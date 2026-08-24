@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Ajar Jaringan Komputer - ITERA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            font-size: 15px;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            color: #333;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin: 10px 0 5px 0;
+            font-weight: 700;
+        }
+        .subtitle {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        .logos {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .logos img {
+            height: 60px;
+            margin: 0 15px;
+            object-fit: contain;
+        }
+        h2 {
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 8px;
+            margin: 30px 0 15px 0;
+            font-size: 18px;
+        }
+        .meeting-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            padding: 15px;
+            background: #ffffff;
+            border-left: 4px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .meeting-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        a.title-link {
+            text-decoration: none;
+            color: #0056b3;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1.3;
+        }
+        a.title-link:hover {
+            text-decoration: underline;
+        }
+        .topic {
+            color: #6c757d;
+            font-size: 13px;
+            flex-grow: 1;
+        }
+        .btn-download {
+            color: #dc3545;
+            font-size: 1.2em;
+            margin-left: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .btn-download:hover {
+            color: #bd2130;
+            background-color: #f8d7da;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            color: #6c757d;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo placeholders if any, otherwise empty -->
+        <!-- <div class="logos">
+            <img src="logo/itera.png" alt="Logo ITERA">
+        </div> -->
+        <h1>Materi Ajar Jaringan Komputer</h1>
+        <p class="subtitle">Institut Teknologi Sumatera (ITERA) | Kode Matakuliah: IF25-21008</p>
+        
+        <h2>Slide Presentasi per Pertemuan</h2>
+        <ul class="meeting-list">
+            <!-- Pertemuan 1 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan01.html" class="title-link">🌐 Pertemuan 1: Pengantar Jaringan</a>
+                    <a href="pertemuan01.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Definisi, Komponen, Kategori, Internet, Protokol Standar</div>
+            </li>
+            <!-- Pertemuan 2 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan02.html" class="title-link">📚 Pertemuan 2: Model Referensi</a>
+                    <a href="pertemuan02.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">OSI 7 Lapisan, TCP/IP, Perbandingan</div>
+            </li>
+            <!-- Pertemuan 3 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan03.html" class="title-link">🔌 Pertemuan 3: Lapisan Fisik & Cabling</a>
+                    <a href="pertemuan03.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Media Transmisi, Modulasi, Membuat Kabel LAN</div>
+            </li>
+            <!-- Pertemuan 4 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan04.html" class="title-link">🔗 Pertemuan 4: Lapisan Data Link</a>
+                    <a href="pertemuan04.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Framing, Kontrol Flow/Error, MAC, Switch/Bridge</div>
+            </li>
+            <!-- Pertemuan 5 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan05.html" class="title-link">🚚 Pertemuan 5: Lapisan Transport</a>
+                    <a href="pertemuan05.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">UDP/TCP, Reliable Transfer, Congestion Control</div>
+            </li>
+            <!-- Pertemuan 6 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan06.html" class="title-link">📍 Pertemuan 6: IP Addressing & Subnetting</a>
+                    <a href="pertemuan06.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">IPv4/IPv6, Struktur, Subnetting, DHCP</div>
+            </li>
+            <!-- Pertemuan 7 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan07.html" class="title-link">🗺️ Pertemuan 7: Network Layer (Control Plane)</a>
+                    <a href="pertemuan07.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Algoritma Routing (Dijkstra), OSPF, ICMP, SNMP, NETCONF/YANG</div>
+            </li>
+            <!-- Pertemuan 8 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan08.html" class="title-link">📝 Pertemuan 8: UTS</a>
+                </div>
+                <div class="topic">Ujian Tengah Semester</div>
+            </li>
+            <!-- Pertemuan 9 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan09.html" class="title-link">🛤️ Pertemuan 9: Routing Statis & Dinamis</a>
+                    <a href="pertemuan09.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Konsep, Algoritma, RIP, OSPF, BGP</div>
+            </li>
+            <!-- Pertemuan 10 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan10.html" class="title-link">🔀 Pertemuan 10: INTERVLAN Routing</a>
+                    <a href="pertemuan10.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Konsep VLAN, Konfigurasi, Layer 3 Switch</div>
+            </li>
+            <!-- Pertemuan 11 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan11.html" class="title-link">💻 Pertemuan 11: Socket Programming</a>
+                    <a href="pertemuan11.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Pengantar, Client-Server, TCP/UDP API</div>
+            </li>
+            <!-- Pertemuan 12 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan12.html" class="title-link">📱 Pertemuan 12: Lapisan Aplikasi</a>
+                    <a href="pertemuan12.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Arsitektur, HTTP, FTP, DNS, Email</div>
+            </li>
+            <!-- Pertemuan 13 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan13.html" class="title-link">🔒 Pertemuan 13: Keamanan Jaringan Dasar</a>
+                    <a href="pertemuan13.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Ancaman, Kriptografi, Firewall, VPN, HTTPS</div>
+            </li>
+            <!-- Pertemuan 14 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan14.html" class="title-link">📡 Pertemuan 14: Wireless & Mobile Networks</a>
+                    <a href="pertemuan14.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">Wi-Fi, Mobile IP, Tantangan</div>
+            </li>
+            <!-- Pertemuan 15 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan15.html" class="title-link">🔍 Pertemuan 15: Studi Kasus & Tren Jaringan</a>
+                    <a href="pertemuan15.html?print-pdf" class="btn-download" title="Download PDF" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                </div>
+                <div class="topic">SOHO, IoT, SDN Dasar, Isu Etika</div>
+            </li>
+            <!-- Pertemuan 16 -->
+            <li>
+                <div class="meeting-header">
+                    <a href="pertemuan16.html" class="title-link">🎓 Pertemuan 16: UAS</a>
+                </div>
+                <div class="topic">Evaluasi Proyek Akhir</div>
+            </li>
+        </ul>
+        
+        <div class="footer">
+            &copy; 2026 Teknik Informatika - Institut Teknologi Sumatera
+        </div>
+    </div>
+</body>
+</html>
