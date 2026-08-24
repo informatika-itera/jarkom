@@ -1,0 +1,1861 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jaringan Komputer - Pertemuan 4: Lapisan Data Link</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="css/pkom-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        .reveal .slides section {
+            height: 100%;
+            overflow-y: auto !important;
+            padding-bottom: 50px;
+        }
+
+        /* images */
+        .slide-img {
+            width: 100%;
+            height: auto;
+            max-height: 36vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+        }
+
+        .slide-img-sm {
+            width: 100%;
+            height: auto;
+            max-height: 24vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+        }
+
+        /* layouts */
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .layout-text-img {
+            display: grid;
+            grid-template-columns: 58% 1fr;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .layout-3col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .img-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .4em;
+        }
+
+        .img-caption {
+            font-size: .52em;
+            color: #777;
+            text-align: center;
+            margin-top: .1em;
+            font-style: italic;
+        }
+
+        /* table */
+        .reveal table {
+            font-size: .65em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .reveal table th,
+        .reveal table td {
+            padding: 7px 12px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .reveal table th {
+            background: #f0f4f8;
+            font-weight: 700;
+        }
+
+        .reveal table tr:nth-child(even) td {
+            background: #fafbfc;
+        }
+
+        /* section header bars */
+        .sec-bar {
+            border-radius: 8px 8px 0 0;
+            padding: 7px 16px;
+            font-size: .68em;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .sec-body {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .sec-bar-blue {
+            background: #1565c0;
+            color: #fff;
+        }
+
+        .sec-bar-orange {
+            background: #e65100;
+            color: #fff;
+        }
+
+        .sec-bar-green {
+            background: #1b5e20;
+            color: #fff;
+        }
+
+        .sec-bar-purple {
+            background: #4a148c;
+            color: #fff;
+        }
+
+        .sec-bar-teal {
+            background: #006064;
+            color: #fff;
+        }
+
+        .sec-bar-red {
+            background: #b71c1c;
+            color: #fff;
+        }
+
+        .sec-bar-indigo {
+            background: #1a237e;
+            color: #fff;
+        }
+
+        .sec-bar-cyan {
+            background: #006064;
+            color: #fff;
+        }
+
+        /* info boxes */
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-warn {
+            border-left: 4px solid #e65100;
+            background: #fff3e0;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-green {
+            border-left: 4px solid #1b5e20;
+            background: #e8f5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-red {
+            border-left: 4px solid #b71c1c;
+            background: #ffebee;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        /* frame diagram */
+        .frame-diagram {
+            display: flex;
+            align-items: stretch;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: .6em;
+            margin: .5em 0;
+        }
+
+        .frame-field {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 6px;
+            border-right: 2px solid #fff;
+            text-align: center;
+        }
+
+        .frame-field:last-child {
+            border-right: none;
+        }
+
+        .ff-pre {
+            background: #1565c0;
+            color: #fff;
+            flex: 1;
+        }
+
+        .ff-dst {
+            background: #e65100;
+            color: #fff;
+            flex: 2;
+        }
+
+        .ff-src {
+            background: #e65100;
+            color: #fff;
+            flex: 2;
+        }
+
+        .ff-type {
+            background: #006064;
+            color: #fff;
+            flex: 1;
+        }
+
+        .ff-data {
+            background: #1b5e20;
+            color: #fff;
+            flex: 6;
+        }
+
+        .ff-crc {
+            background: #4a148c;
+            color: #fff;
+            flex: 1.5;
+        }
+
+        .frame-field .ff-label {
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        .frame-field .ff-bytes {
+            font-size: .85em;
+            opacity: .85;
+            margin-top: 2px;
+        }
+
+        /* MAC address display */
+        .mac-display {
+            font-family: 'Courier New', monospace;
+            font-size: .85em;
+            font-weight: 700;
+            letter-spacing: .08em;
+            background: #f0f4f8;
+            border: 1px solid #dee2e6;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* Protocol cards */
+        .proto-card {
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+        }
+
+        /* timeline / analogy boxes */
+        .analogy-box {
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: .65em;
+        }
+
+        /* slot diagram for ALOHA */
+        .slot-row {
+            display: flex;
+            gap: 4px;
+            margin: .3em 0;
+            align-items: center;
+            font-size: .6em;
+        }
+
+        .slot {
+            width: 36px;
+            height: 28px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: .85em;
+            flex-shrink: 0;
+        }
+
+        .slot-empty {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            color: #bbb;
+        }
+
+        .slot-ok {
+            background: #c8e6c9;
+            border: 1px solid #81c784;
+            color: #1b5e20;
+        }
+
+        .slot-col {
+            background: #ffcdd2;
+            border: 1px solid #e57373;
+            color: #b71c1c;
+        }
+
+        .slot-label {
+            width: 80px;
+            color: #555;
+            flex-shrink: 0;
+        }
+
+        /* switch table */
+        .switch-table {
+            font-family: 'Courier New', monospace;
+            font-size: .6em;
+        }
+
+        /* tugas slide */
+        .tugas-box {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            border-radius: 14px;
+            padding: 22px 28px;
+            color: #fff;
+        }
+
+        .tugas-soal {
+            background: rgba(255, 255, 255, .13);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 8px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .63em;
+            line-height: 1.65;
+            margin: 0;
+            color: #e8eaf6;
+        }
+
+        .tugas-soal .num {
+            font-size: .9em;
+            font-weight: 700;
+            color: #ffeb3b;
+        }
+
+        .tugas-info {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: .58em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* grid-4 */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .media-card {
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            padding: 14px 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .07);
+        }
+
+        .media-card .icon-circle {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            margin: 0 auto 8px;
+        }
+
+        .media-card h5 {
+            font-size: .62em;
+            font-weight: 700;
+            margin: 0 0 5px;
+        }
+
+        .media-card p {
+            font-size: .52em;
+            color: #555;
+            line-height: 1.45;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="footer-branding">
+            <div class="footer-logos"></div>
+            <div class="footer-copyright">&copy; 2026 IF25-21008 Jaringan Komputer - ITERA</div>
+        </div>
+
+        <div class="slides">
+
+            <!-- ━━━━━━━━━━━━━━ INTRO ━━━━━━━━━━━━━━ -->
+            <section>
+                <div class="title-box">
+                    <h1>Lapisan Data Link</h1>
+                    <h3 class="subtitle">Pertemuan 4</h3>
+                </div>
+                <p>Referensi: Kurose &amp; Ross — <em>Computer Networking: A Top-Down Approach (8th Ed)</em><br>
+                    &amp; Forouzan — <em>Data Communications and Networking (5th Ed)</em></p>
+                <p class="text-small"><em>Dosen Pengampu:</em></p>
+                <div
+                    style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                    <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
+                    <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
+                </div>
+                <aside class="notes">Selamat pagi/siang. Hari ini kita naik satu lapisan dari Physical ke Data Link.
+                    Lapisan ini yang bertanggung jawab atas pengiriman frame antar perangkat yang berdekatan
+                    (hop-by-hop).</aside>
+            </section>
+
+            <!-- Outline -->
+            <section>
+                <h3>Outline Materi (100 Menit)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#1565c0;">Bagian 1: Layanan &amp; Error Handling</p>
+                        <ul>
+                            <li>Layanan Lapisan Data Link</li>
+                            <li>Framing &amp; Struktur Frame</li>
+                            <li>Deteksi Error: Parity, Checksum, CRC</li>
+                            <li>Kontrol Aliran &amp; Koreksi Error</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#e65100;">Bagian 2: MAC &amp; Jaringan LAN</p>
+                        <ul>
+                            <li>Multiple Access Protocols (ALOHA, CSMA)</li>
+                            <li>MAC Address &amp; ARP</li>
+                            <li>Ethernet &amp; Frame Ethernet</li>
+                            <li>Switch: Self-Learning &amp; Forwarding</li>
+                            <li>Switch vs Router</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analogi transportasi -->
+            <section>
+                <h3>Analogi: Data Link di Kehidupan Nyata</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p>Bayangkan perjalanan <strong>Denpasar → Bandung</strong>:</p>
+                        <ul style="margin-top:.4em;">
+                            <li>🚖 <strong>Limo</strong>: Denpasar → Ngurah Rai (Bandara)</li>
+                            <li>✈️ <strong>Pesawat</strong>: Ngurah Rai → Soetta (Jakarta)</li>
+                            <li>🚄 <strong>Kereta</strong>: Jakarta → Bandung</li>
+                        </ul>
+                        <div class="analogy-box" style="margin-top:.7em;">
+                            <strong>Analogi Jaringan:</strong>
+                            <ul style="margin-top:.3em;">
+                                <li>👤 Penumpang = <strong>Datagram</strong> (paket data)</li>
+                                <li>🎫 Tiket per segmen = <strong>Frame</strong> per link</li>
+                                <li>🏣 Terminal transportasi = <strong>Router / Switch</strong></li>
+                                <li>Pengemudi/pilot = <strong>Link-layer protocol</strong></li>
+                            </ul>
+                            <p style="margin-top:.4em; font-size:.9em;">Tiap "kendaraan" yang berbeda = tiap link bisa
+                                punya protokol berbeda (Ethernet, Wi-Fi, PPP, dll).</p>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div
+                            style="background:linear-gradient(135deg,#e3f2fd,#bbdefb); border-radius:12px; padding:20px; text-align:center; font-size:2.5em; width:100%;">
+                            🏠<br>
+                            <span style="font-size:.5em; color:#1565c0;">Source</span><br>
+                            ↓ <span style="font-size:.3em; color:#555;">Link 1 (Ethernet)</span><br>
+                            🔀<br>
+                            <span style="font-size:.5em; color:#e65100;">Router</span><br>
+                            ↓ <span style="font-size:.3em; color:#555;">Link 2 (Wi-Fi)</span><br>
+                            🏢<br>
+                            <span style="font-size:.5em; color:#1b5e20;">Destination</span>
+                        </div>
+                        <p class="img-caption">Datagram melewati beberapa link berbeda</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 1: LAYANAN ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>1. Layanan Lapisan Data Link</h2>
+                <aside class="notes">Data link bertanggung jawab atas pengiriman frame antar node yang terhubung
+                    langsung (satu hop). Ini berbeda dengan network layer yang mengurus ujung-ke-ujung.</aside>
+            </section>
+
+            <!-- Layanan 1: Framing -->
+            <section>
+                <h3>Layanan Data Link: Framing &amp; Link Access</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Framing</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Mengemas datagram dari Network Layer ke dalam sebuah <strong>frame</strong> dengan
+                                    menambahkan <em>header</em> dan <em>trailer</em>.</li>
+                                <li>Header frame berisi <strong>MAC address</strong> sumber dan tujuan — berbeda dengan
+                                    IP address.</li>
+                                <li>Frame menandai batas awal dan akhir data yang dikirim per satu hop.</li>
+                            </ul>
+                        </div>
+                        <div class="sec-bar sec-bar-orange" style="margin-top:.5em; border-radius:8px;">Link Access
+                        </div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Mengatur <strong>siapa yang boleh mengirim</strong> pada medium bersama (<em>shared
+                                        medium</em>) pada satu waktu tertentu.</li>
+                                <li>Protokol yang mengatur hal ini disebut <strong>Medium Access Control (MAC)</strong>.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-green">Error Detection &amp; Correction</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Error terjadi karena atenuasi sinyal dan noise selama transmisi.</li>
+                                <li>Penerima mendeteksi error, lalu meminta pengiriman ulang (<em>retransmission</em>)
+                                    atau mengoreksinya sendiri.</li>
+                            </ul>
+                        </div>
+                        <div class="sec-bar sec-bar-purple" style="margin-top:.5em; border-radius:8px;">Flow Control
+                        </div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Mengatur kecepatan antara <strong>pengirim dan penerima yang berdekatan</strong>
+                                    (adjacent nodes).</li>
+                                <li>Mencegah pengirim cepat "membanjiri" penerima yang lambat.</li>
+                            </ul>
+                        </div>
+                        <div class="info-box" style="margin-top:.5em;">
+                            💡 Data Link bekerja di setiap NIC (Network Interface Card) pada perangkat — setiap laptop,
+                            smartphone, dan router punya implementasi ini.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementasi di NIC -->
+            <section>
+                <h3>Implementasi: Di Mana Data Link Berada?</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p>Lapisan Data Link diimplementasikan pada setiap host dan perangkat jaringan, bukan hanya di
+                            server:</p>
+                        <ul style="margin-top:.5em;">
+                            <li><strong>Network Interface Card (NIC)</strong> — chip di motherboard atau kartu PCI-e
+                                terpisah yang mengimplementasikan lapisan link dan fisik.</li>
+                            <li>NIC menghubungkan host ke link yang memungkinkan pengiriman/penerimaan frame.</li>
+                            <li>Pada sisi pengirim: mengenkapsulasi datagram ke frame, menambahkan bit error-check.</li>
+                            <li>Pada sisi penerima: memeriksa error, mengekstrak datagram, memberikannya ke network
+                                layer.</li>
+                        </ul>
+                        <div class="info-box" style="margin-top:.6em;">
+                            🔌 NIC adalah "jembatan" antara dunia software (IP, TCP) dan dunia hardware (kabel, sinyal
+                            listrik).
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div
+                            style="background:#f8f9fa; border:1px solid #dee2e6; border-radius:10px; padding:14px; font-size:.65em; width:100%;">
+                            <div style="text-align:center; margin-bottom:8px; font-weight:700;">Stack Protokol di Host
+                            </div>
+                            <div
+                                style="background:#e3f2fd; padding:6px 10px; border-radius:6px; margin:3px 0; text-align:center;">
+                                Application</div>
+                            <div
+                                style="background:#e3f2fd; padding:6px 10px; border-radius:6px; margin:3px 0; text-align:center;">
+                                Transport</div>
+                            <div
+                                style="background:#e3f2fd; padding:6px 10px; border-radius:6px; margin:3px 0; text-align:center;">
+                                Network</div>
+                            <div
+                                style="background:#ff8f00; color:#fff; padding:6px 10px; border-radius:6px; margin:3px 0; text-align:center; font-weight:700;">
+                                Data Link ← NIC</div>
+                            <div
+                                style="background:#ff8f00; color:#fff; padding:6px 10px; border-radius:6px; margin:3px 0; text-align:center; font-weight:700;">
+                                Physical ← NIC</div>
+                        </div>
+                        <p class="img-caption">NIC mengimplementasikan lapisan Link &amp; Physical</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 2: FRAMING ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>2. Framing &amp; Struktur Frame</h2>
+                <aside class="notes">Frame adalah unit data di lapisan data link, seperti paket di lapisan network. Mari
+                    kita lihat strukturnya.</aside>
+            </section>
+
+            <!-- Struktur Frame Ethernet -->
+            <section>
+                <h3>Struktur Frame Ethernet</h3>
+                <div class="frame-diagram">
+                    <div class="frame-field ff-pre">
+                        <span class="ff-label">Preamble</span>
+                        <span class="ff-bytes">8 byte</span>
+                    </div>
+                    <div class="frame-field ff-dst">
+                        <span class="ff-label">Dest. MAC</span>
+                        <span class="ff-bytes">6 byte</span>
+                    </div>
+                    <div class="frame-field ff-src">
+                        <span class="ff-label">Source MAC</span>
+                        <span class="ff-bytes">6 byte</span>
+                    </div>
+                    <div class="frame-field ff-type">
+                        <span class="ff-label">Type</span>
+                        <span class="ff-bytes">2 byte</span>
+                    </div>
+                    <div class="frame-field ff-data">
+                        <span class="ff-label">Data (Payload)</span>
+                        <span class="ff-bytes">46–1500 byte</span>
+                    </div>
+                    <div class="frame-field ff-crc">
+                        <span class="ff-label">CRC</span>
+                        <span class="ff-bytes">4 byte</span>
+                    </div>
+                </div>
+                <div class="layout-2col" style="margin-top:.6em;">
+                    <div class="card text-left text-smaller">
+                        <ul>
+                            <li><strong>Preamble (8B):</strong> 7 byte pola 10101010 + 1 byte 10101011. Digunakan untuk
+                                <em>sinkronisasi clock</em> antara pengirim dan penerima.</li>
+                            <li><strong>Dest. &amp; Src. MAC (6B each):</strong> Alamat fisik hardware tujuan dan sumber
+                                (48-bit).</li>
+                            <li><strong>Type (2B):</strong> Menunjukkan protokol di layer atas — 0x0800 = IPv4, 0x0806 =
+                                ARP, 0x86DD = IPv6.</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-smaller">
+                        <ul>
+                            <li><strong>Data / Payload (46–1500B):</strong> Berisi datagram IP yang dienkapsulasi.
+                                Minimum 46B — jika kurang, ditambah <em>padding</em>. Maksimum 1500B (MTU Ethernet).
+                            </li>
+                            <li><strong>CRC (4B):</strong> Cyclic Redundancy Check — nilai hash dari isi frame untuk
+                                mendeteksi error transmisi. Jika CRC tidak cocok, frame dibuang.</li>
+                        </ul>
+                        <div class="info-box" style="margin-top:.4em; font-size:.9em;">
+                            Total overhead frame: 8+6+6+2+4 = <strong>26 byte</strong>. Data murni maksimal 1500/1526 ≈
+                            98.3% efisiensi.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 3: ERROR DETECTION ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>3. Deteksi Error</h2>
+                <aside class="notes">Ada tiga teknik utama deteksi error yang perlu dipahami: Parity Check, Internet
+                    Checksum, dan CRC.</aside>
+            </section>
+
+            <!-- Konsep EDC -->
+            <section>
+                <h3>Konsep Error Detection &amp; Correction (EDC)</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p>Bit error dapat terjadi selama transmisi karena atenuasi, noise, dan interferensi.</p>
+                        <div
+                            style="background:#f8f9fa; border-radius:8px; padding:12px; margin:.5em 0; font-size:.85em;">
+                            <strong>D</strong> = Data yang dilindungi (termasuk header)<br>
+                            <strong>EDC</strong> = Bit error-detection &amp; correction (redundansi)<br><br>
+                            Pengirim kirim: <strong>D + EDC</strong><br>
+                            Penerima terima: <strong>D' + EDC'</strong> (mungkin berubah)<br>
+                            Penerima cek: apakah D' konsisten dengan EDC'?
+                        </div>
+                        <div class="info-box-warn">
+                            ⚠️ Error detection <strong>tidak 100% reliable</strong>! Ada kemungkinan error tidak
+                            terdeteksi (undetected error) — probabilitasnya tergantung teknik yang dipakai.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div
+                            style="background:#fff8e1; border:1px solid #ffe082; border-radius:10px; padding:16px; font-size:.7em; width:100%;">
+                            <p style="font-weight:700; text-align:center; color:#e65100; margin:0 0 8px;">Aliran Data +
+                                EDC</p>
+                            <div
+                                style="background:#1565c0; color:#fff; padding:6px 10px; border-radius:6px; text-align:center; margin:4px 0;">
+                                📦 Data (D)</div>
+                            <div style="text-align:center; font-size:1.2em;">+</div>
+                            <div
+                                style="background:#4a148c; color:#fff; padding:6px 10px; border-radius:6px; text-align:center; margin:4px 0;">
+                                🔐 EDC bits</div>
+                            <div style="text-align:center; margin:6px; color:#555;">──── dikirim via link ────</div>
+                            <div
+                                style="background:#1b5e20; color:#fff; padding:6px 10px; border-radius:6px; text-align:center; margin:4px 0;">
+                                ✅ Verifikasi D' vs EDC'</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Parity Check -->
+            <section>
+                <h3>Teknik 1: Parity Checking</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Single Bit Parity</div>
+                        <div class="sec-body text-left text-small">
+                            <p>Menambahkan <strong>1 bit paritas</strong> sehingga total bit 1 dalam data menjadi genap
+                                (<em>even parity</em>) atau ganjil (<em>odd parity</em>).</p>
+                            <div
+                                style="font-family:'Courier New', monospace; background:#f0f4f8; padding:8px 12px; border-radius:6px; font-size:.8em; margin:.4em 0;">
+                                Data: 0111000110101011<br>
+                                Paritas: <span style="color:#1565c0; font-weight:700;">1</span> (ada 9 bit '1' → tambah
+                                1 agar genap)<br>
+                                Dikirim: 0111000110101011<span style="color:#1565c0;">1</span>
+                            </div>
+                            <ul style="font-size:.9em;">
+                                <li>✅ Deteksi error <strong>ganjil (1, 3, 5, ...)</strong> bit yang berubah.</li>
+                                <li>❌ Tidak bisa deteksi error genap (2, 4, ... bit berubah sekaligus).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-orange">Two-Dimensional Parity</div>
+                        <div class="sec-body text-left text-small">
+                            <p>Data disusun dalam matriks baris-kolom. Bit paritas dihitung per baris <em>dan</em> per
+                                kolom.</p>
+                            <div
+                                style="font-family:'Courier New', monospace; background:#f0f4f8; padding:8px 12px; border-radius:6px; font-size:.78em; margin:.4em 0;">
+                                1 0 1 1 0 | <span style="color:#1565c0;">1</span><br>
+                                0 1 0 1 1 | <span style="color:#1565c0;">1</span><br>
+                                1 1 0 1 0 | <span style="color:#1565c0;">1</span><br>
+                                <span style="color:#e65100;">0 0 1 1 1 | <span style="color:#4a148c;">1</span></span>
+                            </div>
+                            <ul style="font-size:.9em;">
+                                <li>✅ Bisa mendeteksi <strong>dan mengoreksi</strong> single-bit error (tahu baris &amp;
+                                    kolom yang salah).</li>
+                                <li>✅ Mendeteksi semua kombinasi 2-bit error.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CRC -->
+            <section>
+                <h3>Teknik 2: Cyclic Redundancy Check (CRC)</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-purple">Prinsip CRC</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li><strong>D</strong> = data bits (sebagai bilangan biner).</li>
+                                <li><strong>G</strong> = generator polynomial (r+1 bit, disepakati pengirim &amp;
+                                    penerima).</li>
+                                <li>Pengirim menghitung <strong>R</strong> (r bit) sedemikian sehingga:<br>
+                                    <code
+                                        style="background:#f0f4f8; padding:2px 6px; border-radius:4px;">D·2ʳ XOR R</code>
+                                    habis dibagi G tanpa sisa.
+                                </li>
+                                <li>Penerima membagi <code
+                                        style="background:#f0f4f8; padding:2px 6px; border-radius:4px;">D'·2ʳ XOR R'</code>
+                                    dengan G. Jika sisa ≠ 0 → error terdeteksi.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-red">Contoh CRC</div>
+                        <div class="sec-body text-left text-small">
+                            <div
+                                style="font-family:'Courier New', monospace; background:#f0f4f8; padding:8px 12px; border-radius:6px; font-size:.78em;">
+                                D = 101110 (data, 6 bit)<br>
+                                G = 1001 (generator, 4 bit → r=3)<br>
+                                <br>
+                                D·2³ = 101110<span style="color:#1565c0;">000</span><br>
+                                Bagi dengan G (long division XOR):<br>
+                                R = <span style="color:#e65100; font-weight:700;">011</span><br>
+                                <br>
+                                Dikirim: 101110<span style="color:#e65100; font-weight:700;">011</span>
+                            </div>
+                            <div class="info-box-green" style="margin-top:.4em; font-size:.9em;">
+                                ✅ CRC digunakan di <strong>Ethernet, Wi-Fi, USB, Bluetooth</strong> karena kemampuannya
+                                mendeteksi burst error.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:.5em;">
+                    CRC 32-bit (CRC-32) yang dipakai Ethernet mampu mendeteksi semua burst error ≤ 32 bit, dan sebagian
+                    besar burst error yang lebih panjang.
+                </div>
+            </section>
+
+            <!-- Internet Checksum -->
+            <section>
+                <h3>Teknik 3: Internet Checksum</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-teal">Cara Kerja (Pengirim)</div>
+                        <div class="sec-body text-left text-small">
+                            <ol>
+                                <li>Anggap isi segmen UDP/TCP (termasuk header) sebagai deretan <strong>integer
+                                        16-bit</strong>.</li>
+                                <li>Jumlahkan semua integer tersebut menggunakan <strong>aritmatika 1's
+                                        complement</strong>.</li>
+                                <li>Hasil penjumlahan di-<strong>complement</strong> (balik semua bit) → ini adalah
+                                    <strong>checksum</strong>.</li>
+                                <li>Sisipkan nilai checksum ke dalam field checksum di header.</li>
+                            </ol>
+                        </div>
+                        <div class="sec-bar sec-bar-teal" style="margin-top:.5em; border-radius:8px;">Cara Kerja
+                            (Penerima)</div>
+                        <div class="sec-body text-left text-small">
+                            <ol>
+                                <li>Jumlahkan semua integer 16-bit yang diterima <em>termasuk</em> field checksum.</li>
+                                <li>Jika hasil = 1111...1111 (semua bit 1) → <strong>tidak ada error</strong>.</li>
+                                <li>Jika ada bit yang 0 → <strong>error terdeteksi</strong>, segmen dibuang.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div
+                            style="background:#e0f2f1; border:1px solid #80cbc4; border-radius:10px; padding:14px; font-size:.65em; width:100%;">
+                            <p style="font-weight:700; color:#006064; margin:0 0 8px; text-align:center;">Contoh
+                                Penjumlahan 1's Complement</p>
+                            <div style="font-family:'Courier New', monospace; font-size:1.05em;">
+                                0110011001100110<br>
+                                + 0101010101010101<br>
+                                ─────────────────<br>
+                                1011101110110111<br>
+                                ←complement→<br>
+                                <span style="color:#006064; font-weight:700;">0100010001001000</span> = checksum
+                            </div>
+                        </div>
+                        <div class="info-box" style="margin-top:.5em; font-size:.9em;">
+                            Checksum digunakan di <strong>UDP &amp; TCP header</strong>, dan <strong>IP header</strong>.
+                            Lebih lemah dari CRC tapi cepat dihitung di software.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 4: MULTIPLE ACCESS ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>4. Multiple Access Protocols</h2>
+                <aside class="notes">Ketika banyak node berbagi satu channel, bagaimana mereka mengatur giliran? Inilah
+                    masalah multiple access.</aside>
+            </section>
+
+            <!-- Dua jenis link -->
+            <section>
+                <h3>Point-to-Point vs Broadcast Link</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Point-to-Point Link</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Hanya <strong>dua node</strong> yang terhubung langsung di satu link.</li>
+                                <li>Tidak ada masalah "tabrakan" — channel eksklusif.</li>
+                                <li>Contoh: Kabel Ethernet antara PC dan switch, PPP (dial-up modem).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-orange">Broadcast Link (Shared Medium)</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li><strong>Banyak node</strong> berbagi satu channel yang sama secara bersamaan.</li>
+                                <li>Jika dua node kirim data serentak → <strong>Collision (tabrakan)</strong> → data
+                                    rusak, tidak terbaca.</li>
+                                <li>Contoh: Wi-Fi (WLAN), Ethernet bus lama (coaxial), Bluetooth.</li>
+                            </ul>
+                            <div class="info-box-warn" style="margin-top:.4em; font-size:.9em;">
+                                ⚠️ Collision = sinyal dari 2+ sumber bercampur dan tidak dapat dibedakan. Butuh protokol
+                                MAC untuk mengatur!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:.6em;">
+                    <strong>MAC Protocol</strong> menentukan cara node bergantian menggunakan shared channel sehingga
+                    collision dapat dihindari atau pulih dari collision dengan cepat.
+                </div>
+            </section>
+
+            <!-- Tiga kelas MAC -->
+            <section>
+                <h3>Tiga Kelas Protokol MAC</h3>
+                <div class="layout-3col">
+                    <div class="proto-card text-left text-small">
+                        <p style="font-weight:700; color:#1565c0; font-size:.8em; margin:0 0 6px;">📅 Channel
+                            Partitioning</p>
+                        <p style="font-size:.75em; color:#555;">Bagi channel menjadi irisan kecil (time slot, frekuensi,
+                            kode). Alokasikan irisan secara eksklusif ke tiap node.</p>
+                        <ul style="font-size:.75em; margin-top:.4em;">
+                            <li>TDMA (Time Division)</li>
+                            <li>FDMA (Frequency Division)</li>
+                            <li>CDMA (Code Division)</li>
+                        </ul>
+                        <div style="margin-top:.4em; font-size:.7em; color:#1565c0;">✅ Tanpa collision<br>❌ Wasteful
+                            saat node sepi</div>
+                    </div>
+                    <div class="proto-card text-left text-small">
+                        <p style="font-weight:700; color:#e65100; font-size:.8em; margin:0 0 6px;">🎲 Random Access</p>
+                        <p style="font-size:.75em; color:#555;">Node kirim kapan pun mau. Jika collision terjadi, ada
+                            mekanisme deteksi &amp; retransmisi dengan waktu acak.</p>
+                        <ul style="font-size:.75em; margin-top:.4em;">
+                            <li>ALOHA (Slotted &amp; Pure)</li>
+                            <li>CSMA / CSMA-CD</li>
+                            <li>CSMA-CA (Wi-Fi)</li>
+                        </ul>
+                        <div style="margin-top:.4em; font-size:.7em; color:#e65100;">✅ Efisien saat beban ringan<br>❌
+                            Collision bisa terjadi</div>
+                    </div>
+                    <div class="proto-card text-left text-small">
+                        <p style="font-weight:700; color:#1b5e20; font-size:.8em; margin:0 0 6px;">🎤 Taking Turns</p>
+                        <p style="font-size:.75em; color:#555;">Node bergiliran secara teratur (polling atau token).
+                            Tidak ada collision, tapi ada overhead koordinasi.</p>
+                        <ul style="font-size:.75em; margin-top:.4em;">
+                            <li>Polling (master-slave)</li>
+                            <li>Token Ring / Token Bus</li>
+                        </ul>
+                        <div style="margin-top:.4em; font-size:.7em; color:#1b5e20;">✅ Efisiensi tinggi<br>❌ Single
+                            point of failure (token/master)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TDMA & FDMA -->
+            <section>
+                <h3>Channel Partitioning: TDMA &amp; FDMA</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">TDMA (Time Division Multiple Access)</div>
+                        <div class="sec-body text-left text-small">
+                            <p>Channel dibagi berdasarkan <strong>waktu (time slot)</strong>.</p>
+                            <div style="display:flex; gap:3px; margin:.5em 0; font-size:.65em;">
+                                <div
+                                    style="display:flex; flex-direction:column; align-items:center; gap:2px; font-weight:700; color:#555; margin-right:4px;">
+                                    Round<br>1<br>2<br>3</div>
+                                <div style="display:flex; flex-direction:column; gap:2px;">
+                                    <div style="display:flex; gap:2px;">
+                                        <div
+                                            style="background:#1565c0; color:#fff; width:32px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:3px;">
+                                            A</div>
+                                        <div
+                                            style="background:#e65100; color:#fff; width:32px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:3px;">
+                                            B</div>
+                                        <div
+                                            style="background:#1b5e20; color:#fff; width:32px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:3px;">
+                                            C</div>
+                                        <div
+                                            style="background:#bbb; color:#fff; width:32px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:3px;">
+                                            –</div>
+                                        <div
+                                            style="background:#1565c0; color:#fff; width:32px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:3px;">
+                                            A</div>
+                                        <div
+                                            style="background:#4a148c; color:#fff; width:32px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:3px;">
+                                            E</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul style="font-size:.85em; margin-top:.2em;">
+                                <li>Tiap node mendapat slot waktu tetap per round.</li>
+                                <li>Node tanpa data tetap "membuang" slotnya (inefficient).</li>
+                                <li><strong>Digunakan:</strong> Jaringan seluler 2G (GSM).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-orange">FDMA (Frequency Division Multiple Access)</div>
+                        <div class="sec-body text-left text-small">
+                            <p>Channel dibagi berdasarkan <strong>frekuensi (band)</strong>.</p>
+                            <div
+                                style="background:#f8f9fa; border-radius:6px; padding:8px; margin:.4em 0; font-size:.7em;">
+                                <div style="display:flex; gap:4px; align-items:center;">
+                                    <div
+                                        style="background:#1565c0; color:#fff; padding:4px 8px; border-radius:4px; flex:1; text-align:center;">
+                                        Node A<br>FM1</div>
+                                    <div
+                                        style="background:#e65100; color:#fff; padding:4px 8px; border-radius:4px; flex:1; text-align:center;">
+                                        Node B<br>FM2</div>
+                                    <div
+                                        style="background:#1b5e20; color:#fff; padding:4px 8px; border-radius:4px; flex:1; text-align:center;">
+                                        Node C<br>FM3</div>
+                                    <div
+                                        style="background:#bbb; color:#fff; padding:4px 8px; border-radius:4px; flex:1; text-align:center;">
+                                        Unused<br>FM4</div>
+                                </div>
+                            </div>
+                            <ul style="font-size:.85em;">
+                                <li>Tiap node mendapat band frekuensi eksklusif.</li>
+                                <li>Band yang tidak dipakai terbuang percuma.</li>
+                                <li><strong>Digunakan:</strong> Radio FM, jaringan seluler 1G (AMPS).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slotted ALOHA -->
+            <section>
+                <h3>Random Access: Slotted ALOHA</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-orange">Asumsi &amp; Cara Kerja</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Semua frame berukuran sama.</li>
+                                <li>Waktu dibagi ke dalam <strong>slot</strong> berukuran tetap (= waktu kirim 1 frame).
+                                </li>
+                                <li>Node hanya boleh mulai kirim di awal slot.</li>
+                                <li>Jika <strong>collision</strong>: node retransmisi di slot berikutnya dengan
+                                    <strong>probabilitas p</strong>.</li>
+                            </ul>
+                        </div>
+                        <div class="sec-bar sec-bar-indigo" style="margin-top:.5em; border-radius:8px;">Efisiensi
+                            Maksimum</div>
+                        <div class="sec-body text-left text-small">
+                            <p>Dengan N node dan probabilitas kirim p per slot, efisiensi optimal mendekati <strong>1/e
+                                    ≈ 37%</strong> saat N sangat besar.</p>
+                            <div class="info-box-green" style="margin-top:.4em; font-size:.9em;">
+                                ✅ Sederhana, node aktif tunggal bisa pakai penuh channel.<br>
+                                ❌ Efisiensi max hanya 37% — sangat boros!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div style="background:#f8f9fa; border-radius:8px; padding:12px; width:100%; font-size:.65em;">
+                            <p style="font-weight:700; text-align:center; color:#333; margin:0 0 8px;">Visualisasi Slot
+                            </p>
+                            <div class="slot-row">
+                                <span class="slot-label">Node 1:</span>
+                                <div class="slot slot-ok">S</div>
+                                <div class="slot slot-empty">.</div>
+                                <div class="slot slot-col">C</div>
+                                <div class="slot slot-ok">S</div>
+                                <div class="slot slot-empty">.</div>
+                            </div>
+                            <div class="slot-row">
+                                <span class="slot-label">Node 2:</span>
+                                <div class="slot slot-empty">.</div>
+                                <div class="slot slot-ok">S</div>
+                                <div class="slot slot-col">C</div>
+                                <div class="slot slot-empty">.</div>
+                                <div class="slot slot-ok">S</div>
+                            </div>
+                            <div class="slot-row">
+                                <span class="slot-label">Node 3:</span>
+                                <div class="slot slot-empty">.</div>
+                                <div class="slot slot-empty">.</div>
+                                <div class="slot slot-col">C</div>
+                                <div class="slot slot-empty">.</div>
+                                <div class="slot slot-empty">.</div>
+                            </div>
+                            <div style="margin-top:6px; font-size:.95em;">
+                                <span style="color:#1b5e20;">■ S</span> = Success &nbsp;
+                                <span style="color:#b71c1c;">■ C</span> = Collision &nbsp;
+                                <span style="color:#bbb;">■ .</span> = Idle
+                            </div>
+                        </div>
+                        <p class="img-caption">Slot 3: 3 node kirim serentak → collision</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CSMA & CSMA-CD -->
+            <section>
+                <h3>CSMA &amp; CSMA/CD — Protokol Ethernet</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">CSMA (Carrier Sense Multiple Access)</div>
+                        <div class="sec-body text-left text-small">
+                            <p><strong>"Dengarkan dulu sebelum bicara"</strong></p>
+                            <ul>
+                                <li>Sebelum kirim, node <em>mendengarkan</em> (sense) apakah channel sedang kosong.</li>
+                                <li>Jika <strong>idle</strong>: kirim frame sepenuhnya.</li>
+                                <li>Jika <strong>busy</strong>: tunda, tunggu sampai idle lalu kirim.</li>
+                                <li>❌ Masih bisa collision! (karena <em>propagation delay</em> — sinyal butuh waktu
+                                    merambat).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-orange">CSMA/CD (Collision Detection)</div>
+                        <div class="sec-body text-left text-small">
+                            <p><strong>"Dengarkan sambil bicara, hentikan jika tabrakan"</strong></p>
+                            <ul>
+                                <li>Selama mengirim, node terus <em>mendengarkan</em> apakah ada sinyal lain
+                                    (collision).</li>
+                                <li>Jika collision terdeteksi: <strong>hentikan transmisi segera</strong>, kirim <em>jam
+                                        signal</em> untuk memberi tahu semua node.</li>
+                                <li>Tunggu waktu <strong>random (exponential backoff)</strong> lalu coba kirim lagi.
+                                </li>
+                                <li>✅ Mengurangi waktu buang — tidak perlu menunggu frame selesai sebelum tahu ada
+                                    collision.</li>
+                            </ul>
+                            <div class="info-box" style="margin-top:.4em; font-size:.9em;">
+                                CSMA/CD digunakan di <strong>Ethernet kabel</strong>. Wi-Fi menggunakan CSMA/CA
+                                (Collision Avoidance) karena tidak bisa mendeteksi collision saat kirim.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exponential Backoff -->
+            <section>
+                <h3>Exponential Backoff — Mekanisme Coba Ulang</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p>Setelah collision ke-n, node menunggu waktu acak yang dipilih dari rentang:</p>
+                        <div
+                            style="background:#f0f4f8; border-radius:8px; padding:12px; font-family:'Courier New', monospace; font-size:.8em; margin:.4em 0;">
+                            Tunggu: <strong>K × 512 bit-time</strong><br><br>
+                            K dipilih acak dari {0, 1, ..., 2ⁿ-1}<br><br>
+                            Collision ke-1: K ∈ {0, 1}<br>
+                            Collision ke-2: K ∈ {0, 1, 2, 3}<br>
+                            Collision ke-3: K ∈ {0, ..., 7}<br>
+                            ...<br>
+                            Collision ke-10: K ∈ {0, ..., 1023}<br>
+                            Collision ke-16: <span style="color:#b71c1c; font-weight:700;">Give up! ERROR</span>
+                        </div>
+                        <div class="info-box" style="margin-top:.5em;">
+                            💡 Semakin sering collision, semakin lama menunggu — ini <em>desentralisasi beban</em>
+                            secara otomatis. Mirip antrian kasir: jika penuh, tunda sebentar, coba lagi nanti.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div style="background:#fff8e1; border-radius:10px; padding:14px; font-size:.65em; width:100%;">
+                            <p style="font-weight:700; text-align:center; color:#e65100; margin:0 0 8px;">Alur CSMA/CD
+                            </p>
+                            <div style="display:flex; flex-direction:column; gap:4px; font-size:1em;">
+                                <div style="background:#e3f2fd; padding:6px 10px; border-radius:6px;">1. Channel idle?
+                                </div>
+                                <div style="text-align:center; color:#555;">↓ Ya</div>
+                                <div style="background:#e3f2fd; padding:6px 10px; border-radius:6px;">2. Kirim frame
+                                </div>
+                                <div style="text-align:center; color:#555;">↓</div>
+                                <div style="background:#ffcdd2; padding:6px 10px; border-radius:6px;">3. Collision
+                                    terdeteksi?</div>
+                                <div style="display:flex; gap:6px;">
+                                    <div style="flex:1; text-align:center; color:#1b5e20;">Tidak → Sukses ✅</div>
+                                    <div style="flex:1; text-align:center; color:#b71c1c;">Ya → Jam + Backoff → ke-2
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 5: MAC ADDRESS & ARP ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>5. MAC Address &amp; ARP</h2>
+                <aside class="notes">Sekarang kita bahas bagaimana pengalamatan di lapisan link bekerja, dan bagaimana
+                    IP address dipetakan ke MAC address.</aside>
+            </section>
+
+            <!-- MAC Address -->
+            <section>
+                <h3>MAC Address: Identitas Fisik Hardware</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p>Setiap antarmuka jaringan (NIC) memiliki <strong>MAC address 48-bit (6 byte)</strong> yang
+                            unik secara global, ditulis dalam notasi heksadesimal:</p>
+                        <div style="text-align:center; margin:0.8em 0;">
+                            <span class="mac-display">1A:2F:BB:76:09:AD</span>
+                        </div>
+                        <ul>
+                            <li><strong>3 byte pertama</strong> = OUI (Organizationally Unique Identifier) —
+                                mengidentifikasi <em>produsen</em> NIC. Dialokasikan oleh IEEE.</li>
+                            <li><strong>3 byte terakhir</strong> = Nomor unik yang ditetapkan produsen untuk tiap unit.
+                            </li>
+                            <li>Tersimpan di ROM pada chip NIC — biasanya tidak bisa diubah (namun bisa <em>spoofed</em>
+                                via software).</li>
+                        </ul>
+                        <div class="info-box" style="margin-top:.5em;">
+                            🆚 <strong>MAC vs IP:</strong> MAC = alamat <em>fisik permanen</em> yang mengidentifikasi
+                            hardware NIC. IP = alamat <em>logis dinamis</em> yang bergantung pada lokasi jaringan. MAC
+                            seperti NIK, IP seperti alamat rumah.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div
+                            style="background:#f8f9fa; border:1px solid #dee2e6; border-radius:10px; padding:14px; font-size:.65em; width:100%;">
+                            <p style="font-weight:700; text-align:center; color:#1565c0; margin:0 0 8px;">Struktur MAC
+                                Address</p>
+                            <div
+                                style="font-family:'Courier New', monospace; text-align:center; margin:6px 0; font-size:1.1em;">
+                                <span
+                                    style="background:#e3f2fd; color:#1565c0; padding:3px 6px; border-radius:4px;">1A:2F:BB</span>
+                                <span style="color:#555; margin:0 4px;">:</span>
+                                <span
+                                    style="background:#fff3e0; color:#e65100; padding:3px 6px; border-radius:4px;">76:09:AD</span>
+                            </div>
+                            <div style="display:flex; gap:6px; margin-top:6px;">
+                                <div style="flex:1; text-align:center; font-size:.9em; color:#1565c0;">OUI<br>Vendor ID
+                                </div>
+                                <div style="flex:1; text-align:center; font-size:.9em; color:#e65100;">Device<br>Serial
+                                </div>
+                            </div>
+                            <hr style="margin:10px 0; border-color:#dee2e6;">
+                            <p style="margin:0; color:#555;">Contoh OUI terkenal:</p>
+                            <ul style="margin:.3em 0; padding-left:1.2em;">
+                                <li>00:50:56 = VMware</li>
+                                <li>A4:C3:F0 = Intel</li>
+                                <li>DC:A6:32 = Raspberry Pi</li>
+                            </ul>
+                        </div>
+                        <p class="img-caption">3 byte OUI + 3 byte serial = 48-bit MAC address</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ARP -->
+            <section>
+                <h3>ARP: Address Resolution Protocol</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p><strong>Masalah:</strong> Network layer punya IP address tujuan, tapi Data Link butuh MAC
+                            address. Bagaimana caranya?</p>
+                        <p style="margin-top:.5em; font-weight:700;">Jawaban: ARP (RFC 826)</p>
+                        <ol style="margin-top:.3em;">
+                            <li><strong>ARP Table</strong>: Tiap node menyimpan tabel IP→MAC dengan TTL (biasanya 20
+                                menit).</li>
+                            <li><strong>ARP Query</strong>: Jika MAC tidak ada di tabel, node broadcast ARP request ke
+                                seluruh LAN:<br>
+                                <em>"Siapa yang punya IP 192.168.1.5? Beritahu MAC-mu!"</em>
+                            </li>
+                            <li><strong>ARP Reply</strong>: Node yang memiliki IP tersebut membalas secara unicast
+                                dengan MAC address-nya.</li>
+                            <li>Pengirim menyimpan pasangan IP→MAC ke tabel, lalu kirim frame.</li>
+                        </ol>
+                        <div class="info-box-warn" style="margin-top:.5em;">
+                            ⚠️ ARP hanya bekerja di dalam <strong>satu subnet</strong> (satu LAN). Untuk kirim ke subnet
+                            lain, frame dikirim ke <strong>gateway (router)</strong> menggunakan MAC address router.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div style="background:#f3e5f5; border-radius:10px; padding:14px; font-size:.62em; width:100%;">
+                            <p style="font-weight:700; text-align:center; color:#4a148c; margin:0 0 8px;">Skenario ARP
+                            </p>
+                            <div style="display:flex; flex-direction:column; gap:4px;">
+                                <div style="background:#e3f2fd; padding:6px 10px; border-radius:6px;">
+                                    🖥️ A (IP: 10.0.0.1, MAC: 1A:2F:BB:76:09:AD)<br>
+                                    ingin kirim ke: 10.0.0.3
+                                </div>
+                                <div style="text-align:center; font-size:1.2em;">↓ ARP Table: 10.0.0.3 → ???</div>
+                                <div style="background:#ffcdd2; padding:6px 10px; border-radius:6px;">
+                                    📢 Broadcast ARP Request:<br>
+                                    "Siapa punya 10.0.0.3?"<br>
+                                    DST MAC: FF:FF:FF:FF:FF:FF
+                                </div>
+                                <div style="text-align:center; font-size:1.2em;">↓ semua node terima</div>
+                                <div style="background:#c8e6c9; padding:6px 10px; border-radius:6px;">
+                                    💬 Unicast ARP Reply dari C:<br>
+                                    "Saya 10.0.0.3 → MAC: 58:23:D7:FA:20:B0"
+                                </div>
+                                <div style="background:#e3f2fd; padding:6px 10px; border-radius:6px;">
+                                    ✅ A simpan ke tabel, kirim frame ke C
+                                </div>
+                            </div>
+                        </div>
+                        <p class="img-caption">Proses resolusi ARP dalam satu LAN</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ARP antar subnet -->
+            <section>
+                <h3>Pengiriman Antar Subnet via Router</h3>
+                <div class="card text-left text-small">
+                    <p>Ketika host A (subnet 111.111.111.0) ingin kirim ke host B (subnet 222.222.222.0):</p>
+                </div>
+                <div class="layout-3col" style="margin-top:.5em;">
+                    <div class="proto-card text-left" style="font-size:.65em;">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 6px;">Langkah 1: A → Router</p>
+                        <ul>
+                            <li>A tahu IP tujuan = 222.222.222.1 (berbeda subnet).</li>
+                            <li>A kirim frame ke <strong>MAC address Router</strong> (via ARP).</li>
+                            <li>IP Dst dalam datagram = IP B (tetap).</li>
+                            <li>MAC Dst dalam frame = MAC Router (berubah per hop).</li>
+                        </ul>
+                    </div>
+                    <div class="proto-card text-left" style="font-size:.65em;">
+                        <p style="font-weight:700; color:#e65100; margin:0 0 6px;">Langkah 2: Router Proses</p>
+                        <ul>
+                            <li>Router terima frame, ekstrak datagram.</li>
+                            <li>Lihat IP Dst = 222.222.222.1.</li>
+                            <li>Tentukan interface keluar lewat <strong>routing table</strong>.</li>
+                            <li>ARP untuk mendapatkan <strong>MAC B</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="proto-card text-left" style="font-size:.65em;">
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 6px;">Langkah 3: Router → B</p>
+                        <ul>
+                            <li>Router buat frame baru dengan <strong>MAC Src = Router</strong>, <strong>MAC Dst = MAC
+                                    B</strong>.</li>
+                            <li>IP Dst dalam datagram tetap = IP B.</li>
+                            <li>B terima frame, ambil datagram.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:.6em;">
+                    🔑 <strong>Kunci penting:</strong> IP address tujuan <em>tidak berubah</em> selama perjalanan. Tapi
+                    MAC address <em>berubah di setiap hop</em>. IP = alamat global, MAC = alamat lokal per link.
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 6: ETHERNET ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>6. Ethernet</h2>
+                <aside class="notes">Ethernet adalah teknologi LAN yang dominan sejak 1970-an. Mari kita pelajari
+                    evolusi dan karakteristiknya.</aside>
+            </section>
+
+            <!-- Sejarah & Dominasi -->
+            <section>
+                <h3>Ethernet: Teknologi LAN Dominan</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <ul>
+                            <li>Pertama kali dikembangkan oleh <strong>Xerox PARC</strong> tahun 1973 (Robert Metcalfe).
+                            </li>
+                            <li>Standar terbuka (IEEE 802.3) — satu chip bisa mendukung banyak kecepatan.</li>
+                            <li>Evolusi kecepatan: <strong>10 Mbps → 100 Mbps → 1 Gbps → 10 Gbps → 400 Gbps</strong>.
+                            </li>
+                            <li>Bersifat <strong>connectionless</strong>: tidak ada handshaking sebelum kirim frame.
+                            </li>
+                            <li>Bersifat <strong>unreliable</strong>: penerima tidak mengirim ACK/NAK. Jika CRC error,
+                                frame dibuang begitu saja — recovery diserahkan ke TCP di atasnya.</li>
+                        </ul>
+                        <div class="info-box" style="margin-top:.5em;">
+                            Alasan Ethernet bertahan selama 50+ tahun: <strong>sederhana, murah, dan berhasil mengikuti
+                                perlombaan kecepatan</strong> tanpa mengubah antarmuka pemrogramannya.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div style="background:#f8f9fa; border-radius:10px; padding:14px; font-size:.64em; width:100%;">
+                            <p style="font-weight:700; text-align:center; color:#333; margin:0 0 8px;">Evolusi Topologi
+                                Ethernet</p>
+                            <div style="background:#fff3e0; border-radius:8px; padding:8px; margin:4px 0;">
+                                <strong style="color:#e65100;">Bus (1970–1990-an):</strong><br>
+                                Semua host berbagi 1 kabel coaxial. Jika ada yang kirim, semua "dengar". Satu domain
+                                collision besar.
+                            </div>
+                            <div style="background:#e8f5e9; border-radius:8px; padding:8px; margin:4px 0;">
+                                <strong style="color:#1b5e20;">Switched (1990-an–sekarang):</strong><br>
+                                Host terhubung ke switch via kabel UTP dedicated. Tiap port = domain collision sendiri.
+                                Tidak ada collision!
+                            </div>
+                        </div>
+                        <p class="img-caption">Dari topologi bus ke switched</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ethernet Standards -->
+            <section>
+                <h3>Standar Ethernet (IEEE 802.3)</h3>
+                <div class="card text-left text-smaller">
+                    <table>
+                        <tr>
+                            <th>Standar</th>
+                            <th>Kecepatan</th>
+                            <th>Medium</th>
+                            <th>Jarak Maks</th>
+                            <th>Keterangan</th>
+                        </tr>
+                        <tr>
+                            <td>10BASE-T</td>
+                            <td>10 Mbps</td>
+                            <td>UTP Cat 3</td>
+                            <td>100 m</td>
+                            <td>Ethernet awal, sudah usang</td>
+                        </tr>
+                        <tr>
+                            <td>100BASE-TX</td>
+                            <td>100 Mbps</td>
+                            <td>UTP Cat 5</td>
+                            <td>100 m</td>
+                            <td>Fast Ethernet, masih ada di gedung lama</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1000BASE-T</strong></td>
+                            <td><strong>1 Gbps</strong></td>
+                            <td>UTP Cat 5e/6</td>
+                            <td>100 m</td>
+                            <td>Gigabit Ethernet — standar umum saat ini</td>
+                        </tr>
+                        <tr>
+                            <td>10GBASE-T</td>
+                            <td>10 Gbps</td>
+                            <td>UTP Cat 6a/7</td>
+                            <td>100 m</td>
+                            <td>Data Center, perkantoran high-end</td>
+                        </tr>
+                        <tr>
+                            <td>1000BASE-LX</td>
+                            <td>1 Gbps</td>
+                            <td>Single-mode fiber</td>
+                            <td>5–10 km</td>
+                            <td>Backbone kampus / gedung</td>
+                        </tr>
+                        <tr>
+                            <td>400GBASE</td>
+                            <td>400 Gbps</td>
+                            <td>Multi-fiber</td>
+                            <td>~100 m</td>
+                            <td>Hyperscale Data Center (cloud)</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="info-box" style="margin-top:.5em;">
+                    Notasi: <strong>Kecepatan BASE Medium</strong> — contoh "1000BASE-T" = 1000 Mbps (1 Gbps), baseband,
+                    medium twisted pair.
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 7: SWITCH ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>7. Ethernet Switch</h2>
+                <aside class="notes">Switch adalah perangkat layer 2 yang menggantikan hub. Perbedaan utamanya: switch
+                    cerdas, hub bodoh.</aside>
+            </section>
+
+            <!-- Switch vs Hub -->
+            <section>
+                <h3>Ethernet Switch: Perangkat Layer 2</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Cara Kerja Switch</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Switch adalah perangkat <strong>link-layer aktif</strong>: memeriksa MAC address
+                                    tujuan frame, lalu meneruskannya hanya ke port yang tepat.</li>
+                                <li><strong>Store-and-Forward:</strong> Terima frame lengkap, periksa CRC, baru
+                                    teruskan.</li>
+                                <li>Setiap port switch = domain collision tersendiri → tidak ada CSMA/CD yang diperlukan
+                                    per port.</li>
+                                <li>Mendukung <strong>transmisi simultan</strong>: A↔B dan C↔D bisa terjadi serentak
+                                    tanpa interferensi.</li>
+                                <li><strong>Transparent:</strong> Host tidak tahu ada switch — dari sudut pandang host,
+                                    seperti terhubung langsung.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-orange">Switch vs Hub</div>
+                        <div class="sec-body text-left text-smaller">
+                            <table>
+                                <tr>
+                                    <th>Aspek</th>
+                                    <th>Hub</th>
+                                    <th>Switch</th>
+                                </tr>
+                                <tr>
+                                    <td>Layer OSI</td>
+                                    <td>Physical (L1)</td>
+                                    <td>Data Link (L2)</td>
+                                </tr>
+                                <tr>
+                                    <td>Kecerdasan</td>
+                                    <td>Broadcast semua port</td>
+                                    <td>Forward berdasarkan MAC</td>
+                                </tr>
+                                <tr>
+                                    <td>Collision Domain</td>
+                                    <td>Satu besar</td>
+                                    <td>Per port</td>
+                                </tr>
+                                <tr>
+                                    <td>Simultaneous</td>
+                                    <td>Tidak</td>
+                                    <td>Ya</td>
+                                </tr>
+                                <tr>
+                                    <td>Full-Duplex</td>
+                                    <td>Tidak</td>
+                                    <td>Ya</td>
+                                </tr>
+                                <tr>
+                                    <td>Harga</td>
+                                    <td>Murah</td>
+                                    <td>Lebih mahal</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="info-box-green" style="margin-top:.4em; font-size:.9em;">
+                            ✅ Hub sudah hampir tidak digunakan. Switch adalah standar de-facto di semua jaringan LAN
+                            modern.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Self-Learning -->
+            <section>
+                <h3>Switch: Self-Learning &amp; Forwarding</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p>Switch belajar secara otomatis — <strong>tidak perlu dikonfigurasi manual</strong>:</p>
+                        <ol style="margin-top:.4em;">
+                            <li><strong>Catat MAC sumber:</strong> Setiap frame yang diterima, switch mencatat MAC
+                                address pengirim dan port masuknya ke <em>forwarding table</em> (SAT).</li>
+                            <li><strong>Lookup MAC tujuan:</strong>
+                                <ul>
+                                    <li>Jika MAC tujuan <em>ada</em> di tabel → <strong>forward</strong> hanya ke port
+                                        tersebut.</li>
+                                    <li>Jika MAC tujuan <em>tidak ada</em> → <strong>flood</strong> ke semua port
+                                        kecuali port masuk.</li>
+                                    <li>Jika tujuan = pengirim (same segment) → <strong>filter</strong> (buang, tidak
+                                        perlu diteruskan).</li>
+                                </ul>
+                            </li>
+                            <li><strong>TTL entry:</strong> Setiap entri punya TTL. Jika tidak ada aktivitas, entri
+                                dihapus.</li>
+                        </ol>
+                        <div class="info-box" style="margin-top:.5em;">
+                            💡 Inilah mengapa switch "plug-and-play" — cukup colokkan kabel, switch akan belajar sendiri
+                            dalam hitungan detik.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div style="background:#f8f9fa; border-radius:10px; padding:14px; font-size:.62em; width:100%;">
+                            <p style="font-weight:700; text-align:center; color:#333; margin:0 0 8px;">Switch Forwarding
+                                Table (Contoh)</p>
+                            <table class="switch-table" style="font-size:1em;">
+                                <tr>
+                                    <th>MAC Address</th>
+                                    <th>Interface</th>
+                                    <th>TTL</th>
+                                </tr>
+                                <tr>
+                                    <td>1A:2F:BB:76:09:AD</td>
+                                    <td>Port 1</td>
+                                    <td>60s</td>
+                                </tr>
+                                <tr>
+                                    <td>58:23:D7:FA:20:B0</td>
+                                    <td>Port 3</td>
+                                    <td>45s</td>
+                                </tr>
+                                <tr>
+                                    <td>0C:C4:7A:12:34:56</td>
+                                    <td>Port 5</td>
+                                    <td>30s</td>
+                                </tr>
+                                <tr>
+                                    <td><em>AA:BB:CC:DD:EE:FF</em></td>
+                                    <td><em>???</em></td>
+                                    <td><em>Belum ada → Flood</em></td>
+                                </tr>
+                            </table>
+                            <div style="margin-top:8px; background:#e8f5e9; padding:6px 10px; border-radius:6px;">
+                                Frame dari A ke B:<br>
+                                • Src A → simpan ke Port 1<br>
+                                • Dst B ada di Port 3 → forward ke Port 3 saja ✅
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Switch Interconnection -->
+            <section>
+                <h3>Menghubungkan Banyak Switch</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p>Switch dapat dihubungkan satu sama lain untuk membentuk jaringan LAN yang lebih besar:</p>
+                        <ul style="margin-top:.5em;">
+                            <li>Self-learning tetap bekerja — tabel di setiap switch dibangun secara independen.</li>
+                            <li>Jika S1 menerima frame ke tujuan yang tidak dikenalnya, S1 akan <em>flood</em> ke semua
+                                port termasuk uplink ke S2, S3, dst.</li>
+                            <li>Tabel setiap switch akan terisi seiring traffic berjalan.</li>
+                        </ul>
+                        <div class="info-box" style="margin-top:.5em;">
+                            🏫 Di jaringan kampus modern, arsitektur 3-tier umum digunakan: <strong>Access →
+                                Distribution → Core</strong> switch. Access terhubung ke end-device, Core menghubungkan
+                            antar gedung dengan kecepatan sangat tinggi (10–100 Gbps).
+                        </div>
+                        <div class="info-box-warn" style="margin-top:.4em;">
+                            ⚠️ Masalah loop! Tanpa mekanisme tambahan, flood bisa menyebabkan storm broadcast yang tak
+                            terhenti. Solusinya: <strong>Spanning Tree Protocol (STP/RSTP)</strong> — memblokir port
+                            tertentu agar tidak terbentuk loop.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <div
+                            style="background:#e3f2fd; border-radius:10px; padding:14px; font-size:.62em; width:100%; text-align:center;">
+                            <p style="font-weight:700; color:#1565c0; margin:0 0 10px;">Arsitektur 3-Tier Campus LAN</p>
+                            <div
+                                style="background:#1565c0; color:#fff; padding:6px; border-radius:6px; margin:4px auto; max-width:140px;">
+                                Core Switch<br><em style="font-size:.85em;">(10–100 Gbps)</em></div>
+                            <div style="display:flex; justify-content:center; gap:6px; margin:4px 0;">
+                                <div style="background:#e65100; color:#fff; padding:5px 8px; border-radius:6px;">
+                                    Distrib. SW</div>
+                                <div style="background:#e65100; color:#fff; padding:5px 8px; border-radius:6px;">
+                                    Distrib. SW</div>
+                            </div>
+                            <div style="display:flex; justify-content:center; gap:4px;">
+                                <div
+                                    style="background:#1b5e20; color:#fff; padding:4px 6px; border-radius:6px; font-size:.9em;">
+                                    Access<br>SW</div>
+                                <div
+                                    style="background:#1b5e20; color:#fff; padding:4px 6px; border-radius:6px; font-size:.9em;">
+                                    Access<br>SW</div>
+                                <div
+                                    style="background:#1b5e20; color:#fff; padding:4px 6px; border-radius:6px; font-size:.9em;">
+                                    Access<br>SW</div>
+                                <div
+                                    style="background:#1b5e20; color:#fff; padding:4px 6px; border-radius:6px; font-size:.9em;">
+                                    Access<br>SW</div>
+                            </div>
+                            <div style="color:#555; margin-top:6px; font-size:.9em;">PC, Laptop, Printer, IP Phone, AP
+                            </div>
+                        </div>
+                        <p class="img-caption">Hierarki switch di jaringan kampus</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Switch vs Router -->
+            <section>
+                <h3>Switch vs Router: Apa Bedanya?</h3>
+                <div class="card text-left text-smaller" style="margin-bottom:.5em;">
+                    <table>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Switch (L2)</th>
+                            <th>Router (L3)</th>
+                        </tr>
+                        <tr>
+                            <td>Layer OSI</td>
+                            <td>Data Link (L2)</td>
+                            <td>Network (L3)</td>
+                        </tr>
+                        <tr>
+                            <td>Alamat yang digunakan</td>
+                            <td>MAC address</td>
+                            <td>IP address</td>
+                        </tr>
+                        <tr>
+                            <td>Tabel yang dibangun</td>
+                            <td>Forwarding table (MAC → Port)</td>
+                            <td>Routing table (IP network → Interface)</td>
+                        </tr>
+                        <tr>
+                            <td>Cara belajar</td>
+                            <td>Self-learning (otomatis)</td>
+                            <td>Routing protocol (RIP, OSPF, BGP) atau manual</td>
+                        </tr>
+                        <tr>
+                            <td>Broadcast domain</td>
+                            <td>Tidak memisahkan (flood broadcast)</td>
+                            <td>Memisahkan (broadcast tidak dilewatkan)</td>
+                        </tr>
+                        <tr>
+                            <td>Koneksi antar jaringan</td>
+                            <td>Tidak bisa (hanya dalam satu subnet)</td>
+                            <td>Ya (bisa hubungkan banyak subnet)</td>
+                        </tr>
+                        <tr>
+                            <td>Plug-and-play</td>
+                            <td>Ya — zero config</td>
+                            <td>Tidak — perlu konfigurasi IP, routing</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="layout-2col">
+                    <div class="info-box">
+                        🔌 <strong>Gunakan Switch</strong> untuk menghubungkan perangkat dalam satu subnet (LAN) yang
+                        sama — lebih murah dan plug-and-play.
+                    </div>
+                    <div class="info-box-warn">
+                        🌐 <strong>Gunakan Router</strong> untuk menghubungkan subnet yang berbeda atau ke internet —
+                        butuh konfigurasi tapi lebih powerful.
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ TUGAS INDIVIDU ━━━━━━━━━━━━━━ -->
+            <section>
+                <div class="tugas-box">
+                    <h3>📝 Tugas Individu — Pertemuan 4</h3>
+                    <p style="font-size:.6em; color:#c5cae9; margin-bottom:10px;">Dikerjakan analitik, ditulis tangan di
+                        kertas folio, foto, kirim ke e-learning</p>
+
+                    <div class="tugas-soal">
+                        <p><span class="num">1.</span> Di sebuah laboratorium komputer terdapat 30 PC yang semuanya
+                            terhubung ke <strong>satu hub</strong> 100 Mbps lama. Mahasiswa mengeluhkan jaringan sangat
+                            lambat terutama saat banyak yang menggunakan serentak. <strong>Jelaskan secara
+                                teknis</strong> mengapa hal ini terjadi (kaitkan dengan CSMA/CD, collision domain, dan
+                            efisiensi bandwidth). <strong>Proposalkan</strong> solusi upgrade dengan switch dan hitung
+                            perkiraan peningkatan bandwidth efektif per user.</p>
+                    </div>
+
+                    <div class="tugas-soal" style="margin-top:8px;">
+                        <p><span class="num">2.</span> Seorang administrator mendeteksi serangan <strong>ARP
+                                Spoofing</strong> di jaringan kantornya — penyerang mengirim ARP Reply palsu agar semua
+                            traffic melewati komputernya (man-in-the-middle). <strong>Jelaskan langkah-langkah</strong>
+                            bagaimana serangan ini bekerja di level frame, dan <strong>sebutkan dua mekanisme</strong>
+                            yang bisa digunakan untuk mencegah ARP Spoofing di jaringan modern.</p>
+                    </div>
+
+                    <div class="tugas-soal" style="margin-top:8px;">
+                        <p><span class="num">3.</span> Sebuah frame Ethernet diterima oleh NIC dengan CRC yang tidak
+                            cocok. <strong>Analisislah</strong>: (a) apa keputusan yang diambil NIC terhadap frame
+                            tersebut? (b) apakah data yang dikirim akan hilang permanen? (c) protokol apa di lapisan
+                            atas yang bertanggung jawab untuk memulihkan kondisi ini, dan bagaimana mekanismenya?</p>
+                    </div>
+
+                    <div class="tugas-info">
+                        <div class="tugas-chip"><i class="bi bi-pencil"></i> Tulis tangan, kertas folio</div>
+                        <div class="tugas-chip"><i class="bi bi-camera"></i> Foto, upload ke e-learning</div>
+                        <div class="tugas-chip"><i class="bi bi-calendar3"></i> Deadline: sebelum Pertemuan 5</div>
+                        <div class="tugas-chip"><i class="bi bi-person"></i> Individual</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RANGKUMAN -->
+            <section>
+                <h3>Rangkuman Pertemuan 4</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#1565c0;">Lapisan Data Link &amp; Error Handling</p>
+                        <ul>
+                            <li>Data Link: framing, link access, flow control, error detection.</li>
+                            <li>Frame Ethernet: Preamble | MAC Dst | MAC Src | Type | Data | CRC.</li>
+                            <li>Deteksi error: <strong>Parity</strong> (sederhana), <strong>Checksum</strong>
+                                (UDP/TCP/IP), <strong>CRC</strong> (Ethernet — paling powerful).</li>
+                            <li>Implementasi di <strong>NIC</strong> — ada di setiap host &amp; perangkat jaringan.</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#e65100;">MAC, ARP, Ethernet &amp; Switch</p>
+                        <ul>
+                            <li>MAC address = 48-bit, unik per NIC, tidak berubah per hop.</li>
+                            <li>ARP: memetakan IP → MAC dalam satu subnet (broadcast query, unicast reply).</li>
+                            <li>Multiple Access: Channel Partition (TDMA/FDMA) · Random (CSMA/CD) · Taking Turns.</li>
+                            <li>Ethernet: connectionless, unreliable, CSMA/CD, CRC-32.</li>
+                            <li>Switch: self-learning forwarding table, per-port collision domain, simultan.</li>
+                            <li>Switch (L2/MAC) vs Router (L3/IP) — berbeda fungsi dan skala.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Tanya Jawab &amp; Diskusi</h2>
+                <p>Pertemuan berikutnya: <strong>Lapisan Transport — UDP &amp; TCP</strong></p>
+                <p class="text-small">Referensi mandiri: Kurose &amp; Ross Chapter 6 (Link Layer)</p>
+            </section>
+
+        </div><!-- /slides -->
+    </div><!-- /reveal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            plugins: [RevealNotes]
+        });
+    </script>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeLink = document.getElementById('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            if (!toggleBtn || !themeLink) return;
+
+            const currentTheme = localStorage.getItem('reveal-theme') || 'simple';
+            if (currentTheme === 'night') {
+                themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                toggleBtn.style.background = '#f1f1f1';
+                toggleBtn.style.color = '#333';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                if (themeLink.href.includes('simple.css')) {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('reveal-theme', 'night');
+                    themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                    toggleBtn.style.background = '#f1f1f1';
+                    toggleBtn.style.color = '#333';
+                } else {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css';
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('reveal-theme', 'simple');
+                    themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+                    toggleBtn.style.background = '#333';
+                    toggleBtn.style.color = '#fff';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

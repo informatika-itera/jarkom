@@ -1,0 +1,1249 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jaringan Komputer - Pertemuan 5: Lapisan Transport</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="css/pkom-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        .reveal .slides section {
+            height: 100%;
+            overflow-y: auto !important;
+            padding-bottom: 50px;
+        }
+
+        /* images */
+        .slide-img {
+            width: 100%;
+            height: auto;
+            max-height: 45vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slide-img-sm {
+            width: 100%;
+            height: auto;
+            max-height: 30vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* layouts */
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .layout-text-img {
+            display: grid;
+            grid-template-columns: 50% 1fr;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .img-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .4em;
+        }
+
+        .img-caption {
+            font-size: .52em;
+            color: #777;
+            text-align: center;
+            margin-top: .1em;
+            font-style: italic;
+        }
+
+        /* section header bars */
+        .sec-bar {
+            border-radius: 8px 8px 0 0;
+            padding: 7px 16px;
+            font-size: .68em;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .sec-body {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .sec-bar-blue {
+            background: #1565c0;
+            color: #fff;
+        }
+
+        .sec-bar-orange {
+            background: #e65100;
+            color: #fff;
+        }
+
+        .sec-bar-green {
+            background: #1b5e20;
+            color: #fff;
+        }
+
+        .sec-bar-purple {
+            background: #4a148c;
+            color: #fff;
+        }
+
+        .sec-bar-red {
+            background: #b71c1c;
+            color: #fff;
+        }
+
+        .sec-bar-teal {
+            background: #00695c;
+            color: #fff;
+        }
+
+        /* info boxes */
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-warn {
+            border-left: 4px solid #e65100;
+            background: #fff3e0;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-green {
+            border-left: 4px solid #1b5e20;
+            background: #e8f5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        /* ANIMATIONS COMMON */
+        .anim-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .anim-node {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+        .anim-node-left {
+            left: 30px;
+        }
+
+        .anim-node-right {
+            right: 30px;
+        }
+
+        .anim-icon {
+            font-size: 4em;
+            color: #333;
+            line-height: 1;
+        }
+
+        .anim-label {
+            font-size: .6em;
+            font-weight: 700;
+            font-family: monospace;
+            margin-top: 5px;
+        }
+
+        .anim-status {
+            font-size: .5em;
+            font-weight: 700;
+            color: #1565c0;
+            margin-top: 2px;
+        }
+
+        .anim-packet {
+            position: absolute;
+            font-size: .6em;
+            font-weight: 700;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            opacity: 0;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        /* 1. ANIMATION: TCP HANDSHAKE */
+        @keyframes sendSyn {
+            0% {
+                left: 100px;
+                opacity: 1;
+            }
+
+            90% {
+                left: calc(100% - 180px);
+                opacity: 1;
+            }
+
+            100% {
+                left: calc(100% - 180px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sendSynAck {
+            0% {
+                right: 100px;
+                opacity: 1;
+            }
+
+            90% {
+                right: calc(100% - 180px);
+                opacity: 1;
+            }
+
+            100% {
+                right: calc(100% - 180px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sendAck {
+            0% {
+                left: 100px;
+                opacity: 1;
+            }
+
+            90% {
+                left: calc(100% - 180px);
+                opacity: 1;
+            }
+
+            100% {
+                left: calc(100% - 180px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes statusChangeClient {
+            0% {
+                content: "CLOSED";
+            }
+
+            30% {
+                content: "SYN_SENT";
+            }
+
+            90% {
+                content: "ESTABLISHED";
+            }
+
+            100% {
+                content: "ESTABLISHED";
+            }
+        }
+
+        @keyframes statusChangeServer {
+            0% {
+                content: "LISTEN";
+            }
+
+            60% {
+                content: "SYN_RCVD";
+            }
+
+            100% {
+                content: "ESTABLISHED";
+            }
+        }
+
+        .handshake-syn {
+            background: #1565c0;
+            top: 30%;
+            animation: sendSyn 2.5s linear infinite;
+            animation-delay: 0s;
+        }
+
+        .handshake-synack {
+            background: #e65100;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: sendSynAck 2.5s linear infinite;
+            animation-delay: 2.5s;
+        }
+
+        .handshake-ack {
+            background: #1b5e20;
+            top: 70%;
+            animation: sendAck 2.5s linear infinite;
+            animation-delay: 5s;
+        }
+
+        /* 2. ANIMATION: TCP TEARDOWN */
+        @keyframes tearFin1 {
+            0% {
+                left: 100px;
+                opacity: 1;
+            }
+
+            90% {
+                left: calc(100% - 180px);
+                opacity: 1;
+            }
+
+            100% {
+                left: calc(100% - 180px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes tearAck1 {
+            0% {
+                right: 100px;
+                opacity: 1;
+            }
+
+            90% {
+                right: calc(100% - 180px);
+                opacity: 1;
+            }
+
+            100% {
+                right: calc(100% - 180px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes tearFin2 {
+            0% {
+                right: 100px;
+                opacity: 1;
+            }
+
+            90% {
+                right: calc(100% - 180px);
+                opacity: 1;
+            }
+
+            100% {
+                right: calc(100% - 180px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes tearAck2 {
+            0% {
+                left: 100px;
+                opacity: 1;
+            }
+
+            90% {
+                left: calc(100% - 180px);
+                opacity: 1;
+            }
+
+            100% {
+                left: calc(100% - 180px);
+                opacity: 0;
+            }
+        }
+
+        .tear-fin1 {
+            background: #b71c1c;
+            top: 25%;
+            animation: tearFin1 2s linear infinite;
+            animation-delay: 0s;
+        }
+
+        .tear-ack1 {
+            background: #1565c0;
+            top: 40%;
+            animation: tearAck1 2s linear infinite;
+            animation-delay: 2s;
+        }
+
+        .tear-fin2 {
+            background: #b71c1c;
+            top: 60%;
+            animation: tearFin2 2s linear infinite;
+            animation-delay: 4s;
+        }
+
+        .tear-ack2 {
+            background: #1565c0;
+            top: 75%;
+            animation: tearAck2 2s linear infinite;
+            animation-delay: 6s;
+        }
+
+        /* 3. ANIMATION: CONGESTION (ROUTER BUFFER FULL) */
+        @keyframes pktMove {
+            0% {
+                left: 0;
+                opacity: 1;
+            }
+
+            45% {
+                left: 40%;
+                opacity: 1;
+            }
+
+            50% {
+                left: 45%;
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            100% {
+                left: 45%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes pktDrop {
+            0% {
+                left: 0;
+                opacity: 1;
+                background: #1565c0;
+            }
+
+            40% {
+                left: 40%;
+                opacity: 1;
+                background: #1565c0;
+            }
+
+            45% {
+                left: 45%;
+                opacity: 1;
+                background: #b71c1c;
+                transform: translateY(20px) rotate(45deg);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .router-box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            border: 4px solid #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            z-index: 5;
+        }
+
+        .buffer-bar {
+            position: absolute;
+            left: 50%;
+            top: 85%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 15px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            background: linear-gradient(to right, #b71c1c 90%, #fff 90%);
+        }
+
+        .cong-pkt {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 20px;
+            background: #1565c0;
+            border-radius: 4px;
+        }
+
+        .cong-pkt:nth-child(1) {
+            animation: pktMove 3s infinite linear;
+            animation-delay: 0s;
+        }
+
+        .cong-pkt:nth-child(2) {
+            animation: pktMove 3s infinite linear;
+            animation-delay: 0.5s;
+        }
+
+        .cong-pkt:nth-child(3) {
+            animation: pktMove 3s infinite linear;
+            animation-delay: 1s;
+        }
+
+        .cong-pkt:nth-child(4) {
+            animation: pktDrop 3s infinite linear;
+            animation-delay: 1.5s;
+        }
+
+        .cong-pkt:nth-child(5) {
+            animation: pktDrop 3s infinite linear;
+            animation-delay: 2s;
+        }
+
+        /* 4. ANIMATION: TCP AIMD SAWTOOTH */
+        @keyframes drawSawtooth {
+            0% {
+                stroke-dashoffset: 1000;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .sawtooth-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawSawtooth 6s linear infinite;
+        }
+
+        .aimd-label {
+            position: absolute;
+            font-size: .6em;
+            font-weight: 700;
+            color: #555;
+        }
+
+        /* tugas slide */
+        .tugas-box {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            border-radius: 14px;
+            padding: 22px 28px;
+            color: #fff;
+        }
+
+        .tugas-soal {
+            background: rgba(255, 255, 255, .13);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 8px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .63em;
+            line-height: 1.65;
+            margin: 0;
+            color: #e8f5e9;
+        }
+
+        .tugas-soal .num {
+            font-size: .9em;
+            font-weight: 700;
+            color: #ffeb3b;
+        }
+
+        .tugas-info {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: .58em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="footer-branding">
+            <div class="footer-logos"></div>
+            <div class="footer-copyright">&copy; 2026 IF25-21008 Jaringan Komputer - ITERA</div>
+        </div>
+
+        <div class="slides">
+
+            <!-- ━━━━━━━━━━━━━━ INTRO ━━━━━━━━━━━━━━ -->
+            <section>
+                <div class="title-box">
+                    <h1>Lapisan Transport</h1>
+                    <h3 class="subtitle">Pertemuan 5</h3>
+                </div>
+                <p>Referensi Utama: Kurose &amp; Ross — <em>Computer Networking: A Top-Down Approach (8th Ed)</em></p>
+                <p class="text-small"><em>Dosen Pengampu:</em></p>
+                <div style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                    <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
+                    <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
+                </div>
+                <aside class="notes">Hari ini kita akan masuk ke lapisan Transport. Lapisan ini sangat penting karena
+                    berada persis di bawah aplikasi kita, menyediakan komunikasi ujung-ke-ujung yang sebenarnya.</aside>
+            </section>
+
+            <!-- Outline -->
+            <section>
+                <h3>Outline Materi (100 Menit)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#1565c0;">Bagian 1: Konsep Transport</p>
+                        <ul>
+                            <li>Layanan Lapisan Transport</li>
+                            <li>Multiplexing &amp; Demultiplexing</li>
+                            <li>Transport Connectionless: UDP</li>
+                            <li>Prinsip Reliable Data Transfer (RDT)</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#e65100;">Bagian 2: TCP &amp; Congestion</p>
+                        <ul>
+                            <li>Transport Connection-Oriented: TCP</li>
+                            <li>Manajemen Koneksi (Handshake &amp; Teardown)</li>
+                            <li>Flow Control</li>
+                            <li>TCP Congestion Control (AIMD)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 1: LAYANAN TRANSPORT ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>1. Layanan Lapisan Transport</h2>
+            </section>
+
+            <section>
+                <h3>Peran Transport Layer</h3>
+                <div class="card text-left text-small">
+                    <p>Menyediakan komunikasi <strong>logis ujung-ke-ujung (end-to-end)</strong> antara proses aplikasi
+                        yang berjalan di host yang berbeda.</p>
+                    <ul style="margin-top:.5em;">
+                        <li><strong>Network Layer:</strong> Komunikasi logis antar <strong>Host</strong> (komputer).
+                        </li>
+                        <li><strong>Transport Layer:</strong> Komunikasi logis antar <strong>Proses</strong>
+                            (aplikasi/socket).</li>
+                    </ul>
+                    <div class="info-box-warn" style="margin-top:.8em;">
+                        💡 <strong>Analogi Keluarga:</strong>
+                        <br>Rumah = Host
+                        <br>Anak-anak = Proses/Aplikasi
+                        <br>Petugas Pos = Network Layer (hanya mengantar ke rumah)
+                        <br>Kakak Tertua = <strong>Transport Layer</strong> (membagikan surat ke adik-adik yang tepat di
+                        dalam rumah)
+                    </div>
+                </div>
+            </section>
+
+            <!-- Animasi Peran Transport -->
+            <section>
+                <h3>Ilustrasi: Komunikasi Proses ke Proses</h3>
+                <div
+                    style="background:#e3f2fd; border-radius:10px; padding:30px; font-size:.8em; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+                    <div style="font-weight:700; font-size:1.4em; color:#1565c0; margin-bottom:20px;">Proses ↔ Proses
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div style="width:30%;">
+                            <div
+                                style="background:#1565c0; color:#fff; padding:10px; border-radius:6px; margin:4px; font-weight:700;">
+                                Browser (Proses A)</div>
+                            <div
+                                style="background:#ff8f00; color:#fff; padding:10px; border-radius:6px; margin:4px; font-weight:700;">
+                                TCP (Transport)</div>
+                        </div>
+                        <div
+                            style="width:40%; font-size:2em; color:#777; display:flex; flex-direction:column; align-items:center;">
+                            <i class="bi bi-arrow-left-right"></i>
+                            <span style="font-size:.4em; margin-top:10px;">Jaringan Internet (IP)</span>
+                        </div>
+                        <div style="width:30%;">
+                            <div
+                                style="background:#1565c0; color:#fff; padding:10px; border-radius:6px; margin:4px; font-weight:700;">
+                                Web Server (Proses B)</div>
+                            <div
+                                style="background:#ff8f00; color:#fff; padding:10px; border-radius:6px; margin:4px; font-weight:700;">
+                                TCP (Transport)</div>
+                        </div>
+                    </div>
+                    <div class="info-box" style="margin-top:20px; font-size:.8em; text-align:left;">
+                        Tugas utama transport layer adalah mengambil pesan dari aplikasi, memecahnya menjadi
+                        segmen-segmen kecil (jika perlu), dan menyerahkannya ke network layer. Di sisi penerima,
+                        menyusunnya kembali dan menyerahkannya ke aplikasi yang tepat.
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 2: MUX & DEMUX ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>2. Multiplexing &amp; Demultiplexing</h2>
+            </section>
+
+            <section>
+                <h3>Konsep Mux &amp; Demux</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Di Sisi Pengirim (Multiplexing)</div>
+                        <div class="sec-body text-left text-small">
+                            Mengumpulkan data dari banyak soket (aplikasi), menambahkan header transport (yang nantinya
+                            dipakai untuk demultiplexing), dan meneruskannya ke Network Layer lewat satu saluran.
+                        </div>
+                        <div class="sec-bar sec-bar-orange" style="margin-top:.5em; border-radius:8px;">Di Sisi Penerima
+                            (Demultiplexing)</div>
+                        <div class="sec-body text-left text-small">
+                            Menggunakan informasi header (<strong>Port Numbers</strong>) untuk memilah dan mengantarkan
+                            segmen yang masuk ke soket yang tepat.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/mux_demux.png" alt="Ilustrasi Multiplexing dan Demultiplexing"
+                            class="slide-img">
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Demultiplexing: UDP</h3>
+                <div class="card text-left text-small">
+                    <p><strong>Connectionless Demux (UDP)</strong></p>
+                    <ul>
+                        <li>Soket UDP diidentifikasi sepenuhnya oleh <strong>2-tuple</strong>:
+                            <code>(Dest IP, Dest Port)</code>.
+                        </li>
+                        <li>Jika dua datagram dari IP pengirim (sumber) yang berbeda, atau dari Port sumber yang
+                            berbeda, menuju <strong>Port Tujuan yang sama</strong>, keduanya akan masuk ke <strong>satu
+                                soket UDP yang sama</strong>.</li>
+                        <li>Sangat efisien untuk server yang melayani banyak klien sekaligus tanpa perlu melacak status
+                            tiap klien (contoh: DNS Server di Port 53).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Demultiplexing: TCP</h3>
+                <div class="card text-left text-small">
+                    <p><strong>Connection-Oriented Demux (TCP)</strong></p>
+                    <ul>
+                        <li>Soket TCP diidentifikasi secara unik oleh <strong>4-tuple</strong>:
+                            <code>(Src IP, Src Port, Dest IP, Dest Port)</code>.
+                        </li>
+                        <li>Host penerima menggunakan <em>keempat</em> nilai ini untuk mengarahkan segmen ke soket yang
+                            tepat.</li>
+                        <li>Web server (Apache/Nginx) membuat <strong>soket baru yang terpisah</strong> untuk
+                            <em>setiap</em> koneksi klien yang masuk, meskipun semuanya menuju port tujuan yang sama
+                            (Port 80/443).
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Perbandingan Demux UDP vs TCP</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#e65100; text-align:center;">UDP Demux</p>
+                        <div
+                            style="background:#fff3e0; padding:15px; border-radius:8px; text-align:left; font-family:monospace; margin-bottom:10px; font-size:.45em; line-height:1.4;">
+                            Client A (IP: A, Port: 111) ──┐<br>
+                            Client B (IP: B, Port: 222) ──┼─▶ Socket (Port 53)<br>
+                            Client C (IP: C, Port: 333) ──┘
+                        </div>
+                        <p style="font-size:.9em;">Satu pintu (soket) melayani semua tamu yang datang ke alamat
+                            tersebut.</p>
+                    </div>
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#1565c0; text-align:center;">TCP Demux</p>
+                        <div
+                            style="background:#e8f0fe; padding:15px; border-radius:8px; text-align:center; font-family:monospace; margin-bottom:10px; font-size:.45em; line-height:1.4;">
+                            Client A (IP: A, Port: 111) ──▶ Socket 1 (Port 80)<br>
+                            Client B (IP: B, Port: 222) ──▶ Socket 2 (Port 80)<br>
+                            Client C (IP: C, Port: 333) ──▶ Socket 3 (Port 80)
+                        </div>
+                        <p style="font-size:.9em;">Setiap tamu (klien) dilayani di ruangan (soket) khusus yang berbeda,
+                            meskipun datang ke gedung (port) yang sama.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 3: UDP ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>3. User Datagram Protocol (UDP)</h2>
+            </section>
+
+            <section>
+                <h3>UDP: Cepat Tapi Tidak Andal</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <ul>
+                            <li><strong>No Frills, Bare Bones:</strong> Protokol transport yang sangat minimalis (RFC
+                                768).</li>
+                            <li><strong>Connectionless:</strong> Tidak ada proses handshaking sebelum mengirim data.
+                                Langsung tembak!</li>
+                            <li><strong>Best Effort:</strong> Segmen UDP dapat hilang (lost) atau datang tidak berurutan
+                                (out of order).</li>
+                            <li><strong>No Congestion Control:</strong> UDP tidak peduli jaringan sedang macet, ia akan
+                                terus mengirim data.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/tcp_vs_udp.png" alt="Perbandingan TCP dan UDP" class="slide-img">
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Mengapa UDP Masih Digunakan?</h3>
+                <div class="card text-left text-small">
+                    <p>Meskipun tidak andal, UDP memiliki keunggulan telak dalam skenario tertentu:</p>
+                    <ul style="margin-top:.4em;">
+                        <li><strong>Tanpa delay setup:</strong> Tidak perlu menunggu 3-way handshake selesai untuk mulai
+                            mengirim data (Sangat penting untuk DNS query yang butuh respon instan).</li>
+                        <li><strong>Tanpa state koneksi:</strong> Server tidak perlu menyimpan informasi buffer atau
+                            parameter koneksi klien, sehingga memori jauh lebih hemat.</li>
+                        <li><strong>Header sangat kecil:</strong> Hanya 8 byte overhead (dibandingkan TCP yang 20 byte).
+                        </li>
+                        <li><strong>Kontrol penuh di level aplikasi:</strong> Aplikasi bisa mengontrol kapan tepatnya
+                            data dikirim tanpa dihalangi oleh algoritma congestion control TCP.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Pentingnya UDP: Real-time &amp; Low Latency</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p>Dalam aplikasi real-time, <strong>kecepatan lebih penting daripada keutuhan 100%</strong>.
+                        </p>
+                        <ul>
+                            <li>🎮 <strong>Game Online:</strong> Kehilangan satu paket data pergerakan pemain tidak
+                                masalah, asalkan paket berikutnya datang sangat cepat tanpa delay. Jika menggunakan TCP,
+                                retransmisi akan menyebabkan <em>lag/stuttering</em>.</li>
+                            <li>📺 <strong>Live Streaming / VoIP:</strong> Hilangnya paket hanya menyebabkan sedikit
+                                glitch visual/audio sementara, yang lebih bisa ditoleransi manusia daripada video yang
+                                terus-terusan berhenti untuk <em>buffering</em>.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/udp_importance.png"
+                            alt="Ilustrasi pentingnya UDP untuk Gaming dan Streaming" class="slide-img-sm">
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 4: TCP HANDSHAKE & TEARDOWN ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>4. Manajemen Koneksi TCP</h2>
+            </section>
+
+            <section>
+                <h3>Manajemen Koneksi (Karakteristik TCP)</h3>
+                <div class="card text-left text-small">
+                    <ul>
+                        <li><strong>Point-to-point:</strong> Satu pengirim, satu penerima.</li>
+                        <li><strong>Reliable, in-order byte stream:</strong> Data dijamin sampai dengan utuh dan
+                            berurutan.</li>
+                        <li><strong>Connection-oriented:</strong> Wajib melakukan handshaking sebelum bertukar data.
+                        </li>
+                        <li><strong>Full duplex data:</strong> Aliran data dua arah (bi-directional) dalam koneksi yang
+                            sama.</li>
+                    </ul>
+                    <div class="info-box-warn" style="margin-top:.8em;">
+                        Sebelum mempertukarkan data aplikasi, pengirim dan penerima harus saling menyapa (handshake)
+                        untuk menyepakati parameter koneksi dan inisialisasi urutan (Sequence Number).
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Animasi: TCP 3-Way Handshake</h3>
+
+                <div class="anim-container">
+                    <div class="anim-node anim-node-left">
+                        <i class="bi bi-laptop anim-icon"></i>
+                        <div class="anim-label">Client</div>
+                        <div class="anim-status" style="animation: statusChangeClient 8s infinite;"></div>
+                    </div>
+
+                    <div class="anim-packet handshake-syn">1. SYN (seq=x)</div>
+                    <div class="anim-packet handshake-synack">2. SYN-ACK (seq=y, ack=x+1)</div>
+                    <div class="anim-packet handshake-ack">3. ACK (ack=y+1)</div>
+
+                    <div class="anim-node anim-node-right">
+                        <i class="bi bi-hdd-network anim-icon" style="color:#1b5e20;"></i>
+                        <div class="anim-label">Server</div>
+                        <div class="anim-status" style="color:#e65100; animation: statusChangeServer 8s infinite;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box-green" style="margin-top:1em; font-size:.6em; text-align:left;">
+                    <strong>Proses:</strong> 1) Klien kirim SYN (meminta koneksi). 2) Server membalas SYN-ACK (setuju &
+                    minta balik). 3) Klien membalas ACK (konfirmasi akhir). Koneksi terbentuk!
+                </div>
+            </section>
+
+            <section>
+                <h3>Menutup Koneksi TCP (Teardown)</h3>
+                <div class="card text-left text-small">
+                    <p>Berbeda dengan saat membuka koneksi yang hanya butuh 3 langkah, menutup koneksi TCP butuh
+                        <strong>4 langkah</strong> karena sifatnya yang asimetris.
+                    </p>
+                    <ul>
+                        <li>Koneksi TCP adalah dua jalur komunikasi satu arah yang digabung (Full Duplex).</li>
+                        <li>Setiap pihak harus menutup jalurnya masing-masing menggunakan bendera <strong>FIN</strong>
+                            (Finish).</li>
+                        <li>Ketika Klien mengirim FIN, ia tidak bisa lagi mengirim data, tapi <strong>masih bisa
+                                menerima data</strong> dari Server sampai Server juga mengirim FIN.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Animasi: TCP 4-Way Teardown</h3>
+
+                <div class="anim-container">
+                    <div class="anim-node anim-node-left">
+                        <i class="bi bi-laptop anim-icon"></i>
+                        <div class="anim-label">Client</div>
+                        <div class="anim-status" style="color:#b71c1c;">FIN_WAIT / CLOSED</div>
+                    </div>
+
+                    <div class="anim-packet tear-fin1">1. FIN (Saya selesai kirim)</div>
+                    <div class="anim-packet tear-ack1">2. ACK (Oke, saya terima FIN)</div>
+                    <div class="anim-packet tear-fin2">3. FIN (Saya juga selesai)</div>
+                    <div class="anim-packet tear-ack2">4. ACK (Oke, Bye!)</div>
+
+                    <div class="anim-node anim-node-right">
+                        <i class="bi bi-hdd-network anim-icon" style="color:#1b5e20;"></i>
+                        <div class="anim-label">Server</div>
+                        <div class="anim-status" style="color:#b71c1c;">CLOSE_WAIT / CLOSED</div>
+                    </div>
+                </div>
+
+                <div class="info-box-warn" style="margin-top:1em; font-size:.6em; text-align:left;">
+                    <strong>Catatan:</strong> Terkadang langkah 2 dan 3 digabung menjadi satu paket (FIN+ACK) oleh
+                    server jika server memang sudah tidak ada data lagi untuk dikirim.
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 5: FLOW CONTROL ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>5. Flow Control (Kendali Aliran)</h2>
+            </section>
+
+            <section>
+                <h3>Flow Control: Melindungi Penerima</h3>
+                <div class="card text-left text-small">
+                    <p><strong>Masalah:</strong> Bagaimana jika aplikasi di sisi penerima sangat lambat membaca data
+                        dari buffer TCP, sementara pengirim menembakkan data dengan sangat cepat?</p>
+                    <p style="margin-top:.4em; color:#b71c1c; font-weight:700;"><i
+                            class="bi bi-exclamation-triangle-fill"></i> Akibat: Buffer overflow di penerima (data
+                        hilang / tertolak).</p>
+
+                    <p style="margin-top:.8em; font-weight:700; color:#1565c0;">Solusi TCP (Flow Control):</p>
+                    <ul>
+                        <li>Penerima secara eksplisit memberitahu pengirim <strong>berapa banyak ruang kosong yang
+                                tersisa</strong> di buffernya.</li>
+                        <li>Nilai ini ditaruh di field <strong>rwnd (Receive Window)</strong> pada header TCP setiap
+                            kali penerima membalas dengan ACK.</li>
+                        <li>Pengirim mematuhi aturan: jumlah data yang sedang melayang (un-ACKed data) <em>tidak boleh
+                                melebihi</em> nilai <code>rwnd</code> saat ini.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Ilustrasi Receive Window (rwnd)</h3>
+                <div class="card text-left text-small">
+                    <p>Ilustrasi buffer di sisi penerima:</p>
+                    <div
+                        style="background:#e8f5e9; border:1px solid #81c784; border-radius:10px; padding:20px; margin:20px 0;">
+                        <div style="font-weight:700; color:#1b5e20; text-align:center; margin-bottom:10px;">Total
+                            Receive Buffer Space (RcvBuffer)</div>
+                        <div
+                            style="display:flex; height:40px; border:2px solid #333; border-radius:4px; overflow:hidden;">
+                            <div
+                                style="background:#81c784; width:35%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">
+                                Data Belum Dibaca App</div>
+                            <div
+                                style="background:#fff; width:65%; display:flex; align-items:center; justify-content:center; color:#555; font-weight:700;">
+                                Ruang Kosong = rwnd</div>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        Jika aplikasi lambat membaca, blok hijau membesar, ruang kosong (rwnd) mengecil. Pengirim akan
+                        memperlambat pengiriman secara otomatis.
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 6: CONGESTION CONTROL ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>6. TCP Congestion Control</h2>
+            </section>
+
+            <section>
+                <h3>Apa itu Congestion? (Kemacetan Jaringan)</h3>
+                <div class="card text-left text-small">
+                    <p><strong>Definisi:</strong> Terlalu banyak sumber yang mengirim terlalu banyak data, terlalu
+                        cepat, sehingga <strong>jaringan (router di tengah jalan)</strong> tidak sanggup menanganinya.
+                    </p>
+                    <p style="margin-top:.8em; font-weight:700;">Ciri-ciri Kemacetan Jaringan:</p>
+                    <ul>
+                        <li><strong>Delay Ekstrem:</strong> Paket mengantre lama di dalam buffer router.</li>
+                        <li><strong>Packet Loss:</strong> Buffer router penuh, sehingga router terpaksa membuang paket
+                            yang baru datang (overflow).</li>
+                    </ul>
+                    <div class="info-box-warn" style="margin-top:.8em;">
+                        ⚠️ <strong>Perbedaan Penting:</strong>
+                        <br><em>Flow Control</em> = Mencegah buffer <strong>Penerima</strong> penuh.
+                        <br><em>Congestion Control</em> = Mencegah buffer <strong>Router Jaringan</strong> penuh.
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Animasi: Terjadinya Kemacetan (Congestion)</h3>
+
+                <div class="anim-container">
+                    <!-- Packets entering -->
+                    <div class="cong-pkt"></div>
+                    <div class="cong-pkt"></div>
+                    <div class="cong-pkt"></div>
+                    <div class="cong-pkt"></div>
+                    <div class="cong-pkt"></div>
+
+                    <!-- Router -->
+                    <div class="router-box">
+                        <i class="bi bi-router"></i>
+                        <div class="buffer-bar"></div>
+                    </div>
+
+                    <div
+                        style="position:absolute; bottom:15px; width:100%; text-align:center; font-size:.6em; font-weight:700; color:#b71c1c;">
+                        Buffer Router Penuh → Paket Berikutnya Dibuang (Drop)
+                    </div>
+                </div>
+
+                <div class="info-box-red" style="margin-top:1em; font-size:.6em; text-align:left;">
+                    Biaya dari kemacetan: Paket yang sudah berhasil melewati setengah jalan internet terbuang percuma,
+                    menguras kapasitas jaringan secara global. Pengirim harus melakukan retransmisi.
+                </div>
+            </section>
+
+            <section>
+                <h3>TCP Congestion Control (AIMD)</h3>
+                <div class="card text-left text-small">
+                    <p>TCP melakukan kontrol kemacetan secara <strong>End-to-End</strong>. TCP tidak bisa bertanya ke
+                        router, jadi ia menebak kemacetan dari adanya <em>packet loss</em>.</p>
+                    <p style="margin-top:.8em; font-weight:700; color:#1565c0;">Algoritma AIMD (Additive Increase,
+                        Multiplicative Decrease):</p>
+                    <ul style="margin-top:.4em;">
+                        <li><strong>Additive Increase (Probe Bandwidth):</strong> Selama tidak ada loss, perlahan-lahan
+                            tingkatkan kecepatan transmisi (+1 MSS setiap RTT) untuk <em>meraba-raba</em> batas
+                            bandwidth maksimal.</li>
+                        <li><strong>Multiplicative Decrease (Rem Darurat):</strong> Jika terjadi packet loss, segera
+                            <strong>potong kecepatan transmisi menjadi setengahnya</strong>.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Animasi: Pola Gigi Gergaji (Sawtooth)</h3>
+
+                <div class="anim-container"
+                    style="background:#fff; display:flex; justify-content:center; align-items:center;">
+                    <svg width="600" height="250" viewBox="0 0 600 250">
+                        <!-- Grid/Axes -->
+                        <line x1="50" y1="200" x2="550" y2="200" stroke="#ccc" stroke-width="2" />
+                        <line x1="50" y1="200" x2="50" y2="20" stroke="#ccc" stroke-width="2" />
+                        <text x="10" y="30" font-size="14" font-family="sans-serif" fill="#555">Kecepatan</text>
+                        <text x="500" y="225" font-size="14" font-family="sans-serif" fill="#555">Waktu</text>
+
+                        <!-- Threshold Line -->
+                        <line x1="50" y1="50" x2="550" y2="50" stroke="#ffcdd2" stroke-width="2"
+                            stroke-dasharray="5,5" />
+                        <text x="555" y="55" font-size="12" font-family="sans-serif" fill="#b71c1c">Batas Kemacetan
+                            (Loss)</text>
+
+                        <!-- Sawtooth Path -->
+                        <path class="sawtooth-path"
+                            d="M 50 180 L 150 50 L 150 115 L 250 50 L 250 115 L 350 50 L 350 115 L 450 50 L 450 115 L 550 50"
+                            fill="none" stroke="#1565c0" stroke-width="4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+
+                        <!-- Labels -->
+                        <text x="90" y="140" font-size="12" font-family="sans-serif" fill="#1565c0"
+                            transform="rotate(-35, 90, 140)">Additive Increase</text>
+                        <text x="155" y="80" font-size="12" font-family="sans-serif" fill="#e65100">Drop (1/2)</text>
+                    </svg>
+                </div>
+
+                <div class="info-box" style="margin-top:1em; font-size:.6em; text-align:left;">
+                    Perilaku ini menghasilkan pola "Gigi Gergaji" yang khas pada grafik throughput TCP. TCP terus
+                    "menggoda" batas maksimal jaringan secara berkelanjutan.
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ TUGAS INDIVIDU ━━━━━━━━━━━━━━ -->
+            <section>
+                <div class="tugas-box">
+                    <h3>📝 Tugas Individu — Pertemuan 5</h3>
+                    <p style="font-size:.6em; color:#e8f5e9; margin-bottom:10px;">Dikerjakan analitik, ditulis tangan di
+                        kertas folio, difoto, dikirim ke e-learning.</p>
+
+                    <div class="tugas-soal">
+                        <p><span class="num">1.</span> Aplikasi video conference seperti Zoom dapat berjalan menggunakan
+                            TCP atau UDP. Mengapa pada kondisi jaringan yang ideal (loss rendah) aplikasi ini
+                            <strong>lebih memilih UDP</strong> dibandingkan TCP? Jelaskan dengan membandingkan mekanisme
+                            TCP RDT (Reliable Data Transfer) dan head-of-line blocking pada TCP.
+                        </p>
+                    </div>
+
+                    <div class="tugas-soal" style="margin-top:8px;">
+                        <p><span class="num">2.</span> Sebuah serangan <strong>SYN Flood Attack</strong> terjadi ketika
+                            penyerang mengirimkan ribuan paket TCP dengan bendera SYN=1, namun tidak pernah merespons
+                            dengan ACK terakhir (langkah ke-3). Jelaskan <strong>secara arsitektural (berdasarkan 3-Way
+                                Handshake)</strong> mengapa serangan ini dapat menyebabkan server lumpuh, dan memori apa
+                            yang dihabiskan oleh server!</p>
+                    </div>
+
+                    <div class="tugas-soal" style="margin-top:8px;">
+                        <p><span class="num">3.</span> Jelaskan perbedaan mendasar antara <strong>Flow Control</strong>
+                            dan <strong>Congestion Control</strong> pada TCP. Jika seorang pengguna mengunduh file besar
+                            dengan kecepatan 10 Mbps, lalu tiba-tiba kecepatannya turun menjadi 1 Mbps karena router di
+                            ISP kelebihan beban, mekanisme manakah yang sedang bekerja mengendalikan kecepatan pengguna
+                            tersebut?</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RANGKUMAN -->
+            <section>
+                <h3>Rangkuman Pertemuan 5</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#1565c0;">Transport Layer &amp; UDP</p>
+                        <ul>
+                            <li><strong>Transport Layer:</strong> Komunikasi antar proses/socket (menggunakan Port
+                                Numbers).</li>
+                            <li><strong>Mux/Demux:</strong> Menggabungkan dan memisahkan aliran data.</li>
+                            <li><strong>UDP:</strong> Connectionless, unreliable, cepat. Cocok untuk DNS dan streaming
+                                realtime (Game/Video).</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#e65100;">TCP</p>
+                        <ul>
+                            <li><strong>TCP:</strong> Connection-oriented, reliable, in-order byte-stream.</li>
+                            <li><strong>Manajemen Koneksi:</strong> 3-Way Handshake (buka), 4-Way Teardown (tutup).</li>
+                            <li><strong>Flow Control:</strong> Membatasi kecepatan agar buffer penerima (rwnd) tidak
+                                luber.</li>
+                            <li><strong>Congestion Control:</strong> Membatasi kecepatan agar router tidak macet (AIMD,
+                                pola gigi gergaji).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Tanya Jawab &amp; Diskusi</h2>
+                <p>Pertemuan berikutnya: <strong>IP Addressing &amp; Subnetting</strong></p>
+                <p class="text-small">Referensi mandiri: Kurose &amp; Ross Chapter 3 (Transport Layer)</p>
+            </section>
+
+        </div><!-- /slides -->
+    </div><!-- /reveal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            plugins: [RevealNotes]
+        });
+    </script>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeLink = document.getElementById('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            if (!toggleBtn || !themeLink) return;
+
+            const currentTheme = localStorage.getItem('reveal-theme') || 'simple';
+            if (currentTheme === 'night') {
+                themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                toggleBtn.style.background = '#f1f1f1';
+                toggleBtn.style.color = '#333';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                if (themeLink.href.includes('simple.css')) {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('reveal-theme', 'night');
+                    themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                    toggleBtn.style.background = '#f1f1f1';
+                    toggleBtn.style.color = '#333';
+                } else {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css';
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('reveal-theme', 'simple');
+                    themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+                    toggleBtn.style.background = '#333';
+                    toggleBtn.style.color = '#fff';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

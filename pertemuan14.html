@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jaringan Komputer - Pertemuan 14: Wireless & Mobile Networks</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="css/pkom-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        .reveal .slides section {
+            height: 100%;
+            overflow-y: auto !important;
+            padding-bottom: 50px;
+        }
+
+        .slide-img-sm {
+            width: 100%;
+            height: auto;
+            max-height: 35vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .layout-text-img {
+            display: grid;
+            grid-template-columns: 50% 1fr;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .img-caption {
+            font-size: .52em;
+            color: #777;
+            text-align: center;
+            margin-top: .1em;
+            font-style: italic;
+        }
+
+        .sec-bar {
+            border-radius: 8px 8px 0 0;
+            padding: 7px 16px;
+            font-size: .68em;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .sec-body {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .sec-bar-blue {
+            background: #1565c0;
+            color: #fff;
+        }
+
+        .sec-bar-orange {
+            background: #e65100;
+            color: #fff;
+        }
+
+        .sec-bar-green {
+            background: #1b5e20;
+            color: #fff;
+        }
+
+        .sec-bar-purple {
+            background: #4a148c;
+            color: #fff;
+        }
+
+        .sec-bar-red {
+            background: #b71c1c;
+            color: #fff;
+        }
+
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-warn {
+            border-left: 4px solid #e65100;
+            background: #fff3e0;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-green {
+            border-left: 4px solid #1b5e20;
+            background: #e8f5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .reveal table {
+            font-size: .5em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .reveal table th,
+        .reveal table td {
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+        }
+
+        .reveal table th {
+            background: #1565c0;
+            color: white;
+        }
+
+        .reveal table tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            font-family: monospace;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: .6em;
+        }
+
+        /* Animation specific */
+        .anim-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .anim-node {
+            position: absolute;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .anim-icon {
+            font-size: 3em;
+            color: #333;
+            line-height: 1;
+        }
+
+        .anim-label {
+            font-size: .5em;
+            font-weight: 700;
+            font-family: monospace;
+            margin-top: 5px;
+        }
+
+        .packet {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #e65100;
+            border-radius: 50%;
+            z-index: 10;
+            opacity: 0;
+        }
+
+        @keyframes pktSend {
+            0% {
+                top: 50%;
+                left: 10%;
+                opacity: 1;
+            }
+
+            100% {
+                top: 50%;
+                left: 90%;
+                opacity: 1;
+            }
+        }
+
+        /* SVG Graph Styling */
+        .svg-graph {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .node circle {
+            fill: #1565c0;
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+        .node text {
+            fill: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: sans-serif;
+            text-anchor: middle;
+            alignment-baseline: central;
+        }
+
+        .link line {
+            stroke: #999;
+            stroke-width: 3px;
+        }
+
+        .link text {
+            fill: #d32f2f;
+            font-size: 14px;
+            font-weight: bold;
+            background: white;
+            font-family: sans-serif;
+        }
+
+        .tugas-box {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            border-radius: 14px;
+            padding: 22px 28px;
+            color: #fff;
+        }
+
+        .tugas-soal {
+            background: rgba(255, 255, 255, .13);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 8px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .48em;
+            line-height: 1.65;
+            margin: 0;
+            color: #e8f5e9;
+        }
+
+        .tugas-soal .num {
+            font-size: .9em;
+            font-weight: 700;
+            color: #ffeb3b;
+        }
+
+        .tugas-info {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: .58em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="footer-branding">
+            <div class="footer-logos"></div>
+            <div class="footer-copyright">&copy; 2026 IF25-21008 Jaringan Komputer - ITERA</div>
+        </div>
+
+        <div class="slides">
+
+
+            
+            <!-- Title Slide -->
+            <section>
+                <div class="title-box">
+                    <h1>Wireless & Mobile Networks</h1>
+                    <h3 class="subtitle">Pertemuan 14</h3>
+                </div>
+                <p>Pendalaman Ekstensif: WiFi, Sinyal Radio, Cellular (4G LTE/5G), & Mobilitas</p>
+                <p>Referensi: <em>Bahan Ajar Week14.pptx & RPS Jaringan Komputer</em></p>
+                <p class="text-small"><em>Dosen Pengampu:</em></p>
+                <div style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                    <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
+                    <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
+                </div>
+            </section>
+
+            <!-- PART 1: OVERVIEW & KARAKTERISTIK -->
+            <section>
+                <h3>Goals & Overview</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Fokus Pertemuan 14:</p>
+                    <ul>
+                        <li><strong>Wireless:</strong> Membedah karakteristik fisik medium komunikasi (sinyal radio) dibandingkan kabel tembaga/optik. Termasuk WiFi 802.11 dan Seluler 4G/5G.</li>
+                        <li><strong>Mobility:</strong> Bagaimana cara sebuah node berpindah lokasi dari satu sel ke sel lain, terputus dari tower lama dan menyambung ke tower baru, tanpa memutus koneksi internetnya?</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image1.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Elemen Jaringan Nirkabel</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>Wireless Hosts:</strong> Perangkat akhir (Smartphone, Laptop, IoT). Dapat bergerak (mobile) atau diam/menetap. <em>Ingat: Nirkabel tidak selalu berarti Mobile (contoh: PC desktop tersambung WiFi).</em></li>
+                        <li><strong>Base Station:</strong> Menjembatani (relay) data dari perangkat nirkabel menuju ke jaringan kabel (infrastruktur internet utama). Contoh: Access Point WiFi, Menara BTS (Cell Towers).</li>
+                        <li><strong>Wireless Link:</strong> Jalur radio frekuensi. Memiliki berbagai batasan laju transmisi, jarak pancar, dan pita frekuensi.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image2.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Dua Mode Jaringan Nirkabel</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>1. Infrastructure Mode</strong></p>
+                    <ul>
+                        <li>Semua perangkat HARUS terhubung ke *Base Station* (seperti router AP di rumah).</li>
+                        <li>Jika perangkat berpindah jangkauan, terjadilah <strong>Handoff</strong> (pemindahan layan dari satu base station ke yang lain).</li>
+                    </ul>
+                    <p><strong>2. Ad Hoc Mode</strong></p>
+                    <ul>
+                        <li>TIDAK ADA *Base Station* pusat.</li>
+                        <li>Perangkat mengorganisasi dirinya sendiri. Jika jaraknya terlalu jauh, sebuah node bisa menitipkan paketnya ke node di sebelahnya untuk direlay (*mesh networking*).</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image3.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Tantangan Fisik Medium Radio</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Komunikasi nirkabel JAUH lebih bermasalah dibandingkan kabel tembaga:</p>
+                    <ol>
+                        <li><strong>Fading / Attenuation:</strong> Sinyal radio otomatis melemah (kehilangan daya) seiring jarak bertambah. (Makin jauh frekuensi/jaraknya, makin parah *path loss*-nya).</li>
+                        <li><strong>Multipath Propagation:</strong> Sinyal memantul di dinding, tanah, dan gedung, menyebabkan sinyal asli dan pantulannya tiba di antena penerima pada waktu yang sedikit berbeda.</li>
+                        <li><strong>Interference & Noise:</strong> Diganggu oleh microwave, motor listrik, dan transmisi perangkat nirkabel tetangga.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image4.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Trade-off: SNR dan BER</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>SNR (Signal-to-Noise Ratio):</strong> Rasio kekuatan sinyal asli terhadap kekuatan sinyal berisik di sekitarnya. Makin besar, makin bagus!</li>
+                        <li><strong>BER (Bit Error Rate):</strong> Persentase paket bit yang rusak saat diterima.</li>
+                    </ul>
+                    <p><strong>Aturan Emas:</strong> Meningkatkan kekuatan pancaran daya perangkat Anda (Power) akan menaikkan SNR, yang pada akhirnya menurunkan tingkat kesalahan data (BER). Tapi ini membuat baterai HP Anda cepat habis.</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image5.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Hidden Terminal Problem</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Masalah klasik di jaringan nirkabel. Bayangkan 3 orang: A, B (di tengah), dan C.</p>
+                    <ul>
+                        <li>A dan B saling mendengar.</li>
+                        <li>B dan C saling mendengar.</li>
+                        <li>Tetapi karena jarak atau halangan fisik, <strong>A dan C tidak saling mendengar (Hidden)</strong>.</li>
+                        <li>Akibatnya, A dan C bisa tanpa sengaja mengirim data ke B SECARA BERSAMAAN. Terjadilah tabrakan (Collision) parah di B!</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image6.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Solusi 1: CDMA (Code Division Multiple Access)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Bagaimana agar A dan C bisa bicara bersamaan tanpa bertabrakan?</p>
+                    <ul>
+                        <li>Pada seluler generasi lama (3G/CDMA), setiap perangkat diberi <strong>Kode Unik</strong>.</li>
+                        <li>Semua orang berbicara berbarengan pada <em>frekuensi yang persis sama</em>. Namun karena memakai bahasa kode matematika yang ortogonal, Base Station dapat menyaring dan menterjemahkan percakapan A tanpa tercampur ucapan C.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image7.jpg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <!-- PART 2: IEEE 802.11 WIFI -->
+            <section>
+                <h3>LAN Nirkabel: IEEE 802.11 (WiFi)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Standar IEEE terus berevolusi meningkatkan *Data Rate* dan beroperasi di rentang 2.4 GHz atau 5 GHz:</p>
+                    <ul>
+                        <li><strong>802.11b (1999):</strong> Maksimal 11 Mbps.</li>
+                        <li><strong>802.11g (2003):</strong> Maksimal 54 Mbps.</li>
+                        <li><strong>802.11n / WiFi 4 (2009):</strong> Maksimal 600 Mbps.</li>
+                        <li><strong>802.11ac / WiFi 5 (2013):</strong> Maksimal 3.47 Gbps.</li>
+                        <li><strong>802.11ax / WiFi 6 (2020):</strong> Tembus 14 Gbps.</li>
+                    </ul>
+                    <p>Semuanya menggunakan protokol MAC yang sama: <strong>CSMA/CA</strong>.</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image8.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Arsitektur 802.11 (BSS & Channels)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>BSS (Basic Service Set):</strong> Komponen dasar WiFi, terdiri atas 1 AP (Access Point) dan klien-klien nirkabelnya.</p>
+                    <ul>
+                        <li>Pita frekuensi 2.4 GHz dibagi menjadi 11 Kanal yang tumpang tindih (beririsan).</li>
+                        <li>Admin jaringan harus berhati-hati memilih kanal (misal 1, 6, 11) agar tidak bentrok dengan sinyal AP tetangga kosannya.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image9.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Proses Asosiasi WiFi (Passive vs Active)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Sebelum mengirim data, laptop Anda harus "memilih dan bergabung" ke AP lewat Asosiasi:</p>
+                    <ul>
+                        <li><strong>Passive Scanning:</strong> AP secara rutin menyiarkan *Beacon Frames* ke seluruh area mengabarkan namanya (SSID) misal: `Kos_Aman`. Laptop mendengar dan meminta bergabung.</li>
+                        <li><strong>Active Scanning:</strong> Laptop yang keliling bertanya, <em>"Halo, adakah AP Kos_Aman di sini?" (Probe Request)</em>. Jika AP ada, ia akan membalas <em>"Ya, saya di sini."</em></li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image10.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>MAC Protocol WiFi: CSMA/CA</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Mengapa tidak memakai CSMA/CD seperti kabel Ethernet?</p>
+                    <ul>
+                        <li><strong>Collision Detection (CD)</strong> mustahil dilakukan di nirkabel. Perangkat tidak bisa mendengar tabrakan di tempat penerima akibat pelemahan sinyal dan fenomena <em>Hidden Terminal</em>.</li>
+                        <li>Oleh karena itu kita memakai <strong>CA (Collision Avoidance)</strong>: Mencegah sebelum terjadi!</li>
+                        <li>Klien menunggu jalan kosong (DIFS), lalu mengirim paket utuh tanpa CD.</li>
+                        <li>Penerima <strong>WAJIB</strong> membalas sinyal `ACK` (Acknowledgment) untuk memastikan paket benar-benar selamat.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image11.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Solusi Hidden Terminal: RTS dan CTS</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Langkah ekstra untuk menghindari tabrakan karena <em>Hidden Terminal</em> (Node A dan C tidak saling lihat):</p>
+                    <ol>
+                        <li>A mengirim paket reservasi kecil: <strong>RTS (Request to Send)</strong> ke Base Station.</li>
+                        <li>Base Station meneriakkan <strong>CTS (Clear to Send)</strong> ke seluruh area.</li>
+                        <li>C yang mendengar teriakan CTS akan diam dan "menunda" transmisinya. A bisa mengirim data dengan tenang.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image12.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <!-- PART 3: 4G LTE & 5G -->
+            <section>
+                <h3>Jaringan Seluler 4G LTE</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>LTE (Long Term Evolution) adalah arsitektur yang 100% berbasis Paket (All-IP Packet Core), tidak lagi memakai sirkuit analog lawas.</p>
+                    <ul>
+                        <li><strong>UE (User Equipment):</strong> Smartphone Anda. Memiliki identitas global (IMSI) di SIM card.</li>
+                        <li><strong>eNode-B (Base Station):</strong> Menara operator seluler di pinggir jalan. Berbeda dengan WiFi AP rumahan, tower ini terintegrasi ketat mengatur koordinasi *handoff* secara aktif dengan tower tetangganya.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image13.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Arsitektur Core 4G (EPC)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Di balik menara BTS, terdapat infrastruktur besar bernama <strong>EPC (Enhanced Packet Core)</strong>:</p>
+                    <ul>
+                        <li><strong>MME (Mobility Management Entity):</strong> Otak utamanya. Mengatur otentikasi, pergerakan *handoff*, dan melacak pergerakan lokasi device (paging).</li>
+                        <li><strong>HSS (Home Subscriber Service):</strong> Database sentral pelanggan. Berisi kunci rahasia pelanggan.</li>
+                        <li><strong>S-GW (Serving Gateway) & P-GW (PDN Gateway):</strong> Router gerbang yang men-tunnel lalu lintas IP ke dunia internet luar lewat fungsi NAT.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image14.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Multiplexing Seluler: OFDM</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Bagaimana satu tower bisa melayani ratusan ponsel sekaligus untuk menonton YouTube?</p>
+                    <ul>
+                        <li>4G memakai kombinasi pembagian waktu dan frekuensi bernama <strong>OFDM (Orthogonal Frequency Division Multiplexing)</strong>.</li>
+                        <li>Terdapat ratusan alokasi "Kotak-kotak pita frekuensi dan detik waktu" yang terus dibagikan secara adil oleh menara ke ponsel-ponsel klien di bawahnya setiap detiknya.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image15.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Dari 4G Menuju 5G (New Radio)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Visi 5G: Bitrate 10x lebih besar, Latency 10x lebih rendah.</p>
+                    <ul>
+                        <li><strong>5G NR (New Radio):</strong> Menggunakan pita frekuensi jauh lebih tinggi hingga kelas <strong>Millimeter Wave</strong> (24 GHz–52 GHz).</li>
+                        <li>Karena frekuensi Millimeter Wave jarak pancarnya sangat pendek dan tidak bisa menembus dinding tembok tebal, arsitektur menara raksasa tidak lagi efektif.</li>
+                        <li>Solusinya: Penempatan jutaan antena kecil <em>Pico-cells</em> di setiap sudut jalan, lampu jalan, dan dalam koridor gedung!</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image16.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <!-- PART 4: MOBILITY MANAGEMENT -->
+            <section>
+                <h3>Tantangan Mobilitas Jaringan</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Saat Anda naik kereta cepat dari Lampung ke Palembang, Anda akan terus berpindah melintasi puluhan menara Telkomsel. IP Address Anda mungkin berganti.</p>
+                    <p><strong>Pertanyaan Kunci:</strong> Bagaimana paket WhatsApp teman Anda tau alamat IP baru Anda secara *real-time* dan mengirimkannya ke menara tujuan akhir Anda tanpa delay?</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image17.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Konsep Routing Mobilitas: Indirect Routing</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Alih-alih mencari tau IP Anda yang terus berubah (NAT IP / Visited Address), pesan selalu dikirim ke "Rumah Utama".</p>
+                    <ol>
+                        <li>Pesan datang menuju <strong>Home Network Gateway</strong> Anda.</li>
+                        <li>Home Network tahu bahwa Anda sedang "Roaming" atau berkelana di jaringan Visited Network (misal di kota lain).</li>
+                        <li>Home Network <strong>Membungkus (Tunnel)</strong> paket tersebut, lalu mengirimkannya ke alamat Visited Network Anda.</li>
+                        <li>Visited Gateway membuka bungkus tunnel dan memberikannya pada Anda. Sangat bisa diandalkan, namun memperpanjang jarak ping (Triangle Routing problem).</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image18.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Konsep Routing Mobilitas: Direct Routing</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Untuk mengatasi inefisiensi jarak (Triangle Routing):</p>
+                    <ol>
+                        <li>Pengirim bertanya langsung ke Database (HSS) Anda: "Di mana alamat IP Visited Budi sekarang?"</li>
+                        <li>Database menjawab dengan alamat Visited Network terbaru Anda.</li>
+                        <li>Pengirim menembakkan paket LANGSUNG menembus ke Visited Network Anda tanpa perlu singgah (Tunneling) di Home Gateway.</li>
+                        <li><strong>Kelemahan:</strong> Jauh lebih sulit melacak pergerakan jika Anda sangat sering pindah sel tiap 10 detik.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image19.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Mobilitas Nyata di 4G (GPRS Tunneling)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Secara praktik, 4G menggabungkan konsep Tunneling via protokol <strong>GTP (GPRS Tunneling Protocol)</strong>.</p>
+                    <ul>
+                        <li>Setiap kali HP Anda pindah menara, MME (Otak Pengatur) akan memperbarui endpoint tunnel GTP-nya.</li>
+                        <li>Paket asli Anda (IP, TCP, HTTP) akan dibungkus mentah-mentah ke dalam UDP baru milik jaringan operasional, memastikan aplikasi Streaming YouTube Anda tidak menyadari sama sekali bahwa koneksi fisiknya di menara baru saja diganti secara drastis!</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image20.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (1)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image21.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (2)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image22.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (3)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image23.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (4)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image24.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (5)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image25.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (6)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image26.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (7)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image27.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (8)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image28.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (9)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image29.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (10)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image30.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (11)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image31.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (12)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image32.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (13)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image33.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (14)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image34.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (15)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image35.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (16)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image36.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (17)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image37.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (18)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image38.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (19)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image39.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (20)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image40.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (21)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image41.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (22)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image42.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (23)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image43.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (24)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image44.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (25)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image45.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (26)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image46.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (27)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image47.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (28)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image48.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (29)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image49.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (30)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image50.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (31)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image51.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (32)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image52.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (33)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image53.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (34)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image54.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (35)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image55.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (36)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image56.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (37)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image57.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (38)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image58.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (39)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image59.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (40)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image60.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (41)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image61.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (42)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image62.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (43)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image63.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (44)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image64.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (45)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image65.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (46)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image66.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (47)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image67.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (48)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image68.jpeg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (49)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image69.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (50)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image70.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (51)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image71.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (52)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image72.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (53)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image73.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (54)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image74.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (55)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image75.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (56)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image76.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (57)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image77.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (58)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image78.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (59)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image79.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (60)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image80.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (61)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image81.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (62)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image82.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (63)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image83.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (64)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image84.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Arsitektur Tambahan (65)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week14/image85.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+        </div><!-- /slides -->
+    </div><!-- /reveal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            plugins: [RevealNotes]
+        });
+    </script>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle"
+        style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeLink = document.getElementById('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            if (!toggleBtn || !themeLink) return;
+
+            const currentTheme = localStorage.getItem('reveal-theme') || 'simple';
+            if (currentTheme === 'night') {
+                themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                toggleBtn.style.background = '#f1f1f1';
+                toggleBtn.style.color = '#333';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                if (themeLink.href.includes('simple.css')) {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('reveal-theme', 'night');
+                    themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                    toggleBtn.style.background = '#f1f1f1';
+                    toggleBtn.style.color = '#333';
+                } else {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css';
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('reveal-theme', 'simple');
+                    themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+                    toggleBtn.style.background = '#333';
+                    toggleBtn.style.color = '#fff';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

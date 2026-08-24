@@ -1,0 +1,2669 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jaringan Komputer - Pertemuan 9: Routing Statis & Dinamis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="css/pkom-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        .reveal .slides section {
+            height: 100%;
+            overflow-y: auto !important;
+            padding-bottom: 50px;
+        }
+
+        .slide-img-sm {
+            width: 100%;
+            height: auto;
+            max-height: 35vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .layout-text-img {
+            display: grid;
+            grid-template-columns: 50% 1fr;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .img-caption {
+            font-size: .52em;
+            color: #777;
+            text-align: center;
+            margin-top: .1em;
+            font-style: italic;
+        }
+
+        .sec-bar {
+            border-radius: 8px 8px 0 0;
+            padding: 7px 16px;
+            font-size: .68em;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .sec-body {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .sec-bar-blue {
+            background: #1565c0;
+            color: #fff;
+        }
+
+        .sec-bar-orange {
+            background: #e65100;
+            color: #fff;
+        }
+
+        .sec-bar-green {
+            background: #1b5e20;
+            color: #fff;
+        }
+
+        .sec-bar-purple {
+            background: #4a148c;
+            color: #fff;
+        }
+
+        .sec-bar-red {
+            background: #b71c1c;
+            color: #fff;
+        }
+
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-warn {
+            border-left: 4px solid #e65100;
+            background: #fff3e0;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-green {
+            border-left: 4px solid #1b5e20;
+            background: #e8f5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .reveal table {
+            font-size: .5em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .reveal table th,
+        .reveal table td {
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+        }
+
+        .reveal table th {
+            background: #1565c0;
+            color: white;
+        }
+
+        .reveal table tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            font-family: monospace;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: .6em;
+        }
+
+        /* Animation specific */
+        .anim-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .anim-node {
+            position: absolute;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .anim-icon {
+            font-size: 3em;
+            color: #333;
+            line-height: 1;
+        }
+
+        .anim-label {
+            font-size: .5em;
+            font-weight: 700;
+            font-family: monospace;
+            margin-top: 5px;
+        }
+
+        .packet {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #e65100;
+            border-radius: 50%;
+            z-index: 10;
+            opacity: 0;
+        }
+
+        @keyframes pktSend {
+            0% {
+                top: 50%;
+                left: 10%;
+                opacity: 1;
+            }
+
+            100% {
+                top: 50%;
+                left: 90%;
+                opacity: 1;
+            }
+        }
+
+        /* SVG Graph Styling */
+        .svg-graph {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .node circle {
+            fill: #1565c0;
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+        .node text {
+            fill: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: sans-serif;
+            text-anchor: middle;
+            alignment-baseline: central;
+        }
+
+        .link line {
+            stroke: #999;
+            stroke-width: 3px;
+        }
+
+        .link text {
+            fill: #d32f2f;
+            font-size: 14px;
+            font-weight: bold;
+            background: white;
+            font-family: sans-serif;
+        }
+
+        .tugas-box {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            border-radius: 14px;
+            padding: 22px 28px;
+            color: #fff;
+        }
+
+        .tugas-soal {
+            background: rgba(255, 255, 255, .13);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 8px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .48em;
+            line-height: 1.65;
+            margin: 0;
+            color: #e8f5e9;
+        }
+
+        .tugas-soal .num {
+            font-size: .9em;
+            font-weight: 700;
+            color: #ffeb3b;
+        }
+
+        .tugas-info {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: .58em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="footer-branding">
+            <div class="footer-logos"></div>
+            <div class="footer-copyright">&copy; 2026 IF25-21008 Jaringan Komputer - ITERA</div>
+        </div>
+
+        <div class="slides">
+
+
+            <!-- Title Slide -->
+            <section>
+                <div class="title-box">
+                    <h1>Routing Statis & Dinamis</h1>
+                    <h3 class="subtitle">Pertemuan 9</h3>
+                </div>
+                <p>Materi: Konsep, Algoritma, RIP, OSPF, BGP</p>
+                <p>Referensi Utama: Kurose &amp; Ross — <em>Computer Networking (8th Ed)</em></p>
+                <p class="text-small"><em>Dosen Pengampu:</em></p>
+                <div
+                    style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                    <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
+                    <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
+                </div>
+            </section>
+
+
+
+
+            <!-- ROADMAP: Introduction: Network Layer Control Plane -->
+            <section data-background-image="images/week9/pptx/image2.jpg" data-background-size="contain"
+                data-background-color="#1a1a2e">
+                <div
+                    style="background:rgba(21,101,192,0.88);display:inline-block;padding:22px 44px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+                    <h2 style="color:#fff;margin:0;font-size:1.1em;">Introduction: Network Layer Control Plane</h2>
+                </div>
+            </section>
+
+            <!-- Slide 3 -->
+            <section>
+                <h3 style="font-size:0.95em;">Chapter 5 – Control Plane Roadmap</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Topik yang dibahas pada bab ini:</p>
+                    <ul style="font-size:0.72em;text-align:left;">
+                        <li>Introduction: routing protocols (link state, distance vector)</li>
+                        <li>Intra-ISP routing: OSPF</li>
+                        <li>Routing among ISPs: BGP</li>
+                        <li>SDN control plane</li>
+                        <li>Internet Control Message Protocol (ICMP)</li>
+                        <li>Network management, configuration: SNMP, NETCONF/YANG</li>
+                    </ul>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px;"><img
+                            src="images/week9/pptx/image2.jpg"
+                            style="max-height:200px;max-width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.18);margin:6px auto;display:block;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4 -->
+            <section>
+                <h3 style="font-size:0.95em;">Two Approaches to Network Control Plane</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Dua pendekatan utama dalam menyusun <em>network control plane</em>:</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;"><strong>Per-router Control
+                                (Traditional)</strong><br>Komponen routing algorithm berjalan di setiap router secara
+                            mandiri dan saling berinteraksi.</div>
+                        <div style="background:#fce4ec;border-radius:8px;padding:10px;"><strong>Logically Centralized
+                                Control (SDN)</strong><br>Remote controller yang menghitung dan menginstall forwarding
+                            table di setiap router.</div>
+                    </div>
+                    <p style="margin-top:8px;">Fungsi Network Layer: <strong>Forwarding</strong> (data plane) →
+                        memindahkan paket; <strong>Routing</strong> (control plane) → menentukan rute.</p>
+
+                </div>
+            </section>
+
+            <!-- Slide 5 -->
+            <section>
+                <h3 style="font-size:0.95em;">Per-Router Control Plane</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Setiap router memiliki komponen <em>routing algorithm</em>-nya sendiri. Router-router saling
+                        berinteraksi satu sama lain untuk membangun dan memperbarui <em>forwarding table</em>-nya.</p>
+                    <p style="margin-top:8px;">Karakteristik:<br>✔ Desentralisasi – setiap router autonomous<br>✔
+                        Distribusi informasi routing antar router (tanpa controller terpusat)</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px;"><img
+                            src="images/week9/pptx/image3.png"
+                            style="max-height:200px;max-width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.18);margin:6px auto;display:block;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6 -->
+            <section>
+                <h3 style="font-size:0.95em;">Software-Defined Networking (SDN) Control Plane</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>Remote Controller</strong> terpusat yang menghitung dan menginstall <em>forwarding
+                            table</em> di setiap router.</p>
+                    <ul style="font-size:0.72em;text-align:left;">
+                        <li>Controller terpisah dari data plane (router hanya meneruskan paket).</li>
+                        <li>Router hanya bertindak sebagai packet forwarder (CA = Control Agent).</li>
+                        <li>Forwarding table dikomputasi secara terpusat dan didistribusikan ke seluruh router.</li>
+                    </ul>
+
+                </div>
+            </section>
+
+            <!-- Slide 7 -->
+            <section>
+                <h3 style="font-size:0.95em;">Per-Router vs SDN Control Plane: Perbandingan Visual</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Perbandingan arsitektur per-router control plane (kiri) dengan SDN control plane (kanan).</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px;"><img
+                            src="images/week9/pptx/image5.png"
+                            style="max-height:200px;max-width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.18);margin:6px auto;display:block;"><img
+                            src="images/week9/pptx/image6.png"
+                            style="max-height:200px;max-width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.18);margin:6px auto;display:block;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transisi SDN ke Per-Router -->
+            <section data-background-color="#f5f5f5">
+                <h3 style="font-size:1.1em;color:#1565c0;">Peta Pembelajaran Kita</h3>
+                <div
+                    style="font-size:0.75em;text-align:left;background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+                    <p>Setelah memahami dua paradigma utama (Tradisional vs SDN), bagaimana fokus kita di kelas ini?</p>
+                    <div style="display:flex;gap:12px;margin-top:15px;">
+                        <div
+                            style="flex:1;background:#e3f2fd;padding:15px;border-radius:8px;border-left:4px solid #1976d2;">
+                            <h4 style="margin:0 0 10px 0;color:#1976d2;">Fokus Pertemuan Ini</h4>
+                            <strong>Per-Router Control Plane</strong><br>
+                            Kita akan membedah secara mendalam algoritma klasik yang menjadi tulang punggung Internet
+                            saat ini: <strong>OSPF (Link State)</strong> dan <strong>BGP (Distance Vector)</strong>.
+                        </div>
+                        <div
+                            style="flex:1;background:#f5f5f5;padding:15px;border-radius:8px;border-left:4px solid #757575;">
+                            <h4 style="margin:0 0 10px 0;color:#757575;">Fokus Pertemuan Pekan Sebelum nya</h4>
+                            <strong>SDN (Software-Defined Networking)</strong><br>
+                            Topik Controller Terpusat dan OpenFlow akan kita jadikan bahasan khusus secara komprehensif
+                            pada pertemuan selanjutnya.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9 -->
+            <section>
+                <h3 style="font-size:0.95em;">Routing Protocols: Goal</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>Tujuan:</strong> Menentukan jalur ("<em>good paths/routes</em>") dari host pengirim ke
+                        host penerima, melalui jaringan router.</p>
+                    <ul style="font-size:0.72em;text-align:left;">
+                        <li><strong>Path:</strong> Urutan router yang dilintasi paket dari sumber ke tujuan.</li>
+                        <li><strong>"Good":</strong> Biaya terkecil (<em>least cost</em>), tercepat, paling tidak padat
+                            (<em>least congested</em>).</li>
+                        <li>Routing adalah salah satu tantangan utama ("top-10") dalam jaringan komputer.</li>
+                    </ul>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+                        <div style="background:#e3f2fd;border-radius:8px;padding:12px;">
+                            <strong>Analogi:</strong> Seperti Google Maps yang mencari rute terpendek/tercepat dari
+                            titik A ke B — routing melakukan hal yang sama untuk paket data di jaringan.
+                        </div>
+                        <div style="background:#e8f5e9;border-radius:8px;padding:12px;">
+                            <strong>Komponen:</strong><br>
+                            • <em>Routing Algorithm</em> → menghitung jalur terbaik<br>
+                            • <em>Routing Protocol</em> → cara router bertukar info<br>
+                            • <em>Routing Table</em> → hasil keputusan routing
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10 -->
+            <section>
+                <h3 style="font-size:0.95em;">Graph Abstraction: Biaya Link</h3>
+                <div style="font-size:0.7em;text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                    <div>
+                        <p>Jaringan dimodelkan sebagai <strong>Graf G = (N, E)</strong>:</p>
+                        <ul style="font-size:0.85em;">
+                            <li><strong>N</strong> = {u, v, w, x, y, z}</li>
+                            <li><strong>c(a,b)</strong> = biaya link a ke b</li>
+                            <li>c(w,z)=5, c(u,z)=∞ (tidak terhubung)</li>
+                            <li>Biaya bisa = bandwidth⁻¹, atau congestion⁻¹</li>
+                        </ul>
+                        <div style="background:#e8f5e9;padding:8px;border-radius:6px;margin-top:8px;font-size:0.85em;">
+                            <strong>Link costs:</strong><br>
+                            u–v:2, u–x:1, u-w:5, v–w:3, v–x:2,<br>
+                            x–w:3, x–y:1, w–y:1, w–z:5, y–z:2
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 320 220" width="100%"
+                            style="border:1px solid #ddd;border-radius:8px;background:#b3e5fc;">
+                            <!-- Edges / Garis -->
+                            <!-- u - v (2) -->
+                            <line x1="40" y1="110" x2="110" y2="50" stroke="#000" stroke-width="1.5" />
+                            <text x="65" y="70" font-size="14" fill="#000" font-weight="bold">2</text>
+
+                            <!-- u - x (1) -->
+                            <line x1="40" y1="110" x2="110" y2="170" stroke="#000" stroke-width="1.5" />
+                            <text x="65" y="160" font-size="14" fill="#000" font-weight="bold">1</text>
+
+                            <!-- v - w (3) -->
+                            <line x1="110" y1="50" x2="210" y2="50" stroke="#000" stroke-width="1.5" />
+                            <text x="155" y="42" font-size="14" fill="#000" font-weight="bold">3</text>
+
+                            <!-- v - x (2) -->
+                            <line x1="110" y1="50" x2="110" y2="170" stroke="#000" stroke-width="1.5" />
+                            <text x="115" y="115" font-size="14" fill="#000" font-weight="bold">2</text>
+
+                            <!-- x - w (3) -->
+                            <line x1="110" y1="170" x2="210" y2="50" stroke="#000" stroke-width="1.5" />
+                            <text x="165" y="125" font-size="14" fill="#000" font-weight="bold">3</text>
+
+                            <!-- x - y (1) -->
+                            <line x1="110" y1="170" x2="210" y2="170" stroke="#000" stroke-width="1.5" />
+                            <text x="155" y="185" font-size="14" fill="#000" font-weight="bold">1</text>
+
+                            <!-- w - y (1) -->
+                            <line x1="210" y1="50" x2="210" y2="170" stroke="#000" stroke-width="1.5" />
+                            <text x="215" y="115" font-size="14" fill="#000" font-weight="bold">1</text>
+
+                            <!-- w - z (5) -->
+                            <line x1="210" y1="50" x2="280" y2="110" stroke="#000" stroke-width="1.5" />
+                            <text x="255" y="70" font-size="14" fill="#000" font-weight="bold">5</text>
+
+                            <!-- y - z (2) -->
+                            <line x1="210" y1="170" x2="280" y2="110" stroke="#000" stroke-width="1.5" />
+                            <text x="255" y="160" font-size="14" fill="#000" font-weight="bold">2</text>
+
+                            <!-- u - w lengkung (5) -->
+                            <path d="M 40,110 Q 40,-40 210,50" fill="transparent" stroke="#000" stroke-width="1.5" />
+                            <text x="60" y="25" font-size="14" fill="#000" font-weight="bold">5</text>
+
+                            <!-- Nodes / Simpul (dibentuk elips agar mirip silinder 3D di gambar) -->
+                            <ellipse cx="40" cy="110" rx="18" ry="18" fill="#1565c0" stroke="#000" stroke-width="1.5" />
+                            <text x="40" y="115" text-anchor="middle" font-size="16" fill="#000">u</text>
+
+                            <ellipse cx="110" cy="50" rx="18" ry="18" fill="#d1c4e9" stroke="#000" stroke-width="1.5" />
+                            <text x="110" y="55" text-anchor="middle" font-size="16" fill="#000">v</text>
+
+                            <ellipse cx="110" cy="170" rx="18" ry="18" fill="#d1c4e9" stroke="#000"
+                                stroke-width="1.5" />
+                            <text x="110" y="175" text-anchor="middle" font-size="16" fill="#000">x</text>
+
+                            <ellipse cx="210" cy="50" rx="18" ry="18" fill="#d1c4e9" stroke="#000" stroke-width="1.5" />
+                            <text x="210" y="55" text-anchor="middle" font-size="16" fill="#000">w</text>
+
+                            <ellipse cx="210" cy="170" rx="18" ry="18" fill="#d1c4e9" stroke="#000"
+                                stroke-width="1.5" />
+                            <text x="210" y="175" text-anchor="middle" font-size="16" fill="#000">y</text>
+
+                            <ellipse cx="280" cy="110" rx="18" ry="18" fill="#d1c4e9" stroke="#000"
+                                stroke-width="1.5" />
+                            <text x="280" y="115" text-anchor="middle" font-size="16" fill="#000">z</text>
+                        </svg>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11 -->
+            <section>
+                <h3 style="font-size:0.95em;">Klasifikasi Algoritma Routing</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;"><strong>Berdasarkan
+                                Informasi:</strong><br>
+                            <ul style="font-size:0.9em;">
+                                <li><em>Global:</em> Semua router punya info topologi lengkap → <strong>Link State
+                                        algorithms</strong></li>
+                                <li><em>Desentralisasi:</em> Router hanya tahu cost ke tetangga langsung, bertukar info
+                                    iteratif → <strong>Distance Vector algorithms</strong></li>
+                            </ul>
+                        </div>
+                        <div style="background:#fff3e0;border-radius:8px;padding:10px;"><strong>Berdasarkan Kecepatan
+                                Perubahan:</strong><br>
+                            <ul style="font-size:0.9em;">
+                                <li><em>Statis:</em> Rute berubah sangat lambat (konfigurasi manual).</li>
+                                <li><em>Dinamis:</em> Rute berubah cepat, via periodic updates atau respons perubahan
+                                    link cost.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ROADMAP: Routing Protocols: Link State (Dijkstra) -->
+            <section data-background-image="images/week9/pptx/image2.jpg" data-background-size="contain"
+                data-background-color="#1a1a2e">
+                <div
+                    style="background:rgba(21,101,192,0.88);display:inline-block;padding:22px 44px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+                    <h2 style="color:#fff;margin:0;font-size:1.1em;">Routing Protocols: Link State (Dijkstra)</h2>
+                </div>
+            </section>
+
+            <!-- Slide 13 -->
+            <section>
+                <h3 style="font-size:0.95em;">Dijkstra's Link-State Routing Algorithm</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>Sifat:</strong> Terpusat (centralized) – topologi jaringan dan biaya link diketahui oleh
+                        <em>semua</em> node via "link state broadcast".
+                    </p>
+                    <p>Menghasilkan <em>least-cost paths</em> dari satu node sumber ke semua node tujuan → menghasilkan
+                        <em>forwarding table</em> untuk node tersebut.
+                    </p>
+                    <div style="background:#e3f2fd;padding:8px;border-radius:6px;margin-top:8px;font-size:0.9em;">
+                        <strong>Notasi:</strong><br><code>c(x,y)</code> = biaya link langsung dari x ke y; = ∞ jika
+                        bukan tetangga langsung<br><code>D(v)</code> = estimasi biaya <em>least-cost-path</em> dari
+                        sumber ke v<br><code>p(v)</code> = predecessor node sebelum v di jalur dari
+                        sumber<br><code>N'</code> = himpunan node yang <em>least-cost-path</em>-nya sudah
+                        <em>definitif</em> diketahui
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 14 -->
+            <section>
+                <h3 style="font-size:0.95em;">Dijkstra's Algorithm: Pseudocode</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <pre
+                        style="background:#1a1a2e;color:#e0e0e0;border-radius:8px;padding:12px;font-size:0.65em;text-align:left;overflow:auto;">Initialization:
+  N' = {u}  /* sumber adalah u */
+  for all nodes v:
+    if v adjacent to u → D(v) = c(u,v)
+    else D(v) = ∞
+
+Loop:
+  1. find w not in N' such that D(w) is minimum
+  2. add w to N'
+  3. update D(v) for all v adjacent to w and not in N':
+       D(v) = min(D(v), D(w) + c(w,v))
+until all nodes in N'</pre>
+
+                </div>
+            </section>
+
+            <!-- Slide 15-26: Dijkstra Step-by-Step -->
+            <section>
+                <h3 style="font-size:0.9em;">Dijkstra: Contoh Iterasi Step-by-Step (Graf u,v,w,x,y,z)</h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.55em;text-align:left;">
+                    <div>
+                        <svg viewBox="0 0 320 220" width="100%"
+                            style="border:1px solid #ddd;border-radius:8px;background:#fff8e1;">
+                            <!-- Edges / Garis -->
+                            <!-- u - v (2) -->
+                            <line x1="40" y1="110" x2="110" y2="50" stroke="#000" stroke-width="1.5" />
+                            <text x="65" y="70" font-size="14" fill="#c62828" font-weight="bold">2</text>
+
+                            <!-- u - x (1) -->
+                            <line x1="40" y1="110" x2="110" y2="170" stroke="#000" stroke-width="1.5" />
+                            <text x="65" y="160" font-size="14" fill="#2e7d32" font-weight="bold">1</text>
+
+                            <!-- v - w (3) -->
+                            <line x1="110" y1="50" x2="210" y2="50" stroke="#000" stroke-width="1.5" />
+                            <text x="155" y="42" font-size="14" fill="#c62828" font-weight="bold">3</text>
+
+                            <!-- v - x (2) -->
+                            <line x1="110" y1="50" x2="110" y2="170" stroke="#000" stroke-width="1.5" />
+                            <text x="115" y="115" font-size="14" fill="#c62828" font-weight="bold">2</text>
+
+                            <!-- x - w (3) -->
+                            <line x1="110" y1="170" x2="210" y2="50" stroke="#000" stroke-width="1.5" />
+                            <text x="165" y="125" font-size="14" fill="#c62828" font-weight="bold">3</text>
+
+                            <!-- x - y (1) -->
+                            <line x1="110" y1="170" x2="210" y2="170" stroke="#000" stroke-width="1.5" />
+                            <text x="155" y="185" font-size="14" fill="#2e7d32" font-weight="bold">1</text>
+
+                            <!-- w - y (1) -->
+                            <line x1="210" y1="50" x2="210" y2="170" stroke="#000" stroke-width="1.5" />
+                            <text x="215" y="115" font-size="14" fill="#2e7d32" font-weight="bold">1</text>
+
+                            <!-- w - z (5) -->
+                            <line x1="210" y1="50" x2="280" y2="110" stroke="#000" stroke-width="1.5" />
+                            <text x="255" y="70" font-size="14" fill="#c62828" font-weight="bold">5</text>
+
+                            <!-- y - z (2) -->
+                            <line x1="210" y1="170" x2="280" y2="110" stroke="#000" stroke-width="1.5" />
+                            <text x="255" y="160" font-size="14" fill="#c62828" font-weight="bold">2</text>
+
+                            <!-- u - w lengkung (5) -->
+                            <path d="M 40,110 Q 40,-40 210,50" fill="transparent" stroke="#000" stroke-width="1.5" />
+                            <text x="60" y="25" font-size="14" fill="#c62828" font-weight="bold">5</text>
+
+                            <!-- Nodes / Simpul (dibentuk elips agar mirip silinder 3D di gambar) -->
+                            <ellipse cx="40" cy="110" rx="18" ry="18" fill="#1565c0" stroke="#000" stroke-width="1.5" />
+                            <text x="40" y="115" text-anchor="middle" font-size="16" fill="#ccc">u</text>
+
+                            <ellipse cx="110" cy="50" rx="18" ry="18" fill="#d1c4e9" stroke="#000" stroke-width="1.5" />
+                            <text x="110" y="55" text-anchor="middle" font-size="16" fill="#000">v</text>
+
+                            <ellipse cx="110" cy="170" rx="18" ry="18" fill="#d1c4e9" stroke="#000"
+                                stroke-width="1.5" />
+                            <text x="110" y="175" text-anchor="middle" font-size="16" fill="#000">x</text>
+
+                            <ellipse cx="210" cy="50" rx="18" ry="18" fill="#d1c4e9" stroke="#000" stroke-width="1.5" />
+                            <text x="210" y="55" text-anchor="middle" font-size="16" fill="#000">w</text>
+
+                            <ellipse cx="210" cy="170" rx="18" ry="18" fill="#d1c4e9" stroke="#000"
+                                stroke-width="1.5" />
+                            <text x="210" y="175" text-anchor="middle" font-size="16" fill="#000">y</text>
+
+                            <ellipse cx="280" cy="110" rx="18" ry="18" fill="#d1c4e9" stroke="#000"
+                                stroke-width="1.5" />
+                            <text x="280" y="115" text-anchor="middle" font-size="16" fill="#000">z</text>
+                        </svg>
+                        <p style="font-size:0.85em;margin-top:4px;">
+                        <div
+                            style="margin-top:12px;padding:6px 12px;background:#fff3e0;border:1px dashed #ff9800;border-radius:6px;display:inline-block;font-size:0.9em;color:#e65100;">
+                            📝 <strong>Tips untuk Mahasiswa:</strong> Gunakan Handout Tabel Kosong yang telah dibagikan
+                            untuk mengikuti simulasi ini langkah demi langkah secara mandiri.</div>
+                        Graf: <span style="color:#1565c0;font-weight:bold;">u</span>=sumber. <span
+                            style="color:#c62828;">Merah</span>=biaya link. <span
+                            style="color:#2e7d32;">Hijau</span>=link biaya 1.</p>
+                    </div>
+                    <div>
+                        <table style="width:100%;border-collapse:collapse;font-size:0.85em;">
+                            <tr style="background:#1565c0;color:#fff;">
+                                <th style="padding:4px 6px;border:1px solid #999;">Step</th>
+                                <th style="padding:4px 6px;border:1px solid #999;">N'</th>
+                                <th style="padding:4px 6px;border:1px solid #999;">D(v),p(v)</th>
+                                <th style="padding:4px 6px;border:1px solid #999;">D(w),p(w)</th>
+                                <th style="padding:4px 6px;border:1px solid #999;">D(x),p(x)</th>
+                                <th style="padding:4px 6px;border:1px solid #999;">D(y),p(y)</th>
+                                <th style="padding:4px 6px;border:1px solid #999;">D(z),p(z)</th>
+                            </tr>
+                            <tr style="background:#fff8e1;">
+                                <td style="padding:4px 6px;border:1px solid #ccc;font-weight:bold;">0</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;font-weight:bold;">u</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">2, u</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">5, u</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;background:#c8e6c9;font-weight:bold;">
+                                    1, u ✓</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">∞</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">∞</td>
+                            </tr>
+                            <tr class="fragment" style="background:#e3f2fd;">
+                                <td style="padding:4px 6px;border:1px solid #ccc;font-weight:bold;">1</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">u, x</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">
+                                    2, u </td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">4, x</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;background:#c8e6c9;font-weight:bold;">
+                                    2, x ✓</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">∞</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td style="padding:4px 6px;border:1px solid #ccc;font-weight:bold;">2</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">u, x, y</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;background:#c8e6c9;font-weight:bold;">
+                                    2,u ✓</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">3, y</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">4, y</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td style="padding:4px 6px;border:1px solid #ccc;font-weight:bold;">3</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">u, x, y, v</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;background:#c8e6c9;font-weight:bold;">
+                                    3, y ✓</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">4, y</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td style="padding:4px 6px;border:1px solid #ccc;font-weight:bold;">4</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">u,x,y,v,w</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;background:#c8e6c9;font-weight:bold;">
+                                    4, y ✓</td>
+                            </tr>
+                            <tr class="fragment" style="background:#e8f5e9;">
+                                <td style="padding:4px 6px;border:1px solid #ccc;font-weight:bold;">5</td>
+                                <td style="padding:4px 6px;border:1px solid #ccc;">u,x,y,v,w,z</td>
+                                <td colspan="5"
+                                    style="padding:4px 6px;border:1px solid #ccc;color:#2e7d32;font-weight:bold;">✅
+                                    Semua node diproses – algoritma selesai!</td>
+                            </tr>
+                        </table>
+
+
+                        <strong class="fragment">Forwarding Table di u:</strong>
+                        <div class="fragment"
+                            style="display: flex; align-items: flex-start; font-family: 'Segoe UI', Arial, sans-serif;">
+                            <!-- HTML Table -->
+
+
+                            <table class="fragment"
+                                style="border-collapse: collapse; text-align: center; border: 1.5px solid #00008b;">
+
+                                <thead>
+                                    <tr>
+                                        <th
+                                            style="background-color: #e0e0e0; border: 1.5px solid #00008b; padding: 5px 15px; font-weight: normal; font-size: 16px; color: #000;">
+                                            Tujuan</th>
+                                        <th
+                                            style="background-color: #e0e0e0; border: 1.5px solid #00008b; padding: 5px 15px; font-weight: normal; font-size: 16px; color: #000;">
+                                            outgoing link</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td
+                                            style="border-right: 1.5px solid #00008b; padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">
+                                            v</td>
+                                        <td style="padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">(u,v)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="border-right: 1.5px solid #00008b; padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">
+                                            x</td>
+                                        <td style="padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">(u,x)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="border-right: 1.5px solid #00008b; padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">
+                                            y</td>
+                                        <td style="padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">(u,x)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="border-right: 1.5px solid #00008b; padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">
+                                            w</td>
+                                        <td style="padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">(u,x)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <!-- Sesuai gambar, baris terakhir tertulis x -->
+                                        <td
+                                            style="border-right: 1.5px solid #00008b; padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">
+                                            x</td>
+                                        <td style="padding: 4px 15px; font-size: 24px; height: 35px; color: #000;">(u,x)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- SVG Overlay for annotations and braces -->
+                            <svg class="fragment" width="320" height="230" style="margin-left: 5px;">
+                                <!-- Line for direct route to v -->
+                                <line class="fragment" x1="0" y1="50" x2="35" y2="50" stroke="#c00000"
+                                    stroke-width="1.2" />
+                                <text class="fragment" x="40" y="55" font-size="16" fill="#000">rute dari <tspan
+                                        font-style="italic">u
+                                    </tspan> ke <tspan font-style="italic">v directly</tspan> </text>
+
+                                <!-- Brace covering x, y, w, x (rows 2, 3, 4, 5) -->
+                                <!-- Center of brace is roughly at y=145 -->
+                                <path class="fragment"
+                                    d="M 5,75 Q 15,75 15,85 L 15,135 Q 15,145 25,145 Q 15,145 15,155 L 15,205 Q 15,215 5,215"
+                                    fill="none" stroke="#c00000" stroke-width="1.2" />
+
+                                <!-- Text for brace -->
+                                <text class="fragment" x="35" y="130" font-size="16" fill="#000">rute dari <tspan
+                                        font-style="italic">u
+                                    </tspan> ke semua</text>
+                                <text class="fragment" x="35" y="152" font-size="16" fill="#000">destinasi
+                                    lainnya</text>
+                                <text class="fragment" x="35" y="174" font-size="16" fill="#000">via <tspan
+                                        font-style="italic">x</tspan>
+                                </text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section>
+                <style>
+                    .slide-container {
+                        font-family: "Segoe UI", Arial, sans-serif;
+                        max-width: 1000px;
+                        margin: 0 auto;
+                        position: relative;
+                        background-color: #fff;
+                        color: #000;
+                        padding: 20px;
+                    }
+
+                    .slide-container h1 {
+                        color: #0000cd;
+                        font-size: 42px;
+                        font-weight: normal;
+                        margin-top: 0;
+                        margin-bottom: 30px;
+                    }
+
+                    .slide-container h3 {
+                        font-size: 22px;
+                        font-weight: normal;
+                        margin-bottom: 20px;
+                    }
+
+                    .top-graph {
+                        text-align: center;
+                        margin-bottom: 50px;
+                    }
+
+                    .bottom-section {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                    }
+
+                    .left-col {
+                        flex: 1;
+                        padding-right: 20px;
+                    }
+
+                    .right-col {
+                        flex: 1;
+                        padding-left: 20px;
+                    }
+
+                    .slide-table {
+                        border-collapse: collapse;
+                        text-align: center;
+                        border: 1.5px solid #00008b;
+                    }
+
+                    .slide-table th {
+                        background-color: #e0e0e0;
+                        border: 1.5px solid #00008b;
+                        padding: 5px 15px;
+                        font-weight: normal;
+                        font-size: 16px;
+                    }
+
+                    .slide-table td {
+                        border-right: 1.5px solid #00008b;
+                        padding: 4px 15px;
+                        font-size: 24px;
+                        height: 32px;
+                    }
+
+                    .slide-footer {
+                        text-align: right;
+                        font-size: 14px;
+                        color: #666;
+                        margin-top: 50px;
+                    }
+                </style>
+
+                <div class="slide-container">
+                    <h1>Dijkstra’s algorithm: an example</h1>
+
+                    <!-- TOP SECTION: Main Graph -->
+                    <div class="top-graph">
+                        <svg viewBox="0 0 400 240" width="450">
+                            <defs>
+                                <!-- Red Arrowhead Marker -->
+                                <marker id="red-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6"
+                                    markerHeight="6" orient="auto">
+                                    <path d="M 0,1 L 8,5 L 0,9 Z" fill="red" />
+                                </marker>
+                                <!-- Standard 3D Node Template (Disk/Cylinder) -->
+                                <g id="disk">
+                                    <path d="M -20,0 L -20,7 A 20,7 0 0 0 20,7 L 20,0 Z" fill="#d1c4e9" stroke="#000"
+                                        stroke-width="1.2" />
+                                    <ellipse cx="0" cy="0" rx="20" ry="7" fill="#e1d5e9" stroke="#000"
+                                        stroke-width="1.2" />
+                                </g>
+                            </defs>
+
+                            <!-- Light blue background blob -->
+                            <path d="M 60,130 C 20,40 180,10 260,20 C 340,30 400,80 380,150 C 360,240 170,260 90,220 Z"
+                                fill="#b3e5fc" />
+
+                            <!-- Black Edges -->
+                            <line x1="140" y1="80" x2="240" y2="80" stroke="#000" stroke-width="1.2" /> <!-- v to w -->
+                            <line x1="140" y1="80" x2="140" y2="200" stroke="#000" stroke-width="1.2" /> <!-- v to x -->
+                            <line x1="140" y1="200" x2="240" y2="80" stroke="#000" stroke-width="1.2" /> <!-- x to w -->
+                            <line x1="240" y1="80" x2="320" y2="140" stroke="#000" stroke-width="1.2" /> <!-- w to z -->
+                            <path d="M 60,140 Q 150,15 240,80" fill="transparent" stroke="#000" stroke-width="1.2" />
+                            <!-- u to w (curve) -->
+
+                            <!-- Red Edges (Shortest Path Tree) with arrows calculated to stop exactly at the node boundary -->
+                            <line x1="60" y1="140" x2="124" y2="92" stroke="red" stroke-width="2.5"
+                                marker-end="url(#red-arrow)" /> <!-- u to v -->
+                            <line x1="60" y1="140" x2="124" y2="188" stroke="red" stroke-width="2.5"
+                                marker-end="url(#red-arrow)" /> <!-- u to x -->
+                            <line x1="140" y1="200" x2="220" y2="200" stroke="red" stroke-width="2.5"
+                                marker-end="url(#red-arrow)" /> <!-- x to y -->
+                            <line x1="240" y1="200" x2="240" y2="100" stroke="red" stroke-width="2.5"
+                                marker-end="url(#red-arrow)" /> <!-- y to w -->
+                            <line x1="240" y1="200" x2="304" y2="152" stroke="red" stroke-width="2.5"
+                                marker-end="url(#red-arrow)" /> <!-- y to z -->
+
+                            <!-- Edge Costs -->
+                            <text x="100" y="100" font-size="16" fill="#000">2</text>
+                            <text x="90" y="180" font-size="16" fill="#000">1</text>
+                            <text x="185" y="72" font-size="16" fill="#000">3</text>
+                            <text x="146" y="145" font-size="16" fill="#000">2</text>
+                            <text x="195" y="150" font-size="16" fill="#000">3</text>
+                            <text x="185" y="215" font-size="16" fill="#000">1</text>
+                            <text x="248" y="155" font-size="16" fill="#000">1</text>
+                            <text x="285" y="100" font-size="16" fill="#000">5</text>
+                            <text x="285" y="185" font-size="16" fill="#000">2</text>
+                            <text x="145" y="38" font-size="16" fill="#000">5</text>
+
+                            <!-- Nodes -->
+                            <g transform="translate(60, 140)">
+                                <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">u</text>
+                            </g>
+                            <g transform="translate(140, 80)">
+                                <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">v</text>
+                            </g>
+                            <g transform="translate(140, 200)">
+                                <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">x</text>
+                            </g>
+                            <g transform="translate(240, 80)">
+                                <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">w</text>
+                            </g>
+                            <g transform="translate(240, 200)">
+                                <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">y</text>
+                            </g>
+                            <g transform="translate(320, 140)">
+                                <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">z</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- BOTTOM SECTION: 2 Columns -->
+                    <div class="bottom-section">
+
+                        <!-- Left Column: Resulting Tree -->
+                        <div class="left-col">
+                            <h3>resulting least-cost-path tree from u:</h3>
+                            <svg viewBox="0 0 400 240" width="380" style="margin-left: 20px;">
+                                <!-- Just the tree edges (plain thin black lines) -->
+                                <line x1="60" y1="140" x2="140" y2="80" stroke="#000" stroke-width="1.2" />
+                                <!-- u to v -->
+                                <line x1="60" y1="140" x2="140" y2="200" stroke="#000" stroke-width="1.2" />
+                                <!-- u to x -->
+                                <line x1="140" y1="200" x2="240" y2="200" stroke="#000" stroke-width="1.2" />
+                                <!-- x to y -->
+                                <line x1="240" y1="200" x2="240" y2="80" stroke="#000" stroke-width="1.2" />
+                                <!-- y to w -->
+                                <line x1="240" y1="200" x2="320" y2="140" stroke="#000" stroke-width="1.2" />
+                                <!-- y to z -->
+
+                                <!-- Nodes -->
+                                <g transform="translate(60, 140)">
+                                    <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">u</text>
+                                </g>
+                                <g transform="translate(140, 80)">
+                                    <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">v</text>
+                                </g>
+                                <g transform="translate(140, 200)">
+                                    <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">x</text>
+                                </g>
+                                <g transform="translate(240, 80)">
+                                    <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">w</text>
+                                </g>
+                                <g transform="translate(240, 200)">
+                                    <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">y</text>
+                                </g>
+                                <g transform="translate(320, 140)">
+                                    <use href="#disk" /><text x="0" y="5" text-anchor="middle" font-size="18">z</text>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Right Column: Routing Table and Brace Mapping -->
+                        <div class="right-col">
+                            <h3>resulting forwarding table in u:</h3>
+                            <div style="display: flex; position: relative;">
+                                <!-- HTML Table -->
+                                <table class="slide-table">
+                                    <thead>
+                                        <tr>
+                                            <th>destination</th>
+                                            <th>outgoing link</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>v</td>
+                                            <td>(u,v)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>x</td>
+                                            <td>(u,x)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>y</td>
+                                            <td>(u,x)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>w</td>
+                                            <td>(u,x)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>z</td>
+                                            <td>(u,x)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <!-- SVG Overlay for annotations and braces -->
+                                <svg width="250" height="220" style="margin-left: 5px;">
+                                    <!-- Line for direct route to v -->
+                                    <line x1="0" y1="52" x2="25" y2="52" stroke="red" stroke-width="1.2" />
+                                    <text x="30" y="57" font-size="16" fill="#000">route from u to v directly</text>
+
+                                    <!-- Brace covering x, y, w, z (rows 2, 3, 4, 5) -->
+                                    <path d="M 5,116 Q 15,116 15,130 Q 15,163 25,163 Q 15,163 15,196 Q 15,210 5,210"
+                                        fill="none" stroke="red" stroke-width="1.2" />
+                                    <text x="35" y="145" font-size="16" fill="#000">route from u to all</text>
+                                    <text x="35" y="167" font-size="16" fill="#000">other destinations</text>
+                                    <text x="35" y="189" font-size="16" fill="#000">via x</text>
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer Text -->
+                    <div class="slide-footer">
+                        Network Layer: 5-27
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Slide 27 -->
+            <section>
+                <h3 style="font-size:0.95em;">Dijkstra: Hasil Forwarding Table &amp; Least-Cost-Path Tree</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Setelah algoritma selesai, dari node u, diperoleh:</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+                        <div style="background:#e8f5e9;border-radius:8px;padding:10px;"><strong>Forwarding Table di
+                                u:</strong>
+                            <table style="margin-top:6px;border-collapse:collapse;width:100%;font-size:0.9em;">
+                                <tr style="background:#2e7d32;color:#fff;">
+                                    <th style="padding:4px;border:1px solid #ccc;">Destination</th>
+                                    <th style="padding:4px;border:1px solid #ccc;">Outgoing Link</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding:4px;border:1px solid #ccc;">v</td>
+                                    <td style="padding:4px;border:1px solid #ccc;">(u,x)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:4px;border:1px solid #ccc;">x</td>
+                                    <td style="padding:4px;border:1px solid #ccc;">(u,x)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:4px;border:1px solid #ccc;">y</td>
+                                    <td style="padding:4px;border:1px solid #ccc;">(u,x)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:4px;border:1px solid #ccc;">w</td>
+                                    <td style="padding:4px;border:1px solid #ccc;">(u,x)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:4px;border:1px solid #ccc;">z</td>
+                                    <td style="padding:4px;border:1px solid #ccc;">(u,x)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;"><strong>Least-Cost-Path Tree
+                                dari u:</strong><br><br>u → x (cost 1)<br>u → x → v (cost 2, rute u-v langsung
+                            sama)<br>u → x → y (cost 2)<br>u → x → y → w (cost 3)<br>u → x → y → z (cost 4)</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 28 -->
+            <section>
+                <h3 style="font-size:0.95em;">Dijkstra: Contoh Kedua (Graf Berbeda)</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Graf: u–v (7), u–w (3), u–x (5), w–v (11/w), w–x (6/w), x–v (14/x), x–y (9/x), v–y (8/v), v–z
+                        (7/v), y–z (2/y)</p>
+                    <table style="margin-top:6px;border-collapse:collapse;width:100%;font-size:0.8em;">
+                        <tr style="background:#1565c0;color:#fff;">
+                            <th style="padding:3px;border:1px solid #ccc;">Step</th>
+                            <th style="padding:3px;border:1px solid #ccc;">N'</th>
+                            <th style="padding:3px;border:1px solid #ccc;">D(v)</th>
+                            <th style="padding:3px;border:1px solid #ccc;">D(w)</th>
+                            <th style="padding:3px;border:1px solid #ccc;">D(x)</th>
+                            <th style="padding:3px;border:1px solid #ccc;">D(y)</th>
+                            <th style="padding:3px;border:1px solid #ccc;">D(z)</th>
+                        </tr>
+                        <tr>
+                            <td style="padding:3px;border:1px solid #ccc;">0</td>
+                            <td style="padding:3px;border:1px solid #ccc;">u</td>
+                            <td style="padding:3px;border:1px solid #ccc;">7,u</td>
+                            <td style="padding:3px;border:1px solid #ccc;font-weight:bold;">3,u✓</td>
+                            <td style="padding:3px;border:1px solid #ccc;">5,u</td>
+                            <td style="padding:3px;border:1px solid #ccc;">∞</td>
+                            <td style="padding:3px;border:1px solid #ccc;">∞</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:3px;border:1px solid #ccc;">1</td>
+                            <td style="padding:3px;border:1px solid #ccc;">u,w</td>
+                            <td style="padding:3px;border:1px solid #ccc;">7,u</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;font-weight:bold;">5,u✓</td>
+                            <td style="padding:3px;border:1px solid #ccc;">∞</td>
+                            <td style="padding:3px;border:1px solid #ccc;">∞</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:3px;border:1px solid #ccc;">2</td>
+                            <td style="padding:3px;border:1px solid #ccc;">u,w,x</td>
+                            <td style="padding:3px;border:1px solid #ccc;font-weight:bold;">7,u✓</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;">14,x</td>
+                            <td style="padding:3px;border:1px solid #ccc;">∞</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:3px;border:1px solid #ccc;">3</td>
+                            <td style="padding:3px;border:1px solid #ccc;">u,w,x,v</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;font-weight:bold;">11,w✓</td>
+                            <td style="padding:3px;border:1px solid #ccc;">14,x</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:3px;border:1px solid #ccc;">4</td>
+                            <td style="padding:3px;border:1px solid #ccc;">u,w,x,v,y</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;">—</td>
+                            <td style="padding:3px;border:1px solid #ccc;font-weight:bold;">13,y✓</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top:8px;font-size:0.85em;">Catatan: Bisa ada <em>tie</em> (biaya sama) – bisa
+                        dipecah sembarang. Predecessor node ditelusuri untuk membangun <em>least-cost-path tree</em>.
+                    </p>
+
+                </div>
+            </section>
+
+            <!-- Slide 29 -->
+            <section>
+                <h3 style="font-size:0.95em;">Dijkstra's Algorithm: Discussion</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;"><strong>Algorithm
+                                Complexity:</strong><br>
+                            <ul style="font-size:0.9em;">
+                                <li>n node: setiap iterasi perlu cek semua node w yang belum di N' → n(n+1)/2
+                                    perbandingan → <strong>O(n²)</strong></li>
+                                <li>Implementasi lebih efisien (heap): <strong>O(n log n)</strong></li>
+                            </ul>
+                        </div>
+                        <div style="background:#fff3e0;border-radius:8px;padding:10px;"><strong>Message
+                                Complexity:</strong><br>
+                            <ul style="font-size:0.9em;">
+                                <li>Setiap router harus <em>broadcast</em> info link state ke n router lainnya.</li>
+                                <li>Efficient broadcast: O(n) link crossings per pesan.</li>
+                                <li>Setiap pesan router melintasi O(n) link → total: <strong>O(n²)</strong> message
+                                    complexity.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 30 -->
+            <section>
+                <h3 style="font-size:0.95em;">Dijkstra: Oscillations (Osilasi Rute)</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Ketika biaya link bergantung pada volume trafik, bisa terjadi <strong>route oscillations</strong>
+                        (rute berubah terus menerus).</p>
+                    <p>Skenario: routing ke tujuan <strong>a</strong>, trafik masuk di d, c, e dengan rate 1, e(<1), 1.
+                            Link cost bergantung pada traffic load.</p>
+                            <div style="background:#ffebee;border-radius:8px;padding:10px;margin-top:8px;">
+                                <strong>Efek:</strong><br>Routing baru dihitung → menyebabkan perubahan beban → routing
+                                berubah lagi → dst (loop osilasi tidak konvergen).<br><br><em>Solusi:</em> Router tidak
+                                sinkronkan waktu perhitungan routing; gunakan mekanisme anti-osilasi (misal: OSPF dengan
+                                delay sebelum re-advertisement).
+                            </div>
+
+                </div>
+            </section>
+
+
+            <!-- Latihan: Dijkstra -->
+            <section>
+                <h3 style="font-size:0.9em;">💡 Latihan: Dijkstra's Algorithm</h3>
+                <div style="font-size:0.68em;text-align:left;">
+                    <div
+                        style="background:#fff9c4;border-left:4px solid #f9a825;border-radius:8px;padding:12px;margin-bottom:12px;">
+                        <strong>Soal:</strong> Diketahui graf berikut:<br>
+                        Nodes: A, B, C, D, E. Link costs: A-B=4, A-C=2, B-C=1, B-D=5, C-D=8, C-E=10, D-E=2.<br>
+                        Hitung jalur terpendek dari <strong>A</strong> ke semua node lainnya menggunakan
+                        <strong>Dijkstra's Algorithm</strong>.
+                    </div>
+                    <div class="fragment" style="background:#e8f5e9;border-radius:8px;padding:12px;">
+                        <strong>Jawaban:</strong>
+                        <table style="border-collapse:collapse;width:100%;font-size:0.95em;margin-top:6px;">
+                            <tr style="background:#2e7d32;color:#fff;">
+                                <th style="padding:4px;border:1px solid #ccc;">Step</th>
+                                <th style="padding:4px;border:1px solid #ccc;">N'</th>
+                                <th style="padding:4px;border:1px solid #ccc;">D(B)</th>
+                                <th style="padding:4px;border:1px solid #ccc;">D(C)</th>
+                                <th style="padding:4px;border:1px solid #ccc;">D(D)</th>
+                                <th style="padding:4px;border:1px solid #ccc;">D(E)</th>
+                            </tr>
+                            <tr>
+                                <td style="padding:4px;border:1px solid #ccc;">0</td>
+                                <td style="padding:4px;border:1px solid #ccc;">A</td>
+                                <td style="padding:4px;border:1px solid #ccc;">4,A</td>
+                                <td style="padding:4px;border:1px solid #ccc;font-weight:bold;background:#c8e6c9;">2,A✓
+                                </td>
+                                <td style="padding:4px;border:1px solid #ccc;">∞</td>
+                                <td style="padding:4px;border:1px solid #ccc;">∞</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:4px;border:1px solid #ccc;">1</td>
+                                <td style="padding:4px;border:1px solid #ccc;">A,C</td>
+                                <td style="padding:4px;border:1px solid #ccc;font-weight:bold;background:#c8e6c9;">3,C✓
+                                </td>
+                                <td style="padding:4px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px;border:1px solid #ccc;">10,C</td>
+                                <td style="padding:4px;border:1px solid #ccc;">12,C</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:4px;border:1px solid #ccc;">2</td>
+                                <td style="padding:4px;border:1px solid #ccc;">A,C,B</td>
+                                <td style="padding:4px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px;border:1px solid #ccc;font-weight:bold;background:#c8e6c9;">8,B✓
+                                </td>
+                                <td style="padding:4px;border:1px solid #ccc;">12,C</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:4px;border:1px solid #ccc;">3</td>
+                                <td style="padding:4px;border:1px solid #ccc;">A,C,B,D</td>
+                                <td style="padding:4px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px;border:1px solid #ccc;">—</td>
+                                <td style="padding:4px;border:1px solid #ccc;font-weight:bold;background:#c8e6c9;">10,D✓
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="margin-top:8px;"><strong>Jalur terpendek:</strong> A→B: A-C-B (cost 3), A→D: A-C-B-D
+                            (cost 8), A→E: A-C-B-D-E (cost 10)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Diskusi Kritis: Dijkstra Jebakan -->
+            <section data-background-color="#fff8e1">
+                <h3 style="font-size:0.95em;color:#e65100;">⚠️ Diskusi Kritis: Jebakan Algoritma Dijkstra</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Kita telah berhasil mensimulasikan Dijkstra dengan sangat baik. Namun, sebagai <em>Network
+                            Engineer</em> masa depan, Anda harus tahu kapan sebuah alat akan rusak/gagal.</p>
+                    <div
+                        style="background:#fff;border-left:5px solid #d32f2f;padding:15px;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.1);margin-top:10px;">
+                        <strong>Pertanyaan Analitis (Skenario Ekstrem):</strong><br>
+                        Apa yang terjadi pada Algoritma Dijkstra jika operator jaringan (karena *human error* atau
+                        konfigurasi khusus) memberikan <strong>*cost* bernilai NEGATIF (-1)</strong> pada salah satu
+                        *link* di jaringan?<br><br>
+                        <em style="color:#757575;">Diskusikan dengan teman di sebelah Anda selama 1 menit!</em>
+                    </div>
+                    <div class="fragment"
+                        style="margin-top:15px;background:#e8f5e9;padding:15px;border-radius:8px;border-left:5px solid #388e3c;">
+                        <strong>Jawaban & Konsekuensi:</strong><br>
+                        Algoritma Dijkstra <strong>akan GAGAL (menghasilkan rute yang salah)</strong> atau terjebak
+                        dalam <em>infinite loop</em> karena Dijkstra selalu berasumsi bahwa "menambah *hop/link* pasti
+                        menambah *cost* (tidak mungkin mengurangi)".
+                        <br><br>
+                        <strong>Solusi:</strong> Inilah mengapa algoritma <em>Distance Vector</em> (berbasis
+                        Bellman-Ford) sangat krusial, karena secara matematis algoritma Bellman-Ford <strong>mampu
+                            menangani *edge* bernilai negatif</strong>.
+                    </div>
+                </div>
+            </section>
+
+            <!-- ROADMAP: Routing Protocols: Distance Vector (Bellman-Ford) -->
+            <section data-background-image="images/week9/pptx/image2.jpg" data-background-size="contain"
+                data-background-color="#1a1a2e">
+                <div
+                    style="background:rgba(21,101,192,0.88);display:inline-block;padding:22px 44px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+                    <h2 style="color:#fff;margin:0;font-size:1.1em;">Routing Protocols: Distance Vector (Bellman-Ford)
+                    </h2>
+                </div>
+            </section>
+
+            <!-- Slide 32 -->
+            <section>
+                <h3 style="font-size:0.95em;">Distance Vector Algorithm – Persamaan Bellman-Ford</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Berdasarkan <strong>Bellman-Ford (BF) equation</strong> – dynamic programming:</p>
+                    <div
+                        style="background:#1a1a2e;color:#e0e0e0;border-radius:8px;padding:14px;text-align:center;margin:10px 0;font-size:1.2em;">
+                        <strong style="color:#81d4fa;">Dₓ(y) = min<sub>v</sub> { c(x,v) + D<sub>v</sub>(y) }</strong>
+                    </div>
+                    <ul style="font-size:0.72em;text-align:left;">
+                        <li><strong>D<sub>x</sub>(y)</strong> = biaya least-cost-path dari x ke y</li>
+                        <li><strong>c(x,v)</strong> = biaya link langsung dari x ke tetangga v</li>
+                        <li><strong>D<sub>v</sub>(y)</strong> = estimasi least-cost-path dari v ke y</li>
+                        <li>min diambil atas semua tetangga v dari x</li>
+                    </ul>
+
+                </div>
+            </section>
+
+            <!-- Slide 33 -->
+            <section>
+                <h3 style="font-size:0.95em;">Bellman-Ford: Contoh Perhitungan</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Graf: u–v(2), u–w(5), u–x(1), v–w(3), x–w(3), x–y(1), w–y(1), w–z(5), y–z(2)</p>
+                    <div style="background:#e3f2fd;border-radius:8px;padding:10px;margin-top:8px;">
+                        <p>Misalkan node u menghitung D<sub>u</sub>(z). Tetangga u adalah: x, v, w.</p>
+                        <p>Diketahui dari tetangga: D<sub>v</sub>(z)=5, D<sub>w</sub>(z)=3, D<sub>x</sub>(z)=3</p>
+                        <div
+                            style="background:#1a1a2e;color:#e0e0e0;border-radius:6px;padding:10px;margin-top:8px;font-size:0.9em;">
+                            D<sub>u</sub>(z) = min { c(u,v) + D<sub>v</sub>(z), c(u,x) + D<sub>x</sub>(z), c(u,w) +
+                            D<sub>w</sub>(z) }<br> = min { 2 + 5, 1 + 3, 5 + 3 }<br> = min { 7, <strong
+                                style="color:#a5d6a7;">4</strong>, 8 } = <strong style="color:#a5d6a7;">4</strong></div>
+                        <p style="margin-top:8px;">Node x adalah node yang menghasilkan minimum → x adalah <em>next
+                                hop</em> menuju z dari u.</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 34 -->
+            <section>
+                <h3 style="font-size:0.95em;">Distance Vector Algorithm: Key Idea</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>Key idea:</strong> Dari waktu ke waktu, setiap node mengirim <em>distance vector</em>-nya
+                        ke tetangga.</p>
+                    <div style="background:#e8f5e9;border-radius:8px;padding:10px;margin-top:8px;">Ketika node x
+                        menerima DV baru dari tetangga mana pun, ia update DV-nya sendiri menggunakan
+                        BF:<br><code>D<sub>x</sub>(y) ← min<sub>v</sub> {c(x,v) + D<sub>v</sub>(y)}</code> untuk setiap
+                        y ∈ N</div>
+                    <p style="margin-top:8px;">Dengan kondisi minor yang alami, estimasi D<sub>x</sub>(y) akan
+                        <strong>konvergen</strong> ke nilai aktual d<sub>x</sub>(y).
+                    </p>
+
+                </div>
+            </section>
+
+            <!-- Slide 35 -->
+            <section>
+                <h3 style="font-size:0.95em;">Distance Vector: Karakteristik Algoritma</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;"><strong>Iteratif,
+                                Asinkron:</strong><br>Iterasi lokal dipicu oleh:<br>
+                            <ul style="font-size:0.9em;">
+                                <li>Perubahan biaya link lokal</li>
+                                <li>Pesan DV update dari tetangga</li>
+                            </ul>Setiap node menunggu perubahan, lalu menghitung ulang dan notifikasi tetangga.
+                        </div>
+                        <div style="background:#e8f5e9;border-radius:8px;padding:10px;"><strong>Terdistribusi,
+                                Self-stopping:</strong><br>
+                            <ul style="font-size:0.9em;">
+                                <li>Setiap node hanya notifikasi tetangga <em>jika</em> DV-nya berubah.</li>
+                                <li>Tetangga notifikasi tetangga mereka – hanya jika perlu.</li>
+                                <li>Tidak ada notifikasi = tidak ada aksi!</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 36 -->
+            <section>
+                <h3 style="font-size:0.95em;">Distance Vector: Contoh (t=0, State Awal)</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Jaringan 3×3 grid: a–b–c / d–e–f / g–h–i, dengan link cost mostly 1 kecuali a–b=8.</p>
+                    <p>Pada <strong>t=0</strong>: setiap node hanya tahu jarak ke tetangga langsungnya.</p>
+                    <div style="background:#e3f2fd;border-radius:8px;padding:10px;margin-top:8px;font-size:0.85em;">
+                        <strong>DV di node a (t=0):</strong><br>D<sub>a</sub>(a)=0, D<sub>a</sub>(b)=8,
+                        D<sub>a</sub>(c)=∞, D<sub>a</sub>(d)=1, D<sub>a</sub>(e)=∞, D<sub>a</sub>(f)=∞,
+                        D<sub>a</sub>(g)=∞, D<sub>a</sub>(h)=∞, D<sub>a</sub>(i)=∞
+                    </div>
+                    <p style="margin-top:8px;"><em>Semua node mengirimkan DV mereka ke tetangga-tetangga mereka.</em>
+                    </p>
+
+                </div>
+            </section>
+
+            <!-- Slide 37-43: DV Iteration Animation -->
+            <section>
+                <h3 style="font-size:0.9em;">Distance Vector: Proses Iterasi (t=1, t=2, dst.)</h3>
+                <div style="font-size:0.68em;text-align:left;">
+                    <p>Pada setiap iterasi, semua node melakukan 3 hal secara bersamaan:</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0;">
+                        <div style="background:#e3f2fd;border-radius:6px;padding:8px;border-left:4px solid #1565c0;">
+                            <strong>1. Receive</strong><br>Terima DV dari semua tetangga
+                        </div>
+                        <div style="background:#fff3e0;border-radius:6px;padding:8px;border-left:4px solid #e65100;">
+                            <strong>2. Compute</strong><br>Hitung ulang DV lokal menggunakan BF
+                        </div>
+                        <div style="background:#e8f5e9;border-radius:6px;padding:8px;border-left:4px solid #2e7d32;">
+                            <strong>3. Send</strong><br>Kirim DV baru ke semua tetangga
+                        </div>
+                    </div>
+                    <div style="background:#fce4ec;border-radius:8px;padding:10px;margin-top:8px;">
+                        <strong>Pola Penyebaran Informasi:</strong><br>
+                        State node c pada t=0 menyebar secara bertahap:<br>
+                        t=1 → mencapai node 1 hop dari c (b)<br>
+                        t=2 → mencapai node 2 hop dari c (a, e)<br>
+                        t=3 → mencapai node 3 hop dari c (d, f, h)<br>
+                        t=4 → mencapai node 4 hop dari c (g, i)<br>
+                    </div>
+                    <div class="fragment" style="background:#e8f5e9;border-radius:8px;padding:10px;margin-top:8px;">
+                        <strong>Kapan Berhenti?</strong> Algoritma konvergen ketika tidak ada lagi node yang mengubah
+                        DV-nya → tidak ada notifikasi baru → algoritma berhenti sendiri (<em>self-stopping</em>).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 44-47: DV Computation Detail Part 1 -->
+            <section>
+                <h3 style="font-size:0.9em;">Distance Vector: Detail Komputasi di Node b</h3>
+                <div style="font-size:0.65em;text-align:left;">
+                    <p>
+                    <div
+                        style="margin-bottom:8px;padding:6px 12px;background:#fff3e0;border:1px dashed #ff9800;border-radius:6px;display:inline-block;font-size:0.95em;color:#e65100;">
+                        📝 <strong>Tips Latihan Mandiri:</strong> Gunakan Handout Tabel Kosong Bellman-Ford untuk
+                        menghitung D<sub>b</sub>(y) bersama-sama.</div>
+                    Node b menerima DV dari tetangganya: a, c, e (pada t=1):</p>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0;">
+                        <div style="background:#fff8e1;border-radius:6px;padding:8px;border:1px solid #f0c040;">
+                            <strong>DV dari a:</strong><br>
+                            Da(a)=0, Da(b)=8,<br>Da(d)=1, rest=∞
+                        </div>
+                        <div style="background:#e8f5e9;border-radius:6px;padding:8px;border:1px solid #66bb6a;">
+                            <strong>DV dari c:</strong><br>
+                            Dc(b)=1, Dc(c)=0,<br>rest=∞
+                        </div>
+                        <div style="background:#e3f2fd;border-radius:6px;padding:8px;border:1px solid #42a5f5;">
+                            <strong>DV dari e:</strong><br>
+                            De(b)=1, De(d)=1,<br>De(e)=0, De(f)=1, De(h)=1
+                        </div>
+                    </div>
+                    <div
+                        style="background:#1a1a2e;color:#e0e0e0;border-radius:8px;padding:10px;font-family:monospace;font-size:0.9em;">
+                        <span style="color:#81d4fa;">// b menggunakan BF: Db(y) = min{ c(b,n) + Dn(y) } untuk semua
+                            tetangga n</span><br>
+                        Db(a) = min{c(b,a)+Da(a), c(b,c)+Dc(a), c(b,e)+De(a)} = min{8+0, 1+∞, 1+∞} = <strong
+                            style="color:#a5d6a7;">8</strong><br>
+                        Db(c) = min{c(b,a)+Da(c), c(b,c)+Dc(c), c(b,e)+De(c)} = min{∞, 1+0, ∞ } = <strong
+                            style="color:#a5d6a7;">1</strong><br>
+                        Db(d) = min{c(b,a)+Da(d), c(b,c)+Dc(d), c(b,e)+De(d)} = min{8+1, 1+∞, 1+1} = <strong
+                            style="color:#a5d6a7;">2</strong><br>
+                        Db(f) = min{c(b,a)+Da(f), c(b,c)+Dc(f), c(b,e)+De(f)} = min{∞, ∞, 1+1} = <strong
+                            style="color:#a5d6a7;">2</strong><br>
+                        Db(h) = min{c(b,a)+Da(h), c(b,c)+Dc(h), c(b,e)+De(h)} = min{∞, ∞, 1+1} = <strong
+                            style="color:#a5d6a7;">2</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 44-47: DV Computation Detail Part 2 -->
+            <section>
+                <h3 style="font-size:0.9em;">Distance Vector: Hasil DV Baru Node b</h3>
+                <div style="font-size:0.68em;text-align:left;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                        <div>
+                            <div
+                                style="background:#fff3e0;border-radius:8px;padding:10px;border-left:4px solid #e65100;">
+                                <strong>DV lama node b (t=0):</strong>
+                                <table style="margin-top:6px;border-collapse:collapse;width:100%;font-size:0.9em;">
+                                    <tr style="background:#fbe9e7;">
+                                        <th style="padding:3px;border:1px solid #ccc;">Dest</th>
+                                        <th style="padding:3px;border:1px solid #ccc;">Cost</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">a</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">8 (direct)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">c</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">1 (direct)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">e</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">1 (direct)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">others</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">∞</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                style="background:#e8f5e9;border-radius:8px;padding:10px;border-left:4px solid #2e7d32;">
+                                <strong>DV baru node b (t=1):</strong>
+                                <table style="margin-top:6px;border-collapse:collapse;width:100%;font-size:0.9em;">
+                                    <tr style="background:#c8e6c9;">
+                                        <th style="padding:3px;border:1px solid #ccc;">Dest</th>
+                                        <th style="padding:3px;border:1px solid #ccc;">Cost</th>
+                                        <th style="padding:3px;border:1px solid #ccc;">Via</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">a</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">8</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">a (direct)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">c</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">1</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">c (direct)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">d</td>
+                                        <td style="padding:3px;border:1px solid #ccc;color:#c62828;font-weight:bold;">2
+                                            ✨baru</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">e</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">e</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">1</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">e (direct)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">f</td>
+                                        <td style="padding:3px;border:1px solid #ccc;color:#c62828;font-weight:bold;">2
+                                            ✨baru</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">e</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;border:1px solid #ccc;">h</td>
+                                        <td style="padding:3px;border:1px solid #ccc;color:#c62828;font-weight:bold;">2
+                                            ✨baru</td>
+                                        <td style="padding:3px;border:1px solid #ccc;">e</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background:#e3f2fd;border-radius:6px;padding:8px;margin-top:10px;">
+                        <strong>Kesimpulan:</strong> b mendapatkan rute ke d, f, dan h yang sebelumnya tidak diketahui!
+                        Informasi menyebar 1 hop lebih jauh di setiap iterasi.
+                    </div>
+                </div>
+            </section>
+            <!-- Slide 48 -->
+            <section>
+                <h3 style="font-size:0.95em;">Distance Vector: Komputasi Node e (t=1)</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Node e menerima DV dari tetangganya: b, d, f, h. Menghitung ulang DV-nya dengan BF.</p>
+                    <div style="background:#e3f2fd;border-radius:8px;padding:10px;margin-top:8px;font-size:0.85em;">
+                        <strong>Diketahui:</strong><br>DV dari b: Db(a)=8, Db(c)=1, rest=∞<br>DV dari d: Dd(a)=1,
+                        Dd(g)=1, Dd(d)=0, rest=∞<br>DV dari f: Df(c)=1, Df(f)=0, Df(i)=1, rest=∞<br>DV dari h: Dh(g)=1,
+                        Dh(h)=0, Dh(i)=1, rest=∞
+                    </div>
+                    <p style="margin-top:8px;"><em>Q: Berapakah DV baru yang dihitung node e pada t=1?</em></p>
+                    <div class="fragment" style="background:#e8f5e9;border-radius:8px;padding:10px;margin-top:6px;">
+                        <strong>Jawaban:</strong> De(a)=2(via d), De(b)=1(via b), De(c)=2(via b), De(d)=1(via d),
+                        De(f)=1(via f), De(g)=2(via d/h), De(h)=1(via h), De(i)=2(via f/h)
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 49 -->
+            <section>
+                <h3 style="font-size:0.95em;">Distance Vector: Penyebaran Informasi State</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Informasi state sebuah node menyebar secara bertahap seperti gelombang:</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;">
+                        <div style="background:#e3f2fd;border-radius:6px;padding:8px;text-align:center;">
+                            <strong>t=0</strong><br>State c hanya ada di c
+                        </div>
+                        <div style="background:#e8f5e9;border-radius:6px;padding:8px;text-align:center;">
+                            <strong>t=1</strong><br>State c mempengaruhi komputasi di b (1 hop)
+                        </div>
+                        <div style="background:#fff3e0;border-radius:6px;padding:8px;text-align:center;">
+                            <strong>t=2</strong><br>State c mempengaruhi komputasi di a, e (2 hop)
+                        </div>
+                        <div style="background:#fce4ec;border-radius:6px;padding:8px;text-align:center;">
+                            <strong>t=3</strong><br>State c mempengaruhi d, f, h (3 hop)
+                        </div>
+                        <div style="background:#ede7f6;border-radius:6px;padding:8px;text-align:center;">
+                            <strong>t=4</strong><br>State c mempengaruhi g, i (4 hop)
+                        </div>
+                        <div style="background:#f3e5f5;border-radius:6px;padding:8px;text-align:center;">
+                            <strong>Konvergen</strong><br>Tidak ada perubahan → algoritma berhenti
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 50 -->
+            <section>
+                <h3 style="font-size:0.95em;">Distance Vector: Link Cost Changes – Good News Travels Fast</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Topologi: x–y (1), y–z (4→1). Scenario: biaya link y–z berubah dari 4 menjadi 1.</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+                        <div style="background:#e8f5e9;border-radius:8px;padding:10px;"><strong>Proses
+                                konvergensi:</strong><br>
+                            <ul style="font-size:0.9em;">
+                                <li>t₀: y deteksi perubahan link cost, update DV, beritahu tetangga.</li>
+                                <li>t₁: z terima update dari y, hitung ulang DV, kirim ke tetangga.</li>
+                                <li>t₂: y terima update z, hitung ulang DV → tidak berubah → tidak kirim notifikasi.
+                                </li>
+                            </ul>
+                        </div>
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;">
+                            <strong>Hasil:</strong><br>"<em>Good news travels fast</em>" – kabar baik (biaya turun)
+                            menyebar cepat, biasanya konvergen dalam beberapa iterasi.<br><br>Sebaliknya, "bad news"
+                            (biaya naik) menyebar lambat dan bisa memicu masalah!
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 51 -->
+            <section>
+                <h3 style="font-size:0.95em;">Distance Vector: Count-to-Infinity Problem</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Topologi: x–y (1), y–z (4→60). Ketika biaya y–z naik dari 4 ke 60:</p>
+                    <div style="background:#ffebee;border-radius:8px;padding:10px;margin-top:8px;">
+                        <ol style="font-size:0.75em;">
+                            <li>y melihat link ke x punya biaya baru 60. Tapi z bilang punya jalur ke x via y dengan
+                                biaya 5. Jadi y hitung: biaya baru ke x = 6 via z. Notif z.</li>
+                            <li>z menerima update dari y: jalur ke x via y sekarang cost 6. z hitung: biaya z ke x = 7
+                                via y. Notif y.</li>
+                            <li>y terima: z ke x cost 7 → y hitung: y ke x via z = 8. Notif z.</li>
+                            <li>z: via y = 9... dan seterusnya...</li>
+                        </ol>
+                    </div>
+                    <div style="background:#fce4ec;border-radius:8px;padding:10px;margin-top:8px;"><strong>⚠️ "Bad news
+                            travels slow" – Count-to-Infinity Problem!</strong><br>Rute loop (y→z→y→z...) menyebabkan
+                        cost terus naik hingga infinity.<br><strong>Solusi:</strong> Poisoned Reverse, Split Horizon,
+                        atau batasan hop (RIP max 15 hop).</div>
+
+                </div>
+            </section>
+
+            <!-- Slide 52 -->
+            <section>
+                <h3 style="font-size:0.95em;">Perbandingan: Link State vs Distance Vector</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <table style="width:100%;border-collapse:collapse;font-size:0.72em;">
+                        <tr style="background:#1565c0;color:#fff;">
+                            <th style="padding:6px;border:1px solid #ccc;">Aspek</th>
+                            <th style="padding:6px;border:1px solid #ccc;">Link State (LS)</th>
+                            <th style="padding:6px;border:1px solid #ccc;">Distance Vector (DV)</th>
+                        </tr>
+                        <tr>
+                            <td style="padding:6px;border:1px solid #ccc;font-weight:bold;">Message Complexity</td>
+                            <td style="padding:6px;border:1px solid #ccc;">n router, O(n²) pesan</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Exchange antar tetangga; waktu konvergen
+                                bervariasi</td>
+                        </tr>
+                        <tr style="background:#f5f5f5;">
+                            <td style="padding:6px;border:1px solid #ccc;font-weight:bold;">Speed of Convergence</td>
+                            <td style="padding:6px;border:1px solid #ccc;">O(n²) algo, O(n²) pesan; bisa osilasi</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Waktu konvergen bervariasi; bisa routing
+                                loops, count-to-infinity</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:6px;border:1px solid #ccc;font-weight:bold;">Robustness</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Router bisa advertise biaya link salah;
+                                setiap router hanya hitung tabel sendiri – error terisolasi</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Router bisa advertise biaya path salah ("I
+                                have zero cost path everywhere") → black-holing; error menyebar ke seluruh jaringan</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </section>
+
+
+            <!-- Latihan: Distance Vector -->
+            <section>
+                <h3 style="font-size:0.9em;">💡 Latihan & Analisis: Count-to-Infinity</h3>
+                <div style="font-size:0.62em;text-align:left;">
+                    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:12px;">
+                        <div>
+                            <div
+                                style="background:#fff9c4;border-left:4px solid #f9a825;border-radius:8px;padding:10px;margin-bottom:10px;">
+                                <strong>Soal:</strong> Topologi: x–z (awal: 4, berubah: 60), x–y (1), y–z (1).<br>
+                                Saat x-z jadi 60, router x beralih rutekan ke z via y (karena y lapor bisa ke z cost 1).
+                                Tapi y ke z sebenarnya lewat x! (y pikir x masih punya cost 4 ke z). Apa yang terjadi?
+                            </div>
+                            <div class="fragment"
+                                style="background:#ffebee;border-radius:8px;padding:10px;border-left:4px solid #c62828;">
+                                <strong>Solusi Count-to-Infinity:</strong><br>
+                                1. <strong>Poisoned Reverse:</strong> Jika y rutekan ke z melalui x, maka y berbohong ke
+                                x dengan mengatakan jarak y ke z adalah ∞ (sehingga x tak akan rutekan balik ke y).<br>
+                                2. <strong>Split Horizon:</strong> y tidak mengirim info rute z kembali ke x.
+                            </div>
+                        </div>
+                        <div>
+                            <strong>Animasi Ping-Pong Jarak (Cost ke Z)</strong>
+                            <svg viewBox="0 0 350 220" width="100%"
+                                style="background:#fff;border-radius:8px;border:1px solid #ccc;margin-top:8px;">
+                                <!-- Node X and Y axes -->
+                                <line x1="100" y1="30" x2="100" y2="200" stroke="#1565c0" stroke-width="3"
+                                    stroke-linecap="round" />
+                                <text x="100" y="20" text-anchor="middle" font-size="14" font-weight="bold"
+                                    fill="#1565c0">Router X</text>
+
+                                <line x1="250" y1="30" x2="250" y2="200" stroke="#2e7d32" stroke-width="3"
+                                    stroke-linecap="round" />
+                                <text x="250" y="20" text-anchor="middle" font-size="14" font-weight="bold"
+                                    fill="#2e7d32">Router Y</text>
+
+                                <!-- Timeline arrows -->
+                                <g class="fragment">
+                                    <line x1="100" y1="50" x2="250" y2="70" stroke="#888" stroke-width="1.5"
+                                        marker-end="url(#arrowhead)" />
+                                    <text x="175" y="55" text-anchor="middle" font-size="10" fill="#555">X lapor: "Saya
+                                        ke Z via Y cost 6!"</text>
+                                </g>
+                                <g class="fragment">
+                                    <line x1="250" y1="80" x2="100" y2="100" stroke="#c62828" stroke-width="1.5"
+                                        marker-end="url(#arrowhead)" />
+                                    <text x="175" y="85" text-anchor="middle" font-size="10" fill="#c62828">Y hitung: "1
+                                        + 6 = 7! Saya lapor ke X cost 7"</text>
+                                </g>
+                                <g class="fragment">
+                                    <line x1="100" y1="110" x2="250" y2="130" stroke="#888" stroke-width="1.5"
+                                        marker-end="url(#arrowhead)" />
+                                    <text x="175" y="115" text-anchor="middle" font-size="10" fill="#555">X hitung: "1 +
+                                        7 = 8! Lapor Y cost 8"</text>
+                                </g>
+                                <g class="fragment">
+                                    <line x1="250" y1="140" x2="100" y2="160" stroke="#c62828" stroke-width="1.5"
+                                        marker-end="url(#arrowhead)" />
+                                    <text x="175" y="145" text-anchor="middle" font-size="10" fill="#c62828">Y lapor:
+                                        "Cost 9!"</text>
+                                </g>
+                                <g class="fragment">
+                                    <text x="175" y="180" text-anchor="middle" font-size="11" font-weight="bold"
+                                        fill="#d32f2f">...Terus bertambah s/d Infinity (50)! 🔁</text>
+                                </g>
+
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="6" markerHeight="5" refX="5" refY="2.5"
+                                        orient="auto">
+                                        <polygon points="0 0, 6 2.5, 0 5" fill="#666" />
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ROADMAP: Intra-ISP Routing: OSPF -->
+            <section data-background-image="images/week9/pptx/image2.jpg" data-background-size="contain"
+                data-background-color="#1a1a2e">
+                <div
+                    style="background:rgba(21,101,192,0.88);display:inline-block;padding:22px 44px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+                    <h2 style="color:#fff;margin:0;font-size:1.1em;">Intra-ISP Routing: OSPF</h2>
+                </div>
+            </section>
+
+            <!-- Slide 54 -->
+            <section>
+                <h3 style="font-size:0.95em;">Routing Skalabilitas: Idealisasi vs Realita</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Studi routing selama ini mengasumsikan kondisi ideal:<br>→ Semua router identik<br>→ Jaringan
+                        "flat" (datar)</p>
+                    <p>Namun kenyataannya <strong>tidak demikian</strong> di internet!</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+                        <div style="background:#ffebee;border-radius:8px;padding:10px;"><strong>Masalah
+                                Skala:</strong><br>
+                            <ul style="font-size:0.9em;">
+                                <li>Internet punya miliaran tujuan – mustahil semua router menyimpannya dalam tabel
+                                    routing.</li>
+                                <li>Update tabel routing akan membanjiri link!</li>
+                            </ul>
+                        </div>
+                        <div style="background:#fff3e0;border-radius:8px;padding:10px;"><strong>Masalah Otonomi
+                                Administratif:</strong><br>
+                            <ul style="font-size:0.9em;">
+                                <li>Internet adalah "network of networks".</li>
+                                <li>Setiap admin jaringan mungkin ingin kontrol routing di jaringannya sendiri.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 55 -->
+            <section>
+                <h3 style="font-size:0.95em;">Internet Approach to Scalable Routing: Autonomous Systems</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Router diaggregasi ke dalam region yang disebut <strong>Autonomous Systems (AS)</strong>, juga
+                        dikenal sebagai "<em>domain</em>".</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;"><strong>Intra-AS (Intra-domain)
+                                Routing:</strong><br>Routing antar router dalam AS yang sama. Semua router di AS harus
+                            jalankan protokol intra-domain yang sama. Router di AS berbeda bisa jalankan protokol
+                            berbeda.</div>
+                        <div style="background:#e8f5e9;border-radius:8px;padding:10px;"><strong>Inter-AS (Inter-domain)
+                                Routing:</strong><br>Routing antar AS. Dilakukan oleh <em>gateway routers</em> di tepi
+                            AS-nya (link ke router di AS lain).</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 56 -->
+            <section>
+                <h3 style="font-size:0.95em;">Interconnected ASes</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Topologi: AS1, AS2, AS3 saling terhubung via gateway router di tepi masing-masing AS.</p>
+                    <div style="background:#e3f2fd;border-radius:8px;padding:10px;margin-top:8px;">
+                        <ul style="font-size:0.85em;">
+                            <li><strong>Intra-AS routing</strong>: menentukan entri untuk tujuan di dalam AS.</li>
+                            <li><strong>Inter-AS & Intra-AS</strong>: menentukan entri untuk tujuan di luar AS.</li>
+                            <li><em>Forwarding table</em> dikonfigurasi oleh algoritma routing intra- DAN inter-AS.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 57 -->
+            <section>
+                <h3 style="font-size:0.95em;">Inter-AS Routing: Perannya dalam Forwarding Intradomain</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Misalkan router di AS1 menerima datagram tujuan di luar AS1.</p>
+                    <p>Inter-domain routing AS1 harus:</p>
+                    <ol style="font-size:0.75em;text-align:left;">
+                        <li>Pelajari tujuan mana yang reachable via AS2, dan mana yang via AS3.</li>
+                        <li>Sebarkan info reachability ke semua router di AS1.</li>
+                        <li>Router forward paket ke gateway router yang tepat di AS1.</li>
+                    </ol>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px;"><img
+                            src="images/week9/pptx/image29.png"
+                            style="max-height:200px;max-width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.18);margin:6px auto;display:block;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 58 -->
+            <section>
+                <h3 style="font-size:0.95em;">Intra-AS Routing Protocols</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Protokol intra-AS yang paling umum:</p>
+                    <table style="width:100%;border-collapse:collapse;font-size:0.72em;margin-top:8px;">
+                        <tr style="background:#1565c0;color:#fff;">
+                            <th style="padding:6px;border:1px solid #ccc;">Protokol</th>
+                            <th style="padding:6px;border:1px solid #ccc;">Tipe</th>
+                            <th style="padding:6px;border:1px solid #ccc;">Keterangan</th>
+                        </tr>
+                        <tr>
+                            <td style="padding:6px;border:1px solid #ccc;"><strong>RIP</strong></td>
+                            <td style="padding:6px;border:1px solid #ccc;">Distance Vector</td>
+                            <td style="padding:6px;border:1px solid #ccc;">DV klasik, exchange tiap 30 detik, sudah
+                                jarang digunakan [RFC 1723]</td>
+                        </tr>
+                        <tr style="background:#f5f5f5;">
+                            <td style="padding:6px;border:1px solid #ccc;"><strong>EIGRP</strong></td>
+                            <td style="padding:6px;border:1px solid #ccc;">DV-based</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Sebelumnya Cisco-proprietary, menjadi open di
+                                2013 [RFC 7868]</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:6px;border:1px solid #ccc;"><strong>OSPF</strong></td>
+                            <td style="padding:6px;border:1px solid #ccc;">Link State</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Open Shortest Path First, link-state routing
+                                [RFC 2328]</td>
+                        </tr>
+                        <tr style="background:#f5f5f5;">
+                            <td style="padding:6px;border:1px solid #ccc;"><strong>IS-IS</strong></td>
+                            <td style="padding:6px;border:1px solid #ccc;">Link State</td>
+                            <td style="padding:6px;border:1px solid #ccc;">ISO standard, esensinya sama dengan OSPF</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </section>
+
+            <!-- Slide 59 -->
+            <section>
+                <h3 style="font-size:0.95em;">OSPF: Open Shortest Path First</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>Open</strong>: publicly available (RFC 2328).</p>
+                    <ul style="font-size:0.75em;text-align:left;">
+                        <li>Classic <em>link-state</em>: setiap router flood OSPF <em>link-state advertisements</em>
+                            (LSA) ke semua router di seluruh AS (langsung via IP, bukan TCP/UDP).</li>
+                        <li>Multiple link cost metrics: bandwidth, delay.</li>
+                        <li>Setiap router punya topologi lengkap, gunakan <strong>Dijkstra's algorithm</strong> untuk
+                            hitung forwarding table.</li>
+                        <li><strong>Security:</strong> semua pesan OSPF diautentikasi (mencegah intrusi berbahaya).</li>
+                    </ul>
+
+                </div>
+            </section>
+
+            <!-- Slide 60 -->
+            <section>
+                <h3 style="font-size:0.95em;">Hierarchical OSPF</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>Two-level hierarchy:</strong> Local area + Backbone.</p>
+                    <p>LSA di-flood hanya dalam area atau backbone – tidak ke seluruh jaringan.</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;font-size:0.8em;"><strong>Area
+                                Border Routers:</strong><br>"Summarize" jarak ke tujuan di area-nya sendiri, advertise
+                            ke backbone.<br><br><strong>Backbone Routers:</strong><br>Jalankan OSPF, terbatas di
+                            backbone.</div>
+                        <div style="background:#e8f5e9;border-radius:8px;padding:10px;font-size:0.8em;"><strong>Boundary
+                                Routers:</strong><br>Koneksi ke AS lain.<br><br><strong>Local (Internal)
+                                Routers:</strong><br>Flood LS hanya di area mereka, hitung routing di dalam area,
+                            forward paket keluar via area border router.</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ROADMAP: Routing among ISPs: BGP -->
+            <section data-background-image="images/week9/pptx/image2.jpg" data-background-size="contain"
+                data-background-color="#1a1a2e">
+                <div
+                    style="background:rgba(21,101,192,0.88);display:inline-block;padding:22px 44px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+                    <h2 style="color:#fff;margin:0;font-size:1.1em;">Routing among ISPs: BGP</h2>
+                </div>
+            </section>
+
+            <!-- Slide 62 -->
+            <section>
+                <h3 style="font-size:0.95em;">Interconnected ASes: Intra vs Inter-AS</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Intra-AS routing menentukan entri untuk tujuan di dalam AS. Inter-AS routing menentukan entri
+                        untuk tujuan di luar AS.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px;"><img
+                            src="images/week9/pptx/image30.png"
+                            style="max-height:200px;max-width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.18);margin:6px auto;display:block;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 63 -->
+            <section>
+                <h3 style="font-size:0.95em;">BGP: Border Gateway Protocol</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>BGP</strong> adalah <em>de facto</em> inter-domain routing protocol – "<em>glue that
+                            holds the Internet together</em>".</p>
+                    <p>BGP memungkinkan subnet mengadvertise keberadaannya dan tujuan yang bisa dicapai ke seluruh
+                        internet: "<em>I am here, here is who I can reach, and how</em>".</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;font-size:0.85em;">
+                            <strong>eBGP:</strong> Dapatkan reachability info dari AS tetangga.
+                        </div>
+                        <div style="background:#e8f5e9;border-radius:8px;padding:10px;font-size:0.85em;">
+                            <strong>iBGP:</strong> Sebarkan reachability info ke semua router internal di AS.
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- BGP Topology Diagram -->
+            <section>
+                <h3 style="font-size:0.9em;">BGP: Topologi eBGP dan iBGP</h3>
+                <div style="font-size:0.68em;text-align:left;">
+                    <svg viewBox="0 0 700 360" width="88%"
+                        style="margin:0 auto;display:block;border:1px solid #ddd;border-radius:10px;background:#f8f9fa;">
+                        <!-- AS1 box -->
+                        <rect x="20" y="20" width="200" height="340" rx="12" fill="#e3f2fd" stroke="#1565c0"
+                            stroke-width="2" stroke-dasharray="8,4" />
+                        <text x="120" y="46" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565c0">AS
+                            1</text>
+                        <!-- AS2 box -->
+                        <rect x="250" y="20" width="200" height="340" rx="12" fill="#e8f5e9" stroke="#2e7d32"
+                            stroke-width="2" stroke-dasharray="8,4" />
+                        <text x="350" y="46" text-anchor="middle" font-size="14" font-weight="bold" fill="#2e7d32">AS
+                            2</text>
+                        <!-- AS3 box -->
+                        <rect x="480" y="20" width="200" height="340" rx="12" fill="#fff3e0" stroke="#e65100"
+                            stroke-width="2" stroke-dasharray="8,4" />
+                        <text x="580" y="46" text-anchor="middle" font-size="14" font-weight="bold" fill="#e65100">AS
+                            3</text>
+                        <!-- AS1 routers -->
+                        <circle cx="80" cy="100" r="22" fill="#1565c0" /><text x="80" y="105" text-anchor="middle"
+                            font-size="12" fill="white">1a</text>
+                        <circle cx="160" cy="100" r="22" fill="#1565c0" /><text x="160" y="105" text-anchor="middle"
+                            font-size="12" fill="white">1b</text>
+                        <circle cx="80" cy="220" r="22" fill="#1565c0" /><text x="80" y="225" text-anchor="middle"
+                            font-size="12" fill="white">1c</text>
+                        <circle cx="160" cy="220" r="22" fill="#1565c0" /><text x="160" y="225" text-anchor="middle"
+                            font-size="12" fill="white">1d</text>
+                        <!-- AS2 routers -->
+                        <circle cx="310" cy="100" r="22" fill="#2e7d32" /><text x="310" y="105" text-anchor="middle"
+                            font-size="12" fill="white">2a</text>
+                        <circle cx="390" cy="100" r="22" fill="#2e7d32" /><text x="390" y="105" text-anchor="middle"
+                            font-size="12" fill="white">2b</text>
+                        <circle cx="310" cy="220" r="22" fill="#2e7d32" /><text x="310" y="225" text-anchor="middle"
+                            font-size="12" fill="white">2c</text>
+                        <circle cx="390" cy="220" r="22" fill="#2e7d32" /><text x="390" y="225" text-anchor="middle"
+                            font-size="12" fill="white">2d</text>
+                        <!-- AS3 routers -->
+                        <circle cx="540" cy="100" r="22" fill="#e65100" /><text x="540" y="105" text-anchor="middle"
+                            font-size="12" fill="white">3a</text>
+                        <circle cx="620" cy="100" r="22" fill="#e65100" /><text x="620" y="105" text-anchor="middle"
+                            font-size="12" fill="white">3b</text>
+                        <circle cx="540" cy="220" r="22" fill="#e65100" /><text x="540" y="225" text-anchor="middle"
+                            font-size="12" fill="white">3c</text>
+                        <circle cx="620" cy="220" r="22" fill="#e65100" /><text x="620" y="225" text-anchor="middle"
+                            font-size="12" fill="white">3d</text>
+                        <!-- iBGP connections (dashed, same color) -->
+                        <line x1="80" y1="100" x2="160" y2="100" stroke="#1565c0" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="80" y1="100" x2="80" y2="220" stroke="#1565c0" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="160" y1="100" x2="160" y2="220" stroke="#1565c0" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="80" y1="220" x2="160" y2="220" stroke="#1565c0" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="310" y1="100" x2="390" y2="100" stroke="#2e7d32" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="310" y1="100" x2="310" y2="220" stroke="#2e7d32" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="390" y1="100" x2="390" y2="220" stroke="#2e7d32" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="310" y1="220" x2="390" y2="220" stroke="#2e7d32" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="540" y1="100" x2="620" y2="100" stroke="#e65100" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="540" y1="100" x2="540" y2="220" stroke="#e65100" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="620" y1="100" x2="620" y2="220" stroke="#e65100" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <line x1="540" y1="220" x2="620" y2="220" stroke="#e65100" stroke-width="1.5"
+                            stroke-dasharray="4,3" />
+                        <!-- eBGP connections (solid, thick) -->
+                        <line x1="160" y1="100" x2="310" y2="100" stroke="#c62828" stroke-width="2.5" />
+                        <line x1="160" y1="220" x2="310" y2="220" stroke="#c62828" stroke-width="2.5" />
+                        <line x1="390" y1="100" x2="540" y2="100" stroke="#c62828" stroke-width="2.5" />
+                        <!-- eBGP label -->
+                        <rect x="195" y="78" width="80" height="18" rx="4" fill="#c62828" />
+                        <text x="235" y="91" text-anchor="middle" font-size="10" fill="white"
+                            font-weight="bold">eBGP</text>
+                        <rect x="415" y="78" width="80" height="18" rx="4" fill="#c62828" />
+                        <text x="455" y="91" text-anchor="middle" font-size="10" fill="white"
+                            font-weight="bold">eBGP</text>
+                        <!-- iBGP label -->
+                        <text x="120" y="175" text-anchor="middle" font-size="10" fill="#1565c0">iBGP</text>
+                        <text x="350" y="175" text-anchor="middle" font-size="10" fill="#2e7d32">iBGP</text>
+                        <text x="580" y="175" text-anchor="middle" font-size="10" fill="#e65100">iBGP</text>
+                        <!-- Network X -->
+                        <rect x="540" y="290" width="60" height="30" rx="6" fill="#fff9c4" stroke="#f9a825"
+                            stroke-width="2" />
+                        <text x="570" y="309" text-anchor="middle" font-size="12" font-weight="bold"
+                            fill="#f57f17">X</text>
+                        <line x1="570" y1="242" x2="570" y2="290" stroke="#f57f17" stroke-width="2" />
+                    </svg>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;font-size:0.85em;">
+                        <div style="background:#ffebee;border-radius:6px;padding:6px;">
+                            <strong style="color:#c62828;">eBGP (solid merah):</strong> Koneksi antar AS. 1b↔2a, 1d↔2c,
+                            2b↔3a.
+                        </div>
+                        <div style="background:#e8eaf6;border-radius:6px;padding:6px;">
+                            <strong style="color:#3949ab;">iBGP (dashed):</strong> Koneksi logis dalam satu AS. Sebarkan
+                            info BGP secara internal.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 64 -->
+            <section>
+                <h3 style="font-size:0.95em;">eBGP dan iBGP Connections</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>Gateway routers</strong> menjalankan kedua protokol eBGP (dengan AS lain) dan iBGP
+                        (dengan router internal di AS yang sama).</p>
+                    <div style="background:#e3f2fd;border-radius:8px;padding:10px;margin-top:8px;">
+                        <ul style="font-size:0.8em;">
+                            <li><strong>eBGP session:</strong> Antara gateway router di AS yang berbeda (melintasi link
+                                fisik antar-AS).</li>
+                            <li><strong>iBGP session:</strong> Antara router-router di dalam AS yang sama (logical
+                                connection, boleh multi-hop).</li>
+                            <li>Rute yang dipelajari via eBGP lalu disebarkan ke semua router di AS via iBGP.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 65 -->
+            <section>
+                <h3 style="font-size:0.95em;">BGP Basics: BGP Session &amp; Path Advertisement</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Ketika AS3 gateway 3a mengadvertise <em>path</em> AS3,X ke AS2 gateway 2c:</p>
+                    <p>→ AS3 <strong>berjanji</strong> kepada AS2 akan forward datagram menuju X.</p>
+                    <div style="background:#e8f5e9;border-radius:8px;padding:10px;margin-top:8px;"><strong>BGP
+                            Session:</strong><br>Dua BGP router ("peers") bertukar pesan BGP via koneksi TCP
+                        semi-permanen, mengadvertise path ke destination network prefixes.<br><em>BGP adalah "path
+                            vector" protocol.</em></div>
+
+                </div>
+            </section>
+
+            <!-- Slide 66 -->
+            <section>
+                <h3 style="font-size:0.95em;">BGP Protocol Messages</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Pesan BGP dipertukarkan antar peers via koneksi TCP:</p>
+                    <table style="width:100%;border-collapse:collapse;font-size:0.75em;margin-top:8px;">
+                        <tr style="background:#1565c0;color:#fff;">
+                            <th style="padding:6px;border:1px solid #ccc;">Pesan</th>
+                            <th style="padding:6px;border:1px solid #ccc;">Fungsi</th>
+                        </tr>
+                        <tr>
+                            <td style="padding:6px;border:1px solid #ccc;font-weight:bold;">OPEN</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Membuka koneksi TCP ke remote BGP peer dan
+                                autentikasi.</td>
+                        </tr>
+                        <tr style="background:#f5f5f5;">
+                            <td style="padding:6px;border:1px solid #ccc;font-weight:bold;">UPDATE</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Mengadvertise path baru atau menarik path
+                                lama.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:6px;border:1px solid #ccc;font-weight:bold;">KEEPALIVE</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Menjaga koneksi tetap aktif; juga ACK untuk
+                                OPEN.</td>
+                        </tr>
+                        <tr style="background:#f5f5f5;">
+                            <td style="padding:6px;border:1px solid #ccc;font-weight:bold;">NOTIFICATION</td>
+                            <td style="padding:6px;border:1px solid #ccc;">Melaporkan error pada pesan sebelumnya; juga
+                                untuk menutup koneksi.</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </section>
+
+            <!-- Slide 67 -->
+            <section>
+                <h3 style="font-size:0.95em;">Path Attributes dan BGP Routes</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>BGP advertised route</strong> = prefix + attributes.</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;font-size:0.85em;">
+                            <strong>AS-PATH:</strong><br>Daftar AS yang telah dilewati oleh prefix advertisement.
+                            Digunakan untuk mencegah routing loop dan membuat keputusan policy.
+                        </div>
+                        <div style="background:#fff3e0;border-radius:8px;padding:10px;font-size:0.85em;">
+                            <strong>NEXT-HOP:</strong><br>Menunjuk router internal spesifik di AS berikutnya (next-hop
+                            AS). Digunakan untuk resolusi forwarding internal.
+                        </div>
+                    </div>
+                    <div style="background:#e8f5e9;border-radius:8px;padding:10px;margin-top:8px;font-size:0.85em;">
+                        <strong>Policy-based routing:</strong> Gateway yang menerima route advertisement menggunakan
+                        <em>import policy</em> untuk accept/decline path (misal: "jangan pernah route via AS Y"). Policy
+                        AS juga menentukan apakah meng-advertise path ke AS tetangga lainnya.
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 68 -->
+            <section>
+                <h3 style="font-size:0.95em;">BGP Path Advertisement: Contoh</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <div style="font-size:0.75em;">
+                        <p>Proses advertisement dari AS3 menuju AS1:</p>
+                        <ol>
+                            <li>AS3 gateway 3a advertise path <strong>AS3, X</strong> ke AS2 gateway 2c (via eBGP).</li>
+                            <li>AS2 router 2c terima path AS3,X. Berdasarkan policy AS2, 2c accept dan propagate (via
+                                iBGP) ke semua router AS2.</li>
+                            <li>AS2 router 2a advertise path <strong>AS2, AS3, X</strong> ke AS1 router 1c (via eBGP).
+                            </li>
+                        </ol>
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;margin-top:8px;"><strong>Multiple
+                                Paths:</strong><br>AS1 gateway 1c bisa mempelajari dua jalur menuju X:<br>• AS2,AS3,X –
+                            dari 2a<br>• AS3,X – dari 3a (langsung)<br>Berdasarkan policy, 1c pilih jalur AS3,X dan
+                            advertise ke dalam AS1 via iBGP.</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 70 -->
+            <section>
+                <h3 style="font-size:0.95em;">BGP: Mengisi Forwarding Tables</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <div style="font-size:0.75em;">
+                        <p>Setelah 1a, 1b, 1d belajar via iBGP dari 1c bahwa "path ke X melewati 1c":</p>
+                        <div style="background:#e3f2fd;border-radius:8px;padding:10px;margin-top:8px;"><strong>Di router
+                                1d:</strong><br>• OSPF intra-domain: untuk ke 1c, gunakan interface 1.<br>• Maka: untuk
+                            ke X, gunakan interface 1.</div>
+                        <div style="background:#e8f5e9;border-radius:8px;padding:10px;margin-top:8px;"><strong>Di router
+                                1a:</strong><br>• OSPF intra-domain: untuk ke 1c, gunakan interface 2.<br>• Maka: untuk
+                            ke X, gunakan interface 2.</div>
+                        <p style="margin-top:8px;font-size:0.9em;">Integrasi BGP (inter-AS) + OSPF (intra-AS) →
+                            forwarding table lengkap.</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 72 -->
+            <section>
+                <h3 style="font-size:0.95em;">Hot Potato Routing</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Router 2d belajar (via iBGP) bahwa bisa route ke X via 2a atau 2c.</p>
+                    <div
+                        style="background:#fff3e0;border-radius:8px;padding:14px;margin-top:10px;border-left:4px solid #e65100;">
+                        <strong>Hot Potato Routing:</strong><br>Pilih gateway lokal yang memiliki biaya <em>intra-domain
+                            terkecil</em> – jangan khawatir tentang biaya inter-domain!<br><br>Contoh: 2d pilih 2a
+                        (meski lebih banyak AS hops menuju X), karena biaya OSPF dari 2d ke 2a lebih rendah (112 vs 263)
+                        dari 2d ke 2c.<br><br><em>"Get the packet out of your network as fast as possible!"</em>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 73 -->
+            <section>
+                <h3 style="font-size:0.95em;">BGP: Achieving Policy via Advertisements</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p><strong>Skenario:</strong> A advertise path Aw ke B dan C. B memilih <strong>tidak</strong>
+                        mengadvertise BAw ke C.</p>
+                    <div style="background:#ffebee;border-radius:8px;padding:10px;margin-top:8px;">
+                        <strong>Alasan:</strong> B tidak mendapat "revenue" dari routing CBAw, karena C, A, w bukan
+                        customer B.<br><strong>Akibatnya:</strong> C tidak tahu tentang path CBAw. C akan route CAw
+                        (tidak lewat B) untuk ke w.<br><em>ISP hanya mau route traffic dari/ke network customer-nya
+                            sendiri (bukan transit traffic antar ISP lain).</em>
+                    </div>
+                    <div style="background:#fff3e0;border-radius:8px;padding:10px;margin-top:8px;">
+                        <strong>Dual-homed:</strong> x terhubung ke dua jaringan (B dan C). x tidak mau jadi transit
+                        antara B dan C, sehingga x tidak advertise ke B rute menuju C.
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 75 -->
+            <section>
+                <h3 style="font-size:0.95em;">BGP Route Selection</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <p>Router bisa mempelajari lebih dari satu rute ke tujuan AS yang sama. Urutan prioritas pemilihan
+                        rute:</p>
+                    <ol style="font-size:0.75em;text-align:left;">
+                        <li><strong>Local preference value attribute</strong> – keputusan policy (dikonfigurasi admin).
+                        </li>
+                        <li><strong>Shortest AS-PATH</strong> – jumlah AS yang paling sedikit.</li>
+                        <li><strong>Closest NEXT-HOP router</strong> – hot potato routing (biaya intra-domain terkecil).
+                        </li>
+                        <li>Additional criteria lainnya (misal: MED, IGP metric, router-id).</li>
+                    </ol>
+
+                </div>
+            </section>
+
+            <!-- Slide 76 -->
+            <section>
+                <h3 style="font-size:0.95em;">Mengapa Intra-AS dan Inter-AS Routing Berbeda?</h3>
+                <div style="font-size:0.7em;text-align:left;">
+                    <table style="width:100%;border-collapse:collapse;font-size:0.75em;margin-top:8px;">
+                        <tr style="background:#1565c0;color:#fff;">
+                            <th style="padding:8px;border:1px solid #ccc;">Aspek</th>
+                            <th style="padding:8px;border:1px solid #ccc;">Intra-AS</th>
+                            <th style="padding:8px;border:1px solid #ccc;">Inter-AS</th>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px;border:1px solid #ccc;font-weight:bold;">Policy</td>
+                            <td style="padding:8px;border:1px solid #ccc;">Satu admin → policy kurang signifikan</td>
+                            <td style="padding:8px;border:1px solid #ccc;">Admin ingin kontrol penuh bagaimana traffic
+                                di-route, siapa yang boleh lewat jaringannya</td>
+                        </tr>
+                        <tr style="background:#f5f5f5;">
+                            <td style="padding:8px;border:1px solid #ccc;font-weight:bold;">Scale</td>
+                            <td style="padding:8px;border:1px solid #ccc;">Dalam satu AS, tabel routing lebih kecil</td>
+                            <td style="padding:8px;border:1px solid #ccc;">Hierarchical routing hemat ukuran tabel dan
+                                update traffic</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px;border:1px solid #ccc;font-weight:bold;">Performance</td>
+                            <td style="padding:8px;border:1px solid #ccc;">Bisa fokus ke performance (bandwidth, delay)
+                            </td>
+                            <td style="padding:8px;border:1px solid #ccc;">Policy mendominasi performance</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </section>
+
+
+            <!-- Latihan: BGP -->
+            <section>
+                <h3 style="font-size:0.9em;">💡 Latihan: BGP & Routing Policy</h3>
+                <div style="font-size:0.68em;text-align:left;">
+                    <div style="background:#fff9c4;border-left:4px solid #f9a825;border-radius:8px;padding:12px;">
+                        <strong>Soal (Analisis Kasus):</strong><br>
+                        ISP A (provider) terhubung ke ISP B (provider lain) dan ke Customer X. Customer X terhubung ke
+                        ISP A dan ISP B (dual-homed).<br><br>
+                        <strong>(a)</strong> Mengapa ISP A tidak akan meng-advertise rute dari ISP B ke Customer X dan
+                        sebaliknya?<br>
+                        <strong>(b)</strong> Apa yang dimaksud "transit traffic" dan mengapa ISP menghindarinya?<br>
+                        <strong>(c)</strong> Jika router ISP A harus memilih antara path <code>AS3,X</code> (3 hop) dan
+                        <code>AS2,AS3,X</code> (4 hop), mana yang diprioritaskan? Berikan alasan!
+                    </div>
+                    <div style="background:#e3f2fd;border-radius:8px;padding:10px;margin-top:10px;font-size:0.9em;">
+                        💡 <em>Pikirkan dari sisi bisnis ISP dan atribut BGP yang relevan (local preference,
+                            AS-PATH).</em><br>
+                        Tekan → untuk melihat jawaban.
+                    </div>
+                </div>
+            </section>
+            <!-- Jawaban Latihan BGP -->
+            <section>
+                <h3 style="font-size:0.9em;">💡 Jawaban: BGP & Routing Policy</h3>
+                <div style="font-size:0.65em;text-align:left;">
+                    <div style="background:#e8f5e9;border-radius:8px;padding:12px;">
+                        <strong style="color:#2e7d32;">(a)</strong> Jika A advertise rute ISP B ke X, trafik dari X bisa
+                        transit ke B via jaringan A <em>tanpa membayar A</em> → merugikan A secara bisnis. Policy BGP:
+                        hanya advertise rute pelanggan sendiri ke provider lain.<br><br>
+                        <strong style="color:#2e7d32;">(b)</strong> <strong>Transit traffic</strong> = trafik yang
+                        <em>masuk</em> dari AS lain dan <em>keluar</em> ke AS lain (bukan dari/ke customer sendiri). ISP
+                        menghindarinya karena tidak ada pendapatan jika provider lain tidak membayar layanan
+                        transit.<br><br>
+                        <strong style="color:#2e7d32;">(c)</strong> Diprioritaskan <strong>AS3,X</strong> karena BGP
+                        Route Selection menggunakan:<br>
+                        1. Local preference (sama untuk kedua rute)<br>
+                        2. <strong>Shortest AS-PATH</strong> → AS3,X hanya 2 AS (AS3, X) vs AS2,AS3,X ada 3 AS → AS3,X
+                        lebih pendek → dipilih!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tugas Take-Home: BGP Traffic Engineering -->
+            <section data-background-color="#e3f2fd">
+                <h3 style="font-size:0.95em;color:#1565c0;">🏠 Tugas Studi Kasus (Take-Home): BGP Traffic Engineering
+                </h3>
+                <div style="font-size:0.65em;text-align:left;">
+                    <p>Sebagai Network Engineer utama di kampus kita, Anda dihadapkan pada skenario nyata
+                        <strong>Multi-Homing</strong>.
+                    </p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
+                        <div
+                            style="background:#fff;padding:12px;border-radius:8px;border-top:4px solid #1976d2;box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+                            <strong>Topologi Infrastruktur:</strong><br>
+                            Jaringan Kampus (AS 65000) berlangganan ke dua ISP sekaligus:<br>
+                            1. <strong>ISP A (AS 100):</strong> Link murah, bandwidth besar, tapi latensi lambat (Best
+                            Effort).<br>
+                            2. <strong>ISP B (AS 200):</strong> Link mahal, bandwidth kecil, tapi latensi sangat rendah
+                            (Premium).
+                        </div>
+                        <div
+                            style="background:#fff;padding:12px;border-radius:8px;border-top:4px solid #d32f2f;box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+                            <strong>Tantangan (Challenge):</strong><br>
+                            Konfigurasikan BGP Routing Policy agar:<br>
+                            1. <strong>Trafik Keluar (Outbound)</strong> dari server Riset/Dosen diprioritaskan
+                            menggunakan ISP B (Premium).<br>
+                            2. <strong>Trafik Masuk (Inbound)</strong> dari Internet publik ke web mahasiswa diarahkan
+                            via ISP A (Murah).
+                        </div>
+                    </div>
+                    <div style="background:#fff9c4;padding:12px;border-radius:8px;margin-top:12px;">
+                        <strong>Tugas Kelompok (Pilih salah satu metode):</strong><br>
+                        Lakukan riset pustaka dan analisis bagaimana atribut BGP berikut digunakan untuk menyelesaikan
+                        skenario di atas:<br>
+                        - Manipulasi <strong>Local Preference</strong> (untuk Inbound atau Outbound?)<br>
+                        - Manipulasi <strong>AS-Path Prepend</strong> (Bagaimana cara kerjanya dan untuk arah yang
+                        mana?)<br>
+                        <em>Dikumpulkan minggu depan dalam format PDF ringkas (max 2 halaman)!</em>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ROADMAP: Distance Vector: Contoh Tambahan -->
+            <section data-background-image="images/week9/pptx/image2.jpg" data-background-size="contain"
+                data-background-color="#1a1a2e">
+                <div
+                    style="background:rgba(21,101,192,0.88);display:inline-block;padding:22px 44px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+                    <h2 style="color:#fff;margin:0;font-size:1.1em;">Distance Vector: Contoh Tambahan</h2>
+                </div>
+            </section>
+
+            <!-- Slide 120-121: DV Another Example -->
+            <section>
+                <h3 style="font-size:0.9em;">Distance Vector: Contoh Lain – x,y,z</h3>
+                <div style="font-size:0.62em;text-align:left;">
+                    <p>Jaringan: x–y (2), x–z (7), y–z (1).</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div>
+                            <svg viewBox="0 0 200 160" width="100%"
+                                style="border:1px solid #ccc;border-radius:8px;background:#f9f9f9;">
+                                <line x1="40" y1="80" x2="100" y2="30" stroke="#555" stroke-width="2" />
+                                <text x="62" y="48" font-size="12" fill="#c62828">2</text>
+                                <line x1="40" y1="80" x2="160" y2="80" stroke="#555" stroke-width="2" />
+                                <text x="97" y="98" font-size="12" fill="#c62828">7</text>
+                                <line x1="100" y1="30" x2="160" y2="80" stroke="#555" stroke-width="2" />
+                                <text x="138" y="48" font-size="12" fill="#c62828">1</text>
+                                <circle cx="40" cy="80" r="16" fill="#1565c0" /><text x="40" y="85" text-anchor="middle"
+                                    font-size="12" fill="white" font-weight="bold">x</text>
+                                <circle cx="100" cy="30" r="16" fill="#2e7d32" /><text x="100" y="35"
+                                    text-anchor="middle" font-size="12" fill="white" font-weight="bold">y</text>
+                                <circle cx="160" cy="80" r="16" fill="#c62828" /><text x="160" y="85"
+                                    text-anchor="middle" font-size="12" fill="white" font-weight="bold">z</text>
+                            </svg>
+                        </div>
+                        <div>
+                            <p><strong>Kondisi awal (t=0):</strong></p>
+                            <table style="border-collapse:collapse;font-size:0.9em;width:100%;">
+                                <tr style="background:#e3f2fd;">
+                                    <td style="padding:3px;border:1px solid #ccc;">Dx(x)=0</td>
+                                    <td style="padding:3px;border:1px solid #ccc;">Dx(y)=2</td>
+                                    <td style="padding:3px;border:1px solid #ccc;">Dx(z)=7</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:3px;border:1px solid #ccc;">Dy(x)=2</td>
+                                    <td style="padding:3px;border:1px solid #ccc;">Dy(y)=0</td>
+                                    <td style="padding:3px;border:1px solid #ccc;">Dy(z)=1</td>
+                                </tr>
+                                <tr style="background:#e3f2fd;">
+                                    <td style="padding:3px;border:1px solid #ccc;">Dz(x)=∞</td>
+                                    <td style="padding:3px;border:1px solid #ccc;">Dz(y)=1</td>
+                                    <td style="padding:3px;border:1px solid #ccc;">Dz(z)=0</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div
+                        style="background:#1a1a2e;color:#e0e0e0;border-radius:8px;padding:12px;margin-top:10px;font-family:monospace;">
+                        <strong style="color:#81d4fa;">x menghitung setelah terima DV dari y dan z:</strong><br>
+                        Dx(y) = min{ c(x,y)+Dy(y), c(x,z)+Dz(y) }<br>
+                        = min{ 2+0, 7+1 } = min{2, 8} = <strong style="color:#a5d6a7;">2</strong> (via y)<br><br>
+                        Dx(z) = min{ c(x,y)+Dy(z), c(x,z)+Dz(z) }<br>
+                        = min{ 2+1, 7+0 } = min{3, 7} = <strong style="color:#a5d6a7;">3</strong> (via y, bukan
+                        langsung!)
+                    </div>
+                    <div class="fragment" style="background:#e8f5e9;border-radius:8px;padding:10px;margin-top:8px;">
+                        <strong>Setelah konvergen:</strong> Semua node punya DV terbaru:<br>
+                        Dx: (0, 2, 3), Dy: (2, 0, 1), Dz: (3, 1, 0)<br>
+                        → x mengirim ke z <strong>via y</strong> (cost 3), bukan langsung (cost 7)!
+                    </div>
+                </div>
+            </section>
+
+            <!-- 13. Kesimpulan -->
+
+            <!-- Tugas Akhir -->
+            <section>
+                <h3>Tugas Mandiri: Simulasi Cisco Packet Tracer</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Buatlah simulasi routing pada Cisco Packet Tracer dengan ketentuan komponen berikut:</p>
+                    <ul style="color:#d32f2f; font-weight:bold;">
+                        <li>Minimal 2 buah Router</li>
+                        <li>Minimal 2 buah Switch</li>
+                        <li>Minimal 1 buah Access Point (Wireless)</li>
+                        <li>1 buah Server (Berfungsi sebagai DHCP Server)</li>
+                        <li>Client: Laptop (Wireless), PC (Kabel), dan Hub penghubung antar client.</li>
+                    </ul>
+                    <div
+                        style="background: #f1f8e9; border-left: 4px solid #2e7d32; padding: 10px; margin-top: 15px; color:#333;">
+                        <strong>Instruksi Implementasi:</strong><br>
+                        1. Lakukan subnetting untuk memisahkan jaringan kabel dan nirkabel.<br>
+                        2. Konfigurasi DHCP Server agar PC dan Laptop otomatis mendapat IP Address.<br>
+                        3. Konfigurasikan <strong>OSPF</strong> atau <strong>Routing Statis</strong> pada kedua Router
+                        agar seluruh perangkat dari ujung ke ujung dapat melakukan PING secara sukses.
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Kesimpulan</h3>
+                <div style="font-size: 0.4em; margin-top: 20px;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #1565c0; color: white;">
+                                <th style="padding: 10px; border: 1px solid #ddd;">Karakteristik</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">RIP</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">OSPF</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">BGP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Tipe</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">IGP (Distance Vector)</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">IGP (Link State)</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">EGP (Path Vector)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Metrik</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Hop Count</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Cost (Bandwidth)</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Atribut Path, Kebijakan</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Skala Jaringan
+                                </td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Kecil (Maks 15 Hop)</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Menengah - Besar (Enterprise)</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Global (Internet)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div><!-- /slides -->
+    </div><!-- /reveal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            plugins: [RevealNotes]
+        });
+    </script>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle"
+        style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeLink = document.getElementById('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            if (!toggleBtn || !themeLink) return;
+
+            const currentTheme = localStorage.getItem('reveal-theme') || 'simple';
+            if (currentTheme === 'night') {
+                themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                toggleBtn.style.background = '#f1f1f1';
+                toggleBtn.style.color = '#333';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                if (themeLink.href.includes('simple.css')) {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('reveal-theme', 'night');
+                    themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                    toggleBtn.style.background = '#f1f1f1';
+                    toggleBtn.style.color = '#333';
+                } else {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css';
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('reveal-theme', 'simple');
+                    themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+                    toggleBtn.style.background = '#333';
+                    toggleBtn.style.color = '#fff';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

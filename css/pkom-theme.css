@@ -1,0 +1,196 @@
+/* Custom Theme for Jaringan Komputer Presentations */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --accent-color: #ffc107;
+  --text-main: #333;
+  --text-muted: #666;
+  --bg-light: #f8f9fa;
+  --border-color: #dee2e6;
+  --font-family-sans: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.reveal {
+  font-family: var(--font-family-sans);
+  color: var(--text-main);
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  font-family: var(--font-family-sans);
+  font-weight: 700;
+  text-transform: none;
+  color: var(--text-main);
+}
+
+/* Footer Branding */
+.footer-branding {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  z-index: 10;
+  font-size: 0.5em;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.9);
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-logos img {
+  height: 30px;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+
+/* Titles */
+.title-box {
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.title-box h1 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 2.2em;
+}
+
+.title-box .subtitle {
+  color: #34495e;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+/* Flex Layouts */
+.flex-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.flex-col {
+  flex: 1;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  margin-bottom: 15px;
+}
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-small { font-size: 0.7em; line-height: 1.5; }
+.text-smaller { font-size: 0.6em; line-height: 1.5; }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.divider-vertical {
+  width: 2px;
+  background-color: var(--border-color);
+  margin: 0 10px;
+}
+
+/* Custom List */
+.reveal ul {
+  list-style-type: disc;
+  padding-left: 1.2em;
+}
+
+.reveal li {
+  margin-bottom: 0.5em;
+}
+
+/* Highlight Text */
+.highlight-blue { color: var(--primary-color); font-weight: bold; }
+.highlight-orange { color: #fd7e14; font-weight: bold; }
+.highlight-green { color: #28a745; font-weight: bold; }
+.highlight-red { color: #dc3545; font-weight: bold; }
+
+/* Code Blocks */
+.reveal pre {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 6px;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 20;
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+.theme-toggle:hover { color: var(--primary-color); }
+
+/* Dark Mode Data Attribute */
+[data-theme="dark"] .reveal {
+  color: #eee;
+  background: #222;
+}
+[data-theme="dark"] .reveal h1, [data-theme="dark"] .reveal h2, [data-theme="dark"] .reveal h3, [data-theme="dark"] .reveal h4 {
+  color: #fff;
+}
+[data-theme="dark"] .card {
+  background: #333;
+  border-color: #444;
+  color: #eee;
+}
+[data-theme="dark"] .title-box {
+  background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+}
+[data-theme="dark"] .title-box h1, [data-theme="dark"] .title-box .subtitle {
+  color: #fff;
+}
+[data-theme="dark"] .footer-branding {
+  background: rgba(34, 34, 34, 0.9);
+  border-top-color: #444;
+  color: #ccc;
+}
+[data-theme="dark"] .sec-body,
+[data-theme="dark"] .media-card {
+  background: #2a2a2a !important;
+  color: #eee !important;
+  border-color: #444 !important;
+}
+[data-theme="dark"] .info-box {
+  background: #1a365d !important;
+  color: #e2e8f0 !important;
+  border-color: #2a4365 !important;
+}
+[data-theme="dark"] .info-box-warn {
+  background: #4a3000 !important;
+  color: #fbd38d !important;
+  border-color: #744210 !important;
+}
+[data-theme="dark"] .info-box-green {
+  background: #0f3a1f !important;
+  color: #c6f6d5 !important;
+  border-color: #22543d !important;
+}
+[data-theme="dark"] .reveal table th {
+  background: #1a365d !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .reveal table tr:nth-child(even) td {
+  background: #222 !important;
+}
+[data-theme="dark"] .reveal table td {
+  border-color: #555 !important;
+}

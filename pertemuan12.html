@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jaringan Komputer - Pertemuan 12: Application Layer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="css/pkom-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        .reveal .slides section {
+            height: 100%;
+            overflow-y: auto !important;
+            padding-bottom: 50px;
+        }
+
+        .slide-img-sm {
+            width: 100%;
+            height: auto;
+            max-height: 35vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .layout-text-img {
+            display: grid;
+            grid-template-columns: 50% 1fr;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .img-caption {
+            font-size: .52em;
+            color: #777;
+            text-align: center;
+            margin-top: .1em;
+            font-style: italic;
+        }
+
+        .sec-bar {
+            border-radius: 8px 8px 0 0;
+            padding: 7px 16px;
+            font-size: .68em;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .sec-body {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .sec-bar-blue {
+            background: #1565c0;
+            color: #fff;
+        }
+
+        .sec-bar-orange {
+            background: #e65100;
+            color: #fff;
+        }
+
+        .sec-bar-green {
+            background: #1b5e20;
+            color: #fff;
+        }
+
+        .sec-bar-purple {
+            background: #4a148c;
+            color: #fff;
+        }
+
+        .sec-bar-red {
+            background: #b71c1c;
+            color: #fff;
+        }
+
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-warn {
+            border-left: 4px solid #e65100;
+            background: #fff3e0;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-green {
+            border-left: 4px solid #1b5e20;
+            background: #e8f5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .reveal table {
+            font-size: .5em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .reveal table th,
+        .reveal table td {
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+        }
+
+        .reveal table th {
+            background: #1565c0;
+            color: white;
+        }
+
+        .reveal table tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            font-family: monospace;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: .6em;
+        }
+
+        /* Animation specific */
+        .anim-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .anim-node {
+            position: absolute;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .anim-icon {
+            font-size: 3em;
+            color: #333;
+            line-height: 1;
+        }
+
+        .anim-label {
+            font-size: .5em;
+            font-weight: 700;
+            font-family: monospace;
+            margin-top: 5px;
+        }
+
+        .packet {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #e65100;
+            border-radius: 50%;
+            z-index: 10;
+            opacity: 0;
+        }
+
+        @keyframes pktSend {
+            0% {
+                top: 50%;
+                left: 10%;
+                opacity: 1;
+            }
+
+            100% {
+                top: 50%;
+                left: 90%;
+                opacity: 1;
+            }
+        }
+
+        /* SVG Graph Styling */
+        .svg-graph {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .node circle {
+            fill: #1565c0;
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+        .node text {
+            fill: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: sans-serif;
+            text-anchor: middle;
+            alignment-baseline: central;
+        }
+
+        .link line {
+            stroke: #999;
+            stroke-width: 3px;
+        }
+
+        .link text {
+            fill: #d32f2f;
+            font-size: 14px;
+            font-weight: bold;
+            background: white;
+            font-family: sans-serif;
+        }
+
+        .tugas-box {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            border-radius: 14px;
+            padding: 22px 28px;
+            color: #fff;
+        }
+
+        .tugas-soal {
+            background: rgba(255, 255, 255, .13);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 8px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .48em;
+            line-height: 1.65;
+            margin: 0;
+            color: #e8f5e9;
+        }
+
+        .tugas-soal .num {
+            font-size: .9em;
+            font-weight: 700;
+            color: #ffeb3b;
+        }
+
+        .tugas-info {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: .58em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="footer-branding">
+            <div class="footer-logos"></div>
+            <div class="footer-copyright">&copy; 2026 IF25-21008 Jaringan Komputer - ITERA</div>
+        </div>
+
+        <div class="slides">
+
+
+            
+            <!-- Title Slide -->
+            <section>
+                <div class="title-box">
+                    <h1>Application Layer</h1>
+                    <h3 class="subtitle">Pertemuan 12</h3>
+                </div>
+                <p>Pendalaman Ekstensif: Web & HTTP, E-mail (SMTP/IMAP), dan DNS</p>
+                <p>Referensi: <em>Bahan Ajar Week12.pptx & RPS Jaringan Komputer</em></p>
+                <p class="text-small"><em>Dosen Pengampu:</em></p>
+                <div style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                    <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
+                    <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
+                </div>
+            </section>
+
+            <!-- PART 1: OVERVIEW -->
+            <section>
+                <h3>Goals & Overview</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Sasaran Pembelajaran Pertemuan 12:</p>
+                    <ul>
+                        <li>Memahami aspek konseptual dan implementasi dari protokol-protokol di Application Layer.</li>
+                        <li>Memahami model transport-layer service.</li>
+                        <li>Membedah paradigma Client-Server vs Peer-to-Peer.</li>
+                        <li>Mempelajari secara mendalam protokol-protokol populer: <strong>HTTP, SMTP, IMAP, dan DNS</strong>.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image1.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Network Apps Populer</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Aplikasi jaringan adalah penggerak utama Internet modern. Beberapa contoh terpopuler:</p>
+                    <ul>
+                        <li>Web Browsing & E-mail</li>
+                        <li>Social Networking (Meta, X, TikTok)</li>
+                        <li>Multi-user Network Games</li>
+                        <li>Streaming Video Berbayar (YouTube, Netflix)</li>
+                        <li>P2P File Sharing (BitTorrent)</li>
+                        <li>Voice over IP & Video Conferencing (Skype, Zoom)</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image2.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Creating a Network App</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Sebagai pengembang, tugas kita adalah menulis program yang berjalan pada <strong>end systems (host)</strong> berbeda dan saling berkomunikasi melalui jaringan.</p>
+                    <ul>
+                        <li>Kita <strong>tidak perlu</strong> memprogram perangkat network-core seperti Router atau Switch layer 2.</li>
+                        <li>Aplikasi di-deploy secara ekstrem di *edge* jaringan (ujung), memungkinkan proses inovasi aplikasi berjalan sangat cepat tanpa mengubah infrastruktur fisik internet.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image3.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Paradigma Aplikasi: Client-Server</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>Server:</strong> Merupakan host yang selalu menyala (always-on). Umumnya memiliki IP Address statis permanen, dan diletakkan di dalam Data Center raksasa demi kemudahan skalabilitas.</li>
+                        <li><strong>Client:</strong> Memulai kontak ke server. Kadang tidak selalu menyala, dan IP Address-nya dapat berubah (Dynamic IP).</li>
+                        <li><strong>Batasan:</strong> Client TIDAK BISA berkomunikasi secara langsung dengan client lainnya tanpa perantara server.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image4.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Paradigma Aplikasi: Peer-to-Peer (P2P)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>Tidak ada server permanen utama:</strong> End system berkomunikasi langsung secara mandiri.</li>
+                        <li><strong>Self-scalability:</strong> Setiap kali *peer* baru bergabung, ia tak hanya menambah beban (demand), tetapi otomatis menambah *service capacity* bagi jaringan (membantu mengirim file ke peer lain).</li>
+                        <li><strong>Kendala:</strong> IP yang dinamis dan terhubung putus-nyambung membuat sistem P2P sulit untuk dikelola secara terpusat.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image5.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Proses yang Berkomunikasi (Sockets)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Sebuah <strong>Proses</strong> adalah program yang sedang berjalan di dalam host.</p>
+                    <p>Agar dua proses pada host yang berbeda dapat bertukar pesan, mereka memanfaatkan <strong>Socket</strong>.</p>
+                    <ul>
+                        <li>Socket dapat dianalogikan sebagai sebuah <em>Pintu</em>.</li>
+                        <li>Proses pengirim mendorong pesannya melewati pintu. Begitu pesan keluar dari pintu, proses pengirim percaya 100% pada infrastruktur di balik pintu (Internet/OS) untuk mengirimkannya ke pintu penerima.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image6.jpg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Kebutuhan Transport Service Aplikasi</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Aplikasi yang berbeda memiliki kebutuhan kualitas yang berbeda (QoS):</p>
+                    <ul>
+                        <li><strong>Data Integrity:</strong> File transfer dan e-mail butuh jaminan data 100% utuh tanpa kerugian satu bit pun (Reliable). Aplikasi audio kadang menoleransi kehilangan sebagian paket (Loss-tolerant).</li>
+                        <li><strong>Timing:</strong> Telepon Internet (VoIP) dan game kompetitif butuh penundaan (delay) yang sangat rendah untuk terasa *real-time*.</li>
+                        <li><strong>Throughput:</strong> Video streaming butuh bandwidth *minimum* tertentu untuk berjalan mulus.</li>
+                        <li><strong>Security:</strong> Kebutuhan enkripsi dari ujung ke ujung.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image7.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Internet Transport Protocols: TCP vs UDP</h3>
+                <div class="layout-col text-left text-smaller">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.8em; margin-top:10px;">
+                        <thead>
+                            <tr style="background:#1565c0; color:#fff;">
+                                <th style="border:1px solid #ddd; padding:5px;">TCP Service</th>
+                                <th style="border:1px solid #ddd; padding:5px;">UDP Service</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="border:1px solid #ddd; padding:5px;">Connection-oriented (Setup required)</td><td style="border:1px solid #ddd; padding:5px;">Connectionless (Tidak ada handshaking)</td></tr>
+                            <tr><td style="border:1px solid #ddd; padding:5px;">Reliable Transport</td><td style="border:1px solid #ddd; padding:5px;">Unreliable data transfer (Best effort)</td></tr>
+                            <tr><td style="border:1px solid #ddd; padding:5px;">Flow & Congestion Control</td><td style="border:1px solid #ddd; padding:5px;">Tidak peduli seberapa macet jaringan</td></tr>
+                            <tr><td style="border:1px solid #ddd; padding:5px;">Cocok: E-mail (SMTP), Web (HTTP), File (FTP)</td><td style="border:1px solid #ddd; padding:5px;">Cocok: Telephony (SIP), Game, Streaming Real-time</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image8.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <!-- PART 2: WEB & HTTP -->
+            <section>
+                <h3>Web dan HTTP: Tinjauan Ulang</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Sebuah halaman web biasanya terdiri dari satu <strong>Base HTML File</strong> dan beberapa <strong>Referenced Objects</strong> (gambar JPEG, video, CSS).</p>
+                    <ul>
+                        <li>Setiap objek dialamatkan oleh sebuah <strong>URL</strong> (Uniform Resource Locator).</li>
+                        <li>Contoh: <code>www.someschool.edu/someDept/pic.gif</code></li>
+                        <li><strong>HTTP (Hypertext Transfer Protocol)</strong> adalah protokol aplikasi utama web. Menerapkan model arsitektur Client (Browser) dan Server (Apache/Nginx).</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image9.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>HTTP Overview (Stateless)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>HTTP berjalan di atas <strong>TCP (Port 80/443)</strong>. Urutannya:</p>
+                    <ol>
+                        <li>Client (Browser) membangun koneksi TCP ke Server.</li>
+                        <li>Server menerima (Accept).</li>
+                        <li>Client dan Server saling bertukar HTTP message.</li>
+                        <li>Koneksi TCP ditutup.</li>
+                    </ol>
+                    <div style="background:#ffebee; padding:10px; border-left:4px solid #c62828; margin-top:10px;">
+                        <p style="margin:0;"><strong>Sifat Krusial HTTP adalah STATELESS!</strong></p>
+                        <p style="margin:0;">Server tidak menyimpan memori apa pun terkait interaksi client sebelumnya. Setiap request dianggap dari orang baru.</p>
+                    </div>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image10.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>HTTP Connections: 2 Tipe Historis</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>1. Non-persistent HTTP:</strong></p>
+                    <ul>
+                        <li>Hanya MAKSIMAL SATU objek yang boleh dikirim di atas satu koneksi TCP terbuka.</li>
+                        <li>Setelah 1 file JPEG terkirim, koneksi TCP ditutup. Jika butuh 10 JPEG, browser harus mengulang proses TCP 3-way handshake sebanyak 10 kali! Sangat tidak efisien (2 RTT per objek).</li>
+                    </ul>
+                    <p><strong>2. Persistent HTTP (HTTP 1.1):</strong></p>
+                    <ul>
+                        <li>Satu buah TCP koneksi dibuka.</li>
+                        <li>Berbagai macam objek (HTML, CSS, 10 JPEG) dikirimkan secara paralel/beruntun tanpa perlu memutus koneksi di tengah jalan (pipeline). Menghemat banyak waktu!</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image11.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Ilustrasi Waktu Non-Persistent (RTT)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>RTT (Round Trip Time):</strong> Waktu bagi sebuah paket kecil untuk melakukan perjalanan pulang-pergi dari client ke server.</p>
+                    <ul>
+                        <li><strong>1st RTT:</strong> Membuka TCP.</li>
+                        <li><strong>2nd RTT:</strong> Mengirim HTTP Request, dan menunggu bait pertama dari HTTP Response.</li>
+                        <li><strong>File Transmission Time:</strong> Waktu mentransfer sisa data file dari server.</li>
+                    </ul>
+                    <p><em>Total = 2 RTT + File Transmission Time.</em> (Diulang-ulang untuk setiap objek!).</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image12.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Anatomi Pesan HTTP Request</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Pesan HTTP berbasis ASCII (bisa dibaca manusia). Strukturnya terdiri dari:</p>
+                    <ol>
+                        <li><strong>Request Line:</strong> Mengandung <code>Method</code> (GET/POST), <code>URL</code>, dan <code>Version</code>.</li>
+                        <li><strong>Header Lines:</strong> Mengandung Metadata seperti <code>Host</code>, <code>User-Agent</code> (jenis browser), dan <code>Accept-Language</code>. Diakhiri oleh spasi baris kosong ganda (<code>
+
+</code>).</li>
+                        <li><strong>Entity Body:</strong> Payload khusus untuk operasi <code>POST</code> atau <code>PUT</code>.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image13.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Anatomi Pesan HTTP Response</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Sama seperti request, namun memiliki <strong>Status Line</strong>:</p>
+                    <ul>
+                        <li>Contoh Status: <code>HTTP/1.1 200 OK</code>.</li>
+                        <li><strong>200 OK:</strong> Sukses, file ditemukan.</li>
+                        <li><strong>301 Moved Permanently:</strong> Halaman sudah ganti alamat (Redirection).</li>
+                        <li><strong>400 Bad Request:</strong> Sintaks klien ngawur.</li>
+                        <li><strong>404 Not Found:</strong> Data/halaman tidak ada di server.</li>
+                        <li><strong>505 Version Not Supported:</strong> Versi HTTP kadaluarsa/tak cocok.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image14.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <!-- PART 3: COOKIES & CACHES -->
+            <section>
+                <h3>Cookies: Membawa "State" pada Protokol Stateless</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Karena HTTP itu "pelupa" (Stateless), bagaimana cara Tokopedia mengingat keranjang belanja kita walau kita pindah halaman?</p>
+                    <p><strong>Cookies</strong> adalah id unik yang disimpan di browser kita.</p>
+                    <ul>
+                        <li>Saat pertama kali berkunjung, Server membalas dengan Header: <code>Set-cookie: 1634</code></li>
+                        <li>Browser menyimpan "1634" tersebut.</li>
+                        <li>Pada request berikutnya, Browser otomatis melampirkan Header: <code>Cookie: 1634</code></li>
+                        <li>Server membaca nomor tersebut, lalu mencari di database-nya untuk memulihkan sesi profil kita.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image15.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Bahaya Cookies & Privasi Tracking</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>First-party cookie:</strong> Cookie dari website asli yang ingin kita kunjungi (contoh: NY Times).</li>
+                        <li><strong>Third-party cookie (Tracking cookies):</strong> Cookie dari pihak ketiga penyedia iklan (contoh: AdX) yang diam-diam terselip di website NY Times.</li>
+                    </ul>
+                    <p>Ketika Anda mengunjungi website "Socks.com" yang juga memakai AdX, AdX akan melihat nomor cookie yang sama dan menyadari, <em>"Ah, orang yang kemarin baca berita sport di NY Times sekarang mencari kaus kaki!"</em>. Hal ini mengganggu privasi. (Mulai diblokir oleh Safari/Firefox modern).</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image16.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Web Caches (Proxy Server)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Di lingkungan institusi kampus/perusahaan besar, akan sangat boros jika ribuan mahasiswa mem-fetch file gambar yang persis sama ke Server di Amerika.</p>
+                    <p><strong>Solusi: Local Web Cache.</strong></p>
+                    <ul>
+                        <li>Semua browser mahasiswa diarahkan request-nya ke server Proxy (Cache) di dalam kampus.</li>
+                        <li>Jika file ada di Cache kampus, langsung dikirim ke mahasiswa dengan delay milidetik (Local LAN).</li>
+                        <li>Jika belum ada, Proxy akan mengunduh dulu dari Server Amerika, menyimpannya di harddisk kampus, baru memberikannya ke mahasiswa.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image17.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Analisis Performa Web Cache</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Hitungan matematis menunjukkan Caching JAUH lebih murah daripada harus menyewa ISP dengan bandwidth yang lebih tinggi (upgrade Access Link).</p>
+                    <p><strong>Bagaimana agar data Cache tidak kadaluarsa (basi)?</strong></p>
+                    <ul>
+                        <li><strong>Conditional GET:</strong> Proxy akan bertanya ke server Amerika, "Kirimkan update terbaru, <em>JIKA DAN HANYA JIKA</em> file ini sudah dimodifikasi sejak <code>&lt;date&gt;</code>." (Menggunakan header <code>If-modified-since</code>).</li>
+                        <li>Jika tidak ada modifikasi, server Amerika hanya membalas pesan kosong <code>304 Not Modified</code> yang menghemat bandwidth besar-besaran.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image18.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Evolusi HTTP: HTTP/2 & HTTP/3</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Meskipun HTTP 1.1 Persistent sudah baik, ia memiliki masalah <strong>Head-of-Line (HOL) Blocking</strong>.</p>
+                    <ul>
+                        <li>Jika antrean request pertama (misal Video 100MB) memakan waktu lama/hilang di jalan, maka antrean request objek kecil di belakangnya (CSS 10KB) ikut MACET.</li>
+                        <li><strong>HTTP/2:</strong> Memungkinkan pipelining pararel sejati, memecah file jadi frame kecil yang menyalip satu sama lain.</li>
+                        <li><strong>HTTP/3:</strong> Mengganti pondasi secara ekstrim! Tidak lagi menggunakan TCP, melainkan berjalan di atas <strong>UDP (dengan protokol baru bernama QUIC)</strong>. Lebih bebas hambat tanpa harus menunggu re-transmisi paket error!</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image19.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <!-- PART 4: E-MAIL -->
+            <section>
+                <h3>E-mail: Struktur Fundamental</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Sistem Surat Elektronik (E-mail) memiliki 3 pilar penyangga:</p>
+                    <ol>
+                        <li><strong>User Agent:</strong> Aplikasi *Mail reader* di HP/Laptop kita (Contoh: Outlook, Apple Mail). Digunakan untuk membaca dan merangkai email.</li>
+                        <li><strong>Mail Servers:</strong> Infrastruktur 24-jam penyedia layanan (Contoh: Server Gmail, Server Yahoo). Di sinilah tempat Kotak Surat (Mailbox) kita berlabuh.</li>
+                        <li><strong>SMTP (Simple Mail Transfer Protocol):</strong> Bahasa utama yang digunakan oleh Mail Server pengirim untuk berbicara dengan Mail Server penerima.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image20.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Mail Servers & Message Queue</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Di dalam sebuah Mail Server, terdapat dua struktur ruang penyimpanan:</p>
+                    <ul>
+                        <li><strong>Mailbox:</strong> Gudang untuk menyimpan pesan-pesan yang <em>DITERIMA / MASUK</em> ke akun user.</li>
+                        <li><strong>Message Queue (Antrean Pesan):</strong> Ruang tunggu bagi pesan-pesan yang *hendak dikirim keluar* oleh SMTP. Jika server tujuan (misal Yahoo) sedang down, pesan akan mengantre dan dicoba dikirim terus-menerus selama beberapa hari sebelum dinyatakan "Mail Delivery Failure".</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image21.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Skenario Pengiriman E-mail Penuh</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Bagaimana nasib sebuah email dari diketik hingga dibaca?</p>
+                    <ol>
+                        <li>Alice mengetik email untuk Bob, menekan Send di Outlook (User Agent).</li>
+                        <li>Outlook mendorong email tersebut ke Server Mail milik institusi Alice.</li>
+                        <li>Server Mail Alice mendeteksi <code>@bob.edu</code>, kemudian <strong>SMTP Client</strong> milik institusi Alice membuka koneksi TCP Port 25 ke Server Mail milik institusi Bob.</li>
+                        <li>Mail Server Alice mendorong email ke Mail Server Bob secara langsung via SMTP (Push).</li>
+                        <li>Mail Server Bob meletakkan email ke dalam Mailbox khusus akun Bob.</li>
+                        <li>Besoknya, Bob membuka Outlook-nya. Outlook menarik (Pull) data dari Mail Server Bob menggunakan protokol **IMAP/POP3**.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image22.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <!-- PART 5: DNS -->
+            <section>
+                <h3>DNS (Domain Name System)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Mengapa kita butuh DNS?</p>
+                    <ul>
+                        <li>Manusia lebih mudah mengingat nama/alias (misal: <code>www.google.com</code>).</li>
+                        <li>Router internet mutlak HANYA bisa mengirim data menggunakan angka IP Address 32-bit (misal: <code>142.250.191.132</code>).</li>
+                    </ul>
+                    <p><strong>DNS adalah buku telepon raksasa terdistribusi</strong> yang bertugas menerjemahkan (mapping) *Hostname* bahasa manusia menjadi *IP Address* bahasa router.</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image23.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Mengapa DNS Tidak Disentralisasi?</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Mengapa tidak membuat SATU SAJA server super besar berisikan seluruh tabel nama internet di dunia?</p>
+                    <ul>
+                        <li><strong>Single point of failure:</strong> Jika satu server itu meledak, seluruh internet dunia akan mati total tak bisa diakses.</li>
+                        <li><strong>Volume Trafik:</strong> Triliunan *query* pencarian datang per detik, mustahil diproses satu entitas.</li>
+                        <li><strong>Skalabilitas & Delay Jarak:</strong> Orang di Antartika akan sangat lambat mengakses server tunggal di benua Amerika.</li>
+                    </ul>
+                    <p>Karenanya DNS dibangun dengan arsitektur <strong>Desentralisasi & Hirarkis</strong> (Database Terdistribusi).</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image24.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Hirarki Server DNS</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Mekanisme pencarian bersifat berjenjang dari atas ke bawah:</p>
+                    <ol>
+                        <li><strong>Root DNS Servers:</strong> Puncak hirarki di seluruh dunia (Terdapat 13 gugus server besar). Bertugas mengarahkan ke TLD.</li>
+                        <li><strong>TLD (Top-Level Domain) Servers:</strong> Mengelola domain tingkat tinggi seperti <code>.com</code>, <code>.net</code>, <code>.org</code>, <code>.edu</code>, atau negara (<code>.id</code>, <code>.jp</code>). Server TLD tau siapa pengelola sub-domain.</li>
+                        <li><strong>Authoritative Servers:</strong> Server milik organisasi yang BENAR-BENAR menyimpan tabel asli IP address dari <code>google.com</code> atau <code>yahoo.com</code>.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image25.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Metode Resolusi 1: Iterated Query</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><em>"Saya tidak tahu alamat pastinya, tapi silakan tanya orang ini."</em></p>
+                    <ul>
+                        <li>Client bertanya ke Local DNS Server.</li>
+                        <li>Local bertanya ke Root. Root mengembalikan IP dari TLD <code>.edu</code>.</li>
+                        <li>Local bertanya langsung ke TLD <code>.edu</code>. TLD mengembalikan IP dari Authoritative <code>umass.edu</code>.</li>
+                        <li>Local bertanya ke Authoritative. Barulah IP sebenarnya didapat.</li>
+                    </ul>
+                    <p>Pada model Iterated, beban berpindah-pindah, tapi kendali pencarian tetap berada di titik Local DNS Server.</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image26.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Metode Resolusi 2: Recursive Query</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><em>"Tolong carikan sampai dapat, saya terima beres saja."</em></p>
+                    <ul>
+                        <li>Beban pencarian dilimpahkan ke bahu server di tingkatan atasnya.</li>
+                        <li>Local DNS melempar query ke Root. Root repot mencarikan ke TLD. TLD repot mencari ke Authoritative. Laporan IP Address diserahkan balik secara estafet.</li>
+                        <li><strong>Kelemahan:</strong> Root Server akan kelebihan beban luar biasa berat! Sangat jarang dipraktikkan dalam dunia nyata berskala tinggi.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image27.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Caching DNS dan Skema TTL</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Pencarian panjang berjenjang tersebut sangat memakan waktu. Maka dari itu diterapkanlah <strong>Caching</strong>.</p>
+                    <ul>
+                        <li>Begitu Local DNS Server menemukan IP <code>www.google.com</code>, ia akan menyimpannya (Cache) di memori RAM sementaranya.</li>
+                        <li>Permintaan kedua dari mahasiswa lain akan DILAYANI SECARA INSTAN TANPA HARUS NAIK KE ROOT SERVER LAGI.</li>
+                        <li><strong>TTL (Time to Live):</strong> Umur maksimal ingatan tersebut. Setelah misal 24 jam, cache dihapus untuk mencegah risiko IP server yang mungkin saja telah diganti oleh pemiliknya (Out-of-date).</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image28.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Format Resource Record (RR) DNS</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Bentuk data murni dari database DNS adalah tuple 4 nilai: <code>(Name, Value, Type, TTL)</code>.</p>
+                    <ul>
+                        <li><strong>Type = A:</strong> Translasi murni Hostname ke IP Address (IPv4). Contoh: <code>(foo.com, 1.2.3.4, A)</code>.</li>
+                        <li><strong>Type = NS:</strong> Translasi Domain untuk mencari siapa Authoritative Server-nya. Contoh: <code>(foo.com, dns1.foo.com, NS)</code>.</li>
+                        <li><strong>Type = CNAME:</strong> Nama Samaran (Alias) yang menunjuk ke nama asli. (Misal <code>www.ibm.com</code> menunjuk ke *canonical name* <code>server2-backup.ibm.com</code>).</li>
+                        <li><strong>Type = MX:</strong> Khusus menunjuk alamat IP dari Mail Server SMTP (pengelolaan email institusi).</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image29.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Keamanan & Serangan DNS</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Karena perannya krusial, DNS sering menjadi target serangan:</p>
+                    <ul>
+                        <li><strong>DDoS Attacks:</strong> Menembakkan trafik sampah ke Root Server hingga *down*. (Sering gagal berkat Caching lokal yang berlapis-lapis).</li>
+                        <li><strong>Spoofing / DNS Cache Poisoning:</strong> Hacker mencegat *query* dan memberikan IP bohongan (Misal, Anda berniat ke m-banking BCA, tapi DNS memberikan IP palsu dari website BCA tipuan si Hacker untuk mencuri PIN Anda).</li>
+                    </ul>
+                    <p>Solusi modern: <strong>DNSSEC</strong>, memberikan tanda tangan digital otentikasi bahwa pesan DNS belum dimanipulasi.</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image30.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (1)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image31.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (2)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image32.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (3)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image33.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (4)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image34.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (5)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image35.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (6)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image36.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (7)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image37.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (8)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image38.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (9)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image39.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (10)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image40.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (11)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image41.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (12)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image42.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (13)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image43.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (14)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image44.jpeg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (15)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week12/image45.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+        </div><!-- /slides -->
+    </div><!-- /reveal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            plugins: [RevealNotes]
+        });
+    </script>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle"
+        style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeLink = document.getElementById('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            if (!toggleBtn || !themeLink) return;
+
+            const currentTheme = localStorage.getItem('reveal-theme') || 'simple';
+            if (currentTheme === 'night') {
+                themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                toggleBtn.style.background = '#f1f1f1';
+                toggleBtn.style.color = '#333';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                if (themeLink.href.includes('simple.css')) {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('reveal-theme', 'night');
+                    themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                    toggleBtn.style.background = '#f1f1f1';
+                    toggleBtn.style.color = '#333';
+                } else {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css';
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('reveal-theme', 'simple');
+                    themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+                    toggleBtn.style.background = '#333';
+                    toggleBtn.style.color = '#fff';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

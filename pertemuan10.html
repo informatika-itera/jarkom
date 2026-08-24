@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jaringan Komputer - Pertemuan 10: INTERVLAN Routing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="css/pkom-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        .reveal .slides section {
+            height: 100%;
+            overflow-y: auto !important;
+            padding-bottom: 50px;
+        }
+
+        .slide-img-sm {
+            width: 100%;
+            height: auto;
+            max-height: 35vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .layout-text-img {
+            display: grid;
+            grid-template-columns: 50% 1fr;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .img-caption {
+            font-size: .52em;
+            color: #777;
+            text-align: center;
+            margin-top: .1em;
+            font-style: italic;
+        }
+
+        .sec-bar {
+            border-radius: 8px 8px 0 0;
+            padding: 7px 16px;
+            font-size: .68em;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .sec-body {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .sec-bar-blue {
+            background: #1565c0;
+            color: #fff;
+        }
+
+        .sec-bar-orange {
+            background: #e65100;
+            color: #fff;
+        }
+
+        .sec-bar-green {
+            background: #1b5e20;
+            color: #fff;
+        }
+
+        .sec-bar-purple {
+            background: #4a148c;
+            color: #fff;
+        }
+
+        .sec-bar-red {
+            background: #b71c1c;
+            color: #fff;
+        }
+
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-warn {
+            border-left: 4px solid #e65100;
+            background: #fff3e0;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-green {
+            border-left: 4px solid #1b5e20;
+            background: #e8f5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .reveal table {
+            font-size: .5em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .reveal table th,
+        .reveal table td {
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+        }
+
+        .reveal table th {
+            background: #1565c0;
+            color: white;
+        }
+
+        .reveal table tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            font-family: monospace;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: .6em;
+        }
+
+        /* Animation specific */
+        .anim-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .anim-node {
+            position: absolute;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .anim-icon {
+            font-size: 3em;
+            color: #333;
+            line-height: 1;
+        }
+
+        .anim-label {
+            font-size: .5em;
+            font-weight: 700;
+            font-family: monospace;
+            margin-top: 5px;
+        }
+
+        .packet {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #e65100;
+            border-radius: 50%;
+            z-index: 10;
+            opacity: 0;
+        }
+
+        @keyframes pktSend {
+            0% {
+                top: 50%;
+                left: 10%;
+                opacity: 1;
+            }
+
+            100% {
+                top: 50%;
+                left: 90%;
+                opacity: 1;
+            }
+        }
+
+        /* SVG Graph Styling */
+        .svg-graph {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .node circle {
+            fill: #1565c0;
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+        .node text {
+            fill: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: sans-serif;
+            text-anchor: middle;
+            alignment-baseline: central;
+        }
+
+        .link line {
+            stroke: #999;
+            stroke-width: 3px;
+        }
+
+        .link text {
+            fill: #d32f2f;
+            font-size: 14px;
+            font-weight: bold;
+            background: white;
+            font-family: sans-serif;
+        }
+
+        .tugas-box {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            border-radius: 14px;
+            padding: 22px 28px;
+            color: #fff;
+        }
+
+        .tugas-soal {
+            background: rgba(255, 255, 255, .13);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 8px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .48em;
+            line-height: 1.65;
+            margin: 0;
+            color: #e8f5e9;
+        }
+
+        .tugas-soal .num {
+            font-size: .9em;
+            font-weight: 700;
+            color: #ffeb3b;
+        }
+
+        .tugas-info {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: .58em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="footer-branding">
+            <div class="footer-logos"></div>
+            <div class="footer-copyright">&copy; 2026 IF25-21008 Jaringan Komputer - ITERA</div>
+        </div>
+
+        <div class="slides">
+
+
+            
+            <!-- Title Slide -->
+            <section>
+                <div class="title-box">
+                    <h1>INTERVLAN Routing & VLANs</h1>
+                    <h3 class="subtitle">Pertemuan 10</h3>
+                </div>
+                <p>Pendalaman Ekstensif: Virtual LAN, Trunking 802.1Q, DTP, Router-on-a-Stick & Layer 3 Switch</p>
+                <p>Referensi: <em>Bahan Ajar Week10.pptx & RPS Jaringan Komputer</em></p>
+                <p class="text-small"><em>Dosen Pengampu:</em></p>
+                <div style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                    <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
+                    <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
+                </div>
+            </section>
+
+            <!-- ROADMAP -->
+            <section>
+                <h3>Link Layer & LANs: Roadmap</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Pembahasan Link Layer mencakup beberapa sub-topik utama:</p>
+                    <ul>
+                        <li>A day in the life of a web request</li>
+                        <li>LANs (Local Area Networks)</li>
+                        <li>Addressing, ARP (Address Resolution Protocol)</li>
+                        <li>Ethernet</li>
+                        <li>Switches</li>
+                        <li><strong>VLANs (Virtual LANs) - Fokus Kita Hari Ini</strong></li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image1.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Virtual LANs (VLANs): Motivasi</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Apa yang terjadi ketika ukuran LAN semakin membesar (scaling) dan user sering berpindah titik koneksi?</p>
+                    <p><strong>Masalah pada Single Broadcast Domain:</strong></p>
+                    <ul>
+                        <li>Semua trafik layer-2 broadcast (seperti request ARP, DHCP, unknown MAC address) harus melintasi <strong>seluruh LAN</strong>.</li>
+                        <li>Hal ini memunculkan masalah <strong>Efisiensi</strong> jaringan yang menurun drastis.</li>
+                        <li>Munculnya masalah keamanan (<strong>Security</strong>) dan privasi, karena trafik bisa di-sniff di seluruh port switch.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image2.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Motivasi Administratif</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Seringkali terdapat kendala di mana user dari departemen berbeda berada di ruangan/switch yang sama.</p>
+                    <p><strong>Contoh Kasus:</strong></p>
+                    <ul>
+                        <li>Seorang user dari departemen <strong>Computer Science (CS)</strong> pindah kantor fisik ke departemen <strong>Electrical Engineering (EE)</strong>.</li>
+                        <li>Ia terhubung ke switch secara fisik di gedung EE, tetapi ia ingin tetap tergabung secara logikal ke switch CS.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image3.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Port-Based VLANs</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Switch yang mendukung kapabilitas VLAN dapat dikonfigurasi untuk mendefinisikan beberapa <strong>Virtual LANs</strong> di atas infrastruktur fisik yang tunggal.</p>
+                    <p><strong>Port-based VLAN:</strong> Port pada switch dikelompokkan (oleh software manajemen switch) sehingga switch fisik tunggal beroperasi sebagai <strong>beberapa switch virtual</strong>.</p>
+                    <ul>
+                        <li>Misal: Port 1-8 dialokasikan untuk EE VLAN.</li>
+                        <li>Misal: Port 9-15 dialokasikan untuk CS VLAN.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image4.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Traffic Isolation & Dynamic Membership</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>Traffic Isolation:</strong> Frame dari/ke port 1-8 <strong>hanya</strong> bisa mencapai port 1-8. Tidak akan pernah bocor ke port 9-15.</li>
+                        <li><strong>Dynamic Membership:</strong> Selain berdasarkan port, VLAN juga dapat didefinisikan berdasarkan MAC address endpoint (device). Port dapat di-assign secara dinamis antar VLAN.</li>
+                        <li><strong>Forwarding between VLANs:</strong> Untuk menghubungkan antar VLAN, dibutuhkan proses routing (sama seperti menghubungkan switch fisik yang terpisah).</li>
+                        <li>Vendor saat ini menjual switch yang menggabungkan switch layer 2 plus router layer 3 (Layer 3 Switch / Multilayer Switch).</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image5.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>VLANs Spanning Multiple Switches</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Bagaimana jika sebuah VLAN membentang melintasi beberapa switch fisik?</p>
+                    <p><strong>Trunk Port:</strong> Membawa frame di antara VLAN yang didefinisikan melewati beberapa switch fisik.</p>
+                    <ul>
+                        <li>Frame yang diteruskan di dalam VLAN antar-switch tidak bisa menggunakan frame 802.1 Ethernet biasa ("vanilla").</li>
+                        <li>Frame tersebut <strong>harus membawa informasi VLAN ID</strong>.</li>
+                        <li>Protokol <strong>802.1Q</strong> menambahkan/menghapus field header tambahan untuk frame yang melintasi port trunk.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image6.jpg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>802.1Q VLAN Frame Format</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Protokol 802.1Q menyisipkan Tag sebesar 4-Byte ke dalam frame Ethernet standar.</p>
+                    <ul>
+                        <li><strong>Tag Protocol Identifier (2 byte):</strong> Memiliki nilai hex 0x8100 untuk menandakan bahwa ini adalah 802.1Q frame.</li>
+                        <li><strong>Tag Control Information (2 byte):</strong> Berisi 12-bit VLAN ID (mendukung hingga 4094 VLAN) dan 3-bit priority field (mirip dengan IP TOS untuk Quality of Service).</li>
+                        <li><strong>Recomputed CRC:</strong> Karena frame disisipkan field baru, perhitungan Frame Check Sequence (FCS/CRC) di akhir frame harus dihitung ulang.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image7.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>EVPN: Ethernet VPNs (VXLANs)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Dalam skala Data Center raksasa, VLAN konvensional kadang tidak cukup. Digunakanlah EVPN (Ethernet VPNs) atau VXLANs.</p>
+                    <ul>
+                        <li>Switch Layer-2 Ethernet secara logikal terhubung satu sama lain menggunakan <strong>IP sebagai underlay</strong>.</li>
+                        <li>Frame Ethernet dibawa <strong>di dalam</strong> datagram IP antar situs (misal antara Data Center A dan B).</li>
+                        <li>Merupakan skema "Tunneling" untuk meletakkan jaringan Layer 2 (Overlay) di atas jaringan Layer 3 (Underlay) yang sudah ada.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image8.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Overview: Switch Tanpa VLAN</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Jika kita menggunakan Switch yang tidak diatur VLAN-nya (kondisi Default):</p>
+                    <ul>
+                        <li><strong>1 Collision Domain per port</strong> (karena ini adalah sifat dasar switch).</li>
+                        <li>Semua port menjadi anggota dari <strong>1 Broadcast Domain raksasa</strong>.</li>
+                        <li>Semua port berada dalam 1 subnet jaringan IP yang sama.</li>
+                        <li>Setiap host yang terhubung ke switch tersebut bisa berkomunikasi secara <strong>langsung</strong> dengan host lain tanpa butuh router.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image9.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Overview: Switch Dengan 2 VLAN</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Jika Switch dikonfigurasi dengan 2 VLAN berbeda (misal VLAN Merah dan VLAN Biru):</p>
+                    <ul>
+                        <li>Terbentuk <strong>2 Broadcast Domain</strong> yang terpisah.</li>
+                        <li>Paket broadcast dari VLAN Merah <strong>hanya</strong> akan dikirim ke port-port anggota VLAN Merah.</li>
+                        <li>Setiap VLAN merupakan sebuah LAN network (subnet IP) tersendiri.</li>
+                        <li>VLAN Merah tidak bisa langsung ping ke VLAN Biru walau berada di switch fisik yang sama.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image10.jpg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Rangkuman Konsep: Apa itu VLAN?</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>VLAN adalah pengelompokan logik</strong> dari device-device jaringan yang terhubung pada port switch, seakan-akan berada pada network tersendiri.</p>
+                    <ul>
+                        <li>VLAN dapat diberi nama untuk memudahkan administrasi (misal: "VLAN 10 Sales").</li>
+                        <li>Pada Switch: Kita melakukan konfigurasi VLAN dan meng-assign port ke VLAN yang diinginkan.</li>
+                        <li>Pada PC: Kita menetapkan IP Address yang sesuai dengan subnet VLAN port tersebut.</li>
+                        <li>Ingat: <strong>1 VLAN = 1 Broadcast Domain = 1 Subnet</strong>.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image11.jpg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Keuntungan VLAN (1/2)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>Security (Keamanan)</strong><br>
+                        Sekelompok device yang memiliki data sensitif dapat ditaruh dalam 1 VLAN tersendiri, terpisah secara broadcast dari user divisi lain.</li>
+                        <li><strong>Hemat Biaya</strong><br>
+                        Untuk membuat network (subnet) baru, kita tidak perlu membeli switch fisik baru. Cukup alokasikan beberapa port menjadi VLAN baru pada switch yang sudah ada.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image12.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Keuntungan VLAN (2/2)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>Performa Meningkat</strong><br>
+                        Memecah broadcast domain dapat mengurangi trafik sampah yang tidak penting, sehingga CPU perangkat dan bandwidth lebih optimal.</li>
+                        <li><strong>Efisiensi Meningkat</strong><br>
+                        User-user dengan kepentingan/fungsi yang sama dapat disatukan dalam 1 VLAN meskipun beda lantai.</li>
+                        <li><strong>Flexibility</strong><br>
+                        Anggota VLAN tidak harus berada dalam 1 switch dan 1 tempat yang sama, bisa melintasi antar gedung.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image13.jpg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Karakteristik VLAN ID</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Penomoran VLAN terbagi dalam dua range utama:</p>
+                    <ul>
+                        <li><strong>Normal-range ID (1 - 1005):</strong>
+                            <ul>
+                                <li>ID 1002 - 1005 digunakan untuk teknologi lama (Token Ring dan FDDI).</li>
+                                <li>VLAN 1, 1002 - 1005 sudah otomatis ada dari pabrik dan <strong>tidak bisa dihapus</strong>.</li>
+                                <li>Konfigurasi VLAN range normal ini disimpan di file <code>vlan.dat</code> dalam memori flash switch.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Extended-range ID (1006 - 4094):</strong>
+                            <ul>
+                                <li>Biasanya dipakai oleh Service Provider untuk skala sangat besar (Metro Ethernet).</li>
+                                <li>Disimpan di dalam file <code>running-config</code>, tidak di vlan.dat.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image14.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Tipe-Tipe VLAN (1/2)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>VLAN Data:</strong><br>
+                        VLAN yang didedikasikan murni untuk membawa trafik data dari aktivitas end-user (komputer, laptop).</li>
+                        <li><strong>VLAN Default:</strong><br>
+                        Tanpa konfigurasi apa pun, secara pabrik semua port switch adalah anggota VLAN 1. VLAN 1 tidak bisa dihapus atau diganti namanya. (<strong>Best practice:</strong> Pindahkan semua port ke VLAN selain VLAN 1 untuk alasan keamanan).</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image15.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Tipe-Tipe VLAN (2/2)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>VLAN Management:</strong><br>
+                        VLAN yang dialokasikan khusus untuk me-manage perangkat jaringan. Kita menaruh IP Address switch pada VLAN management ini agar switch bisa diremote via SSH/Telnet dengan aman.</li>
+                        <li><strong>VLAN Voice:</strong><br>
+                        Trafik telepon/voice sebaiknya dipisahkan dari VLAN data ke VLAN Voice tersendiri karena sifat trafiknya yang sangat butuh stabilitas tinggi.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image16.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Lebih Dalam: Voice VLAN</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Trafik voice harus diperlakukan secara istimewa di dalam jaringan karena:</p>
+                    <ul>
+                        <li>Membutuhkan jaminan bandwidth agar suara tidak putus-putus.</li>
+                        <li>Prioritas transmisi di antrean switch harus lebih tinggi dari trafik data biasa.</li>
+                        <li>Delay transmisi end-to-end idealnya harus <strong>kurang dari 150 milisecond</strong>.</li>
+                    </ul>
+                    <p>Perintah CLI Cisco untuk mengaktifkan Voice VLAN:</p>
+                    <div class="code-wrapper" style="font-size:0.75em; background:#282c34; color:#abb2bf; padding:10px; border-radius:5px;">
+                        <code>Switch(config-if)# switchport access vlan 150</code> &lt;- (Data)<br>
+                        <code>Switch(config-if)# switchport voice vlan 200</code> &lt;- (Voice)<br>
+                        <code>Switch(config-if)# mls qos trust cos</code> &lt;- (Prioritas CoS)
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>VLAN Membership (Keanggotaan)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>1. Static Membership</strong></p>
+                    <p>Port-port pada switch dikonfigurasi secara <strong>manual</strong> oleh administrator jaringan sebagai anggota dari VLAN tertentu. Lokasi port menentukan VLAN PC tersebut.</p>
+                    <ul>
+                        <li>Port 1 = VLAN 10</li>
+                        <li>Port 2 = VLAN 10</li>
+                        <li>Port 3 = VLAN 20</li>
+                    </ul>
+                    <p><strong>2. Dynamic Membership</strong></p>
+                    <p>Keanggotaan ditentukan oleh server terpusat bernama <strong>VMPS (VLAN Membership Policy Server)</strong>. Keanggotaan bukan diikat ke port, melainkan ke <strong>MAC Address</strong> milik komputer/device.</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image17.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Konsep TRUNK Link</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>Trunk</strong> adalah link yang menghubungkan antar Switch ke Switch, atau Switch ke Router.</p>
+                    <ul>
+                        <li>Trunk link berfungsi memperluas jangkauan VLAN melebihi satu switch fisik tunggal.</li>
+                        <li>Sebuah Trunk link mampu membawa trafik data dari <strong>berbagai macam VLAN</strong> secara bersamaan.</li>
+                        <li>Agar tidak tertukar, setiap frame Ethernet yang lewat di Trunk akan diberi label identitas VLAN (disebut <strong>Tagging</strong>).</li>
+                        <li>Ada dua teknologi Layer 2 Tagging: <strong>ISL</strong> dan <strong>802.1Q</strong>.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image18.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Tagging: ISL (Inter-Switch Link)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Protokol Tagging yang lebih tua dan eksklusif.</p>
+                    <ul>
+                        <li><strong>Cisco Proprietary:</strong> Hanya dapat digunakan antar produk Cisco murni.</li>
+                        <li>Cara kerjanya membungkus (enkapsulasi) frame asli ke dalam frame yang baru secara keseluruhan.</li>
+                        <li>Menambahkan Header (26 bytes) dan Trailer CRC (4 bytes).</li>
+                        <li><strong>Kelemahan:</strong> Tidak memiliki fitur <em>Native VLAN</em>. Semua frame yang tidak dibungkus ISL akan langsung di-<em>drop</em>.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image19.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Tagging: 802.1Q (Dot1Q)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Protokol Tagging yang menjadi Standar Industri Modern.</p>
+                    <ul>
+                        <li><strong>Open Standard IEEE:</strong> Dapat diimplementasikan menyilang antar vendor (Cisco ke Juniper ke Mikrotik).</li>
+                        <li>Cara kerjanya tidak membungkus ulang seluruh paket, melainkan <strong>menyelipkan Tag sebesar 4-byte</strong> ke dalam frame Ethernet original.</li>
+                        <li>Mendukung konsep <strong>Native VLAN</strong>, yakni VLAN default di mana jika ada frame tak ber-Tag (Untagged Frame), ia akan dimasukkan ke anggota Native VLAN.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image20.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>DTP (Dynamic Trunking Protocol)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>DTP adalah protokol milik Cisco yang berfungsi mengatur <strong>negosiasi</strong> sebuah port apakah akan menjadi link Trunk atau link Access secara otomatis ketika dihubungkan dengan port switch di seberangnya.</p>
+                    <p><strong>Mode-mode Port Switch:</strong></p>
+                    <ul>
+                        <li><strong>Access:</strong> Pasti menjadi Access port (Non-trunk). Mengabaikan request seberang.</li>
+                        <li><strong>Dynamic Auto:</strong> Pasif. Menunggu diajak (menunggu request DTP dari seberang) untuk menjadi Trunk. Jika seberang tidak mengajak, ia jadi Access.</li>
+                        <li><strong>Dynamic Desirable:</strong> Aktif. Mengirimkan request DTP terus menerus membujuk port seberang agar mau menjadi Trunk bersama.</li>
+                        <li><strong>Trunk:</strong> Pasti menjadi Trunk port. Memaksa pembentukan Trunk tanpa peduli status seberang.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Interaksi Switchport Mode (Tabel DTP)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Apa yang terjadi jika port F0/1 bertemu port F0/1 di switch seberang dengan mode berbeda?</p>
+                    <table style="width:100%; border-collapse:collapse; font-size:0.7em; margin-top:10px;">
+                        <thead>
+                            <tr style="background:#1565c0; color:#fff;">
+                                <th style="border:1px solid #ddd; padding:5px;">Mode Port Kiri</th>
+                                <th style="border:1px solid #ddd; padding:5px;">Mode Port Kanan</th>
+                                <th style="border:1px solid #ddd; padding:5px;">Hasil Akhir Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="border:1px solid #ddd; padding:5px;">Dynamic Auto</td><td style="border:1px solid #ddd; padding:5px;">Dynamic Auto</td><td style="border:1px solid #ddd; padding:5px; background:#ffcdd2;">Access</td></tr>
+                            <tr><td style="border:1px solid #ddd; padding:5px;">Dynamic Auto</td><td style="border:1px solid #ddd; padding:5px;">Dynamic Desirable</td><td style="border:1px solid #ddd; padding:5px; background:#c8e6c9;">Trunk</td></tr>
+                            <tr><td style="border:1px solid #ddd; padding:5px;">Dynamic Desirable</td><td style="border:1px solid #ddd; padding:5px;">Dynamic Desirable</td><td style="border:1px solid #ddd; padding:5px; background:#c8e6c9;">Trunk</td></tr>
+                            <tr><td style="border:1px solid #ddd; padding:5px;">Trunk</td><td style="border:1px solid #ddd; padding:5px;">Dynamic Auto</td><td style="border:1px solid #ddd; padding:5px; background:#c8e6c9;">Trunk</td></tr>
+                            <tr><td style="border:1px solid #ddd; padding:5px;">Trunk</td><td style="border:1px solid #ddd; padding:5px;">Access</td><td style="border:1px solid #ddd; padding:5px; background:#ffe0b2;">Tidak Dianjurkan (Error)</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image21.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Kapan Memakai Access / Trunk?</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong>Mode Access:</strong> Gunakan saat port switch terhubung langsung ke end-device (PC, Server, Printer). Port mode Access hanya mengizinkan 1 VLAN spesifik.</li>
+                        <li><strong>Mode Trunk:</strong> Gunakan saat port switch terhubung dengan Switch lain atau Router. Port mode trunk defaultnya membawa trafik dari SEMUA VLAN (1-4094).</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image22.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Konfigurasi VLAN: Create & Membership</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Langkah-langkah di CLI (Command Line Interface) Cisco:</p>
+                    <div class="code-wrapper" style="font-size:0.65em; background:#282c34; color:#abb2bf; padding:10px; border-radius:5px;">
+                        <pre><code>Switch# configure terminal
+Switch(config)# vlan 10                     <-- Membuat VLAN ID 10
+Switch(config-vlan)# name students          <-- Memberi nama VLAN
+Switch(config-vlan)# exit
+
+Switch(config)# interface f0/4              <-- Masuk ke interface
+Switch(config-if)# switchport mode access   <-- Memaksa port ke mode Access
+Switch(config-if)# switchport access vlan 10 <-- Memasukkan port ke VLAN 10
+</code></pre>
+                    </div>
+                    <p>Secara default, sebelum di-assign, F0/4 adalah anggota VLAN 1.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>Konfigurasi VLAN: Delete & Verifikasi</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Cara menghapus port dari VLAN 10 dan mengembalikannya ke Default (VLAN 1):</p>
+                    <div class="code-wrapper" style="font-size:0.65em; background:#282c34; color:#abb2bf; padding:10px; border-radius:5px;">
+                        <code>Switch(config-if)# no switchport access vlan</code>
+                    </div>
+                    <p>Cara menghapus VLAN ID dari database:</p>
+                    <div class="code-wrapper" style="font-size:0.65em; background:#282c34; color:#abb2bf; padding:10px; border-radius:5px;">
+                        <code>Switch(config)# no vlan 20</code><br>
+                        <em>Penting: Pindahkan dulu port anggotanya sebelum menghapus VLAN-nya!</em>
+                    </div>
+                    <p>Perintah Verifikasi Utama:</p>
+                    <div class="code-wrapper" style="font-size:0.65em; background:#282c34; color:#abb2bf; padding:10px; border-radius:5px;">
+                        <code>Switch# show vlan brief</code> (Menampilkan VLAN & port anggotanya)<br>
+                        <code>Switch# show vlan id 10</code> (Detail spesifik VLAN 10)
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Konfigurasi Trunking (Allowed VLAN)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Secara default Trunk melewatkan semua VLAN. Namun demi keamanan (Security), kita bisa membatasi VLAN mana saja yang boleh lewat di kabel Trunk tersebut.</p>
+                    <div class="code-wrapper" style="font-size:0.7em; background:#282c34; color:#abb2bf; padding:10px; border-radius:5px;">
+                        <pre><code>Switch(config)# interface f0/1
+Switch(config-if)# switchport mode trunk
+Switch(config-if)# switchport trunk allowed vlan 1-20</code></pre>
+                    </div>
+                    <p>Dengan perintah di atas, hanya VLAN 1 sampai 20 yang diperbolehkan melintasi Trunk, VLAN 30 akan di-blok.</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image23.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Masalah Umum VLAN 1: Native VLAN Mismatch</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Terjadi hanya pada metode tagging <strong>802.1Q</strong> (ISL tidak punya Native VLAN).</p>
+                    <ul>
+                        <li>Misal: Port Trunk Switch Kiri di-set Native VLAN 10. Port Trunk Switch Kanan di-set Native VLAN 20.</li>
+                        <li><strong>Dampak:</strong> Akan timbul pesan peringatan (CDP error) dari switch. Menimbulkan celah keamanan di mana VLAN Merah seolah-olah terhubung langsung dengan VLAN Biru tanpa melewati router.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image24.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Masalah Umum VLAN 2 & 3: Mode & Allowed Mismatch</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>Mode Trunk Mismatch:</strong></p>
+                    <ul>
+                        <li>Switch kiri dikonfigurasi hardcode <code>trunk</code>, sedangkan switch kanan di-hardcode <code>access</code>.</li>
+                        <li><strong>Dampak:</strong> Koneksi terputus total (broken link) karena format frame yang dikirim saling tidak dikenali.</li>
+                    </ul>
+                    <p><strong>Allowed VLAN Mismatch:</strong></p>
+                    <ul>
+                        <li>Trunk kiri mengizinkan 10,20,30. Trunk kanan hanya mengizinkan 10,20.</li>
+                        <li><strong>Dampak:</strong> User di VLAN 30 pada switch kiri tidak akan bisa berkomunikasi dengan PC VLAN 30 di switch kanan. Terpotong di tengah jalan.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image25.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Tantangan Baru: Inter-VLAN Routing</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Sejauh ini, VLAN memisahkan network. Lalu bagaimana jika ada PC dari VLAN 10 (Sales) benar-benar HARI INI butuh mengirim file ke PC di VLAN 20 (HRD)?</p>
+                    <p>Karena 1 VLAN = 1 Subnet IP yang berbeda, maka Switch L2 biasa akan menyerah. <strong>Kita membutuhkan perangkat Layer 3 (ROUTER)</strong> untuk menjembatani komunikasi antar VLAN.</p>
+                    <p>Terdapat tiga metode historis untuk melakukannya:</p>
+                    <ol>
+                        <li>Traditional Inter-VLAN Routing</li>
+                        <li>Router-on-a-Stick (ROAS)</li>
+                        <li>Layer 3 Switch (SVI)</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section>
+                <h3>1. Traditional Inter-VLAN Routing</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Metode kuno yang boros.</p>
+                    <ul>
+                        <li>Switch mengalokasikan 1 port fisik Access khusus ke Router untuk VLAN 10.</li>
+                        <li>Switch mengalokasikan 1 port fisik Access <em>lainnya</em> ke Router untuk VLAN 20.</li>
+                        <li>Router harus menyediakan 2 port Ethernet fisik yang berbeda.</li>
+                        <li>Jika perusahaan kita punya 50 VLAN, router harus memiliki 50 port colokan fisik! (Sangat mahal dan tidak praktis).</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image26.jpg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>2. Router-on-a-Stick (ROAS)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Solusi cerdas yang masih digunakan hingga saat ini untuk network kecil/menengah.</p>
+                    <ul>
+                        <li>Koneksi Switch ke Router hanya menggunakan <strong>1 Kabel Fisik Tunggal</strong>.</li>
+                        <li>Port tersebut di-set sebagai <strong>TRUNK</strong> 802.1Q.</li>
+                        <li>Di dalam sistem Router, antarmuka fisik tunggal (misal <code>Gig0/0</code>) dipecah secara logika menjadi banyak <strong>Sub-Interface</strong> (seperti <code>Gig0/0.10</code>, <code>Gig0/0.20</code>).</li>
+                        <li>Masing-masing sub-interface bertugas menjadi Default Gateway bagi tiap VLAN.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week10/image27.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>3. Layer 3 Switch (Switch Virtual Interface)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Teknologi modern untuk kelas Enterprise. Kenapa repot beli Router dan Switch terpisah jika satu Switch L3 bisa melakukan keduanya dengan kecepatan kilat?</p>
+                    <ul>
+                        <li>Switch Layer 3 (Multilayer Switch) dilengkapi dengan modul ASIC untuk memproses IP Routing (Layer 3).</li>
+                        <li>Routing dilakukan sepenuhnya di dalam kotak switch melalui interface logikal yang disebut <strong>SVI (Switch Virtual Interface)</strong>.</li>
+                        <li>Sangat cepat (Wire-speed routing) karena tidak terhalang bandwidth kabel tunggal seperti pada konsep Router-on-a-Stick.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Tugas Praktikum Mandiri: Packet Tracer</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Untuk menguji pemahaman materi 100 menit ini, kerjakan skenario simulasi berikut:</p>
+                    <div class="card" style="border-left: 4px solid #ff9800; background: #fff3e0;">
+                        <h4 style="color:#e65100; font-size:1em;">Instruksi Lab: Konfigurasi ROAS</h4>
+                        <ol style="font-size:0.85em;">
+                            <li>Letakkan 1 Router (Cisco 2911) dan 1 Switch (Cisco 2960).</li>
+                            <li>Buat 3 buah VLAN di Switch: VLAN 10, VLAN 20, VLAN 30.</li>
+                            <li>Masukkan 2 PC ke masing-masing VLAN sebagai Access Port.</li>
+                            <li>Konfigurasi link Switch <--> Router sebagai <strong>Trunk</strong>.</li>
+                            <li>Di Router, konfigurasikan Sub-interface dengan enkapsulasi dot1Q untuk menjadi gateway masing-masing subnet VLAN.</li>
+                            <li>Lakukan Ping antar VLAN untuk memvalidasi Routing!</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+        </div><!-- /slides -->
+    </div><!-- /reveal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            plugins: [RevealNotes]
+        });
+    </script>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle"
+        style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeLink = document.getElementById('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            if (!toggleBtn || !themeLink) return;
+
+            const currentTheme = localStorage.getItem('reveal-theme') || 'simple';
+            if (currentTheme === 'night') {
+                themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                toggleBtn.style.background = '#f1f1f1';
+                toggleBtn.style.color = '#333';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                if (themeLink.href.includes('simple.css')) {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('reveal-theme', 'night');
+                    themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                    toggleBtn.style.background = '#f1f1f1';
+                    toggleBtn.style.color = '#333';
+                } else {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css';
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('reveal-theme', 'simple');
+                    themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+                    toggleBtn.style.background = '#333';
+                    toggleBtn.style.color = '#fff';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jaringan Komputer - Pertemuan 11: Socket Programming</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="css/pkom-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        .reveal .slides section {
+            height: 100%;
+            overflow-y: auto !important;
+            padding-bottom: 50px;
+        }
+
+        .slide-img-sm {
+            width: 100%;
+            height: auto;
+            max-height: 35vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .layout-text-img {
+            display: grid;
+            grid-template-columns: 50% 1fr;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .img-caption {
+            font-size: .52em;
+            color: #777;
+            text-align: center;
+            margin-top: .1em;
+            font-style: italic;
+        }
+
+        .sec-bar {
+            border-radius: 8px 8px 0 0;
+            padding: 7px 16px;
+            font-size: .68em;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .sec-body {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .sec-bar-blue {
+            background: #1565c0;
+            color: #fff;
+        }
+
+        .sec-bar-orange {
+            background: #e65100;
+            color: #fff;
+        }
+
+        .sec-bar-green {
+            background: #1b5e20;
+            color: #fff;
+        }
+
+        .sec-bar-purple {
+            background: #4a148c;
+            color: #fff;
+        }
+
+        .sec-bar-red {
+            background: #b71c1c;
+            color: #fff;
+        }
+
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-warn {
+            border-left: 4px solid #e65100;
+            background: #fff3e0;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-green {
+            border-left: 4px solid #1b5e20;
+            background: #e8f5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .reveal table {
+            font-size: .5em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .reveal table th,
+        .reveal table td {
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+        }
+
+        .reveal table th {
+            background: #1565c0;
+            color: white;
+        }
+
+        .reveal table tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            font-family: monospace;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: .6em;
+        }
+
+        /* Animation specific */
+        .anim-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .anim-node {
+            position: absolute;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .anim-icon {
+            font-size: 3em;
+            color: #333;
+            line-height: 1;
+        }
+
+        .anim-label {
+            font-size: .5em;
+            font-weight: 700;
+            font-family: monospace;
+            margin-top: 5px;
+        }
+
+        .packet {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #e65100;
+            border-radius: 50%;
+            z-index: 10;
+            opacity: 0;
+        }
+
+        @keyframes pktSend {
+            0% {
+                top: 50%;
+                left: 10%;
+                opacity: 1;
+            }
+
+            100% {
+                top: 50%;
+                left: 90%;
+                opacity: 1;
+            }
+        }
+
+        /* SVG Graph Styling */
+        .svg-graph {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .node circle {
+            fill: #1565c0;
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+        .node text {
+            fill: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: sans-serif;
+            text-anchor: middle;
+            alignment-baseline: central;
+        }
+
+        .link line {
+            stroke: #999;
+            stroke-width: 3px;
+        }
+
+        .link text {
+            fill: #d32f2f;
+            font-size: 14px;
+            font-weight: bold;
+            background: white;
+            font-family: sans-serif;
+        }
+
+        .tugas-box {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            border-radius: 14px;
+            padding: 22px 28px;
+            color: #fff;
+        }
+
+        .tugas-soal {
+            background: rgba(255, 255, 255, .13);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 8px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .48em;
+            line-height: 1.65;
+            margin: 0;
+            color: #e8f5e9;
+        }
+
+        .tugas-soal .num {
+            font-size: .9em;
+            font-weight: 700;
+            color: #ffeb3b;
+        }
+
+        .tugas-info {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: .58em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="footer-branding">
+            <div class="footer-logos"></div>
+            <div class="footer-copyright">&copy; 2026 IF25-21008 Jaringan Komputer - ITERA</div>
+        </div>
+
+        <div class="slides">
+
+
+            
+            <!-- Title Slide -->
+            <section>
+                <div class="title-box">
+                    <h1>Socket Programming (TCP & UDP)</h1>
+                    <h3 class="subtitle">Pertemuan 11</h3>
+                </div>
+                <p>Pendalaman Ekstensif: Client-Server, Socket API, Timeouts, dan Eksekusi Kode Python</p>
+                <p>Referensi: <em>Bahan Ajar Week11.pptx & RPS Jaringan Komputer</em></p>
+                <p class="text-small"><em>Dosen Pengampu:</em></p>
+                <div style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                    <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
+                    <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
+                </div>
+            </section>
+
+            <!-- PART 1 -->
+            <section>
+                <h3>Application Layer: Overview</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Pembahasan Application Layer mencakup beberapa sub-topik mendasar yang menggerakkan internet:</p>
+                    <ul>
+                        <li>Principles of network applications (Prinsip-prinsip)</li>
+                        <li>Web and HTTP</li>
+                        <li>E-mail, SMTP, IMAP</li>
+                        <li>The Domain Name System (DNS)</li>
+                        <li>P2P applications</li>
+                        <li>Video streaming and CDNs</li>
+                        <li><strong>Socket programming with UDP and TCP - Fokus Pertemuan Ini</strong></li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image1.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Paradigma Layanan: Client-Server</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Hampir sebagian besar layanan internet dikonstruksi menggunakan paradigma Client-Server.</p>
+                    <ul>
+                        <li><strong>Server:</strong> Program yang berjalan tanpa henti (infinite loop) di mesin remote. Selalu "membuka pintu" mendengarkan request dari jaringan.</li>
+                        <li><strong>Client:</strong> Program yang berjalan di mesin lokal pengguna. Berjalan secara terbatas (finite). Hidup saat mengirim request dan ditutup setelah request terjawab.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image2.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Paradigma Layanan: Peer-to-Peer (P2P)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Berbeda dengan arsitektur tersentralisasi, P2P tidak mengandalkan server utama yang selalu menyala.</p>
+                    <ul>
+                        <li>Setiap perangkat dalam jaringan (Peer) bertindak <strong>ganda</strong>: sebagai Client sekaligus Server.</li>
+                        <li>Sangat efisien untuk distribusi file berukuran raksasa (misal: BitTorrent).</li>
+                        <li>Tidak ada batasan skalabilitas akibat bottleneck di satu server sentral.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image3.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Apa itu Socket?</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>Goal Utama:</strong> Mempelajari bagaimana membangun aplikasi klien dan server yang berkomunikasi melalui jaringan.</p>
+                    <p><strong>Definisi:</strong> Socket adalah sebuah <em>Pintu (Door)</em> atau titik akhir komunikasi antara proses aplikasi di user-space dengan protokol transport end-to-end di kernel OS (Operating System).</p>
+                    <div style="background:#e3f2fd; padding:10px; border-left:4px solid #1565c0; margin-top:10px;">
+                        <p style="margin:0;">Proses aplikasi menjejalkan pesan ke luar pintu (Socket), dengan asumsi bahwa infrastruktur di balik pintu tersebut akan mengirimkannya ke Socket tujuan dengan selamat.</p>
+                    </div>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image4.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Kontrol Socket</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Siapa yang mengontrol Socket?</p>
+                    <ul>
+                        <li><strong>Bagian atas pintu (Application layer):</strong> Dikendalikan penuh oleh <em>App Developer</em>. Kita bebas memilih bahasa pemrograman (Python, Java, C).</li>
+                        <li><strong>Bagian bawah pintu (Transport layer & ke bawah):</strong> Dikendalikan sepenuhnya oleh Sistem Operasi.</li>
+                    </ul>
+                    <p>Aplikasi butuh memesan (request) sepasang socket ke OS. Satu untuk Client, satu untuk Server.</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image5.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <!-- PART 2 -->
+            <section>
+                <h3>Dua Tipe Socket Transport</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Sistem Operasi menyediakan dua jenis transport service utama yang menentukan tipe Socket:</p>
+                    <ul>
+                        <li><strong>UDP (User Datagram Protocol):</strong> Komunikasi <em>unreliable</em>, berbasis Datagram (terpotong-potong dan independen). Cepat, tapi tidak menjamin paket sampai atau berurutan.</li>
+                        <li><strong>TCP (Transmission Control Protocol):</strong> Komunikasi <em>reliable</em>, berbasis byte-stream. Menjamin paket sampai secara utuh, berurutan, dan tanpa duplikasi.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image6.jpg" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Contoh Aplikasi (Uppercase Server)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Untuk mendemonstrasikan kedua tipe Socket, kita akan membangun aplikasi sederhana dengan alur:</p>
+                    <ol>
+                        <li>Klien membaca satu baris kalimat huruf kecil dari keyboard.</li>
+                        <li>Klien mengirimkannya ke Server.</li>
+                        <li>Server menerima data, dan mengonversinya menjadi HURUF KAPITAL (Uppercase).</li>
+                        <li>Server mengirim balik data modifikasi tersebut ke Klien.</li>
+                        <li>Klien menerima balasan dan menampilkannya ke layar komputer.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image7.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Socket Programming dengan UDP</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Pada UDP, <strong>TIDAK ADA KONEKSI</strong> yang dibangun antara Klien dan Server sebelum transmisi data (<em>No handshaking</em>).</p>
+                    <ul>
+                        <li>Pengirim secara eksplisit harus menempelkan <strong>Alamat IP dan Nomor Port tujuan</strong> pada setiap paket datagram yang dikirim.</li>
+                        <li>Penerima harus mengekstrak Alamat IP dan Nomor Port pengirim dari paket yang datang untuk bisa membalas.</li>
+                        <li><strong>Resiko:</strong> Data bisa hilang di jalan (packet loss) atau tiba tidak berurutan.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image8.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Interaksi Client/Server: UDP</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Alur siklus hidup Socket UDP:</p>
+                    <ol>
+                        <li><strong>Server:</strong> Membuat socket dan mengikatnya (bind) ke port tertentu. Menunggu paket datang.</li>
+                        <li><strong>Client:</strong> Membuat socket. Membuat paket datagram berisi alamat IP/Port Server tujuan. Mengirim paket.</li>
+                        <li><strong>Server:</strong> Menerima datagram. Membaca request, merangkai balasan, mengirim balik ke IP/Port Klien (didapat dari header paket).</li>
+                        <li><strong>Client:</strong> Menerima balasan, dan menutup socket.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image9.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Bedah Kode: UDP Client (Python 3)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <div class="code-wrapper" style="font-size:0.65em; background:#282c34; color:#abb2bf; padding:15px; border-radius:5px;">
+<pre><code>from socket import *
+serverName = 'hostname_atau_IP'
+serverPort = 12000
+
+# 1. Membuat UDP Socket (SOCK_DGRAM)
+clientSocket = socket(AF_INET, SOCK_DGRAM)
+
+message = input('Input lowercase sentence:')
+
+# 2. Mengirim data beserta tujuan (serverName, Port)
+clientSocket.sendto(message.encode(), (serverName, serverPort))
+
+# 3. Menunggu balasan (recvfrom membaca data & alamat pengirim)
+modifiedMessage, serverAddress = clientSocket.recvfrom(2048)
+print(modifiedMessage.decode())
+
+# 4. Tutup socket
+clientSocket.close()</code></pre>
+                    </div>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image10.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Bedah Kode: UDP Server (Python 3)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <div class="code-wrapper" style="font-size:0.65em; background:#282c34; color:#abb2bf; padding:15px; border-radius:5px;">
+<pre><code>from socket import *
+serverPort = 12000
+serverSocket = socket(AF_INET, SOCK_DGRAM)
+
+# 1. Mengikat (Bind) socket ke local port 12000
+serverSocket.bind(('', serverPort))
+print('The server is ready to receive')
+
+# 2. Infinite Loop untuk melayani request tiada henti
+while True:
+    # Menerima request dan menyimpan alamat IP Klien
+    message, clientAddress = serverSocket.recvfrom(2048)
+    
+    modifiedMessage = message.decode().upper()
+    
+    # Mengirim balasan ke IP Klien spesifik tersebut
+    serverSocket.sendto(modifiedMessage.encode(), clientAddress)</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PART 3 -->
+            <section>
+                <h3>Socket Programming dengan TCP</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>TCP bekerja bagaikan sambungan telepon. Harus diangkat (dihubungkan) terlebih dahulu sebelum bisa bicara.</p>
+                    <ul>
+                        <li>Server harus menyala lebih dulu dan membuat <em>Welcoming Socket</em> (pintu penerima tamu).</li>
+                        <li>Klien mengontak Server dengan membuat TCP Socket dan memanggil perintah <strong>Connect</strong>.</li>
+                        <li>TCP membangun koneksi 3-way handshake.</li>
+                        <li>Setelah terkoneksi, TCP membentuk "Pipa" streaming virtual di mana byte bisa mengalir secara terurut dan reliabel.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image11.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Konsep Welcoming vs Connection Socket</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Ada perbedaan mendasar di sisi Server pada TCP:</p>
+                    <ul>
+                        <li>Server memiliki 1 <strong>Welcoming Socket</strong> (misal di Port 80) yang tugasnya HANYA mendengarkan ketukan pintu klien baru.</li>
+                        <li>Ketika Klien "mengetuk", Server akan memanggil perintah <code>accept()</code>.</li>
+                        <li>Perintah <code>accept()</code> akan mencetak <strong>Socket Baru (Connection Socket)</strong> yang didedikasikan KHUSUS untuk berbicara 1-on-1 dengan Klien tersebut.</li>
+                        <li>Welcoming Socket kembali ke tugas awalnya mendengarkan tamu lain.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image12.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Interaksi Client/Server: TCP</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Alur siklus hidup Socket TCP:</p>
+                    <ol>
+                        <li><strong>Server:</strong> Membuat <code>serverSocket</code> dan memanggil <code>listen()</code>. Tertidur menunggu di <code>accept()</code>.</li>
+                        <li><strong>Client:</strong> Membuat socket. Memanggil <code>connect()</code> (memicu TCP Handshake).</li>
+                        <li><strong>Server:</strong> Terbangun dari <code>accept()</code> menghasilkan <code>connectionSocket</code> baru.</li>
+                        <li><strong>Client & Server:</strong> Bertukar data menggunakan <code>send()</code> dan <code>recv()</code> tanpa perlu menempelkan IP tujuan lagi, karena pipa sudah terbentuk secara logikal.</li>
+                    </ol>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image13.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Bedah Kode: TCP Client (Python 3)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <div class="code-wrapper" style="font-size:0.65em; background:#282c34; color:#abb2bf; padding:15px; border-radius:5px;">
+<pre><code>from socket import *
+serverName = 'servername'
+serverPort = 12000
+
+# 1. Membuat TCP Socket (SOCK_STREAM)
+clientSocket = socket(AF_INET, SOCK_STREAM)
+
+# 2. Inisiasi Koneksi 3-way Handshake
+clientSocket.connect((serverName, serverPort))
+
+sentence = input('Input lowercase sentence:')
+# 3. Mengirim data langsung ke dalam "pipa", tanpa target IP lagi
+clientSocket.send(sentence.encode())
+
+# 4. Menerima balasan
+modifiedSentence = clientSocket.recv(1024)
+print('From Server:', modifiedSentence.decode())
+
+clientSocket.close()</code></pre>
+                    </div>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image14.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Bedah Kode: TCP Server (Python 3)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <div class="code-wrapper" style="font-size:0.55em; background:#282c34; color:#abb2bf; padding:10px; border-radius:5px;">
+<pre><code>from socket import *
+serverPort = 12000
+serverSocket = socket(AF_INET, SOCK_STREAM)
+serverSocket.bind(('', serverPort))
+
+# 1. Mulai mendengarkan (Welcoming Socket)
+serverSocket.listen(1)
+print('The server is ready to receive')
+
+while True:
+    # 2. Block/Tertidur sampai ada Klien masuk.
+    #    Menghasilkan Socket BARU (connectionSocket) khusus klien ini.
+    connectionSocket, addr = serverSocket.accept()
+    
+    # 3. Menerima data stream dari klien spesifik tersebut
+    sentence = connectionSocket.recv(1024).decode()
+    capitalizedSentence = sentence.upper()
+    
+    # 4. Kirim balasan dan TUTUP connectionSocket klien ini.
+    #    (serverSocket pembuka tamu TIDAK DITUTUP!)
+    connectionSocket.send(capitalizedSentence.encode())
+    connectionSocket.close()</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PART 4 -->
+            <section>
+                <h3>Socket Programming: Pengecualian & Timeout</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Seringkali aplikasi jaringan harus <strong>menunggu berbagai kejadian (event)</strong>, misalnya:</p>
+                    <ul>
+                        <li>Menunggu balasan dari socket lain.</li>
+                        <li>Menunggu waktu habis (<em>timeout</em>).</li>
+                    </ul>
+                    <p>Fungsi seperti <code>recv()</code> bersifat <strong>Blocking</strong>. Jika tidak ada balasan dari seberang, program akan *freeze* selamanya. Solusinya adalah fitur Timeouts.</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image15.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Menggunakan settimeout()</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Di Python, kita dapat memasang "bom waktu" pada soket dengan perintah <code>s.settimeout(10)</code>.</p>
+                    <ul>
+                        <li>Jika dalam 10 detik operasi <code>s.recv()</code> tidak menerima byte apa pun, Python akan melemparkan sebuah interupsi <em>Timeout Exception</em>.</li>
+                        <li>Timer akan berhenti otomatis jika paket diterima sebelum batas waktu habis.</li>
+                        <li>Setiap pengerjaan soket selanjutnya akan menuruti aturan 10 detik ini.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image16.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Menangani Eksepsi dengan Try-Except</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Bagaimana cara Python menangkap lemparan interupsi tersebut agar program tidak "crash"?</p>
+                    <div class="code-wrapper" style="font-size:0.65em; background:#282c34; color:#abb2bf; padding:15px; border-radius:5px;">
+<pre><code>try:
+    # Blok kode yang rawan bermasalah / melempar exception
+    pesan = clientSocket.recv(1024)
+    print(pesan)
+    
+except timeout:
+    # Apa yang dilakukan jika terbukti Waktu Habis?
+    print("Server diam saja! Waktu tunggu 10 detik habis.")
+    
+except Exception as e:
+    # Penanganan error lainnya
+    print("Terjadi error jaringan: ", str(e))</code></pre>
+                    </div>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image17.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Contoh Kasus TCP Server Timeout (The Shepherd Boy)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p><strong>Analoginya:</strong> Anak gembala (Klien) iseng terkoneksi ke Warga (Server) namun diam saja.</p>
+                    <ul>
+                        <li>Warga memberi batasan waktu 10 detik. Jika Anak gembala diam saja, timer akan membangkitkan exception.</li>
+                        <li>Warga hanya mentolerir 3 kali keisengan (counter < 3). Setelah 3 kali timeout, Warga (Server) memutus sambungan permanen selamanya.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image18.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Implementasi The Shepherd Boy (TCPServer)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <div class="code-wrapper" style="font-size:0.6em; background:#282c34; color:#abb2bf; padding:10px; border-radius:5px;">
+<pre><code>counter = 0
+while counter < 3:
+    connectionSocket, addr = serverSocket.accept()
+    
+    # Memasang "bom waktu" 10 detik khusus untuk koneksi anak gembala ini
+    connectionSocket.settimeout(10)
+    
+    try:
+        wolf_location = connectionSocket.recv(1024).decode()
+        send_hunter(wolf_location) # Fungsi eksternal
+        connectionSocket.send('hunter sent')
+        
+    except timeout:
+        # Jika anak gembala diam saja > 10 detik
+        counter += 1
+        print("Bocah iseng ketahuan!")
+        
+    connectionSocket.close()</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PART 5 -->
+            <section>
+                <h3>Deep Dive: Anatomi Modul Socket Python</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Mari kita bedah secara akademis perintah-perintah bawaan Python.</p>
+                    <p><strong>Fungsi Penciptaan: <code>socket.socket(family, type)</code></strong></p>
+                    <ul>
+                        <li><code>family</code>: Protokol apa yang dipakai? 
+                            <ul>
+                                <li><code>AF_INET</code> untuk Internet IPv4.</li>
+                                <li><code>AF_UNIX</code> untuk komunikasi internal OS (Unix Domain).</li>
+                            </ul>
+                        </li>
+                        <li><code>type</code>: Jenis layanannya?
+                            <ul>
+                                <li><code>SOCK_STREAM</code> untuk TCP.</li>
+                                <li><code>SOCK_DGRAM</code> untuk UDP.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image19.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Fungsi Koneksi (connect)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Fungsi <code>s.connect(address)</code> digunakan oleh Klien untuk melakukan inisiasi.</p>
+                    <ul>
+                        <li>Parameter <code>address</code> pada protokol Internet (<code>AF_INET</code>) berbentuk **Tuple**, yakni pasangan <code>(host, port)</code>.</li>
+                        <li>Misal: <code>s.connect(("192.168.1.5", 8080))</code>.</li>
+                        <li>Untuk UNIX domain, address hanyalah sebuah string <em>pathname</em> (contoh: <code>"/tmp/my_socket"</code>).</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image20.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Fungsi Pengikatan (bind & listen)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Fungsi ini dieksekusi oleh Server.</p>
+                    <ul>
+                        <li><strong><code>s.bind(address)</code></strong>: Mengikat socket ke sebuah port fisik mesin tersebut agar OS tahu bahwa traffic di port tersebut adalah milik program kita. Address berupa Tuple <code>(host, port)</code>. Host bisa diisi string kosong <code>''</code> yang berarti mendengarkan semua kartu jaringan yang ada di mesin server.</li>
+                        <li><strong><code>s.listen(queue)</code></strong>: Mengubah socket menjadi pendengar (Welcoming Socket). Nilai <code>queue</code> (contoh: 1 atau 5) merepresentasikan maksimum antrian koneksi Klien di lobi yang menunggu di-accept oleh server.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image21.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Fungsi Penerimaan (accept & send/recv)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <ul>
+                        <li><strong><code>s.accept()</code></strong>: Menahan laju program (blocking) sampai Klien terhubung. Mengembalikan nilai Tuple baru: <code>(connectionSocket, addressKlien)</code>.</li>
+                        <li><strong><code>s.send(bytes)</code> (TCP)</strong> / <strong><code>s.sendto(bytes, address)</code> (UDP)</strong>: Mengirim urutan byte ke jaringan. Pastikan String diubah ke byte array via <code>.encode()</code>!</li>
+                        <li><strong><code>s.recv(bufsize)</code> (TCP)</strong> / <strong><code>s.recvfrom(bufsize)</code> (UDP)</strong>: Menerima maksimum ukuran penyangga (misal 1024 atau 2048 bytes) ke dalam RAM.</li>
+                    </ul>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image22.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Rangkuman (Chapter 2 Summary)</h3>
+                <div class="layout-col text-left text-smaller">
+                    <p>Setelah menguasai Socket, kita telah menutup bab <strong>Application Layer</strong> dengan sempurna. Hal esensial yang kita pelajari:</p>
+                    <ul>
+                        <li><strong>Protokol Request/Reply:</strong> Klien meminta info, Server merespons (biasanya dengan Status Code).</li>
+                        <li><strong>Format Pesan:</strong> Headers (memberi instruksi metadata), dan Data/Payload.</li>
+                        <li><strong>Tema Penting:</strong> Sentralisasi vs Desentralisasi (P2P), Stateless vs Stateful (HTTP vs FTP/TCP), Skalabilitas jaringan, dan keandalan (Reliable TCP vs Unreliable UDP).</li>
+                    </ul>
+                    <p style="text-align:center; margin-top:20px; font-weight:bold; color:#1565c0;">"Complexity at the network edge!"</p>
+                    <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image23.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (1)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image24.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (2)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image25.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (3)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image26.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (4)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image27.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (5)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image28.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (6)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image29.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+
+            <section>
+                <h3>Galeri Ilustrasi Tambahan (7)</h3>
+                <div style="text-align: center; margin: 15px 0;"><img src="images/week11/image30.png" style="max-height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);"></div>
+            </section>
+        </div><!-- /slides -->
+    </div><!-- /reveal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            plugins: [RevealNotes]
+        });
+    </script>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle"
+        style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeLink = document.getElementById('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            if (!toggleBtn || !themeLink) return;
+
+            const currentTheme = localStorage.getItem('reveal-theme') || 'simple';
+            if (currentTheme === 'night') {
+                themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                toggleBtn.style.background = '#f1f1f1';
+                toggleBtn.style.color = '#333';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                if (themeLink.href.includes('simple.css')) {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('reveal-theme', 'night');
+                    themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                    toggleBtn.style.background = '#f1f1f1';
+                    toggleBtn.style.color = '#333';
+                } else {
+                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css';
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('reveal-theme', 'simple');
+                    themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+                    toggleBtn.style.background = '#333';
+                    toggleBtn.style.color = '#fff';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
