@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="id">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,13 +12,38 @@
     <link rel="stylesheet" href="css/pkom-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
-        .reveal .slides section {
-            height: 100%;
-            overflow-y: auto !important;
-            padding-bottom: 50px;
+        @media screen {
+            .reveal .slides section {
+                max-height: 100%;
+                overflow-y: auto;
+                padding-bottom: 20px;
+            }
+
+            .reveal img {
+                max-height: 55vh;
+                object-fit: contain;
+            }
+        }
+
+        @media print {
+            .reveal .slides section {
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            .reveal img,
+            .card {
+                page-break-inside: avoid;
+            }
+        }
+
+        .reveal .card {
+            margin-bottom: 10px;
         }
     </style>
 </head>
+
 <body>
     <div class="reveal">
         <div class="footer-branding">
@@ -34,7 +60,8 @@
                 </div>
                 <p>Referensi Utama: Forouzan - <em>Data Communications and Networking (5th Ed)</em></p>
                 <p class="text-small"><em>Dosen Pengampu:</em></p>
-                <div style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                <div
+                    style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
                     <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
                     <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
                     <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
@@ -43,7 +70,7 @@
             </section>
 
             <section>
-                <h3>Outline Materi (100 Menit)</h3>
+                <h3>Outline Materi</h3>
                 <div class="card text-left text-small">
                     <ul>
                         <li>Konsep Arsitektur Berlapis (Layering)</li>
@@ -65,28 +92,33 @@
                 <h3>Mengapa Membutuhkan Model Referensi?</h3>
                 <div class="card text-left text-small">
                     <p>Komunikasi antar dua komputer yang berjauhan adalah proses yang luar biasa kompleks.</p>
-                    <p>Memecahkan satu masalah besar (misal: mengirim email ke benua lain) menjadi beberapa sub-masalah kecil dan independen adalah esensi dari <strong>Arsitektur Berlapis (Layered Architecture)</strong>.</p>
+                    <p>Memecahkan satu masalah besar (misal: mengirim email ke benua lain) menjadi beberapa sub-masalah
+                        kecil dan independen adalah esensi dari <strong>Arsitektur Berlapis (Layered
+                            Architecture)</strong>.</p>
                 </div>
             </section>
 
             <section>
-                <h3>Analogi Pengiriman Surat (Bagian 1)</h3>
-                <div class="card text-left text-small">
-                    <p>Analogi Maria dan Ann yang saling berkirim surat.</p>
-                    <ul>
-                        <li><strong>Layer 3 (Pengirim):</strong> Maria menulis surat, memasukkannya ke amplop, menulis alamat Ann, menjatuhkannya ke kotak pos.</li>
-                        <li><strong>Layer 2 (Kurir Pos):</strong> Tukang pos mengambil surat dari kotak pos dan membawanya ke kantor pos.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h3>Analogi Pengiriman Surat (Bagian 2)</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li><strong>Layer 1 (Transportasi Fisik):</strong> Surat dipilah dan diterbangkan dengan pesawat atau dibawa truk antar kota.</li>
-                    </ul>
-                    <p>Maria (Layer 3) tidak peduli apakah surat itu diangkut pesawat atau kapal (Layer 1). Tugasnya hanya menulis alamat. Ini disebut independensi layer.</p>
+                <h3>Analogi Pengiriman Surat</h3>
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="flex: 1;" class="text-left text-smaller card">
+                        <p>Analogi Maria dan Ann yang saling berkirim surat.</p>
+                        <ul>
+                            <li class="fragment"><strong>Layer 3 (Pengirim):</strong> Maria menulis surat, memasukkannya
+                                ke amplop.</li>
+                            <li class="fragment"><strong>Layer 2 (Kurir Pos):</strong> Tukang pos mengambil surat dari
+                                kotak pos dan membawanya ke kantor pos.</li>
+                            <li class="fragment"><strong>Layer 1 (Fisik):</strong> Surat dipilah dan diterbangkan dengan
+                                pesawat / truk.</li>
+                        </ul>
+                        <p class="fragment" style="margin-top:15px; color:var(--primary-color);">*Maria (Layer 3) tidak
+                            peduli apakah surat diangkut pesawat atau kapal (Layer 1).</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <img src="assets/postal_layers_1788845702371.jpg"
+                            style="width:100%; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"
+                            alt="Analogi Kantor Pos">
+                    </div>
                 </div>
             </section>
 
@@ -94,21 +126,35 @@
                 <h3>Keuntungan Modularitas Layer</h3>
                 <div class="card text-left text-small">
                     <ul>
-                        <li><strong class="highlight-blue">Pengembangan Independen:</strong> Insinyur pembuat fiber optik tidak perlu tahu cara kerja browser Chrome.</li>
-                        <li><strong class="highlight-orange">Interoperabilitas:</strong> Perangkat vendor Cisco dan Mikrotik bisa nyambung asalkan mematuhi standar layer yang sama.</li>
-                        <li><strong class="highlight-green">Pemeliharaan Mudah:</strong> Mengganti jaringan rumah dari kabel tembaga ke fiber (Layer 1 berubah) tidak memaksa Anda mengubah aplikasi WhatsApp (Layer atas).</li>
+                        <li><strong class="highlight-blue">Pengembangan Independen:</strong> Insinyur pembuat fiber
+                            optik tidak perlu tahu cara kerja browser Chrome.</li>
+                        <li><strong class="highlight-orange">Interoperabilitas:</strong> Perangkat vendor Cisco dan
+                            Mikrotik bisa nyambung asalkan mematuhi standar layer yang sama.</li>
+                        <li><strong class="highlight-green">Pemeliharaan Mudah:</strong> Mengganti jaringan rumah dari
+                            kabel tembaga ke fiber (Layer 1 berubah) tidak memaksa Anda mengubah aplikasi WhatsApp
+                            (Layer atas).</li>
                     </ul>
                 </div>
             </section>
 
             <section>
                 <h3>Konsep Peer-to-Peer Process</h3>
-                <div class="card text-left text-small">
-                    <p>Komunikasi seolah-olah terjadi <strong>secara logis</strong> antara layer yang sama di dua mesin.</p>
-                    <ul>
-                        <li>Browser PC Anda (Layer 7) merasa sedang ngobrol langsung dengan Web Server (Layer 7).</li>
-                        <li>Kenyataannya, secara <strong>fisik</strong>, data bergerak vertikal turun dari PC Anda ke kabel, merambat, lalu naik lagi ke Server.</li>
-                    </ul>
+                <div style="display: flex; gap: 20px; align-items:center;">
+                    <div style="flex: 1;" class="card text-left text-small">
+                        <p>Komunikasi seolah-olah terjadi <strong>secara logis</strong> antara layer yang sama di dua
+                            mesin.</p>
+                        <ul>
+                            <li>Browser PC Anda (Layer 7) merasa sedang ngobrol langsung dengan Web Server (Layer 7).
+                            </li>
+                            <li>Kenyataannya, secara <strong>fisik</strong>, data bergerak vertikal turun dari PC Anda
+                                ke kabel, merambat, lalu naik lagi ke Server.</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1;">
+                        <img src="assets/peer_to_peer_osi_1788846772674.jpg"
+                            style="width:100%; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"
+                            alt="Peer to Peer Communication">
+                    </div>
                 </div>
             </section>
 
@@ -122,8 +168,10 @@
                 <h3>Sejarah Singkat OSI</h3>
                 <div class="card text-left text-small">
                     <ul>
-                        <li>Dirilis secara resmi pada tahun 1984 oleh <strong>ISO</strong> (International Organization for Standardization).</li>
-                        <li><strong>Tujuan:</strong> Menciptakan standar terbuka agar mesin IBM, DEC, dll yang dulunya tertutup bisa saling berkomunikasi.</li>
+                        <li>Dirilis secara resmi pada tahun 1984 oleh <strong>ISO</strong> (International Organization
+                            for Standardization).</li>
+                        <li><strong>Tujuan:</strong> Menciptakan standar terbuka agar mesin IBM, DEC, dll yang dulunya
+                            tertutup bisa saling berkomunikasi.</li>
                         <li>Terdiri dari <strong>7 Lapisan (Layers)</strong> yang ketat.</li>
                     </ul>
                 </div>
@@ -131,35 +179,44 @@
 
             <section>
                 <h3>Mnemonic OSI (Bawah ke Atas)</h3>
-                <div class="card text-left text-small">
-                    <h4 class="highlight-blue">Layer 1 sampai 7:</h4>
-                    <ul>
-                        <li><strong>P</strong>hysical</li>
-                        <li><strong>D</strong>ata Link</li>
-                        <li><strong>N</strong>etwork</li>
-                        <li><strong>T</strong>ransport</li>
-                        <li><strong>S</strong>ession</li>
-                        <li><strong>P</strong>resentation</li>
-                        <li><strong>A</strong>pplication</li>
-                    </ul>
-                    <p><em>Cara menghafal: "Please Do Not Throw Sausage Pizza Away"</em></p>
-                </div>
-            </section>
-
-            <section>
-                <h3>Mnemonic OSI (Atas ke Bawah)</h3>
-                <div class="card text-left text-small">
-                    <h4 class="highlight-orange">Layer 7 sampai 1:</h4>
-                    <ul>
-                        <li><strong>A</strong>pplication</li>
-                        <li><strong>P</strong>resentation</li>
-                        <li><strong>S</strong>ession</li>
-                        <li><strong>T</strong>ransport</li>
-                        <li><strong>N</strong>etwork</li>
-                        <li><strong>D</strong>ata Link</li>
-                        <li><strong>P</strong>hysical</li>
-                    </ul>
-                    <p><em>Cara menghafal: "All People Seem To Need Data Processing"</em></p>
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="flex: 1;" class="text-left text-small card">
+                        <p><em>Cara menghafal:</em></p>
+                        <h4 style="color:#e91e63;">"Please Do Not Throw Sausage Pizza Away"</h4>
+                        <ul style="margin-top:20px;">
+                            <li class="fragment"><strong>A</strong>way &rarr; Application (7)</li>
+                            <li class="fragment"><strong>P</strong>izza &rarr; Presentation (6)</li>
+                            <li class="fragment"><strong>S</strong>ausage &rarr; Session (5)</li>
+                            <li class="fragment"><strong>T</strong>hrow &rarr; Transport (4)</li>
+                            <li class="fragment"><strong>N</strong>ot &rarr; Network (3)</li>
+                            <li class="fragment"><strong>D</strong>o &rarr; Data Link (2)</li>
+                            <li class="fragment"><strong>P</strong>lease &rarr; Physical (1)</li>
+                        </ul>
+                    </div>
+                    <div
+                        style="flex: 1; display:flex; flex-direction:column; font-weight:bold; font-size:0.8em; text-align:center;">
+                        <div class="fragment"
+                            style="background:#f48fb1; padding:8px; border:1px solid #fff; color:#000;">7. Application
+                            (Data)</div>
+                        <div class="fragment"
+                            style="background:#ce93d8; padding:8px; border:1px solid #fff; color:#000;">6. Presentation
+                            (Data)</div>
+                        <div class="fragment"
+                            style="background:#b39ddb; padding:8px; border:1px solid #fff; color:#000;">5. Session
+                            (Data)</div>
+                        <div class="fragment"
+                            style="background:#90caf9; padding:8px; border:1px solid #fff; color:#000;">4. Transport
+                            (Segments)</div>
+                        <div class="fragment"
+                            style="background:#80cbc4; padding:8px; border:1px solid #fff; color:#000;">3. Network
+                            (Packets)</div>
+                        <div class="fragment"
+                            style="background:#a5d6a7; padding:8px; border:1px solid #fff; color:#000;">2. Data Link
+                            (Frames)</div>
+                        <div class="fragment"
+                            style="background:#e6ee9c; padding:8px; border:1px solid #fff; color:#000;">1. Physical
+                            (Bits)</div>
+                    </div>
                 </div>
             </section>
 
@@ -178,10 +235,12 @@
             <section>
                 <h3>Layer 2: Data Link Layer (Bag. 1)</h3>
                 <div class="card text-left text-small">
-                    <p><strong>Fungsi:</strong> Mentransfer data aman secara node-to-node di dalam 1 jaringan (LAN) yang sama.</p>
+                    <p><strong>Fungsi:</strong> Mentransfer data aman secara node-to-node di dalam 1 jaringan (LAN) yang
+                        sama.</p>
                     <ul>
                         <li><strong>Framing:</strong> Membungkus bit dari Layer 1 menjadi <em>Frames</em>.</li>
-                        <li><strong>Physical Addressing:</strong> Menempelkan alamat MAC (MAC Address) pengirim dan tujuan ke header. (MAC address ditanam di dalam kartu jaringan pabrik).</li>
+                        <li><strong>Physical Addressing:</strong> Menempelkan alamat MAC (MAC Address) pengirim dan
+                            tujuan ke header. (MAC address ditanam di dalam kartu jaringan pabrik).</li>
                     </ul>
                 </div>
             </section>
@@ -190,8 +249,10 @@
                 <h3>Layer 2: Data Link Layer (Bag. 2)</h3>
                 <div class="card text-left text-small">
                     <ul>
-                        <li><strong>Error Control:</strong> Menambahkan cek error (CRC) di bagian ekor (trailer) frame agar penerima tahu jika bit rusak di jalan.</li>
-                        <li><strong>Access Control:</strong> Jika medianya adalah Wi-Fi bersama, layer ini mengatur siapa yang boleh transmisi duluan.</li>
+                        <li><strong>Error Control:</strong> Menambahkan cek error (CRC) di bagian ekor (trailer) frame
+                            agar penerima tahu jika bit rusak di jalan.</li>
+                        <li><strong>Access Control:</strong> Jika medianya adalah Wi-Fi bersama, layer ini mengatur
+                            siapa yang boleh transmisi duluan.</li>
                         <li><span class="highlight-orange">Perangkat: Switch, Access Point.</span></li>
                     </ul>
                 </div>
@@ -199,23 +260,67 @@
 
             <section>
                 <h3>Layer 3: Network Layer (Jaringan)</h3>
-                <div class="card text-left text-small">
-                    <p><strong>Fungsi:</strong> Merutekan paket/datagram secara <em>end-to-end</em> melintasi berbagai negara dan ISP.</p>
-                    <ul>
-                        <li><strong>Logical Addressing:</strong> Menempelkan IP Address. IP Address bisa berubah jika Anda pindah kafe/lokasi jaringan (tidak permanen seperti MAC).</li>
-                        <li><strong>Routing:</strong> Memilih rute terbaik di jalan raya internet (seperti Google Maps).</li>
-                        <li><span class="highlight-green">Perangkat: Router.</span></li>
-                    </ul>
+                <div style="display: flex; gap: 20px; align-items:center;">
+                    <div style="flex: 1;" class="card text-left text-smaller">
+                        <p><strong>Fungsi:</strong> Merutekan paket/datagram secara <em>end-to-end</em> melintasi
+                            berbagai negara dan ISP.</p>
+                        <ul>
+                            <li><strong>Logical Addressing:</strong> Menempelkan IP Address. IP Address bisa berubah
+                                jika Anda pindah kafe/lokasi jaringan (tidak permanen seperti MAC).</li>
+                            <li><strong>Routing:</strong> Memilih rute terbaik di jalan raya internet (seperti Google
+                                Maps).</li>
+                            <li><span class="highlight-green">Perangkat: Router.</span></li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1;">
+                        <img src="assets/router_traffic_1788845719452.jpg"
+                            style="width:100%; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"
+                            alt="Ilustrasi Router Traffic">
+                    </div>
                 </div>
             </section>
 
             <section>
-                <h3>IP vs MAC Address (Analogi KTP)</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li><strong>MAC Address (Layer 2)</strong> seperti Nomor KTP. Identitas itu permanen nempel pada raga Anda.</li>
-                        <li><strong>IP Address (Layer 3)</strong> seperti Alamat Rumah / Kos tempat Anda tinggal bulan ini. Jika Anda pindah, alamatnya ganti, tapi KTP Anda tetap.</li>
-                    </ul>
+                <h3>IP vs MAC Address</h3>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <!-- Kolom Kiri: MAC Address -->
+                    <div style="flex: 1.2;" class="card text-center">
+                        <div style="font-size: 0.5em; color: #f44336; margin-bottom: 10px;"><i
+                                class="bi bi-person-vcard"></i></div>
+                        <h5 class="highlight-red" style="font-size: 0.9em;">MAC Address (Layer 2)</h5>
+                        <div class="text-smaller text-left" style="font-size: 0.55em; line-height: 1.3;">
+                            <ul style="padding-left: 1em;">
+                                <li>Analogi: <strong>KTP / Paspor</strong></li>
+                                <li>Sifat: Permanen, bawaan pabrik</li>
+                                <li>Contoh: <br><code>0A:1B:2C...</code></li>
+                                <li>6 byte<br><code>hexadesimal</code></li>
+                                <li>Cakupan: Lokal (LAN)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Kolom Tengah: Gambar -->
+                    <div style="flex: 2.5;">
+                        <img src="assets/ip_mac_analogy_1788845679947.jpg"
+                            style="width:100%; max-height: 60vh; object-fit: contain; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin: 0;"
+                            alt="IP vs MAC Analogi">
+                    </div>
+
+                    <!-- Kolom Kanan: IP Address -->
+                    <div style="flex: 1.2;" class="card text-center">
+                        <div style="font-size: 0.5em; color: #4caf50; margin-bottom: 10px;"><i
+                                class="bi bi-house-door"></i></div>
+                        <h4 class="highlight-green" style="font-size: 0.9em;">IP Address (Layer 3)</h4>
+                        <div class="text-smaller text-left" style="font-size: 0.55em; line-height: 1.3;">
+                            <ul style="padding-left: 1em;">
+                                <li>Analogi: <strong>Rumah/Kos</strong></li>
+                                <li>Sifat: Dinamis, bisa berubah</li>
+                                <li>Contoh: <br><code>192.168.1.10</code></li>
+                                <li>4 byte (v4) dan 16 byte (v6)<br><code>desimal</code></li>
+                                <li>Cakupan: Global (Internet)</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -224,8 +329,10 @@
                 <div class="card text-left text-small">
                     <p><strong>Fungsi:</strong> Pengiriman pesan dari proses aplikasi secara <em>end-to-end</em>.</p>
                     <ul>
-                        <li><strong>Port Addressing:</strong> Memastikan paket masuk ke aplikasi yang benar. Jika masuk ke PC Anda, apakah untuk WhatsApp atau Spotify? Itu dipisah berdasarkan nomor Port.</li>
-                        <li><strong>Segmentation:</strong> Memecah file video besar jadi kepingan-kepingan Segmen yang dikasih nomor urut, agar bisa disatukan lagi.</li>
+                        <li><strong>Port Addressing:</strong> Memastikan paket masuk ke aplikasi yang benar. Jika masuk
+                            ke PC Anda, apakah untuk WhatsApp atau Spotify? Itu dipisah berdasarkan nomor Port.</li>
+                        <li><strong>Segmentation:</strong> Memecah file video besar jadi kepingan-kepingan Segmen yang
+                            dikasih nomor urut, agar bisa disatukan lagi.</li>
                     </ul>
                 </div>
             </section>
@@ -234,8 +341,10 @@
                 <h3>Layer 4: Transport Layer (Bag. 2)</h3>
                 <div class="card text-left text-small">
                     <ul>
-                        <li><strong>Connection Control:</strong> Membangun koneksi yang pasti sampai (TCP) atau langsung gas cepat tanpa jaminan (UDP).</li>
-                        <li><strong>End-to-End Error Control:</strong> Layer Transport yang akan meminta pengiriman ulang jika ada paket yang hilang/bolong di tengah jalan.</li>
+                        <li><strong>Connection Control:</strong> Membangun koneksi yang pasti sampai (TCP) atau langsung
+                            gas cepat tanpa jaminan (UDP).</li>
+                        <li><strong>End-to-End Error Control:</strong> Layer Transport yang akan meminta pengiriman
+                            ulang jika ada paket yang hilang/bolong di tengah jalan.</li>
                     </ul>
                 </div>
             </section>
@@ -244,19 +353,24 @@
                 <h3>Layer 5 & 6: Session dan Presentation</h3>
                 <div class="card text-left text-small">
                     <h4 class="highlight-blue">Layer 5: Session</h4>
-                    <p>Mengelola dialog (half-duplex/full-duplex) dan menambahkan titik checkpoint sinkronisasi file.</p>
+                    <p>Mengelola dialog (half-duplex/full-duplex) dan menambahkan titik checkpoint sinkronisasi file.
+                    </p>
                     <h4 class="highlight-orange">Layer 6: Presentation</h4>
-                    <p>Berurusan dengan <em>Format</em>: Menerjemahkan karakter bahasa mesin, melakukan <strong>Enkripsi</strong> keamanan, dan <strong>Kompresi</strong> data.</p>
+                    <p>Berurusan dengan <em>Format</em>: Menerjemahkan karakter bahasa mesin, melakukan
+                        <strong>Enkripsi</strong> keamanan, dan <strong>Kompresi</strong> data.
+                    </p>
                 </div>
             </section>
 
             <section>
                 <h3>Layer 7: Application Layer</h3>
                 <div class="card text-left text-small">
-                    <p><strong>Fungsi:</strong> Titik temu antara pengguna (manusia/software) dengan layanan jaringan.</p>
+                    <p><strong>Fungsi:</strong> Titik temu antara pengguna (manusia/software) dengan layanan jaringan.
+                    </p>
                     <ul>
                         <li>Menyediakan protokol seperti HTTP (Web), SMTP (Email), FTP (File).</li>
-                        <li>Peringatan: Aplikasi Google Chrome atau MS Word BUKANLAH application layer. Application layer adalah protokol penggeraknya.</li>
+                        <li>Peringatan: Aplikasi Google Chrome atau MS Word BUKANLAH application layer. Application
+                            layer adalah protokol penggeraknya.</li>
                     </ul>
                 </div>
             </section>
@@ -267,23 +381,71 @@
             </section>
 
             <section>
-                <h3>Enkapsulasi (Perjalanan Turun)</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>Saat Anda mengirim pesan, data berjalan dari Layer 7 turun ke Layer 1.</li>
-                        <li>Tiap layer (selain fisik) akan <strong>Membungkus</strong> data tersebut dengan <strong>Header</strong> miliknya sendiri. (Layer 2 menambah Trailer).</li>
-                        <li>Sama seperti pesanan online dibungkus kardus, lalu dilakban, lalu ditempel resi barulah diangkut mobil.</li>
-                    </ul>
+                <h3>Enkapsulasi & Dekapsulasi</h3>
+                <img src="assets/encapsulation_osi_1788846756700.jpg"
+                    style="width:85%; border-radius:10px; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"
+                    alt="Encapsulation OSI">
+                <!-- <div style="display: flex; gap: 20px;">
+                    <div style="flex: 1;" class="card text-left text-smaller">
+                        <h4 class="highlight-blue" style="margin-top:0;">1. Enkapsulasi (Turun)</h4>
+                        <ul>
+                            <li>Tiap layer membungkus data dengan <strong>Header</strong>.</li>
+                            <li>Analogi: Kado (Data) &rarr; kardus (TCP) &rarr; dilakban (IP).</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1;" class="card text-left text-smaller">
+                        <h4 class="highlight-green" style="margin-top:0;">2. Dekapsulasi (Naik)</h4>
+                        <ul>
+                            <li>Di penerima, proses berbalik (naik). Tiap layer membuka bungkus miliknya.</li>
+                        </ul>
+                    </div>
+                </div> -->
+            </section>
+
+            <section>
+                <h3>Detail Proses Enkapsulasi (Turun)</h3>
+                <div class="card text-left text-smaller">
+                    <p>Proses pembungkusan data saat mengalir dari Layer Atas ke Layer Bawah (Pengirim):</p>
+                    <ol>
+                        <li class="fragment"><strong>Layer 7, 6, 5:</strong> Pesan atau file murni dibentuk. Disebut
+                            <em>Data/Message</em>.
+                        </li>
+                        <li class="fragment"><strong>Layer 4 (Transport):</strong> Data turun, ditambahkan
+                            <strong>Header L4</strong> (berisi Port sumber & tujuan). Jadilah <em>Segment</em>.
+                        </li>
+                        <li class="fragment"><strong>Layer 3 (Network):</strong> Segment turun, ditambahkan
+                            <strong>Header L3</strong> (berisi IP Address asal & tujuan). Jadilah <em>Packet</em>.
+                        </li>
+                        <li class="fragment"><strong>Layer 2 (Data Link):</strong> Packet turun, ditambahkan
+                            <strong>Header L2</strong> (berisi MAC Address) DAN <strong>Trailer L2</strong> (untuk
+                            pengecekan error). Jadilah <em>Frame</em>.
+                        </li>
+                        <li class="fragment"><strong>Layer 1 (Physical):</strong> Frame diubah menjadi aliran
+                            <em>Bits</em> (0 dan 1) untuk dikirim via media fisik.
+                        </li>
+                    </ol>
                 </div>
             </section>
 
             <section>
-                <h3>Dekapsulasi (Perjalanan Naik)</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>Di komputer penerima, prosesnya berbalik dari Layer 1 naik ke Layer 7.</li>
-                        <li>Tiap layer akan <strong>Membuka bungkus Header (Decapsulation)</strong> miliknya sendiri, membaca isinya, membuang bungkus tersebut, lalu memberikan intinya ke layer atas.</li>
-                    </ul>
+                <h3>Detail Proses Dekapsulasi (Naik)</h3>
+                <div class="card text-left text-smaller">
+                    <p>Proses pembongkaran paket saat mengalir dari Layer Bawah ke Layer Atas (Penerima):</p>
+                    <ol>
+                        <li class="fragment"><strong>Layer 1 (Physical):</strong> Sinyal fisik diterima, diterjemahkan
+                            kembali menjadi <em>Bits</em>, dan diserahkan ke Layer 2.</li>
+                        <li class="fragment"><strong>Layer 2 (Data Link):</strong> Mengecek Trailer untuk error. Jika
+                            aman dan MAC Address cocok, <strong>Header & Trailer L2 dibuang</strong>, lalu isinya
+                            diserahkan ke Layer 3.</li>
+                        <li class="fragment"><strong>Layer 3 (Network):</strong> Mengecek IP Address. Jika cocok,
+                            <strong>Header L3 dibuang</strong>, lalu isinya diserahkan ke Layer 4.
+                        </li>
+                        <li class="fragment"><strong>Layer 4 (Transport):</strong> Mengecek Port Address. <strong>Header
+                                L4 dibuang</strong>, potongan-potongan disatukan, lalu diserahkan ke aplikasi yang
+                            tepat.</li>
+                        <li class="fragment"><strong>Layer 7, 6, 5:</strong> Data murni diproses dan akhirnya
+                            ditampilkan di layar pengguna.</li>
+                    </ol>
                 </div>
             </section>
 
@@ -291,12 +453,30 @@
                 <h3>Terminologi PDU (Protocol Data Unit)</h3>
                 <div class="card text-left text-small">
                     <table style="width:100%; border-collapse: collapse;">
-                        <tr style="background-color: var(--bg-light);"><th>Layer</th><th>Nama Data (PDU)</th></tr>
-                        <tr><td>Layer 7, 6, 5</td><td><strong class="highlight-blue">Message / Data</strong></td></tr>
-                        <tr><td>Layer 4</td><td><strong class="highlight-orange">Segment (TCP) / Datagram (UDP)</strong></td></tr>
-                        <tr><td>Layer 3</td><td><strong class="highlight-green">Packet / Datagram</strong></td></tr>
-                        <tr><td>Layer 2</td><td><strong class="highlight-red">Frame</strong></td></tr>
-                        <tr><td>Layer 1</td><td><strong>Bits</strong></td></tr>
+                        <tr style="background-color: var(--bg-light);">
+                            <th>Layer</th>
+                            <th>Nama Data (PDU)</th>
+                        </tr>
+                        <tr>
+                            <td>Layer 7, 6, 5</td>
+                            <td><strong class="highlight-blue">Message / Data</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Layer 4</td>
+                            <td><strong class="highlight-orange">Segment (TCP) / Datagram (UDP)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Layer 3</td>
+                            <td><strong class="highlight-green">Packet / Datagram</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Layer 2</td>
+                            <td><strong class="highlight-red">Frame</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Layer 1</td>
+                            <td><strong>Bits</strong></td>
+                        </tr>
                     </table>
                 </div>
             </section>
@@ -312,7 +492,8 @@
                 <div class="card text-left text-small">
                     <ul>
                         <li>Dibuat oleh Vint Cerf & Bob Kahn dari militer AS (ARPANET) jauh sebelum OSI ada.</li>
-                        <li>Karena sudah duluan matang dan terbukti, internet dunia sepakat menggunakan arsitektur TCP/IP alih-alih standar teoretis OSI.</li>
+                        <li>Karena sudah duluan matang dan terbukti, internet dunia sepakat menggunakan arsitektur
+                            TCP/IP alih-alih standar teoretis OSI.</li>
                         <li>Merupakan Model yang lebih praktis (hanya 4 atau 5 layer).</li>
                     </ul>
                 </div>
@@ -327,7 +508,8 @@
                         <li><strong>Internet Layer</strong> (Ekuivalen Network Layer Layer 3 OSI).</li>
                         <li><strong>Network Access Layer</strong> (Gabungan Layer 1 dan 2 OSI).</li>
                     </ol>
-                    <p class="highlight-blue text-smaller">*Banyak literatur modern memecah layer terbawah jadi dua, sehingga jadi model hybrid 5 Layer.*</p>
+                    <p class="highlight-blue text-smaller">*Banyak literatur modern memecah layer terbawah jadi dua,
+                        sehingga jadi model hybrid 5 Layer.*</p>
                 </div>
             </section>
 
@@ -335,7 +517,9 @@
                 <h3>TCP/IP: Network Access Layer</h3>
                 <div class="card text-left text-small">
                     <p>Ekuivalen dengan Data Link + Physical.</p>
-                    <p>Rahasia TCP/IP adalah dia <strong>tidak mengatur secara spesifik</strong> layer bawah ini. TCP/IP dirancang untuk bisa jalan menumpang di atas teknologi hardware apapun (Ethernet kuno, Wi-Fi modern, kabel fiber terbaru) tanpa masalah.</p>
+                    <p>Rahasia TCP/IP adalah dia <strong>tidak mengatur secara spesifik</strong> layer bawah ini. TCP/IP
+                        dirancang untuk bisa jalan menumpang di atas teknologi hardware apapun (Ethernet kuno, Wi-Fi
+                        modern, kabel fiber terbaru) tanpa masalah.</p>
                 </div>
             </section>
 
@@ -344,7 +528,8 @@
                 <div class="card text-left text-small">
                     <p>Raja di layer ini adalah protokol <strong>IP (Internet Protocol)</strong>.</p>
                     <ul>
-                        <li>Sifat IP adalah <em>Best-Effort Delivery</em> (Berusaha ngirim sebisa mungkin, tapi kalau paketnya hilang, IP tidak akan mengulang pengiriman).</li>
+                        <li>Sifat IP adalah <em>Best-Effort Delivery</em> (Berusaha ngirim sebisa mungkin, tapi kalau
+                            paketnya hilang, IP tidak akan mengulang pengiriman).</li>
                         <li>Protokol pembantunya: ICMP (untuk Ping), ARP (cari MAC Address).</li>
                     </ul>
                 </div>
@@ -354,9 +539,11 @@
                 <h3>TCP/IP: Transport Layer</h3>
                 <div class="card text-left text-small">
                     <h4 class="highlight-blue">1. TCP (Transmission Control Protocol)</h4>
-                    <p><em>Reliable</em> (pasti sampai tanpa rusak). Jika ada cacat atau paket hilang, TCP menuntut retransmisi. Lambat tapi presisi. (Dipakai Web HTTP, Email).</p>
+                    <p><em>Reliable</em> (pasti sampai tanpa rusak). Jika ada cacat atau paket hilang, TCP menuntut
+                        retransmisi. Lambat tapi presisi. (Dipakai Web HTTP, Email).</p>
                     <h4 class="highlight-orange">2. UDP (User Datagram Protocol)</h4>
-                    <p><em>Unreliable</em>. Tidak ada garansi paket sampai. Jika hilang, lupakan saja. Keunggulannya adalah SUPER CEPAT. (Dipakai untuk Zoom Call, Game FPS, DNS).</p>
+                    <p><em>Unreliable</em>. Tidak ada garansi paket sampai. Jika hilang, lupakan saja. Keunggulannya
+                        adalah SUPER CEPAT. (Dipakai untuk Zoom Call, Game FPS, DNS).</p>
                 </div>
             </section>
 
@@ -364,7 +551,8 @@
                 <h3>TCP/IP: Application Layer</h3>
                 <div class="card text-left text-small">
                     <ul>
-                        <li>Segala urusan Session dan Presentation diserahkan kepada <em>programmer</em> aplikasinya sendiri. Sistem operasi jaringan lepas tangan.</li>
+                        <li>Segala urusan Session dan Presentation diserahkan kepada <em>programmer</em> aplikasinya
+                            sendiri. Sistem operasi jaringan lepas tangan.</li>
                         <li>Ini membuat pembuatan aplikasi lebih gesit dan praktis.</li>
                         <li>Contoh protokolnya: HTTP, SMTP, FTP, DNS.</li>
                     </ul>
@@ -377,10 +565,30 @@
             </section>
 
             <section>
-                <h3>Perbandingan Visual (Mapping)</h3>
-                <div class="card text-center text-small">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/UDP_encapsulation.svg/512px-UDP_encapsulation.svg.png" alt="TCP/IP" style="height: 250px; object-fit: contain;">
-                    <p>Secara konsep: 3 Layer atas OSI dikompres jadi 1 Layer Application di TCP/IP. 2 Layer bawah OSI dikompres jadi 1 Layer Network Access di TCP/IP lama.</p>
+                <h3>Perbandingan OSI vs TCP/IP</h3>
+                <div
+                    style="display: flex; gap: 20px; align-items:flex-end; justify-content:center; text-align:center; font-size:0.75em; font-weight:bold;">
+                    <div style="flex:1; display:flex; flex-direction:column; gap:2px;">
+                        <h4 style="font-size:1.2em;">OSI 7 Layer</h4>
+                        <div style="background:#f48fb1; padding:10px; color:#000;">7. Application</div>
+                        <div style="background:#ce93d8; padding:10px; color:#000;">6. Presentation</div>
+                        <div style="background:#b39ddb; padding:10px; color:#000;">5. Session</div>
+                        <div style="background:#90caf9; padding:10px; color:#000;">4. Transport</div>
+                        <div style="background:#80cbc4; padding:10px; color:#000;">3. Network</div>
+                        <div style="background:#a5d6a7; padding:10px; color:#000;">2. Data Link</div>
+                        <div style="background:#e6ee9c; padding:10px; color:#000;">1. Physical</div>
+                    </div>
+                    <div style="flex:1; display:flex; flex-direction:column; gap:2px;">
+                        <h4 style="font-size:1.2em;">TCP/IP 4 Layer</h4>
+                        <div
+                            style="background:#ffb74d; padding:10px; height: 114px; display:flex; align-items:center; justify-content:center; color:#000;">
+                            Application</div>
+                        <div style="background:#90caf9; padding:10px; color:#000;">Transport</div>
+                        <div style="background:#80cbc4; padding:10px; color:#000;">Internet</div>
+                        <div
+                            style="background:#dce775; padding:10px; height: 72px; display:flex; align-items:center; justify-content:center; color:#000;">
+                            Network Access</div>
+                    </div>
                 </div>
             </section>
 
@@ -388,9 +596,11 @@
                 <h3>Perbedaan Konseptual (Teori vs Praktek)</h3>
                 <div class="card text-left text-small">
                     <p><strong class="highlight-blue">Model OSI (Pecinta Teori):</strong></p>
-                    <p>Model ini dirancang <em>dulu</em> secara sangat rapi, barulah ilmuwan pusing memikirkan cara bikin protokolnya.</p>
+                    <p>Model ini dirancang <em>dulu</em> secara sangat rapi, barulah ilmuwan pusing memikirkan cara
+                        bikin protokolnya.</p>
                     <p><strong class="highlight-orange">Model TCP/IP (Pekerja Praktek):</strong></p>
-                    <p>Protokolnya dibikin dan dipakai <em>dulu</em> sampai berhasil jalan, barulah arsitekturnya dituliskan jadi standar.</p>
+                    <p>Protokolnya dibikin dan dipakai <em>dulu</em> sampai berhasil jalan, barulah arsitekturnya
+                        dituliskan jadi standar.</p>
                 </div>
             </section>
 
@@ -398,7 +608,9 @@
                 <h3>Mengapa OSI Gagal Mendominasi? (Bag. 1)</h3>
                 <div class="card text-left text-small">
                     <ul>
-                        <li><strong class="highlight-red">Waktu yang Terlambat:</strong> Saat buku standar OSI baru dicetak (1984), kampus-kampus dan perusahaan di Amerika sudah memakai TCP/IP dan tidak mau pindah karena biaya ganti sistem itu triliunan.</li>
+                        <li><strong class="highlight-red">Waktu yang Terlambat:</strong> Saat buku standar OSI baru
+                            dicetak (1984), kampus-kampus dan perusahaan di Amerika sudah memakai TCP/IP dan tidak mau
+                            pindah karena biaya ganti sistem itu triliunan.</li>
                     </ul>
                 </div>
             </section>
@@ -407,8 +619,11 @@
                 <h3>Mengapa OSI Gagal Mendominasi? (Bag. 2)</h3>
                 <div class="card text-left text-small">
                     <ul>
-                        <li><strong class="highlight-orange">Terlalu Kompleks:</strong> Layer 5 (Session) dan Layer 6 (Presentation) sering terbukti tidak berguna di mayoritas aplikasi, tapi membuat sistem operasi jadi sangat berat.</li>
-                        <li><strong class="highlight-green">Software yang Lambat:</strong> Implementasi awal kode program OSI sangat buruk dibanding Unix yang menanamkan TCP/IP secara gratis dan cepat.</li>
+                        <li><strong class="highlight-orange">Terlalu Kompleks:</strong> Layer 5 (Session) dan Layer 6
+                            (Presentation) sering terbukti tidak berguna di mayoritas aplikasi, tapi membuat sistem
+                            operasi jadi sangat berat.</li>
+                        <li><strong class="highlight-green">Software yang Lambat:</strong> Implementasi awal kode
+                            program OSI sangat buruk dibanding Unix yang menanamkan TCP/IP secara gratis dan cepat.</li>
                     </ul>
                 </div>
             </section>
@@ -421,14 +636,21 @@
 
             <section>
                 <h3>Hierarki Alamat (Forouzan)</h3>
-                <div class="card text-left text-small">
-                    <p>TCP/IP menggunakan 4 tipe alamat, masing-masing nyangkut di 1 layer spesifik:</p>
-                    <ol>
-                        <li>Physical Address (Layer 2)</li>
-                        <li>Logical Address (Layer 3)</li>
-                        <li>Port Address (Layer 4)</li>
-                        <li>Specific Address (Layer 7)</li>
-                    </ol>
+                <div style="display: flex; gap: 20px; align-items:center;">
+                    <div style="flex: 1;" class="card text-left text-small">
+                        <p>TCP/IP menggunakan 4 tipe alamat, masing-masing nyangkut di 1 layer spesifik:</p>
+                        <ol>
+                            <li>Physical Address (Layer 2)</li>
+                            <li>Logical Address (Layer 3)</li>
+                            <li>Port Address (Layer 4)</li>
+                            <li>Specific Address (Layer 7)</li>
+                        </ol>
+                    </div>
+                    <div style="flex: 1;">
+                        <img src="assets/address_hierarchy_forouzan_1788854793640.jpg"
+                            style="width:100%; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"
+                            alt="TCP/IP Address Hierarchy">
+                    </div>
                 </div>
             </section>
 
@@ -439,7 +661,8 @@
                         <li>Dikenal sebagai <strong>MAC Address</strong> (Media Access Control).</li>
                         <li>Panjangnya 48-bit heksadesimal (Misal: 07:01:02:01:2C:4B).</li>
                         <li>Ditanam mati secara fisik di kartu jaringan laptop/HP Anda oleh pabrik.</li>
-                        <li>Alamat ini hanya bermakna di jaringan area lokal yang sama. Jika Anda beda negara, MAC tidak berguna.</li>
+                        <li>Alamat ini hanya bermakna di jaringan area lokal yang sama. Jika Anda beda negara, MAC tidak
+                            berguna.</li>
                     </ul>
                 </div>
             </section>
@@ -450,7 +673,8 @@
                     <ul>
                         <li>Dikenal sebagai <strong>IP Address</strong>.</li>
                         <li>Panjangnya 32-bit untuk IPv4 (Misal: 192.168.1.10).</li>
-                        <li>Bisa berubah-ubah. Jika Anda putus dari Wi-Fi rumah dan nyambung ke Wi-Fi Starbucks, IP Address Anda diganti.</li>
+                        <li>Bisa berubah-ubah. Jika Anda putus dari Wi-Fi rumah dan nyambung ke Wi-Fi Starbucks, IP
+                            Address Anda diganti.</li>
                         <li>Berfungsi bagaikan alamat rumah global yang dimengerti oleh seluruh router di dunia.</li>
                     </ul>
                 </div>
@@ -461,8 +685,10 @@
                 <div class="card text-left text-small">
                     <ul>
                         <li>Angka 16-bit (contoh: Port 80, 443, 21).</li>
-                        <li>Karena 1 IP Address bisa membuka Browser, Zoom, dan Spotify sekaligus. Alamat IP saja tidak cukup!</li>
-                        <li>Port Address memastikan paket "Masuk dari IP rumah, lanjut masuk ke kamar/aplikasi Spotify dengan port yang tepat".</li>
+                        <li>Karena 1 IP Address bisa membuka Browser, Zoom, dan Spotify sekaligus. Alamat IP saja tidak
+                            cukup!</li>
+                        <li>Port Address memastikan paket "Masuk dari IP rumah, lanjut masuk ke kamar/aplikasi Spotify
+                            dengan port yang tepat".</li>
                     </ul>
                 </div>
             </section>
@@ -486,9 +712,42 @@
                     <ul>
                         <li>Layering membagi masalah jaringan besar jadi tugas spesifik modular.</li>
                         <li>OSI Model punya 7 layer teoritis yang baik untuk media ajar akademik.</li>
-                        <li>TCP/IP Model punya 4/5 layer yang memenangkan peperangan dan menjadi nyawa internet asli.</li>
+                        <li>TCP/IP Model punya 4/5 layer yang memenangkan peperangan dan menjadi nyawa internet asli.
+                        </li>
                         <li>Data dibungkus dari atas ke bawah (Enkapsulasi) dengan Header MAC, IP, dan Port.</li>
                     </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3 style="color:#ffb74d;"><i class="bi bi-laptop"></i> Tugas Pertemuan 2</h3>
+                <div class="card text-left text-smaller" style="font-size: 0.5em !important; line-height: 1.3;">
+                    <p><strong>Tujuan:</strong> Membuktikan teori Hierarki Alamat dan Enkapsulasi di dunia nyata.
+                        <br><em style="color:#f44336; font-size:0.8em;">(Tugas ini membutuhkan data real-time dari
+                            network lokal Anda)</em>
+                    </p>
+                    <ol>
+                        <li>Install dan jalankan aplikasi <strong>Wireshark</strong> di laptop Anda.</li>
+                        <li>Mulai proses <em>Capture</em> jaringan, lalu buka browser dan akses sebuah website, contoh
+                            <code>www.itera.ac.id</code>.
+                        </li>
+                        <li>Hentikan <em>Capture</em>. Filter dan temukan <strong>1 buah paket</strong> TCP/TLS/HTTP
+                            yang menuju server tersebut.</li>
+                        <li><strong>Analisis Paket:</strong> Bedah layer paket tersebut di Wireshark, temukan dan
+                            <em>screenshot</em> letak ke-4 Hierarki Alamat ini:
+                            <ul>
+                                <li><strong>Physical (L2):</strong> MAC Address asal (Laptop Anda) & tujuan (Gateway
+                                    Anda).</li>
+                                <li><strong>Logical (L3):</strong> IP Address asal (Laptop Anda) & tujuan (Server
+                                    ITERA).</li>
+                                <li><strong>Port (L4):</strong> Source Port (Dinamis) & Destination Port (80/443).</li>
+                                <li><strong>Specific (L7):</strong> Hostname/URL yang diakses (misal pada layer
+                                    TLS/HTTP).</li>
+                            </ul>
+                        </li>
+                        <li>Kumpulkan dalam format PDF berisi <em>screenshot</em> asli dari PC Anda yang sudah diberi
+                            kotak penanda (highlight).</li>
+                    </ol>
                 </div>
             </section>
 
@@ -506,16 +765,17 @@
             hash: true,
             slideNumber: 'c/t',
             transition: 'slide',
-            plugins: [ RevealNotes ]
+            plugins: [RevealNotes]
         });
     </script>
 
     <!-- Theme Toggle -->
-    <button id="theme-toggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+    <button id="theme-toggle"
+        style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
         <i class="bi bi-moon-fill" id="theme-icon"></i>
     </button>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const toggleBtn = document.getElementById('theme-toggle');
             const themeLink = document.getElementById('theme');
             const themeIcon = document.getElementById('theme-icon');
@@ -550,4 +810,5 @@
         });
     </script>
 </body>
+
 </html>
