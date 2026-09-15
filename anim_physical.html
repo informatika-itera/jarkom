@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin:0; background:#111; color:white; font-family:monospace; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; overflow:hidden;}
+  h2 { color:#4caf50; font-family:sans-serif; margin-bottom:50px;}
+  .track { width:800px; height:100px; border-bottom:1px solid #333; display:flex; align-items:center; position:relative; }
+  .label { width:200px; font-size:1.5em; color:#888; font-family:sans-serif;}
+  
+  .bits { position:absolute; left:200px; font-size:2.5em; font-weight:bold; letter-spacing:10px; color:#fff; animation: move-bits 3s infinite linear;}
+  
+  .wave-container { position:absolute; left:400px; width:400px; height:100px; overflow:hidden;}
+  .square-wave { width:100%; height:100%; background: repeating-linear-gradient(90deg, transparent, transparent 20px, #2196f3 20px, #2196f3 40px); clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%); animation: scroll-bg 1s infinite linear; }
+  .light-pulse { width:100%; height:100%; background: repeating-linear-gradient(90deg, transparent, transparent 30px, #e91e63 30px, #e91e63 50px); opacity:0.8; filter:blur(4px); animation: scroll-bg 0.5s infinite linear; }
+  
+  @keyframes move-bits {
+    0% { transform: translateX(0); opacity:1;}
+    60% { transform: translateX(120px); opacity:1; color:#0ff;}
+    100% { transform: translateX(200px); opacity:0; }
+  }
+  @keyframes scroll-bg {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 0; }
+  }
+</style>
+</head>
+<body>
+  <h2>Layer 1: Physical Transformation</h2>
+  <div class="track">
+    <div class="label">Copper Wire<br><span style="font-size:0.5em;">Electrical Signal</span></div>
+    <div class="bits">1011001</div>
+    <div class="wave-container">
+      <div class="square-wave"></div>
+    </div>
+  </div>
+  <div class="track" style="margin-top:20px;">
+    <div class="label">Fiber Optic<br><span style="font-size:0.5em;">Light Pulse</span></div>
+    <div class="bits" style="animation-delay:0.5s;">0110101</div>
+    <div class="wave-container">
+      <div class="light-pulse"></div>
+    </div>
+  </div>
+</body>
+</html>

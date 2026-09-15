@@ -1,985 +1,1587 @@
 <!doctype html>
 <html lang="id">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Jaringan Komputer - Pertemuan 3: Lapisan Fisik &amp; Cabling</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
     <link rel="stylesheet" href="css/pkom-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
-        .reveal .slides section { height:100%; overflow-y:auto !important; padding-bottom:50px; }
+        @media screen {
+            .reveal .slides section {
+                max-height: 100%;
+                overflow-y: auto;
+                padding-bottom: 20px;
+            }
+
+            .reveal img {
+                max-height: 45vh;
+                object-fit: contain;
+            }
+        }
+
+        @media print {
+            .reveal .slides section {
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            .reveal img,
+            .card {
+                page-break-inside: avoid;
+            }
+        }
+
+        .reveal .card {
+            margin-bottom: 10px;
+        }
 
         /* images */
-        .slide-img    { width:100%; height:auto; max-height:38vh; object-fit:contain; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,.15); display:block; }
-        .slide-img-sm { width:100%; height:auto; max-height:26vh; object-fit:contain; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,.15); display:block; }
+        .slide-img {
+            width: 100%;
+            max-height: 38vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .15);
+            display: block;
+        }
+
+        .slide-img-sm {
+            width: 100%;
+            max-height: 26vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .15);
+            display: block;
+        }
+
+        .slide-img-xs {
+            width: 100%;
+            max-height: 18vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+            display: block;
+        }
 
         /* layouts */
-        .layout-2col     { display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start; width:100%; }
-        .layout-text-img { display:grid; grid-template-columns:58% 1fr; gap:18px; align-items:center; width:100%; }
-        .img-col     { display:flex; flex-direction:column; align-items:center; gap:.4em; }
-        .img-caption { font-size:.52em; color:#777; text-align:center; margin-top:.1em; font-style:italic; }
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .layout-text-img {
+            display: grid;
+            grid-template-columns: 58% 1fr;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .img-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .35em;
+        }
+
+        .img-caption {
+            font-size: .52em;
+            color: #777;
+            text-align: center;
+            margin-top: .1em;
+            font-style: italic;
+        }
 
         /* grid-4 */
-        .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-        .media-card { background:#fff; border-radius:10px; border:1px solid #dee2e6; padding:14px 8px; text-align:center; box-shadow:0 3px 10px rgba(0,0,0,.07); }
-        .media-card .icon-circle { width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5em; margin:0 auto 8px; }
-        .media-card h5 { font-size:.62em; font-weight:700; margin:0 0 5px; }
-        .media-card p  { font-size:.52em; color:#555; line-height:1.45; margin:0; }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
 
-        /* table */
-        .reveal table { font-size:.65em; width:100%; border-collapse:collapse; }
-        .reveal table th,.reveal table td { padding:7px 12px; border:1px solid #dee2e6; text-align:left; vertical-align:top; }
-        .reveal table th { background:#f0f4f8; font-weight:700; }
-        .reveal table tr:nth-child(even) td { background:#fafbfc; }
+        .media-card {
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            padding: 12px 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .07);
+        }
+
+        .media-card .icon-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+            margin: 0 auto 7px;
+        }
+
+        .media-card h5 {
+            font-size: .60em;
+            font-weight: 700;
+            margin: 0 0 4px;
+        }
+
+        .media-card p {
+            font-size: .50em;
+            color: #555;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* section bars */
+        .sec-bar {
+            border-radius: 7px;
+            padding: 5px 14px;
+            font-size: .65em;
+            font-weight: 700;
+            letter-spacing: .03em;
+            margin-bottom: 4px;
+        }
+
+        .sec-bar-blue {
+            background: #1565c0;
+            color: #fff;
+        }
+
+        .sec-bar-orange {
+            background: #e65100;
+            color: #fff;
+        }
+
+        .sec-bar-green {
+            background: #2e7d32;
+            color: #fff;
+        }
+
+        .sec-bar-purple {
+            background: #6a1b9a;
+            color: #fff;
+        }
+
+        .sec-bar-teal {
+            background: #00695c;
+            color: #fff;
+        }
+
+        .sec-body {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 7px;
+            padding: 10px 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        /* info boxes */
+        .info-box {
+            border-left: 4px solid #007bff;
+            background: #f0f6ff;
+            border-radius: 0 7px 7px 0;
+            padding: 8px 12px;
+            font-size: .65em;
+            margin-top: .5em;
+        }
+
+        .info-box-warn {
+            border-left: 4px solid #e65100;
+            background: #fff8f2;
+            border-radius: 0 7px 7px 0;
+            padding: 8px 12px;
+            font-size: .65em;
+            margin-top: .5em;
+        }
+
+        .info-box-green {
+            border-left: 4px solid #2e7d32;
+            background: #f2fbf4;
+            border-radius: 0 7px 7px 0;
+            padding: 8px 12px;
+            font-size: .65em;
+            margin-top: .5em;
+        }
+
+        /* tugas */
+        .tugas-box {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            border-radius: 12px;
+            padding: 18px 24px;
+            color: #fff;
+        }
+
+        .tugas-box h3 {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .tugas-soal {
+            background: rgba(255, 255, 255, .12);
+            border-radius: 9px;
+            padding: 11px 15px;
+            margin: 7px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .63em;
+            line-height: 1.55;
+            margin: 0;
+            color: #e8eaf6;
+        }
+
+        .tugas-soal .num {
+            font-size: .85em;
+            font-weight: 700;
+            color: #ffeb3b;
+        }
+
+        .tugas-info {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: .56em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* wire colors */
+        .wire-o {
+            color: #e67e22;
+            font-weight: 700;
+        }
+
+        .wire-ow {
+            color: #d35400;
+            font-weight: 700;
+        }
+
+        .wire-g {
+            color: #27ae60;
+            font-weight: 700;
+        }
+
+        .wire-gw {
+            color: #1e8449;
+            font-weight: 700;
+        }
+
+        .wire-b {
+            color: #2980b9;
+            font-weight: 700;
+        }
+
+        .wire-bw {
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .wire-br {
+            color: #7d6608;
+            font-weight: 700;
+        }
+
+        .wire-brw {
+            color: #a04000;
+            font-weight: 700;
+        }
 
         /* badges */
-        .badge-radio { background:#e3f2fd; color:#1565c0; }
-        .badge-micro { background:#fff3e0; color:#e65100; }
-        .badge-ir    { background:#e8f5e9; color:#2e7d32; }
-        .badge-sat   { background:#f3e5f5; color:#6a1b9a; }
+        .badge-radio {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
 
-        /* section header bar */
-        .sec-bar { border-radius:8px; padding:7px 16px; font-size:.68em; font-weight:700; letter-spacing:.04em; margin-bottom:4px; }
-        .sec-bar-blue   { background:#1565c0; color:#fff; }
-        .sec-bar-orange { background:#e65100; color:#fff; }
-        .sec-bar-green  { background:#2e7d32; color:#fff; }
-        .sec-bar-purple { background:#6a1b9a; color:#fff; }
-        .sec-bar-teal   { background:#00695c; color:#fff; }
-        .sec-body { background:#fff; border:1px solid #dee2e6; border-radius:8px; padding:12px 16px; box-shadow:0 2px 8px rgba(0,0,0,.05); }
+        .badge-micro {
+            background: #fff3e0;
+            color: #e65100;
+        }
 
-        /* warna info box */
-        .info-box { border-left:4px solid #007bff; background:#f0f6ff; border-radius:0 8px 8px 0; padding:10px 14px; font-size:.68em; margin-top:.5em; }
-        .info-box-warn { border-left:4px solid #e65100; background:#fff8f2; border-radius:0 8px 8px 0; padding:10px 14px; font-size:.68em; margin-top:.5em; }
-        .info-box-green { border-left:4px solid #2e7d32; background:#f2fbf4; border-radius:0 8px 8px 0; padding:10px 14px; font-size:.68em; margin-top:.5em; }
+        .badge-ir {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
 
-        /* tugas slide */
-        .tugas-box { background:linear-gradient(135deg,#1a237e 0%,#283593 100%); border-radius:14px; padding:22px 28px; color:#fff; }
-        .tugas-box h3 { color:#fff; margin-bottom:6px; }
-        .tugas-soal { background:rgba(255,255,255,.12); border-radius:10px; padding:14px 18px; margin:10px 0; }
-        .tugas-soal p { font-size:.65em; line-height:1.6; margin:0; color:#e8eaf6; }
-        .tugas-soal .num { font-size:.85em; font-weight:700; color:#ffeb3b; }
-        .tugas-info { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
-        .tugas-chip { background:rgba(255,255,255,.2); border-radius:20px; padding:5px 14px; font-size:.58em; color:#fff; display:flex; align-items:center; gap:5px; }
+        .badge-sat {
+            background: #f3e5f5;
+            color: #6a1b9a;
+        }
 
-        /* color wire */
-        .wire-o { color:#e67e22; font-weight:700; }
-        .wire-ow { color:#d35400; font-weight:700; }
-        .wire-g { color:#27ae60; font-weight:700; }
-        .wire-gw { color:#1e8449; font-weight:700; }
-        .wire-b { color:#2980b9; font-weight:700; }
-        .wire-bw { color:#1a5276; font-weight:700; }
-        .wire-br { color:#7d6608; font-weight:700; }
-        .wire-brw { color:#a04000; font-weight:700; }
+        /* dark mode */
+        [data-theme="dark"] .sec-body,
+        [data-theme="dark"] .media-card {
+            background: #2a2a2a !important;
+            color: #eee !important;
+            border-color: #444 !important;
+        }
+
+        [data-theme="dark"] .info-box {
+            background: #1a365d !important;
+            color: #e2e8f0 !important;
+        }
+
+        [data-theme="dark"] .info-box-warn {
+            background: #4a3000 !important;
+            color: #fbd38d !important;
+        }
+
+        [data-theme="dark"] .info-box-green {
+            background: #0f3a1f !important;
+            color: #c6f6d5 !important;
+        }
+
+        [data-theme="dark"] .reveal table th {
+            background: #1a365d !important;
+            color: #fff !important;
+        }
+
+        [data-theme="dark"] .reveal table tr:nth-child(even) td {
+            background: #222 !important;
+        }
+
+        [data-theme="dark"] .reveal table td {
+            border-color: #555 !important;
+        }
     </style>
 </head>
+
 <body>
-<div class="reveal">
-    <div class="footer-branding">
-        <div class="footer-logos"></div>
-        <div class="footer-copyright">&copy; 2026 IF25-21008 Jaringan Komputer - ITERA</div>
-    </div>
-
-    <div class="slides">
-
-    <!-- ━━━━━━━━━━━━━━ INTRO ━━━━━━━━━━━━━━ -->
-    <section>
-        <div class="title-box">
-            <h1>Lapisan Fisik &amp; Cabling</h1>
-            <h3 class="subtitle">Pertemuan 3</h3>
+    <div class="reveal">
+        <div class="footer-branding">
+            <div class="footer-logos"></div>
+            <div class="footer-copyright">&copy; 2026 IF25-21008 Jaringan Komputer - ITERA</div>
         </div>
-        <p>Referensi Utama: Forouzan — <em>Data Communications and Networking</em></p>
-        <p class="text-small"><em>Dosen Pengampu:</em></p>
-        <div style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
-            <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
-            <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
-            <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
-            <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
-        </div>
-        <aside class="notes">Selamat pagi/siang. Hari ini kita turun ke lapisan terbawah dari model OSI, yaitu Physical Layer.</aside>
-    </section>
 
-    <section>
-        <h3>Outline Materi (100 Menit)</h3>
-        <div class="layout-2col">
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#1565c0;">Teori</p>
-                <ul>
-                    <li>Konsep Sinyal: Analog vs Digital</li>
-                    <li>Gangguan Transmisi (Impairment)</li>
-                    <li>Guided Media: Twisted Pair, Coaxial, Fiber Optik</li>
-                    <li>Unguided Media: Radio, Microwave, Infrared, Satelit</li>
-                </ul>
-            </div>
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#e65100;">Praktikum &amp; Tugas</p>
-                <ul>
-                    <li>Crimping Kabel UTP (Straight &amp; Cross)</li>
-                    <li>Pengujian dengan LAN Tester</li>
-                    <li><strong>Tugas Individu</strong> — Analitik tertulis</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        <div class="slides">
 
-    <!-- ━━━━━━━━━━━━━━ SECTION 1: SINYAL ━━━━━━━━━━━━━━ -->
-    <section>
-        <h2>1. Konsep Sinyal &amp; Transmisi</h2>
-        <aside class="notes">Sebelum membahas kabel, kita harus tahu apa wujud data yang mengalir di dalamnya.</aside>
-    </section>
-
-    <!-- 1a. Data vs Sinyal -->
-    <section>
-        <h3>Data vs Sinyal</h3>
-        <div class="layout-text-img">
-            <div class="card text-left text-small">
-                <ul>
-                    <li><strong>Data:</strong> Entitas yang mengandung informasi (teks, gambar, video). Komputer menyimpannya sebagai bit 0 dan 1.</li>
-                    <li style="margin-top:.5em;"><strong>Sinyal:</strong> Representasi elektrik/elektromagnetik dari data, agar bisa merambat secara fisik melalui kabel atau udara.</li>
-                </ul>
-                <div class="info-box" style="margin-top:.8em;">
-                    💡 Kabel LAN tidak memindahkan file video secara langsung. Kabel LAN memindahkan <strong>voltase listrik</strong> yang merepresentasikan setiap bit dari file tersebut.
+            <!-- INTRO -->
+            <section>
+                <div class="title-box">
+                    <h1>Lapisan Fisik &amp; Cabling</h1>
+                    <h3 class="subtitle">Pertemuan 3</h3>
                 </div>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image6.png" alt="Diagram Sistem Transmisi: Transmitter — Channel — Receiver" class="slide-img">
-                <p class="img-caption">Sistem transmisi dasar</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 1b. Sinyal Analog -->
-    <section>
-        <h3>Sinyal Analog</h3>
-        <div class="layout-text-img">
-            <div>
-                <div class="sec-bar sec-bar-blue">Apa itu Sinyal Analog?</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>Intensitas (voltase) berubah secara <strong>kontinu dan mulus</strong> seiring waktu — tidak ada lompatan mendadak.</li>
-                        <li>Digambarkan sebagai gelombang sinus yang meliuk-liuk.</li>
-                        <li>Tiga parameter utama: <strong>Amplitudo</strong> (kekuatan), <strong>Frekuensi</strong> (kecepatan gelombang), <strong>Phase</strong> (posisi awal gelombang).</li>
-                    </ul>
+                <p>Referensi Utama: Forouzan &mdash; <em>Data Communications and Networking</em></p>
+                <p class="text-small"><em>Dosen Pengampu:</em></p>
+                <div
+                    style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                    <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
+                    <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
+                    <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
                 </div>
-                <div class="info-box" style="margin-top:.7em;">
-                    <strong>Contoh nyata:</strong> Suara manusia yang merambat di udara, siaran radio FM, sinyal telepon kabel generasi lama.
-                </div>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image6.png" alt="Gelombang analog: kontinu dan mulus" class="slide-img">
-                <p class="img-caption">Gelombang analog — kontinu &amp; mulus</p>
-            </div>
-        </div>
-    </section>
+                <aside class="notes">Selamat pagi/siang. Hari ini kita turun ke lapisan terbawah dari model OSI, yaitu
+                    Physical Layer.</aside>
+            </section>
 
-    <!-- 1c. Sinyal Digital -->
-    <section>
-        <h3>Sinyal Digital &amp; Modulasi</h3>
-        <div class="layout-2col">
-            <div>
-                <div class="sec-bar sec-bar-orange">Sinyal Digital</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>Hanya memiliki nilai <strong>diskrit yang terbatas</strong> — biasanya dua level: tinggi dan rendah.</li>
-                        <li>Bentuk gelombang: persegi (kotak-kotak, patah tajam).</li>
-                        <li>Disukai komputer karena representasi biner langsung:<br>
-                            &nbsp;&nbsp;&nbsp;• <strong>+5 Volt = bit 1</strong><br>
-                            &nbsp;&nbsp;&nbsp;• <strong>0 Volt = bit 0</strong>
+            <!-- OUTLINE -->
+            <section>
+                <h3>Outline Materi</h3>
+                <div class="card text-left text-small" style="max-width: 700px; margin: 0 auto; padding: 20px 40px;">
+                    <ol style="line-height: 1.6;">
+                        <li>Konsep Sinyal: Analog vs Digital</li>
+                        <li>Gangguan Transmisi</li>
+                        <li>Guided Media:
+                            <ol type="a" style="margin-top:0; padding-left:1.4em; font-size:.92em;">
+                                <li>Coaxial</li>
+                                <li>Twisted Pair</li>
+                                <li>Fiber Optik</li>
+                            </ol>
                         </li>
-                    </ul>
+                        <li>Unguided Media:
+                            <ol type="a" style="margin-top:0; padding-left:1.4em; font-size:.92em;">
+                                <li>Radio</li>
+                                <li>Microwave</li>
+                                <li>Infrared</li>
+                                <li>Satelit</li>
+                            </ol>
+                        </li>
+                    </ol>
                 </div>
-            </div>
-            <div>
-                <div class="sec-bar sec-bar-teal">Modulasi — Mo-Dem</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>Proses <strong>menumpangkan</strong> data digital ke atas sinyal analog pembawa (<em>carrier signal</em>).</li>
-                        <li>Diperlukan agar sinyal bisa dikirim jarak jauh (4G, satelit, ADSL).</li>
-                        <li>Alat yang melakukan modulasi (digital→analog) dan demodulasi (analog→digital) disebut <strong>Modem</strong>.</li>
-                    </ul>
+            </section>
+
+            <!-- SECTION 1: SINYAL -->
+            <section>
+                <h2>1. Konsep Sinyal &amp; Transmisi</h2>
+                <aside class="notes">Sebelum membahas kabel, kita harus tahu apa wujud data yang mengalir di dalamnya.
+                </aside>
+            </section>
+
+            <!-- 1a. Data vs Sinyal -->
+            <section>
+                <h3>Data vs Sinyal</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <ul>
+                            <li><strong>Data:</strong> Entitas yang mengandung informasi (teks, gambar, video). Komputer
+                                menyimpannya sebagai bit 0 dan 1.</li>
+                            <li style="margin-top:.5em;"><strong>Sinyal:</strong> Representasi elektrik/elektromagnetik
+                                dari data, agar bisa merambat secara fisik melalui kabel atau udara.</li>
+                        </ul>
+                        <div class="info-box">
+                            &#x1F4A1; Kabel LAN tidak memindahkan file video secara langsung. Kabel LAN memindahkan
+                            <strong>voltase listrik</strong> yang merepresentasikan setiap bit dari file tersebut.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/image6.png" alt="Diagram Sistem Transmisi: Transmitter - Channel - Receiver"
+                            class="slide-img">
+                        <p class="img-caption">Sistem transmisi dasar</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- ━━━━━━━━━━━━━━ SECTION 2: IMPAIRMENT ━━━━━━━━━━━━━━ -->
-    <section>
-        <h2>2. Gangguan Transmisi (Impairment)</h2>
-        <aside class="notes">Sinyal yang dikirim tidak pernah sampai persis sama. Ada 3 jenis gangguan utama.</aside>
-    </section>
-
-    <!-- 2a. Overview 3 jenis -->
-    <section>
-        <h3>Tiga Jenis Gangguan Transmisi</h3>
-        <div class="layout-text-img">
-            <div class="card text-left text-small">
-                <p>Sinyal yang dikirim dari titik A <strong>tidak pernah</strong> tiba 100% identik di titik B. Selalu ada degradasi akibat tiga faktor:</p>
-                <ol style="margin-top:.5em;">
-                    <li style="margin-bottom:.6em;"><strong class="highlight-red">Attenuation (Redaman)</strong> — sinyal kehilangan energi dan melemah.</li>
-                    <li style="margin-bottom:.6em;"><strong class="highlight-orange">Distortion (Distorsi)</strong> — bentuk sinyal berubah dari aslinya.</li>
-                    <li><strong style="color:#6a1b9a;">Noise (Kebisingan)</strong> — sinyal liar tak diinginkan bercampur.</li>
-                </ol>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image6.png" alt="Diagram gangguan transmisi: noise, distortion, interference" class="slide-img">
-                <p class="img-caption">Tiga gangguan pada saluran transmisi</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2b. Attenuation + Distortion -->
-    <section>
-        <h3>Attenuation &amp; Distortion</h3>
-        <div class="layout-2col">
-            <div>
-                <div class="sec-bar sec-bar-orange">1 — Attenuation (Redaman)</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>Kehilangan energi — sinyal melemah seiring bertambahnya jarak.</li>
-                        <li>Terjadi karena <strong>resistansi kabel</strong> mengubah energi listrik menjadi panas.</li>
-                        <li>Diukur dalam satuan <strong>Decibel (dB)</strong>.</li>
-                        <li><strong>Solusi:</strong> Repeater atau Amplifier dipasang di tengah jalur untuk memperkuat sinyal.</li>
-                    </ul>
+            <!-- 1b. Sinyal Analog -->
+            <section>
+                <h3>Sinyal Analog</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Apa itu Sinyal Analog?</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Intensitas (voltase) berubah secara <strong>kontinu dan mulus</strong> seiring waktu
+                                    &mdash; tidak ada lompatan mendadak.</li>
+                                <li>Digambarkan sebagai gelombang sinus yang meliuk-liuk.</li>
+                                <li>Tiga parameter utama: <strong>Amplitudo</strong> (kekuatan),
+                                    <strong>Frekuensi</strong> (kecepatan gelombang), <strong>Phase</strong> (posisi
+                                    awal gelombang).
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="info-box">
+                            <strong>Contoh nyata:</strong> Suara manusia di udara, siaran radio FM, sinyal telepon kabel
+                            generasi lama.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/sinyal_analog_pro.jpg" alt="Gelombang analog: kontinu dan mulus"
+                            class="slide-img">
+                        <p class="img-caption">Gelombang analog &mdash; kontinu &amp; mulus</p>
+                    </div>
                 </div>
-                <div class="info-box-warn">
-                    ⚠️ Kabel UTP standar hanya efektif hingga <strong>100 meter</strong>. Lebih dari itu butuh repeater!
+            </section>
+
+            <!-- 1c. Sinyal Digital -->
+            <section>
+                <h3>Sinyal Digital</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-orange">Karakteristik Sinyal Digital</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Hanya memiliki nilai <strong>diskrit yang terbatas</strong> &mdash; biasanya dua
+                                    level: tinggi dan rendah.</li>
+                                <li>Bentuk gelombang: persegi (kotak-kotak, patah tajam).</li>
+                                <li>Representasi biner langsung:<br>
+                                    &nbsp;&nbsp;&#x2022; <strong>+5 Volt = bit 1</strong><br>
+                                    &nbsp;&nbsp;&#x2022; <strong>0 Volt = bit 0</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/sinyal_digital_id.jpg" alt="Sinyal digital diskrit" class="slide-img">
+                        <p class="img-caption">Gelombang digital &mdash; diskrit (kotak-kotak)</p>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div class="sec-bar sec-bar-blue">2 — Distortion (Distorsi)</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>Perubahan <strong>bentuk</strong> sinyal dari aslinya — bukan sekadar melemah.</li>
-                        <li>Terjadi paling sering pada sinyal komposit (gabungan banyak frekuensi).</li>
-                        <li>Setiap komponen frekuensi merambat dengan kecepatan sedikit berbeda di dalam medium.</li>
-                        <li>Akibatnya, komponen-komponen tersebut tiba di tujuan pada waktu yang tidak serentak (bergeser).</li>
-                    </ul>
+            </section>
+
+            <!-- 1d. Modulasi -->
+            <section>
+                <h3>Modulasi (Mo-Dem)</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-teal">Konsep Modulasi</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Proses <strong>menumpangkan</strong> data digital ke atas sinyal analog pembawa
+                                    (<em>carrier signal</em>).</li>
+                                <li>Diperlukan agar sinyal bisa dikirim jarak jauh (4G, satelit, ADSL).</li>
+                                <li>Alat yang melakukan modulasi (digital&#x2192;analog) dan demodulasi
+                                    (analog&#x2192;digital) disebut <strong>Modem</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/modulasi_id.jpg" alt="Proses Modulasi" class="slide-img">
+                        <p class="img-caption">Proses penumpangan data digital ke sinyal analog</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <aside class="notes">Analogi attenuation: berbicara keras di ujung lorong — suara sampai tapi pelan. Analogi distortion: orkestra yang instrumennya tiba pada waktu berbeda.</aside>
-    </section>
+            </section>
 
-    <!-- 2c. Noise -->
-    <section>
-        <h3>Noise (Kebisingan / Gangguan)</h3>
-        <div class="layout-text-img">
-            <div class="card text-left text-small">
-                <p>Sinyal tambahan liar yang tidak diinginkan, bercampur dengan sinyal asli sehingga mengubah isi informasi.</p>
-                <p style="margin-top:.5em; font-weight:700;">Tiga jenis noise paling umum:</p>
-                <ul>
-                    <li><strong>Crosstalk:</strong> Efek induksi elektromagnetik dari kabel lain yang berdekatan. Penyebab utama ini yang membuat kabel UTP <em>dipilin</em> — untuk membatalkan efek crosstalk.</li>
-                    <li><strong>Thermal Noise:</strong> Pergerakan acak elektron dalam konduktor akibat suhu ruangan. Tidak bisa dihilangkan sepenuhnya.</li>
-                    <li><strong>EMI (Electromagnetic Interference):</strong> Gangguan dari sumber eksternal seperti motor listrik, microwave oven, atau petir.</li>
-                </ul>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image6.png" alt="Noise masuk ke transmission channel" class="slide-img">
-                <p class="img-caption">Noise mencemari sinyal di saluran transmisi</p>
-                <div class="info-box-warn" style="font-size:.58em; text-align:left; margin-top:.5em;">
-                    💡 <strong>SNR (Signal-to-Noise Ratio)</strong> = rasio kekuatan sinyal vs noise. Makin tinggi SNR, makin bersih sinyal.
+            <!-- SECTION 2: IMPAIRMENT -->
+            <section>
+                <h2>2. Gangguan Transmisi (Impairment)</h2>
+                <aside class="notes">Sinyal yang dikirim tidak pernah sampai persis sama. Ada 3 jenis gangguan utama.
+                </aside>
+            </section>
+
+            <!-- 2a. Tiga jenis -->
+            <section>
+                <h3>Tiga Jenis Gangguan Transmisi</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <p>Sinyal yang dikirim dari titik A <strong>tidak pernah</strong> tiba 100% identik di titik B.
+                            Selalu ada degradasi akibat tiga faktor:</p>
+                        <ol style="margin-top:.5em;">
+                            <li style="margin-bottom:.5em;"><strong class="highlight-red">Attenuation (Redaman)</strong>
+                                &mdash; sinyal kehilangan energi dan melemah.</li>
+                            <li style="margin-bottom:.5em;"><strong class="highlight-orange">Distortion
+                                    (Distorsi)</strong> &mdash; bentuk sinyal berubah dari aslinya.</li>
+                            <li><strong style="color:#6a1b9a;">Noise (Kebisingan)</strong> &mdash; sinyal liar tak
+                                diinginkan bercampur.</li>
+                        </ol>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/gangguan_transmisi_id.jpg" alt="Diagram tiga jenis gangguan transmisi"
+                            class="slide-img">
+                        <p class="img-caption">Ilustrasi redaman, distorsi, dan noise</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- ━━━━━━━━━━━━━━ SECTION 3: GUIDED MEDIA ━━━━━━━━━━━━━━ -->
-    <section>
-        <h2>3. Media Transmisi</h2>
-        <p>Jalan Raya Bagi Sinyal</p>
-        <aside class="notes">Kita bahas dua kategori besar: Guided (kabel) dan Unguided (nirkabel).</aside>
-    </section>
-
-    <section>
-        <h3>Guided vs Unguided Media</h3>
-        <div class="layout-text-img">
-            <div class="card text-left text-small">
-                <ul>
-                    <li><strong class="highlight-blue">Guided Media (Kabel):</strong> Sinyal "dipandu" di dalam medium padat dari ujung ke ujung.<br>
-                        <em>Contoh: Twisted Pair, Coaxial, Fiber Optik.</em>
-                    </li>
-                    <li style="margin-top:.7em;"><strong class="highlight-orange">Unguided Media (Nirkabel):</strong> Gelombang elektromagnetik merambat bebas di udara atau ruang hampa tanpa panduan fisik.<br>
-                        <em>Contoh: Wi-Fi, BTS Seluler, Satelit.</em>
-                    </li>
-                </ul>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image8.png" alt="Klasifikasi Transmission Media" class="slide-img">
-                <p class="img-caption">Klasifikasi media transmisi</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── Twisted Pair ── -->
-    <!-- 3a. Konsep -->
-    <section>
-        <h3>Guided 1: Twisted-Pair Cable — Konsep</h3>
-        <div class="layout-text-img">
-            <div class="card text-left text-small">
-                <ul>
-                    <li>Terdiri dari <strong>dua konduktor tembaga</strong>, masing-masing dibungkus isolator plastik, lalu <strong>dipilin (di-twist) bersama</strong>.</li>
-                    <li style="margin-top:.5em;"><strong>Mengapa harus dipilin?</strong><br>
-                        Pilinan menciptakan medan magnet yang saling berlawanan pada kedua kawat. Saat noise EMI datang, efeknya terbatalkan secara alami (<em>differential signaling</em>).
-                    </li>
-                    <li style="margin-top:.5em;">Semakin rapat pilinan per meter → semakin kebal terhadap EMI, tapi semakin mahal.</li>
-                </ul>
-                <div class="info-box" style="margin-top:.7em;">
-                    💡 Inilah alasan kenapa ketika Anda buka kabel LAN, isi dalamnya selalu berpilin — bukan karena estetika!
+            <!-- 2b. Attenuation -->
+            <section>
+                <h3>Attenuation (Redaman)</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-orange">Konsep Attenuation</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Kehilangan energi &mdash; sinyal melemah seiring bertambahnya jarak.</li>
+                                <li>Terjadi karena <strong>resistansi kabel</strong> mengubah energi listrik menjadi
+                                    panas.</li>
+                                <li>Diukur dalam satuan <strong>Decibel (dB)</strong>.</li>
+                                <li><strong>Solusi:</strong> Repeater atau Amplifier dipasang di tengah jalur.</li>
+                            </ul>
+                        </div>
+                        <div class="info-box-warn">
+                            &#x26A0;&#xFE0F; Kabel UTP standar hanya efektif hingga <strong>100 meter</strong>. Lebih
+                            dari itu butuh repeater!
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/attenuation_id.jpg" alt="Proses redaman sinyal dan repeater"
+                            class="slide-img">
+                        <p class="img-caption">Redaman seiring jarak dan fungsi repeater</p>
+                    </div>
                 </div>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image20.png" alt="Penampang kabel UTP dan STP: conductor, insulation, pair, sheath" class="slide-img">
-                <p class="img-caption">Penampang UTP (atas) &amp; STP (bawah)</p>
-            </div>
-        </div>
-        <aside class="notes">Jika ditanya di ujian kenapa dipilin: untuk membatalkan gelombang induksi EMI — noise saling menghapuskan satu sama lain.</aside>
-    </section>
+                <aside class="notes">Analogi attenuation: berbicara keras di ujung lorong, suaranya makin jauh makin
+                    pelan.</aside>
+            </section>
 
-    <!-- 3b. UTP vs STP -->
-    <section>
-        <h3>Guided 1: UTP vs STP</h3>
-        <div class="layout-2col">
-            <div>
-                <div class="sec-bar sec-bar-blue">UTP — Unshielded Twisted Pair</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>Tidak memiliki pelindung logam tambahan — hanya pilinan kawat.</li>
-                        <li>Paling <strong>murah dan lentur</strong> — mudah dipasang di berbagai sudut gedung.</li>
-                        <li>Standar de-facto jaringan LAN di seluruh dunia (rumah, kantor, kampus).</li>
-                        <li>Rentan terhadap EMI di lingkungan industri berat.</li>
-                    </ul>
+            <!-- 2c. Distortion -->
+            <section>
+                <h3>Distortion (Distorsi)</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Konsep Distortion</div>
+                        <div class="sec-body text-left text-small">
+                            <ul>
+                                <li>Perubahan <strong>bentuk</strong> sinyal dari aslinya &mdash; bukan sekadar melemah.
+                                </li>
+                                <li>Terjadi paling sering pada sinyal komposit (gabungan banyak frekuensi).</li>
+                                <li>Setiap komponen frekuensi merambat dengan kecepatan sedikit berbeda di dalam medium.
+                                </li>
+                                <li>Akibatnya, komponen-komponen tersebut tiba di tujuan pada waktu yang tidak serentak.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/distortion_id.jpg"
+                            alt="Proses distorsi karena perbedaan kecepatan rambat frekuensi" class="slide-img">
+                        <p class="img-caption">Perubahan bentuk sinyal komposit karena distorsi</p>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div class="sec-bar sec-bar-orange">STP — Shielded Twisted Pair</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>Memiliki lapisan <strong>metal braid / aluminium foil</strong> tambahan yang membungkus keempat pasang kawat.</li>
-                        <li>Memberikan kekebalan ekstra terhadap EMI yang ekstrem.</li>
-                        <li>Digunakan di lingkungan industri, pabrik, atau area dekat tiang listrik tegangan tinggi.</li>
-                        <li>Lebih mahal, lebih kaku, dan memerlukan ground yang benar agar efektif.</li>
-                    </ul>
+                <aside class="notes">Analogi distortion: orkestra yang instrumennya tiba pada waktu berbeda sehingga
+                    suaranya jadi kacau.</aside>
+            </section>
+
+            <!-- 2c. Noise -->
+            <section>
+                <h3>Noise (Kebisingan / Gangguan)</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller">
+                        <p>Sinyal tambahan liar yang tidak diinginkan, bercampur dengan sinyal asli sehingga mengubah
+                            isi informasi.</p>
+                        <p style="margin-top:.5em; font-weight:700;">Tiga jenis noise paling umum:</p>
+                        <ul>
+                            <li><strong>Crosstalk:</strong> Efek induksi elektromagnetik dari kabel lain yang
+                                berdekatan. Penyebab utama inilah yang membuat kabel UTP <em>dipilin</em> &mdash; untuk
+                                membatalkan efek crosstalk.</li>
+                            <li><strong>Thermal Noise:</strong> Pergerakan acak elektron dalam konduktor akibat suhu
+                                ruangan. Tidak bisa dihilangkan sepenuhnya.</li>
+                            <li><strong>EMI:</strong> Gangguan dari sumber eksternal seperti motor listrik, microwave
+                                oven, atau petir.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/noise_id.jpg" alt="Ilustrasi Crosstalk, Thermal Noise, dan EMI"
+                            class="slide-img">
+                        <p class="img-caption">Ilustrasi tiga jenis gangguan noise</p>
+                        <div class="info-box-warn" style="font-size:.58em; text-align:left; margin-top:.5em;">
+                            &#x1F4A1; <strong>SNR</strong> = rasio kekuatan sinyal vs noise. Makin tinggi SNR, makin
+                            bersih sinyal.
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="img-col" style="margin-top:.6em;">
-            <img src="img/week3/image21.png" alt="Perbandingan fisik kabel UTP dan STP" class="slide-img-sm">
-            <p class="img-caption">UTP (atas) vs STP (bawah)</p>
-        </div>
-    </section>
+            </section>
 
-    <!-- ── Kategori & Konektor ── -->
-    <!-- 4a. Kategori -->
-    <section>
-        <h3>Kategori Kabel UTP</h3>
-        <div class="card text-left text-smaller">
-            <table>
-                <tr><th>Kategori</th><th>Max Bandwidth</th><th>Max Data Rate</th><th>Penggunaan</th></tr>
-                <tr><td>Cat 3</td><td>16 MHz</td><td>10 Mbps</td><td>Telepon analog, LAN 10Base-T (usang)</td></tr>
-                <tr><td>Cat 5</td><td>100 MHz</td><td>100 Mbps</td><td>Fast Ethernet (usang)</td></tr>
-                <tr><td><strong>Cat 5e</strong></td><td>100 MHz</td><td><strong>1 Gbps</strong></td><td>Standar LAN rumah / kantor kecil. Maks 100m.</td></tr>
-                <tr><td><strong>Cat 6</strong></td><td>250 MHz</td><td><strong>10 Gbps</strong> (55m)</td><td>LAN perkantoran modern. Ada spline plastik di tengah.</td></tr>
-                <tr><td><strong>Cat 6a</strong></td><td>500 MHz</td><td><strong>10 Gbps</strong> (100m)</td><td>Data Center / Backbone LAN. Lebih tebal &amp; berat.</td></tr>
-                <tr><td>Cat 7</td><td>600 MHz</td><td>10 Gbps+</td><td>High-density Data Center (menggunakan konektor GG45).</td></tr>
-            </table>
-        </div>
-        <div class="info-box" style="margin-top:.5em;">
-            💡 <strong>Cat 5e</strong> adalah pilihan paling ekonomis untuk jaringan rumah/kantor. <strong>Cat 6</strong> untuk performa lebih tinggi dengan anggaran sedang.
-        </div>
-    </section>
+            <!-- SECTION 3: MEDIA TRANSMISI -->
+            <section>
+                <h2>3. Media Transmisi</h2>
+                <p>Jalan Raya Bagi Sinyal</p>
+                <aside class="notes">Kita bahas dua kategori besar: Guided (kabel) dan Unguided (nirkabel).</aside>
+            </section>
 
-    <!-- 4b. Konektor RJ45 -->
-    <section>
-        <h3>Konektor RJ45 &amp; Susunan Warna 568-B</h3>
-        <div class="layout-2col">
-            <div class="card text-left text-small">
-                <p><strong>RJ45</strong> (Registered Jack 45) adalah konektor plastik transparan dengan <strong>8 pin tembaga</strong> yang menjadi standar kabel UTP.</p>
-                <p style="margin-top:.5em; font-weight:700;">Susunan warna TIA/EIA 568-B (paling populer di Indonesia):</p>
-                <p style="font-size:.75em; margin-top:.4em;">Pin 1→8, klip RJ45 menghadap ke bawah:</p>
-                <ol style="font-size:.75em; column-count:2; column-gap:1em;">
-                    <li><span class="wire-ow">Putih-Oranye</span></li>
-                    <li><span class="wire-o">Oranye</span></li>
-                    <li><span class="wire-gw">Putih-Hijau</span></li>
-                    <li><span class="wire-b">Biru</span></li>
-                    <li><span class="wire-bw">Putih-Biru</span></li>
-                    <li><span class="wire-g">Hijau</span></li>
-                    <li><span class="wire-brw">Putih-Coklat</span></li>
-                    <li><span class="wire-br">Coklat</span></li>
-                </ol>
-                <div class="info-box-warn" style="margin-top:.5em; font-size:.6em;">
-                    ⚠️ Ingat: pasangan Hijau dipisahkan oleh pasangan Biru (pin 3 &amp; 6 tidak bersebelahan). Ini yang sering salah!
+            <!-- Guided vs Unguided -->
+            <section>
+                <h3>Guided vs Unguided Media</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-small">
+                        <ul>
+                            <li><strong class="highlight-blue">Guided Media (Kabel):</strong> Sinyal "dipandu" di dalam
+                                medium padat dari ujung ke ujung.<br>
+                                <em>Contoh: Twisted Pair, Coaxial, Fiber Optik.</em>
+                            </li>
+                            <li style="margin-top:.7em;"><strong class="highlight-orange">Unguided Media
+                                    (Nirkabel):</strong> Gelombang elektromagnetik merambat bebas di udara atau ruang
+                                hampa tanpa panduan fisik.<br>
+                                <em>Contoh: Wi-Fi, BTS Seluler, Satelit.</em>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/image8.png" alt="Klasifikasi Transmission Media" class="slide-img">
+                        <p class="img-caption">Klasifikasi media transmisi</p>
+                    </div>
                 </div>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image27.png" alt="Konektor RJ45 tampak depan 8 pin" class="slide-img-sm">
-                <p class="img-caption">Konektor RJ45 (8 pin tembaga)</p>
-                <img src="img/week3/image28.png" alt="Jack RJ45 keystone" class="slide-img-sm" style="margin-top:.4em;">
-                <p class="img-caption">Jack RJ45 pada keystone panel</p>
-            </div>
-        </div>
-        <aside class="notes">Tips hafalan 568-B: Putih-Oranye, Oranye, Putih-Hijau, BIRU, Putih-Biru, Hijau, Putih-Coklat, Coklat. Ingat pasangan hijau terpisah oleh biru.</aside>
-    </section>
+            </section>
 
-    <!-- ── Coaxial ── -->
-    <!-- 5a. Struktur -->
-    <section>
-        <h3>Guided 2: Coaxial Cable — Struktur</h3>
-        <div class="layout-text-img">
-            <div class="card text-left text-small">
-                <p>Kabel koaksial memiliki konstruksi berlapis yang menjadikannya sangat tahan noise:</p>
-                <ol style="margin-top:.5em;">
-                    <li><strong>Centre Core</strong> — kawat tembaga solid sebagai penghantar sinyal utama.</li>
-                    <li><strong>Dielectric Insulator</strong> — isolator plastik tebal memisahkan inti dari shield.</li>
-                    <li><strong>Metallic Shield</strong> (outer conductor) — jaring anyaman logam atau foil aluminium yang berfungsi sebagai pelindung EMI sekaligus penghantar balik.</li>
-                    <li><strong>Plastic Jacket</strong> — pembungkus luar untuk proteksi fisik.</li>
-                </ol>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image10.png" alt="Diagram penampang kabel coaxial" class="slide-img-sm" style="background:#fff; padding:6px;">
-                <p class="img-caption">Penampang kabel koaksial</p>
-                <img src="img/week3/image11.png" alt="Foto fisik kabel coaxial dikupas" class="slide-img-sm" style="margin-top:.4em;">
-                <p class="img-caption">Fisik kabel koaksial yang dikupas</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5b. Penggunaan & karakteristik -->
-    <section>
-        <h3>Guided 2: Coaxial Cable — Karakteristik &amp; Penggunaan</h3>
-        <div class="layout-2col">
-            <div>
-                <div class="sec-bar sec-bar-orange">Karakteristik Teknis</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>Frekuensi kerja: <strong>100 kHz – 500 MHz</strong> (jauh lebih tinggi dari UTP).</li>
-                        <li>Bandwidth besar — cocok untuk sinyal video frekuensi tinggi.</li>
-                        <li>Konstruksi kaku — tidak mudah ditekuk berkali-kali.</li>
-                        <li>Konektor: <strong>BNC</strong> (Bayonet Neill–Concelman) — twist-lock, tidak mudah lepas.</li>
-                    </ul>
+            <!-- Coaxial: Struktur -->
+            <section>
+                <h3>Guided 1: Coaxial Cable &mdash; Struktur</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller">
+                        <p>Kabel koaksial memiliki konstruksi berlapis yang menjadikannya sangat tahan noise:</p>
+                        <ol style="margin-top:.5em;">
+                            <li><strong>Centre Core</strong> &mdash; kawat tembaga solid sebagai penghantar sinyal
+                                utama.</li>
+                            <li><strong>Dielectric Insulator</strong> &mdash; isolator plastik tebal memisahkan inti
+                                dari shield.</li>
+                            <li><strong>Metallic Shield</strong> &mdash; jaring anyaman logam atau foil aluminium
+                                pelindung EMI sekaligus penghantar balik.</li>
+                            <li><strong>Plastic Jacket</strong> &mdash; pembungkus luar untuk proteksi fisik.</li>
+                        </ol>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/image10.png" alt="Diagram penampang kabel coaxial" class="slide-img-sm"
+                            style="background:#fff; padding:5px; max-height: 140px; width: auto; object-fit: contain;">
+                        <p class="img-caption">Penampang kabel koaksial</p>
+                        <img src="img/week3/image11.png" alt="Foto fisik kabel coaxial dikupas" class="slide-img-sm"
+                            style="margin-top:.2em; max-height: 140px; width: auto; object-fit: contain;">
+                        <p class="img-caption">Fisik kabel koaksial dikupas</p>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div class="sec-bar sec-bar-blue">Penggunaan Utama</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>📺 <strong>TV Kabel</strong> (FirstMedia, MNC Play, dll) — distribusi sinyal analog/digital dari head-end ke rumah.</li>
-                        <li>📷 <strong>CCTV Analog</strong> — kabel RG-59 / RG-6 menghubungkan kamera ke DVR.</li>
-                        <li>🔌 <strong>LAN 10Base2 / 10Base5</strong> (Thin/Thick Ethernet) — teknologi jaringan lawas tahun 1980–1990-an.</li>
-                        <li>📡 <strong>Antena TV/Radio</strong> — menghubungkan antena atap ke TV.</li>
-                    </ul>
+            </section>
+
+            <!-- Coaxial: Karakteristik & Penggunaan -->
+            <section>
+                <h3>Guided 1: Coaxial Cable &mdash; Karakteristik &amp; Penggunaan</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-orange">Karakteristik Teknis</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li>Frekuensi kerja: <strong>100 kHz &ndash; 500 MHz</strong> (jauh lebih tinggi dari
+                                    UTP).</li>
+                                <li>Bandwidth besar &mdash; cocok untuk sinyal video frekuensi tinggi.</li>
+                                <li>Konstruksi kaku &mdash; tidak mudah ditekuk berkali-kali.</li>
+                                <li>Konektor: <strong>BNC</strong> (Bayonet Neill&ndash;Concelman) &mdash; twist-lock,
+                                    tidak mudah lepas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Penggunaan Utama</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li>&#x1F4FA; <strong>TV Kabel</strong> (FirstMedia, MNC Play) &mdash; distribusi sinyal
+                                    dari head-end ke rumah.</li>
+                                <li>&#x1F4F7; <strong>CCTV Analog</strong> &mdash; kabel RG-59/RG-6 menghubungkan kamera
+                                    ke DVR.</li>
+                                <li>&#x1F50C; <strong>LAN 10Base2/10Base5</strong> &mdash; teknologi jaringan lawas
+                                    1980&ndash;1990-an.</li>
+                                <li>&#x1F4E1; <strong>Antena TV/Radio</strong> &mdash; menghubungkan antena atap ke TV.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- ── Fiber Optic ── -->
-    <!-- 6a. Prinsip & Struktur -->
-    <section>
-        <h3>Guided 3: Fiber Optik — Prinsip &amp; Struktur</h3>
-        <div class="layout-text-img">
-            <div class="card text-left text-small">
-                <p>Fiber optik menghantarkan <strong>pulsa cahaya</strong> (bukan arus listrik) melalui inti kaca/plastik silika berkualitas tinggi.</p>
-                <p style="margin-top:.5em; font-weight:700;">Prinsip kerja: Total Internal Reflection</p>
-                <p style="font-size:.85em;">Cahaya yang masuk ke inti fiber akan dipantulkan bolak-balik di dinding kaca secara terus-menerus, tidak bocor keluar, hingga mencapai tujuan.</p>
-                <p style="margin-top:.5em; font-weight:700;">Lapisan struktur fiber:</p>
-                <ol style="font-size:.85em;">
-                    <li><strong>Core</strong> — inti kaca ultra-jernih, tempat cahaya merambat.</li>
-                    <li><strong>Cladding</strong> — lapisan kaca dengan indeks refraksi lebih rendah, memantulkan cahaya ke dalam core.</li>
-                    <li><strong>Coating</strong> — pelindung plastik tipis dari goresan.</li>
-                    <li><strong>Strength Member &amp; Outer Jacket</strong> — proteksi mekanis.</li>
-                </ol>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image33.png" alt="Struktur 3D kabel Fiber Optik: Core, Cladding, Coating, Jacket" class="slide-img">
-                <p class="img-caption">Struktur kabel fiber optik</p>
-            </div>
-        </div>
-    </section>
+            <!-- Twisted-Pair: Konsep -->
+            <section>
+                <h3>Guided 2: Twisted-Pair Cable &mdash; Konsep</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller">
+                        <ul>
+                            <li>Terdiri dari <strong>dua konduktor tembaga</strong>, masing-masing dibungkus isolator
+                                plastik, lalu <strong>dipilin (di-twist) bersama</strong>.</li>
+                            <li style="margin-top:.5em;"><strong>Mengapa harus dipilin?</strong><br>
+                                Pilinan menciptakan medan magnet yang saling berlawanan pada kedua kawat. Saat noise EMI
+                                datang, efeknya terbatalkan secara alami (<em>differential signaling</em>).
+                            </li>
+                            <li style="margin-top:.5em;">Semakin rapat pilinan per meter &#x2192; semakin kebal terhadap
+                                EMI, tapi semakin mahal.</li>
+                        </ul>
+                        <div class="info-box">
+                            &#x1F4A1; Inilah alasan kenapa ketika Anda buka kabel LAN, isi dalamnya selalu berpilin
+                            &mdash; bukan karena estetika!
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/image20.png" alt="Penampang kabel UTP dan STP" class="slide-img">
+                        <p class="img-caption">Penampang UTP (atas) &amp; STP (bawah)</p>
+                    </div>
+                </div>
+                <aside class="notes">Jika ditanya di ujian kenapa dipilin: untuk membatalkan gelombang induksi EMI
+                    &mdash; noise saling menghapuskan satu sama lain.</aside>
+            </section>
 
-    <!-- 6b. Jenis & Keunggulan -->
-    <section>
-        <h3>Guided 3: Fiber Optik — Jenis &amp; Keunggulan</h3>
-        <div class="layout-2col">
-            <div>
-                <div class="sec-bar sec-bar-blue">Dua Jenis Fiber</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li><strong>Single-mode (SMF):</strong> Inti sangat kecil (~8 µm). Cahaya merambat lurus tanpa pantulan. Jarak sangat jauh (puluhan–ratusan km). Dipakai untuk backbone internet &amp; backbone antar kota.</li>
-                        <li style="margin-top:.5em;"><strong>Multi-mode (MMF):</strong> Inti lebih besar (~50–62.5 µm). Cahaya merambat dalam banyak jalur (mode). Jarak lebih pendek (maks ~500m). Dipakai di data center &amp; LAN gedung.</li>
-                    </ul>
+            <!-- UTP vs STP -->
+            <section>
+                <h3>Guided 2: UTP vs STP</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">UTP &mdash; Unshielded Twisted Pair</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li>Tidak memiliki pelindung logam tambahan &mdash; hanya pilinan kawat.</li>
+                                <li>Paling <strong>murah dan lentur</strong> &mdash; mudah dipasang di berbagai sudut
+                                    gedung.</li>
+                                <li>Standar de-facto jaringan LAN di seluruh dunia (rumah, kantor, kampus).</li>
+                                <li>Rentan terhadap EMI di lingkungan industri berat.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-orange">STP &mdash; Shielded Twisted Pair</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li>Memiliki lapisan <strong>metal braid / aluminium foil</strong> tambahan yang
+                                    membungkus keempat pasang kawat.</li>
+                                <li>Memberikan kekebalan ekstra terhadap EMI yang ekstrem.</li>
+                                <li>Digunakan di lingkungan industri, pabrik, atau area dekat tiang listrik tegangan
+                                    tinggi.</li>
+                                <li>Lebih mahal, lebih kaku, dan memerlukan ground yang benar agar efektif.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="img-col" style="margin-top:.5em;">
-                    <img src="img/week3/image34.png" alt="Single-mode vs Multi-mode fiber" class="slide-img-sm" style="background:#fff; padding:4px;">
-                    <p class="img-caption">Single-mode (atas) vs Multi-mode (bawah)</p>
+                    <img src="img/week3/image21.png" alt="Perbandingan fisik kabel UTP dan STP" class="slide-img-xs">
+                    <p class="img-caption">UTP vs STP</p>
                 </div>
-            </div>
-            <div>
-                <div class="sec-bar sec-bar-green">Keunggulan Fiber Optik</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>🚀 <strong>Bandwidth Masif:</strong> Ratusan Gbps hingga Terabit/s. Tulang punggung internet global di bawah laut.</li>
-                        <li>📏 <strong>Redaman Sangat Kecil:</strong> Kabel tembaga perlu repeater setiap 100m. Fiber optik bisa jalan puluhan km tanpa repeater.</li>
-                        <li>🛡️ <strong>Kebal EMI 100%:</strong> Tidak pakai listrik → tidak tersambar petir, tidak terganggu mesin pabrik.</li>
-                        <li>🔒 <strong>Aman dari Penyadapan:</strong> Tidak memancarkan gelombang elektromagnetik ke luar — mustahil disadap secara pasif.</li>
-                        <li>⚖️ <strong>Lebih Ringan &amp; Kecil:</strong> Satu kabel fiber bisa menggantikan ribuan kabel tembaga.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- ━━━━━━━━━━━━━━ SECTION 4: UNGUIDED MEDIA ━━━━━━━━━━━━━━ -->
-    <section>
-        <h2>4. Unguided Media (Nirkabel)</h2>
-        <p>Gelombang elektromagnetik merambat bebas tanpa panduan fisik</p>
-        <aside class="notes">Ada 4 jenis utama yang akan kita bahas satu per satu.</aside>
-    </section>
-
-    <!-- Overview 4 jenis -->
-    <section>
-        <h3>Empat Jenis Unguided Media</h3>
-        <div class="grid-4">
-            <div class="media-card">
-                <div class="icon-circle badge-radio"><i class="bi bi-reception-4"></i></div>
-                <h5 class="highlight-blue">Gelombang Radio</h5>
-                <p>3 Hz – 1 GHz<br>Omnidirectional<br>Tembus tembok<br>FM, AM, Bluetooth</p>
-            </div>
-            <div class="media-card">
-                <div class="icon-circle badge-micro"><i class="bi bi-broadcast-pin"></i></div>
-                <h5 class="highlight-orange">Gelombang Mikro</h5>
-                <p>1 – 300 GHz<br>Unidirectional<br>Line-of-Sight<br>BTS, Wi-Fi, Backhaul</p>
-            </div>
-            <div class="media-card">
-                <div class="icon-circle badge-ir"><i class="bi bi-lightbulb"></i></div>
-                <h5 class="highlight-green">Infrared</h5>
-                <p>300 GHz – 400 THz<br>Jarak &lt; 1 m<br>Tidak tembus dinding<br>Remote TV, IrDA</p>
-            </div>
-            <div class="media-card">
-                <div class="icon-circle badge-sat"><i class="bi bi-globe2"></i></div>
-                <h5 style="color:#6a1b9a;">Satelit</h5>
-                <p>Jangkauan global<br>Latensi tinggi (GEO)<br>Area terpencil<br>GPS, Starlink, VSAT</p>
-            </div>
-        </div>
-        <div class="info-box" style="margin-top:.7em;">
-            🔑 Semakin tinggi frekuensi → <strong>bandwidth lebih besar</strong>, tapi <strong>jangkauan lebih pendek</strong> dan semakin mudah terhalang benda padat.
-        </div>
-    </section>
-
-    <!-- ── Gelombang Radio ── -->
-    <!-- 7a. Karakteristik -->
-    <section>
-        <h3><i class="bi bi-reception-4" style="color:#1565c0;"></i> Gelombang Radio — Karakteristik</h3>
-        <div class="layout-text-img">
-            <div>
-                <div class="sec-bar sec-bar-blue">Sifat Fisik</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li><strong>Frekuensi:</strong> 3 Hz – 1 GHz. Mencakup sub-band: ELF, VLF, LF, MF (AM), HF, VHF, UHF.</li>
-                        <li><strong>Arah Rambat:</strong> <em>Omnidirectional</em> — menyebar ke semua arah seperti cahaya bola lampu. Tidak butuh pengarahan antena.</li>
-                        <li><strong>Penetrasi:</strong> Mampu menembus tembok beton, hujan, dan bukit kecil.</li>
-                        <li><strong>Panjang Gelombang:</strong> Panjang (meter hingga kilometer), sehingga tidak mudah diserap objek kecil.</li>
-                    </ul>
-                </div>
-                <div class="info-box-warn" style="margin-top:.5em;">
-                    ⚠️ Karena omnidirectional, sinyal radio mudah <strong>tersadap</strong> dan rentan terhadap <strong>interferensi antar pemancar</strong> di frekuensi sama. Regulasi frekuensi oleh pemerintah diperlukan.
-                </div>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/radio_wave_devices.png" alt="Transmisi gelombang radio: menara AM/FM ke rumah dan mobil" class="slide-img">
-                <p class="img-caption">Transmisi gelombang radio AM/FM</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7b. Contoh Perangkat -->
-    <section>
-        <h3><i class="bi bi-reception-4" style="color:#1565c0;"></i> Gelombang Radio — Contoh Perangkat</h3>
-        <div class="layout-2col">
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#1565c0;">Perangkat Penyiaran (Broadcasting)</p>
-                <ul>
-                    <li>📡 <strong>Menara Pemancar AM/FM</strong> — siaran radio ke jutaan pendengar sekaligus.</li>
-                    <li>📺 <strong>Pemancar TV Analog/Digital</strong> (VHF/UHF) — siaran televisi terrestrial.</li>
-                    <li>🚁 <strong>Radio Komunikasi Penerbangan</strong> — ATC (Air Traffic Control) menggunakan band VHF 118–137 MHz.</li>
-                    <li>🚒 <strong>HT (Handy Talky)</strong> — komunikasi darurat polisi, pemadam kebakaran.</li>
-                </ul>
-            </div>
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#1565c0;">Perangkat Jaringan Pendek</p>
-                <ul>
-                    <li>🔵 <strong>Bluetooth</strong> (2.4 GHz, ISM band) — headset, speaker, transfer file jarak pendek (&lt; 10m standar).</li>
-                    <li>🌐 <strong>Zigbee &amp; Z-Wave</strong> (868 MHz / 2.4 GHz) — otomasi rumah (smart home), sensor IoT.</li>
-                    <li>🎮 <strong>RF Remote</strong> — remote TV/AC generasi baru yang tidak butuh LoS seperti infrared.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── Gelombang Mikro ── -->
-    <!-- 8a. Karakteristik -->
-    <section>
-        <h3><i class="bi bi-broadcast-pin" style="color:#e65100;"></i> Gelombang Mikro — Karakteristik</h3>
-        <div class="layout-text-img">
-            <div>
-                <div class="sec-bar sec-bar-orange">Sifat Fisik</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li><strong>Frekuensi:</strong> 1 GHz – 300 GHz. Termasuk sub-band S, C, X, Ku, Ka.</li>
-                        <li><strong>Arah Rambat:</strong> <em>Unidirectional</em> — terfokus seperti sinar laser. Antena parabola digunakan untuk memfokuskan sinyal.</li>
-                        <li><strong>Syarat Line-of-Sight (LoS):</strong> Antena pengirim dan penerima <em>harus bisa saling melihat</em> — tidak boleh ada halangan gunung, gedung tinggi, atau pohon besar.</li>
-                        <li><strong>Panjang Gelombang:</strong> Pendek (mm – cm). Mudah terserap oleh hujan lebat (<em>Rain Fade</em>).</li>
-                    </ul>
-                </div>
-                <div class="info-box-warn" style="margin-top:.5em;">
-                    ⚠️ Karena memerlukan LoS, tower BTS harus ditempatkan di titik-titik tinggi dengan radius yang cermat — itulah alasan tower BTS sering di bukit atau atap gedung tinggi.
-                </div>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/microwave_devices.png" alt="Perangkat gelombang mikro: BTS, WiFi, antena backhaul" class="slide-img">
-                <p class="img-caption">Perangkat microwave: BTS, WiFi, backhaul</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8b. Contoh Perangkat -->
-    <section>
-        <h3><i class="bi bi-broadcast-pin" style="color:#e65100;"></i> Gelombang Mikro — Contoh Perangkat</h3>
-        <div class="layout-2col">
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#e65100;">Komunikasi Seluler &amp; LAN</p>
-                <ul>
-                    <li>🗼 <strong>BTS (Base Transceiver Station)</strong> — menara seluler 4G LTE / 5G NR. Menggunakan band 700 MHz – 26 GHz.</li>
-                    <li>📶 <strong>Wi-Fi Router</strong> (2.4 GHz &amp; 5 GHz) — jaringan nirkabel lokal di rumah/kantor/kampus.</li>
-                    <li>🔷 <strong>WiMAX</strong> (2.3–3.5 GHz) — broadband nirkabel jarak menengah (beberapa km).</li>
-                </ul>
-            </div>
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#e65100;">Backhaul &amp; Point-to-Point</p>
-                <ul>
-                    <li>📡 <strong>Antena Microwave Backhaul</strong> — menghubungkan BTS ke jaringan inti. Dua antena parabola saling berhadapan antar gedung (jarak 1–50 km).</li>
-                    <li>🏢 <strong>LMDS/MMDS</strong> — distribusi internet broadband ke kawasan perumahan tanpa kabel.</li>
-                    <li>🌧️ <strong>Radar Cuaca &amp; Pesawat</strong> — menggunakan band X/C untuk deteksi presipitasi.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── Infrared ── -->
-    <!-- 9a. Karakteristik -->
-    <section>
-        <h3><i class="bi bi-lightbulb" style="color:#2e7d32;"></i> Infrared — Karakteristik</h3>
-        <div class="layout-text-img">
-            <div>
-                <div class="sec-bar sec-bar-green">Sifat Fisik</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li><strong>Frekuensi:</strong> 300 GHz – 400 THz. Tepat di bawah cahaya tampak pada spektrum elektromagnetik.</li>
-                        <li><strong>Arah Rambat:</strong> Sangat terfokus — berperilaku seperti cahaya biasa.</li>
-                        <li><strong>Jangkauan:</strong> Sangat pendek, efektif hanya beberapa sentimeter hingga ~1 meter.</li>
-                        <li><strong>Tidak bisa menembus dinding</strong> — diblokir oleh material padat apa pun.</li>
-                        <li><strong>Butuh LoS ketat</strong> — pengirim dan penerima harus bertatapan langsung.</li>
-                        <li><strong>Interferensi matahari:</strong> Cahaya matahari mengandung infrared yang dapat mengganggu sinyal.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/infrared_devices.png" alt="Perangkat infrared: remote TV, IrDA, sensor gerak" class="slide-img">
-                <p class="img-caption">Perangkat berbasis infrared</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 9b. Contoh Perangkat -->
-    <section>
-        <h3><i class="bi bi-lightbulb" style="color:#2e7d32;"></i> Infrared — Contoh Perangkat</h3>
-        <div class="layout-2col">
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#2e7d32;">Kendali Jarak Dekat</p>
-                <ul>
-                    <li>📺 <strong>Remote Control TV / AC / Proyektor</strong> — pengguna paling umum. Menggunakan LED infrared yang memancarkan kode pulsa.</li>
-                    <li>🔦 <strong>Remote Kamera DSLR</strong> — trigger shutter tanpa menyentuh kamera untuk foto long-exposure.</li>
-                    <li>🎮 <strong>Nintendo Wii Sensor Bar</strong> — dua titik infrared yang dilacak oleh Wiimote.</li>
-                </ul>
-            </div>
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#2e7d32;">Transfer Data &amp; Deteksi</p>
-                <ul>
-                    <li>💻 <strong>IrDA (Infrared Data Association)</strong> — port transfer data di laptop/HP era 1990–2000-an. Kecepatan hingga 16 Mbps (Fast-IR).</li>
-                    <li>🔒 <strong>Sensor Gerak PIR</strong> (Passive IR) — mendeteksi panas tubuh manusia. Digunakan di alarm keamanan dan lampu otomatis.</li>
-                    <li>🛒 <strong>Barcode Scanner</strong> — beberapa model menggunakan LED IR.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── Satelit ── -->
-    <!-- 10a. Karakteristik & Orbit -->
-    <section>
-        <h3><i class="bi bi-globe2" style="color:#6a1b9a;"></i> Komunikasi Satelit — Orbit &amp; Latensi</h3>
-        <div class="layout-text-img">
-            <div>
-                <div class="sec-bar sec-bar-purple">Tiga Jenis Orbit</div>
-                <div class="sec-body text-left text-smaller">
+            <!-- Kategori UTP -->
+            <section>
+                <h3>Kategori Kabel UTP</h3>
+                <div class="card text-left text-smaller">
                     <table>
-                        <tr><th>Orbit</th><th>Ketinggian</th><th>Latensi</th><th>Contoh</th></tr>
                         <tr>
-                            <td><strong>GEO</strong><br>Geostationary</td>
-                            <td>~35.786 km</td>
-                            <td>~500–700 ms</td>
-                            <td>Viasat, HughesNet, TV Parabola</td>
+                            <th>Kategori</th>
+                            <th>Max Bandwidth</th>
+                            <th>Max Data Rate</th>
+                            <th>Penggunaan</th>
                         </tr>
                         <tr>
-                            <td><strong>MEO</strong><br>Medium Earth</td>
-                            <td>2.000–20.000 km</td>
-                            <td>~100–250 ms</td>
-                            <td>GPS (20.200 km), Galileo, Glonass</td>
+                            <td>Cat 3</td>
+                            <td>16 MHz</td>
+                            <td>10 Mbps</td>
+                            <td>Telepon analog, LAN 10Base-T (usang)</td>
                         </tr>
                         <tr>
-                            <td><strong>LEO</strong><br>Low Earth</td>
-                            <td>200–2.000 km</td>
-                            <td>~20–40 ms</td>
-                            <td>Starlink (~550 km), OneWeb, Iridium</td>
+                            <td>Cat 5</td>
+                            <td>100 MHz</td>
+                            <td>100 Mbps</td>
+                            <td>Fast Ethernet (usang)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cat 5e</strong></td>
+                            <td>100 MHz</td>
+                            <td><strong>1 Gbps</strong></td>
+                            <td>Standar LAN rumah / kantor kecil. Maks 100m.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cat 6</strong></td>
+                            <td>250 MHz</td>
+                            <td><strong>10 Gbps</strong> (55m)</td>
+                            <td>LAN perkantoran modern. Ada spline plastik di tengah.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cat 6a</strong></td>
+                            <td>500 MHz</td>
+                            <td><strong>10 Gbps</strong> (100m)</td>
+                            <td>Data Center / Backbone LAN. Lebih tebal &amp; berat.</td>
+                        </tr>
+                        <tr>
+                            <td>Cat 7</td>
+                            <td>600 MHz</td>
+                            <td>10 Gbps+</td>
+                            <td>High-density Data Center (konektor GG45).</td>
                         </tr>
                     </table>
                 </div>
                 <div class="info-box" style="margin-top:.5em;">
-                    💡 GEO <em>stasioner</em> terhadap bumi — cocok untuk TV broadcast. LEO bergerak cepat — butuh banyak satelit (konstelasi) tapi latensi sangat rendah.
+                    &#x1F4A1; <strong>Cat 5e</strong> adalah pilihan paling ekonomis untuk jaringan rumah/kantor.
+                    <strong>Cat 6</strong> untuk performa lebih tinggi dengan anggaran sedang.
                 </div>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/satellite_devices.png" alt="Sistem komunikasi satelit: uplink, orbit, downlink" class="slide-img">
-                <p class="img-caption">Sistem komunikasi satelit (uplink–downlink)</p>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- 10b. Contoh Perangkat & Layanan -->
-    <section>
-        <h3><i class="bi bi-globe2" style="color:#6a1b9a;"></i> Komunikasi Satelit — Layanan &amp; Perangkat</h3>
-        <div class="layout-2col">
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#6a1b9a;">Internet &amp; Data</p>
-                <ul>
-                    <li>🛰️ <strong>Starlink (SpaceX)</strong> — internet via LEO, tersedia di Indonesia. Latensi ~20-40ms, kecepatan ~100-400 Mbps.</li>
-                    <li>☁️ <strong>VSAT (Very Small Aperture Terminal)</strong> — internet satelit GEO untuk kapal laut, rig minyak, desa terpencil. Antena kecil ~1.2m.</li>
-                    <li>📱 <strong>Direct-to-Cell (Starlink / AST)</strong> — koneksi langsung ke smartphone biasa tanpa SIM khusus.</li>
-                </ul>
-            </div>
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#6a1b9a;">Navigasi &amp; Penyiaran</p>
-                <ul>
-                    <li>🗺️ <strong>GPS (Global Positioning System)</strong> — 31 satelit MEO milik AS. Akurasi sipil ~3-5 meter. Digunakan di smartphone, kendaraan, survei.</li>
-                    <li>📡 <strong>TV Satelit</strong> — Telkom-4 / MEASAT / Intelsat (GEO). Dish parabola menangkap siaran langsung dari orbit.</li>
-                    <li>🌦️ <strong>Satelit Cuaca</strong> — BMKG menggunakan data dari satelit GEO untuk prakiraan cuaca nasional.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tabel Perbandingan Unguided -->
-    <section>
-        <h3>Perbandingan Keempat Unguided Media</h3>
-        <div class="card text-left text-smaller">
-            <table>
-                <tr><th>Jenis</th><th>Frekuensi</th><th>Arah</th><th>Jangkauan</th><th>Contoh Aplikasi</th></tr>
-                <tr>
-                    <td><span class="highlight-blue">Gelombang Radio</span></td>
-                    <td>3 Hz – 1 GHz</td><td>Omnidirectional</td><td>Puluhan – ratusan km</td>
-                    <td>AM/FM Radio, Bluetooth, TV Analog, HT</td>
-                </tr>
-                <tr>
-                    <td><span class="highlight-orange">Gelombang Mikro</span></td>
-                    <td>1 – 300 GHz</td><td>Unidirectional (LoS)</td><td>Beberapa – puluhan km</td>
-                    <td>Wi-Fi, BTS 4G/5G, Radar, Backhaul</td>
-                </tr>
-                <tr>
-                    <td><span class="highlight-green">Infrared</span></td>
-                    <td>300 GHz – 400 THz</td><td>Terfokus (LoS ketat)</td><td>&lt; 1 meter</td>
-                    <td>Remote TV/AC, IrDA, Sensor PIR</td>
-                </tr>
-                <tr>
-                    <td><span style="color:#6a1b9a;font-weight:700;">Satelit</span></td>
-                    <td>1 – 40 GHz (µwave)</td><td>Global (downlink luas)</td><td>Seluruh bumi</td>
-                    <td>GPS, Starlink, VSAT, TV Parabola</td>
-                </tr>
-            </table>
-        </div>
-        <div class="info-box" style="margin-top:.5em;">
-            📌 Infrared dan Radio adalah dua ekstrem yang berlawanan: infrared paling terbatas secara jangkauan, radio paling luas — tapi radio juga paling tidak aman dari penyadapan.
-        </div>
-    </section>
-
-    <!-- ━━━━━━━━━━━━━━ SECTION 5: PRAKTIKUM ━━━━━━━━━━━━━━ -->
-    <section>
-        <h2>5. Praktikum: Membuat Kabel LAN (UTP)</h2>
-        <p>Crimping RJ45 — sesi hands-on</p>
-        <aside class="notes">Masuk ke bagian praktikum. Mahasiswa harap menyiapkan tang crimping, konektor RJ45, dan kabel UTP.</aside>
-    </section>
-
-    <!-- 11a. Alat + Langkah -->
-    <section>
-        <h3>Crimping UTP: Alat &amp; Langkah-langkah</h3>
-        <div class="layout-2col">
-            <div>
-                <div class="sec-bar sec-bar-teal">Alat yang Dibutuhkan</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>🔵 <strong>Kabel UTP</strong> Cat 5e / Cat 6</li>
-                        <li>🟡 <strong>Konektor RJ45</strong> (8 pin tembaga)</li>
-                        <li>🔧 <strong>Tang Crimping</strong> — memotong, mengupas, dan menekan pin</li>
-                        <li>🔴 <strong>LAN Tester</strong> — unit utama + unit remote</li>
-                    </ul>
+            <!-- Konektor RJ45 -->
+            <section>
+                <h3>Konektor RJ45 &amp; Susunan Warna 568-B</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller">
+                        <p><strong>RJ45</strong> (Registered Jack 45) adalah konektor plastik transparan dengan
+                            <strong>8 pin tembaga</strong> yang menjadi standar kabel UTP.
+                        </p>
+                        <p style="margin-top:.5em; font-weight:700;">Susunan warna TIA/EIA 568-B (paling populer di
+                            Indonesia):</p>
+                        <p style="font-size:.78em; margin-top:.3em;">Pin 1&#x2192;8, klip RJ45 menghadap ke bawah:</p>
+                        <ol style="font-size:.78em; column-count:2; column-gap:1em;">
+                            <li><span class="wire-ow">Putih-Oranye</span></li>
+                            <li><span class="wire-o">Oranye</span></li>
+                            <li><span class="wire-gw">Putih-Hijau</span></li>
+                            <li><span class="wire-b">Biru</span></li>
+                            <li><span class="wire-bw">Putih-Biru</span></li>
+                            <li><span class="wire-g">Hijau</span></li>
+                            <li><span class="wire-brw">Putih-Coklat</span></li>
+                            <li><span class="wire-br">Coklat</span></li>
+                        </ol>
+                        <div class="info-box-warn" style="margin-top:.5em; font-size:.6em;">
+                            &#x26A0;&#xFE0F; Ingat: pasangan Hijau dipisahkan oleh pasangan Biru (pin 3 &amp; 6 tidak
+                            bersebelahan). Ini yang sering salah!
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/image27.png" alt="Konektor RJ45 tampak depan 8 pin" class="slide-img-sm"
+                            style="max-height: 140px; width: auto; object-fit: contain;">
+                        <p class="img-caption">Konektor RJ45 (8 pin tembaga)</p>
+                        <img src="img/week3/image28.png" alt="Jack RJ45 keystone" class="slide-img-sm"
+                            style="margin-top:.2em; max-height: 140px; width: auto; object-fit: contain;">
+                        <p class="img-caption">Jack RJ45 pada keystone panel</p>
+                    </div>
                 </div>
-                <div class="sec-bar sec-bar-teal" style="margin-top:.6em; border-radius:8px;">Langkah Crimping (Ringkas)</div>
-                <div class="sec-body text-left text-small">
-                    <ol>
-                        <li>Kupas jaket luar ~3 cm menggunakan pisau bundar crimper.</li>
-                        <li>Urai keempat pasang kabel, luruskan tiap urat.</li>
-                        <li>Susun 8 urat sesuai urutan warna standar (568-B).</li>
-                        <li>Potong rata ujungnya hingga panjang ~1.2 cm.</li>
-                        <li>Masukkan ke RJ45 hingga mentok, lalu tekan (crimp) kuat.</li>
-                        <li>Uji dengan LAN Tester.</li>
-                    </ol>
+                <aside class="notes">Tips hafalan 568-B: Putih-Oranye, Oranye, Putih-Hijau, BIRU, Putih-Biru, Hijau,
+                    Putih-Coklat, Coklat. Ingat pasangan hijau terpisah oleh biru.</aside>
+            </section>
+
+            <!-- KABEL UTP STRAIGHT & CROSS -->
+            <section>
+                <h2>Kabel UTP: Straight &amp; Cross</h2>
+                <aside class="notes">Mari kita bahas dua jenis susunan kabel UTP yang sering digunakan: Straight-through
+                    dan Crossover, beserta fungsinya masing-masing.</aside>
+            </section>
+
+            <!-- Straight-Through -->
+            <section>
+                <h3>Kabel UTP Straight-Through</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Definisi &amp; Standar</div>
+                        <div class="sec-body text-left text-smaller">
+                            <p><strong>Straight-through cable</strong> adalah kabel UTP di mana kedua ujungnya memiliki
+                                susunan warna pin yang <strong>sama</strong>. Biasanya menggunakan standar
+                                <strong>TIA/EIA-568B</strong> di kedua ujungnya.
+                            </p>
+                        </div>
+                        <div class="sec-bar sec-bar-blue" style="margin-top:.6em; border-radius:7px;">Fungsi &amp;
+                            Penggunaan</div>
+                        <div class="sec-body text-left text-smaller">
+                            <p>Digunakan untuk menghubungkan dua perangkat jaringan yang <strong>berbeda
+                                    tingkat/jenis</strong>. Contoh: Komputer (PC/Laptop) ke Switch / Hub, Komputer ke
+                                Router
+                                (Port LAN), Switch ke Router.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/image24.png" alt="Diagram pin Straight-Through Cable" class="slide-img-sm"
+                            style="background:#fff; padding:4px;">
+                        <p class="img-caption">Susunan Straight-Through (568-B ke 568-B)</p>
+                    </div>
                 </div>
-            </div>
-            <div class="img-col">
-                <img src="img/week3/image24.png" alt="Diagram pin Straight-Through Cable" class="slide-img-sm" style="background:#fff; padding:4px;">
-                <p class="img-caption">Straight-Through (568-B | 568-B)</p>
-                <img src="img/week3/image22.png" alt="Diagram pin Crossover Cable" class="slide-img-sm" style="margin-top:.4em; background:#fff; padding:4px;">
-                <p class="img-caption">Crossover (568-B | 568-A)</p>
-            </div>
+            </section>
+
+            <!-- Crossover -->
+            <section>
+                <h3>Kabel UTP Crossover</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-orange">Definisi &amp; Standar</div>
+                        <div class="sec-body text-left text-smaller">
+                            <p><strong>Crossover cable</strong> adalah kabel UTP di mana salah satu ujung menggunakan
+                                <strong>TIA/EIA-568A</strong> dan ujung lainnya <strong>TIA/EIA-568B</strong>. Terjadi
+                                "persilangan" pada pin transmisi (Tx) dan penerima (Rx).
+                            </p>
+                        </div>
+                        <div class="sec-bar sec-bar-orange" style="margin-top:.6em; border-radius:7px;">Fungsi &amp;
+                            Penggunaan</div>
+                        <div class="sec-body text-left text-smaller">
+                            <p>Digunakan untuk menghubungkan dua perangkat jaringan yang
+                                <strong>setingkat/sejenis</strong>. Contoh: Komputer ke Komputer secara langsung, Switch
+                                ke
+                                Switch, Router ke Router.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/image22.png" alt="Diagram pin Crossover Cable" class="slide-img-sm"
+                            style="margin-top:.4em; background:#fff; padding:4px;">
+                        <p class="img-caption">Susunan Crossover (568-B ke 568-A)</p>
+                    </div>
+                </div>
+                <aside class="notes">Catatan: Sebagian besar perangkat modern saat ini memiliki fitur Auto-MDIX yang
+                    secara otomatis dapat menyesuaikan jika kita menggunakan kabel straight untuk perangkat yang
+                    sejenis. Namun secara teori, pengkabelan crossover tetap penting untuk dipahami.</aside>
+            </section>
+
+            <!-- Fiber Optik: Prinsip & Struktur -->
+            <section>
+                <h3>Guided 3: Fiber Optik (Prinsip)</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller">
+                        <p>Fiber optik menghantarkan <strong>pulsa cahaya</strong> (bukan arus listrik) melalui inti
+                            kaca/plastik silika berkualitas tinggi.</p>
+                        <p style="margin-top:.5em; font-weight:700;">Prinsip kerja: Total Internal Reflection</p>
+                        <p style="font-size:.85em;">Cahaya yang masuk ke inti fiber akan dipantulkan bolak-balik di
+                            dinding kaca secara terus-menerus, tidak bocor keluar, hingga mencapai tujuan.</p>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/fiber_prinsip_id.jpg" alt="Pemantulan Internal Total pada Fiber Optik"
+                            class="slide-img">
+                        <p class="img-caption">Prinsip Pemantulan Internal Total</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Guided 3: Fiber Optik (Struktur)</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller">
+                        <p style="margin-top:.5em; font-weight:700;">Lapisan struktur fiber:</p>
+                        <ol style="font-size:.85em;">
+                            <li><strong>Core</strong> &mdash; inti kaca ultra-jernih, tempat cahaya merambat.</li>
+                            <li><strong>Cladding</strong> &mdash; lapisan kaca dengan indeks refraksi lebih rendah,
+                                memantulkan cahaya ke dalam core.</li>
+                            <li><strong>Coating</strong> &mdash; pelindung plastik tipis dari goresan.</li>
+                            <li><strong>Strength Member &amp; Outer Jacket</strong> &mdash; proteksi mekanis.</li>
+                        </ol>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/image33.png" alt="Struktur 3D kabel Fiber Optik" class="slide-img">
+                        <p class="img-caption">Struktur kabel fiber optik</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fiber Optik: Jenis & Keunggulan -->
+            <section>
+                <h3>Guided 3: Jenis Fiber Optik</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Dua Jenis Fiber</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li><strong>Single-mode (SMF):</strong> Inti sangat kecil (~8 &micro;m). Cahaya merambat
+                                    lurus tanpa pantulan. Jarak sangat jauh (puluhan&ndash;ratusan km). Dipakai untuk
+                                    backbone internet &amp; backbone antar kota.</li>
+                                <li style="margin-top:.5em;"><strong>Multi-mode (MMF):</strong> Inti lebih besar
+                                    (~50&ndash;62.5 &micro;m). Cahaya merambat dalam banyak jalur (mode). Jarak lebih
+                                    pendek (maks ~500m). Dipakai di data center &amp; LAN gedung.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="img-col" style="margin-top:.5em;">
+                            <img src="img/week3/image34.png" alt="Single-mode vs Multi-mode fiber" class="slide-img-xs"
+                                style="background:#fff; padding:3px;">
+                            <p class="img-caption">Single-mode (atas) vs Multi-mode (bawah)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>Guided 3: Tulang Punggung Internet Global</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="padding:15px;">
+                        <ul style="margin-top:0.5em; display:flex; flex-direction:column; gap:12px;">
+                            <li>&#x1F30D; <strong>Kabel Bawah Laut (Submarine Cables):</strong> Fakta mengejutkan:
+                                Sekitar <strong>99% data internet antar benua</strong> mengalir melalui kabel fiber
+                                optik yang diletakkan di dasar samudera, bukan melalui satelit.</li>
+                            <li>&#x1F4E1; <strong>Mengapa bukan Satelit?</strong> Satelit memiliki bandwidth yang jauh
+                                lebih terbatas dan latensi yang lebih lambat (ratusan milidetik) dibandingkan fiber
+                                optik yang mampu menghantarkan cahaya antar benua dalam puluhan milidetik.</li>
+                            <!-- <li>&#x1F4A1; <strong>Kapasitas Masif:</strong> Sistem kabel bawah laut modern dapat memuat ratusan Terabit per detik (Tbps), menjadi urat nadi utama yang menghubungkan seluruh data center di dunia.</li> -->
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/submarine_cable_id.jpg" alt="Kabel Bawah Laut Fiber Optik"
+                            class="slide-img">
+                        <p class="img-caption">Ilustrasi jaringan kabel laut antar benua</p>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>Guided 3: Kelebihan Fiber Optik</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="padding:15px;">
+                        <ul style="margin-top:0.5em; display:flex; flex-direction:column; gap:8px;">
+                            <li>&#x1F680; <strong>Bandwidth Masif:</strong> Ratusan Gbps hingga Terabit/s. Tulang
+                                punggung internet global di bawah laut.</li>
+                            <li>&#x1F4CF; <strong>Redaman Sangat Kecil:</strong> Kabel tembaga perlu repeater setiap
+                                100m. Fiber optik bisa jalan puluhan km tanpa repeater.</li>
+                            <li>&#x1F6E1;&#xFE0F; <strong>Kebal EMI 100%:</strong> Tidak pakai listrik &#x2192;
+                                tidak tersambar petir, tidak terganggu mesin pabrik.</li>
+                            <!-- <li>&#x1F512; <strong>Aman dari Penyadapan:</strong> Tidak memancarkan gelombang
+                                elektromagnetik ke luar.</li> -->
+                            <li>&#x2696;&#xFE0F; <strong>Lebih Ringan &amp; Kecil:</strong> Satu kabel fiber bisa
+                                menggantikan ribuan kabel tembaga.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/fiber_kelebihan_id.jpg" alt="Infografis Kelebihan Fiber Optik"
+                            class="slide-img">
+                        <p class="img-caption">4 Keunggulan Utama Fiber Optik</p>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- SECTION 4: UNGUIDED MEDIA -->
+            <section>
+                <h2>4. Unguided Media (Nirkabel)</h2>
+                <p>Gelombang elektromagnetik merambat bebas tanpa panduan fisik</p>
+                <aside class="notes">Ada 4 jenis utama yang akan kita bahas satu per satu.</aside>
+            </section>
+
+            <!-- Overview 4 jenis -->
+            <section>
+                <h3>Empat Jenis Unguided Media</h3>
+                <div class="grid-4">
+                    <div class="media-card">
+                        <div class="icon-circle badge-radio"><i class="bi bi-reception-4"></i></div>
+                        <h5 class="highlight-blue">Gelombang Radio</h5>
+                        <p>3 Hz &ndash; 1 GHz<br>Omnidirectional<br>Tembus tembok<br>FM, AM, Bluetooth</p>
+                    </div>
+                    <div class="media-card">
+                        <div class="icon-circle badge-micro"><i class="bi bi-broadcast-pin"></i></div>
+                        <h5 class="highlight-orange">Gelombang Mikro</h5>
+                        <p>1 &ndash; 300 GHz<br>Unidirectional<br>Line-of-Sight<br>BTS, Wi-Fi, Backhaul</p>
+                    </div>
+                    <div class="media-card">
+                        <div class="icon-circle badge-ir"><i class="bi bi-lightbulb"></i></div>
+                        <h5 class="highlight-green">Infrared</h5>
+                        <p>300 GHz &ndash; 400 THz<br>Jarak &lt; 1 m<br>Tidak tembus dinding<br>Remote TV, IrDA</p>
+                    </div>
+                    <div class="media-card">
+                        <div class="icon-circle badge-sat"><i class="bi bi-globe2"></i></div>
+                        <h5 style="color:#6a1b9a;">Satelit</h5>
+                        <p>Jangkauan global<br>Latensi tinggi (GEO)<br>Area terpencil<br>GPS, Starlink, VSAT</p>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:.7em;">
+                    &#x1F511; Semakin tinggi frekuensi &#x2192; <strong>bandwidth lebih besar</strong>, tapi
+                    <strong>jangkauan lebih pendek</strong> dan semakin mudah terhalang benda padat.
+                </div>
+            </section>
+
+            <!-- Gelombang Radio: Karakteristik -->
+            <section>
+                <h3><i class="bi bi-reception-4" style="color:#1565c0;"></i> Karakteristik Gelombang Radio</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Sifat Fisik</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li><strong>Frekuensi:</strong> 3 Hz &ndash; 1 GHz. Mencakup sub-band: ELF, VLF, LF, MF
+                                    (AM), HF, VHF, UHF.</li>
+                                <li><strong>Arah Rambat:</strong> <em>Omnidirectional</em> &mdash; menyebar ke semua
+                                    arah seperti cahaya bola lampu. Tidak butuh pengarahan antena.</li>
+                                <li><strong>Penetrasi:</strong> Mampu menembus tembok beton, hujan, dan bukit kecil.
+                                </li>
+                                <li><strong>Panjang Gelombang:</strong> Panjang (meter hingga kilometer), sehingga tidak
+                                    mudah diserap objek kecil.</li>
+                            </ul>
+                        </div>
+                        <!-- <div class="info-box-warn" style="margin-top:.5em;">
+                            &#x26A0;&#xFE0F; Karena omnidirectional, sinyal radio mudah <strong>tersadap</strong> dan
+                            rentan terhadap <strong>interferensi antar pemancar</strong> di frekuensi sama. Regulasi
+                            frekuensi oleh pemerintah diperlukan.
+                        </div> -->
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/radio_wave_devices.png"
+                            alt="Transmisi gelombang radio: menara AM/FM ke rumah dan mobil" class="slide-img">
+                        <p class="img-caption">Transmisi gelombang radio AM/FM</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3><i class="bi bi-reception-4" style="color:#c09e15;"></i> Kelemahan Gelombang Radio</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="info-box-warn" style="margin-top:.5em;">
+                            &#x26A0;&#xFE0F; Karena omnidirectional, sinyal radio mudah <strong>tersadap</strong> dan
+                            rentan terhadap <strong>interferensi antar pemancar</strong> di frekuensi sama. Regulasi
+                            frekuensi oleh pemerintah diperlukan.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/kelemahan_radio_id.jpg"
+                            alt="Ilustrasi penyadapan dan interferensi gelombang radio" class="slide-img">
+                        <p class="img-caption">Risiko penyadapan &amp; interferensi sinyal radio</p>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Gelombang Radio: Contoh Perangkat -->
+            <section>
+                <h3><i class="bi bi-reception-4" style="color:#1565c0;"></i> Gelombang Radio &mdash; Contoh Perangkat
+                </h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller">
+                        <p style="font-weight:700; color:#1565c0;">Perangkat Penyiaran (Broadcasting)</p>
+                        <ul>
+                            <li>&#x1F4E1; <strong>Menara Pemancar AM/FM</strong> &mdash; siaran radio ke jutaan
+                                pendengar sekaligus.</li>
+                            <li>&#x1F4FA; <strong>Pemancar TV Analog/Digital</strong> (VHF/UHF) &mdash; siaran televisi
+                                terrestrial.</li>
+                            <li>&#x1F681; <strong>Radio Komunikasi Penerbangan</strong> &mdash; ATC menggunakan band VHF
+                                118&ndash;137 MHz.</li>
+                            <li>&#x1F692; <strong>HT (Handy Talky)</strong> &mdash; komunikasi darurat polisi, pemadam
+                                kebakaran.</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-smaller">
+                        <p style="font-weight:700; color:#1565c0;">Perangkat Jaringan Pendek</p>
+                        <ul>
+                            <li>&#x1F535; <strong>Bluetooth</strong> (2.4 GHz, ISM band) &mdash; headset, speaker,
+                                transfer file jarak pendek (&lt; 10m standar).</li>
+                            <li>&#x1F310; <strong>Zigbee &amp; Z-Wave</strong> (868 MHz / 2.4 GHz) &mdash; otomasi rumah
+                                (smart home), sensor IoT.</li>
+                            <li>&#x1F3AE; <strong>RF Remote</strong> &mdash; remote TV/AC generasi baru yang tidak butuh
+                                LoS seperti infrared.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gelombang Mikro: Karakteristik -->
+            <section>
+                <h3><i class="bi bi-broadcast-pin" style="color:#e65100;"></i> Gelombang Mikro &mdash; Karakteristik
+                </h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-orange">Sifat Fisik</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li><strong>Frekuensi:</strong> 1 GHz &ndash; 300 GHz. Termasuk sub-band S, C, X, Ku,
+                                    Ka.</li>
+                                <li><strong>Arah Rambat:</strong> <em>Unidirectional</em> &mdash; terfokus seperti sinar
+                                    laser. Antena parabola digunakan untuk memfokuskan sinyal.</li>
+                                <li><strong>Syarat Line-of-Sight (LoS):</strong> Antena pengirim dan penerima <em>harus
+                                        bisa saling melihat</em> &mdash; tidak boleh ada halangan gunung, gedung tinggi,
+                                    atau pohon besar.</li>
+                                <li><strong>Panjang Gelombang:</strong> Pendek (mm &ndash; cm). Mudah terserap oleh
+                                    hujan lebat (<em>Rain Fade</em>).</li>
+                            </ul>
+                        </div>
+                        <div class="info-box-warn" style="margin-top:.5em;">
+                            &#x26A0;&#xFE0F; Karena memerlukan LoS, tower BTS harus ditempatkan di titik-titik tinggi
+                            dengan radius yang cermat &mdash; itulah alasan tower BTS sering di bukit atau atap gedung
+                            tinggi.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/microwave_devices.png"
+                            alt="Perangkat gelombang mikro: BTS, WiFi, antena backhaul" class="slide-img">
+                        <p class="img-caption">Perangkat microwave: BTS, WiFi, backhaul</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gelombang Mikro: Contoh Perangkat -->
+            <section>
+                <h3><i class="bi bi-broadcast-pin" style="color:#e65100;"></i> Gelombang Mikro &mdash; Contoh Perangkat
+                </h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller">
+                        <p style="font-weight:700; color:#e65100;">Komunikasi Seluler &amp; LAN</p>
+                        <ul>
+                            <li>&#x1F5FC; <strong>BTS (Base Transceiver Station)</strong> &mdash; menara seluler 4G LTE
+                                / 5G NR. Menggunakan band 700 MHz &ndash; 26 GHz.</li>
+                            <li>&#x1F4F6; <strong>Wi-Fi Router</strong> (2.4 GHz &amp; 5 GHz) &mdash; jaringan nirkabel
+                                lokal di rumah/kantor/kampus.</li>
+                            <li>&#x1F537; <strong>WiMAX</strong> (2.3&ndash;3.5 GHz) &mdash; broadband nirkabel jarak
+                                menengah (beberapa km).</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-smaller">
+                        <p style="font-weight:700; color:#e65100;">Backhaul &amp; Point-to-Point</p>
+                        <ul>
+                            <li>&#x1F4E1; <strong>Antena Microwave Backhaul</strong> &mdash; menghubungkan BTS ke
+                                jaringan inti. Dua antena parabola saling berhadapan antar gedung (jarak 1&ndash;50 km).
+                            </li>
+                            <li>&#x1F3E2; <strong>LMDS/MMDS</strong> &mdash; distribusi internet broadband ke kawasan
+                                perumahan tanpa kabel.</li>
+                            <li>&#x1F327;&#xFE0F; <strong>Radar Cuaca &amp; Pesawat</strong> &mdash; menggunakan band
+                                X/C untuk deteksi presipitasi.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Infrared: Karakteristik -->
+            <section>
+                <h3><i class="bi bi-lightbulb" style="color:#2e7d32;"></i> Infrared &mdash; Karakteristik</h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-green">Sifat Fisik</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li><strong>Frekuensi:</strong> 300 GHz &ndash; 400 THz. Tepat di bawah cahaya tampak
+                                    pada spektrum elektromagnetik.</li>
+                                <li><strong>Arah Rambat:</strong> Sangat terfokus &mdash; berperilaku seperti cahaya
+                                    biasa.</li>
+                                <li><strong>Jangkauan:</strong> Sangat pendek, efektif hanya beberapa sentimeter hingga
+                                    ~1 meter.</li>
+                                <li><strong>Tidak bisa menembus dinding</strong> &mdash; diblokir oleh material padat
+                                    apa pun.</li>
+                                <li><strong>Butuh LoS ketat</strong> &mdash; pengirim dan penerima harus bertatapan
+                                    langsung.</li>
+                                <li><strong>Interferensi matahari:</strong> Cahaya matahari mengandung infrared yang
+                                    dapat mengganggu sinyal.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/infrared_devices.png"
+                            alt="Perangkat infrared: remote TV, IrDA, sensor gerak" class="slide-img">
+                        <p class="img-caption">Perangkat berbasis infrared</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Infrared: Contoh Perangkat -->
+            <section>
+                <h3><i class="bi bi-lightbulb" style="color:#2e7d32;"></i> Infrared &mdash; Contoh Perangkat</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller">
+                        <p style="font-weight:700; color:#2e7d32;">Kendali Jarak Dekat</p>
+                        <ul>
+                            <li>&#x1F4FA; <strong>Remote Control TV / AC / Proyektor</strong> &mdash; pengguna paling
+                                umum. Menggunakan LED infrared yang memancarkan kode pulsa.</li>
+                            <li>&#x1F526; <strong>Remote Kamera DSLR</strong> &mdash; trigger shutter tanpa menyentuh
+                                kamera untuk foto long-exposure.</li>
+                            <li>&#x1F3AE; <strong>Nintendo Wii Sensor Bar</strong> &mdash; dua titik infrared yang
+                                dilacak oleh Wiimote.</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-smaller">
+                        <p style="font-weight:700; color:#2e7d32;">Transfer Data &amp; Deteksi</p>
+                        <ul>
+                            <li>&#x1F4BB; <strong>IrDA (Infrared Data Association)</strong> &mdash; port transfer data
+                                di laptop/HP era 1990&ndash;2000-an. Kecepatan hingga 16 Mbps (Fast-IR).</li>
+                            <li>&#x1F512; <strong>Sensor Gerak PIR</strong> (Passive IR) &mdash; mendeteksi panas tubuh
+                                manusia. Digunakan di alarm keamanan dan lampu otomatis.</li>
+                            <li>&#x1F6D2; <strong>Barcode Scanner</strong> &mdash; beberapa model menggunakan LED IR.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Satelit: Orbit & Latensi -->
+            <section>
+                <h3><i class="bi bi-globe2" style="color:#6a1b9a;"></i> Komunikasi Satelit &mdash; Orbit &amp; Latensi
+                </h3>
+                <div class="layout-text-img">
+                    <div>
+                        <div class="sec-bar sec-bar-purple">Tiga Jenis Orbit</div>
+                        <div class="sec-body text-left text-smaller">
+                            <table style="width:100%; border-collapse: collapse; font-size: 0.75em; line-height: 1.2;">
+                                <tr
+                                    style="border-bottom: 2px solid #6a1b9a; background-color: rgba(106, 27, 154, 0.1);">
+                                    <th style="padding: 6px; text-align: left;">Orbit</th>
+                                    <th style="padding: 6px; text-align: left;">Ketinggian</th>
+                                    <th style="padding: 6px; text-align: left;">Latensi</th>
+                                    <th style="padding: 6px; text-align: left;">Contoh</th>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                                    <td style="padding: 6px; vertical-align: top;"><strong>GEO</strong><br><span
+                                            style="font-size:0.85em">Geostationary</span></td>
+                                    <td style="padding: 6px; vertical-align: top;">~35.786 km</td>
+                                    <td style="padding: 6px; vertical-align: top;">~500&ndash;700 ms</td>
+                                    <td style="padding: 6px; vertical-align: top;">Viasat, HughesNet, TV Parabola</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                                    <td style="padding: 6px; vertical-align: top;"><strong>MEO</strong><br><span
+                                            style="font-size:0.85em">Medium Earth</span></td>
+                                    <td style="padding: 6px; vertical-align: top;">2.000&ndash;20.000 km</td>
+                                    <td style="padding: 6px; vertical-align: top;">~100&ndash;250 ms</td>
+                                    <td style="padding: 6px; vertical-align: top;">GPS, Galileo, Glonass</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 6px; vertical-align: top;"><strong>LEO</strong><br><span
+                                            style="font-size:0.85em">Low Earth</span></td>
+                                    <td style="padding: 6px; vertical-align: top;">200&ndash;2.000 km</td>
+                                    <td style="padding: 6px; vertical-align: top;">~20&ndash;40 ms</td>
+                                    <td style="padding: 6px; vertical-align: top;">Starlink, OneWeb, Iridium</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="info-box" style="margin-top:.5em;">
+                            &#x1F4A1; GEO <em>stasioner</em> terhadap bumi &mdash; cocok untuk TV broadcast. LEO
+                            bergerak cepat &mdash; butuh banyak satelit (konstelasi) tapi latensi sangat rendah.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week3/satellite_devices.png"
+                            alt="Sistem komunikasi satelit: uplink, orbit, downlink" class="slide-img">
+                        <p class="img-caption">Sistem komunikasi satelit (uplink&ndash;downlink)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Satelit: Layanan & Perangkat -->
+            <section>
+                <h3><i class="bi bi-globe2" style="color:#6a1b9a;"></i> Komunikasi Satelit &mdash; Layanan &amp;
+                    Perangkat</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller">
+                        <p style="font-weight:700; color:#6a1b9a;">Internet &amp; Data</p>
+                        <ul>
+                            <li>&#x1F6F0;&#xFE0F; <strong>Starlink (SpaceX)</strong> &mdash; internet via LEO, tersedia
+                                di Indonesia. Latensi ~20-40ms, kecepatan ~100-400 Mbps.</li>
+                            <li>&#x2601;&#xFE0F; <strong>VSAT (Very Small Aperture Terminal)</strong> &mdash; internet
+                                satelit GEO untuk kapal laut, rig minyak, desa terpencil. Antena kecil ~1.2m.</li>
+                            <li>&#x1F4F1; <strong>Direct-to-Cell (Starlink / AST)</strong> &mdash; koneksi langsung ke
+                                smartphone biasa tanpa SIM khusus.</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-smaller">
+                        <p style="font-weight:700; color:#6a1b9a;">Navigasi &amp; Penyiaran</p>
+                        <ul>
+                            <li>&#x1F5FA;&#xFE0F; <strong>GPS</strong> &mdash; 31 satelit MEO milik AS. Akurasi sipil
+                                ~3-5 meter. Digunakan di smartphone, kendaraan, survei.</li>
+                            <li>&#x1F4E1; <strong>TV Satelit</strong> &mdash; Telkom-4 / MEASAT / Intelsat (GEO). Dish
+                                parabola menangkap siaran langsung dari orbit.</li>
+                            <li>&#x1F326;&#xFE0F; <strong>Satelit Cuaca</strong> &mdash; BMKG menggunakan data dari
+                                satelit GEO untuk prakiraan cuaca nasional.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tabel Perbandingan Unguided -->
+            <section>
+                <h3>Perbandingan Keempat Unguided Media</h3>
+                <div class="card text-left text-smaller">
+                    <table style="width:100%; border-collapse: collapse; font-size: 0.75em; line-height: 1.3;">
+                        <tr style="border-bottom: 2px solid #555; background-color: rgba(0,0,0,0.05);">
+                            <th style="padding: 6px; text-align: left;">Jenis</th>
+                            <th style="padding: 6px; text-align: left;">Frekuensi</th>
+                            <th style="padding: 6px; text-align: left;">Arah</th>
+                            <th style="padding: 6px; text-align: left;">Jangkauan</th>
+                            <th style="padding: 6px; text-align: left;">Contoh Aplikasi</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <td style="padding: 6px; vertical-align: top;"><span
+                                    style="color:#1565c0;font-weight:700;">Gelombang Radio</span></td>
+                            <td style="padding: 6px; vertical-align: top;">3 Hz &ndash; 1 GHz</td>
+                            <td style="padding: 6px; vertical-align: top;">Omnidirectional</td>
+                            <td style="padding: 6px; vertical-align: top;">Puluhan &ndash; ratusan km</td>
+                            <td style="padding: 6px; vertical-align: top;">AM/FM Radio, Bluetooth, TV Analog, HT</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <td style="padding: 6px; vertical-align: top;"><span
+                                    style="color:#e65100;font-weight:700;">Gelombang Mikro</span></td>
+                            <td style="padding: 6px; vertical-align: top;">1 &ndash; 300 GHz</td>
+                            <td style="padding: 6px; vertical-align: top;">Unidirectional (LoS)</td>
+                            <td style="padding: 6px; vertical-align: top;">Beberapa &ndash; puluhan km</td>
+                            <td style="padding: 6px; vertical-align: top;">Wi-Fi, BTS 4G/5G, Radar, Backhaul</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <td style="padding: 6px; vertical-align: top;"><span
+                                    style="color:#2e7d32;font-weight:700;">Infrared</span></td>
+                            <td style="padding: 6px; vertical-align: top;">300 GHz &ndash; 400 THz</td>
+                            <td style="padding: 6px; vertical-align: top;">Terfokus (LoS ketat)</td>
+                            <td style="padding: 6px; vertical-align: top;">&lt; 1 meter</td>
+                            <td style="padding: 6px; vertical-align: top;">Remote TV/AC, IrDA, Sensor PIR</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px; vertical-align: top;"><span
+                                    style="color:#6a1b9a;font-weight:700;">Satelit</span></td>
+                            <td style="padding: 6px; vertical-align: top;">1 &ndash; 40 GHz (&micro;wave)</td>
+                            <td style="padding: 6px; vertical-align: top;">Global (downlink luas)</td>
+                            <td style="padding: 6px; vertical-align: top;">Seluruh bumi</td>
+                            <td style="padding: 6px; vertical-align: top;">GPS, Starlink, VSAT, TV Parabola</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="info-box" style="margin-top:.5em;">
+                    &#x1F4CC; Infrared dan Radio adalah dua ekstrem yang berlawanan: infrared paling terbatas secara
+                    jangkauan, radio paling luas &mdash; tapi radio juga paling tidak aman dari penyadapan.
+                </div>
+            </section>
+
+            <!-- RANGKUMAN -->
+            <section>
+                <h3>Rangkuman Pertemuan 3</h3>
+                <div class="layout-2col">
+                    <div>
+                        <div class="sec-bar sec-bar-blue">Konsep Sinyal &amp; Gangguan</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li style="margin-bottom:0.4em;"><strong>Analog vs Digital:</strong> Analog bersifat
+                                    kontinu (gelombang mulus), digital bersifat diskret (nilai pulsa biner).</li>
+                                <li><strong>Gangguan Transmisi:</strong>
+                                    <ul style="margin-top:0.2em;">
+                                        <li><em>Attenuation:</em> Sinyal melemah seiring jarak.</li>
+                                        <li><em>Distortion:</em> Perubahan bentuk sinyal komposit.</li>
+                                        <li><em>Noise:</em> Gangguan sinyal liar (Crosstalk, Thermal, EMI).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-bar sec-bar-green">Media Transmisi</div>
+                        <div class="sec-body text-left text-smaller">
+                            <ul>
+                                <li style="margin-bottom:0.4em;"><strong>Guided (Kabel):</strong>
+                                    <ul style="margin-top:0.2em;">
+                                        <li><em>Coaxial:</em> Berlapis shield, tahan noise.</li>
+                                        <li><em>Twisted Pair:</em> UTP &amp; STP. Dipilin untuk atasi crosstalk.</li>
+                                        <li><em>Fiber Optik:</em> Inti kaca, bandwidth masif, kebal EMI.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Unguided (Nirkabel):</strong> Radio (omnidirectional), Mikro
+                                    (unidirectional/LoS), Infrared (jarak sangat dekat), dan Satelit (GEO, MEO, LEO).
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TUGAS INDIVIDU -->
+            <section>
+                <div class="tugas-box">
+                    <h3>&#x1F4DD; Tugas Pertemuan 3</h3>
+                    <p style="font-size:.6em; color:#c5cae9; margin-bottom:10px;">Tugas ini dirancang khusus berbasis
+                        observasi nyata</p>
+
+                    <div class="tugas-soal text-smaller" style="text-align: left; padding: 15px;">
+                        <p style="margin-bottom: 10px;"><strong>Audit Media Transmisi &amp; Gangguan Jaringan di
+                                Lingkungan Anda</strong><br>
+                            Pilih satu lokasi disekitar anda (rumah, kos, atau laboratorium kampus). Lakukan langkah
+                            berikut:</p>
+
+                        <p><span class="num"
+                                style="background:#1565c0; color:#fff; padding:2px 8px; border-radius:10px;">1</span>
+                            <strong>Pemetaan Fisik (Wajib Sketsa Tangan):</strong><br>
+                            Gambarkan denah ruangan secara manual. Tandai posisi sumber internet (Modem/Router/Access
+                            Point), letak perangkat pengguna (PC/Laptop/TV), dan jalur kabel yang ada.
+                        </p>
+
+                        <p style="margin-top: 10px;"><span class="num"
+                                style="background:#e65100; color:#fff; padding:2px 8px; border-radius:10px;">2</span>
+                            <strong>Identifikasi Guided Media &amp; Potensi EMI:</strong><br>
+                            Temukan minimal 1 jalur kabel jaringan (UTP/Coaxial/Fiber). Amati jalur fisiknya. Apakah
+                            kabel tersebut ditumpuk bersama kabel listrik PLN? Analisislah potensi terjadinya
+                            <em>Crosstalk</em> atau <em>EMI</em> pada kabel tersebut berdasarkan teori (misal: apakah
+                            kabelnya UTP tanpa shield, atau sudah STP?).
+                        </p>
+
+                        <p style="margin-top: 10px;"><span class="num"
+                                style="background:#2e7d32; color:#fff; padding:2px 8px; border-radius:10px;">3</span>
+                            <strong>Analisis Unguided Media (Attenuation &amp; Interferensi):</strong><br>
+                            Amati sinyal Wi-Fi (Gelombang Mikro) di lokasi. Jelaskan secara teknis fenomena
+                            <em>Attenuation</em> (redaman) yang terjadi ketika Anda berpindah dari dekat router ke
+                            ruangan yang terhalang 2-3 tembok tebal. Apakah ada potensi interferensi dari perangkat
+                            <em>Bluetooth</em> atau benda elektronik lain di sekitarnya?
+                        </p>
+
+                        <p style="margin-top: 10px;"><span class="num"
+                                style="background:#6a1b9a; color:#fff; padding:2px 8px; border-radius:10px;">4</span>
+                            <strong>Rekomendasi Solusi:</strong><br>
+                            Berdasarkan temuan nomor 2 dan 3, berikan 1 rekomendasi perbaikan fisik (misal: relokasi
+                            alat, penggantian jenis kabel) untuk mengurangi efek <em>Noise</em> atau
+                            <em>Attenuation</em> di lokasi tersebut!
+                        </p>
+                    </div>
+                    <div class="tugas-info" style="margin-top: 10px;">
+                        <div class="tugas-chip"><i class="bi bi-pencil"></i> Tulis tangan laporan &amp; sketsa</div>
+                        <div class="tugas-chip"><i class="bi bi-camera"></i> Scan/Foto jelas, jadikan PDF</div>
+                        <div class="tugas-chip"><i class="bi bi-calendar3"></i> Dikumpulkan di E-Learning</div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- TANYA JAWAB -->
+            <section>
+                <h2>Tanya Jawab &amp; Diskusi</h2>
+                <p>Silakan jika ada pertanyaan mengenai materi ini.</p>
+            </section>
+
         </div>
-    </section>
+    </div>
 
-    <!-- 11b. Straight vs Cross + Pengujian -->
-    <section>
-        <h3>Straight vs Crossover &amp; Pengujian</h3>
-        <div class="layout-2col">
-            <div>
-                <div class="sec-bar sec-bar-blue">Kapan Pakai Straight-Through?</div>
-                <div class="sec-body text-left text-small">
-                    <p>Kedua ujung menggunakan susunan <strong>568-B identik</strong>. Digunakan untuk menghubungkan <strong>perangkat beda level</strong>:</p>
-                    <ul>
-                        <li>PC / Laptop → Switch / Hub</li>
-                        <li>PC / Laptop → Router (port LAN)</li>
-                        <li>Switch → Router</li>
-                    </ul>
-                </div>
-                <div class="sec-bar sec-bar-orange" style="margin-top:.5em; border-radius:8px;">Kapan Pakai Crossover?</div>
-                <div class="sec-body text-left text-small">
-                    <p>Ujung A = 568-B, Ujung B = 568-A. Digunakan untuk <strong>perangkat selevel</strong>:</p>
-                    <ul>
-                        <li>PC → PC (langsung)</li>
-                        <li>Switch → Switch</li>
-                        <li>Router → Router</li>
-                    </ul>
-                </div>
-            </div>
-            <div>
-                <div class="sec-bar sec-bar-green">Membaca Hasil LAN Tester</div>
-                <div class="sec-body text-left text-small">
-                    <ul>
-                        <li>✅ <strong class="highlight-green">Straight Berhasil:</strong> LED 1–8 di kedua unit menyala berurutan serentak (1↔1, 2↔2, ... 8↔8).</li>
-                        <li style="margin-top:.4em;">✅ <strong class="highlight-green">Crossover Berhasil:</strong> Unit utama 1,2,3,4,5,6,7,8 — unit remote menyala dengan urutan <strong>3,6,1,4,5,2,7,8</strong>.</li>
-                        <li style="margin-top:.4em;">❌ <strong class="highlight-red">Gagal:</strong> Ada LED yang mati atau tidak sesuai urutan → urat putus atau pin kurang ditekan. Potong dan ulangi!</li>
-                    </ul>
-                </div>
-                <div class="info-box" style="margin-top:.5em; font-size:.6em;">
-                    💡 <strong>Auto-MDIX:</strong> Switch/NIC modern bisa mendeteksi dan menukar Tx/Rx secara otomatis, sehingga kabel straight pun bisa untuk koneksi PC-PC. Namun secara akademis, Anda tetap wajib bisa membuat crossover!
-                </div>
-            </div>
-        </div>
-        <aside class="notes">Kesalahan paling umum: kulit luar kabel kepanjangan sehingga RJ45 tidak menggigit jaket, atau pin tidak tertekan penuh.</aside>
-    </section>
-
-    <!-- ━━━━━━━━━━━━━━ TUGAS INDIVIDU ━━━━━━━━━━━━━━ -->
-    <section>
-        <div class="tugas-box">
-            <h3>📝 Tugas Individu — Pertemuan 3</h3>
-            <p style="font-size:.6em; color:#c5cae9; margin-bottom:10px;">Dikerjakan secara analitik dan tertulis tangan di kertas folio</p>
-
-            <div class="tugas-soal">
-                <p><span class="num">1.</span> Sebuah perusahaan manufaktur di kawasan industri Lampung ingin menghubungkan 3 gedung yang terpisah sejauh 200 meter satu sama lain. Di sekitar area tersebut terdapat banyak mesin las dan generator listrik besar. <strong>Analisislah:</strong> jenis media transmisi apa yang paling tepat dipilih, dan jelaskan alasan teknis Anda berdasarkan karakteristik masing-masing media (minimal 3 media dibandingkan).</p>
-            </div>
-
-            <div class="tugas-soal" style="margin-top:8px;">
-                <p><span class="num">2.</span> Seorang teknisi memasang kabel UTP Cat 6 sepanjang 95 meter dan mengeluhkan bahwa koneksi sering terputus meski LAN Tester menunjukkan hasil "berhasil". Berdasarkan konsep <em>attenuation</em>, <em>distortion</em>, dan <em>noise</em>, <strong>identifikasi</strong> kemungkinan penyebab masalah tersebut dan <strong>berikan solusi</strong> teknisnya.</p>
-            </div>
-
-            <div class="tugas-soal" style="margin-top:8px;">
-                <p><span class="num">3.</span> Di era Starlink dan 5G, apakah menurut Anda kabel fiber optik masih relevan sebagai tulang punggung internet global? <strong>Argumentasikan</strong> posisi Anda dengan membandingkan ketiga aspek: biaya infrastruktur, kapasitas bandwidth, dan keamanan data.</p>
-            </div>
-
-            <div class="tugas-info">
-                <div class="tugas-chip"><i class="bi bi-pencil"></i> Tulis tangan di kertas folio</div>
-                <div class="tugas-chip"><i class="bi bi-camera"></i> Foto, kirim ke e-learning</div>
-                <div class="tugas-chip"><i class="bi bi-calendar3"></i> Deadline: sebelum pertemuan 4</div>
-                <div class="tugas-chip"><i class="bi bi-person"></i> Individual — bukan kelompok</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- RANGKUMAN -->
-    <section>
-        <h3>Rangkuman Pertemuan 3</h3>
-        <div class="layout-2col">
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#1565c0;">Konsep Sinyal &amp; Gangguan</p>
-                <ul>
-                    <li>Physical Layer mengubah bit menjadi <strong>Sinyal</strong> (Analog/Digital).</li>
-                    <li>Tiga gangguan utama: <strong>Atenuasi</strong>, <strong>Distorsi</strong>, <strong>Noise</strong>.</li>
-                </ul>
-                <p style="font-weight:700; color:#1565c0; margin-top:.5em;">Guided Media</p>
-                <ul>
-                    <li><strong>Twisted Pair (UTP/STP)</strong> — LAN standar, kebal EMI lewat pilinan.</li>
-                    <li><strong>Coaxial</strong> — TV Kabel, CCTV, bandwidth tinggi.</li>
-                    <li><strong>Fiber Optik</strong> — tercepat, terjauh, kebal EMI 100%.</li>
-                </ul>
-            </div>
-            <div class="card text-left text-small">
-                <p style="font-weight:700; color:#e65100;">Unguided Media</p>
-                <ul>
-                    <li><strong>Radio</strong> (omni, tembus tembok) — FM, Bluetooth.</li>
-                    <li><strong>Microwave</strong> (uni, LoS) — BTS, Wi-Fi, Backhaul.</li>
-                    <li><strong>Infrared</strong> (sangat pendek) — Remote, IrDA, PIR.</li>
-                    <li><strong>Satelit</strong> (global) — GPS, Starlink, TV Parabola.</li>
-                </ul>
-                <p style="font-weight:700; color:#e65100; margin-top:.5em;">Praktikum</p>
-                <ul>
-                    <li>Straight-Through: beda level (PC–Switch).</li>
-                    <li>Crossover: selevel (PC–PC, Switch–Switch).</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>Tanya Jawab &amp; Praktikum</h2>
-        <p>Silakan nyalakan alat, siapkan kabel, dan selamat berlatih!</p>
-    </section>
-
-    </div><!-- /slides -->
-</div><!-- /reveal -->
-
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
-<script>
-    Reveal.initialize({
-        hash: true,
-        slideNumber: 'c/t',
-        transition: 'slide',
-        plugins: [ RevealNotes ]
-    });
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            plugins: [RevealNotes]
+        });
+    </script>
 
     <!-- Theme Toggle -->
-    <button id="theme-toggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+    <button id="theme-toggle"
+        style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
         <i class="bi bi-moon-fill" id="theme-icon"></i>
     </button>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const toggleBtn = document.getElementById('theme-toggle');
             const themeLink = document.getElementById('theme');
             const themeIcon = document.getElementById('theme-icon');
@@ -1014,4 +1616,5 @@
         });
     </script>
 </body>
+
 </html>
