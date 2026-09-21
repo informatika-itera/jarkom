@@ -1116,6 +1116,9 @@
                     &#x1F511; Semakin tinggi frekuensi &#x2192; <strong>bandwidth lebih besar</strong>, tapi
                     <strong>jangkauan lebih pendek</strong> dan semakin mudah terhalang benda padat.
                 </div>
+                <div class="info-box-warn" style="margin-top:.7em; font-size:.6em;">
+                    &#x26A0;&#xFE0F; <strong>Catatan Wi-Fi:</strong> Berdasarkan taksonomi Forouzan (referensi utama), Wi-Fi masuk kategori <em>Microwave (Unidirectional)</em> karena beroperasi di band 2.4/5 GHz. Namun pada kenyataan praktis (referensi Tanenbaum &amp; Kurose), perangkat Wi-Fi rumahan memancarkan sinyal secara <strong>Omnidirectional</strong>.
+                </div>
             </section>
 
             <!-- Gelombang Radio: Karakteristik -->
@@ -1246,7 +1249,7 @@
                             <li>&#x1F5FC; <strong>BTS (Base Transceiver Station)</strong> &mdash; menara seluler 4G LTE
                                 / 5G NR. Menggunakan band 700 MHz &ndash; 26 GHz.</li>
                             <li>&#x1F4F6; <strong>Wi-Fi Router</strong> (2.4 GHz &amp; 5 GHz) &mdash; jaringan nirkabel
-                                lokal di rumah/kantor/kampus.</li>
+                                lokal di rumah/kantor/kampus (<em>praktiknya omnidirectional, walau secara akademis diklasifikasikan sebagai microwave di sini</em>).</li>
                             <li>&#x1F537; <strong>WiMAX</strong> (2.3&ndash;3.5 GHz) &mdash; broadband nirkabel jarak
                                 menengah (beberapa km).</li>
                         </ul>
@@ -1432,9 +1435,9 @@
                             <td style="padding: 6px; vertical-align: top;"><span
                                     style="color:#e65100;font-weight:700;">Gelombang Mikro</span></td>
                             <td style="padding: 6px; vertical-align: top;">1 &ndash; 300 GHz</td>
-                            <td style="padding: 6px; vertical-align: top;">Unidirectional (LoS)</td>
+                            <td style="padding: 6px; vertical-align: top;">Unidirectional (LoS)*</td>
                             <td style="padding: 6px; vertical-align: top;">Beberapa &ndash; puluhan km</td>
-                            <td style="padding: 6px; vertical-align: top;">Wi-Fi, BTS 4G/5G, Radar, Backhaul</td>
+                            <td style="padding: 6px; vertical-align: top;">Wi-Fi*, BTS 4G/5G, Radar, Backhaul</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
                             <td style="padding: 6px; vertical-align: top;"><span
@@ -1454,6 +1457,9 @@
                         </tr>
                     </table>
                 </div>
+                <p style="font-size: 0.5em; text-align: left; margin-top: 10px; margin-bottom: 0; color: #555;">
+                    <em>*Catatan: Secara praktis, Wi-Fi beroperasi secara omnidirectional. Klasifikasi di atas berdasarkan referensi Forouzan yang mengkategorikan berdasarkan spektrum frekuensi semata.</em>
+                </p>
                 <div class="info-box" style="margin-top:.5em;">
                     &#x1F4CC; Infrared dan Radio adalah dua ekstrem yang berlawanan: infrared paling terbatas secara
                     jangkauan, radio paling luas &mdash; tapi radio juga paling tidak aman dari penyadapan.
