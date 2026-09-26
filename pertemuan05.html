@@ -1069,6 +1069,114 @@
             </section>
 
             <section>
+                <h3>Apa itu RTT (Round-Trip Time)?</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small" style="font-size: .45em;">
+                        <p><strong>Round-Trip Time (RTT)</strong> adalah total waktu yang dibutuhkan oleh sebuah paket
+                            data untuk melakukan perjalanan dari pengirim menuju penerima, ditambah dengan waktu
+                            kembalinya sinyal konfirmasi (ACK) ke pengirim.</p>
+                        <p style="margin-top: 10px;">Singkatnya: <strong>Waktu sejak paket dikirim sampai konfirmasi
+                                diterima.</strong></p>
+                        <ul style="margin-top: 10px;">
+                            <li>RTT sangat dipengaruhi oleh jarak fisik dan panjang kabel penghubung.</li>
+                            <li>Turut dipengaruhi oleh waktu antrean pemrosesan di router (Queueing Delay).</li>
+                            <li><strong>Mengapa Penting?</strong> Nilai RTT sangat menentukan seberapa efisien kapasitas
+                                bandwidth bisa dimanfaatkan.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/rtt_illustration.jpg" alt="Ilustrasi RTT" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">RTT = Total Waktu
+                            Bolak-Balik Paket dan ACK</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Studi Kasus: Request Time Out (RTO)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small" style="font-size: .45em;">
+                        <p style="font-weight:700; color:#e65100;">Apa yang terjadi?</p>
+                        <p>Pengirim berhasil melempar paket ke jaringan, dan paket tersebut sedang mengalir mencari
+                            jalan. Namun, hingga <em>timer</em> (waktu tunggu) habis, tidak ada balasan sama sekali yang
+                            kembali ke pengirim.</p>
+                        <p style="margin-top: 10px; font-weight:700; color:#e65100;">Penyebab Umum:</p>
+                        <ul>
+                            <li>Paket ditolak secara diam-diam (di-drop) oleh <strong>Firewall</strong> di sisi penerima
+                                atau router tengah.</li>
+                            <li>Jaringan sangat macet (Congestion), sehingga paket terbuang dari antrean (Packet Loss).
+                            </li>
+                            <li>Server tujuan sedang mati/hang sehingga tidak merespon paket yang datang.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/rto_illustration.jpg" alt="Ilustrasi Request Time Out" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Waktu tunggu (timer) habis
+                            sebelum balasan tiba</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Studi Kasus: Destination Unreachable</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small" style="font-size: .45em;">
+                        <p style="font-weight:700; color:#d32f2f;">Apa yang terjadi?</p>
+                        <p>Paket bahkan tidak pernah sampai mendekati tujuan. Dalam perjalanannya, sebuah Router (atau
+                            PC pengirim itu sendiri) menyadari bahwa jalan menuju ke sana <strong>tidak ada</strong>
+                            atau terputus, lalu secara aktif mengirimkan pesan eror (ICMP) kembali ke pengirim.</p>
+                        <p style="margin-top: 10px; font-weight:700; color:#d32f2f;">Penyebab Umum:</p>
+                        <ul>
+                            <li>Kabel jaringan putus atau interface jaringan mati (Link Down).</li>
+                            <li>Tidak ada entri di tabel routing (No Route to Host).</li>
+                            <li>Salah konfigurasi IP atau Gateway.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/unreachable_illustration.jpg" alt="Ilustrasi Destination Unreachable"
+                            class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Router mengirim pesan eror
+                            eksplisit: Jalur Putus</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Perbandingan: RTO vs Unreachable</h3>
+                <div class="card text-left text-smaller">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <tr style="background-color: #f5f5f5; border-bottom: 2px solid #ccc;">
+                            <th style="padding: 10px;">Aspek</th>
+                            <th style="padding: 10px; color:#e65100;">Request Time Out (RTO)</th>
+                            <th style="padding: 10px; color:#d32f2f;">Destination Unreachable</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 10px; font-weight: bold;">Status Jalan</td>
+                            <td style="padding: 10px;">Rute jalannya ada, tapi paket "hilang" di jalan atau tujuan.</td>
+                            <td style="padding: 10px;">Rute jalannya benar-benar tidak diketahui/terputus.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 10px; font-weight: bold;">Respons Jaringan</td>
+                            <td style="padding: 10px;"><strong>Diam (Silent Drop).</strong> Tidak ada info apa-apa yang
+                                kembali.</td>
+                            <td style="padding: 10px;"><strong>Aktif (Eksplisit).</strong> Router mengirim notifikasi
+                                eror ICMP.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; font-weight: bold;">Analogi Kehidupan</td>
+                            <td style="padding: 10px;">Kirim barang lewat kurir, tapi kurirnya lenyap di jalan. Kita
+                                menunggu tanpa kepastian sampai bosan.</td>
+                            <td style="padding: 10px;">Kirim barang lewat kurir, tapi baru sampai gang depan ditolak
+                                satpam: "Alamat ini tidak ada!".</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <section>
                 <h3>Evolusi RDT &amp; Pipelining (1)</h3>
                 <div class="layout-2col">
                     <div class="card text-left text-smaller">
@@ -1483,30 +1591,35 @@
                 <h3>Algoritma AIMD (1)</h3>
                 <div class="layout-2col">
                     <div class="card text-left text-small">
-                        <p style="margin-top:.4em;">
-                        <p><strong>Additive Increase (Probe Bandwidth):</strong> Selama tidak ada loss,
-                            perlahan-lahan
-                            tingkatkan kecepatan transmisi (+1 MSS setiap RTT) untuk <em>meraba-raba</em> batas
+                        <p style="margin-top:.4em;"><strong>Additive Increase (Probe Bandwidth):</strong> Selama tidak
+                            ada loss,
+                            perlahan-lahan tingkatkan kecepatan transmisi (+1 MSS setiap RTT) untuk <em>meraba-raba</em>
+                            batas
                             bandwidth maksimal.</p>
-
-                        </p>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/aimd_1_indo.jpg" alt="Additive Increase" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Fase Additive Increase (+1
+                            MSS per RTT)</div>
                     </div>
                 </div>
-
             </section>
 
             <section>
                 <h3>Algoritma AIMD (2)</h3>
                 <div class="layout-2col">
                     <div class="card text-left text-small">
-                        <p style="margin-top:.4em;">
-                        <p><strong>Multiplicative Decrease (Rem Darurat):</strong> Jika terjadi packet loss, segera
-                            <strong>potong kecepatan transmisi menjadi setengahnya</strong>.
-                        </p>
-                        </p>
+                        <p style="margin-top:.4em;"><strong>Multiplicative Decrease (Rem Darurat):</strong> Jika terjadi
+                            packet loss, segera <strong>potong kecepatan transmisi menjadi setengahnya</strong>.</p>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/aimd_2_indo.jpg" alt="Multiplicative Decrease" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Fase Multiplicative
+                            Decrease (Potong Setengah)</div>
                     </div>
                 </div>
-
             </section>
             <section>
                 <h3>Animasi: Pola Gigi Gergaji (Sawtooth)</h3>
@@ -1565,7 +1678,10 @@
                         </div>
                     </div>
                     <div class="img-col">
-                        <!-- Space for future image -->
+                        <img src="img/week5/tcp_slow_start.jpg" alt="Fase Slow Start" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Peningkatan eksponensial
+                            menuju batas Threshold</div>
                     </div>
                 </div>
             </section>
@@ -1585,7 +1701,11 @@
                         </div>
                     </div>
                     <div class="img-col">
-                        <!-- Space for future image -->
+                        <img src="img/week5/tcp_congestion_avoidance.jpg" alt="Fase Congestion Avoidance"
+                            class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Peningkatan linier setelah
+                            melewati Threshold</div>
                     </div>
                 </div>
             </section>
@@ -1606,7 +1726,10 @@
                         </div>
                     </div>
                     <div class="img-col">
-                        <!-- Space for future image -->
+                        <img src="img/week5/tcp_fast_recovery.jpg" alt="Fase Fast Recovery vs Timeout" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Perbandingan penanganan
+                            loss: 3 Dup ACKs vs Timeout</div>
                     </div>
                 </div>
             </section>
@@ -1628,8 +1751,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card text-left text-smaller">
-
+                    <div class="img-col">
+                        <img src="img/week5/tcp_cubic.jpg" alt="Grafik TCP CUBIC vs Standard TCP" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Fungsi Kubik TCP
+                            mempercepat pemulihan menuju Wmax</div>
                     </div>
                 </div>
             </section>
@@ -1650,6 +1776,12 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/tcp_fairness.jpg" alt="Ilustrasi Keadilan TCP" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Ilustrasi pembagian
+                            Bandwidth (R) secara adil untuk 3 koneksi</div>
                     </div>
                 </div>
             </section>
@@ -1682,7 +1814,11 @@
                         </ul>
                     </div>
                     <div class="img-col">
-                        <img src="img/week5/quic_protocol.png" alt="QUIC Protocol vs TCP" class="slide-img">
+                        <img src="img/week5/quic_vs_tcp.jpg" alt="Perbandingan Koneksi TCP+TLS vs QUIC"
+                            class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">QUIC (1 RTT) vs TCP+TLS (3
+                            RTT)</div>
                     </div>
                 </div>
             </section>
