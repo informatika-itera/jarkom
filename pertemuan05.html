@@ -11,10 +11,34 @@
     <link rel="stylesheet" href="css/pkom-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
-        .reveal .slides section {
-            height: 100%;
-            overflow-y: auto !important;
-            padding-bottom: 50px;
+        @media screen {
+            .reveal .slides section {
+                max-height: 100%;
+                overflow-y: auto;
+                padding-bottom: 20px;
+            }
+
+            .reveal img {
+                max-height: 45vh;
+                object-fit: contain;
+            }
+        }
+
+        @media print {
+            .reveal .slides section {
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            .reveal img,
+            .card {
+                page-break-inside: avoid;
+            }
+        }
+
+        .reveal .card {
+            margin-bottom: 10px;
         }
 
         /* images */
@@ -51,9 +75,16 @@
 
         .layout-text-img {
             display: grid;
-            grid-template-columns: 50% 1fr;
+            grid-template-columns: 58% 1fr;
             gap: 16px;
             align-items: center;
+            width: 100%;
+        }
+
+        .layout-3col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
             width: 100%;
         }
 
@@ -70,6 +101,30 @@
             text-align: center;
             margin-top: .1em;
             font-style: italic;
+        }
+
+        /* table */
+        .reveal table {
+            font-size: .65em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .reveal table th,
+        .reveal table td {
+            padding: 7px 12px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .reveal table th {
+            background: #f0f4f8;
+            font-weight: 700;
+        }
+
+        .reveal table tr:nth-child(even) td {
+            background: #fafbfc;
         }
 
         /* section header bars */
@@ -109,13 +164,23 @@
             color: #fff;
         }
 
+        .sec-bar-teal {
+            background: #006064;
+            color: #fff;
+        }
+
         .sec-bar-red {
             background: #b71c1c;
             color: #fff;
         }
 
-        .sec-bar-teal {
-            background: #00695c;
+        .sec-bar-indigo {
+            background: #1a237e;
+            color: #fff;
+        }
+
+        .sec-bar-cyan {
+            background: #006064;
             color: #fff;
         }
 
@@ -141,6 +206,15 @@
         .info-box-green {
             border-left: 4px solid #1b5e20;
             background: #e8f5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .66em;
+            margin-top: .5em;
+        }
+
+        .info-box-red {
+            border-left: 4px solid #b71c1c;
+            background: #ffebee;
             border-radius: 0 8px 8px 0;
             padding: 10px 14px;
             font-size: .66em;
@@ -612,7 +686,8 @@
                 </div>
                 <p>Referensi Utama: Kurose &amp; Ross — <em>Computer Networking: A Top-Down Approach (8th Ed)</em></p>
                 <p class="text-small"><em>Dosen Pengampu:</em></p>
-                <div style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                <div
+                    style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
                     <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
                     <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
                     <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
@@ -624,24 +699,25 @@
 
             <!-- Outline -->
             <section>
-                <h3>Outline Materi (100 Menit)</h3>
+                <h3>Outline Materi</h3>
                 <div class="layout-2col">
                     <div class="card text-left text-small">
-                        <p style="font-weight:700; color:#1565c0;">Bagian 1: Konsep Transport</p>
+                        <p style="font-weight:700; color:#1565c0;">Bagian 1: Konsep Transport &amp; UDP</p>
                         <ul>
-                            <li>Layanan Lapisan Transport</li>
-                            <li>Multiplexing &amp; Demultiplexing</li>
-                            <li>Transport Connectionless: UDP</li>
-                            <li>Prinsip Reliable Data Transfer (RDT)</li>
+                            <li>1. Layanan Lapisan Transport</li>
+                            <li>2. Multiplexing &amp; Demultiplexing</li>
+                            <li>3. User Datagram Protocol (UDP)</li>
+                            <li>4. Prinsip Reliable Data Transfer (RDT)</li>
                         </ul>
                     </div>
                     <div class="card text-left text-small">
-                        <p style="font-weight:700; color:#e65100;">Bagian 2: TCP &amp; Congestion</p>
+                        <p style="font-weight:700; color:#e65100;">Bagian 2: TCP &amp; Protokol Modern</p>
                         <ul>
-                            <li>Transport Connection-Oriented: TCP</li>
-                            <li>Manajemen Koneksi (Handshake &amp; Teardown)</li>
-                            <li>Flow Control</li>
-                            <li>TCP Congestion Control (AIMD)</li>
+                            <li>5. Transmission Control Protocol (TCP)</li>
+                            <li>6. Manajemen Koneksi TCP</li>
+                            <li>7. Flow Control (Kendali Aliran)</li>
+                            <li>8. TCP Congestion Control</li>
+                            <li>9. Evolusi Transport Layer (QUIC)</li>
                         </ul>
                     </div>
                 </div>
@@ -664,19 +740,45 @@
                             (aplikasi/socket).</li>
                     </ul>
                     <div class="info-box-warn" style="margin-top:.8em;">
-                        💡 <strong>Analogi Keluarga:</strong>
-                        <br>Rumah = Host
-                        <br>Anak-anak = Proses/Aplikasi
-                        <br>Petugas Pos = Network Layer (hanya mengantar ke rumah)
-                        <br>Kakak Tertua = <strong>Transport Layer</strong> (membagikan surat ke adik-adik yang tepat di
-                        dalam rumah)
+                        💡 <strong>Analogi Asrama Mahasiswa (Kost-kostan):</strong>
+                        <br>Gedung Asrama = <strong>Host</strong> (Komputer/HP)
+                        <br>Mahasiswa di kamar = <strong>Proses</strong> (Aplikasi: Chrome, Spotify, Zoom)
+                        <br>Kurir Paket = <strong>Network Layer</strong> (Hanya mengantar paket sampai ke pos satpam
+                        asrama)
+                        <br>Satpam Asrama = <strong>Transport Layer</strong> (Mensortir dan menyalurkan paket ke kamar
+                        mahasiswa yang tepat)
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Ilustrasi Peran Transport Layer</h3>
+                <div class="layout-2col" style="margin-top: 20px;">
+                    <div class="card text-left text-smaller">
+                        <div class="sec-bar sec-bar-indigo">Analogi Asrama Mahasiswa</div>
+                        <div class="sec-body" style="font-size:0.85em; padding-top: 10px;">
+                            <p><strong>Bagian Kiri (Network Layer):</strong> <br>
+                                Kurir paket JNE hanya bertugas mengantar barang melalui jaringan jalan umum sampai ke
+                                <strong>Pos Gerbang Asrama (Host)</strong>.
+                            </p>
+                            <br>
+                            <p><strong>Bagian Kanan (Transport Layer):</strong> <br>
+                                Satpam di dalam gedung asrama bertugas menyortir paket dan mengantarkannya langsung ke
+                                <strong>pintu kamar mahasiswa (Proses/Aplikasi)</strong> yang bersangkutan.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/ilustrasi_asrama.jpg" alt="Ilustrasi Analogi Asrama untuk Transport Layer"
+                            class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                     </div>
                 </div>
             </section>
 
             <!-- Animasi Peran Transport -->
             <section>
-                <h3>Ilustrasi: Komunikasi Proses ke Proses</h3>
+                <h3>Komunikasi Proses ke Proses</h3>
                 <div
                     style="background:#e3f2fd; border-radius:10px; padding:30px; font-size:.8em; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
                     <div style="font-weight:700; font-size:1.4em; color:#1565c0; margin-bottom:20px;">Proses ↔ Proses
@@ -711,6 +813,20 @@
                     </div>
                 </div>
             </section>
+            <section>
+                <h3>Ilustrasi: Komunikasi Proses ke Proses</h3>
+                <div style="text-align: center; margin-top: 10px;">
+                    <img src="img/week5/proses_komunikasi.jpg" alt="Ilustrasi Komunikasi Proses ke Proses"
+                        class="slide-img"
+                        style="border-radius: 10px; max-height: 35vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                </div>
+                <div class="info-box" style="margin-top:15px; font-size:.65em; text-align:left;">
+                    <strong>Transport layer</strong> mengambil pesan dari aplikasi (misal: Browser), menyerahkannya ke
+                    network layer, dikirim melalui internet. Di sisi penerima, pesan diserahkan kembali ke aplikasi yang
+                    tepat (misal: Web Server).
+                </div>
+            </section>
+
 
             <!-- ━━━━━━━━━━━━━━ SECTION 2: MUX & DEMUX ━━━━━━━━━━━━━━ -->
             <section>
@@ -811,7 +927,7 @@
             <section>
                 <h3>UDP: Cepat Tapi Tidak Andal</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-small">
+                    <div class="card text-left text-smaller">
                         <ul>
                             <li><strong>No Frills, Bare Bones:</strong> Protokol transport yang sangat minimalis (RFC
                                 768).</li>
@@ -831,7 +947,7 @@
 
             <section>
                 <h3>Mengapa UDP Masih Digunakan?</h3>
-                <div class="card text-left text-small">
+                <div class="card text-left text-smaller">
                     <p>Meskipun tidak andal, UDP memiliki keunggulan telak dalam skenario tertentu:</p>
                     <ul style="margin-top:.4em;">
                         <li><strong>Tanpa delay setup:</strong> Tidak perlu menunggu 3-way handshake selesai untuk mulai
@@ -847,9 +963,10 @@
             </section>
 
             <section>
-                <h3>Pentingnya UDP: Real-time &amp; Low Latency</h3>
+                <h3>Pentingnya UDP:</h3>
+                <h4>Real-time &amp; Low Latency</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-small">
+                    <div class="card text-left text-smaller" style="font-size:0.55em;">
                         <p>Dalam aplikasi real-time, <strong>kecepatan lebih penting daripada keutuhan 100%</strong>.
                         </p>
                         <ul>
@@ -868,9 +985,275 @@
                 </div>
             </section>
 
-            <!-- ━━━━━━━━━━━━━━ SECTION 4: TCP HANDSHAKE & TEARDOWN ━━━━━━━━━━━━━━ -->
             <section>
-                <h2>4. Manajemen Koneksi TCP</h2>
+                <h3>UDP Checksum</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size:0.45em;">
+                        <div class="sec-bar sec-bar-blue">Fungsi Checksum</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>Meskipun UDP tidak andal, ia menyediakan fungsi <strong>deteksi error</strong>
+                                    minimum melalui <em>Checksum</em>.</li>
+                                <li><strong>Tujuan:</strong> Mendeteksi "bit yang berubah" (error) di dalam segmen yang
+                                    ditransmisikan.</li>
+                            </ul>
+                        </div>
+                        <div class="sec-bar sec-bar-teal" style="margin-top: 10px;">Sisi Pengirim</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>Memperlakukan segmen (termasuk header dan data) sebagai urutan integer 16-bit.</li>
+                                <li><strong>Checksum:</strong> Hasil penjumlahan seluruh 16-bit word menggunakan <em>1's
+                                        complement arithmetic</em>, kemudian dibalik (complement).</li>
+                                <li>Nilai ini dimasukkan ke field <em>checksum</em> di header UDP.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card text-left text-smaller" style="font-size:0.45em;">
+                        <div class="sec-bar sec-bar-orange">Sisi Penerima</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>Penerima menjumlahkan semua 16-bit word yang diterima beserta checksum-nya.</li>
+                                <li>Jika tidak ada error, hasil penjumlahan (1's complement) harus berupa kumpulan bit
+                                    <code>1</code> (semuanya bernilai 1).
+                                </li>
+                                <li>Jika ada setidaknya satu bit <code>0</code>, maka <strong>error terdeteksi</strong>,
+                                    dan segmen UDP biasanya akan dibuang (di-drop).</li>
+                            </ul>
+                            <div class="info-box-warn" style="margin-top: 10px;">
+                                <strong>Keterbatasan:</strong> Checksum UDP lemah dibandingkan CRC pada Data Link Layer,
+                                namun sangat cepat dihitung dalam perangkat lunak (software).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 4: RDT ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>4. Prinsip Reliable Data Transfer (RDT)</h2>
+            </section>
+
+            <section>
+                <h3>Reliable Data Transfer (RDT)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size:0.4em;">
+                        <p style="margin-bottom: 8px;"><strong>Tantangan Utama:</strong></p>
+                        <p>Bagaimana membangun layanan komunikasi yang <strong>andal</strong> (tidak ada data hilang,
+                            rusak, atau tertukar urutannya) di atas saluran fisik/jaringan yang <strong>tidak
+                                andal</strong> (unreliable channel)?</p>
+                        <div class="sec-bar sec-bar-blue" style="margin-top: 15px;">Mekanisme Dasar RDT</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li><strong>Error Detection:</strong> Checksum (mendeteksi bit error).</li>
+                                <li><strong>Receiver Feedback:</strong>
+                                    <ul>
+                                        <li><strong>ACK</strong> (Acknowledgement): Berhasil diterima.</li>
+                                        <li><strong>NAK</strong> (Negative ACK): Gagal/Rusak.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Retransmission:</strong> Mengirim ulang paket yang rusak/hilang.</li>
+                                <li><strong>Sequence Number:</strong> Menandai urutan paket agar penerima tahu jika ada
+                                    paket duplikat atau hilang.</li>
+                                <li><strong>Timer:</strong> Untuk mendeteksi paket yang hilang di jalan (Timeout).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/rdt_ilustrasi.jpg" alt="Ilustrasi Mekanisme Reliable Data Transfer"
+                            class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Ilustrasi Mekanisme RDT
+                            (Timer, Sequence, Feedback, &amp; Error Detection)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Evolusi RDT &amp; Pipelining (1)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller">
+                        <div class="sec-bar sec-bar-purple">Pendekatan "Stop-and-Wait" (rdt3.0)</div>
+                        <div class="sec-body" style="font-size: 0.9em; padding-top: 10px;">
+                            <ul>
+                                <li>Pengirim mengirim 1 paket, lalu <strong>menunggu</strong> ACK dari penerima sebelum
+                                    mengirim paket berikutnya.</li>
+                                <li style="margin-top: 10px;"><strong>Kelemahan Utama:</strong> Utilisasi jaringan
+                                    sangat buruk! Kapasitas link
+                                    (bandwidth) yang besar terbuang percuma karena dihabiskan untuk waktu tunggu
+                                    propagasi sinyal (RTT) yang mendominasi.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/stop_and_wait.jpg" alt="Ilustrasi Stop-and-Wait" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Ilustrasi waktu terbuang
+                            saat menunggu paket ACK.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Evolusi RDT &amp; Pipelining (2)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller">
+
+                        <div class="sec-bar sec-bar-green" style="margin-top: 10px;">Solusi: Pipelining</div>
+                        <div class="sec-body" style="font-size: 0.9em; padding-top: 10px;">
+                            <ul>
+                                <li>Pengirim diperbolehkan mengirim banyak paket sekaligus secara berturut-turut tanpa
+                                    harus menunggu ACK dari paket sebelumnya.
+                                </li>
+                                <li style="margin-top: 10px;">Dengan ini utilisasi link jauh lebih optimal karena
+                                    pengirim tidak membuang waktu menunggu (gap kosong berkurang drastis).</li>
+                                <li style="margin-top: 10px;">Membutuhkan <em>sequence number</em> yang lebih besar dan
+                                    <em>buffer</em> (tempat penyimpanan sementara) di
+                                    pengirim/penerima.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/pipelining_concept.jpg" alt="Ilustrasi Konsep Pipelining" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Ilustrasi aliran paket yang
+                            dikirimkan tanpa jeda menunggu ACK.</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section>
+                <h3>Evolusi RDT &amp; Pipelining (3)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size:0.45em;">
+                        <div class="sec-bar sec-bar-teal">Dua Pendekatan Pipelining</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li><strong>Go-Back-N (GBN):</strong>
+                                    <ul>
+                                        <li>Penerima mengirimkan <em>Cumulative ACK</em>.</li>
+                                        <li>Jika terjadi timeout pada paket <var>n</var>, pengirim mentransmisikan ulang
+                                            paket <var>n</var> dan <strong>semua</strong> paket setelahnya (Sangat boros
+                                            bandwidth).</li>
+                                    </ul>
+                                </li>
+                                <li style="margin-top: 5px;"><strong>Selective Repeat (SR):</strong>
+                                    <ul>
+                                        <li>Penerima mengirimkan ACK secara individual tiap paket.</li>
+                                        <li>Penerima mem-buffer paket yang <em>out-of-order</em>.</li>
+                                        <li>Pengirim hanya mentransmisikan ulang paket yang benar-benar hilang/timeout
+                                            (Lebih efisien).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/gbn_vs_sr.jpg" alt="Ilustrasi Go-Back-N vs Selective Repeat"
+                            class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Perbandingan inefisiensi
+                            GBN vs efisiensi SR saat terjadi paket error.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 5: TCP ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>5. Transmission Control Protocol (TCP)</h2>
+            </section>
+
+            <section>
+                <h3>Struktur Segmen TCP</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:0.45em;">
+                        <ul>
+                            <li><strong>Source &amp; Dest Port (16-bit):</strong> Untuk multiplexing &amp;
+                                demultiplexing.</li>
+                            <li><strong>Sequence Number (32-bit):</strong> Nomor urut byte pertama dari data dalam
+                                segmen ini (bukan nomor segmen).</li>
+                            <li><strong>Acknowledgement Number (32-bit):</strong> Nomor urut byte <em>selanjutnya</em>
+                                yang diharapkan dari pihak lawan (Cumulative ACK).</li>
+                            <li><strong>Header Length (4-bit):</strong> Panjang header (karena ada field Option yang
+                                bervariasi).</li>
+                            <li><strong>Flags (C, E, U, A, P, R, S, F):</strong>
+                                <ul>
+                                    <li><strong>A (ACK):</strong> Field ACK valid.</li>
+                                    <li><strong>S (SYN):</strong> Setup koneksi.</li>
+                                    <li><strong>F (FIN):</strong> Tutup koneksi.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Receive Window (16-bit):</strong> Untuk <em>Flow Control</em> (jumlah byte yang
+                                bisa diterima).</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/tcp_header_indo.jpg" alt="Struktur Segmen TCP" class="slide-img"
+                            style="border-radius: 10px; max-height: 60vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Format Header TCP
+                            (Berdasarkan RFC 793)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>TCP RTT dan Timeout</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller">
+                        <div class="sec-bar sec-bar-indigo">Estimasi RTT &amp; Timeout</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>TCP mengatur interval <em>Timeout</em> secara dinamis karena RTT jaringan selalu
+                                    berubah.</li>
+                                <li>Menggunakan <code>EstimatedRTT</code> (rata-rata berbobot dari sampel RTT) dan
+                                    <code>DevRTT</code> (margin keamanan/fluktuasi).
+                                </li>
+                                <li><strong>TimeoutInterval</strong> = EstimatedRTT + 4 * DevRTT.</li>
+                                <li>Jika terjadi timeout, paket dikirim ulang, dan interval timeout
+                                    <strong>digandakan</strong>.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/tcp_rtt.jpg" alt="Grafik TCP RTT dan Timeout" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Grafik Dinamika SampleRTT,
+                            EstimatedRTT, dan Timeout Interval.</div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>Fast Retransmit</h3>
+                <div class="layout-2col">
+
+                    <div class="card text-left text-smaller">
+                        <div class="sec-bar sec-bar-orange">Fast Retransmit</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>Menunggu timeout seringkali terlalu lama.</li>
+                                <li>Jika pengirim menerima <strong>3 Duplicate ACKs</strong> untuk data yang sama, ini
+                                    menandakan paket berikutnya hilang.</li>
+                                <li>Pengirim akan langsung melakukan <strong>Fast Retransmit</strong> (mengirim ulang
+                                    paket tersebut) tanpa menunggu timer timeout habis.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/fast_retransmit.jpg" alt="Ilustrasi Fast Retransmit" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Ilustrasi Fast Retransmit:
+                            Mengirim ulang sebelum Timeout berdasarkan 3 Duplicate ACKs.</div>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- ━━━━━━━━━━━━━━ TCP HANDSHAKE & TEARDOWN ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>6. Manajemen Koneksi TCP</h2>
             </section>
 
             <section>
@@ -964,78 +1347,88 @@
                 </div>
             </section>
 
-            <!-- ━━━━━━━━━━━━━━ SECTION 5: FLOW CONTROL ━━━━━━━━━━━━━━ -->
+            <!-- ━━━━━━━━━━━━━━ FLOW CONTROL ━━━━━━━━━━━━━━ -->
             <section>
-                <h2>5. Flow Control (Kendali Aliran)</h2>
+                <h2>7. Flow Control (Kendali Aliran)</h2>
             </section>
 
             <section>
-                <h3>Flow Control: Melindungi Penerima</h3>
-                <div class="card text-left text-small">
-                    <p><strong>Masalah:</strong> Bagaimana jika aplikasi di sisi penerima sangat lambat membaca data
-                        dari buffer TCP, sementara pengirim menembakkan data dengan sangat cepat?</p>
-                    <p style="margin-top:.4em; color:#b71c1c; font-weight:700;"><i
-                            class="bi bi-exclamation-triangle-fill"></i> Akibat: Buffer overflow di penerima (data
-                        hilang / tertolak).</p>
+                <h3>Flow Control</h3>
+                <h4>Melindungi Penerima</h4>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .4em;">
+                        <p><strong>Masalah:</strong> Bagaimana jika aplikasi di sisi penerima sangat lambat membaca data
+                            dari buffer TCP, sementara pengirim menembakkan data dengan sangat cepat?</p>
+                        <p style="margin-top:.4em; color:#b71c1c; font-weight:700;"><i
+                                class="bi bi-exclamation-triangle-fill"></i> Akibat: Buffer overflow di penerima (data
+                            hilang / tertolak).</p>
 
-                    <p style="margin-top:.8em; font-weight:700; color:#1565c0;">Solusi TCP (Flow Control):</p>
-                    <ul>
-                        <li>Penerima secara eksplisit memberitahu pengirim <strong>berapa banyak ruang kosong yang
-                                tersisa</strong> di buffernya.</li>
-                        <li>Nilai ini ditaruh di field <strong>rwnd (Receive Window)</strong> pada header TCP setiap
-                            kali penerima membalas dengan ACK.</li>
-                        <li>Pengirim mematuhi aturan: jumlah data yang sedang melayang (un-ACKed data) <em>tidak boleh
-                                melebihi</em> nilai <code>rwnd</code> saat ini.</li>
-                    </ul>
+                        <p style="margin-top:.8em; font-weight:700; color:#1565c0;">Solusi TCP (Flow Control):</p>
+                        <ul>
+                            <li>Penerima secara eksplisit memberitahu pengirim <strong>berapa banyak ruang kosong yang
+                                    tersisa</strong> di buffernya.</li>
+                            <li>Nilai ini ditaruh di field <strong>rwnd (Receive Window)</strong> pada header TCP setiap
+                                kali penerima membalas dengan ACK.</li>
+                            <li>Pengirim mematuhi aturan: jumlah data yang sedang melayang (un-ACKed data) <em>tidak
+                                    boleh
+                                    melebihi</em> nilai <code>rwnd</code> saat ini.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/flow_control_indo.jpg" alt="Ilustrasi TCP Flow Control" class="slide-img"
+                            style="border-radius: 10px; max-height: 35vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Penerima mengatur debit
+                            aliran data pengirim melalui parameter rwnd.</div>
+                    </div>
                 </div>
+
             </section>
 
             <section>
                 <h3>Ilustrasi Receive Window (rwnd)</h3>
-                <div class="card text-left text-small">
-                    <p>Ilustrasi buffer di sisi penerima:</p>
-                    <div
-                        style="background:#e8f5e9; border:1px solid #81c784; border-radius:10px; padding:20px; margin:20px 0;">
-                        <div style="font-weight:700; color:#1b5e20; text-align:center; margin-bottom:10px;">Total
-                            Receive Buffer Space (RcvBuffer)</div>
-                        <div
-                            style="display:flex; height:40px; border:2px solid #333; border-radius:4px; overflow:hidden;">
-                            <div
-                                style="background:#81c784; width:35%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">
-                                Data Belum Dibaca App</div>
-                            <div
-                                style="background:#fff; width:65%; display:flex; align-items:center; justify-content:center; color:#555; font-weight:700;">
-                                Ruang Kosong = rwnd</div>
-                        </div>
-                    </div>
-                    <div class="info-box">
-                        Jika aplikasi lambat membaca, blok hijau membesar, ruang kosong (rwnd) mengecil. Pengirim akan
-                        memperlambat pengiriman secara otomatis.
+                <div class="card text-center" style="padding: 10px;">
+                    <img src="img/week5/rwnd_buffer_indo.jpg" alt="Ilustrasi TCP Receive Buffer" class="slide-img"
+                        style="border-radius: 10px; max-height: 40vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div class="info-box" style="margin-top: 15px; font-size:.4em; text-align:left;">
+                        <strong>Catatan:</strong> Jika aplikasi (di penerima) lambat dalam membaca data dari sistem,
+                        maka porsi blok <strong>"Data Belum Dibaca Aplikasi"</strong> akan semakin membesar, yang
+                        artinya <strong>"Ruang Kosong (rwnd)"</strong> semakin menyusut. Pengirim akan mengetahui hal
+                        ini dari balasan ACK dan akan langsung memperlambat pengiriman secara otomatis untuk mencegah
+                        <em>buffer overflow</em>.
                     </div>
                 </div>
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 6: CONGESTION CONTROL ━━━━━━━━━━━━━━ -->
             <section>
-                <h2>6. TCP Congestion Control</h2>
+                <h2>8. TCP Congestion Control</h2>
             </section>
 
             <section>
                 <h3>Apa itu Congestion? (Kemacetan Jaringan)</h3>
-                <div class="card text-left text-small">
-                    <p><strong>Definisi:</strong> Terlalu banyak sumber yang mengirim terlalu banyak data, terlalu
-                        cepat, sehingga <strong>jaringan (router di tengah jalan)</strong> tidak sanggup menanganinya.
-                    </p>
-                    <p style="margin-top:.8em; font-weight:700;">Ciri-ciri Kemacetan Jaringan:</p>
-                    <ul>
-                        <li><strong>Delay Ekstrem:</strong> Paket mengantre lama di dalam buffer router.</li>
-                        <li><strong>Packet Loss:</strong> Buffer router penuh, sehingga router terpaksa membuang paket
-                            yang baru datang (overflow).</li>
-                    </ul>
-                    <div class="info-box-warn" style="margin-top:.8em;">
-                        ⚠️ <strong>Perbedaan Penting:</strong>
-                        <br><em>Flow Control</em> = Mencegah buffer <strong>Penerima</strong> penuh.
-                        <br><em>Congestion Control</em> = Mencegah buffer <strong>Router Jaringan</strong> penuh.
+                <div class="layout-2col">
+                    <div class="card text-left text-small" style="font-size: .5em;">
+                        <p><strong>Definisi:</strong> Terlalu banyak sumber yang mengirim terlalu banyak data, terlalu
+                            cepat, sehingga <strong>jaringan (router di tengah jalan)</strong> tidak sanggup
+                            menanganinya.
+                        </p>
+                        <p style="margin-top:.8em; font-weight:700;">Ciri-ciri Kemacetan Jaringan:</p>
+                        <ul>
+                            <li><strong>Delay Ekstrem:</strong> Paket mengantre lama di dalam buffer router.</li>
+                            <li><strong>Packet Loss:</strong> Buffer router penuh, sehingga router terpaksa membuang
+                                paket yang baru datang (overflow).</li>
+                        </ul>
+                        <div class="info-box-warn" style="margin-top:.8em;">
+                            ⚠️ <strong>Perbedaan Penting:</strong>
+                            <br><em>Flow Control</em> = Mencegah buffer <strong>Penerima</strong> penuh.
+                            <br><em>Congestion Control</em> = Mencegah buffer <strong>Router Jaringan</strong> penuh.
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/network_congestion.jpg" alt="Ilustrasi Kemacetan Jaringan" class="slide-img"
+                            style="border-radius: 10px; max-height: 55vh; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div class="img-caption" style="margin-top: 10px; font-weight: 500;">Buffer router yang penuh
+                            memicu pembuangan paket (Packet Loss).</div>
                     </div>
                 </div>
             </section>
@@ -1086,7 +1479,35 @@
                     </ul>
                 </div>
             </section>
+            <section>
+                <h3>Algoritma AIMD (1)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small">
+                        <p style="margin-top:.4em;">
+                        <p><strong>Additive Increase (Probe Bandwidth):</strong> Selama tidak ada loss,
+                            perlahan-lahan
+                            tingkatkan kecepatan transmisi (+1 MSS setiap RTT) untuk <em>meraba-raba</em> batas
+                            bandwidth maksimal.</p>
 
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+            <section>
+                <h3>Algoritma AIMD (2)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-small">
+                        <p style="margin-top:.4em;">
+                        <p><strong>Multiplicative Decrease (Rem Darurat):</strong> Jika terjadi packet loss, segera
+                            <strong>potong kecepatan transmisi menjadi setengahnya</strong>.
+                        </p>
+                        </p>
+                    </div>
+                </div>
+
+            </section>
             <section>
                 <h3>Animasi: Pola Gigi Gergaji (Sawtooth)</h3>
 
@@ -1124,6 +1545,186 @@
                 </div>
             </section>
 
+            <section>
+                <h3>Fase TCP</h3>
+                <h4 class="text-blue">Congestion Control (1)</h4>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .5em;">
+                        <div class="sec-bar sec-bar-green">1. Slow Start</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>Saat koneksi baru dimulai, <code>cwnd</code> (Congestion Window) diset kecil (misal
+                                    1 MSS).</li>
+                                <li>Namun, TCP ingin menemukan kapasitas maksimum secara cepat.</li>
+                                <li>Oleh karena itu, <code>cwnd</code> ditingkatkan secara <strong>eksponensial</strong>
+                                    (digandakan setiap RTT) dengan menambahkan 1 MSS untuk setiap ACK yang diterima.
+                                </li>
+                                <li>Fase ini berlangsung hingga <code>cwnd</code> mencapai threshold (ssthresh) atau
+                                    terjadi <em>loss</em>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <!-- Space for future image -->
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Fase TCP</h3>
+                <h4 class="text-blue">Congestion Control (2)</h4>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .5em;">
+                        <div class="sec-bar sec-bar-blue">2. Congestion Avoidance</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>Ketika <code>cwnd</code> melewati threshold, peningkatan menjadi linier
+                                    (<strong>Additive Increase</strong>).</li>
+                                <li>Tujuannya untuk "meraba" sisa bandwidth dengan hati-hati.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <!-- Space for future image -->
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Fase TCP</h3>
+                <h4 class="text-orange">Congestion Control (3)</h4>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .5em;">
+                        <div class="sec-bar sec-bar-orange">3. Fast Recovery</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>Jika terjadi loss akibat <strong>3 Duplicate ACKs</strong>, <code>cwnd</code>
+                                    dipotong menjadi setengahnya, lalu masuk ke fase Fast Recovery.</li>
+                                <li>Jika loss karena <strong>Timeout</strong>, <code>cwnd</code> di-reset kembali ke 1
+                                    MSS (kembali ke Slow Start).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col">
+                        <!-- Space for future image -->
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Varian Congestion Control &amp; Fairness (1)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .5em;">
+                        <div class="sec-bar sec-bar-purple">TCP CUBIC</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>Varian TCP default pada Linux/Android modern.</li>
+                                <li>AIMD tradisional kurang agresif di jaringan berkecepatan sangat tinggi.</li>
+                                <li><strong>Ide CUBIC:</strong> Menggunakan fungsi kubik (pangkat 3) untuk memulihkan
+                                    <code>cwnd</code> setelah loss.
+                                </li>
+                                <li>Meningkatkan ukuran window dengan sangat cepat di awal, lalu melambat ketika
+                                    mendekati ukuran maksimum sebelum loss sebelumnya (Wmax).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card text-left text-smaller">
+
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>Varian Congestion Control &amp; Fairness (2)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .45em;">
+                        <div class="sec-bar sec-bar-teal">TCP Fairness (Keadilan)</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li>Jika ada K koneksi TCP yang melewati sebuah bottleneck link berkapasitas R, apakah
+                                    masing-masing akan mendapat bandwidth sebesar R/K?</li>
+                                <li><strong>Ya, TCP pada dasarnya "Fair" (Adil).</strong> Mekanisme AIMD secara
+                                    matematis memaksa aliran TCP yang bersaing untuk pada akhirnya berbagi bandwidth
+                                    secara seimbang.</li>
+                                <li>Namun, koneksi dengan RTT yang lebih kecil (jarak lebih dekat) biasanya bisa
+                                    meningkatkan <code>cwnd</code> lebih cepat, sehingga mengambil porsi lebih banyak.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 7: QUIC ━━━━━━━━━━━━━━ -->
+            <section>
+                <h2>9. Evolusi Transport Layer (QUIC)</h2>
+            </section>
+
+            <section>
+                <h3>QUIC: Quick UDP Internet Connections</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size: .45em;">
+                        <ul>
+                            <li>Dirancang oleh Google, kini menjadi fondasi <strong>HTTP/3</strong>.</li>
+                            <li><strong>Menggunakan UDP</strong> di bawahnya, tetapi mengimplementasikan keandalan
+                                (RDT), congestion control, dan keamanan (TLS) di level aplikasi/QUIC itu sendiri.</li>
+                            <li><strong>Kelebihan Utama:</strong>
+                                <ul>
+                                    <li><strong>Fast Connection Setup:</strong> Menggabungkan handshake transport dan
+                                        kriptografi (TLS) menjadi 1 RTT (atau bahkan 0 RTT!). TCP+TLS biasanya butuh 2-3
+                                        RTT.</li>
+                                    <li><strong>No Head-of-Line Blocking:</strong> Memiliki konsep "Streams" independen.
+                                        Jika satu paket hilang di Stream A, Stream B tetap bisa diproses tanpa terhenti.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Masa depan protokol web yang lebih cepat dan efisien!</li>
+                        </ul>
+                    </div>
+                    <div class="img-col">
+                        <img src="img/week5/quic_protocol.png" alt="QUIC Protocol vs TCP" class="slide-img">
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- RANGKUMAN -->
+            <section>
+                <h3>Rangkuman Pertemuan 5</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size:.45em;">
+                        <p style="font-weight:700; color:#1565c0;">Transport Layer, UDP &amp; RDT</p>
+                        <ul>
+                            <li><strong>Transport Layer:</strong> Komunikasi antar proses (Process-to-Process)
+                                menggunakan Port Numbers. Melakukan proses Multiplexing/Demultiplexing.</li>
+                            <li><strong>UDP:</strong> Protokol connectionless, unreliable, namun cepat tanpa overhead.
+                                Sangat ideal untuk layanan streaming dan DNS.</li>
+                            <li><strong>RDT &amp; Pipelining:</strong> Mekanisme keandalan transfer data menggunakan
+                                Checksum, ACK/NACK, Sequence Number, dan Timer.</li>
+                            <li><strong>Pipelining (GBN &amp; SR):</strong> Protokol yang mengizinkan pengiriman banyak
+                                paket sekaligus tanpa menunggu ACK untuk memaksimalkan utilitas bandwidth.</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-smaller" style="font-size:.45em;">
+                        <p style="font-weight:700; color:#e65100;">TCP, Congestion Control &amp; QUIC</p>
+                        <ul>
+                            <li><strong>TCP:</strong> Protokol connection-oriented, andal (reliable), dan berurutan
+                                (in-order byte-stream).</li>
+                            <li><strong>Manajemen Koneksi:</strong> 3-Way Handshake (setup) &amp; 4-Way Teardown
+                                (teardown).</li>
+                            <li><strong>Flow Control:</strong> Mekanisme untuk melindungi buffer <em>penerima</em> agar
+                                tidak kewalahan (menggunakan <code>rwnd</code>).</li>
+                            <li><strong>Congestion Control:</strong> Melindungi antrean <em>router</em> jaringan agar
+                                tidak macet menggunakan algoritma AIMD (Slow Start, Congestion Avoidance, Fast
+                                Recovery).</li>
+                            <li><strong>QUIC:</strong> Evolusi Transport Layer untuk HTTP/3 yang dibangun di atas UDP
+                                guna menghilangkan efek <em>Head-of-Line Blocking</em>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
             <!-- ━━━━━━━━━━━━━━ TUGAS INDIVIDU ━━━━━━━━━━━━━━ -->
             <section>
                 <div class="tugas-box">
@@ -1131,56 +1732,36 @@
                     <p style="font-size:.6em; color:#e8f5e9; margin-bottom:10px;">Dikerjakan analitik, ditulis tangan di
                         kertas folio, difoto, dikirim ke e-learning.</p>
 
-                    <div class="tugas-soal">
-                        <p><span class="num">1.</span> Aplikasi video conference seperti Zoom dapat berjalan menggunakan
-                            TCP atau UDP. Mengapa pada kondisi jaringan yang ideal (loss rendah) aplikasi ini
-                            <strong>lebih memilih UDP</strong> dibandingkan TCP? Jelaskan dengan membandingkan mekanisme
-                            TCP RDT (Reliable Data Transfer) dan head-of-line blocking pada TCP.
+                    <div class="tugas-soal" style="font-size:.6em;">
+                        <p><span class="num">1.</span> <strong>[Analogi Kurir Pos]</strong>
+                            Gunakan Analogi lapisan Transport sebagai "Petugas Pos" yang menyortir surat
+                            (port/soket).
+                            Jika Petugas Pos mempekerjakan dua kurir pembantu: "Si Cepat-tapi-Ceroboh" dan "Si
+                            Lambat-tapi-Pasti", petakan karakteristik kedua kurir tersebut ke dalam mekanisme
+                            <em>multiplexing</em>, pengurutan, dan keandalan (reliability) milik protokol
+                            <strong>UDP</strong> dan <strong>TCP</strong>! Jelaskan mengapa keduanya tetap dibutuhkan!
                         </p>
                     </div>
 
-                    <div class="tugas-soal" style="margin-top:8px;">
-                        <p><span class="num">2.</span> Sebuah serangan <strong>SYN Flood Attack</strong> terjadi ketika
-                            penyerang mengirimkan ribuan paket TCP dengan bendera SYN=1, namun tidak pernah merespons
-                            dengan ACK terakhir (langkah ke-3). Jelaskan <strong>secara arsitektural (berdasarkan 3-Way
-                                Handshake)</strong> mengapa serangan ini dapat menyebabkan server lumpuh, dan memori apa
-                            yang dihabiskan oleh server!</p>
+                    <div class="tugas-soal" style="font-size:.6em;" style="margin-top:8px;">
+                        <p><span class="num">2.</span> <strong>[Studi Kasus Grafis TCP]</strong> Gambarkan secara
+                            mandiri di kertas Anda grafik gigi gergaji (AIMD) TCP dengan skenario berikut: Koneksi
+                            dimulai dengan <code>ssthresh</code> = 8 MSS. Siklus ke-1 hingga 4 berjalan normal. Pada
+                            awal Siklus ke-5, terjadi <em>packet loss</em> akibat <strong>3 Duplicate ACKs</strong>.
+                            Koneksi pulih dan berjalan normal dari Siklus ke-6 hingga ke-8. <strong>Berapakah nilai
+                                pasti <code>cwnd</code> (Congestion Window) pada Siklus ke-4, Siklus ke-5 (saat potong),
+                                dan Siklus ke-8?</strong> (Petunjuk: Pahami perbedaan Slow Start vs Congestion
+                            Avoidance).</p>
                     </div>
 
-                    <div class="tugas-soal" style="margin-top:8px;">
-                        <p><span class="num">3.</span> Jelaskan perbedaan mendasar antara <strong>Flow Control</strong>
-                            dan <strong>Congestion Control</strong> pada TCP. Jika seorang pengguna mengunduh file besar
-                            dengan kecepatan 10 Mbps, lalu tiba-tiba kecepatannya turun menjadi 1 Mbps karena router di
-                            ISP kelebihan beban, mekanisme manakah yang sedang bekerja mengendalikan kecepatan pengguna
-                            tersebut?</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- RANGKUMAN -->
-            <section>
-                <h3>Rangkuman Pertemuan 5</h3>
-                <div class="layout-2col">
-                    <div class="card text-left text-small">
-                        <p style="font-weight:700; color:#1565c0;">Transport Layer &amp; UDP</p>
-                        <ul>
-                            <li><strong>Transport Layer:</strong> Komunikasi antar proses/socket (menggunakan Port
-                                Numbers).</li>
-                            <li><strong>Mux/Demux:</strong> Menggabungkan dan memisahkan aliran data.</li>
-                            <li><strong>UDP:</strong> Connectionless, unreliable, cepat. Cocok untuk DNS dan streaming
-                                realtime (Game/Video).</li>
-                        </ul>
-                    </div>
-                    <div class="card text-left text-small">
-                        <p style="font-weight:700; color:#e65100;">TCP</p>
-                        <ul>
-                            <li><strong>TCP:</strong> Connection-oriented, reliable, in-order byte-stream.</li>
-                            <li><strong>Manajemen Koneksi:</strong> 3-Way Handshake (buka), 4-Way Teardown (tutup).</li>
-                            <li><strong>Flow Control:</strong> Membatasi kecepatan agar buffer penerima (rwnd) tidak
-                                luber.</li>
-                            <li><strong>Congestion Control:</strong> Membatasi kecepatan agar router tidak macet (AIMD,
-                                pola gigi gergaji).</li>
-                        </ul>
+                    <div class="tugas-soal" style="font-size:.6em;" style="margin-top:8px;">
+                        <p><span class="num">3.</span> <strong>[Analisis QUIC &amp; SIAKAD]</strong> Protokol QUIC
+                            (HTTP/3) berevolusi di atas UDP untuk memecahkan masalah <em>Head-of-Line Blocking</em>
+                            milik TCP. Jika kelak SIAKAD ITERA dimigrasikan ke HTTP/3, jelaskan sebuah skenario spesifik
+                            saat masa KRS-an (jaringan sibuk) bagaimana arsitektur QUIC mencegah <em>packet loss</em>
+                            pada satu <em>request</em> (misal: <em>request</em> gambar aset web) memblokir antrean
+                            <em>request</em> krusial lainnya (misal: <em>request</em> simpan KRS)!
+                        </p>
                     </div>
                 </div>
             </section>
@@ -1190,6 +1771,8 @@
                 <p>Pertemuan berikutnya: <strong>IP Addressing &amp; Subnetting</strong></p>
                 <p class="text-small">Referensi mandiri: Kurose &amp; Ross Chapter 3 (Transport Layer)</p>
             </section>
+
+
 
         </div><!-- /slides -->
     </div><!-- /reveal -->
@@ -1206,11 +1789,12 @@
     </script>
 
     <!-- Theme Toggle -->
-    <button id="theme-toggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+    <button id="theme-toggle"
+        style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
         <i class="bi bi-moon-fill" id="theme-icon"></i>
     </button>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const toggleBtn = document.getElementById('theme-toggle');
             const themeLink = document.getElementById('theme');
             const themeIcon = document.getElementById('theme-icon');
