@@ -11,16 +11,52 @@
     <link rel="stylesheet" href="css/pkom-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
-        .reveal .slides section {
-            height: 100%;
-            overflow-y: auto !important;
-            padding-bottom: 50px;
+        @media screen {
+            .reveal .slides section {
+                max-height: 100%;
+                overflow-y: auto;
+                padding-bottom: 20px;
+            }
+
+            .reveal img {
+                max-height: 45vh;
+                object-fit: contain;
+            }
+        }
+
+        @media print {
+            .reveal .slides section {
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            .reveal img,
+            .card {
+                page-break-inside: avoid;
+            }
+        }
+
+        .reveal .card {
+            margin-bottom: 10px;
+        }
+
+        /* images */
+        .slide-img {
+            width: 100%;
+            height: auto;
+            max-height: 45vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
         }
 
         .slide-img-sm {
             width: 100%;
             height: auto;
-            max-height: 35vh;
+            max-height: 30vh;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
@@ -45,17 +81,18 @@
         }
 
         .img-caption {
-            font-size: .52em;
+            font-size: .55em;
             color: #777;
             text-align: center;
-            margin-top: .1em;
+            margin-top: .2em;
             font-style: italic;
         }
 
+        /* Section bars & headers */
         .sec-bar {
             border-radius: 8px 8px 0 0;
-            padding: 7px 16px;
-            font-size: .68em;
+            padding: 8px 16px;
+            font-size: .75em;
             font-weight: 700;
             letter-spacing: .04em;
         }
@@ -65,7 +102,17 @@
             border: 1px solid #dee2e6;
             border-radius: 0 0 8px 8px;
             padding: 12px 16px;
+            font-size: .68em;
             box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        /* Nested card scaling */
+        .card .sec-bar {
+            font-size: .88em;
+        }
+
+        .card .sec-body {
+            font-size: .82em;
         }
 
         .sec-bar-blue {
@@ -93,13 +140,15 @@
             color: #fff;
         }
 
+        /* Info boxes */
         .info-box {
             border-left: 4px solid #1565c0;
             background: #e8f0fe;
             border-radius: 0 8px 8px 0;
             padding: 10px 14px;
-            font-size: .66em;
+            font-size: .68em;
             margin-top: .5em;
+            line-height: 1.5;
         }
 
         .info-box-warn {
@@ -107,8 +156,9 @@
             background: #fff3e0;
             border-radius: 0 8px 8px 0;
             padding: 10px 14px;
-            font-size: .66em;
+            font-size: .68em;
             margin-top: .5em;
+            line-height: 1.5;
         }
 
         .info-box-green {
@@ -116,14 +166,92 @@
             background: #e8f5e9;
             border-radius: 0 8px 8px 0;
             padding: 10px 14px;
-            font-size: .66em;
+            font-size: .68em;
             margin-top: .5em;
+            line-height: 1.5;
+        }
+
+        .card .info-box,
+        .card .info-box-warn,
+        .card .info-box-green {
+            font-size: .88em;
+        }
+
+        .reveal h3 {
+            font-size: 1.35em;
+            margin-bottom: 12px;
+        }
+
+        /* Per-Router Diagram Styles */
+        .router-diagram-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f4f7fb;
+            border: 1px solid #cfdbe8;
+            border-radius: 8px;
+            padding: 8px 14px;
+            margin-bottom: 10px;
+        }
+
+        .router-card {
+            flex: 1;
+            background: #fff;
+            border: 1.5px solid #1565c0;
+            border-radius: 6px;
+            padding: 6px 10px;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .router-plane-ctrl {
+            background: #e3f2fd;
+            border-radius: 4px;
+            padding: 3px 6px;
+            margin: 4px 0;
+            font-size: .74em;
+            color: #0d47a1;
+            font-weight: 600;
+        }
+
+        .router-plane-data {
+            background: #e8f5e9;
+            border-radius: 4px;
+            padding: 3px 6px;
+            font-size: .74em;
+            color: #1b5e20;
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .router-diagram-box {
+            background: #25282c !important;
+            border-color: #444 !important;
+        }
+
+        [data-theme="dark"] .router-card {
+            background: #2d3239 !important;
+            border-color: #3b82f6 !important;
+            color: #eee !important;
+        }
+
+        [data-theme="dark"] .router-plane-ctrl {
+            background: #1e3a5f !important;
+            color: #93c5fd !important;
+        }
+
+        [data-theme="dark"] .router-plane-data {
+            background: #143823 !important;
+            color: #86efac !important;
         }
 
         .reveal table {
-            font-size: .5em;
+            font-size: .55em;
             width: 100%;
             border-collapse: collapse;
+        }
+
+        .card table {
+            font-size: .82em;
         }
 
         .reveal table th,
@@ -147,7 +275,7 @@
             font-family: monospace;
             padding: 10px;
             border-radius: 6px;
-            font-size: .6em;
+            font-size: .65em;
         }
 
         /* Animation specific */
@@ -176,7 +304,7 @@
         }
 
         .anim-label {
-            font-size: .5em;
+            font-size: .55em;
             font-weight: 700;
             font-family: monospace;
             margin-top: 5px;
@@ -246,6 +374,7 @@
             font-family: sans-serif;
         }
 
+        /* Tugas slide */
         .tugas-box {
             background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
             border-radius: 14px;
@@ -302,7 +431,7 @@
 
         <div class="slides">
 
-            <!-- Title Slide -->
+            <!-- ━━━━━━━━━━━━━━ INTRO ━━━━━━━━━━━━━━ -->
             <section>
                 <div class="title-box">
                     <h1>Network Layer: Control Plane</h1>
@@ -317,51 +446,59 @@
                     <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
                     <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
                 </div>
+                <aside class="notes">Selamat datang di Pertemuan 7. Hari ini kita akan membahas Network Layer bagian
+                    Control Plane: bagaimana rute perjalanan paket ditentukan di internet.</aside>
             </section>
 
-            <!-- Outline -->
+            <!-- ━━━━━━━━━━━━━━ OUTLINE ━━━━━━━━━━━━━━ -->
             <section>
                 <h3>Outline Materi</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1565c0;">Bagian 1: Pendahuluan Control Plane</p>
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; color:#1565c0; font-size: .85em; margin: 0;">
+                            Bagian 1: Pendahuluan Control Plane</p>
                         <ul>
                             <li>Dua Pendekatan Control Plane</li>
                             <li>Per-router (Tradisional) vs SDN</li>
                         </ul>
 
-                        <p style="font-weight:700; color:#e65100; margin-top:1em;">Bagian 2: Algoritma Routing</p>
+                        <p style="font-weight:700; color:#e65100; font-size: .85em; margin-top:1em;">Bagian 2: Algoritma
+                            Routing</p>
                         <ul>
                             <li>Konsep Graph Abstraction</li>
                             <li>Link State (Dijkstra)</li>
                             <li>Distance Vector (Bellman-Ford)</li>
                         </ul>
                     </div>
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1b5e20;">Bagian 3: Protokol Routing (Singkat)</p>
+                    <div class="card text-left text-small">
+                        <p style="font-weight:700; font-size: .85em; color:#1b5e20;  margin: 0;">Bagian 3: Protokol
+                            Routing di
+                            Internet</p>
                         <ul>
-                            <li>OSPF (Intra-ISP)</li>
-                            <li>BGP (Inter-ISP)</li>
+                            <li>Intra-AS vs Inter-AS</li>
+                            <li>OSPF (Intra-ISP) &amp; BGP (Inter-ISP)</li>
                         </ul>
 
-                        <p style="font-weight:700; color:#4a148c; margin-top:1em;">Bagian 4: Protokol Manajemen</p>
+                        <p style="font-weight:700; font-size: .85em; color:#4a148c; margin-top:1em;">Bagian 4: Protokol
+                            Bantuan &amp;
+                            Manajemen</p>
                         <ul>
-                            <li>ICMP (Ping & Traceroute)</li>
+                            <li>ICMP (Ping &amp; Traceroute)</li>
                             <li>Network Management (SNMP)</li>
-                            <li>NETCONF & YANG</li>
+                            <li>NETCONF &amp; YANG</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- SECTION 1 -->
+            <!-- ━━━━━━━━━━━━━━ SECTION 1: PENDAHULUAN CONTROL PLANE ━━━━━━━━━━━━━━ -->
             <section>
                 <h2>1. Pendahuluan Control Plane</h2>
             </section>
 
             <section>
                 <h3>Fungsi Network Layer (Data vs Control)</h3>
-                <div class="card text-left text-smaller">
+                <div class="card text-left text-small">
                     <p>Di Pertemuan 6, kita belajar tentang <strong>Data Plane</strong> (pengalamatan IP dan
                         subnetting). Sekarang kita masuk ke <strong>Control Plane</strong>.</p>
                     <div class="layout-2col" style="margin-top:1em;">
@@ -377,107 +514,290 @@
                                 Table</em>.
                         </div>
                     </div>
+                    <aside class="notes">Ingatkan kembali analogi: Forwarding adalah tindakan fisik belok kiri/kanan di
+                        persimpangan jalan, sedangkan Routing adalah perencanaan peta rute perjalanan dari kota A ke
+                        kota B.</aside>
                 </div>
             </section>
 
             <section>
                 <h3>Dua Pendekatan Control Plane</h3>
-                <div class="card text-left text-smaller">
+                <div class="card text-left text-small">
                     <p>Bagaimana Control Plane diimplementasikan? Ada dua pendekatan utama di internet saat ini:</p>
                     <ol>
-                        <li style="margin-bottom:.8em;">
+                        <li class="fragment" style="margin-bottom:.8em;">
                             <strong>Kontrol Tradisional (Per-router):</strong> Setiap router memiliki agen routing
                             masing-masing (berjalan sendiri-sendiri) yang saling bertukar informasi. Algoritma (seperti
                             OSPF/BGP) dihitung <em>di dalam setiap router</em>.
                         </li>
-                        <li>
+                        <li class="fragment">
                             <strong>Software-Defined Networking (SDN):</strong> Logika kontrol dipisahkan dari router
                             fisik. Sebuah "otak" terpusat berupa <em>Remote Controller</em> (server) menghitung rute dan
                             meng-install <em>Forwarding Table</em> ke setiap <em>switches</em>.
                         </li>
                     </ol>
+                    <aside class="notes">Per-router adalah model warisan internet sejak awal. SDN adalah inovasi modern
+                        di pusat data dan jaringan ISP besar saat ini.</aside>
+                </div>
+            </section>
+
+            <section>
+                <h3>Dua Pendekatan Control Plane (Bagian 2)</h3>
+                <div class="card text-left text-small" style="padding:14px 18px; font-size:26px;">
+                    <p
+                        style="font-weight:700; color:#1565c0; font-size:.88em; margin-bottom:.4em; display:flex; align-items:center; gap:8px;">
+                        <i class="bi bi-router-fill"></i> Fokus: Kontrol Tradisional (Per-Router Control)
+                    </p>
+                    <p style="margin-bottom:.5em; line-height:1.45;">
+                        Pada pendekatan tradisional, fungsi <strong>Control Plane</strong> dan <strong>Data
+                            Plane</strong> menyatu erat di dalam setiap kotak router fisik (arsitektur <em>vertically
+                            integrated / monolitik</em>).
+                    </p>
+
+                    <!-- Diagram Arsitektur Per-Router -->
+                    <div class="router-diagram-box">
+                        <!-- Router Fisik A -->
+                        <div class="router-card">
+                            <div style="font-weight:700; font-size:.82em; color:#1565c0;"><i class="bi bi-router"></i>
+                                Router Fisik A</div>
+                            <div class="router-plane-ctrl">
+                                <strong>Control Plane:</strong> Algoritma Routing (CPU)
+                            </div>
+                            <div style="font-size:.68em; color:#666; margin:2px 0;">⬇ <em>instal rute lokal</em></div>
+                            <div class="router-plane-data">
+                                <strong>Data Plane:</strong> Forwarding Table (ASIC)
+                            </div>
+                        </div>
+
+                        <!-- Panah Pertukaran Antar Router -->
+                        <div
+                            style="padding:0 12px; text-align:center; color:#1565c0; font-weight:600; font-size:.72em; min-width:130px;">
+                            <i class="bi bi-arrow-left-right"
+                                style="font-size:1.3em; display:block; margin-bottom:2px;"></i>
+                            Pesan Protokol Routing<br><span
+                                style="font-size:.88em; color:#666; font-weight:normal;">(OSPF / BGP Updates)</span>
+                        </div>
+
+                        <!-- Router Fisik B -->
+                        <div class="router-card">
+                            <div style="font-weight:700; font-size:.82em; color:#1565c0;"><i class="bi bi-router"></i>
+                                Router Fisik B</div>
+                            <div class="router-plane-ctrl">
+                                <strong>Control Plane:</strong> Algoritma Routing (CPU)
+                            </div>
+                            <div style="font-size:.68em; color:#666; margin:2px 0;">⬇ <em>instal rute lokal</em></div>
+                            <div class="router-plane-data">
+                                <strong>Data Plane:</strong> Forwarding Table (ASIC)
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="info-box" style="margin-top:8px; padding:8px 12px; font-size:.82em;">
+                        📌 <strong>Inti Konsep:</strong> <em>"Setiap router berpikir sendiri (otak otonom) dan
+                            meneruskan paketnya sendiri berdasarkan hasil kalkulasi lokal."</em>
+                    </div>
+                    <aside class="notes">Jelaskan bahwa pendekatan per-router adalah pondasi internet tradisional selama
+                        beberapa dekade. Analogi: seperti pengemudi mobil di jalan raya yang masing-masing membawa peta,
+                        saling berkomunikasi via radio dengan pengemudi lain, lalu memutuskan sendiri ke mana harus
+                        berbelok di setiap persimpangan. Hubungan control plane dan data plane terikat erat (vertically
+                        integrated) di sasis perangkat vendor yang sama.</aside>
+                </div>
+            </section>
+            <section>
+                <h3>Dua Pendekatan Control Plane (Bagian 3)</h3>
+                <div class="card text-left text-small" style="padding:14px 18px; font-size:26px;">
+
+
+                    <!-- 2 Kolom Mekanisme & Karakteristik -->
+                    <div class="layout-2col" style="margin-top:6px; gap:12px;">
+                        <div>
+                            <div class="sec-bar sec-bar-blue" style="padding:6px 12px; font-size:.82em;">Mekanisme Kerja
+                                Terdistribusi</div>
+                            <div class="sec-body" style="padding:8px 12px; font-size:.78em;">
+                                <ul style="margin:0; padding-left:1.1em;">
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Komponen Routing
+                                            Mandiri:</strong> Setiap router menjalankan daemon routing (OSPF, RIP, BGP)
+                                        di prosesor lokal tanpa server sentral.</li>
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Pertukaran
+                                            Peer-to-Peer:</strong> Router bertukar pesan update/topologi secara berkala
+                                        dengan router tetangga.</li>
+                                    <li class="fragment"><strong>Kalkulasi Lokal:</strong> Mengeksekusi algoritma
+                                        (Dijkstra/Bellman-Ford) untuk langsung mengisi <em>Forwarding Table</em> lokal.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sec-bar sec-bar-orange" style="padding:6px 12px; font-size:.82em;">Kelebihan
+                                &amp; Keterbatasan</div>
+                            <div class="sec-body" style="padding:8px 12px; font-size:.78em;">
+                                <ul style="margin:0; padding-left:1.1em;">
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Kelebihan
+                                            (Fault-Tolerant):</strong> Terdesentralisasi penuh — tidak ada <em>single
+                                            point of failure</em>. Jaringan otomatis konvergen bila link putus.</li>
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Keterbatasan (Per-Box
+                                            Config):</strong> Konfigurasi manual satu per satu via CLI/SSH, rawan
+                                        <em>human error</em> dan lambat diskalakan.
+                                    </li>
+                                    <li class="fragment"><strong>Vendor Lock-in:</strong> Inovasi lambat karena software
+                                        dan hardware terikat erat pada vendor proprietary (Cisco, Juniper, dll.).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box" style="margin-top:8px; padding:8px 12px; font-size:.82em;">
+                        📌 <strong>Inti Konsep:</strong> <em>"Setiap router berpikir sendiri (otak otonom) dan
+                            meneruskan paketnya sendiri berdasarkan hasil kalkulasi lokal."</em>
+                    </div>
+                    <aside class="notes">Jelaskan bahwa pendekatan per-router adalah pondasi internet tradisional selama
+                        beberapa dekade. Analogi: seperti pengemudi mobil di jalan raya yang masing-masing membawa peta,
+                        saling berkomunikasi via radio dengan pengemudi lain, lalu memutuskan sendiri ke mana harus
+                        berbelok di setiap persimpangan. Hubungan control plane dan data plane terikat erat (vertically
+                        integrated) di sasis perangkat vendor yang sama.</aside>
+                </div>
+            </section>
+
+
+            <section>
+                <h3>Dua Pendekatan Control Plane (Bagian 4)</h3>
+                <div class="card text-left text-small" style="padding:14px 18px; font-size:22px;">
+                    <p
+                        style="font-weight:700; color:#e65100; font-size:.88em; margin-bottom:.5em; display:flex; align-items:center; gap:8px;">
+                        <i class="bi bi-diagram-3-fill"></i> Fokus: Software-Defined Networking (SDN)
+                    </p>
+                    <p style="margin-bottom:.6em; line-height:1.45;">
+                        SDN merevolusi arsitektur jaringan dengan <strong>memisahkan (decoupling)</strong> logika
+                        kendali (Control Plane) dari perangkat keras penerus paket (Data Plane).
+                    </p>
+
+                    <div class="layout-2col" style="margin-top:6px; gap:12px;">
+                        <div>
+                            <div class="sec-bar sec-bar-green" style="padding:6px 12px; font-size:.82em;">Mekanisme
+                                Kerja SDN</div>
+                            <div class="sec-body" style="padding:8px 12px; font-size:.78em;">
+                                <ul style="margin:0; padding-left:1.1em;">
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Otak Terpusat (SDN
+                                            Controller):</strong> Server terpusat memiliki pandangan global seluruh
+                                        topologi dan menghitung semua rute.</li>
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Perangkat Penerus (Dumb
+                                            Switches):</strong> Switch fisik hanya bertugas memindahkan paket data
+                                        sesuai instruksi controller.</li>
+                                    <li class="fragment"><strong>Instalasi Jarak Jauh:</strong> Controller memasang
+                                        <em>flow/forwarding table</em> ke switch via protokol standar (misal OpenFlow).
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sec-bar sec-bar-purple" style="padding:6px 12px; font-size:.82em;">Kelebihan
+                                &amp; Tantangan</div>
+                            <div class="sec-body" style="padding:8px 12px; font-size:.78em;">
+                                <ul style="margin:0; padding-left:1.1em;">
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Kelebihan
+                                            (Programmable):</strong> Jaringan fleksibel, otomatis, dan dapat dikontrol
+                                        langsung dengan script/API (Python).</li>
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Manajemen
+                                            Terpusat:</strong> Kebijakan routing, security, dan QoS global dapat diubah
+                                        seketika dari satu titik kontrol.</li>
+                                    <li class="fragment"><strong>Tantangan (Resiliensi):</strong> Controller harus
+                                        dibuat redundan (cluster) agar tidak menjadi <em>single point of failure</em>.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box-green" style="margin-top:8px; padding:8px 12px; font-size:.82em;">
+                        ⚡ <strong>Inti Konsep:</strong> <em>"Otak dipusatkan pada server Controller (Software),
+                            sementara switch fisik hanya menjadi pelaksana penerus paket (Hardware)."</em>
+                    </div>
+                    <aside class="notes">SDN menjadi standar di arsitektur data center modern (seperti Google, AWS,
+                        Microsoft) karena memungkinkan otomatisasi ribuan server secara dinamis.</aside>
                 </div>
             </section>
 
             <section>
                 <h3>Ilustrasi: Per-Router vs SDN</h3>
-                <div class="layout-2col">
-                    <div class="card text-center text-smaller">
-                        <strong style="color:#1565c0;">Tradisional (Per-router)</strong>
-                        <div class="anim-container">
-                            <div class="anim-node" style="top:20%; left:20%;"><i class="bi bi-router anim-icon"></i>
-                                <div class="anim-label">Brain+Data</div>
-                            </div>
-                            <div class="anim-node" style="top:70%; left:50%;"><i class="bi bi-router anim-icon"></i>
-                                <div class="anim-label">Brain+Data</div>
-                            </div>
-                            <div class="anim-node" style="top:20%; left:80%;"><i class="bi bi-router anim-icon"></i>
-                                <div class="anim-label">Brain+Data</div>
-                            </div>
-                            <!-- Routing Update Packets -->
-                            <div class="packet"
-                                style="animation: pktSend 3s infinite; left:25%; top:25%; background:#1565c0;"></div>
+                <div class="layout-2col" style="gap:16px; font-size:30px;">
+                    <!-- Kolom 1: Per-Router Control Plane -->
+                    <div class="card text-center text-small" style="padding:12px 14px;">
+                        <strong style="color:#1565c0; font-size:.88em; display:block; margin-bottom:6px;">
+                            <i class="bi bi-router"></i> Kontrol Tradisional (Per-Router)
+                        </strong>
+                        <img src="img/week7/control_plane_per_router.jpg"
+                            alt="Ilustrasi Arsitektur Control Plane Per-Router"
+                            style="max-height:260px; width:auto; max-width:100%; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin:0 auto; display:block;">
+                        <div class="text-left" style="margin-top:8px; font-size:.8em; line-height:1.45;">
+                            <ul style="margin:0; padding-left:1.1em;">
+                                <li><strong>Arsitektur Monolitik:</strong> Control Plane (Algoritma OSPF/BGP di CPU) dan
+                                    Data Plane (FIB) menyatu di setiap router fisik.</li>
+                                <li><strong>Koordinasi Peer-to-Peer:</strong> Router saling bertukar pesan rute dengan
+                                    tetangga untuk menghitung jalur terpendek secara mandiri.</li>
+                                <li><strong>Karakteristik:</strong> Desentralisasi penuh, toleran terhadap kegagalan,
+                                    namun memerlukan konfigurasi manual per-perangkat.</li>
+                            </ul>
                         </div>
-                        <p style="font-size:0.8em; margin-top:5px;">Setiap router punya "otak" routing mandiri.</p>
                     </div>
-                    <div class="card text-center text-smaller">
-                        <strong style="color:#e65100;">SDN (Logically Centralized)</strong>
-                        <div class="anim-container">
-                            <div class="anim-node" style="top:10%; left:50%; transform:translate(-50%,0);"><i
-                                    class="bi bi-server anim-icon" style="color:#e65100;"></i>
-                                <div class="anim-label">SDN Controller (The Brain)</div>
-                            </div>
 
-                            <div class="anim-node" style="top:70%; left:20%;"><i
-                                    class="bi bi-hdd-network anim-icon"></i>
-                                <div class="anim-label">Dumb Router</div>
-                            </div>
-                            <div class="anim-node" style="top:70%; left:50%;"><i
-                                    class="bi bi-hdd-network anim-icon"></i>
-                                <div class="anim-label">Dumb Router</div>
-                            </div>
-                            <div class="anim-node" style="top:70%; left:80%;"><i
-                                    class="bi bi-hdd-network anim-icon"></i>
-                                <div class="anim-label">Dumb Router</div>
-                            </div>
-
-                            <!-- Downward config packets -->
-                            <div class="packet"
-                                style="animation: pktSend 2s infinite alternate; left:50%; top:25%; background:#e65100;">
-                            </div>
+                    <!-- Kolom 2: Software-Defined Networking (SDN) -->
+                    <div class="card text-center text-small" style="padding:12px 14px;">
+                        <strong style="color:#e65100; font-size:.88em; display:block; margin-bottom:6px;">
+                            <i class="bi bi-diagram-3"></i> Software-Defined Networking (SDN)
+                        </strong>
+                        <img src="img/week7/control_plane_sdn.jpg" alt="Ilustrasi Arsitektur Control Plane SDN"
+                            style="max-height:260px; width:auto; max-width:100%; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin:0 auto; display:block;">
+                        <div class="text-left" style="margin-top:8px; font-size:.8em; line-height:1.45;">
+                            <ul style="margin:0; padding-left:1.1em;">
+                                <li><strong>Pemisahan (Decoupling):</strong> Otak kendali dipusatkan pada <em>SDN
+                                        Controller</em>, terpisah dari perangkat keras penerus data.</li>
+                                <li><strong>Instalasi Jarak Jauh:</strong> Controller menghitung rute global dan
+                                    memasang <em>Flow Table</em> via protokol standar (OpenFlow).</li>
+                                <li><strong>Karakteristik:</strong> Programmable via API/software, manajemen kebijakan
+                                    terpusat, dan switch fisik beroperasi secara sederhana.</li>
+                            </ul>
                         </div>
-                        <p style="font-size:0.8em; margin-top:5px;">Router/Switch hanya meneruskan paket. Rute
-                            dikalkulasi oleh server terpusat.</p>
                     </div>
                 </div>
+                <aside class="notes">Bandingkan kedua arsitektur secara visual: Pada Per-Router (kiri), setiap router
+                    memiliki otak dan otot sendiri serta berkoordinasi peer-to-peer. Pada SDN (kanan), otak dipisahkan
+                    dan dipusatkan pada server Controller yang menginstruksikan switch-switch di bawahnya via OpenFlow.
+                </aside>
             </section>
 
-            <!-- SECTION 2 -->
+            <!-- ━━━━━━━━━━━━━━ SECTION 2: ALGORITMA ROUTING ━━━━━━━━━━━━━━ -->
             <section>
                 <h2>2. Algoritma Routing</h2>
             </section>
 
             <section>
-                <h3>Tujuan & Abstraksi Graf (Graph)</h3>
-                <div class="card text-left text-smaller">
+                <h3>Tujuan &amp; Abstraksi Graf (Graph)</h3>
+                <div class="card text-left text-small">
                     <p><strong>Tujuan Routing:</strong> Menemukan jalur (rute) "terbaik" dari sumber ke tujuan.
                         "Terbaik" bisa berarti rute dengan <em>biaya terkecil (least cost)</em>, <em>tercepat</em>, atau
                         <em>paling tidak macet (least congested)</em>.
                     </p>
                     <p style="font-weight:700; margin-top:.5em;">Abstraksi Graf: <code>G = (N, E)</code></p>
                     <ul style="margin-top:.3em;">
-                        <li><strong>N (Nodes):</strong> Kumpulan router (misal: <code>{u, v, w, x, y, z}</code>).</li>
-                        <li><strong>E (Edges):</strong> Kumpulan link fisik yang menghubungkan router.</li>
-                        <li><strong>c(x, y):</strong> Biaya link (Link Cost) dari router x ke y. Nilainya bisa 1, atau
-                            berbasis kapasitas bandwidth, dll. Jika tidak terhubung langsung, biayanya adalah ∞ (tak
-                            terhingga).</li>
+                        <li class="fragment"><strong>N (Nodes):</strong> Kumpulan router (misal:
+                            <code>{u, v, w, x, y, z}</code>).
+                        </li>
+                        <li class="fragment"><strong>E (Edges):</strong> Kumpulan link fisik yang menghubungkan router.
+                        </li>
+                        <li class="fragment"><strong>c(x, y):</strong> Biaya link (Link Cost) dari router x ke y.
+                            Nilainya bisa 1, atau
+                            berbasis kapasitas bandwidth, delay, dll. Jika tidak terhubung langsung, biayanya adalah ∞
+                            (tak terhingga).</li>
                     </ul>
+                    <aside class="notes">Dalam teori graf jaringan komputer, setiap router direpresentasikan sebagai
+                        simpul (node) dan setiap kabel penghubung sebagai sisi (edge).</aside>
                 </div>
             </section>
 
             <section>
                 <h3>Klasifikasi Algoritma Routing</h3>
-                <div class="card text-left text-smaller">
+                <div class="card text-left text-small">
                     <p>Secara umum, algoritma routing dibagi berdasarkan seberapa banyak informasi yang dimiliki oleh
                         sebuah router sebelum menghitung rute:</p>
                     <div style="margin-top:1em;">
@@ -501,7 +821,7 @@
 
             <section>
                 <h3>Algoritma Link-State: Dijkstra</h3>
-                <div class="card text-left text-smaller">
+                <div class="card text-left text-small">
                     <p><strong>Tujuan:</strong> Menghitung biaya terpendek (Least-cost path) dari satu titik sumber
                         (source) ke <em>semua titik lain</em> di dalam jaringan.</p>
                     <div class="info-box" style="margin-bottom:1em;">
@@ -516,15 +836,15 @@
                     </div>
                     <p>Penerapan di Lapisan Network: Digunakan oleh protokol <strong>OSPF</strong>. Setiap router
                         menjalankan Dijkstra secara mandiri setelah menerima gambaran topologi utuh dari router lain,
-                        untuk mengisi *Forwarding Table* nya.</p>
+                        untuk mengisi <em>Forwarding Table</em>-nya.</p>
                 </div>
             </section>
 
             <section>
-                <h3>Simulasi Algoritma Dijkstra (Grafik)</h3>
-                <div class="card text-left text-smaller">
-                    <p>Misalkan node <strong>u</strong> adalah sumber. Kita akan mencari rute terpendek ke seluruh node.
-                    </p>
+                <h3>Simulasi Algoritma Dijkstra (Topologi Graf)</h3>
+                <div class="card text-left text-small">
+                    <p>Misalkan node <strong>u</strong> adalah sumber (source). Kita akan mencari rute terpendek ke
+                        seluruh node.</p>
                     <svg class="svg-graph" width="500" height="200" viewBox="0 0 500 200">
                         <!-- Links -->
                         <g class="link">
@@ -565,14 +885,14 @@
                             <circle cx="420" cy="100" r="20" /><text x="420" y="100">z</text>
                         </g>
                     </svg>
-                    <p style="text-align:center; font-size:.9em; color:#666; margin-top:5px;">Graf jaringan dengan 6
-                        router dan biaya antar node.</p>
+                    <p class="img-caption">Graf topologi 6 router beserta cost link antar node (Referensi Kurose &amp;
+                        Ross)</p>
                 </div>
             </section>
 
             <section>
                 <h3>Tabel Simulasi Dijkstra (Step-by-Step)</h3>
-                <div class="card text-left text-smaller">
+                <div class="card text-left text-small">
                     <div class="tbl-scroll" style="max-height: 450px;">
                         <table style="text-align:center;">
                             <thead>
@@ -596,7 +916,7 @@
                                     <td>∞</td>
                                     <td>∞</td>
                                 </tr>
-                                <tr>
+                                <tr class="fragment">
                                     <td>1</td>
                                     <td>u, <strong>x</strong></td>
                                     <td style="background:#fff9c4;"><strong>2,u</strong></td>
@@ -605,17 +925,16 @@
                                     <td>2,x</td>
                                     <td>∞</td>
                                 </tr>
-                                <tr>
+                                <tr class="fragment">
                                     <td>2</td>
-                                    <td>u, x, <strong>y</strong> (karena y &amp; v = 2, urut abjad v/y) <em>pilih y</em>
-                                    </td>
+                                    <td>u, x, <strong>y</strong> (pilih y)</td>
                                     <td style="background:#fff9c4;"><strong>2,u</strong></td>
                                     <td>3,y</td>
                                     <td>-</td>
                                     <td>-</td>
                                     <td>4,y</td>
                                 </tr>
-                                <tr>
+                                <tr class="fragment">
                                     <td>3</td>
                                     <td>u, x, y, <strong>v</strong></td>
                                     <td>-</td>
@@ -624,7 +943,7 @@
                                     <td>-</td>
                                     <td>4,y</td>
                                 </tr>
-                                <tr>
+                                <tr class="fragment">
                                     <td>4</td>
                                     <td>u, x, y, v, <strong>w</strong></td>
                                     <td>-</td>
@@ -633,7 +952,7 @@
                                     <td>-</td>
                                     <td style="background:#fff9c4;"><strong>4,y</strong></td>
                                 </tr>
-                                <tr>
+                                <tr class="fragment">
                                     <td>5</td>
                                     <td>u, x, y, v, w, <strong>z</strong></td>
                                     <td>-</td>
@@ -645,9 +964,13 @@
                             </tbody>
                         </table>
                     </div>
-                    <p style="font-size:0.8em; margin-top:10px;"><em>p(v)</em> = Node pendahulu (predecessor). Setelah
-                        langkah 5, tabel routing jadi, dan rute ke <code>z</code> adalah: <code>u ➔ x ➔ y ➔ z</code>
-                        dengan cost total 4.</p>
+                    <p class="text-smaller" style="margin-top:10px;"><em>p(v)</em> = Node pendahulu (predecessor).
+                        Setelah langkah 5, tabel forwarding terbentuk, dan rute ke <code>z</code> adalah:
+                        <code>u ➔ x ➔ y ➔ z</code> dengan cost total 4.
+                    </p>
+                    <aside class="notes">Jelaskan bahwa pada setiap iterasi kita selalu memilih node dengan estimasi
+                        terkecil yang belum masuk ke himpunan N', lalu memperbarui estimasi tetangga-tetangganya.
+                    </aside>
                 </div>
             </section>
 
@@ -671,66 +994,133 @@
                         <strong>BGP</strong> (Path Vector). Algoritma ini bersifat asinkron, iteratif, dan
                         terdesentralisasi.
                     </p>
+                    <aside class="notes">Distance Vector hemat overhead broadcast, namun rentan mengalami fenomena
+                        'Count to Infinity' jika terjadi link failure.</aside>
                 </div>
             </section>
 
-            <!-- SECTION 3 -->
+            <!-- ━━━━━━━━━━━━━━ SECTION 3: PROTOKOL ROUTING DI INTERNET ━━━━━━━━━━━━━━ -->
             <section>
                 <h2>3. Protokol Routing di Internet</h2>
-                <p>OSPF &amp; BGP (Overview Singkat)</p>
             </section>
 
             <section>
-                <h3>Intra-ISP vs Inter-ISP</h3>
-                <div class="card text-left text-smaller">
-                    <p>Karena ukuran Internet sangat masif (ratusan juta router), tidak mungkin menyimpan semua rute di
-                        satu tabel. Internet dibagi menjadi blok-blok besar yang disebut <strong>Autonomous System (AS)
-                            / Domain</strong>.</p>
+                <h3>Routing Hierarkis: Intra-AS</h3>
+                <div class="card text-left text-small" style="padding:14px 18px; font-size:20px">
+                    <p style="margin-bottom:.5em;">Karena ukuran Internet sangat masif (ratusan juta router), tidak
+                        mungkin menyimpan seluruh rute di satu tabel global. Internet dibagi menjadi blok-blok besar
+                        otonom yang disebut <strong>Autonomous System (AS) / Domain</strong>.</p>
 
-                    <div class="layout-2col" style="margin-top:1em;">
-                        <div class="sec-body" style="border-top: 4px solid #1565c0;">
-                            <strong>Intra-AS (Interior Gateway Protocol)</strong>
-                            <ul style="margin-top:5px; padding-left:1.2em;">
-                                <li>Routing di <strong>dalam</strong> satu ISP/Domain (internal).</li>
-                                <li>Semua router di AS yang sama harus menggunakan protokol yang seragam.</li>
-                                <li>Protokol Utama: <strong>OSPF</strong> (Open Shortest Path First) menggunakan metode
-                                    Link-State (Dijkstra).</li>
+                    <div class="layout-2col" style="margin-top:.6em; gap:14px; align-items:start;">
+                        <div class="sec-body" style="border-top: 4px solid #1565c0; padding:10px 14px;">
+                            <strong style="color:#1565c0; font-size:.92em;"><i class="bi bi-hdd-network"></i> Intra-AS
+                                (Interior Gateway Protocol)</strong>
+                            <ul style="margin-top:6px; padding-left:1.1em; line-height:1.45;">
+                                <li class="fragment" style="margin-bottom:.35em;">Routing di <strong>dalam</strong> satu
+                                    domain/ISP yang sama (kendali administratif tunggal).</li>
+                                <li class="fragment" style="margin-bottom:.35em;"><strong>Fokus Utama:</strong> Optimasi
+                                    performa teknis (mencari rute dengan <em>biaya minimum / cost terkecil</em>).</li>
+                                <li class="fragment" style="margin-bottom:.35em;"><strong>Otonomi Penuh:</strong>
+                                    Administrator jaringan bebas memilih metrik dan algoritma tanpa intervensi pihak
+                                    luar.</li>
+                                <li class="fragment"><strong>Protokol Populer:</strong>
+                                    <ul style="margin-top:2px; padding-left:1.1em;">
+                                        <li><strong>OSPF</strong> (Open Shortest Path First) — Link-State (Dijkstra)
+                                        </li>
+                                        <li><strong>IS-IS</strong> (Intermediate System to Intermediate System)</li>
+                                        <li><strong>RIP</strong> (Routing Information Protocol) — Distance Vector</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
-                        <div class="sec-body" style="border-top: 4px solid #e65100;">
-                            <strong>Inter-AS (Exterior Gateway Protocol)</strong>
-                            <ul style="margin-top:5px; padding-left:1.2em;">
-                                <li>Routing <strong>antar</strong> ISP/Domain yang berbeda.</li>
-                                <li>Fokus pada "Policy" bisnis dan jalur, bukan hanya rute tercepat.</li>
-                                <li>Protokol Tunggal di Internet: <strong>BGP</strong> (Border Gateway Protocol). Lem
-                                    keutuhan internet!</li>
-                            </ul>
+                        <div class="sec-body text-center" style="border-top: 4px solid #1565c0; padding:10px 12px;">
+                            <strong style="color:#1565c0; font-size:.88em; display:block; margin-bottom:6px;"><i
+                                    class="bi bi-diagram-3"></i> Topologi &amp; Alur Intra-AS</strong>
+                            <img src="img/week7/intra_as_routing.jpg" alt="Ilustrasi Routing Hierarkis: Intra-AS"
+                                style="max-height:260px; width:auto; max-width:100%; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin:0 auto; display:block;">
+                            <p class="img-caption" style="margin-top:6px; font-size:.72em;">Router internal
+                                berkoordinasi via OSPF untuk menghitung rute biaya terpendek (Least Cost) menuju Router
+                                Gerbang.</p>
                         </div>
                     </div>
-                    <div class="info-box-green" style="margin-top:1em;">
-                        <em>Detail lebih dalam mengenai praktik OSPF dan BGP akan dibahas pada mata kuliah atau
-                            pertemuan khusus mengenai Teknik Routing Lanjut.</em>
+                    <div class="info-box-green" style="margin-top:8px; padding:8px 12px; font-size:.82em;">
+                        📌 <strong>Inti Konsep:</strong> <em>Intra-AS mengutamakan efisiensi performa internal
+                            organisasi, di mana seluruh router internal berada di bawah kebijakan satu otoritas
+                            administratif.</em>
                     </div>
+                    <aside class="notes">Analogikan Intra-AS seperti navigasi lalu lintas di dalam komplek kampus atau
+                        satu kota otonom. Seluruh persimpangan (router internal) bekerja sama mencari jalur paling cepat
+                        menuju gerbang keluar (Gateway Router) menggunakan protokol interior seperti OSPF.</aside>
+                </div>
+            </section>
+            <section>
+                <h3>Routing Hierarkis: Inter-AS</h3>
+                <div class="card text-left text-small" style="padding:14px 18px; font-size:20px">
+                    <p style="margin-bottom:.5em;">Karena ukuran Internet sangat masif, routing antar organisasi yang
+                        independen membutuhkan koordinasi lintas domain yang disebut <strong>Inter-AS (Exterior Gateway
+                            Routing)</strong>.</p>
+
+                    <div class="layout-2col" style="margin-top:.6em; gap:14px; align-items:start;">
+                        <div class="sec-body" style="border-top: 4px solid #e65100; padding:10px 14px;">
+                            <strong style="color:#e65100; font-size:.92em;"><i class="bi bi-globe2"></i> Inter-AS
+                                (Exterior Gateway Protocol)</strong>
+                            <ul style="margin-top:6px; padding-left:1.1em; line-height:1.45;">
+                                <li class="fragment" style="margin-bottom:.35em;">Routing <strong>antar</strong>
+                                    Autonomous System / ISP yang berbeda di seluruh dunia.</li>
+                                <li class="fragment" style="margin-bottom:.35em;"><strong>Fokus Kebijakan
+                                        (Policy):</strong> Dipandu oleh kesepakatan bisnis, privasi, dan regulasi
+                                    ekonomi, bukan sekadar jalur fisik terpendek.</li>
+                                <li class="fragment" style="margin-bottom:.35em;"><strong>Dua Peran Sesi BGP:</strong>
+                                    <ul style="margin-top:2px; padding-left:1.1em;">
+                                        <li><strong>eBGP:</strong> Bertukar informasi rute jangkauan dengan AS tetangga.
+                                        </li>
+                                        <li><strong>iBGP:</strong> Menyebarkan rute eksternal ke router internal di
+                                            dalam AS.</li>
+                                    </ul>
+                                </li>
+                                <li class="fragment"><strong>Standar Global De Facto:</strong> <strong>BGP</strong>
+                                    (Border Gateway Protocol) — <em>"lem perekat keutuhan internet global"</em>.</li>
+                            </ul>
+                        </div>
+                        <div class="sec-body text-center" style="border-top: 4px solid #e65100; padding:10px 12px;">
+                            <strong style="color:#e65100; font-size:.88em; display:block; margin-bottom:6px;"><i
+                                    class="bi bi-diagram-3"></i> Topologi &amp; Sesi Inter-AS (BGP)</strong>
+                            <img src="img/week7/inter_as_routing.jpg" alt="Ilustrasi Routing Hierarkis: Inter-AS"
+                                style="max-height:260px; width:auto; max-width:100%; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin:0 auto; display:block;">
+                            <p class="img-caption" style="margin-top:6px; font-size:.72em;">Router Gerbang menghubungkan
+                                AS 1, AS 2, dan AS 3 melalui sesi eBGP dengan penegakan kebijakan bisnis (Policy
+                                Routing).</p>
+                        </div>
+                    </div>
+                    <div class="info-box-green" style="margin-top:8px; padding:8px 12px; font-size:.82em;">
+                        📌 <strong>Inti Konsep:</strong> <em>Inter-AS mengutamakan penegakan kebijakan bisnis (policy)
+                            dan kontrol privasi antar penyedia layanan, sehingga rute yang dipilih adalah rute yang
+                            disepakati secara komersial.</em>
+                    </div>
+                    <aside class="notes">Jelaskan bahwa jika Intra-AS adalah navigasi internal satu kota, maka Inter-AS
+                        adalah sistem diplomasi dan perjanjian penerbangan antar negara. BGP memungkinkan ISP menentukan
+                        siapa yang boleh melintas dan jalur mana yang diumumkan ke dunia luar.</aside>
                 </div>
             </section>
 
-            <!-- SECTION 4 -->
+
+            <!-- ━━━━━━━━━━━━━━ SECTION 4: PROTOKOL BANTUAN & MANAJEMEN ━━━━━━━━━━━━━━ -->
             <section>
-                <h2>4. Protokol Bantuan &amp; Manajemen (ICMP &amp; SNMP)</h2>
+                <h2>4. Protokol Bantuan &amp; Manajemen</h2>
             </section>
 
             <section>
                 <h3>Apa itu ICMP?</h3>
-                <div class="card text-left text-smaller">
+                <div class="card text-left text-small" style="padding:14px 18px; font-size:20px">
                     <p><strong>ICMP (Internet Control Message Protocol)</strong> digunakan oleh perangkat jaringan untuk
-                        saling mengirimkan pesan kesalahan (error reporting) dan informasi operasional (ping).</p>
+                        saling mengirimkan pesan kesalahan (error reporting) dan informasi operasional (diagnostik).</p>
                     <ul>
                         <li>Berada di atas (berjalan menggunakan) protokol IP. Datagram IP berisi paket ICMP.</li>
                         <li><strong>Format Pesan:</strong> Memiliki kolom Type (Tipe) dan Code (Kode) untuk
                             mengidentifikasi pesan.</li>
                     </ul>
 
-                    <table style="width:100%; margin-top:1em; font-size:.9em; text-align:center;">
+                    <table style="width:100%; margin-top:1em; text-align:center;">
                         <tr>
                             <th colspan="2">ICMP Tipe &amp; Kode Umum</th>
                             <th>Fungsi</th>
@@ -738,78 +1128,150 @@
                         <tr>
                             <td>Type 0</td>
                             <td>Code 0</td>
-                            <td>Echo Reply (Balasan Ping)</td>
+                            <td>Echo Reply (Balasan Ping Berhasil)</td>
                         </tr>
                         <tr>
                             <td>Type 8</td>
                             <td>Code 0</td>
-                            <td>Echo Request (Request Ping)</td>
+                            <td>Echo Request (Request Pengujian Ping)</td>
                         </tr>
                         <tr>
                             <td>Type 3</td>
                             <td>Code 3</td>
-                            <td>Destination Port Unreachable (Port tertutup)</td>
+                            <td>Destination Port Unreachable (Port aplikasi tujuan tertutup)</td>
                         </tr>
                         <tr>
                             <td>Type 11</td>
                             <td>Code 0</td>
-                            <td>TTL Expired (Digunakan oleh Traceroute)</td>
+                            <td>TTL Expired (Masa hidup paket habis, kunci Traceroute!)</td>
                         </tr>
                     </table>
                 </div>
             </section>
 
             <section>
-                <h3>Penerapan ICMP: Ping &amp; Traceroute</h3>
-                <div class="card text-left text-smaller">
-                    <div style="margin-bottom:1em;">
-                        <div class="sec-bar sec-bar-blue">Program: PING</div>
-                        <div class="sec-body">
-                            Mengirimkan ICMP tipe 8 (Echo Request). Jika host tujuan hidup dan tidak memblokir ping, ia
-                            membalas dengan tipe 0 (Echo Reply). Mengukur konektivitas dasar.
+                <h3>Penerapan ICMP: Ping</h3>
+                <div class="card text-left text-small" style="padding:14px 18px; font-size:24px">
+                    <div class="layout-2col" style="gap:14px; align-items:start;">
+                        <div>
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-terminal"></i> Program: PING</div>
+                            <div class="sec-body" style="padding:10px 14px; font-size:.82em; line-height:1.45;">
+                                <p style="margin:0 0 6px 0;">Menguji keterjangkauan host tujuan dan mengukur waktu
+                                    latensi bolak-balik (Round-Trip Time).</p>
+                                <ul style="margin:0; padding-left:1.1em;">
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Echo Request (Type
+                                            8):</strong> Klien mengirim paket ICMP Type 8 ke alamat IP tujuan.</li>
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Echo Reply (Type
+                                            0):</strong> Jika host target aktif dan tidak memfilter ICMP, ia merespons
+                                        dengan paket Type 0.</li>
+                                    <li class="fragment"><strong>Metrik Kunci:</strong>
+                                        <ul style="margin-top:2px; padding-left:1.1em;">
+                                            <li><strong>RTT (Latency):</strong> Waktu tempuh paket bolak-balik (ms).
+                                            </li>
+                                            <li><strong>Packet Loss:</strong> Persentase paket yang gagal kembali
+                                                (drop/timeout).</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sec-bar sec-bar-orange text-center"><i class="bi bi-diagram-3"></i> Ilustrasi
+                                Alur Ping</div>
+                            <div class="sec-body text-center" style="padding:10px 12px;">
+                                <img src="img/week7/icmp_ping.jpg" alt="Ilustrasi Protokol ICMP Ping"
+                                    style="max-height:260px; width:auto; max-width:100%; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin:0 auto; display:block;">
+                                <p class="img-caption" style="margin-top:6px; font-size:.72em;">Pengirim mengirim ICMP
+                                    Type 8 (Request) dan menerima ICMP Type 0 (Reply) untuk menghitung RTT.</p>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="sec-bar sec-bar-orange">Program: TRACEROUTE (Tracert)</div>
-                        <div class="sec-body">
-                            Mengetahui jejak router (lompatan/hop) menuju server tujuan.
-                            <ul style="margin-top:.5em; font-size:.9em;">
-                                <li>Pengirim secara sengaja mengirim paket UDP/ICMP dengan <strong>TTL = 1</strong>,
-                                    lalu <strong>TTL = 2</strong>, dst.</li>
-                                <li>Router di hop 1 akan mengurangi TTL menjadi 0, sehingga ia men-drop paket dan
-                                    membalas <strong>ICMP Type 11 (TTL Expired)</strong>. Pengirim jadi tahu alamat IP
-                                    router hop ke-1.</li>
-                                <li>Proses diulang dengan TTL makin tinggi hingga sampai ke tujuan. Cerdas!</li>
-                            </ul>
+                    <div class="info-box-green" style="margin-top:8px; padding:8px 12px; font-size:.82em;">
+                        📌 <strong>Inti Konsep:</strong> <em>Ping adalah alat diagnostik tercepat untuk memverifikasi
+                            apakah host tujuan aktif pada Network Layer (Layer 3) dan mengukur latensi end-to-end.</em>
+                    </div>
+                    <aside class="notes">Jelaskan bahwa jika ping menampilkan Request Timed Out (RTO), kemungkinannya
+                        adalah host mati, kabel putus, atau firewall tujuan memblokir paket ICMP Type 8.</aside>
+                </div>
+            </section>
+            <section>
+                <h3>Penerapan ICMP: Traceroute</h3>
+                <div class="card text-left text-small" style="padding:14px 18px; font-size:22px;">
+                    <div class="layout-2col" style="gap:14px; align-items:start;">
+                        <div>
+                            <div class="sec-bar sec-bar-orange"><i class="bi bi-signpost-split"></i> Program: TRACEROUTE
+                                (Tracert)</div>
+                            <div class="sec-body" style="padding:10px 14px; font-size:.82em; line-height:1.45;">
+                                <p style="margin:0 0 6px 0;">Menelusuri seluruh rute hop-by-hop dari host sumber menuju
+                                    server tujuan.</p>
+                                <ul style="margin:0; padding-left:1.1em;">
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Inkrementasi TTL:</strong>
+                                        Pengirim sengaja mengirim paket probe berurutan dengan <code>TTL = 1</code>,
+                                        <code>TTL = 2</code>, <code>TTL = 3</code>, dst.
+                                    </li>
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Pesan TTL Expired (Type
+                                            11):</strong> Router di hop ke-<em>n</em> mengurangi TTL menjadi 0, men-drop
+                                        paket, lalu membalas dengan <em>ICMP Type 11 (Time Exceeded)</em>.</li>
+                                    <li class="fragment" style="margin-bottom:.35em;"><strong>Pencatatan Hop:</strong>
+                                        Alamat IP pengirim pesan balasan dicatat sebagai identitas router hop tersebut
+                                        bersama waktu RTT-nya.</li>
+                                    <li class="fragment"><strong>Kondisi Berhenti:</strong> Saat mencapai host tujuan,
+                                        server membalas dengan <em>ICMP Port Unreachable (Type 3)</em> atau <em>Echo
+                                            Reply (Type 0)</em>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sec-bar sec-bar-blue text-center"><i class="bi bi-diagram-3"></i> Ilustrasi Alur
+                                Traceroute</div>
+                            <div class="sec-body text-center" style="padding:10px 12px;">
+                                <img src="img/week7/icmp_traceroute.jpg" alt="Ilustrasi Protokol ICMP Traceroute"
+                                    style="max-height:260px; width:auto; max-width:100%; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin:0 auto; display:block;">
+                                <p class="img-caption" style="margin-top:6px; font-size:.72em;">Pemanfaatan cerdas
+                                    inkrementasi TTL bertahap &amp; pesan ICMP Type 11 untuk mengungkap rute perantara.
+                                </p>
+                            </div>
                         </div>
                     </div>
+                    <div class="info-box-green" style="margin-top:8px; padding:8px 12px; font-size:.82em;">
+                        📌 <strong>Inti Konsep:</strong> <em>Traceroute secara kreatif memanfaatkan batas masa hidup
+                            paket (TTL) untuk memancing router di sepanjang jalur mengirimkan pesan kesalahan ICMP Type
+                            11 sebagai penanda jejak.</em>
+                    </div>
+                    <aside class="notes">Jelaskan kecerdasan mekanisme ini: Traceroute tidak memerlukan protokol
+                        penelusuran rute baru, melainkan memanfaatkan secara cerdas perilaku standar IP saat TTL habis
+                        (ICMP Type 11) untuk mengungkap topologi perantara satu per satu.</aside>
                 </div>
             </section>
 
             <section>
                 <h3>Network Management (SNMP)</h3>
-                <div class="card text-left text-smaller">
+                <div class="card text-left text-small" style="font-size:24px;">
                     <p>Di jaringan raksasa (Enterprise), admin tidak mungkin login (SSH) ke ratusan router satu per satu
                         setiap detik untuk melihat status port. Kita butuh <strong>Network Management</strong>.</p>
 
-                    <div class="layout-text-img">
-                        <div>
-                            <p style="font-weight:700;">SNMP (Simple Network Management Protocol)</p>
-                            <ul>
-                                <li><strong>Managing Server (Manager):</strong> Aplikasi sentral (misal: Cacti, Zabbix)
+                    <div class="layout-2col" style="margin-top:1em;">
+                        <div class="sec-body" style="border-top: 4px solid #1565c0;">
+                            <strong>Komponen SNMP</strong>
+                            <ul style="margin-top:5px; padding-left:1.2em;">
+                                <li><strong>Managing Server (Manager):</strong> Aplikasi sentral (misal: Cacti, Zabbix,
+                                    Prometheus)
                                     yang bertugas menarik data.</li>
                                 <li><strong>Managed Device (Agent):</strong> Router/Switch yang menjalankan aplikasi
                                     agen SNMP.</li>
                                 <li><strong>MIB (Management Information Base):</strong> Struktur database hirarkis di
-                                    dalam router (cth: OID untuk trafik port LAN 1).</li>
+                                    dalam router (cth: OID untuk statistik trafik port).</li>
                             </ul>
                         </div>
-                        <div class="info-box-warn" style="margin:0; border-radius:8px; border-left:none;">
-                            <strong>Metode SNMP:</strong><br>
-                            1. <code>GetRequest</code>: Manager meminta data spesifik (misal: utilisasi CPU).<br>
-                            2. <code>SetRequest</code>: Manager mengubah nilai config di Router.<br>
-                            3. <code>Trap</code>: Router melapor mandiri ke Manager saat ada kondisi bahaya (misal:
-                            kabel dicabut).
+                        <div class="sec-body" style="border-top: 4px solid #e65100;">
+                            <strong>Metode Pesan SNMP</strong>
+                            <ul style="margin-top:5px; padding-left:1.2em;">
+                                <li><code>GetRequest:</code> Manager meminta data spesifik (misal: utilisasi CPU
+                                    router).</li>
+                                <li><code>SetRequest:</code> Manager mengubah nilai konfigurasi di Router.</li>
+                                <li><code>Trap:</code> Router melapor mandiri ke Manager saat ada kondisi bahaya (misal:
+                                    port down / kabel dicabut).</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -817,10 +1279,10 @@
 
             <section>
                 <h3>Evolusi Manajemen: NETCONF &amp; YANG</h3>
-                <div class="card text-left text-smaller">
+                <div class="card text-left text-small" style="font-size:24px;">
                     <p>SNMP bagus untuk membaca data (statistik), namun sangat rumit dan jarang dipakai untuk
                         <strong>konfigurasi jaringan massal</strong> (otomasi). Internet modern menggunakan pendekatan
-                        baru.
+                        baru:
                     </p>
                     <ul style="margin-top:1em;">
                         <li><strong>NETCONF:</strong> Protokol berbasis RPC (Remote Procedure Call) yang aman (via
@@ -832,75 +1294,422 @@
                     </ul>
                     <div class="info-box-green" style="margin-top:1em;">
                         NETCONF dan YANG adalah tulang punggung dari <strong>SDN (Software-Defined Networking)</strong>
-                        modern, karena sangat bersahabat dengan bot dan script otomasi python.
+                        modern, karena sangat bersahabat dengan bot dan script otomasi python/Ansible.
                     </div>
                 </div>
             </section>
 
-            <!-- TUGAS INDIVIDU -->
-            <section>
-                <div class="tugas-box">
-                    <h3>📝 Tugas Individu — Pertemuan 7</h3>
-                    <p style="font-size:.6em; color:#e8f5e9; margin-bottom:10px;">Dikerjakan mandiri, ditulis tangan di
-                        kertas, difoto/scan, dikirim ke e-learning (Maksimal pertemuan minggu depan).</p>
-
-                    <div class="tugas-soal">
-                        <p><span class="num">1.</span> Diketahui sebuah graf topologi jaringan router dengan titik-titik
-                            sebagai berikut:<br>
-                            Titik: {A, B, C, D, E, F}. Biaya antar link (cost): A-B=2, A-D=5, B-C=3, B-D=2, C-E=1,
-                            C-F=5, D-C=3, D-E=1, E-F=2.<br><br>
-                            Dengan menggunakan <strong>Algoritma Dijkstra</strong>, simulasikan langkah-langkah
-                            pencarian rute terpendek dari <strong>Node A (Source)</strong> menuju seluruh node lainnya.
-                            Buatlah tabel iterasinya secara berurutan, lalu tuliskan rute terpendek dari A menuju F
-                            beserta total cost-nya!</p>
-                    </div>
-
-                    <div class="tugas-soal" style="margin-top:8px;">
-                        <p><span class="num">2.</span> Jelaskan mekanisme kreatif yang dimanfaatkan oleh perintah
-                            <code>traceroute</code> dalam menggunakan "TTL (Time-To-Live)" dan peran pesan "ICMP TTL
-                            Expired" untuk mencatat setiap lompatan router yang dilalui paket menuju server tujuan!
-                        </p>
-                    </div>
-
-                    <div class="tugas-info">
-                        <div class="tugas-chip"><i class="bi bi-pencil"></i> Tulis tangan (Folio)</div>
-                        <div class="tugas-chip"><i class="bi bi-camera"></i> Scan PDF/Foto ke E-Learning</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- RANGKUMAN -->
+            <!-- ━━━━━━━━━━━━━━ RANGKUMAN ━━━━━━━━━━━━━━ -->
             <section>
                 <h3>Rangkuman Pertemuan 7</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-small">
+                    <div class="card text-left text-small" style="font-size:24px;">
                         <p style="font-weight:700; color:#1565c0;">Control Plane &amp; Routing</p>
                         <ul>
-                            <li><strong>Pendekatan:</strong> Per-router (mandiri, kuno) vs SDN (terpusat, modern).</li>
-                            <li><strong>Dijkstra (Link-State):</strong> Info global.
-                                <code>D(v) = min(D(v), D(w)+c)</code>. (Contoh: OSPF).
+                            <li><strong>Pendekatan:</strong> Per-router (mandiri, tradisional) vs SDN (terpusat logis).
                             </li>
-                            <li><strong>Bellman-Ford (Dist-Vector):</strong> Bertukar info lokal.
-                                <code>min(Cost ke tetangga + Cost tetangga ke tujuan)</code>.
+                            <li><strong>Dijkstra (Link-State):</strong> Info topologi global. Menghitung rute terpendek
+                                dengan relaksasi
+                                <code>D(v) = min(D(v), D(w)+c)</code> (Contoh: OSPF).
                             </li>
+                            <li><strong>Bellman-Ford (Dist-Vector):</strong> Bertukar info vektor jarak lokal dengan
+                                tetangga. Menghitung biaya minimum iteratif (Contoh: RIP, BGP).</li>
                         </ul>
                     </div>
                     <div class="card text-left text-small">
-                        <p style="font-weight:700; color:#e65100;">Manajemen &amp; Protokol Lain</p>
+                        <p style="font-weight:700; color:#e65100;">Manajemen &amp; Protokol Pendukung</p>
                         <ul>
-                            <li><strong>ICMP:</strong> Untuk pelaporan error &amp; cek jaringan (Ping, Traceroute).</li>
-                            <li><strong>SNMP:</strong> Mengecek statistik router menggunakan MIB, Get, dan Trap.</li>
-                            <li><strong>NETCONF &amp; YANG:</strong> Revolusi otomasi konfigurasi jaringan berbasis
-                                XML/SSH.</li>
+                            <li><strong>ICMP:</strong> Untuk pelaporan error &amp; pengujian jaringan (Ping, Traceroute
+                                via TTL).</li>
+                            <li><strong>SNMP:</strong> Mengecek statistik router menggunakan MIB, Get, Set, dan Trap.
+                            </li>
+                            <li><strong>NETCONF &amp; YANG:</strong> Otomasi konfigurasi jaringan berbasis
+                                XML/SSH untuk era SDN modern.</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
+            <!-- ━━━━━━━━━━━━━━ KUIS 1 ━━━━━━━━━━━━━━ -->
+            <section>
+                <h3>📝 KUIS 1</h3>
+
+                <div class="card text-center"
+                    style="max-width: 820px; margin: 15px auto 0; padding: 22px 28px; position: relative;">
+                    <style>
+                        .kuis-badges {
+                            display: flex;
+                            justify-content: center;
+                            gap: 12px;
+                            margin-bottom: 12px;
+                            flex-wrap: wrap;
+                        }
+
+                        .kuis-chip {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 6px;
+                            padding: 6px 14px;
+                            border-radius: 20px;
+                            font-size: 0.58em;
+                            font-weight: 600;
+                        }
+
+                        .kuis-chip-portal {
+                            background: #e3f2fd;
+                            color: #0d47a1;
+                            border: 1px solid #bbdefb;
+                        }
+
+                        [data-theme="dark"] .kuis-chip-portal {
+                            background: #1e3a5f;
+                            color: #90caf9;
+                            border-color: #2a4d7d;
+                        }
+
+                        .kuis-chip-time {
+                            background: #fff3e0;
+                            color: #e65100;
+                            border: 1px solid #ffe0b2;
+                        }
+
+                        [data-theme="dark"] .kuis-chip-time {
+                            background: #4a2800;
+                            color: #ffb74d;
+                            border-color: #6d3d00;
+                        }
+
+                        .kuis-chip-mode {
+                            background: #e8f5e9;
+                            color: #1b5e20;
+                            border: 1px solid #c8e6c9;
+                        }
+
+                        [data-theme="dark"] .kuis-chip-mode {
+                            background: #1b3d22;
+                            color: #a5d6a7;
+                            border-color: #275630;
+                        }
+
+                        .kuis-instruction {
+                            font-size: 0.6em;
+                            color: #555;
+                            margin: 0 0 12px 0;
+                            line-height: 1.5;
+                        }
+
+                        [data-theme="dark"] .kuis-instruction {
+                            color: #ccc;
+                        }
+
+                        .kuis-portal-link {
+                            color: #1565c0;
+                            font-weight: 700;
+                            text-decoration: underline;
+                        }
+
+                        [data-theme="dark"] .kuis-portal-link {
+                            color: #64b5f6;
+                        }
+
+                        .kuis-timer-display {
+                            font-size: 3.4em;
+                            font-weight: 800;
+                            font-family: 'SFMono-Regular', Consolas, 'Courier New', Courier, monospace;
+                            color: #1565c0;
+                            letter-spacing: 4px;
+                            margin: 6px 0 4px 0;
+                            line-height: 1;
+                            transition: color 0.3s ease;
+                        }
+
+                        [data-theme="dark"] .kuis-timer-display {
+                            color: #42a5f5;
+                        }
+
+                        .kuis-timer-display.warning {
+                            color: #ef6c00 !important;
+                        }
+
+                        .kuis-timer-display.danger {
+                            color: #c62828 !important;
+                            animation: pulseKuisRed 1s infinite alternate;
+                        }
+
+                        @keyframes pulseKuisRed {
+                            from {
+                                transform: scale(1);
+                                opacity: 1;
+                            }
+
+                            to {
+                                transform: scale(1.03);
+                                opacity: 0.85;
+                            }
+                        }
+
+                        .kuis-progress-bg {
+                            width: 100%;
+                            max-width: 460px;
+                            height: 8px;
+                            background: #e0e0e0;
+                            border-radius: 4px;
+                            margin: 8px auto 14px;
+                            overflow: hidden;
+                        }
+
+                        [data-theme="dark"] .kuis-progress-bg {
+                            background: #444;
+                        }
+
+                        .kuis-progress-bar {
+                            height: 100%;
+                            width: 100%;
+                            background: #1565c0;
+                            border-radius: 4px;
+                            transition: width 0.5s ease, background-color 0.3s ease;
+                        }
+
+                        .kuis-btn {
+                            border: none;
+                            padding: 8px 18px;
+                            font-size: 0.6em;
+                            font-weight: 600;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 6px;
+                            transition: all 0.2s ease;
+                        }
+
+                        .kuis-btn:disabled {
+                            opacity: 0.45;
+                            cursor: not-allowed;
+                        }
+
+                        .kuis-btn-start {
+                            background: #1565c0;
+                            color: #ffffff;
+                        }
+
+                        .kuis-btn-start:hover:not(:disabled) {
+                            background: #0d47a1;
+                        }
+
+                        .kuis-btn-pause {
+                            background: #e65100;
+                            color: #ffffff;
+                        }
+
+                        .kuis-btn-pause:hover:not(:disabled) {
+                            background: #bf360c;
+                        }
+
+                        .kuis-btn-reset {
+                            background: #616161;
+                            color: #ffffff;
+                        }
+
+                        .kuis-btn-reset:hover:not(:disabled) {
+                            background: #424242;
+                        }
+
+                        .kuis-status {
+                            font-size: 0.52em;
+                            color: #666;
+                            margin-top: 10px;
+                            min-height: 1.4em;
+                            font-weight: 500;
+                        }
+
+                        [data-theme="dark"] .kuis-status {
+                            color: #aaa;
+                        }
+                    </style>
+
+                    <div class="kuis-badges">
+                        <span class="kuis-chip kuis-chip-portal">
+                            <i class="bi bi-globe2"></i> Portal: kuliah2.itera.ac.id
+                        </span>
+                        <span class="kuis-chip kuis-chip-time">
+                            <i class="bi bi-stopwatch"></i> Durasi: 30 Menit
+                        </span>
+                        <span class="kuis-chip kuis-chip-mode">
+                            <i class="bi bi-laptop"></i> Ujian Daring (Online)
+                        </span>
+                    </div>
+
+                    <p class="kuis-instruction">
+                        Pelaksanaan kuis dilakukan melalui website resmi <a class="kuis-portal-link"
+                            href="https://kuliah2.itera.ac.id" target="_blank"
+                            rel="noopener noreferrer">kuliah2.itera.ac.id</a> pada mata kuliah Jaringan Komputer.<br>
+                        Timer di bawah ini digunakan sebagai acuan batas waktu pengerjaan ujian.
+                    </p>
+
+                    <div id="kuis-countdown" class="kuis-timer-display">30:00</div>
+
+                    <div class="kuis-progress-bg">
+                        <div id="kuis-progress-bar" class="kuis-progress-bar"></div>
+                    </div>
+
+                    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 5px;">
+                        <button id="kuis-btn-start" class="kuis-btn kuis-btn-start" onclick="startKuisTimer()">
+                            <i class="bi bi-play-fill"></i> Mulai Ujian
+                        </button>
+                        <button id="kuis-btn-pause" class="kuis-btn kuis-btn-pause" onclick="togglePauseKuisTimer()"
+                            disabled>
+                            <i class="bi bi-pause-fill"></i> Jeda
+                        </button>
+                        <button id="kuis-btn-reset" class="kuis-btn kuis-btn-reset" onclick="resetKuisTimer()">
+                            <i class="bi bi-arrow-counterclockwise"></i> Reset (30m)
+                        </button>
+                    </div>
+
+                    <div id="kuis-status-msg" class="kuis-status">Kuis siap dimulai. Klik &ldquo;Mulai Ujian&rdquo; untuk
+                        memulai perhitungan waktu mundur.</div>
+                </div>
+
+                <script>
+                    (function () {
+                        const TOTAL_SECONDS = 30 * 60; // 30 Menit
+                        let remainingSeconds = TOTAL_SECONDS;
+                        let timerInterval = null;
+                        let isPaused = false;
+
+                        const display = document.getElementById('kuis-countdown');
+                        const progressBar = document.getElementById('kuis-progress-bar');
+                        const btnStart = document.getElementById('kuis-btn-start');
+                        const btnPause = document.getElementById('kuis-btn-pause');
+                        const statusMsg = document.getElementById('kuis-status-msg');
+
+                        function formatTime(sec) {
+                            const m = Math.floor(sec / 60);
+                            const s = sec % 60;
+                            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+                        }
+
+                        function updateUI() {
+                            if (!display || !progressBar) return;
+                            display.textContent = formatTime(remainingSeconds);
+                            const pct = Math.max(0, (remainingSeconds / TOTAL_SECONDS) * 100);
+                            progressBar.style.width = pct + '%';
+
+                            if (remainingSeconds <= 0) {
+                                display.classList.remove('warning');
+                                display.classList.add('danger');
+                                progressBar.style.backgroundColor = '#c62828';
+                                statusMsg.textContent = '⚠️ WAKTU HABIS! Segera kumpulkan/submit jawaban Anda di kuliah2.itera.ac.id.';
+                                statusMsg.style.color = '#c62828';
+                                statusMsg.style.fontWeight = '700';
+                            } else if (remainingSeconds <= 300) { // <= 5 menit
+                                display.classList.remove('warning');
+                                display.classList.add('danger');
+                                progressBar.style.backgroundColor = '#c62828';
+                                statusMsg.textContent = 'Perhatian: Sisa waktu kurang dari 5 menit!';
+                                statusMsg.style.color = '#c62828';
+                            } else if (remainingSeconds <= 600) { // <= 10 menit
+                                display.classList.add('warning');
+                                display.classList.remove('danger');
+                                progressBar.style.backgroundColor = '#ef6c00';
+                                statusMsg.textContent = 'Peringatan: Sisa waktu 10 menit terakhir.';
+                                statusMsg.style.color = '#ef6c00';
+                            } else {
+                                display.classList.remove('warning', 'danger');
+                                progressBar.style.backgroundColor = '#1565c0';
+                                statusMsg.style.color = '';
+                            }
+                        }
+
+                        window.startKuisTimer = function () {
+                            if (timerInterval) return;
+                            if (remainingSeconds <= 0) {
+                                remainingSeconds = TOTAL_SECONDS;
+                            }
+                            isPaused = false;
+                            btnStart.disabled = true;
+                            btnPause.disabled = false;
+                            btnPause.innerHTML = '<i class="bi bi-pause-fill"></i> Jeda';
+                            statusMsg.textContent = 'Ujian sedang berlangsung... Semoga sukses!';
+                            statusMsg.style.color = '#2e7d32';
+
+                            timerInterval = setInterval(function () {
+                                if (remainingSeconds > 0) {
+                                    remainingSeconds--;
+                                    updateUI();
+                                }
+                                if (remainingSeconds <= 0) {
+                                    clearInterval(timerInterval);
+                                    timerInterval = null;
+                                    btnStart.disabled = false;
+                                    btnStart.innerHTML = '<i class="bi bi-arrow-repeat"></i> Mulai Ulang';
+                                    btnPause.disabled = true;
+                                    updateUI();
+                                }
+                            }, 1000);
+                        };
+
+                        window.togglePauseKuisTimer = function () {
+                            if (!timerInterval && !isPaused) return;
+
+                            if (!isPaused) {
+                                clearInterval(timerInterval);
+                                timerInterval = null;
+                                isPaused = true;
+                                btnPause.innerHTML = '<i class="bi bi-play-fill"></i> Lanjutkan';
+                                statusMsg.textContent = 'Timer dijeda sementara.';
+                                statusMsg.style.color = '#ef6c00';
+                            } else {
+                                isPaused = false;
+                                btnPause.innerHTML = '<i class="bi bi-pause-fill"></i> Jeda';
+                                statusMsg.textContent = 'Ujian sedang berlangsung...';
+                                statusMsg.style.color = '#2e7d32';
+                                timerInterval = setInterval(function () {
+                                    if (remainingSeconds > 0) {
+                                        remainingSeconds--;
+                                        updateUI();
+                                    }
+                                    if (remainingSeconds <= 0) {
+                                        clearInterval(timerInterval);
+                                        timerInterval = null;
+                                        btnStart.disabled = false;
+                                        btnStart.innerHTML = '<i class="bi bi-arrow-repeat"></i> Mulai Ulang';
+                                        btnPause.disabled = true;
+                                        updateUI();
+                                    }
+                                }, 1000);
+                            }
+                        };
+
+                        window.resetKuisTimer = function () {
+                            if (timerInterval) {
+                                clearInterval(timerInterval);
+                                timerInterval = null;
+                            }
+                            isPaused = false;
+                            remainingSeconds = TOTAL_SECONDS;
+                            btnStart.disabled = false;
+                            btnStart.innerHTML = '<i class="bi bi-play-fill"></i> Mulai Ujian';
+                            btnPause.disabled = true;
+                            btnPause.innerHTML = '<i class="bi bi-pause-fill"></i> Jeda';
+                            statusMsg.textContent = 'Kuis siap dimulai. Klik “Mulai Ujian” untuk memulai perhitungan waktu mundur.';
+                            statusMsg.style.fontWeight = '500';
+                            updateUI();
+                        };
+
+                        updateUI();
+                    })();
+                </script>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ OUTRO ━━━━━━━━━━━━━━ -->
             <section>
                 <h2>Tanya Jawab &amp; Diskusi</h2>
-                <p>Pertemuan berikutnya: <strong>Teknologi Jaringan Lanjut &amp; Transport Layer Lanjut</strong></p>
-                <p class="text-small">Referensi: Kurose &amp; Ross Chapter 5</p>
+                <p>Pertemuan berikutnya: <strong>Ujian Tengah Semester (UTS)</strong></p>
+                <p class="text-small">Persiapkan seluruh materi Pertemuan 1 s.d. 7 — Referensi: Kurose &amp; Ross
+                    (Chapters 1–5)</p>
+                <aside class="notes">Beri kesempatan mahasiswa bertanya sebelum mengakhiri sesi dan memberikan arahan
+                    kisi-kisi UTS minggu depan.</aside>
             </section>
 
         </div><!-- /slides -->
@@ -918,11 +1727,12 @@
     </script>
 
     <!-- Theme Toggle -->
-    <button id="theme-toggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+    <button id="theme-toggle"
+        style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; font-size: 16px; width: 40px; height: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
         <i class="bi bi-moon-fill" id="theme-icon"></i>
     </button>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const toggleBtn = document.getElementById('theme-toggle');
             const themeLink = document.getElementById('theme');
             const themeIcon = document.getElementById('theme-icon');
