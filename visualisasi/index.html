@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jarkom Visual — Katalog Visualisasi Algoritma</title>
+    <!-- Tema diterapkan sebelum render pertama agar tidak ada kilatan latar putih. Warna latar sama dengan Latte/Mocha di theme.css. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('jarkom-theme');
+          var dark = t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+    <style>
+      html { background: #eff1f5; }
+      html[data-theme='dark'] { background: #1e1e2e; }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400..800&family=Google+Sans+Code:wght@400..700&display=swap" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/decks/catalog/main.tsx"></script>
+  </body>
+</html>

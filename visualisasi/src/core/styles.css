@@ -1,0 +1,9 @@
+/*
+ * Satu pintu untuk seluruh CSS deck, supaya urutannya TETAP di build produksi:
+ * reveal (dasar) → KaTeX → tema kita. Bila diimpor terpisah dari berkas JS, bundler bisa
+ * membalik urutannya dan `.reveal-viewport{background:#fff}` milik reveal menimpa tema gelap.
+ */
+@import 'reveal.js/reset.css';
+@import 'reveal.js/reveal.css';
+@import 'katex/dist/katex.min.css';
+@import './theme.css';

@@ -1,0 +1,955 @@
+/* Tema Jarkom Visual — mengikuti palet pkom-theme (situs mata kuliah), dengan mode gelap. */
+
+:root {
+  --font-sans: 'Google Sans Flex', 'Google Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Google Sans Code', ui-monospace, Menlo, monospace;
+
+  /* Catppuccin Latte (terang) */
+  --ctp-rosewater: #dc8a78;
+  --ctp-flamingo: #dd7878;
+  --ctp-pink: #ea76cb;
+  --ctp-mauve: #8839ef;
+  --ctp-red: #d20f39;
+  --ctp-maroon: #e64553;
+  --ctp-peach: #fe640b;
+  --ctp-yellow: #df8e1d;
+  --ctp-green: #40a02b;
+  --ctp-teal: #179299;
+  --ctp-sky: #04a5e5;
+  --ctp-sapphire: #209fb5;
+  --ctp-blue: #1e66f5;
+  --ctp-lavender: #7287fd;
+  --ctp-text: #4c4f69;
+  --ctp-subtext1: #5c5f77;
+  --ctp-subtext0: #6c6f85;
+  --ctp-overlay2: #7c7f93;
+  --ctp-overlay1: #8c8fa1;
+  --ctp-overlay0: #9ca0b0;
+  --ctp-surface2: #acb0be;
+  --ctp-surface1: #bcc0cc;
+  --ctp-surface0: #ccd0da;
+  --ctp-base: #eff1f5;
+  --ctp-mantle: #e6e9ef;
+  --ctp-crust: #dce0e8;
+
+  --c-bg: var(--ctp-base);
+  --c-surface: var(--ctp-mantle);
+  --c-surface-2: var(--ctp-crust);
+  --c-border: var(--ctp-surface0);
+  --c-text: var(--ctp-text);
+  --c-text-muted: var(--ctp-subtext0);
+  --c-primary: var(--ctp-blue);
+  --c-primary-soft: color-mix(in srgb, var(--ctp-blue) 14%, var(--ctp-base));
+  --c-on-accent: var(--ctp-base);
+
+  /* Peran visual dalam algoritma */
+  --c-source: var(--ctp-mauve);
+  --c-settled: var(--ctp-green);
+  --c-settled-soft: color-mix(in srgb, var(--ctp-green) 16%, var(--ctp-base));
+  --c-current: var(--ctp-peach);
+  --c-current-soft: color-mix(in srgb, var(--ctp-peach) 16%, var(--ctp-base));
+  --c-check: var(--ctp-blue);
+  --c-check-soft: var(--c-primary-soft);
+  --c-bad: var(--ctp-red);
+  --c-bad-soft: color-mix(in srgb, var(--ctp-red) 13%, var(--ctp-base));
+  --c-edge: var(--ctp-overlay0);
+  --c-node: var(--ctp-mantle);
+  --c-node-stroke: var(--ctp-overlay2);
+  --c-water: var(--ctp-sky);
+  --c-title-a: color-mix(in srgb, var(--ctp-lavender) 22%, var(--ctp-base));
+  --c-title-b: color-mix(in srgb, var(--ctp-sapphire) 22%, var(--ctp-base));
+
+  --r-background-color: var(--c-bg);
+  --r-main-font: var(--font-sans);
+  --r-main-font-size: 30px;
+  --r-block-margin: 20px;
+  --r-heading-margin: 0 0 20px 0;
+  --r-heading-line-height: 1.2;
+  --r-heading-text-shadow: none;
+  --r-heading1-size: 2.5em;
+  --r-heading2-size: 1.6em;
+  --r-heading3-size: 1.3em;
+  --r-heading4-size: 1em;
+  --r-overlay-element-bg-color: 0 0 0;
+  --r-overlay-element-fg-color: 240 240 240;
+  --r-main-color: var(--c-text);
+  --r-heading-font: var(--font-sans);
+  --r-heading-color: var(--c-text);
+  --r-heading-font-weight: 700;
+  --r-heading-text-transform: none;
+  --r-heading-letter-spacing: -0.01em;
+  --r-code-font: var(--font-mono);
+  --r-link-color: var(--c-primary);
+  --r-selection-background-color: var(--ctp-blue);
+  --r-selection-color: var(--ctp-base);
+}
+
+/* Catppuccin Mocha (gelap) */
+html[data-theme='dark'] {
+  --ctp-rosewater: #f5e0dc;
+  --ctp-flamingo: #f2cdcd;
+  --ctp-pink: #f5c2e7;
+  --ctp-mauve: #cba6f7;
+  --ctp-red: #f38ba8;
+  --ctp-maroon: #eba0ac;
+  --ctp-peach: #fab387;
+  --ctp-yellow: #f9e2af;
+  --ctp-green: #a6e3a1;
+  --ctp-teal: #94e2d5;
+  --ctp-sky: #89dceb;
+  --ctp-sapphire: #74c7ec;
+  --ctp-blue: #89b4fa;
+  --ctp-lavender: #b4befe;
+  --ctp-text: #cdd6f4;
+  --ctp-subtext1: #bac2de;
+  --ctp-subtext0: #a6adc8;
+  --ctp-overlay2: #9399b2;
+  --ctp-overlay1: #7f849c;
+  --ctp-overlay0: #6c7086;
+  --ctp-surface2: #585b70;
+  --ctp-surface1: #45475a;
+  --ctp-surface0: #313244;
+  --ctp-base: #1e1e2e;
+  --ctp-mantle: #181825;
+  --ctp-crust: #11111b;
+
+  --c-surface: var(--ctp-mantle);
+  --c-surface-2: var(--ctp-surface0);
+  --c-border: var(--ctp-surface1);
+  --c-primary-soft: color-mix(in srgb, var(--ctp-blue) 18%, var(--ctp-base));
+  --c-settled-soft: color-mix(in srgb, var(--ctp-green) 18%, var(--ctp-base));
+  --c-current-soft: color-mix(in srgb, var(--ctp-peach) 18%, var(--ctp-base));
+  --c-bad-soft: color-mix(in srgb, var(--ctp-red) 18%, var(--ctp-base));
+  --c-node: var(--ctp-surface0);
+}
+
+html {
+  background: var(--c-bg);
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-sans);
+}
+
+.reveal-viewport {
+  background: var(--c-bg);
+}
+
+.reveal .slides section {
+  text-align: left;
+  height: 100%;
+}
+
+/* ---------- Kerangka slide ---------- */
+
+.frame {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px 14px;
+}
+
+.frame-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.frame-head h2 {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.15;
+}
+
+.frame-body {
+  flex: 1;
+  min-height: 0;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.reveal p {
+  margin: 0 0 12px;
+}
+
+.reveal ul {
+  margin: 0 0 0 1.1em;
+}
+
+.reveal li {
+  margin-bottom: 8px;
+}
+
+.muted {
+  color: var(--c-text-muted);
+}
+
+.mono,
+.reveal code {
+  font-family: var(--font-mono);
+}
+
+.reveal code {
+  font-size: 0.9em;
+  background: var(--c-surface-2);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
+/* ---------- Tata letak ---------- */
+
+.row {
+  display: flex;
+  gap: 22px;
+  min-height: 0;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.grow {
+  flex: 1;
+}
+
+.card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.card h3 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+
+.card.soft {
+  background: var(--c-surface-2);
+  box-shadow: none;
+}
+
+.callout {
+  border-left: 5px solid var(--c-primary);
+  background: var(--c-primary-soft);
+  padding: 12px 16px;
+  border-radius: 0 10px 10px 0;
+  font-size: 20px;
+}
+
+.callout.warn {
+  border-color: var(--c-current);
+  background: var(--c-current-soft);
+}
+
+.callout.ok {
+  border-color: var(--c-settled);
+  background: var(--c-settled-soft);
+}
+
+.callout.bad {
+  border-color: var(--c-bad);
+  background: var(--c-bad-soft);
+}
+
+/* ---------- Tombol & kontrol ---------- */
+
+.btn {
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s, transform 0.05s;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--c-primary);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn.primary {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: var(--c-on-accent);
+}
+
+.btn.small {
+  font-size: 14px;
+  padding: 6px 10px;
+}
+
+.btn.active {
+  background: var(--c-primary-soft);
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.seg button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 7px 11px;
+  border: 0;
+  background: var(--c-surface);
+  color: var(--c-text-muted);
+  cursor: pointer;
+}
+
+.seg button + button {
+  border-left: 1px solid var(--c-border);
+}
+
+.seg button.on {
+  background: var(--c-primary);
+  color: var(--c-on-accent);
+}
+
+.reveal select,
+.reveal input[type='number'] {
+  font: inherit;
+  font-size: 15px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+}
+
+.reveal input[type='range'] {
+  accent-color: var(--c-primary);
+}
+
+.reveal label.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.step-count {
+  font-size: 14px;
+  color: var(--c-text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- Kotak penjelasan ---------- */
+
+.explain {
+  /* Tinggi tetap supaya toolbar di bawahnya tidak berpindah-pindah antar langkah. */
+  box-sizing: border-box;
+  height: 108px;
+  overflow-y: auto;
+  background: var(--c-surface-2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 16px;
+  line-height: 1.38;
+}
+
+.explain .tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-right: 8px;
+  vertical-align: 2px;
+  color: var(--c-on-accent);
+  background: var(--c-primary);
+}
+
+/* ---------- Pseudocode ---------- */
+
+.reveal pre.pseudo {
+  font-family: var(--font-mono);
+  font-size: 14.5px;
+  line-height: 1.55;
+  background: var(--c-surface-2);
+  border-radius: 10px;
+  padding: 8px 0;
+  margin: 0;
+  width: 100%;
+  white-space: pre;
+}
+
+.reveal .pseudo .ln {
+  display: block;
+  padding: 0 14px;
+  border-left: 4px solid transparent;
+  min-height: 1.55em;
+}
+
+.pseudo .ln.active {
+  background: var(--c-current-soft);
+  border-left-color: var(--c-current);
+  font-weight: 600;
+}
+
+.pseudo .ln.clickable {
+  cursor: pointer;
+}
+
+.pseudo .ln.clickable:hover {
+  background: var(--c-primary-soft);
+}
+
+.pseudo .num {
+  display: inline-block;
+  width: 22px;
+  color: var(--c-text-muted);
+  opacity: 0.6;
+}
+
+/* ---------- Tabel ---------- */
+
+table.algo {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 15px;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+table.algo th,
+table.algo td {
+  border-bottom: 1px solid var(--c-border);
+  padding: 5px 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+table.algo th {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--c-text-muted);
+  background: var(--c-surface-2);
+}
+
+table.algo td.left,
+table.algo th.left {
+  text-align: left;
+}
+
+table.algo td.settled {
+  color: var(--c-text-muted);
+}
+
+table.algo td.chosen {
+  background: var(--c-settled-soft);
+  color: var(--c-settled);
+  font-weight: 700;
+}
+
+table.algo td.changed {
+  background: var(--c-current-soft);
+}
+
+table.algo td.checking {
+  outline: 2px solid var(--c-check);
+  outline-offset: -2px;
+}
+
+table.algo tr.live td {
+  background-image: linear-gradient(var(--c-primary-soft), var(--c-primary-soft));
+}
+
+table.algo tr.live td.chosen {
+  background: var(--c-settled-soft);
+}
+
+table.algo tr.live td.changed {
+  background: var(--c-current-soft);
+}
+
+table.algo tr.clickable {
+  cursor: pointer;
+}
+
+table.algo tr.clickable:hover td {
+  background: var(--c-primary-soft);
+}
+
+table.algo tr.selected td {
+  background: var(--c-current-soft);
+  font-weight: 650;
+}
+
+/* ---------- Legenda ---------- */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 13.5px;
+  color: var(--c-text-muted);
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid var(--c-node-stroke);
+}
+
+/* ---------- Graf SVG ---------- */
+
+.graph {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  touch-action: none;
+}
+
+.graph .edge-line {
+  stroke: var(--c-edge);
+  stroke-width: 3;
+  fill: none;
+  transition: stroke 0.25s, stroke-width 0.25s;
+}
+
+.graph .edge-hit {
+  stroke: transparent;
+  stroke-width: 18;
+  fill: none;
+}
+
+.graph .edge-label rect {
+  fill: var(--c-surface);
+  stroke: var(--c-border);
+}
+
+.graph .edge-label text {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--c-bad);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.graph .node circle {
+  fill: var(--c-node);
+  stroke: var(--c-node-stroke);
+  stroke-width: 3;
+  transition: fill 0.25s, stroke 0.25s;
+}
+
+.graph .node text.id {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 20px;
+  fill: var(--c-text);
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+.graph .node .badge-text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+.graph .clickable {
+  cursor: pointer;
+}
+
+/* ---------- Kuis ---------- */
+
+.quiz-q {
+  font-size: 20px;
+  font-weight: 650;
+  margin-bottom: 10px;
+}
+
+.quiz-opts {
+  display: grid;
+  gap: 8px;
+}
+
+.quiz-opt {
+  font: inherit;
+  font-size: 17px;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 9px;
+  border: 1.5px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+.quiz-opt:hover:not(:disabled) {
+  border-color: var(--c-primary);
+}
+
+.quiz-opt.right {
+  border-color: var(--c-settled);
+  background: var(--c-settled-soft);
+}
+
+.quiz-opt.wrong {
+  border-color: var(--c-bad);
+  background: var(--c-bad-soft);
+}
+
+.quiz-why {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/* ---------- Judul deck ---------- */
+
+.title-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 0 40px;
+}
+
+.title-box {
+  background: linear-gradient(135deg, var(--c-title-a) 0%, var(--c-title-b) 100%);
+  padding: 44px 48px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.title-box h1 {
+  font-size: 58px;
+  margin: 8px 0 12px;
+  color: var(--c-text);
+}
+
+.title-box .subtitle {
+  font-size: 26px;
+  color: var(--c-text-muted);
+}
+
+.pill {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 650;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: var(--c-primary-soft);
+  color: var(--c-primary);
+}
+
+/* ---------- Rumus ---------- */
+
+.formula {
+  font-size: 44px;
+  text-align: center;
+  padding: 18px 0;
+}
+
+.formula .term {
+  padding: 2px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.formula .term.on {
+  box-shadow: 0 0 0 3px currentColor;
+}
+
+/* ---------- Tombol tema ---------- */
+
+/* Tombol melayang di pojok kanan atas agar tidak menutupi kontrol slide */
+.theme-toggle {
+  position: fixed;
+  right: 14px;
+  top: 14px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Tombol melayang di pojok kanan atas */
+.home-link {
+  position: fixed;
+  right: 62px;
+  top: 14px;
+  z-index: 100;
+  height: 40px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+  font: 600 14px var(--font-sans);
+  text-decoration: none;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes pulse-in {
+  from {
+    transform: scale(0.92);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pop {
+  animation: pulse-in 0.25s ease-out;
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+
+.graph .stepper-btn circle {
+  fill: var(--c-primary-soft);
+  stroke: var(--c-primary);
+  stroke-width: 1.5;
+}
+
+.graph .stepper-btn text {
+  fill: var(--c-primary);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.graph .stepper-btn:hover circle {
+  fill: var(--c-primary);
+}
+
+.graph .stepper-btn:hover text {
+  fill: var(--c-on-accent);
+}
+
+.tag.good { background: var(--c-settled); }
+.tag.warn { background: var(--c-current); }
+.tag.info { background: var(--c-check); }
+.tag.src { background: var(--c-source); }
+
+/* Elemen dasar yang biasanya disediakan tema reveal */
+.reveal {
+  font-family: var(--font-sans);
+  font-size: var(--r-main-font-size);
+  font-weight: 400;
+  color: var(--c-text);
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  margin: var(--r-heading-margin);
+  font-family: var(--r-heading-font);
+  font-weight: var(--r-heading-font-weight);
+  line-height: var(--r-heading-line-height);
+  letter-spacing: var(--r-heading-letter-spacing);
+  text-transform: none;
+  color: var(--c-text);
+}
+
+.reveal a {
+  color: var(--c-primary);
+}
+
+.reveal ::selection {
+  background: var(--ctp-blue);
+  color: var(--ctp-base);
+}
+
+.reveal pre {
+  width: 100%;
+  box-shadow: none;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.reveal .controls {
+  color: var(--c-primary);
+}
+
+.reveal .progress {
+  color: var(--c-primary);
+}
+
+.reveal .slide-number {
+  color: var(--c-text-muted);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* Reveal menambahkan .reveal-viewport pada body; #root harus mengisi layar agar skala slide benar. */
+body.reveal-viewport #root {
+  position: fixed;
+  inset: 0;
+}
+
+/* reset.css meratakan sub/sup; kembalikan untuk notasi D_x(y) */
+.reveal sub,
+.reveal sup {
+  font-size: 0.7em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.reveal sub {
+  top: 0.35em;
+}
+
+.reveal sup {
+  top: -0.45em;
+}
+
+/* ---------- Syntax highlight pseudocode (Catppuccin) ---------- */
+
+.pseudo .tk-kw { color: var(--ctp-mauve); font-weight: 600; }
+.pseudo .tk-fn { color: var(--ctp-blue); }
+.pseudo .tk-var { color: var(--ctp-maroon); }
+.pseudo .tk-set { color: var(--ctp-yellow); }
+.pseudo .tk-num { color: var(--ctp-peach); }
+.pseudo .tk-op { color: var(--ctp-sky); }
+.pseudo .tk-head { color: var(--ctp-green); font-weight: 700; }
+.pseudo .tk-cmt { color: var(--ctp-overlay1); font-style: italic; }
+
+/* ---------- Tabel trace berukuran tetap ---------- */
+
+table.algo.fixed {
+  table-layout: fixed;
+}
+
+table.algo.fixed th,
+table.algo.fixed td {
+  height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+table.algo.fixed col.c-step { width: 70px; }
+table.algo.fixed col.c-nset { width: 96px; }
+
+/* ---------- Badge KaTeX di graf ---------- */
+
+.badge-tex {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  font-size: 17px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--c-text);
+}
+
+.badge-tex.tone-good { color: var(--c-settled); }
+.badge-tex.tone-bad { color: var(--c-bad); }
+
+.badge-tex.emph {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.badge-tex.emph .katex {
+  background: var(--c-current-soft);
+  border: 2px solid var(--c-current);
+  color: var(--c-text);
+  border-radius: 10px;
+  padding: 3px 10px;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--c-current) 35%, transparent);
+}
+
+.reveal .katex {
+  font-size: 1.1em;
+}
+
+.btn .katex,
+.seg .katex {
+  font-size: 1em;
+}
+
+.tex-chip {
+  font-size: 22px;
+}
+
+/* Kartu rincian perhitungan: tinggi tetap agar kolom kanan tidak bergeser. */
+.detail-card {
+  box-sizing: border-box;
+  height: 140px;
+  overflow-y: auto;
+}
