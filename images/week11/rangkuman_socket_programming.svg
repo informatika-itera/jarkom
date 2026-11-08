@@ -1,0 +1,438 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#edf2f7"/>
+    </linearGradient>
+
+    <!-- Header Gradient -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+
+    <!-- Left Pillars Gradient -->
+    <linearGradient id="pillarCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f7ff"/>
+      <stop offset="100%" stop-color="#e0eefe"/>
+    </linearGradient>
+    <linearGradient id="pillarHdrGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <!-- Right Philosophy Gradient -->
+    <linearGradient id="philoCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <linearGradient id="philoHdrGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+
+    <!-- Quote Banner Gradient -->
+    <linearGradient id="quoteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+
+    <!-- Network Core Cloud Gradient -->
+    <linearGradient id="coreCloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+
+    <!-- Shadows -->
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <filter id="subtleShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1280" height="820" fill="url(#bgGrad)"/>
+  <rect x="15" y="15" width="1250" height="790" rx="16" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="8 6"/>
+
+  <!-- ================= TOP HEADER BANNER ================= -->
+  <g transform="translate(30, 25)">
+    <rect width="1220" height="72" rx="12" fill="url(#headerGrad)" filter="url(#cardShadow)"/>
+    <rect x="0" y="68" width="1220" height="4" rx="2" fill="#38bdf8"/>
+    
+    <text x="24" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+      RANGKUMAN ARSITEKTUR &amp; SINTESIS: PEMROGRAMAN SOCKET
+    </text>
+    <text x="24" y="54" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#93c5fd">
+      Abstraksi Soket API, Kontras Layanan Transport (TCP/UDP), &amp; Prinsip Desain "Complexity at the Network Edge"
+    </text>
+
+    <!-- Textbook Reference Badge -->
+    <rect x="990" y="20" width="206" height="32" rx="16" fill="#1e293b" fill-opacity="0.85" stroke="#38bdf8" stroke-width="1"/>
+    <text x="1093" y="41" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#e0f2fe" text-anchor="middle">
+      Kurose &amp; Ross • Penutup Bab 2
+    </text>
+  </g>
+
+  <!-- ================= LEFT PANEL: 3 PILAR ESENSIAL SOKET ================= -->
+  <g transform="translate(30, 115)">
+    <rect width="575" height="470" rx="14" fill="url(#pillarCardGrad)" stroke="#93c5fd" stroke-width="1.5" filter="url(#cardShadow)"/>
+
+    <!-- Header -->
+    <path d="M 0 14 Q 0 0 14 0 L 561 0 Q 575 0 575 14 L 575 46 L 0 46 Z" fill="url(#pillarHdrGrad)"/>
+    <text x="20" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#ffffff">
+      1. TIGA PILAR ESENSIAL PEMROGRAMAN SOKET
+    </text>
+    <rect x="445" y="12" width="115" height="22" rx="11" fill="#1e40af" stroke="#60a5fa" stroke-width="1"/>
+    <text x="502" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#dbeafe" text-anchor="middle">
+      CORE PILLARS
+    </text>
+
+    <!-- Subcard 1: Paradigma Request-Response -->
+    <g transform="translate(18, 60)">
+      <rect width="539" height="118" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <rect width="32" height="24" rx="4" fill="#2563eb" x="12" y="10"/>
+      <text x="28" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="52" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#1e3a8a">
+        Paradigma Layanan Request–Response
+      </text>
+
+      <text x="14" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#334155">
+        • <tspan font-weight="700" fill="#1e3a8a">Klien (Penginisiasi Aktif):</tspan> Memulai komunikasi ke alamat spesifik target.
+      </text>
+      <text x="14" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#334155">
+        • <tspan font-weight="700" fill="#065f46">Server (Penyedia Pasif):</tspan> Berjalan kontinu di port tetap (Well-Known / Static Port).
+      </text>
+      <text x="14" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#334155">
+        • Menggunakan arsitektur terdesentralisasi tanpa shared-memory langsung.
+      </text>
+
+      <rect x="14" y="93" width="511" height="18" rx="3" fill="#eff6ff"/>
+      <text x="269" y="106" font-family="Courier, monospace" font-size="9" font-weight="600" fill="#1d4ed8" text-anchor="middle">
+        connect() / sendto()  ⇄  bind() + listen() + accept() / recvfrom()
+      </text>
+    </g>
+
+    <!-- Subcard 2: Raw Bytes & Serialisasi -->
+    <g transform="translate(18, 190)">
+      <rect width="539" height="118" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <rect width="32" height="24" rx="4" fill="#0284c7" x="12" y="10"/>
+      <text x="28" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="52" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#0369a1">
+        Format Pesan: Aliran Bita Mentah (Raw Bytes)
+      </text>
+
+      <text x="14" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#334155">
+        • Jaringan sepenuhnya agnostik terhadap makna data (hanya mengangkut bita).
+      </text>
+      <text x="14" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#334155">
+        • <tspan font-weight="700" fill="#0369a1">Tanggung Jawab Aplikasi:</tspan> Serialisasi &amp; deserialisasi data di User Space.
+      </text>
+      <text x="14" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#334155">
+        • Standar encoding: UTF-8 untuk teks; struct/protobuf untuk data biner.
+      </text>
+
+      <rect x="14" y="93" width="511" height="18" rx="3" fill="#f0f9ff"/>
+      <text x="269" y="106" font-family="Courier, monospace" font-size="9" font-weight="600" fill="#0284c7" text-anchor="middle">
+        String Python  ──►  .encode(&apos;utf-8&apos;)  ──►  Bita Mentah  ──►  .decode(&apos;utf-8&apos;)
+      </text>
+    </g>
+
+    <!-- Subcard 3: Dualitas Transport TCP vs UDP -->
+    <g transform="translate(18, 320)">
+      <rect width="539" height="136" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <rect width="32" height="24" rx="4" fill="#d97706" x="12" y="10"/>
+      <text x="28" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="52" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#92400e">
+        Dualitas Layanan Transport: TCP vs. UDP
+      </text>
+
+      <g transform="translate(14, 42)">
+        <!-- TCP column -->
+        <rect width="250" height="82" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+        <text x="12" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#1e3a8a">
+          🔵 TCP (SOCK_STREAM)
+        </text>
+        <text x="12" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#334155">
+          • Berorientasi koneksi (Handshake 3-arah)
+        </text>
+        <text x="12" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#334155">
+          • Pipa virtual terandalkan, terurut, lossless
+        </text>
+        <text x="12" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" font-weight="600" fill="#1e40af">
+          • Kasus: Web (HTTP), Email, SSH, DB
+        </text>
+
+        <!-- UDP column -->
+        <rect x="261" y="0" width="250" height="82" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+        <text x="273" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#92400e">
+          🟠 UDP (SOCK_DGRAM)
+        </text>
+        <text x="273" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#334155">
+          • Nir-koneksi, instan tanpa jabat tangan
+        </text>
+        <text x="273" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#334155">
+          • Datagram mandiri, best-effort, 8B header
+        </text>
+        <text x="273" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" font-weight="600" fill="#b45309">
+          • Kasus: DNS, Video Streaming, Game
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT PANEL: COMPLEXITY AT THE NETWORK EDGE ================= -->
+  <g transform="translate(620, 115)">
+    <rect width="630" height="470" rx="14" fill="url(#philoCardGrad)" stroke="#cbd5e1" stroke-width="1.5" filter="url(#cardShadow)"/>
+
+    <!-- Header -->
+    <path d="M 0 14 Q 0 0 14 0 L 616 0 Q 630 0 630 14 L 630 46 L 0 46 Z" fill="url(#philoHdrGrad)"/>
+    <text x="20" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="800" fill="#ffffff">
+      2. PRINSIP ARSITEKTUR: "COMPLEXITY AT THE NETWORK EDGE"
+    </text>
+    <rect x="500" y="12" width="115" height="22" rx="11" fill="#1e293b" stroke="#94a3b8" stroke-width="1"/>
+    <text x="557" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle">
+      END-TO-END
+    </text>
+
+    <!-- Visual Architecture Diagram -->
+    <g transform="translate(18, 58)">
+      <rect width="594" height="245" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#subtleShadow)"/>
+
+      <!-- Left: Client Edge Host -->
+      <g transform="translate(14, 16)">
+        <rect width="145" height="212" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+        <rect width="145" height="26" rx="8 8 0 0" fill="#2563eb"/>
+        <text x="72" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">
+          SISTEM UJUNG (EDGE)
+        </text>
+        <text x="72" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#1e3a8a" text-anchor="middle">
+          Host Klien
+        </text>
+
+        <!-- Components inside Edge -->
+        <rect x="10" y="48" width="125" height="32" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+        <text x="72" y="63" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="700" fill="#1e40af" text-anchor="middle">
+          Aplikasi &amp; Logika
+        </text>
+        <text x="72" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">
+          User Space Code
+        </text>
+
+        <rect x="10" y="86" width="125" height="26" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+        <text x="72" y="103" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#1d4ed8" text-anchor="middle">
+          Socket API
+        </text>
+
+        <rect x="10" y="118" width="125" height="42" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+        <text x="72" y="132" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" fill="#1e3a8a" text-anchor="middle">
+          Manajemen Status:
+        </text>
+        <text x="72" y="145" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8" fill="#475569" text-anchor="middle">
+          Buffer Transmisi, ACK,
+        </text>
+        <text x="72" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8" fill="#475569" text-anchor="middle">
+          Nomor Urut, Retransmisi
+        </text>
+
+        <rect x="10" y="166" width="125" height="36" rx="4" fill="#1e293b"/>
+        <text x="72" y="180" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8.5" font-weight="800" fill="#38bdf8" text-anchor="middle">
+          KOMPLEKSITAS TINGGI
+        </text>
+        <text x="72" y="193" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="7.5" fill="#94a3b8" text-anchor="middle">
+          (Semua Kecerdasan di Sini)
+        </text>
+      </g>
+
+      <!-- Center: Network Core (Routers) -->
+      <g transform="translate(172, 16)">
+        <rect width="250" height="212" rx="8" fill="url(#coreCloudGrad)" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 4"/>
+        <rect width="250" height="26" rx="8 8 0 0" fill="#475569"/>
+        <text x="125" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">
+          INTI JARINGAN (NETWORK CORE)
+        </text>
+
+        <!-- Router Icons -->
+        <g transform="translate(25, 45)">
+          <circle cx="35" cy="35" r="24" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="700" fill="#334155" text-anchor="middle">Router</text>
+
+          <circle cx="165" cy="35" r="24" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="165" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="700" fill="#334155" text-anchor="middle">Router</text>
+
+          <circle cx="100" cy="95" r="24" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="100" y="98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="700" fill="#334155" text-anchor="middle">Router</text>
+
+          <!-- Links between routers -->
+          <line x1="59" y1="35" x2="141" y2="35" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="50" y1="52" x2="85" y2="80" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="150" y1="52" x2="115" y2="80" stroke="#64748b" stroke-width="1.5"/>
+        </g>
+
+        <!-- Simple Core Characteristic Badge -->
+        <rect x="15" y="148" width="220" height="54" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="125" y="165" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="800" fill="#047857" text-anchor="middle">
+          ⚡ INTI JARINGAN SEDERHANA &amp; CEPAT
+        </text>
+        <text x="125" y="179" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8" fill="#475569" text-anchor="middle">
+          • Murni Stateless Packet Forwarding (IP)
+        </text>
+        <text x="125" y="191" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">
+          • Tidak tahu-menahu isi pesan aplikasi!
+        </text>
+      </g>
+
+      <!-- Right: Server Edge Host -->
+      <g transform="translate(435, 16)">
+        <rect width="145" height="212" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="1.5"/>
+        <rect width="145" height="26" rx="8 8 0 0" fill="#059669"/>
+        <text x="72" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">
+          SISTEM UJUNG (EDGE)
+        </text>
+        <text x="72" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#065f46" text-anchor="middle">
+          Host Server
+        </text>
+
+        <!-- Components inside Edge -->
+        <rect x="10" y="48" width="125" height="32" rx="4" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+        <text x="72" y="63" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="700" fill="#065f46" text-anchor="middle">
+          Layanan &amp; Database
+        </text>
+        <text x="72" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">
+          Business Logic Code
+        </text>
+
+        <rect x="10" y="86" width="125" height="26" rx="4" fill="#dcfce7" stroke="#059669" stroke-width="1"/>
+        <text x="72" y="103" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#047857" text-anchor="middle">
+          Socket API
+        </text>
+
+        <rect x="10" y="118" width="125" height="42" rx="4" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+        <text x="72" y="132" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" fill="#065f46" text-anchor="middle">
+          Manajemen Status:
+        </text>
+        <text x="72" y="145" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8" fill="#475569" text-anchor="middle">
+          Koneksi Parsial, Buffer,
+        </text>
+        <text x="72" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8" fill="#475569" text-anchor="middle">
+          Otentikasi, Enkripsi TLS
+        </text>
+
+        <rect x="10" y="166" width="125" height="36" rx="4" fill="#1e293b"/>
+        <text x="72" y="180" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8.5" font-weight="800" fill="#34d399" text-anchor="middle">
+          KOMPLEKSITAS TINGGI
+        </text>
+        <text x="72" y="193" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="7.5" fill="#94a3b8" text-anchor="middle">
+          (Semua Kecerdasan di Sini)
+        </text>
+      </g>
+    </g>
+
+    <!-- Golden Quote Banner -->
+    <g transform="translate(18, 318)">
+      <rect width="594" height="138" rx="8" fill="url(#quoteGrad)" filter="url(#subtleShadow)"/>
+      <text x="297" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">
+        "COMPLEXITY AT THE NETWORK EDGE!"
+      </text>
+      <text x="297" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#e0f2fe" text-anchor="middle">
+        — Jerome H. Saltzer, David P. Reed, &amp; David D. Clark (End-to-End Principle, 1984)
+      </text>
+
+      <rect x="20" y="66" width="554" height="58" rx="6" fill="#0f172a" fill-opacity="0.55"/>
+      <text x="297" y="86" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#f8fafc" text-anchor="middle">
+        Internet dapat berkembang pesat karena router inti tidak perlu diubah saat Anda
+      </text>
+      <text x="297" y="102" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#f8fafc" text-anchor="middle">
+        membuat aplikasi baru. Anda cukup menulis kode Socket di kedua komputer ujung!
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= BOTTOM SYNTHESIS SUMMARY BAR ================= -->
+  <g transform="translate(30, 600)">
+    <rect width="1220" height="195" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#cardShadow)"/>
+
+    <!-- Section Title Banner -->
+    <path d="M 0 12 Q 0 0 12 0 L 1208 0 Q 1220 0 1220 12 L 1220 32 L 0 32 Z" fill="#1e293b"/>
+    <text x="20" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+      KESIMPULAN AKHIR MODUL PEMROGRAMAN SOKET LAPISAN APLIKASI
+    </text>
+
+    <!-- Takeaway 1 -->
+    <g transform="translate(18, 45)">
+      <rect width="380" height="135" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <rect width="32" height="24" rx="4" fill="#2563eb" x="12" y="12"/>
+      <text x="28" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">1</text>
+      <text x="52" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1e3a8a">Jembatan Abstraksi Socket API</text>
+      
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Soket adalah satu-satunya antarmuka
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        yang menjembatani kode aplikasi pengembang
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        (User Space) dengan tumpukan protokol OS.
+      </text>
+
+      <rect x="12" y="98" width="356" height="24" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#1d4ed8">User Space ⇄ Kernel OS Boundary</text>
+    </g>
+
+    <!-- Takeaway 2 -->
+    <g transform="translate(420, 45)">
+      <rect width="380" height="135" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <rect width="32" height="24" rx="4" fill="#2563eb" x="12" y="12"/>
+      <text x="28" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">2</text>
+      <text x="52" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1e3a8a">Pemilihan Karakteristik Transport</text>
+
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Pilihan antara TCP (Reliable Stream)
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        dan UDP (Fast Datagram) sepenuhnya
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        ditentukan oleh kompromi kebutuhan aplikasi.
+      </text>
+
+      <rect x="12" y="98" width="356" height="24" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#1d4ed8">TCP Keandalan vs UDP Kecepatan</text>
+    </g>
+
+    <!-- Takeaway 3 -->
+    <g transform="translate(822, 45)">
+      <rect width="380" height="135" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+      <rect width="32" height="24" rx="4" fill="#059669" x="12" y="12"/>
+      <text x="28" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">3</text>
+      <text x="52" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#065f46">Kemerdekaan Inovasi di Ujung</text>
+
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Fondasi End-to-End inilah yang membuat
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        inovasi baru (WebRTC, HTTP/3, QUIC) dapat
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        langsung diimplementasikan tanpa izin ISP.
+      </text>
+
+      <rect x="12" y="98" width="356" height="24" rx="4" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#047857">Inovasi Bebas di Sisi Pengembang</text>
+    </g>
+  </g>
+</svg>
