@@ -5,22 +5,60 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Jaringan Komputer - Ujian Akhir Semester (UAS)</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
     <link rel="stylesheet" href="css/pkom-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
     <style>
-        .reveal .slides section {
-            height: 100%;
-            overflow-y: auto !important;
-            padding-bottom: 50px;
+        @media screen {
+            .reveal .slides section {
+                max-height: 100%;
+                overflow-y: auto;
+                padding-bottom: 20px;
+            }
+
+            .reveal img {
+                max-height: 45vh;
+                object-fit: contain;
+            }
+        }
+
+        @media print {
+            .reveal .slides section {
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            .reveal img,
+            .card {
+                page-break-inside: avoid;
+            }
+        }
+
+        .reveal .card {
+            margin-bottom: 10px;
+        }
+
+        /* images */
+        .slide-img {
+            width: 100%;
+            height: auto;
+            max-height: 44vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
         }
 
         .slide-img-sm {
             width: 100%;
             height: auto;
-            max-height: 35vh;
+            max-height: 32vh;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
@@ -38,24 +76,32 @@
 
         .layout-text-img {
             display: grid;
-            grid-template-columns: 50% 1fr;
+            grid-template-columns: 52% 1fr;
             gap: 16px;
             align-items: center;
             width: 100%;
         }
 
+        .layout-3col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+        }
+
         .img-caption {
-            font-size: .52em;
+            font-size: .55em;
             color: #777;
             text-align: center;
-            margin-top: .1em;
+            margin-top: .2em;
             font-style: italic;
         }
 
+        /* Section bars & headers */
         .sec-bar {
             border-radius: 8px 8px 0 0;
-            padding: 7px 16px;
-            font-size: .68em;
+            padding: 8px 16px;
+            font-size: .75em;
             font-weight: 700;
             letter-spacing: .04em;
         }
@@ -65,7 +111,16 @@
             border: 1px solid #dee2e6;
             border-radius: 0 0 8px 8px;
             padding: 12px 16px;
+            font-size: .68em;
             box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .card .sec-bar {
+            font-size: .88em;
+        }
+
+        .card .sec-body {
+            font-size: .82em;
         }
 
         .sec-bar-blue {
@@ -93,13 +148,15 @@
             color: #fff;
         }
 
+        /* Info boxes */
         .info-box {
             border-left: 4px solid #1565c0;
             background: #e8f0fe;
             border-radius: 0 8px 8px 0;
             padding: 10px 14px;
-            font-size: .66em;
+            font-size: .68em;
             margin-top: .5em;
+            line-height: 1.5;
         }
 
         .info-box-warn {
@@ -107,8 +164,9 @@
             background: #fff3e0;
             border-radius: 0 8px 8px 0;
             padding: 10px 14px;
-            font-size: .66em;
+            font-size: .68em;
             margin-top: .5em;
+            line-height: 1.5;
         }
 
         .info-box-green {
@@ -116,25 +174,50 @@
             background: #e8f5e9;
             border-radius: 0 8px 8px 0;
             padding: 10px 14px;
-            font-size: .66em;
+            font-size: .68em;
             margin-top: .5em;
+            line-height: 1.5;
+        }
+
+        .info-box-red {
+            border-left: 4px solid #b71c1c;
+            background: #ffebee;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: .68em;
+            margin-top: .5em;
+            line-height: 1.5;
+        }
+
+        .card .info-box,
+        .card .info-box-warn,
+        .card .info-box-green,
+        .card .info-box-red {
+            font-size: .88em;
+        }
+
+        .reveal h3 {
+            font-size: 1.35em;
+            margin-bottom: 12px;
         }
 
         .reveal table {
-            font-size: .5em;
+            font-size: .55em;
             width: 100%;
             border-collapse: collapse;
         }
 
         .reveal table th,
         .reveal table td {
-            border: 1px solid #ccc;
+            border: 1px solid #dee2e6;
             padding: 6px 10px;
+            text-align: left;
         }
 
         .reveal table th {
             background: #1565c0;
-            color: white;
+            color: #fff;
+            font-weight: 700;
         }
 
         .reveal table tr:nth-child(even) td {
@@ -145,130 +228,44 @@
             background: #282c34;
             color: #abb2bf;
             font-family: monospace;
-            padding: 10px;
+            padding: 10px 14px;
             border-radius: 6px;
-            font-size: .6em;
-        }
-
-        /* Animation specific */
-        .anim-container {
-            position: relative;
-            width: 100%;
-            height: 250px;
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 1em;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .anim-node {
-            position: absolute;
-            text-align: center;
-            z-index: 2;
-        }
-
-        .anim-icon {
-            font-size: 3em;
-            color: #333;
-            line-height: 1;
-        }
-
-        .anim-label {
-            font-size: .5em;
-            font-weight: 700;
-            font-family: monospace;
-            margin-top: 5px;
-        }
-
-        .packet {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: #e65100;
-            border-radius: 50%;
-            z-index: 10;
-            opacity: 0;
-        }
-
-        @keyframes pktSend {
-            0% {
-                top: 50%;
-                left: 10%;
-                opacity: 1;
-            }
-
-            100% {
-                top: 50%;
-                left: 90%;
-                opacity: 1;
-            }
-        }
-
-        /* SVG Graph Styling */
-        .svg-graph {
-            background: #fff;
-            border-radius: 10px;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ddd;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .node circle {
-            fill: #1565c0;
-            stroke: #fff;
-            stroke-width: 2px;
-        }
-
-        .node text {
-            fill: #fff;
-            font-size: 14px;
-            font-weight: bold;
-            font-family: sans-serif;
-            text-anchor: middle;
-            alignment-baseline: central;
-        }
-
-        .link line {
-            stroke: #999;
-            stroke-width: 3px;
-        }
-
-        .link text {
-            fill: #d32f2f;
-            font-size: 14px;
-            font-weight: bold;
-            background: white;
-            font-family: sans-serif;
+            font-size: .62em;
+            text-align: left;
+            overflow-x: auto;
+            line-height: 1.45;
         }
 
         .tugas-box {
-            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
             border-radius: 14px;
             padding: 22px 28px;
             color: #fff;
+            text-align: left;
+        }
+
+        .tugas-box h3 {
+            color: #fff !important;
+            margin-top: 0;
+            font-size: 1.2em;
         }
 
         .tugas-soal {
-            background: rgba(255, 255, 255, .13);
+            background: rgba(255, 255, 255, .15);
             border-radius: 10px;
             padding: 14px 18px;
-            margin: 8px 0;
+            margin: 10px 0;
         }
 
         .tugas-soal p {
-            font-size: .48em;
-            line-height: 1.65;
+            font-size: .6em;
+            line-height: 1.6;
             margin: 0;
             color: #e8f5e9;
         }
 
         .tugas-soal .num {
-            font-size: .9em;
+            font-size: 1.1em;
             font-weight: 700;
             color: #ffeb3b;
         }
@@ -276,19 +273,44 @@
         .tugas-info {
             display: flex;
             gap: 10px;
-            margin-top: 12px;
+            margin-top: 14px;
             flex-wrap: wrap;
         }
 
         .tugas-chip {
             background: rgba(255, 255, 255, .2);
             border-radius: 20px;
-            padding: 5px 14px;
-            font-size: .58em;
+            padding: 6px 14px;
+            font-size: .6em;
             color: #fff;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+        }
+
+        /* Dark mode overrides for custom components */
+        [data-theme="dark"] .sec-body {
+            background: #2a2a2a !important;
+            color: #eee !important;
+            border-color: #444 !important;
+        }
+
+        [data-theme="dark"] .code-block {
+            background: #1e1e1e !important;
+            color: #d4d4d4 !important;
+            border: 1px solid #444;
+        }
+
+        [data-theme="dark"] .reveal table th {
+            background: #1a365d !important;
+        }
+
+        [data-theme="dark"] .reveal table td {
+            border-color: #444 !important;
+        }
+
+        [data-theme="dark"] .reveal table tr:nth-child(even) td {
+            background: #222 !important;
         }
     </style>
 </head>
@@ -302,8 +324,6 @@
 
         <div class="slides">
 
-
-            <!-- Title Slide -->
             <section>
                 <div class="title-box">
                     <h1>Ujian Akhir Semester (UAS)</h1>
@@ -320,11 +340,9 @@
                 </div>
             </section>
 
-            <!-- Tata Tertib 1 -->
             <section>
                 <h3>Tata Tertib Ujian</h3>
-                <div class="layout-col">
-                    <div class="card text-left text-smaller" style="font-size: 0.6em; line-height: 1.5;">
+                <div class="card text-left text-smaller" style="font-size: 0.6em; line-height: 1.5;">
                         <ul style="padding-left: 20px;">
                             <li style="margin-bottom: 10px;"><strong style="color: #1565c0;">Autentikasi:</strong>
                                 Peserta hanya diperbolehkan login menggunakan akun / NPM / NIM resmi milik sendiri.</li>
@@ -348,14 +366,11 @@
                                 kosong jika diizinkan untuk perhitungan subnetting).</li>
                         </ul>
                     </div>
-                </div>
             </section>
 
-            <!-- Masalah Teknis -->
             <section>
                 <h3>Masalah Teknis & Keadaan Darurat</h3>
-                <div class="layout-col">
-                    <div class="card text-left text-smaller" style="font-size: 0.6em; line-height: 1.5;">
+                <div class="card text-left text-smaller" style="font-size: 0.6em; line-height: 1.5;">
                         <ul style="padding-left: 20px;">
                             <li style="margin-bottom: 15px;"><strong style="color: #e65100;">Terputus Koneksi
                                     (Disconnect):</strong> Jika koneksi terputus saat ujian, jawaban yang sudah dipilih
@@ -369,13 +384,12 @@
                                 Utama / Dosen Pengampu.</li>
                         </ul>
                     </div>
-                </div>
             </section>
 
-            <!-- Sanksi -->
             <section>
                 <h3>Sanksi Pelanggaran</h3>
-                <div style="font-size: 0.95em; margin-top: 20px;">
+                <div class="card text-left text-smaller">
+                    <div style="font-size: 0.95em; margin-top: 20px;">
                     <table style="width: 100%; border-collapse: collapse;">
                         <thead>
                             <tr style="background: #1565c0; color: white;">
@@ -417,7 +431,6 @@
                 </div>
             </section>
 
-            <!-- Timer -->
             <section>
                 <h3>Waktu Pengerjaan Ujian</h3>
                 <div class="card text-center" style="margin-top: 30px; padding: 40px; position: relative;">
@@ -497,6 +510,7 @@
                     }
                 </script>
             </section>
+
         </div><!-- /slides -->
     </div><!-- /reveal -->
 

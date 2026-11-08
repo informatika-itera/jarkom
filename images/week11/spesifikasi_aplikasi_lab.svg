@@ -1,0 +1,457 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#edf2f7"/>
+    </linearGradient>
+
+    <!-- Header Gradient -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+
+    <!-- Client Card Gradient (Blue Theme) -->
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+    <linearGradient id="clientHdrGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <!-- Server Card Gradient (Teal/Emerald Theme) -->
+    <linearGradient id="serverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4"/>
+      <stop offset="100%" stop-color="#dcfce7"/>
+    </linearGradient>
+    <linearGradient id="serverHdrGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#065f46"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Flow Cards Gradients -->
+    <linearGradient id="stepGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+
+    <!-- Shadows -->
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <filter id="subtleShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#059669"/>
+    </marker>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1280" height="820" fill="url(#bgGrad)"/>
+  <rect x="15" y="15" width="1250" height="790" rx="16" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="8 6"/>
+
+  <!-- ================= TOP HEADER BANNER ================= -->
+  <g transform="translate(30, 25)">
+    <rect width="1220" height="72" rx="12" fill="url(#headerGrad)" filter="url(#cardShadow)"/>
+    <rect x="0" y="68" width="1220" height="4" rx="2" fill="#38bdf8"/>
+    
+    <text x="24" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+      SPESIFIKASI ALUR DATA APLIKASI LAB: SERVER UPPERCASE
+    </text>
+    <text x="24" y="54" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#93c5fd">
+      Pola Request–Response Klien–Server Berbasis Pemrograman Socket API (Python Standard Library)
+    </text>
+
+    <!-- Textbook Reference Badge -->
+    <rect x="990" y="20" width="206" height="32" rx="16" fill="#1e293b" fill-opacity="0.85" stroke="#38bdf8" stroke-width="1"/>
+    <text x="1093" y="41" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#e0f2fe" text-anchor="middle">
+      Kurose &amp; Ross • Subbab 2.7
+    </text>
+  </g>
+
+  <!-- ================= LEFT PANEL: KLIEN (CLIENT PROCESS) ================= -->
+  <g transform="translate(30, 115)">
+    <!-- Container Card -->
+    <rect width="430" height="470" rx="14" fill="url(#clientGrad)" stroke="#93c5fd" stroke-width="1.5" filter="url(#cardShadow)"/>
+    
+    <!-- Header -->
+    <path d="M 0 14 Q 0 0 14 0 L 416 0 Q 430 0 430 14 L 430 46 L 0 46 Z" fill="url(#clientHdrGrad)"/>
+    <text x="18" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#ffffff">
+      1. PROSES KLIEN (Client Process)
+    </text>
+    <rect x="330" y="12" width="85" height="22" rx="11" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+    <text x="372" y="27" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#dbeafe" text-anchor="middle">
+      client.py
+    </text>
+
+    <!-- Terminal Mockup Window -->
+    <g transform="translate(18, 60)">
+      <rect width="394" height="205" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      
+      <!-- Terminal Header Bar -->
+      <rect width="394" height="26" rx="8 8 0 0" fill="#1e293b"/>
+      <circle cx="16" cy="13" r="4.5" fill="#ef4444"/>
+      <circle cx="28" cy="13" r="4.5" fill="#f59e0b"/>
+      <circle cx="40" cy="13" r="4.5" fill="#10b981"/>
+      <text x="60" y="17" font-family="Courier, monospace" font-size="10" fill="#94a3b8">bash — Terminal Klien (User Interface)</text>
+
+      <!-- Terminal Body Content -->
+      <text x="16" y="48" font-family="Courier, monospace" font-size="11" fill="#64748b">$ python3 client.py</text>
+      
+      <!-- Step 1 in Terminal -->
+      <text x="16" y="70" font-family="Courier, monospace" font-size="11" fill="#38bdf8">[Langkah 1: Input Keyboard]</text>
+      <text x="16" y="90" font-family="Courier, monospace" font-size="11" fill="#f8fafc">
+        Ketik kalimat: <tspan fill="#fde047" font-weight="700">jaringan komputer seru</tspan>
+      </text>
+      <text x="16" y="108" font-family="Courier, monospace" font-size="9.5" fill="#94a3b8">
+        ↳ String Python: &quot;jaringan komputer seru&quot;
+      </text>
+
+      <!-- Divider line in terminal -->
+      <line x1="16" y1="120" x2="378" y2="120" stroke="#334155" stroke-width="1" stroke-dasharray="4 3"/>
+
+      <!-- Step 5 in Terminal -->
+      <text x="16" y="142" font-family="Courier, monospace" font-size="11" fill="#4ade80">[Langkah 5: Cetak Balasan Layar]</text>
+      <text x="16" y="162" font-family="Courier, monospace" font-size="11" fill="#f8fafc">
+        Dari Server: <tspan fill="#4ade80" font-weight="700">JARINGAN KOMPUTER SERU</tspan>
+      </text>
+      <text x="16" y="180" font-family="Courier, monospace" font-size="9.5" fill="#94a3b8">
+        ↳ String didekode (.decode(&apos;utf-8&apos;)) dari soket
+      </text>
+    </g>
+
+    <!-- Client Socket Component Box -->
+    <g transform="translate(18, 280)">
+      <rect width="394" height="172" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <text x="16" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#1e3a8a">
+        Soket Klien (clientSocket) &amp; Buffer Transmisi
+      </text>
+
+      <!-- Encoding Box -->
+      <rect x="16" y="36" width="362" height="40" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="26" y="52" font-family="Courier, monospace" font-size="10.5" font-weight="700" fill="#1e40af">
+        .encode(&apos;utf-8&apos;)
+      </text>
+      <text x="26" y="68" font-family="Courier, monospace" font-size="9.5" fill="#334155">
+        String &quot;jaringan...&quot; → Bita: b&apos;jaringan komputer seru&apos;
+      </text>
+
+      <!-- Decoding Box -->
+      <rect x="16" y="86" width="362" height="40" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+      <text x="26" y="102" font-family="Courier, monospace" font-size="10.5" font-weight="700" fill="#065f46">
+        .decode(&apos;utf-8&apos;)
+      </text>
+      <text x="26" y="118" font-family="Courier, monospace" font-size="9.5" fill="#334155">
+        Bita: b&apos;JARINGAN...&apos; → String &quot;JARINGAN KOMPUTER SERU&quot;
+      </text>
+
+      <!-- Port & Binding Status -->
+      <text x="16" y="146" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="600" fill="#475569">
+        Alamat Klien: IP Localhost (127.0.0.1) • Port Asal Efemeral: <tspan fill="#2563eb" font-weight="700">54321</tspan>
+      </text>
+      <text x="16" y="160" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#64748b">
+        Port dialokasikan secara otomatis dan dinamis oleh Kernel OS.
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= MIDDLE CHANNEL: NETWORK & DATA IN FLIGHT ================= -->
+  <g transform="translate(475, 115)">
+    <!-- Channel Container -->
+    <rect width="330" height="470" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#subtleShadow)"/>
+
+    <!-- Network Cloud Title -->
+    <rect x="0" y="0" width="330" height="46" rx="14 14 0 0" fill="#334155"/>
+    <text x="165" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">
+      KANAL JARINGAN (Localhost / LAN)
+    </text>
+    <text x="165" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">
+      Protokol Transport: UDP (Datagram) / TCP (Stream)
+    </text>
+
+    <!-- REQUEST ARROW & PAYLOAD (TOP) -->
+    <g transform="translate(15, 75)">
+      <rect width="300" height="120" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2"/>
+      <text x="14" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#1e3a8a">
+        [LANGKAH 2] PERMINTAAN (REQUEST) →
+      </text>
+      
+      <!-- Direction arrow line -->
+      <line x1="20" y1="40" x2="275" y2="40" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowBlue)"/>
+      
+      <!-- Payload Box -->
+      <rect x="18" y="52" width="264" height="34" rx="5" fill="#ffffff" stroke="#3b82f6" stroke-width="1"/>
+      <text x="26" y="68" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#1d4ed8">
+        b&apos;jaringan komputer seru&apos;
+      </text>
+      <text x="26" y="81" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#64748b">
+        Muatan: Bita Teks Huruf Kecil
+      </text>
+
+      <text x="18" y="105" font-family="Courier, monospace" font-size="9.5" fill="#334155">
+        Tujuan: 127.0.0.1 : <tspan font-weight="700" fill="#2563eb">12000</tspan>
+      </text>
+    </g>
+
+    <!-- Inter-layer Bridge Icon / Analogy -->
+    <g transform="translate(65, 222)">
+      <rect width="200" height="42" rx="21" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="100" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#475569" text-anchor="middle">
+        API Socket Jaringan
+      </text>
+      <text x="100" y="34" font-family="Courier, monospace" font-size="9" fill="#0284c7" text-anchor="middle">
+        sendto() / send() ⇄ recvfrom() / recv()
+      </text>
+    </g>
+
+    <!-- RESPONSE ARROW & PAYLOAD (BOTTOM) -->
+    <g transform="translate(15, 290)">
+      <rect width="300" height="120" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2"/>
+      <text x="14" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#065f46">
+        ← [LANGKAH 4] BALASAN (RESPONSE)
+      </text>
+
+      <!-- Direction arrow line (pointing left) -->
+      <line x1="280" y1="40" x2="25" y2="40" stroke="#059669" stroke-width="3" marker-end="url(#arrowGreen)"/>
+
+      <!-- Payload Box -->
+      <rect x="18" y="52" width="264" height="34" rx="5" fill="#ffffff" stroke="#10b981" stroke-width="1"/>
+      <text x="26" y="68" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#047857">
+        b&apos;JARINGAN KOMPUTER SERU&apos;
+      </text>
+      <text x="26" y="81" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#64748b">
+        Muatan: Bita Teks HURUF BESAR
+      </text>
+
+      <text x="18" y="105" font-family="Courier, monospace" font-size="9.5" fill="#334155">
+        Tujuan: 127.0.0.1 : <tspan font-weight="700" fill="#059669">54321</tspan>
+      </text>
+    </g>
+
+    <text x="165" y="442" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">
+      Kanal Full-Duplex (Dua Arah Independen)
+    </text>
+  </g>
+
+  <!-- ================= RIGHT PANEL: SERVER (SERVER PROCESS) ================= -->
+  <g transform="translate(820, 115)">
+    <!-- Container Card -->
+    <rect width="430" height="470" rx="14" fill="url(#serverGrad)" stroke="#86efac" stroke-width="1.5" filter="url(#cardShadow)"/>
+
+    <!-- Header -->
+    <path d="M 0 14 Q 0 0 14 0 L 416 0 Q 430 0 430 14 L 430 46 L 0 46 Z" fill="url(#serverHdrGrad)"/>
+    <text x="18" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#ffffff">
+      2. PROSES SERVER (Server Process)
+    </text>
+    <rect x="330" y="12" width="85" height="22" rx="11" fill="#064e3b" stroke="#34d399" stroke-width="1"/>
+    <text x="372" y="27" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#a7f3d0" text-anchor="middle">
+      server.py
+    </text>
+
+    <!-- Server Listening & Socket Spec Box -->
+    <g transform="translate(18, 60)">
+      <rect width="394" height="85" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <text x="16" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#065f46">
+        Soket Server &amp; Konfigurasi Port
+      </text>
+      <text x="16" y="40" font-family="Courier, monospace" font-size="10.5" fill="#0f172a">
+        serverSocket = socket(AF_INET, SOCK_...)
+      </text>
+      <text x="16" y="58" font-family="Courier, monospace" font-size="10.5" font-weight="700" fill="#047857">
+        serverSocket.bind((&apos;&apos;, 12000))
+      </text>
+      <text x="16" y="76" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#475569">
+        Mendengarkan secara pasif di port tetap: <tspan font-weight="700" fill="#047857">12000</tspan>
+      </text>
+    </g>
+
+    <!-- Internal Processing Pipeline Box (Langkah 3) -->
+    <g transform="translate(18, 160)">
+      <rect width="394" height="292" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <rect width="394" height="30" rx="8 8 0 0" fill="#065f46"/>
+      <text x="16" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#ffffff">
+        [LANGKAH 3] PIPELINE TRANSFORMASI LOGIKA SERVER
+      </text>
+
+      <!-- Substep 3a: Read Bytes -->
+      <g transform="translate(16, 42)">
+        <rect width="362" height="42" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="12" y="18" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#1e293b">
+          3a. Penerimaan Bita Soket:
+        </text>
+        <text x="12" y="33" font-family="Courier, monospace" font-size="9.5" fill="#3b82f6">
+          data, clientAddress = serverSocket.recvfrom(...)
+        </text>
+      </g>
+
+      <!-- Substep 3b: Decode -->
+      <g transform="translate(16, 94)">
+        <rect width="362" height="42" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="12" y="18" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#1e293b">
+          3b. String Decoding:
+        </text>
+        <text x="12" y="33" font-family="Courier, monospace" font-size="9.5" fill="#0f172a">
+          kalimat = data.decode(&apos;utf-8&apos;)
+        </text>
+      </g>
+
+      <!-- Substep 3c: Core Logic .upper() -->
+      <g transform="translate(16, 146)">
+        <rect width="362" height="48" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+        <text x="12" y="19" font-family="Courier, monospace" font-size="10" font-weight="800" fill="#065f46">
+          3c. Transformasi Kapital (Inti Aplikasi):
+        </text>
+        <text x="12" y="36" font-family="Courier, monospace" font-size="11" font-weight="800" fill="#047857">
+          kalimat_kapital = kalimat.upper()
+        </text>
+      </g>
+
+      <!-- Substep 3d: Encode & Send -->
+      <g transform="translate(16, 204)">
+        <rect width="362" height="42" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="12" y="18" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#1e293b">
+          3d. Re-encoding ke Bita:
+        </text>
+        <text x="12" y="33" font-family="Courier, monospace" font-size="9.5" fill="#0f172a">
+          data_balasan = kalimat_kapital.encode(&apos;utf-8&apos;)
+        </text>
+      </g>
+
+      <!-- Substep 3e: Send back -->
+      <g transform="translate(16, 254)">
+        <text x="12" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" font-weight="600" fill="#065f46">
+          ↳ Menembakkan balik bita ke socket alamat Klien (clientAddress).
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= BOTTOM HORIZONTAL WORKFLOW CARDS (STEPS 1 - 5) ================= -->
+  <g transform="translate(30, 600)">
+    <rect width="1220" height="195" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#cardShadow)"/>
+
+    <!-- Section Title Banner -->
+    <path d="M 0 12 Q 0 0 12 0 L 1208 0 Q 1220 0 1220 12 L 1220 32 L 0 32 Z" fill="#1e293b"/>
+    <text x="20" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+      SEKUENSI 5 LANGKAH EKSEKUSI APLIKASI LAB
+    </text>
+
+    <!-- Step 1 Card -->
+    <g transform="translate(15, 45)">
+      <rect width="228" height="135" rx="8" fill="url(#stepGrad)" stroke="#cbd5e1" stroke-width="1"/>
+      <rect width="36" height="24" rx="4" fill="#2563eb" x="12" y="12"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">1</text>
+      <text x="56" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a">Input Pengguna</text>
+      
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Pengguna mengetik kalimat
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        huruf kecil pada antarmuka
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        terminal klien via keyboard.
+      </text>
+
+      <rect x="12" y="98" width="204" height="25" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#1e40af">input() → &quot;halo&quot;</text>
+    </g>
+
+    <!-- Step 2 Card -->
+    <g transform="translate(258, 45)">
+      <rect width="228" height="135" rx="8" fill="url(#stepGrad)" stroke="#cbd5e1" stroke-width="1"/>
+      <rect width="36" height="24" rx="4" fill="#2563eb" x="12" y="12"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">2</text>
+      <text x="56" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a">Transmisi Request</text>
+
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Klien mengenkode string ke bita
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        lalu menembakkan data keluar
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        menuju IP dan Port Server.
+      </text>
+
+      <rect x="12" y="98" width="204" height="25" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#1e40af">sendto() / send()</text>
+    </g>
+
+    <!-- Step 3 Card -->
+    <g transform="translate(501, 45)">
+      <rect width="228" height="135" rx="8" fill="url(#stepGrad)" stroke="#10b981" stroke-width="1.5"/>
+      <rect width="36" height="24" rx="4" fill="#059669" x="12" y="12"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">3</text>
+      <text x="56" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#065f46">Konversi Huruf</text>
+
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Server menerima bita, dekode
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        ke string, lalu mengonversinya
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        menjadi HURUF KAPITAL.
+      </text>
+
+      <rect x="12" y="98" width="204" height="25" rx="4" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="800" fill="#047857">.upper() → &quot;HALO&quot;</text>
+    </g>
+
+    <!-- Step 4 Card -->
+    <g transform="translate(744, 45)">
+      <rect width="228" height="135" rx="8" fill="url(#stepGrad)" stroke="#cbd5e1" stroke-width="1"/>
+      <rect width="36" height="24" rx="4" fill="#059669" x="12" y="12"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">4</text>
+      <text x="56" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#065f46">Transmisi Response</text>
+
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Server mengenkode string baru
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        ke bita dan mengirimkannya
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        balik menuju soket klien.
+      </text>
+
+      <rect x="12" y="98" width="204" height="25" rx="4" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#047857">sendto() / send()</text>
+    </g>
+
+    <!-- Step 5 Card -->
+    <g transform="translate(987, 45)">
+      <rect width="218" height="135" rx="8" fill="url(#stepGrad)" stroke="#cbd5e1" stroke-width="1"/>
+      <rect width="36" height="24" rx="4" fill="#2563eb" x="12" y="12"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">5</text>
+      <text x="56" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a">Output Terminal</text>
+
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Klien menerima bita balasan,
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        mendekodenya ke string, dan
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        menampilkan ke monitor.
+      </text>
+
+      <rect x="12" y="98" width="194" height="25" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#1e40af">print(hasil_dekode)</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,450 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#edf2f7"/>
+    </linearGradient>
+
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <linearGradient id="userSpaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+
+    <linearGradient id="kernelSpaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4"/>
+      <stop offset="100%" stop-color="#dcfce7"/>
+    </linearGradient>
+
+    <linearGradient id="doorGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+
+    <linearGradient id="doorActiveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+
+    <filter id="doorGlow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#d97706" flood-opacity="0.25"/>
+    </filter>
+
+    <filter id="doorGlowBlue" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#2563eb" flood-opacity="0.25"/>
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrowBlue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M 0 0 L 9 4.5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M 0 0 L 9 4.5 L 0 9 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M 0 0 L 9 4.5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <style>
+    .title-main { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 800; fill: #ffffff; letter-spacing: 0.5px; }
+    .title-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 500; fill: #bfdbfe; }
+    .host-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 800; }
+    .zone-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.5px; }
+    .card-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11.5px; line-height: 1.45; fill: #334155; }
+    .door-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12.5px; font-weight: 800; fill: #ffffff; }
+    .code-txt { font-family: 'Consolas', 'Courier New', monospace; font-size: 11px; fill: #1e3a8a; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="1280" height="820" fill="url(#bgGrad)"/>
+  <rect x="15" y="15" width="1250" height="790" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Top Banner / Header -->
+  <g transform="translate(15, 15)">
+    <path d="M 0 16 C 0 7.16 7.16 0 16 0 L 1234 0 C 1242.84 0 1250 7.16 1250 16 L 1250 74 L 0 74 Z" fill="url(#headerGrad)"/>
+    <rect x="25" y="20" width="4" height="34" rx="2" fill="#38bdf8"/>
+    <text x="38" y="38" class="title-main">ABSTRAKSI SOKET: PINTU GERBANG ANTARA APLIKASI DAN KERNEL OS</text>
+    <text x="38" y="56" class="title-sub">Model Antarmuka Komunikasi End-to-End: Batas Kendali Ruang Pengguna (User Space) vs Ruang Kernel (OS Transport)</text>
+
+    <!-- Top Badge -->
+    <rect x="1055" y="24" width="170" height="26" rx="13" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+    <circle cx="1070" cy="37" r="4" fill="#38bdf8"/>
+    <text x="1082" y="41" font-family="-apple-system, sans-serif" font-size="10px" font-weight="800" fill="#ffffff">Jaringan Komputer</text>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       GARIS DEMARKASI HORIZONTAL (BOUNDARY OF CONTROL)
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(35, 345)">
+    <!-- Red dashed boundary line spanning the canvas -->
+    <line x1="0" y1="0" x2="1210" y2="0" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6,4"/>
+    
+    <!-- Left Boundary Badge -->
+    <rect x="0" y="-12" width="230" height="24" rx="4" fill="#dc2626"/>
+    <text x="115" y="4" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10px" font-weight="800" fill="#ffffff">
+      ↑ KENDALI PENGEMBANG APLIKASI
+    </text>
+
+    <!-- Center Boundary Badge -->
+    <rect x="490" y="-14" width="230" height="28" rx="6" fill="#1e293b"/>
+    <text x="605" y="4" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11px" font-weight="800" fill="#ffffff">
+      BATAS GERBANG ANTARMUKA SOKET
+    </text>
+
+    <!-- Right Boundary Badge -->
+    <rect x="980" y="-12" width="230" height="24" rx="4" fill="#047857"/>
+    <text x="1095" y="4" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10px" font-weight="800" fill="#ffffff">
+      ↓ KENDALI PENUH SISTEM OPERASI
+    </text>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       HOST PENGIRIM / KLIEN (SISI KIRI)
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(35, 105)">
+    <!-- Host Container Box -->
+    <rect x="0" y="0" width="410" height="540" rx="12" fill="#ffffff" stroke="#93c5fd" stroke-width="1.6" filter="url(#cardShadow)"/>
+    
+    <!-- Host Header -->
+    <path d="M 0 12 C 0 5.37 5.37 0 12 0 L 398 0 C 404.63 0 410 5.37 410 12 L 410 44 L 0 44 Z" fill="#1e40af"/>
+    <text x="20" y="28" class="host-hdr" fill="#ffffff">💻 HOST KLIEN / PENGIRIM (LOCAL HOST)</text>
+
+    <!-- 1. ZONA ATAS: USER SPACE (PROSES APLIKASI) -->
+    <g transform="translate(15, 54)">
+      <rect x="0" y="0" width="380" height="150" rx="8" fill="url(#userSpaceGrad)" stroke="#3b82f6" stroke-width="1.2"/>
+      
+      <!-- Zone Tag -->
+      <rect x="10" y="8" width="210" height="20" rx="4" fill="#2563eb"/>
+      <text x="115" y="22" text-anchor="middle" class="zone-hdr" fill="#ffffff">RUANG PENGGUNA (USER SPACE)</text>
+      
+      <text x="12" y="48" font-family="-apple-system, sans-serif" font-size="12px" font-weight="700" fill="#0f172a">
+        Proses Aplikasi Klien (Program Python / App)
+      </text>
+      <text x="12" y="66" class="card-txt">
+        • Dikelola oleh <tspan font-weight="bold" fill="#1e40af">Pengembang Aplikasi</tspan> (User-Space Code).
+      </text>
+      <text x="12" y="82" class="card-txt">
+        • Menentukan format pesan, struktur bita, enkripsi, dan logika.
+      </text>
+
+      <!-- Code Snippet Box -->
+      <rect x="10" y="92" width="360" height="46" rx="6" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="18" y="110" class="code-txt">
+        msg = "Halo Server ITERA".encode('utf-8')
+      </text>
+      <text x="18" y="126" class="code-txt" fill="#2563eb">
+        clientSocket.send(msg) <tspan fill="#64748b"># Menjejal bita ke luar pintu</tspan>
+      </text>
+    </g>
+
+    <!-- 2. THE DOORWAY: SOCKET KLIEN (PINTU GERBANG) -->
+    <g transform="translate(15, 218)">
+      <!-- Arrow from Application into Socket -->
+      <path d="M 190 -10 L 190 8" stroke="#2563eb" stroke-width="2.5" fill="none" marker-end="url(#arrowBlue)"/>
+
+      <rect x="0" y="12" width="380" height="64" rx="8" fill="url(#doorGrad)" stroke="#b45309" stroke-width="2" filter="url(#doorGlow)"/>
+      
+      <!-- Door icon graphic -->
+      <rect x="16" y="22" width="32" height="44" rx="3" fill="#78350f" stroke="#ffffff" stroke-width="1.5"/>
+      <rect x="20" y="26" width="24" height="36" rx="2" fill="#fef3c7"/>
+      <circle cx="38" cy="44" r="2.5" fill="#78350f"/>
+
+      <text x="60" y="38" class="door-txt">🚪 PINTU SOKET KLIEN (SOCKET ENDPOINT)</text>
+      <text x="60" y="55" font-family="-apple-system, sans-serif" font-size="11px" font-weight="600" fill="#fef3c7">
+        Titik Temu: File Descriptor di OS Kernel • Port Ephemeral :54210
+      </text>
+      <text x="60" y="68" font-family="-apple-system, sans-serif" font-size="10px" fill="#ffffff">
+        Antarmuka penghubung proses aplikasi ke stack protokol transport
+      </text>
+    </g>
+
+    <!-- 3. ZONA BAWAH: KERNEL SPACE (TRANSPORT LAYER & OS) -->
+    <g transform="translate(15, 308)">
+      <!-- Arrow from Socket into Kernel -->
+      <path d="M 190 -10 L 190 8" stroke="#d97706" stroke-width="2.5" fill="none" marker-end="url(#arrowAmber)"/>
+
+      <rect x="0" y="12" width="380" height="206" rx="8" fill="url(#kernelSpaceGrad)" stroke="#059669" stroke-width="1.2"/>
+      
+      <!-- Zone Tag -->
+      <rect x="10" y="20" width="200" height="20" rx="4" fill="#047857"/>
+      <text x="110" y="34" text-anchor="middle" class="zone-hdr" fill="#ffffff">RUANG KERNEL (KERNEL SPACE)</text>
+
+      <text x="12" y="60" font-family="-apple-system, sans-serif" font-size="12px" font-weight="700" fill="#065f46">
+        Lapisan Transpor &amp; Driver Kartu Jaringan (OS)
+      </text>
+      <text x="12" y="78" class="card-txt">
+        • Dikelola sepenuhnya oleh <tspan font-weight="bold" fill="#065f46">Sistem Operasi (Kernel Stack)</tspan>.
+      </text>
+      <text x="12" y="94" class="card-txt">
+        • Mengalokasikan <strong>Send Buffer</strong> (Penyangga memori RAM kernel).
+      </text>
+      <text x="12" y="110" class="card-txt">
+        • Membungkus bita ke dalam segmen TCP (Sequence) / paket UDP.
+      </text>
+      <text x="12" y="126" class="card-txt">
+        • Menghitung Checksum, mengatur Flow Control &amp; Retransmisi.
+      </text>
+      
+      <!-- Hardware / NIC block -->
+      <rect x="10" y="142" width="360" height="62" rx="6" fill="#ffffff" stroke="#a7f3d0" stroke-width="1"/>
+      <rect x="20" y="152" width="40" height="42" rx="4" fill="#1e293b"/>
+      <circle cx="32" cy="164" r="3" fill="#22c55e"/>
+      <circle cx="44" cy="164" r="3" fill="#38bdf8"/>
+      <rect x="26" y="174" width="28" height="12" rx="2" fill="#64748b"/>
+
+      <text x="70" y="166" font-family="-apple-system, sans-serif" font-size="11.5px" font-weight="700" fill="#0f172a">
+        Kartu Antarmuka Jaringan (NIC / Ethernet / Wi-Fi)
+      </text>
+      <text x="70" y="182" class="card-txt" fill="#475569">
+        Mengonversi bita digital buffer kernel menjadi sinyal fisik kabel/radio
+      </text>
+    </g>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       PANEL TENGAH: TRANSMISI INFRASTRUKTUR JARINGAN INTERNET
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(460, 105)">
+    <!-- Container Awan & Alur Transmisi -->
+    <rect x="0" y="0" width="360" height="540" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- Top Header -->
+    <rect x="0" y="0" width="360" height="44" rx="12" fill="#f8fafc"/>
+    <text x="180" y="27" text-anchor="middle" class="host-hdr" fill="#0f172a">
+      🌐 INFRASTRUKTUR JARINGAN
+    </text>
+
+    <!-- Cloud Graphic -->
+    <g transform="translate(30, 60)">
+      <path d="M 50 60 C 30 60, 15 75, 15 95 C 5 95, 0 105, 0 118 C 0 132, 12 142, 25 142 L 275 142 C 290 142, 300 132, 300 118 C 300 106, 292 98, 282 95 C 282 78, 268 62, 250 62 C 242 62, 235 65, 230 69 C 220 52, 202 40, 180 40 C 162 40, 146 50, 138 64 C 133 60, 126 58, 120 58 C 102 58, 90 70, 88 85 C 80 70, 65 60, 50 60 Z" 
+            fill="url(#cloudGrad)" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="150" y="98" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12.5px" font-weight="800" fill="#334155">
+        JARINGAN INTERNET
+      </text>
+      <text x="150" y="116" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5px" font-weight="500" fill="#64748b">
+        Hop Router, Switch &amp; Media Transmisi
+      </text>
+    </g>
+
+    <!-- Analogi Doorway Narrative Box -->
+    <g transform="translate(18, 220)">
+      <rect x="0" y="0" width="324" height="108" rx="8" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.2"/>
+      <text x="12" y="20" font-family="-apple-system, sans-serif" font-size="11.5px" font-weight="800" fill="#92400e">
+        Analogi Pintu (The Doorway Concept):
+      </text>
+      <text x="12" y="38" class="card-txt" fill="#78350f">
+        Proses aplikasi di User Space mengasumsikan
+      </text>
+      <text x="12" y="54" class="card-txt" fill="#78350f">
+        bahwa begitu pesan dilemparkan ke luar pintu
+      </text>
+      <text x="12" y="70" class="card-txt" fill="#78350f">
+        (Socket), infrastruktur sistem di balik pintu
+      </text>
+      <text x="12" y="86" class="card-txt" fill="#78350f">
+        akan mengantarkannya ke pintu tujuan dengan selamat.
+      </text>
+    </g>
+
+    <!-- Data Stream Delivery Arrow (Kernel to Kernel via Internet) -->
+    <g transform="translate(18, 360)">
+      <rect x="0" y="0" width="324" height="154" rx="8" fill="#f0fdf4" stroke="#a7f3d0" stroke-width="1.2"/>
+      <text x="12" y="22" font-family="-apple-system, sans-serif" font-size="11px" font-weight="800" fill="#065f46">
+        Alur Data di Bawah Pintu (Kernel Level):
+      </text>
+      <path d="M 20 54 L 300 54" stroke="#059669" stroke-width="3" fill="none" marker-end="url(#arrowGreen)"/>
+      <text x="160" y="46" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#047857">
+        Transmisi Bita Stream (IP Packets) →
+      </text>
+
+      <path d="M 300 96 L 20 96" stroke="#2563eb" stroke-width="3" fill="none" marker-end="url(#arrowBlue)"/>
+      <text x="160" y="88" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#1e40af">
+        ← Balasan Respon / Paket ACK
+      </text>
+
+      <rect x="12" y="112" width="300" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="162" y="131" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10px" font-weight="700" fill="#334155">
+        Aplikasi tidak peduli jalur fisik yang dilewati paket!
+      </text>
+    </g>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       HOST PENERIMA / SERVER (SISI KANAN)
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(835, 105)">
+    <!-- Host Container Box -->
+    <rect x="0" y="0" width="410" height="540" rx="12" fill="#ffffff" stroke="#86efac" stroke-width="1.6" filter="url(#cardShadow)"/>
+    
+    <!-- Host Header -->
+    <path d="M 0 12 C 0 5.37 5.37 0 12 0 L 398 0 C 404.63 0 410 5.37 410 12 L 410 44 L 0 44 Z" fill="#047857"/>
+    <text x="20" y="28" class="host-hdr" fill="#ffffff">🖥️ HOST SERVER / PENERIMA (REMOTE HOST)</text>
+
+    <!-- 1. ZONA ATAS: USER SPACE (PROSES SERVER) -->
+    <g transform="translate(15, 54)">
+      <rect x="0" y="0" width="380" height="150" rx="8" fill="url(#userSpaceGrad)" stroke="#3b82f6" stroke-width="1.2"/>
+      
+      <!-- Zone Tag -->
+      <rect x="10" y="8" width="210" height="20" rx="4" fill="#2563eb"/>
+      <text x="115" y="22" text-anchor="middle" class="zone-hdr" fill="#ffffff">RUANG PENGGUNA (USER SPACE)</text>
+      
+      <text x="12" y="48" font-family="-apple-system, sans-serif" font-size="12px" font-weight="700" fill="#0f172a">
+        Proses Aplikasi Server (Daemon / Service)
+      </text>
+      <text x="12" y="66" class="card-txt">
+        • Dikelola oleh <tspan font-weight="bold" fill="#1e40af">Pengembang Server</tspan> (Python/C/Go).
+      </text>
+      <text x="12" y="82" class="card-txt">
+        • Membaca data masuk, memproses logika, merangkai jawaban.
+      </text>
+
+      <!-- Code Snippet Box -->
+      <rect x="10" y="92" width="360" height="46" rx="6" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="18" y="110" class="code-txt" fill="#2563eb">
+        sentence = connectionSocket.recv(1024)
+      </text>
+      <text x="18" y="126" class="code-txt">
+        capitalized = sentence.decode().upper() <tspan fill="#64748b"># Olah data</tspan>
+      </text>
+    </g>
+
+    <!-- 2. THE DOORWAY: SOCKET SERVER (PINTU PENERIMA) -->
+    <g transform="translate(15, 218)">
+      <!-- Arrow from Kernel into Socket and up to App -->
+      <path d="M 190 74 L 190 90" stroke="#059669" stroke-width="2.5" fill="none" marker-end="url(#arrowGreen)"/>
+
+      <rect x="0" y="12" width="380" height="64" rx="8" fill="url(#doorActiveGrad)" stroke="#1e40af" stroke-width="2" filter="url(#doorGlowBlue)"/>
+      
+      <!-- Door icon graphic -->
+      <rect x="16" y="22" width="32" height="44" rx="3" fill="#0f172a" stroke="#ffffff" stroke-width="1.5"/>
+      <rect x="20" y="26" width="24" height="36" rx="2" fill="#bfdbfe"/>
+      <circle cx="38" cy="44" r="2.5" fill="#1e40af"/>
+
+      <text x="60" y="38" class="door-txt">🚪 PINTU SOKET SERVER (CONNECTION SOCKET)</text>
+      <text x="60" y="55" font-family="-apple-system, sans-serif" font-size="11px" font-weight="600" fill="#dbeafe">
+        Hasil accept() • Didedikasikan 1-on-1 ke Klien :12000
+      </text>
+      <text x="60" y="68" font-family="-apple-system, sans-serif" font-size="10px" fill="#ffffff">
+        Pintu masuk tempat data ditarik ke dalam RAM aplikasi pengguna
+      </text>
+    </g>
+
+    <!-- 3. ZONA BAWAH: KERNEL SPACE (RECEIVE STACK & OS) -->
+    <g transform="translate(15, 308)">
+      <!-- Arrow from NIC to Socket -->
+      <path d="M 190 12 L 190 -8" stroke="#059669" stroke-width="2.5" fill="none" marker-end="url(#arrowGreen)"/>
+
+      <rect x="0" y="12" width="380" height="206" rx="8" fill="url(#kernelSpaceGrad)" stroke="#059669" stroke-width="1.2"/>
+      
+      <!-- Zone Tag -->
+      <rect x="10" y="20" width="200" height="20" rx="4" fill="#047857"/>
+      <text x="110" y="34" text-anchor="middle" class="zone-hdr" fill="#ffffff">RUANG KERNEL (KERNEL SPACE)</text>
+
+      <text x="12" y="60" font-family="-apple-system, sans-serif" font-size="12px" font-weight="700" fill="#065f46">
+        Lapisan Transpor &amp; Antrian Penyangga Server
+      </text>
+      <text x="12" y="78" class="card-txt">
+        • Dikelola sepenuhnya oleh <tspan font-weight="bold" fill="#065f46">Sistem Operasi Server</tspan>.
+      </text>
+      <text x="12" y="94" class="card-txt">
+        • Menampung bita masuk ke dalam <strong>Receive Buffer</strong>.
+      </text>
+      <text x="12" y="110" class="card-txt">
+        • Memverifikasi nomor port tujuan (:12000) &amp; Checksum.
+      </text>
+      <text x="12" y="126" class="card-txt">
+        • Membangunkan fungsi <code>recv()</code> yang sedang tertidur (blocking).
+      </text>
+      
+      <!-- Hardware / NIC block -->
+      <rect x="10" y="142" width="360" height="62" rx="6" fill="#ffffff" stroke="#a7f3d0" stroke-width="1"/>
+      <rect x="20" y="152" width="40" height="42" rx="4" fill="#1e293b"/>
+      <circle cx="32" cy="164" r="3" fill="#22c55e"/>
+      <circle cx="44" cy="164" r="3" fill="#22c55e"/>
+      <rect x="26" y="174" width="28" height="12" rx="2" fill="#64748b"/>
+
+      <text x="70" y="166" font-family="-apple-system, sans-serif" font-size="11.5px" font-weight="700" fill="#0f172a">
+        Kartu Jaringan Server (Server NIC Card)
+      </text>
+      <text x="70" y="182" class="card-txt" fill="#475569">
+        Menerima paket frame dari kabel internet dan meneruskan interupsi ke CPU
+      </text>
+    </g>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       PANEL BAWAH: RANGKUMAN TIGA PRINSIP KUNCI ABSTRAKSI SOKET
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(35, 660)">
+    <rect x="0" y="0" width="1210" height="120" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- Title bar bottom -->
+    <rect x="0" y="0" width="1210" height="28" rx="10" fill="#0f172a"/>
+    <text x="605" y="18" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11.5px" font-weight="800" fill="#f8fafc">
+      TIGA PRINSIP ESENSIAL PADA ABSTRAKSI PEMROGRAMAN SOKET JARINGAN
+    </text>
+
+    <!-- 3 Summary Columns -->
+    <g transform="translate(20, 36)">
+      <!-- Col 1 -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="4" width="375" height="70" rx="6" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+        <text x="14" y="24" font-family="-apple-system, sans-serif" font-size="11.5px" font-weight="700" fill="#1e40af">
+          1. Abstraksi Titik Akhir (Endpoint Interface)
+        </text>
+        <text x="14" y="42" class="card-txt">
+          Aplikasi tidak perlu mengetahui topologi kabel atau jenis router
+        </text>
+        <text x="14" y="58" class="card-txt">
+          di internet. Cukup meminta soket ke OS dan menjejal bita ke dalamnya.
+        </text>
+      </g>
+
+      <!-- Col 2 -->
+      <g transform="translate(395, 0)">
+        <rect x="0" y="4" width="385" height="70" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1"/>
+        <text x="14" y="24" font-family="-apple-system, sans-serif" font-size="11.5px" font-weight="700" fill="#92400e">
+          2. Pembagian Batas Kendali (Boundary of Control)
+        </text>
+        <text x="14" y="42" class="card-txt">
+          Bebas berkresi pada logika aplikasi di User Space, sementara
+        </text>
+        <text x="14" y="58" class="card-txt">
+          stabilitas transmisi, penomoran sequence &amp; buffer ditangani OS Kernel.
+        </text>
+      </g>
+
+      <!-- Col 3 -->
+      <g transform="translate(800, 0)">
+        <rect x="0" y="4" width="375" height="70" rx="6" fill="#ffffff" stroke="#a7f3d0" stroke-width="1"/>
+        <text x="14" y="24" font-family="-apple-system, sans-serif" font-size="11.5px" font-weight="700" fill="#047857">
+          3. Pengenal Komunikasi Unik (Socket Pair)
+        </text>
+        <text x="14" y="42" class="card-txt">
+          Tiap sesi komunikasi diidentifikasi oleh 4 parameter (4-Tuple):
+        </text>
+        <text x="14" y="58" class="card-txt" font-family="monospace" fill="#047857" font-weight="bold">
+          (IP_Sumber, Port_Sumber, IP_Tujuan, Port_Tujuan)
+        </text>
+      </g>
+    </g>
+  </g>
+
+</svg>

@@ -1,0 +1,410 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#edf2f7"/>
+    </linearGradient>
+
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#eff6ff"/>
+    </linearGradient>
+
+    <linearGradient id="serverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0fdf4"/>
+    </linearGradient>
+
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+
+    <linearGradient id="reqGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+
+    <linearGradient id="resGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+
+    <filter id="glowClient" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#3b82f6" flood-opacity="0.18"/>
+    </filter>
+
+    <filter id="glowServer" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#10b981" flood-opacity="0.18"/>
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrowReq" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M 0 0 L 9 4.5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowRes" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M 0 0 L 9 4.5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <style>
+    .title-main { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 800; fill: #ffffff; letter-spacing: 0.5px; }
+    .title-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 500; fill: #bfdbfe; }
+    .panel-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 800; }
+    .panel-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 500; }
+    .card-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11.5px; line-height: 1.45; fill: #334155; }
+    .card-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 700; fill: #0f172a; }
+    .flow-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11.5px; font-weight: 700; }
+    .badge-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="1280" height="820" fill="url(#bgGrad)"/>
+  <rect x="15" y="15" width="1250" height="790" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Top Banner / Header -->
+  <g transform="translate(15, 15)">
+    <path d="M 0 16 C 0 7.16 7.16 0 16 0 L 1234 0 C 1242.84 0 1250 7.16 1250 16 L 1250 74 L 0 74 Z" fill="url(#headerGrad)"/>
+    <rect x="25" y="20" width="4" height="34" rx="2" fill="#38bdf8"/>
+    <text x="38" y="38" class="title-main">PARADIGMA ARSITEKTUR LAYANAN: CLIENT–SERVER</text>
+    <text x="38" y="56" class="title-sub">Model Komunikasi Asimetris Internet: Pemohon Layanan On-Demand vs Penyedia Layanan Terpusat Always-On</text>
+
+    <!-- Top Badge -->
+    <rect x="1055" y="24" width="170" height="26" rx="13" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+    <circle cx="1070" cy="37" r="4" fill="#38bdf8"/>
+    <text x="1082" y="41" class="badge-hdr" fill="#ffffff">Jaringan Komputer</text>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       PANEL KIRI: SISI KLIEN (CLIENTS - PEMOHON LAYANAN)
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(35, 105)">
+    <!-- Main Client Panel Box -->
+    <rect x="0" y="0" width="370" height="540" rx="12" fill="url(#clientGrad)" stroke="#93c5fd" stroke-width="1.6" filter="url(#glowClient)"/>
+    
+    <!-- Header Client -->
+    <path d="M 0 12 C 0 5.37 5.37 0 12 0 L 358 0 C 364.63 0 370 5.37 370 12 L 370 46 L 0 46 Z" fill="#1e40af"/>
+    <text x="20" y="29" class="panel-hdr" fill="#ffffff">💻 SISI KLIEN (CLIENTS)</text>
+    <text x="245" y="29" class="panel-sub" fill="#bfdbfe">Pemohon Layanan</text>
+
+    <!-- Client Devices Visual Group -->
+    <!-- Device 1: PC Desktop -->
+    <g transform="translate(18, 60)">
+      <rect x="0" y="0" width="334" height="66" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+      <rect x="10" y="10" width="46" height="46" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+      <!-- Monitor icon -->
+      <rect x="18" y="18" width="30" height="22" rx="2" fill="#1e40af"/>
+      <rect x="22" y="22" width="22" height="14" rx="1" fill="#93c5fd"/>
+      <line x1="33" y1="40" x2="33" y2="48" stroke="#1e40af" stroke-width="2"/>
+      <line x1="25" y1="48" x2="41" y2="48" stroke="#1e40af" stroke-width="2"/>
+      
+      <text x="66" y="26" class="card-hdr">Klien Desktop (Kantor / Lab)</text>
+      <text x="66" y="42" class="card-txt">Alamat IP: <tspan font-family="monospace" fill="#2563eb">192.168.1.45</tspan> (Dinamis)</text>
+      <text x="66" y="56" class="card-txt">Port Lokal: <tspan font-family="monospace" fill="#0369a1">:54120</tspan> (Ephemeral OS)</text>
+    </g>
+
+    <!-- Device 2: Laptop Pengguna -->
+    <g transform="translate(18, 134)">
+      <rect x="0" y="0" width="334" height="66" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+      <rect x="10" y="10" width="46" height="46" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+      <!-- Laptop icon -->
+      <polygon points="23,20 43,20 47,40 19,40" fill="#1e40af"/>
+      <polygon points="25,22 41,22 44,38 22,38" fill="#93c5fd"/>
+      <rect x="16" y="40" width="34" height="5" rx="1" fill="#1e293b"/>
+
+      <text x="66" y="26" class="card-hdr">Klien Laptop (Wi-Fi Kampus)</text>
+      <text x="66" y="42" class="card-txt">Alamat IP: <tspan font-family="monospace" fill="#2563eb">10.0.12.89</tspan> (DHCP Lease)</text>
+      <text x="66" y="56" class="card-txt">Port Lokal: <tspan font-family="monospace" fill="#0369a1">:58912</tspan> (Ephemeral OS)</text>
+    </g>
+
+    <!-- Device 3: Smartphone -->
+    <g transform="translate(18, 208)">
+      <rect x="0" y="0" width="334" height="66" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+      <rect x="10" y="10" width="46" height="46" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+      <!-- Smartphone icon -->
+      <rect x="23" y="16" width="20" height="34" rx="3" fill="#1e40af"/>
+      <rect x="25" y="19" width="16" height="25" rx="1" fill="#93c5fd"/>
+      <circle cx="33" cy="46" r="1.5" fill="#ffffff"/>
+
+      <text x="66" y="26" class="card-hdr">Klien Mobile / Smartphone (Seluler)</text>
+      <text x="66" y="42" class="card-txt">Alamat IP: <tspan font-family="monospace" fill="#2563eb">172.16.8.210</tspan> (IP Operator)</text>
+      <text x="66" y="56" class="card-txt">Port Lokal: <tspan font-family="monospace" fill="#0369a1">:61405</tspan> (Ephemeral OS)</text>
+    </g>
+
+    <!-- Karakteristik Kunci Sisi Klien -->
+    <g transform="translate(18, 285)">
+      <rect x="0" y="0" width="334" height="238" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="0" y="0" width="334" height="30" rx="8" fill="#f1f5f9"/>
+      <path d="M 0 20 L 334 20 L 334 30 L 0 30 Z" fill="#f1f5f9"/>
+      <text x="12" y="20" font-family="-apple-system, sans-serif" font-size="12px" font-weight="700" fill="#0f172a">
+        Karakteristik Fundamental Klien:
+      </text>
+
+      <g transform="translate(12, 38)">
+        <circle cx="6" cy="8" r="3" fill="#2563eb"/>
+        <text x="16" y="12" class="card-txt"><strong>Aktif Menginisiasi:</strong> Selalu memprakarsai komunikasi</text>
+        <text x="16" y="26" class="card-txt">dengan mengirim permintaan (<tspan font-style="italic">Request</tspan>).</text>
+
+        <circle cx="6" cy="42" r="3" fill="#2563eb"/>
+        <text x="16" y="46" class="card-txt"><strong>Operasi On-Demand:</strong> Aktif saat pengguna butuh,</text>
+        <text x="16" y="60" class="card-txt">dapat mati/putus sambungan sewaktu-waktu.</text>
+
+        <circle cx="6" cy="76" r="3" fill="#2563eb"/>
+        <text x="16" y="80" class="card-txt"><strong>Alamat IP Dinamis:</strong> Berubah-ubah sesuai jaringan</text>
+        <text x="16" y="94" class="card-txt">lokal yang digunakan (DHCP / NAT).</text>
+
+        <circle cx="6" cy="110" r="3" fill="#2563eb"/>
+        <text x="16" y="114" class="card-txt"><strong>Port Ephemeral:</strong> Menggunakan nomor port acak</text>
+        <text x="16" y="128" class="card-txt">sementara yang dialokasikan oleh kernel OS (&gt; 1024).</text>
+
+        <rect x="4" y="142" width="308" height="42" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+        <text x="12" y="159" font-family="-apple-system, sans-serif" font-size="10.5px" font-weight="700" fill="#b91c1c">
+          ⚠️ Isolasi Klien (No Peer-to-Peer):
+        </text>
+        <text x="12" y="174" font-family="-apple-system, sans-serif" font-size="10px" fill="#7f1d1d">
+          Klien TIDAK BERKOMUNIKASI LANGSUNG antar-klien!
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       PANEL TENGAH: JARINGAN INTERNET & ALUR ASIMETRIS
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(425, 105)">
+    <!-- Container Awan & Alur -->
+    <rect x="0" y="0" width="430" height="540" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- Top Sub-Header -->
+    <rect x="0" y="0" width="430" height="46" rx="12" fill="#f8fafc"/>
+    <text x="215" y="28" text-anchor="middle" class="panel-hdr" fill="#0f172a">
+      🌐 INTERAKSI TRANSMISI DATA
+    </text>
+
+    <!-- Cloud Graphic -->
+    <g transform="translate(45, 65)">
+      <!-- Cloud Shape -->
+      <path d="M 60 70 C 40 70, 20 85, 20 105 C 10 105, 0 115, 0 130 C 0 145, 12 155, 25 155 L 315 155 C 330 155, 340 145, 340 130 C 340 118, 332 108, 320 105 C 320 85, 305 70, 285 70 C 278 70, 270 73, 265 77 C 255 58, 235 45, 210 45 C 190 45, 172 55, 163 70 C 158 66, 150 63, 142 63 C 122 63, 108 78, 105 95 C 98 80, 80 70, 60 70 Z" 
+            fill="url(#cloudGrad)" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="170" y="110" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13px" font-weight="800" fill="#334155">
+        JARINGAN INTERNET / INTI IP
+      </text>
+      <text x="170" y="128" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5px" font-weight="500" fill="#64748b">
+        Infrastruktur Router, Switch, Link ISP
+      </text>
+    </g>
+
+    <!-- Flow Arrows & Boxes -->
+    <!-- 1. REQUEST ARROW (Client -> Server) -->
+    <g transform="translate(25, 245)">
+      <rect x="0" y="0" width="380" height="74" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+      <path d="M 20 37 L 340 37" stroke="#2563eb" stroke-width="3.5" fill="none" marker-end="url(#arrowReq)"/>
+      <rect x="90" y="12" width="200" height="22" rx="4" fill="#2563eb"/>
+      <text x="190" y="27" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11px" font-weight="800" fill="#ffffff">
+        1. PERMINTAAN (REQUEST) →
+      </text>
+      <text x="190" y="58" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#1e40af">
+        Target: IP_Server:12000 (Payload Data)
+      </text>
+    </g>
+
+    <!-- 2. RESPONSE ARROW (Server -> Client) -->
+    <g transform="translate(25, 335)">
+      <rect x="0" y="0" width="380" height="74" rx="8" fill="#f0fdf4" stroke="#10b981" stroke-width="1.5"/>
+      <path d="M 340 37 L 20 37" stroke="#059669" stroke-width="3.5" fill="none" marker-end="url(#arrowRes)"/>
+      <rect x="90" y="12" width="200" height="22" rx="4" fill="#059669"/>
+      <text x="190" y="27" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11px" font-weight="800" fill="#ffffff">
+        ← 2. BALASAN (RESPONSE)
+      </text>
+      <text x="190" y="58" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#065f46">
+        Target: IP_Klien:Port_Ephemeral (Hasil Proses)
+      </text>
+    </g>
+
+    <!-- Asymmetry Summary Box -->
+    <g transform="translate(25, 425)">
+      <rect x="0" y="0" width="380" height="95" rx="8" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.2"/>
+      <text x="14" y="22" font-family="-apple-system, sans-serif" font-size="11px" font-weight="800" fill="#92400e">
+        Konsep Kunci: Asimetri Komunikasi Jaringan
+      </text>
+      <text x="14" y="40" class="card-txt" fill="#78350f">
+        • <strong>Sisi Klien:</strong> Memulai percakapan secara proaktif.
+      </text>
+      <text x="14" y="56" class="card-txt" fill="#78350f">
+        • <strong>Sisi Server:</strong> Pasif bersiaga (<em>listening</em>), merespons
+      </text>
+      <text x="14" y="72" class="card-txt" fill="#78350f">
+        hanya ketika ada paket yang mengetuk pintu soketnya.
+      </text>
+      <text x="14" y="88" class="card-txt" fill="#b45309">
+        • <em>Hubungan relasi 1 Server melayani ribuan Klien (1-to-Many).</em>
+      </text>
+    </g>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       PANEL KANAN: SISI SERVER (PENYEDIA LAYANAN TERPUSAT)
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(875, 105)">
+    <!-- Main Server Panel Box -->
+    <rect x="0" y="0" width="370" height="540" rx="12" fill="url(#serverGrad)" stroke="#86efac" stroke-width="1.6" filter="url(#glowServer)"/>
+    
+    <!-- Header Server -->
+    <path d="M 0 12 C 0 5.37 5.37 0 12 0 L 358 0 C 364.63 0 370 5.37 370 12 L 370 46 L 0 46 Z" fill="#047857"/>
+    <text x="20" y="29" class="panel-hdr" fill="#ffffff">🖥️ SISI SERVER (SERVERS)</text>
+    <text x="235" y="29" class="panel-sub" fill="#d1fae5">Penyedia Terpusat</text>
+
+    <!-- Server Rack Visualization -->
+    <g transform="translate(18, 60)">
+      <rect x="0" y="0" width="334" height="140" rx="8" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.2"/>
+      
+      <!-- Rack Chassis -->
+      <g transform="translate(14, 12)">
+        <rect x="0" y="0" width="60" height="116" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.5"/>
+        <!-- Unit 1 -->
+        <rect x="5" y="6" width="50" height="18" rx="2" fill="#334155"/>
+        <circle cx="12" cy="15" r="2" fill="#22c55e"/>
+        <circle cx="18" cy="15" r="2" fill="#38bdf8"/>
+        <rect x="30" y="13" width="20" height="4" rx="1" fill="#64748b"/>
+        <!-- Unit 2 -->
+        <rect x="5" y="28" width="50" height="18" rx="2" fill="#334155"/>
+        <circle cx="12" cy="37" r="2" fill="#22c55e"/>
+        <circle cx="18" cy="37" r="2" fill="#22c55e"/>
+        <rect x="30" y="35" width="20" height="4" rx="1" fill="#64748b"/>
+        <!-- Unit 3 -->
+        <rect x="5" y="50" width="50" height="18" rx="2" fill="#334155"/>
+        <circle cx="12" cy="59" r="2" fill="#22c55e"/>
+        <circle cx="18" cy="59" r="2" fill="#ef4444"/>
+        <rect x="30" y="57" width="20" height="4" rx="1" fill="#64748b"/>
+        <!-- Unit 4 -->
+        <rect x="5" y="72" width="50" height="18" rx="2" fill="#334155"/>
+        <circle cx="12" cy="81" r="2" fill="#22c55e"/>
+        <circle cx="18" cy="81" r="2" fill="#38bdf8"/>
+        <rect x="30" y="79" width="20" height="4" rx="1" fill="#64748b"/>
+        <!-- Unit 5 (Storage) -->
+        <rect x="5" y="94" width="50" height="16" rx="2" fill="#1e293b"/>
+        <circle cx="12" cy="102" r="2" fill="#eab308"/>
+        <rect x="25" y="100" width="25" height="4" rx="1" fill="#475569"/>
+      </g>
+
+      <!-- Server Identity Specs -->
+      <g transform="translate(86, 14)">
+        <text x="0" y="14" class="card-hdr" fill="#065f46">Data Center / Server Farm</text>
+        <text x="0" y="32" class="card-txt">Alamat IP: <tspan font-family="monospace" fill="#047857" font-weight="bold">203.0.113.10</tspan></text>
+        <text x="0" y="48" class="card-txt">Sifat IP: <tspan font-weight="bold" fill="#065f46">Permanen / Publik Statis</tspan></text>
+        <text x="0" y="64" class="card-txt">Port Layanan: <tspan font-family="monospace" fill="#047857" font-weight="bold">:12000</tspan> (Dedicated)</text>
+        <text x="0" y="80" class="card-txt">Domain DNS: <tspan font-family="monospace" fill="#047857">srv.itera.ac.id</tspan></text>
+        <rect x="0" y="90" width="234" height="24" rx="4" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+        <text x="117" y="106" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5px" font-weight="700" fill="#166534">
+          Status: ALWAYS-ON (24 Jam / 7 Hari)
+        </text>
+      </g>
+    </g>
+
+    <!-- Karakteristik Kunci Sisi Server -->
+    <g transform="translate(18, 215)">
+      <rect x="0" y="0" width="334" height="308" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="0" y="0" width="334" height="30" rx="8" fill="#f1f5f9"/>
+      <path d="M 0 20 L 334 20 L 334 30 L 0 30 Z" fill="#f1f5f9"/>
+      <text x="12" y="20" font-family="-apple-system, sans-serif" font-size="12px" font-weight="700" fill="#0f172a">
+        Karakteristik Fundamental Server:
+      </text>
+
+      <g transform="translate(12, 38)">
+        <circle cx="6" cy="8" r="3" fill="#059669"/>
+        <text x="16" y="12" class="card-txt"><strong>Always-On Host:</strong> Beroperasi tanpa henti (24/7)</text>
+        <text x="16" y="26" class="card-txt">menjalankan loop layanan tak berbatas (<tspan font-family="monospace">while True</tspan>).</text>
+
+        <circle cx="6" cy="42" r="3" fill="#059669"/>
+        <text x="16" y="46" class="card-txt"><strong>Alamat IP Permanen:</strong> Wajib memiliki alamat IP statis</text>
+        <text x="16" y="60" class="card-txt">atau nama domain DNS tetap agar dapat ditemukan klien.</text>
+
+        <circle cx="6" cy="76" r="3" fill="#059669"/>
+        <text x="16" y="80" class="card-txt"><strong>Well-Known / Dedicated Port:</strong> Mengikat (<tspan font-family="monospace">bind</tspan>) soket</text>
+        <text x="16" y="94" class="card-txt">pada port khusus yang disepakati (misal :80, :443, :12000).</text>
+
+        <circle cx="6" cy="110" r="3" fill="#059669"/>
+        <text x="16" y="114" class="card-txt"><strong>Pasif Bersiap (Passive Listening):</strong> Membuka pintu</text>
+        <text x="16" y="128" class="card-txt">menunggu ketukan masuk (<tspan font-family="monospace">listen() &amp; accept()</tspan>).</text>
+
+        <circle cx="6" cy="144" r="3" fill="#059669"/>
+        <text x="16" y="148" class="card-txt"><strong>Skalabilitas Data Center:</strong> Layanan berskala besar</text>
+        <text x="16" y="162" class="card-txt">menggunakan kluster server (*Server Farm*) di balik</text>
+        <text x="16" y="176" class="card-txt">penyeimbang beban (*Load Balancer*) untuk menangani</text>
+        <text x="16" y="190" class="card-txt">jutaan koneksi secara simultan.</text>
+
+        <rect x="4" y="206" width="308" height="48" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+        <text x="12" y="224" font-family="-apple-system, sans-serif" font-size="10.5px" font-weight="700" fill="#15803d">
+          💡 Analogi Dunia Nyata:
+        </text>
+        <text x="12" y="240" font-family="-apple-system, sans-serif" font-size="10px" fill="#166534">
+          Bagaikan Kantor Pos / Layanan CS: Alamatnya tetap &amp; pintunya
+        </text>
+        <text x="12" y="252" font-family="-apple-system, sans-serif" font-size="10px" fill="#166534">
+          selalu terbuka menunggu warga (klien) yang datang berkunjung.
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       PANEL BAWAH: RANGKUMAN KOMPARASI KONTRASTIF
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(35, 660)">
+    <rect x="0" y="0" width="1210" height="120" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- Title bar bottom -->
+    <rect x="0" y="0" width="1210" height="28" rx="10" fill="#0f172a"/>
+    <text x="605" y="18" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11.5px" font-weight="800" fill="#f8fafc">
+      MATRIKS PEMBANDING KARAKTERISTIK: KLIEN VS SERVER PADA TINGKAT SOKET JARINGAN
+    </text>
+
+    <!-- Table Columns -->
+    <g transform="translate(20, 36)">
+      <!-- Col 1 -->
+      <g transform="translate(0, 0)">
+        <text x="0" y="15" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#1e40af">Dimensi Operasional:</text>
+        <text x="0" y="35" class="card-txt">• Siklus Hidup Host</text>
+        <text x="0" y="52" class="card-txt">• Kepemilikan Alamat IP</text>
+        <text x="0" y="69" class="card-txt">• Penetapan Nomor Port</text>
+      </g>
+
+      <!-- Col 2: Klien -->
+      <g transform="translate(220, 0)">
+        <text x="0" y="15" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#2563eb">Perilaku Sisi Klien (Client):</text>
+        <text x="0" y="35" class="card-txt">Dinamis &amp; Sementara (<tspan font-style="italic">On-Demand, Finite</tspan>)</text>
+        <text x="0" y="52" class="card-txt">Dinamis (Dapat berubah tiap sesi / DHCP)</text>
+        <text x="0" y="69" class="card-txt">Port Acak Dinamis (<tspan font-style="italic">Ephemeral Port</tspan> &gt; 1024)</text>
+      </g>
+
+      <!-- Col 3: Server -->
+      <g transform="translate(560, 0)">
+        <text x="0" y="15" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#047857">Perilaku Sisi Server (Server):</text>
+        <text x="0" y="35" class="card-txt">Permanen &amp; Terus Berjalan (<tspan font-style="italic">Always-On, Infinite</tspan>)</text>
+        <text x="0" y="52" class="card-txt">Statis Permanen (IP Publik / Domain DNS)</text>
+        <text x="0" y="69" class="card-txt">Port Khusus yang Diikat (<tspan font-family="monospace">bind</tspan> ke Well-Known Port)</text>
+      </g>
+
+      <!-- Col 4: Socket API Flow -->
+      <g transform="translate(900, 0)">
+        <text x="0" y="15" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#b91c1c">Alur Metode Socket API:</text>
+        <text x="0" y="35" class="card-txt">Klien: <tspan font-family="monospace" fill="#1e40af">socket → connect → send → recv</tspan></text>
+        <text x="0" y="52" class="card-txt">Server: <tspan font-family="monospace" fill="#047857">bind → listen → accept → recv</tspan></text>
+        <text x="0" y="69" class="card-txt">Relasi: <tspan font-weight="bold" fill="#0f172a">Banyak Klien dilayani 1 Server</tspan></text>
+      </g>
+    </g>
+  </g>
+
+</svg>

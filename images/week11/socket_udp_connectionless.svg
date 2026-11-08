@@ -1,0 +1,450 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#edf2f7"/>
+    </linearGradient>
+
+    <!-- Header Gradient -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+
+    <!-- Client Card Gradient (Amber/Blue Accent) -->
+    <linearGradient id="clientCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#e0eefe"/>
+    </linearGradient>
+    <linearGradient id="clientHdrGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <!-- Server Card Gradient (Warm Amber Accent) -->
+    <linearGradient id="serverCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+    <linearGradient id="serverHdrGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <!-- Datagram Envelope Gradient -->
+    <linearGradient id="envelopeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+
+    <!-- Shadows -->
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <filter id="subtleShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1280" height="820" fill="url(#bgGrad)"/>
+  <rect x="15" y="15" width="1250" height="790" rx="16" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="8 6"/>
+
+  <!-- ================= TOP HEADER BANNER ================= -->
+  <g transform="translate(30, 25)">
+    <rect width="1220" height="72" rx="12" fill="url(#headerGrad)" filter="url(#cardShadow)"/>
+    <rect x="0" y="68" width="1220" height="4" rx="2" fill="#f59e0b"/>
+    
+    <text x="24" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+      MEKANISME PEMROGRAMAN SOCKET UDP (CONNECTIONLESS)
+    </text>
+    <text x="24" y="54" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#fef3c7">
+      Transmisi Datagram Independen, Penandaan Alamat Eksplisit, &amp; Ekstraksi Pengirim via recvfrom()
+    </text>
+
+    <!-- Textbook Reference Badge -->
+    <rect x="990" y="20" width="206" height="32" rx="16" fill="#1e293b" fill-opacity="0.85" stroke="#f59e0b" stroke-width="1"/>
+    <text x="1093" y="41" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#fef3c7" text-anchor="middle">
+      Kurose &amp; Ross • Subbab 2.7.1
+    </text>
+  </g>
+
+  <!-- ================= LEFT PANEL: SISI KLIEN UDP ================= -->
+  <g transform="translate(30, 115)">
+    <!-- Container Card -->
+    <rect width="400" height="470" rx="14" fill="url(#clientCardGrad)" stroke="#93c5fd" stroke-width="1.5" filter="url(#cardShadow)"/>
+    
+    <!-- Header -->
+    <path d="M 0 14 Q 0 0 14 0 L 386 0 Q 400 0 400 14 L 400 46 L 0 46 Z" fill="url(#clientHdrGrad)"/>
+    <text x="18" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="800" fill="#ffffff">
+      1. SISI KLIEN: Penandaan Alamat Eksplisit
+    </text>
+    <rect x="305" y="12" width="80" height="22" rx="11" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+    <text x="345" y="27" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#dbeafe" text-anchor="middle">
+      client.py
+    </text>
+
+    <!-- Code & Socket Initialization Box -->
+    <g transform="translate(16, 58)">
+      <rect width="368" height="85" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <text x="14" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a">
+        Inisialisasi Soket Datagram (UDP):
+      </text>
+      <text x="14" y="38" font-family="Courier, monospace" font-size="10.5" fill="#0f172a">
+        clientSocket = socket(AF_INET, <tspan fill="#d97706" font-weight="700">SOCK_DGRAM</tspan>)
+      </text>
+      
+      <rect x="14" y="48" width="340" height="26" rx="4" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+      <text x="22" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="600" fill="#1e40af">
+        ⚡ No Handshake: Tidak ada connect() sebelum kirim!
+      </text>
+    </g>
+
+    <!-- The Postcard / Datagram Metaphor Card -->
+    <g transform="translate(16, 155)">
+      <rect width="368" height="185" rx="10" fill="url(#envelopeGrad)" stroke="#f59e0b" stroke-width="1.5" filter="url(#subtleShadow)"/>
+      
+      <!-- Envelope Header -->
+      <rect width="368" height="26" rx="10 10 0 0" fill="#d97706"/>
+      <text x="14" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff">
+        ✉️ Analogi Kartu Pos: Paket Datagram Mandiri
+      </text>
+
+      <!-- Stamp -->
+      <rect x="290" y="36" width="65" height="42" rx="4" fill="#ffffff" stroke="#d97706" stroke-width="1" stroke-dasharray="3 2"/>
+      <text x="322" y="54" font-family="Courier, monospace" font-size="8.5" font-weight="700" fill="#b45309" text-anchor="middle">UDP HDR</text>
+      <text x="322" y="68" font-family="Courier, monospace" font-size="8" fill="#64748b" text-anchor="middle">8 BYTES</text>
+
+      <!-- Destination Address Box (EXPLICIT ADDRESSING) -->
+      <g transform="translate(14, 36)">
+        <text x="0" y="14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#92400e">
+          Alamat Target Wajib (Destination):
+        </text>
+        <rect x="0" y="20" width="265" height="32" rx="4" fill="#ffffff" stroke="#d97706" stroke-width="1"/>
+        <text x="10" y="36" font-family="Courier, monospace" font-size="10.5" font-weight="700" fill="#b45309">
+          IP: &apos;127.0.0.1&apos;, Port: 12000
+        </text>
+        <text x="10" y="47" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8" fill="#64748b">
+          Wajib ditulis eksplisit di setiap paket!
+        </text>
+      </g>
+
+      <!-- Source Address Info -->
+      <g transform="translate(14, 96)">
+        <text x="0" y="12" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" font-weight="600" fill="#475569">
+          Alamat Pengirim (Ditempel Kernel Otomatis):
+        </text>
+        <text x="0" y="27" font-family="Courier, monospace" font-size="9.5" fill="#334155">
+          Asal: IP 127.0.0.1 • Port Efemeral (misal: 54321)
+        </text>
+      </g>
+
+      <!-- Payload -->
+      <g transform="translate(14, 134)">
+        <rect width="340" height="40" rx="5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="10" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="700" fill="#475569">
+          Payload Data Bita (Maksimum 65.507 Bytes):
+        </text>
+        <text x="10" y="31" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#1e40af">
+          b&apos;halo dunia jaringan&apos;
+        </text>
+      </g>
+    </g>
+
+    <!-- Sendto Callout Box -->
+    <g transform="translate(16, 352)">
+      <rect width="368" height="102" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <text x="14" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a">
+        Pemanggilan API Transmisi UDP:
+      </text>
+      
+      <rect x="14" y="30" width="340" height="28" rx="4" fill="#0f172a"/>
+      <text x="22" y="48" font-family="Courier, monospace" font-size="10" fill="#f8fafc">
+        clientSocket.<tspan fill="#f59e0b" font-weight="700">sendto</tspan>(msg, (serverIP, port))
+      </text>
+
+      <text x="14" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#334155">
+        Parameter kedua adalah tuple <tspan font-weight="700">(IP, Port)</tspan> target.
+      </text>
+      <text x="14" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#64748b">
+        Sistem langsung menembakkan bita tanpa membentuk sirkuit.
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= MIDDLE CHANNEL: NETWORK ROUTING (BEST-EFFORT) ================= -->
+  <g transform="translate(445, 115)">
+    <!-- Container Card -->
+    <rect width="390" height="470" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#subtleShadow)"/>
+
+    <!-- Channel Header -->
+    <rect x="0" y="0" width="390" height="46" rx="14 14 0 0" fill="#334155"/>
+    <text x="195" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">
+      KANAL INTERNET / JARINGAN IP
+    </text>
+    <text x="195" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#94a3b8" text-anchor="middle">
+      Model Transmisi Nir-Koneksi (Best-Effort Delivery)
+    </text>
+
+    <!-- Flying Datagram 1 (Request) -->
+    <g transform="translate(20, 65)">
+      <rect width="350" height="85" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2"/>
+      <text x="14" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#1e3a8a">
+        Datagram Klien → Server (Request)
+      </text>
+      <path d="M 20 38 L 320 38" stroke="#d97706" stroke-width="2.5" marker-end="url(#arrowAmber)"/>
+
+      <rect x="70" y="48" width="210" height="26" rx="4" fill="#ffffff" stroke="#d97706" stroke-width="1"/>
+      <text x="175" y="65" font-family="Courier, monospace" font-size="9.5" font-weight="700" fill="#b45309" text-anchor="middle">
+        [Dst: 12000 | b&apos;halo dunia&apos;]
+      </text>
+    </g>
+
+    <!-- Flying Datagram 2 (Response) -->
+    <g transform="translate(20, 165)">
+      <rect width="350" height="85" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2"/>
+      <text x="14" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#065f46">
+        Datagram Server → Klien (Response)
+      </text>
+      <path d="M 320 38 L 25 38" stroke="#059669" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+
+      <rect x="70" y="48" width="210" height="26" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1"/>
+      <text x="175" y="65" font-family="Courier, monospace" font-size="9.5" font-weight="700" fill="#065f46" text-anchor="middle">
+        [Dst: 54321 | b&apos;HALO DUNIA&apos;]
+      </text>
+    </g>
+
+    <!-- Network Characteristics & Risks Box -->
+    <g transform="translate(20, 268)">
+      <rect width="350" height="186" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2"/>
+      <text x="14" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#9a3412">
+        ⚠️ Karakteristik &amp; Risiko UDP di Jaringan:
+      </text>
+
+      <circle cx="22" cy="45" r="3" fill="#ea580c"/>
+      <text x="32" y="49" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        <tspan font-weight="700" fill="#9a3412">Setiap Paket Independen:</tspan> Bisa lewat rute berbeda.
+      </text>
+
+      <circle cx="22" cy="72" r="3" fill="#ea580c"/>
+      <text x="32" y="76" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        <tspan font-weight="700" fill="#9a3412">Tidak Ada Garansi Urutan:</tspan> Paket dapat tiba acak.
+      </text>
+
+      <circle cx="22" cy="99" r="3" fill="#ea580c"/>
+      <text x="32" y="103" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        <tspan font-weight="700" fill="#9a3412">Potensi Packet Loss:</tspan> Dibuang router jika buffer penuh
+      </text>
+      <text x="32" y="117" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#64748b">
+        tanpa laporan kegagalan ke pengirim.
+      </text>
+
+      <circle cx="22" cy="138" r="3" fill="#16a34a"/>
+      <text x="32" y="142" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        <tspan font-weight="700" fill="#166534">Keunggulan Utama:</tspan> Latensi minimal &amp; hemat bita!
+      </text>
+      <text x="32" y="156" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#15803d">
+        Ideal untuk DNS, game real-time, VoIP, streaming video.
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT PANEL: SISI SERVER UDP ================= -->
+  <g transform="translate(850, 115)">
+    <!-- Container Card -->
+    <rect width="400" height="470" rx="14" fill="url(#serverCardGrad)" stroke="#fcd34d" stroke-width="1.5" filter="url(#cardShadow)"/>
+
+    <!-- Header -->
+    <path d="M 0 14 Q 0 0 14 0 L 386 0 Q 400 0 400 14 L 400 46 L 0 46 Z" fill="url(#serverHdrGrad)"/>
+    <text x="18" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="800" fill="#ffffff">
+      2. SISI SERVER: Ekstraksi Tuple recvfrom()
+    </text>
+    <rect x="305" y="12" width="80" height="22" rx="11" fill="#78350f" stroke="#fbbf24" stroke-width="1"/>
+    <text x="345" y="27" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#fef3c7" text-anchor="middle">
+      server.py
+    </text>
+
+    <!-- Server Binding Box -->
+    <g transform="translate(16, 58)">
+      <rect width="368" height="85" rx="8" fill="#ffffff" stroke="#fde68a" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <text x="14" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#92400e">
+        Pengikatan Port Server (Passive Port):
+      </text>
+      <text x="14" y="38" font-family="Courier, monospace" font-size="10.5" fill="#0f172a">
+        serverSocket.<tspan fill="#b45309" font-weight="700">bind</tspan>((&apos;&apos;, <tspan fill="#d97706" font-weight="700">12000</tspan>))
+      </text>
+
+      <rect x="14" y="48" width="340" height="26" rx="4" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+      <text x="22" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="600" fill="#b45309">
+        Server siap menerima datagram dari klien mana pun!
+      </text>
+    </g>
+
+    <!-- The recvfrom() Tuple Extraction Anatomy Box -->
+    <g transform="translate(16, 155)">
+      <rect width="368" height="185" rx="10" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5" filter="url(#subtleShadow)"/>
+      <rect width="368" height="28" rx="10 10 0 0" fill="#b45309"/>
+      <text x="14" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#ffffff">
+        🔍 Ekstraksi Nilai Kembalian recvfrom(2048)
+      </text>
+
+      <!-- The Assignment Call -->
+      <g transform="translate(14, 38)">
+        <rect width="340" height="30" rx="5" fill="#0f172a"/>
+        <text x="14" y="20" font-family="Courier, monospace" font-size="10.5" fill="#f8fafc">
+          <tspan fill="#38bdf8" font-weight="700">data</tspan>, <tspan fill="#4ade80" font-weight="700">clientAddress</tspan> = serverSocket.<tspan fill="#f59e0b">recvfrom</tspan>(2048)
+        </text>
+      </g>
+
+      <!-- Variable 1: data -->
+      <g transform="translate(14, 76)">
+        <rect width="340" height="44" rx="5" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+        <text x="12" y="18" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#1e40af">
+          [1] Variabel &apos;data&apos; (Payload Bita):
+        </text>
+        <text x="12" y="34" font-family="Courier, monospace" font-size="9.5" fill="#1d4ed8">
+          b&apos;halo dunia jaringan&apos; (isi pesan mentah)
+        </text>
+      </g>
+
+      <!-- Variable 2: clientAddress -->
+      <g transform="translate(14, 126)">
+        <rect width="340" height="48" rx="5" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+        <text x="12" y="18" font-family="Courier, monospace" font-size="10" font-weight="700" fill="#065f46">
+          [2] Variabel &apos;clientAddress&apos; (Tuple Alamat):
+        </text>
+        <text x="12" y="35" font-family="Courier, monospace" font-size="9.5" font-weight="700" fill="#047857">
+          (&apos;127.0.0.1&apos;, 54321) → (IP Pengirim, Port Pengirim)
+        </text>
+      </g>
+    </g>
+
+    <!-- Reply Mechanism Box -->
+    <g transform="translate(16, 352)">
+      <rect width="368" height="102" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.2" filter="url(#subtleShadow)"/>
+      <text x="14" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#92400e">
+        Cara Server Membalas ke Klien:
+      </text>
+
+      <rect x="14" y="30" width="340" height="28" rx="4" fill="#0f172a"/>
+      <text x="22" y="48" font-family="Courier, monospace" font-size="10" fill="#f8fafc">
+        serverSocket.<tspan fill="#f59e0b" font-weight="700">sendto</tspan>(balasan, <tspan fill="#4ade80" font-weight="700">clientAddress</tspan>)
+      </text>
+
+      <text x="14" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#334155">
+        Server menggunakan tuple hasil ekstraksi <tspan font-weight="700">clientAddress</tspan>.
+      </text>
+      <text x="14" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#64748b">
+        Tidak perlu sesi koneksi; paket langsung kembali ke alamat pengirim.
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= BOTTOM KEY PILLARS BAR (4 PILAR UDP) ================= -->
+  <g transform="translate(30, 600)">
+    <rect width="1220" height="195" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#cardShadow)"/>
+
+    <!-- Section Title Banner -->
+    <path d="M 0 12 Q 0 0 12 0 L 1208 0 Q 1220 0 1220 12 L 1220 32 L 0 32 Z" fill="#1e293b"/>
+    <text x="20" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+      4 PILAR FUNDAMENTAL PEMROGRAMAN SOCKET UDP (RFC 768)
+    </text>
+
+    <!-- Pillar 1 Card -->
+    <g transform="translate(18, 45)">
+      <rect width="280" height="135" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <rect width="32" height="24" rx="4" fill="#2563eb" x="12" y="12"/>
+      <text x="28" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">1</text>
+      <text x="52" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1e3a8a">No Handshake (Nir-Koneksi)</text>
+      
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Tidak ada proses pembentukan sesi
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        (3-way handshake) sebelum kirim.
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Transmisi berlangsung seketika (0 RTT).
+      </text>
+
+      <rect x="12" y="98" width="256" height="24" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#1d4ed8">Tanpa connect() / listen()</text>
+    </g>
+
+    <!-- Pillar 2 Card -->
+    <g transform="translate(315, 45)">
+      <rect width="280" height="135" rx="8" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+      <rect width="32" height="24" rx="4" fill="#d97706" x="12" y="12"/>
+      <text x="28" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">2</text>
+      <text x="52" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#92400e">Explicit Address Tagging</text>
+
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Karena tidak ada pipa permanen,
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        setiap panggilan sendto() wajib
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        menyertakan tuple (IP, Port) target.
+      </text>
+
+      <rect x="12" y="98" width="256" height="24" rx="4" fill="#ffffff" stroke="#fde68a" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#b45309">sendto(msg, (IP, Port))</text>
+    </g>
+
+    <!-- Pillar 3 Card -->
+    <g transform="translate(612, 45)">
+      <rect width="280" height="135" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+      <rect width="32" height="24" rx="4" fill="#059669" x="12" y="12"/>
+      <text x="28" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">3</text>
+      <text x="52" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#065f46">Ekstraksi Tuple recvfrom()</text>
+
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Fungsi recvfrom() mengembalikan
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        dua elemen: data bita dan tuple
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        alamat pengirim untuk rute balasan.
+      </text>
+
+      <rect x="12" y="98" width="256" height="24" rx="4" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#047857">data, clientAddress = recvfrom()</text>
+    </g>
+
+    <!-- Pillar 4 Card -->
+    <g transform="translate(909, 45)">
+      <rect width="293" height="135" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1"/>
+      <rect width="32" height="24" rx="4" fill="#ea580c" x="12" y="12"/>
+      <text x="28" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">4</text>
+      <text x="52" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#9a3412">Layanan Best-Effort</text>
+
+      <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Overhead header minimal (hanya 8 bytes).
+      </text>
+      <text x="12" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        Sangat cepat &amp; efisien, namun paket
+      </text>
+      <text x="12" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#334155">
+        dapat hilang tanpa notifikasi kernel.
+      </text>
+
+      <rect x="12" y="98" width="269" height="24" rx="4" fill="#ffffff" stroke="#fed7aa" stroke-width="1"/>
+      <text x="18" y="114" font-family="Courier, monospace" font-size="9" font-weight="700" fill="#c2410c">Header 8 Bytes • Unreliable</text>
+    </g>
+  </g>
+</svg>

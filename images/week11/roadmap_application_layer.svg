@@ -1,0 +1,443 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#edf2f7"/>
+    </linearGradient>
+
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f2b5c"/>
+      <stop offset="50%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <linearGradient id="socketHighlightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+
+    <linearGradient id="tcpGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+
+    <linearGradient id="udpGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+
+    <linearGradient id="appPillarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+
+    <filter id="focusShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#2563eb" flood-opacity="0.22"/>
+    </filter>
+
+    <!-- Markers for arrows -->
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowDark" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#0d9488"/>
+    </marker>
+  </defs>
+
+  <style>
+    .title-main { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 800; fill: #ffffff; letter-spacing: 0.5px; }
+    .title-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 500; fill: #bfdbfe; }
+    .card-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; fill: #0f172a; }
+    .card-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 400; fill: #475569; line-height: 1.4; }
+    .badge-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .layer-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 800; }
+    .layer-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; }
+    .layer-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 500; }
+    .boundary-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1280" height="820" fill="url(#bgGrad)"/>
+  <rect x="15" y="15" width="1250" height="790" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Top Banner / Header -->
+  <g transform="translate(15, 15)">
+    <path d="M 0 16 C 0 7.16 7.16 0 16 0 L 1234 0 C 1242.84 0 1250 7.16 1250 16 L 1250 74 L 0 74 Z" fill="url(#headerGrad)"/>
+    
+    <!-- Accent indicator -->
+    <rect x="25" y="20" width="4" height="34" rx="2" fill="#60a5fa"/>
+    <text x="38" y="38" class="title-main">PETA KONSEP LAPISAN APLIKASI (APPLICATION LAYER)</text>
+    <text x="38" y="56" class="title-sub">Roadmap Arsitektur Protokol Internet &amp; Posisi Strategis Pemrograman Socket (Socket API)</text>
+
+    <!-- Top Badge -->
+    <rect x="1055" y="24" width="170" height="26" rx="13" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+    <circle cx="1070" cy="37" r="4" fill="#4ade80"/>
+    <text x="1082" y="41" class="badge-text" fill="#ffffff">Bahan Ajar Week 11</text>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       PANEL KIRI: TUMPUKAN 5 LAPISAN PROTOKOL INTERNET
+       ════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(35, 105)">
+    <!-- Container Card -->
+    <rect x="0" y="0" width="260" height="680" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- Panel Header -->
+    <path d="M 0 12 C 0 5.37 5.37 0 12 0 L 248 0 C 254.63 0 260 5.37 260 12 L 260 44 L 0 44 Z" fill="#1e293b"/>
+    <text x="130" y="27" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13px" font-weight="700" fill="#f8fafc">
+      Tumpukan Protokol Internet
+    </text>
+
+    <!-- Layer 5: Application (HIGHLIGHTED) -->
+    <g transform="translate(12, 56)">
+      <rect x="0" y="0" width="236" height="135" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2.2" filter="url(#focusShadow)"/>
+      <rect x="8" y="8" width="48" height="18" rx="4" fill="#2563eb"/>
+      <text x="32" y="21" text-anchor="middle" class="layer-num" fill="#ffffff">L-5</text>
+      <text x="64" y="22" class="layer-name" fill="#1e40af">Lapisan Aplikasi</text>
+      <text x="12" y="44" class="card-desc" fill="#1e3a8a">
+        • HTTP, SMTP, DNS, CDN, P2P
+      </text>
+      <text x="12" y="60" class="card-desc" fill="#1e3a8a">
+        • <tspan font-weight="700">Socket API (TCP &amp; UDP)</tspan>
+      </text>
+      
+      <!-- Highlight pill inside Layer 5 -->
+      <rect x="10" y="74" width="216" height="50" rx="6" fill="#2563eb"/>
+      <text x="118" y="93" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11px" font-weight="800" fill="#ffffff">
+        • FOKUS MATERI HARI INI •
+      </text>
+      <text x="118" y="111" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10px" font-weight="500" fill="#dbeafe">
+        Pemrograman Socket Jaringan
+      </text>
+    </g>
+
+    <!-- Connector bracket Layer 5 to detail panel -->
+    <path d="M 250 120 L 285 120" stroke="#2563eb" stroke-width="2.5" fill="none" marker-end="url(#arrowBlue)"/>
+
+    <!-- Layer 4: Transport -->
+    <g transform="translate(12, 203)">
+      <rect x="0" y="0" width="236" height="88" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+      <rect x="8" y="8" width="48" height="18" rx="4" fill="#475569"/>
+      <text x="32" y="21" text-anchor="middle" class="layer-num" fill="#ffffff">L-4</text>
+      <text x="64" y="22" class="layer-name" fill="#334155">Lapisan Transpor</text>
+      <text x="12" y="44" class="card-desc" fill="#64748b">
+        • <tspan font-weight="700">TCP:</tspan> Handshake, Reliable Stream
+      </text>
+      <text x="12" y="60" class="card-desc" fill="#64748b">
+        • <tspan font-weight="700">UDP:</tspan> Unreliable Datagram
+      </text>
+      <text x="12" y="76" class="card-desc" fill="#0284c7">
+        • Port Addressing (0 - 65535)
+      </text>
+    </g>
+
+    <!-- Layer 3: Network -->
+    <g transform="translate(12, 303)">
+      <rect x="0" y="0" width="236" height="74" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+      <rect x="8" y="8" width="48" height="18" rx="4" fill="#64748b"/>
+      <text x="32" y="21" text-anchor="middle" class="layer-num" fill="#ffffff">L-3</text>
+      <text x="64" y="22" class="layer-name" fill="#475569">Lapisan Jaringan</text>
+      <text x="12" y="44" class="card-desc">
+        • Protokol Internet (IPv4 &amp; IPv6)
+      </text>
+      <text x="12" y="60" class="card-desc">
+        • Routing &amp; IP Addressing
+      </text>
+    </g>
+
+    <!-- Layer 2: Data Link -->
+    <g transform="translate(12, 389)">
+      <rect x="0" y="0" width="236" height="74" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+      <rect x="8" y="8" width="48" height="18" rx="4" fill="#94a3b8"/>
+      <text x="32" y="21" text-anchor="middle" class="layer-num" fill="#ffffff">L-2</text>
+      <text x="64" y="22" class="layer-name" fill="#64748b">Lapisan Tautan Data</text>
+      <text x="12" y="44" class="card-desc">
+        • Ethernet (IEEE 802.3), Wi-Fi
+      </text>
+      <text x="12" y="60" class="card-desc">
+        • MAC Addressing &amp; Frame Switching
+      </text>
+    </g>
+
+    <!-- Layer 1: Physical -->
+    <g transform="translate(12, 475)">
+      <rect x="0" y="0" width="236" height="74" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+      <rect x="8" y="8" width="48" height="18" rx="4" fill="#cbd5e1"/>
+      <text x="32" y="21" text-anchor="middle" class="layer-num" fill="#475569">L-1</text>
+      <text x="64" y="22" class="layer-name" fill="#64748b">Lapisan Fisik</text>
+      <text x="12" y="44" class="card-desc">
+        • Kabel Tembaga (UTP), Fiber Optik
+      </text>
+      <text x="12" y="60" class="card-desc">
+        • Transmisi Bit Sinyal Radio/Cahaya
+      </text>
+    </g>
+
+    <!-- Bottom Note in Left Panel -->
+    <rect x="12" y="562" width="236" height="106" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="22" y="582" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#0f172a">
+      Prinsip Desain Internet:
+    </text>
+    <text x="22" y="600" class="card-desc" fill="#475569">
+      "Complexity at the Network Edge!"
+    </text>
+    <text x="22" y="618" class="card-desc" fill="#475569">
+      Seluruh kecerdasan aplikasi
+    </text>
+    <text x="22" y="634" class="card-desc" fill="#475569">
+      dijalankan di End-System (Host),
+    </text>
+    <text x="22" y="650" class="card-desc" fill="#475569">
+      bukan pada inti jaringan (Core).
+    </text>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       PANEL KANAN: DETAIL ROADMAP LAPISAN APLIKASI & POSISI SOCKET
+       ════════════════════════════════════════════════════════════════ -->
+  
+  <!-- BOUNDARY LINE: USER SPACE vs KERNEL SPACE -->
+  <g transform="translate(315, 105)">
+    <!-- Outer Container -->
+    <rect x="0" y="0" width="930" height="680" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- SUB-PANEL ATAS: PROTOKOL APLIKASI STANDAR (USER SPACE) -->
+    <rect x="15" y="15" width="900" height="235" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+    
+    <!-- Section Header A -->
+    <rect x="25" y="24" width="220" height="24" rx="4" fill="#0369a1"/>
+    <text x="35" y="40" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#ffffff">
+      A. PROTOKOL APLIKASI STANDAR
+    </text>
+    <text x="255" y="40" font-family="-apple-system, sans-serif" font-size="11px" font-weight="500" fill="#64748b">
+      (Layanan Aplikasi Siap Pakai di Internet • Pembahasan Pertemuan 12)
+    </text>
+
+    <!-- 5 Application Protocol Cards -->
+    <!-- Card 1: Web & HTTP -->
+    <g transform="translate(25, 58)">
+      <rect x="0" y="0" width="166" height="175" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="0" y="0" width="166" height="34" rx="8" fill="#f0f9ff"/>
+      <path d="M 0 26 L 166 26 L 166 34 L 0 34 Z" fill="#f0f9ff"/>
+      <text x="12" y="22" class="card-title" fill="#0369a1">Web &amp; HTTP</text>
+      <text x="12" y="52" class="card-desc">• Arsitektur Web</text>
+      <text x="12" y="68" class="card-desc">• Request/Response</text>
+      <text x="12" y="84" class="card-desc">• Status Code (200, 404)</text>
+      <text x="12" y="100" class="card-desc">• Stateless &amp; Cookies</text>
+      <text x="12" y="116" class="card-desc">• HTTP/1.1, 2, 3</text>
+      <rect x="10" y="136" width="146" height="26" rx="4" fill="#e0f2fe"/>
+      <text x="83" y="153" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#0284c7">Transport: TCP :80/443</text>
+    </g>
+
+    <!-- Card 2: E-Mail -->
+    <g transform="translate(203, 58)">
+      <rect x="0" y="0" width="166" height="175" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="0" y="0" width="166" height="34" rx="8" fill="#fef2f2"/>
+      <path d="M 0 26 L 166 26 L 166 34 L 0 34 Z" fill="#fef2f2"/>
+      <text x="12" y="22" class="card-title" fill="#b91c1c">Surat Elektronik</text>
+      <text x="12" y="52" class="card-desc">• SMTP (Kirim Surat)</text>
+      <text x="12" y="68" class="card-desc">• IMAP &amp; POP3 (Akses)</text>
+      <text x="12" y="84" class="card-desc">• Mail Transfer Agent</text>
+      <text x="12" y="100" class="card-desc">• Format Header MIME</text>
+      <text x="12" y="116" class="card-desc">• Relay &amp; Mailbox</text>
+      <rect x="10" y="136" width="146" height="26" rx="4" fill="#fee2e2"/>
+      <text x="83" y="153" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#b91c1c">Transport: TCP :25/:993</text>
+    </g>
+
+    <!-- Card 3: DNS -->
+    <g transform="translate(381, 58)">
+      <rect x="0" y="0" width="166" height="175" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="0" y="0" width="166" height="34" rx="8" fill="#f0fdf4"/>
+      <path d="M 0 26 L 166 26 L 166 34 L 0 34 Z" fill="#f0fdf4"/>
+      <text x="12" y="22" class="card-title" fill="#15803d">Sistem DNS</text>
+      <text x="12" y="52" class="card-desc">• Resolusi Host → IP</text>
+      <text x="12" y="68" class="card-desc">• Hirarki Root, TLD</text>
+      <text x="12" y="84" class="card-desc">• Authoritative DNS</text>
+      <text x="12" y="100" class="card-desc">• DNS Caching &amp; TTL</text>
+      <text x="12" y="116" class="card-desc">• Resource Records (A, NS)</text>
+      <rect x="10" y="136" width="146" height="26" rx="4" fill="#dcfce7"/>
+      <text x="83" y="153" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#15803d">Transport: UDP/TCP :53</text>
+    </g>
+
+    <!-- Card 4: CDN & Video -->
+    <g transform="translate(559, 58)">
+      <rect x="0" y="0" width="166" height="175" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="0" y="0" width="166" height="34" rx="8" fill="#faf5ff"/>
+      <path d="M 0 26 L 166 26 L 166 34 L 0 34 Z" fill="#faf5ff"/>
+      <text x="12" y="22" class="card-title" fill="#7e22ce">Streaming &amp; CDN</text>
+      <text x="12" y="52" class="card-desc">• Video Streaming</text>
+      <text x="12" y="68" class="card-desc">• DASH &amp; HLS Chunking</text>
+      <text x="12" y="84" class="card-desc">• Content Distribution</text>
+      <text x="12" y="100" class="card-desc">• Edge Server Caching</text>
+      <text x="12" y="116" class="card-desc">• Manifest Playlists</text>
+      <rect x="10" y="136" width="146" height="26" rx="4" fill="#f3e8ff"/>
+      <text x="83" y="153" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#7e22ce">Transport: TCP/UDP</text>
+    </g>
+
+    <!-- Card 5: P2P -->
+    <g transform="translate(737, 58)">
+      <rect x="0" y="0" width="166" height="175" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="0" y="0" width="166" height="34" rx="8" fill="#fffbeb"/>
+      <path d="M 0 26 L 166 26 L 166 34 L 0 34 Z" fill="#fffbeb"/>
+      <text x="12" y="22" class="card-title" fill="#b45309">Arsitektur P2P</text>
+      <text x="12" y="52" class="card-desc">• Tanpa Server Sentral</text>
+      <text x="12" y="68" class="card-desc">• Client &amp; Server Sekaligus</text>
+      <text x="12" y="84" class="card-desc">• Distribusi Berkas</text>
+      <text x="12" y="100" class="card-desc">• Skalabilitas Mandiri</text>
+      <text x="12" y="116" class="card-desc">• BitTorrent &amp; Tracker</text>
+      <rect x="10" y="136" width="146" height="26" rx="4" fill="#fef3c7"/>
+      <text x="83" y="153" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#b45309">Transport: TCP/UDP</text>
+    </g>
+
+    <!-- Arrows indicating flow from Standard Protocols down to Socket API -->
+    <path d="M 108 240 L 108 270" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="3,3" fill="none" marker-end="arrowBlue"/>
+    <path d="M 286 240 L 286 270" stroke="#b91c1c" stroke-width="1.8" stroke-dasharray="3,3" fill="none" marker-end="arrowBlue"/>
+    <path d="M 464 240 L 464 270" stroke="#15803d" stroke-width="1.8" stroke-dasharray="3,3" fill="none" marker-end="arrowBlue"/>
+    <path d="M 642 240 L 642 270" stroke="#7e22ce" stroke-width="1.8" stroke-dasharray="3,3" fill="none" marker-end="arrowBlue"/>
+    <path d="M 820 240 L 820 270" stroke="#b45309" stroke-width="1.8" stroke-dasharray="3,3" fill="none" marker-end="arrowBlue"/>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         SUB-PANEL TENGAH: THE SOCKET API GATEWAY (FOKUS UTAMA MINGGU INI)
+         ════════════════════════════════════════════════════════════════ -->
+    <g transform="translate(15, 275)">
+      <!-- Master Focus Box -->
+      <rect x="0" y="0" width="900" height="245" rx="10" fill="url(#socketHighlightGrad)" stroke="#2563eb" stroke-width="2.2" filter="url(#focusShadow)"/>
+      
+      <!-- Focus Badge -->
+      <rect x="20" y="16" width="280" height="28" rx="6" fill="#1e40af"/>
+      <text x="160" y="35" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12px" font-weight="800" fill="#ffffff" letter-spacing="0.5px">
+        B. ANTARMUKA PEMROGRAMAN SOKET (SOCKET API)
+      </text>
+
+      <rect x="310" y="16" width="220" height="28" rx="6" fill="#dc2626"/>
+      <text x="420" y="35" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11px" font-weight="800" fill="#ffffff">
+        • FOKUS KAJIAN PERTEMUAN 11 •
+      </text>
+
+      <!-- Explanation Paragraph inside Socket API box -->
+      <text x="25" y="68" font-family="-apple-system, sans-serif" font-size="12px" font-weight="700" fill="#0f172a">
+        Titik Temu Abstraksi Perangkat Lunak (Software) dengan Sistem Operasi:
+      </text>
+      <text x="25" y="86" font-family="-apple-system, sans-serif" font-size="11px" font-weight="400" fill="#334155">
+        Socket adalah pintu gerbang komunikasi (antarmuka API) yang digunakan oleh aplikasi di User Space untuk meminta layanan transmisi data
+      </text>
+      <text x="25" y="102" font-family="-apple-system, sans-serif" font-size="11px" font-weight="400" fill="#334155">
+        ke kernel OS. Seluruh protokol di atas (HTTP, SMTP, DNS) pada implementasinya dikodekan menggunakan Socket API ini!
+      </text>
+
+      <!-- Two Core Socket Pathways: TCP Socket vs UDP Socket -->
+      <!-- TCP Socket Card -->
+      <g transform="translate(20, 116)">
+        <rect x="0" y="0" width="415" height="112" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.8"/>
+        <path d="M 0 0 L 415 0 L 415 28 L 0 28 Z" fill="url(#tcpGrad)"/>
+        <text x="14" y="19" font-family="-apple-system, sans-serif" font-size="12px" font-weight="700" fill="#ffffff">
+          1. TCP Socket (SOCK_STREAM)
+        </text>
+        <rect x="290" y="5" width="115" height="18" rx="4" fill="rgba(255,255,255,0.25)"/>
+        <text x="347" y="18" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#ffffff">Connection-Oriented</text>
+
+        <text x="14" y="48" class="card-desc" fill="#1e3a8a">• <tspan font-weight="700">Karakteristik:</tspan> Pipa virtual kontinu (stream of bytes), andal (reliable), terurut.</text>
+        <text x="14" y="66" class="card-desc" fill="#1e3a8a">• <tspan font-weight="700">Mekanisme:</tspan> 3-Way Handshake, retransmisi bita hilang, kontrol aliran.</text>
+        <text x="14" y="84" class="card-desc" fill="#1e3a8a">• <tspan font-weight="700">Dua Soket Server:</tspan> <tspan font-style="italic">Welcoming Socket</tspan> (Port 12000) &amp; <tspan font-style="italic">Connection Socket</tspan>.</text>
+        <text x="14" y="102" class="card-desc" fill="#2563eb">• <tspan font-weight="700">Metode API Utama:</tspan> <tspan font-family="monospace">socket()</tspan>, <tspan font-family="monospace">connect()</tspan>, <tspan font-family="monospace">bind()</tspan>, <tspan font-family="monospace">listen()</tspan>, <tspan font-family="monospace">accept()</tspan>, <tspan font-family="monospace">send()</tspan>, <tspan font-family="monospace">recv()</tspan></text>
+      </g>
+
+      <!-- UDP Socket Card -->
+      <g transform="translate(465, 116)">
+        <rect x="0" y="0" width="415" height="112" rx="8" fill="#ffffff" stroke="#f59e0b" stroke-width="1.8"/>
+        <path d="M 0 0 L 415 0 L 415 28 L 0 28 Z" fill="url(#udpGrad)"/>
+        <text x="14" y="19" font-family="-apple-system, sans-serif" font-size="12px" font-weight="700" fill="#ffffff">
+          2. UDP Socket (SOCK_DGRAM)
+        </text>
+        <rect x="290" y="5" width="115" height="18" rx="4" fill="rgba(255,255,255,0.25)"/>
+        <text x="347" y="18" text-anchor="middle" font-family="monospace" font-size="10px" font-weight="700" fill="#ffffff">Connectionless</text>
+
+        <text x="14" y="48" class="card-desc" fill="#78350f">• <tspan font-weight="700">Karakteristik:</tspan> Paket independen (datagram), ringan, transmisi cepat tanpa delay.</text>
+        <text x="14" y="66" class="card-desc" fill="#78350f">• <tspan font-weight="700">Mekanisme:</tspan> Tanpa handshake, tiap paket wajib mencantumkan target IP &amp; Port.</text>
+        <text x="14" y="84" class="card-desc" fill="#78350f">• <tspan font-weight="700">Soket Server Tunggal:</tspan> 1 soket melayani seluruh pengirim tanpa antrian koneksi.</text>
+        <text x="14" y="102" class="card-desc" fill="#d97706">• <tspan font-weight="700">Metode API Utama:</tspan> <tspan font-family="monospace">socket()</tspan>, <tspan font-family="monospace">bind()</tspan>, <tspan font-family="monospace">sendto()</tspan>, <tspan font-family="monospace">recvfrom()</tspan>, <tspan font-family="monospace">close()</tspan></text>
+      </g>
+    </g>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         GARIS PEMISAH: USER SPACE vs KERNEL SPACE
+         ════════════════════════════════════════════════════════════════ -->
+    <g transform="translate(15, 532)">
+      <!-- Boundary line -->
+      <line x1="0" y1="0" x2="900" y2="0" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6,4"/>
+      
+      <!-- Boundary Tag Left -->
+      <rect x="10" y="-12" width="220" height="24" rx="4" fill="#dc2626"/>
+      <text x="120" y="4" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11px" font-weight="800" fill="#ffffff">
+        ↑ RUANG PENGGUNA (USER SPACE)
+      </text>
+
+      <!-- Boundary Tag Center -->
+      <rect x="360" y="-12" width="180" height="24" rx="4" fill="#1e293b"/>
+      <text x="450" y="4" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10px" font-weight="700" fill="#ffffff">
+        BATAS GERBANG SOKET (API)
+      </text>
+
+      <!-- Boundary Tag Right -->
+      <rect x="670" y="-12" width="220" height="24" rx="4" fill="#0f766e"/>
+      <text x="780" y="4" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11px" font-weight="800" fill="#ffffff">
+        ↓ RUANG KERNEL OS (SYSTEM CALL)
+      </text>
+    </g>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         SUB-PANEL BAWAH: LAYER TRANSPORTASI DI KERNEL OS
+         ════════════════════════════════════════════════════════════════ -->
+    <g transform="translate(15, 545)">
+      <rect x="0" y="0" width="900" height="120" rx="10" fill="#f0fdf4" stroke="#0d9488" stroke-width="1.4"/>
+      
+      <rect x="20" y="12" width="250" height="22" rx="4" fill="#0f766e"/>
+      <text x="145" y="27" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#ffffff">
+        C. IMPLEMENTASI DI KERNEL SISTEM OPERASI
+      </text>
+
+      <g transform="translate(20, 42)">
+        <!-- TCP Kernel Block -->
+        <rect x="0" y="0" width="415" height="66" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="12" y="20" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#0f172a">
+          Protokol TCP di Kernel:
+        </text>
+        <text x="12" y="38" class="card-desc">
+          • Mengatur buffer kirim/terima (*Send/Receive Buffers*)
+        </text>
+        <text x="12" y="54" class="card-desc">
+          • Penomoran Sequence &amp; ACK, Timer Retransmisi, State Machine (ESTABLISHED)
+        </text>
+      </g>
+
+      <g transform="translate(465, 42)">
+        <!-- UDP Kernel Block -->
+        <rect x="0" y="0" width="415" height="66" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="12" y="20" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#0f172a">
+          Protokol UDP di Kernel:
+        </text>
+        <text x="12" y="38" class="card-desc">
+          • Penempelan Header Port (8 Bytes) langsung dikirim ke IP Layer
+        </text>
+        <text x="12" y="54" class="card-desc">
+          • Tanpa pengecekan status penerima (*No state tracking, raw datagram pass*)
+        </text>
+      </g>
+    </g>
+
+  </g>
+
+  <!-- Flow Arrows connecting Socket Boxes down to Kernel Space -->
+  <path d="M 545 498 L 545 540" stroke="#2563eb" stroke-width="2.5" fill="none" marker-end="url(#arrowBlue)"/>
+  <path d="M 990 498 L 990 540" stroke="#f59e0b" stroke-width="2.5" fill="none" marker-end="url(#arrowDark)"/>
+
+</svg>
