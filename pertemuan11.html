@@ -684,7 +684,8 @@
                         </div>
                     </div>
                     <div>
-                        <img src="images/week11/roadmap_application_layer.jpg" class="slide-img" alt="Peta Konsep Lapisan Aplikasi dan Posisi Socket API">
+                        <img src="images/week11/roadmap_application_layer.jpg" class="slide-img"
+                            alt="Peta Konsep Lapisan Aplikasi dan Posisi Socket API">
                         <div class="img-caption">Posisi Socket API sebagai Gerbang Antarmuka ke Lapisan Transpor</div>
                     </div>
                 </div>
@@ -722,7 +723,8 @@
                         </div>
                     </div>
                     <div>
-                        <img src="images/week11/paradigma_client_server.jpg" class="slide-img" alt="Paradigma Layanan Client–Server">
+                        <img src="images/week11/paradigma_client_server.jpg" class="slide-img"
+                            alt="Paradigma Layanan Client–Server">
                         <div class="img-caption">Model Asimetris Komunikasi Client–Server dan Isolasi Antar-Klien</div>
                     </div>
                 </div>
@@ -746,8 +748,10 @@
                         </ul>
                     </div>
                     <div>
-                        <img src="images/week11/abstraksi_socket_doorway.jpg" class="slide-img" alt="Abstraksi Socket: Pintu Gerbang ke Jaringan">
-                        <div class="img-caption">Konsep Pintu Gerbang (Doorway) dan Batas Kendali User Space vs Kernel Space</div>
+                        <img src="images/week11/abstraksi_socket_doorway.jpg" class="slide-img"
+                            alt="Abstraksi Socket: Pintu Gerbang ke Jaringan">
+                        <div class="img-caption">Konsep Pintu Gerbang (Doorway) dan Batas Kendali User Space vs Kernel
+                            Space</div>
                     </div>
                 </div>
             </section>
@@ -777,8 +781,10 @@
                         </ul>
                     </div>
                     <div>
-                        <img src="images/week11/dua_tipe_socket_transport.jpg" class="slide-img" alt="Dua Tipe Socket Transport: TCP vs UDP">
-                        <div class="img-caption">Komparasi Karakteristik Layanan Socket TCP (Stream) vs Socket UDP (Datagram)</div>
+                        <img src="images/week11/dua_tipe_socket_transport.jpg" class="slide-img"
+                            alt="Dua Tipe Socket Transport: TCP vs UDP">
+                        <div class="img-caption">Komparasi Karakteristik Layanan Socket TCP (Stream) vs Socket UDP
+                            (Datagram)</div>
                     </div>
                 </div>
             </section>
@@ -802,8 +808,10 @@
                         </ol>
                     </div>
                     <div>
-                        <img src="images/week11/spesifikasi_aplikasi_lab.jpg" class="slide-img" alt="Spesifikasi Alur Kerja Aplikasi Lab: Server Uppercase">
-                        <div class="img-caption">Alur Sekuensial Permintaan–Balasan (Request–Response) Klien–Server</div>
+                        <img src="images/week11/spesifikasi_aplikasi_lab.jpg" class="slide-img"
+                            alt="Spesifikasi Alur Kerja Aplikasi Lab: Server Uppercase">
+                        <div class="img-caption">Alur Sekuensial Permintaan–Balasan (Request–Response) Klien–Server
+                        </div>
                     </div>
                 </div>
             </section>
@@ -838,8 +846,10 @@
                         </ul>
                     </div>
                     <div>
-                        <img src="images/week11/socket_udp_connectionless.jpg" class="slide-img" alt="Socket Programming dengan UDP (Connectionless)">
-                        <div class="img-caption">Infografis Akademis: Mekanisme Datagram Mandiri, Tagging Alamat Eksplisit, dan Ekstraksi recvfrom()</div>
+                        <img src="images/week11/socket_udp_connectionless.jpg" class="slide-img"
+                            alt="Socket Programming dengan UDP (Connectionless)">
+                        <div class="img-caption">Mekanisme Datagram Mandiri, Tagging Alamat Eksplisit, dan Ekstraksi
+                            recvfrom()</div>
                     </div>
                 </div>
             </section>
@@ -848,20 +858,27 @@
             <section>
                 <h3>Bedah Kode: UDP Server (Python 3)</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                    <div class="card text-left text-smaller" style="font-size: .4em;">
                         <p style="margin-top:0;"><strong>Arsitektur Eksekusi <code>UDPServer.py</code>:</strong></p>
                         <ol style="margin-left:14px; margin-bottom:8px;">
-                            <li><strong>Inisiasi Soket:</strong> <code>socket(AF_INET, SOCK_DGRAM)</code> membuat soket datagram IPv4 di User Space.</li>
-                            <li><strong>Binding Port:</strong> <code>serverSocket.bind(('', 12000))</code> mengikat soket ke port 12000 pada seluruh antarmuka lokal.</li>
-                            <li><strong>Infinite Service Loop:</strong> <code>while True:</code> menjaga proses server selalu aktif menyambut datagram dari klien mana pun.</li>
-                            <li><strong>Penerimaan Datagram:</strong> <code>recvfrom(2048)</code> membaca muatan bita sekaligus tuple <code>clientAddress</code>.</li>
-                            <li><strong>Pemrosesan &amp; Balasan:</strong> Data didekode, diubah ke huruf kapital, lalu ditembakkan balik via <code>sendto()</code>.</li>
+                            <li><strong>Inisiasi Soket:</strong> <code>socket(AF_INET, SOCK_DGRAM)</code> membuat soket
+                                datagram IPv4 di User Space.</li>
+                            <li><strong>Binding Port:</strong> <code>serverSocket.bind(('', 12000))</code> mengikat
+                                soket ke port 12000 pada seluruh antarmuka lokal.</li>
+                            <li><strong>Infinite Service Loop:</strong> <code>while True:</code> menjaga proses server
+                                selalu aktif menyambut datagram dari klien mana pun.</li>
+                            <li><strong>Penerimaan Datagram:</strong> <code>recvfrom(2048)</code> membaca muatan bita
+                                sekaligus tuple <code>clientAddress</code>.</li>
+                            <li><strong>Pemrosesan &amp; Balasan:</strong> Data didekode, diubah ke huruf kapital, lalu
+                                ditembakkan balik via <code>sendto()</code>.</li>
                         </ol>
                         <div class="info-box" style="margin-top:8px;">
-                            <strong>Kunci Arsitektur UDP:</strong> Server UDP <em>tidak memerlukan</em> panggilan <code>listen()</code> maupun <code>accept()</code>. Satu <code>serverSocket</code> tunggal melayani seluruh klien secara langsung.
+                            <strong>Kunci Arsitektur UDP:</strong> Server UDP <em>tidak memerlukan</em> panggilan
+                            <code>listen()</code> maupun <code>accept()</code>. Satu <code>serverSocket</code> tunggal
+                            melayani seluruh klien secara langsung.
                         </div>
                     </div>
-                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                    <div class="card text-left text-smaller" style="font-size: .6em;">
                         <div class="code-block" style="font-size: .83em;">
                             <pre><code class="language-python">from socket import *
 
@@ -887,27 +904,38 @@ while True:
                         </div>
                     </div>
                 </div>
-                <aside class="notes">Perhatikan bahwa server UDP tidak memiliki listening queue dan tidak mencetak socket baru. Satu serverSocket melayani seluruh pengirim.</aside>
+                <aside class="notes">Perhatikan bahwa server UDP tidak memiliki listening queue dan tidak mencetak
+                    socket baru. Satu serverSocket melayani seluruh pengirim.</aside>
             </section>
 
             <!-- SLIDE 12: Bedah Kode UDP Client -->
             <section>
                 <h3>Bedah Kode: UDP Client (Python 3)</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                    <div class="card text-left text-smaller" style="font-size: .4em;">
                         <p style="margin-top:0;"><strong>Arsitektur Eksekusi <code>UDPClient.py</code>:</strong></p>
                         <ol style="margin-left:14px; margin-bottom:8px;">
-                            <li><strong>Inisiasi Soket:</strong> <code>clientSocket = socket(AF_INET, SOCK_DGRAM)</code>. Kernel otomatis mengalokasikan port efemeral dinamis.</li>
-                            <li><strong>Serialisasi Teks:</strong> <code>message.encode()</code> mengubah string keyboard menjadi bita mentah (*raw bytes*).</li>
-                            <li><strong>Explicit Addressing:</strong> <code>sendto(..., (serverName, serverPort))</code> menembakkan datagram langsung ke target (*0 RTT*).</li>
-                            <li><strong>Penerimaan Balasan:</strong> <code>recvfrom(2048)</code> membaca bita balasan dari server ke dalam buffer.</li>
-                            <li><strong>Penutupan:</strong> <code>clientSocket.close()</code> melepaskan sumber daya soket ke sistem operasi.</li>
+                            <li><strong>Inisiasi Soket:</strong>
+                                <code>clientSocket = socket(AF_INET, SOCK_DGRAM)</code>. Kernel otomatis mengalokasikan
+                                port efemeral dinamis.
+                            </li>
+                            <li><strong>Serialisasi Teks:</strong> <code>message.encode()</code> mengubah string
+                                keyboard menjadi bita mentah (*raw bytes*).</li>
+                            <li><strong>Explicit Addressing:</strong> <code>sendto(..., (serverName, serverPort))</code>
+                                menembakkan datagram langsung ke target (*0 RTT*).</li>
+                            <li><strong>Penerimaan Balasan:</strong> <code>recvfrom(2048)</code> membaca bita balasan
+                                dari server ke dalam buffer.</li>
+                            <li><strong>Penutupan:</strong> <code>clientSocket.close()</code> melepaskan sumber daya
+                                soket ke sistem operasi.</li>
                         </ol>
                         <div class="info-box" style="margin-top:8px; border-left-color: #e65100; background: #fff3e0;">
-                            <strong style="color:#e65100;">⚠️ Titik Kritis Blocking I/O:</strong> Panggilan <code>recvfrom(2048)</code> bersifat <em>blocking</em> default. Jika paket hilang di rute jaringan, klien akan terkunci (*freeze*) selamanya. Masalah ini akan kita pecahkan dengan <code>settimeout()</code> pada Bagian 4.
+                            <strong style="color:#e65100;">⚠️ Titik Kritis Blocking I/O:</strong> Panggilan
+                            <code>recvfrom(2048)</code> bersifat <em>blocking</em> default. Jika paket hilang di rute
+                            jaringan, klien akan terkunci (*freeze*) selamanya. Masalah ini akan kita pecahkan dengan
+                            <code>settimeout()</code> pada Bagian 4.
                         </div>
                     </div>
-                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                    <div class="card text-left text-smaller" style="font-size: .6em;">
                         <div class="code-block" style="font-size: .83em;">
                             <pre><code class="language-python">from socket import *
 
@@ -931,7 +959,8 @@ clientSocket.close()</code></pre>
                         </div>
                     </div>
                 </div>
-                <aside class="notes">Tunjukkan bahwa clientSocket tidak melakukan bind() secara eksplisit karena OS otomatis mengalokasikan ephemeral port saat sendto pertama dieksekusi.</aside>
+                <aside class="notes">Tunjukkan bahwa clientSocket tidak melakukan bind() secara eksplisit karena OS
+                    otomatis mengalokasikan ephemeral port saat sendto pertama dieksekusi.</aside>
             </section>
 
             <!-- SLIDE 13: Simulasi Interaktif UDP -->
@@ -1043,8 +1072,10 @@ clientSocket.close()</code></pre>
                         </ul>
                     </div>
                     <div>
-                        <img src="images/week11/socket_tcp_connection_oriented.jpg" class="slide-img" alt="Socket Programming dengan TCP (Connection-Oriented)">
-                        <div class="img-caption">Infografis Akademis: Fase 3-Way Handshake, Pipa Virtual Byte-Stream, dan Implicit Addressing</div>
+                        <img src="images/week11/socket_tcp_connection_oriented.jpg" class="slide-img"
+                            alt="Socket Programming dengan TCP (Connection-Oriented)">
+                        <div class="img-caption">Fase 3-Way Handshake, Pipa Virtual Byte-Stream, dan Implicit Addressing
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1086,20 +1117,30 @@ clientSocket.close()</code></pre>
             <section>
                 <h3>Bedah Kode: TCP Server (Python 3)</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                    <div class="card text-left text-smaller" style="font-size: .4em;">
                         <p style="margin-top:0;"><strong>Arsitektur Eksekusi <code>TCPServer.py</code>:</strong></p>
                         <ol style="margin-left:14px; margin-bottom:8px;">
-                            <li><strong>Welcoming Socket:</strong> <code>socket(AF_INET, SOCK_STREAM)</code> membuat soket penyambut TCP di port 12000.</li>
-                            <li><strong>Mode Listening:</strong> <code>serverSocket.listen(1)</code> membuka antrian masuk permohonan koneksi.</li>
-                            <li><strong>Handshake &amp; Forking:</strong> <code>connectionSocket, addr = serverSocket.accept()</code> menahan proses (*blocking*) hingga 3-way handshake selesai, lalu menghasilkan soket baru khusus klien tersebut.</li>
-                            <li><strong>Stream Transmisi:</strong> <code>connectionSocket.recv(1024)</code> dan <code>send()</code> membaca/menulis langsung dari pipa virtual tanpa alamat IP.</li>
-                            <li><strong>Penutupan Sesi:</strong> <code>connectionSocket.close()</code> menutup sesi klien, sementara <code>serverSocket</code> tetap aktif menyambut klien lain.</li>
+                            <li><strong>Welcoming Socket:</strong> <code>socket(AF_INET, SOCK_STREAM)</code> membuat
+                                soket penyambut TCP di port 12000.</li>
+                            <li><strong>Mode Listening:</strong> <code>serverSocket.listen(1)</code> membuka antrian
+                                masuk permohonan koneksi.</li>
+                            <li><strong>Handshake &amp; Forking:</strong>
+                                <code>connectionSocket, addr = serverSocket.accept()</code> menahan proses
+                                (<strong>blocking</strong>)
+                                hingga 3-way handshake selesai, lalu menghasilkan soket baru khusus klien tersebut.
+                            </li>
+                            <li><strong>Stream Transmisi:</strong> <code>connectionSocket.recv(1024)</code> dan
+                                <code>send()</code> membaca/menulis langsung dari pipa virtual tanpa alamat IP.
+                            </li>
+                            <li><strong>Penutupan Sesi:</strong> <code>connectionSocket.close()</code> menutup sesi
+                                klien, sementara <code>serverSocket</code> tetap aktif menyambut klien lain.</li>
                         </ol>
                         <div class="info-box" style="margin-top:8px;">
-                            <strong>Kunci Arsitektur TCP:</strong> Jangan pernah menutup <code>serverSocket.close()</code> di dalam perulangan <code>while True</code>!
+                            <strong>Kunci Arsitektur TCP:</strong> Jangan pernah menutup
+                            <code>serverSocket.close()</code> di dalam perulangan <code>while True</code>!
                         </div>
                     </div>
-                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                    <div class="card text-left text-smaller" style="font-size: .6em;">
                         <div class="code-block" style="font-size: .83em;">
                             <pre><code class="language-python">from socket import *
 
@@ -1129,27 +1170,40 @@ while True:
                         </div>
                     </div>
                 </div>
-                <aside class="notes">Tunjukkan perbedaan serverSocket.close() vs connectionSocket.close(). Ini pertanyaan jebakan ujian yang sangat sering muncul.</aside>
+                <aside class="notes">Tunjukkan perbedaan serverSocket.close() vs connectionSocket.close(). Ini
+                    pertanyaan jebakan ujian yang sangat sering muncul.</aside>
             </section>
 
             <!-- SLIDE 18: Bedah Kode TCP Client -->
             <section>
                 <h3>Bedah Kode: TCP Client (Python 3)</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                    <div class="card text-left text-smaller" style="font-size: .4em;">
                         <p style="margin-top:0;"><strong>Arsitektur Eksekusi <code>TCPClient.py</code>:</strong></p>
                         <ol style="margin-left:14px; margin-bottom:8px;">
-                            <li><strong>Inisiasi Soket:</strong> <code>clientSocket = socket(AF_INET, SOCK_STREAM)</code> membuat soket stream TCP.</li>
-                            <li><strong>3-Way Handshake:</strong> <code>clientSocket.connect((serverName, serverPort))</code> memicu pertukaran segmen SYN &rarr; SYN-ACK &rarr; ACK. Terhubung sebelum data pertama dikirim.</li>
-                            <li><strong>Implicit Stream:</strong> <code>clientSocket.send(sentence.encode())</code> mengalirkan bita ke pipa tanpa parameter IP/Port lagi.</li>
-                            <li><strong>Penerimaan Stream:</strong> <code>clientSocket.recv(1024)</code> membaca bita balasan dari pipa virtual (*blocking*).</li>
-                            <li><strong>Penutupan Teratur:</strong> <code>clientSocket.close()</code> mengirim segmen FIN untuk membongkar koneksi.</li>
+                            <li><strong>Inisiasi Soket:</strong>
+                                <code>clientSocket = socket(AF_INET, SOCK_STREAM)</code> membuat soket stream TCP.
+                            </li>
+                            <li><strong>3-Way Handshake:</strong>
+                                <code>clientSocket.connect((serverName, serverPort))</code> memicu pertukaran segmen SYN
+                                &rarr; SYN-ACK &rarr; ACK. Terhubung sebelum data pertama dikirim.
+                            </li>
+                            <li><strong>Implicit Stream:</strong> <code>clientSocket.send(sentence.encode())</code>
+                                mengalirkan bita ke pipa tanpa parameter IP/Port lagi.</li>
+                            <li><strong>Penerimaan Stream:</strong> <code>clientSocket.recv(1024)</code> membaca bita
+                                balasan dari pipa virtual (<strong>blocking</strong>).</li>
+                            <li><strong>Penutupan Teratur:</strong> <code>clientSocket.close()</code> mengirim segmen
+                                FIN untuk membongkar koneksi.</li>
                         </ol>
                         <div class="info-box" style="margin-top:8px; border-left-color: #e65100; background: #fff3e0;">
-                            <strong style="color:#e65100;">⚠️ Titik Kritis Blocking I/O:</strong> Baik <code>connect()</code> maupun <code>recv()</code> adalah operasi *blocking*. Jika server hang di tengah transmisi stream, klien terkunci. Solusinya dibahas tuntas pada Slide 21 dengan <code>settimeout()</code>.
+                            <strong style="color:#e65100;">⚠️ Titik Kritis Blocking I/O:</strong> Baik
+                            <code>connect()</code> maupun <code>recv()</code> adalah operasi <strong>blocking</strong>.
+                            Jika server
+                            hang di tengah transmisi stream, klien terkunci. Solusinya dibahas tuntas pada Slide 21
+                            dengan <code>settimeout()</code>.
                         </div>
                     </div>
-                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                    <div class="card text-left text-smaller" style="font-size: .6em;">
                         <div class="code-block" style="font-size: .83em;">
                             <pre><code class="language-python">from socket import *
 
@@ -1176,7 +1230,8 @@ clientSocket.close()</code></pre>
                         </div>
                     </div>
                 </div>
-                <aside class="notes">Tekankan bahwa connect() wajib dijalankan sebelum send(). Jika server belum siap, connect() akan memicu ConnectionRefusedError.</aside>
+                <aside class="notes">Tekankan bahwa connect() wajib dijalankan sebelum send(). Jika server belum siap,
+                    connect() akan memicu ConnectionRefusedError.</aside>
             </section>
 
             <!-- SLIDE 19: Simulasi Interaktif TCP -->
@@ -1275,20 +1330,27 @@ clientSocket.close()</code></pre>
             <section>
                 <h3>Mitigasi Blocking I/O dengan Timeout &amp; Exception</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size: .45em;">
+                    <div class="card text-left text-smaller" style="font-size: .4em;">
                         <p style="margin-top:0;"><strong>Korelasi dengan Kode Slide Sebelumnya:</strong></p>
-                        <p>Pada <code>UDPClient.py</code> (Slide 12) dan <code>TCPClient.py</code> (Slide 18), pemanggilan fungsi membaca seperti <code>recvfrom()</code> dan <code>recv()</code> berjalan secara <strong>blocking</strong> default. Jika paket hilang atau server hang, program klien membeku (*freeze*) tanpa batas waktu.</p>
+                        <p>Pada <code>UDPClient.py</code> (Slide 12) dan <code>TCPClient.py</code> (Slide 18),
+                            pemanggilan fungsi membaca seperti <code>recvfrom()</code> dan <code>recv()</code> berjalan
+                            secara <strong>blocking</strong> default. Jika paket hilang atau server hang, program klien
+                            membeku (*freeze*) tanpa batas waktu.</p>
                         <p><strong>Solusi: <code>clientSocket.settimeout(detik)</code></strong></p>
                         <ul>
                             <li>Memasang timer batas waktu tunggu maksimal pada soket (baik UDP maupun TCP).</li>
-                            <li>Jika dalam kurun waktu tersebut tidak ada data yang masuk, Python membangkitkan interupsi <code>socket.timeout</code>.</li>
-                            <li>Wajib dibungkus dalam blok proteksi <code>try ... except</code> agar aplikasi dapat melakukan mitigasi secara anggun (*graceful handling*) tanpa mengalami *crash*.</li>
+                            <li>Jika dalam kurun waktu tersebut tidak ada data yang masuk, Python membangkitkan
+                                interupsi <code>socket.timeout</code>.</li>
+                            <li>Wajib dibungkus dalam blok proteksi <code>try ... except</code> agar aplikasi dapat
+                                melakukan mitigasi secara anggun (*graceful handling*) tanpa mengalami *crash*.</li>
                         </ul>
                         <div class="info-box" style="margin-top:8px;">
-                            <strong>Universal:</strong> Pola proteksi <code>settimeout()</code> dan <code>try...except</code> ini berlaku identik untuk mengamankan <code>UDPClient.py</code> maupun <code>TCPClient.py</code>.
+                            <strong>Universal:</strong> Pola proteksi <code>settimeout()</code> dan
+                            <code>try...except</code> ini berlaku identik untuk mengamankan <code>UDPClient.py</code>
+                            maupun <code>TCPClient.py</code>.
                         </div>
                     </div>
-                    <div class="card text-left text-smaller" style="font-size: .45em;">
+                    <div class="card text-left text-smaller" style="font-size: .6em;">
                         <div class="code-block" style="font-size: .83em;">
                             <pre><code class="language-python">import socket
 
@@ -1319,7 +1381,8 @@ finally:
                         </div>
                     </div>
                 </div>
-                <aside class="notes">Tunjukkan bahwa tanpa settimeout(), jika server tidak merespons maka baris recv() akan hang selamanya dan mematikan antarmuka aplikasi.</aside>
+                <aside class="notes">Tunjukkan bahwa tanpa settimeout(), jika server tidak merespons maka baris recv()
+                    akan hang selamanya dan mematikan antarmuka aplikasi.</aside>
             </section>
 
             <!-- SLIDE 22: Studi Kasus Shepherd Boy -->
@@ -1347,7 +1410,7 @@ finally:
             <!-- SLIDE 23: Implementasi Shepherd Boy Code -->
             <section>
                 <h3>Implementasi The Shepherd Boy (TCPServer)</h3>
-                <div class="card text-left text-smaller">
+                <div class="card text-left text-small">
                     <div class="code-block">
                         <pre><code>from socket import *
 serverSocket = socket(AF_INET, SOCK_STREAM)
@@ -1582,8 +1645,10 @@ print("Batas toleransi 3x habis! Server menolak anak gembala permanen.")</code><
                             the network edge!"</p>
                     </div>
                     <div>
-                        <img src="images/week11/rangkuman_socket_programming.jpg" class="slide-img" alt="Rangkuman Modul Socket Programming: Arsitektur &amp; Prinsip End-to-End">
-                        <div class="img-caption">Infografis Akademis: Tiga Pilar Soket &amp; Filosofi Desain "Complexity at the Network Edge"</div>
+                        <img src="images/week11/rangkuman_socket_programming.jpg" class="slide-img"
+                            alt="Rangkuman Modul Socket Programming: Arsitektur &amp; Prinsip End-to-End">
+                        <div class="img-caption">Tiga Pilar Soket &amp; Filosofi Desain "Complexity at the Network Edge"
+                        </div>
                     </div>
                 </div>
             </section>
