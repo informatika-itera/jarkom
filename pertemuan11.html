@@ -845,67 +845,94 @@
             </section>
 
             <!-- SLIDE 11: Bedah Kode UDP Server (Server-First!) -->
-            <!-- <section>
+            <section>
                 <h3>Bedah Kode: UDP Server (Python 3)</h3>
-                <div class="card text-left text-smaller">
-                    <div class="code-block">
-                        <pre><code>from socket import *
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                        <p style="margin-top:0;"><strong>Arsitektur Eksekusi <code>UDPServer.py</code>:</strong></p>
+                        <ol style="margin-left:14px; margin-bottom:8px;">
+                            <li><strong>Inisiasi Soket:</strong> <code>socket(AF_INET, SOCK_DGRAM)</code> membuat soket datagram IPv4 di User Space.</li>
+                            <li><strong>Binding Port:</strong> <code>serverSocket.bind(('', 12000))</code> mengikat soket ke port 12000 pada seluruh antarmuka lokal.</li>
+                            <li><strong>Infinite Service Loop:</strong> <code>while True:</code> menjaga proses server selalu aktif menyambut datagram dari klien mana pun.</li>
+                            <li><strong>Penerimaan Datagram:</strong> <code>recvfrom(2048)</code> membaca muatan bita sekaligus tuple <code>clientAddress</code>.</li>
+                            <li><strong>Pemrosesan &amp; Balasan:</strong> Data didekode, diubah ke huruf kapital, lalu ditembakkan balik via <code>sendto()</code>.</li>
+                        </ol>
+                        <div class="info-box" style="margin-top:8px;">
+                            <strong>Kunci Arsitektur UDP:</strong> Server UDP <em>tidak memerlukan</em> panggilan <code>listen()</code> maupun <code>accept()</code>. Satu <code>serverSocket</code> tunggal melayani seluruh klien secara langsung.
+                        </div>
+                    </div>
+                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                        <div class="code-block" style="font-size: .83em;">
+                            <pre><code class="language-python">from socket import *
+
 serverPort = 12000
 
 # 1. Membuat UDP Socket (AF_INET = IPv4, SOCK_DGRAM = UDP)
 serverSocket = socket(AF_INET, SOCK_DGRAM)
 
-# 2. Mengikat (Bind) soket ke port lokal 12000 ('' berarti semua interface)
+# 2. Mengikat (Bind) soket ke port lokal 12000
 serverSocket.bind(('', serverPort))
-print('The server is ready to receive')
+print('Server UDP siap menerima paket...')
 
 # 3. Infinite loop untuk terus melayani datagram yang masuk
 while True:
-    # recvfrom membaca bita payload sekaligus tuple alamat pengirim (IP, Port)
+    # 4. recvfrom membaca bita payload & tuple alamat pengirim
     message, clientAddress = serverSocket.recvfrom(2048)
     
-    # Konversi bytes ke string, ubah ke kapital
+    # 5. Konversi bytes ke string, ubah ke kapital
     modifiedMessage = message.decode().upper()
     
-    # Mengirim balik bita balasan langsung ke alamat klien pengirim
+    # 6. Mengirim balik bita balasan langsung ke klien pengirim
     serverSocket.sendto(modifiedMessage.encode(), clientAddress)</code></pre>
+                        </div>
                     </div>
                 </div>
-                <aside class="notes">Perhatikan bahwa server UDP tidak memiliki listening queue dan tidak mencetak
-                    socket baru. Satu serverSocket melayani seluruh pengirim.</aside>
-            </section> -->
+                <aside class="notes">Perhatikan bahwa server UDP tidak memiliki listening queue dan tidak mencetak socket baru. Satu serverSocket melayani seluruh pengirim.</aside>
+            </section>
 
             <!-- SLIDE 12: Bedah Kode UDP Client -->
-            <!-- <section>
+            <section>
                 <h3>Bedah Kode: UDP Client (Python 3)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                        <div class="code-block">
-                            <pre><code>from socket import *
-serverName = '127.0.0.1' # atau hostname remote
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                        <p style="margin-top:0;"><strong>Arsitektur Eksekusi <code>UDPClient.py</code>:</strong></p>
+                        <ol style="margin-left:14px; margin-bottom:8px;">
+                            <li><strong>Inisiasi Soket:</strong> <code>clientSocket = socket(AF_INET, SOCK_DGRAM)</code>. Kernel otomatis mengalokasikan port efemeral dinamis.</li>
+                            <li><strong>Serialisasi Teks:</strong> <code>message.encode()</code> mengubah string keyboard menjadi bita mentah (*raw bytes*).</li>
+                            <li><strong>Explicit Addressing:</strong> <code>sendto(..., (serverName, serverPort))</code> menembakkan datagram langsung ke target (*0 RTT*).</li>
+                            <li><strong>Penerimaan Balasan:</strong> <code>recvfrom(2048)</code> membaca bita balasan dari server ke dalam buffer.</li>
+                            <li><strong>Penutupan:</strong> <code>clientSocket.close()</code> melepaskan sumber daya soket ke sistem operasi.</li>
+                        </ol>
+                        <div class="info-box" style="margin-top:8px; border-left-color: #e65100; background: #fff3e0;">
+                            <strong style="color:#e65100;">⚠️ Titik Kritis Blocking I/O:</strong> Panggilan <code>recvfrom(2048)</code> bersifat <em>blocking</em> default. Jika paket hilang di rute jaringan, klien akan terkunci (*freeze*) selamanya. Masalah ini akan kita pecahkan dengan <code>settimeout()</code> pada Bagian 4.
+                        </div>
+                    </div>
+                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                        <div class="code-block" style="font-size: .83em;">
+                            <pre><code class="language-python">from socket import *
+
+serverName = '127.0.0.1'  # atau hostname/IP server tujuan
 serverPort = 12000
 
 # 1. Membuat socket UDP klien
 clientSocket = socket(AF_INET, SOCK_DGRAM)
 
-message = input('Input lowercase sentence: ')
+message = input('Ketik kalimat huruf kecil: ')
 
 # 2. Mengirim data mentah beserta tuple tujuan (IP, Port)
 clientSocket.sendto(message.encode(), (serverName, serverPort))
 
-# 3. Menunggu balasan (buffer 2048 bytes)
+# 3. Menunggu balasan (buffer 2048 bytes - BLOCKING!)
 modifiedMessage, serverAddress = clientSocket.recvfrom(2048)
-print('From Server:', modifiedMessage.decode())
+print('Balasan Server:', modifiedMessage.decode())
 
 # 4. Tutup socket
 clientSocket.close()</code></pre>
                         </div>
                     </div>
-                    <div>
-                        <img src="images/week11/image10.png" class="slide-img" alt="Bedah Kode UDP Client">
-                    </div>
                 </div>
-            </section> -->
+                <aside class="notes">Tunjukkan bahwa clientSocket tidak melakukan bind() secara eksplisit karena OS otomatis mengalokasikan ephemeral port saat sendto pertama dieksekusi.</aside>
+            </section>
 
             <!-- SLIDE 13: Simulasi Interaktif UDP -->
             <section>
@@ -1056,11 +1083,26 @@ clientSocket.close()</code></pre>
             </section>
 
             <!-- SLIDE 17: Bedah Kode TCP Server (Server-First!) -->
-            <!-- <section>
+            <section>
                 <h3>Bedah Kode: TCP Server (Python 3)</h3>
-                <div class="card text-left text-smaller">
-                    <div class="code-block">
-                        <pre><code>from socket import *
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                        <p style="margin-top:0;"><strong>Arsitektur Eksekusi <code>TCPServer.py</code>:</strong></p>
+                        <ol style="margin-left:14px; margin-bottom:8px;">
+                            <li><strong>Welcoming Socket:</strong> <code>socket(AF_INET, SOCK_STREAM)</code> membuat soket penyambut TCP di port 12000.</li>
+                            <li><strong>Mode Listening:</strong> <code>serverSocket.listen(1)</code> membuka antrian masuk permohonan koneksi.</li>
+                            <li><strong>Handshake &amp; Forking:</strong> <code>connectionSocket, addr = serverSocket.accept()</code> menahan proses (*blocking*) hingga 3-way handshake selesai, lalu menghasilkan soket baru khusus klien tersebut.</li>
+                            <li><strong>Stream Transmisi:</strong> <code>connectionSocket.recv(1024)</code> dan <code>send()</code> membaca/menulis langsung dari pipa virtual tanpa alamat IP.</li>
+                            <li><strong>Penutupan Sesi:</strong> <code>connectionSocket.close()</code> menutup sesi klien, sementara <code>serverSocket</code> tetap aktif menyambut klien lain.</li>
+                        </ol>
+                        <div class="info-box" style="margin-top:8px;">
+                            <strong>Kunci Arsitektur TCP:</strong> Jangan pernah menutup <code>serverSocket.close()</code> di dalam perulangan <code>while True</code>!
+                        </div>
+                    </div>
+                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                        <div class="code-block" style="font-size: .83em;">
+                            <pre><code class="language-python">from socket import *
+
 serverPort = 12000
 
 # 1. Membuat Welcoming Socket (SOCK_STREAM = TCP)
@@ -1069,10 +1111,10 @@ serverSocket.bind(('', serverPort))
 
 # 2. Mulai mendengarkan antrian koneksi masuk
 serverSocket.listen(1)
-print('The server is ready to receive')
+print('Server TCP siap menerima koneksi...')
 
 while True:
-    # 3. Blocking tertidur di accept(). Saat ada klien masuk,
+    # 3. Blocking di accept(). Saat ada klien masuk,
     #    OS menghasilkan connectionSocket BARU khusus klien ini
     connectionSocket, addr = serverSocket.accept()
     
@@ -1080,50 +1122,62 @@ while True:
     sentence = connectionSocket.recv(1024).decode()
     capitalizedSentence = sentence.upper()
     
-    # 5. Mengirim balasan dan menutup connectionSocket klien ini
+    # 5. Mengirim balasan dan menutup connectionSocket
     connectionSocket.send(capitalizedSentence.encode())
-    connectionSocket.close()
+    connectionSocket.close()  # Sesi klien ini selesai
     # (serverSocket welcoming socket TIDAK DITUTUP!)</code></pre>
+                        </div>
                     </div>
                 </div>
-                <aside class="notes">Tunjukkan perbedaan serverSocket.close() vs connectionSocket.close(). Ini
-                    pertanyaan jebakan ujian yang sangat sering muncul.</aside>
-            </section> -->
+                <aside class="notes">Tunjukkan perbedaan serverSocket.close() vs connectionSocket.close(). Ini pertanyaan jebakan ujian yang sangat sering muncul.</aside>
+            </section>
 
             <!-- SLIDE 18: Bedah Kode TCP Client -->
-            <!-- <section>
+            <section>
                 <h3>Bedah Kode: TCP Client (Python 3)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                        <div class="code-block">
-                            <pre><code>from socket import *
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                        <p style="margin-top:0;"><strong>Arsitektur Eksekusi <code>TCPClient.py</code>:</strong></p>
+                        <ol style="margin-left:14px; margin-bottom:8px;">
+                            <li><strong>Inisiasi Soket:</strong> <code>clientSocket = socket(AF_INET, SOCK_STREAM)</code> membuat soket stream TCP.</li>
+                            <li><strong>3-Way Handshake:</strong> <code>clientSocket.connect((serverName, serverPort))</code> memicu pertukaran segmen SYN &rarr; SYN-ACK &rarr; ACK. Terhubung sebelum data pertama dikirim.</li>
+                            <li><strong>Implicit Stream:</strong> <code>clientSocket.send(sentence.encode())</code> mengalirkan bita ke pipa tanpa parameter IP/Port lagi.</li>
+                            <li><strong>Penerimaan Stream:</strong> <code>clientSocket.recv(1024)</code> membaca bita balasan dari pipa virtual (*blocking*).</li>
+                            <li><strong>Penutupan Teratur:</strong> <code>clientSocket.close()</code> mengirim segmen FIN untuk membongkar koneksi.</li>
+                        </ol>
+                        <div class="info-box" style="margin-top:8px; border-left-color: #e65100; background: #fff3e0;">
+                            <strong style="color:#e65100;">⚠️ Titik Kritis Blocking I/O:</strong> Baik <code>connect()</code> maupun <code>recv()</code> adalah operasi *blocking*. Jika server hang di tengah transmisi stream, klien terkunci. Solusinya dibahas tuntas pada Slide 21 dengan <code>settimeout()</code>.
+                        </div>
+                    </div>
+                    <div class="card text-left text-smaller" style="font-size: .44em;">
+                        <div class="code-block" style="font-size: .83em;">
+                            <pre><code class="language-python">from socket import *
+
 serverName = '127.0.0.1'
 serverPort = 12000
 
 # 1. Membuat socket TCP klien (SOCK_STREAM)
 clientSocket = socket(AF_INET, SOCK_STREAM)
 
-# 2. Inisiasi koneksi 3-way handshake ke server
+# 2. Inisiasi koneksi 3-way handshake ke server (BLOCKING!)
 clientSocket.connect((serverName, serverPort))
 
-sentence = input('Input lowercase sentence: ')
+sentence = input('Ketik kalimat huruf kecil: ')
 
 # 3. Mengalirkan data ke pipa tanpa target IP lagi
 clientSocket.send(sentence.encode())
 
-# 4. Menerima bita stream balasan
+# 4. Menerima bita stream balasan (BLOCKING!)
 modifiedSentence = clientSocket.recv(1024)
-print('From Server:', modifiedSentence.decode())
+print('Balasan Server:', modifiedSentence.decode())
 
 # 5. Menutup koneksi TCP (FIN-ACK handshake)
 clientSocket.close()</code></pre>
                         </div>
                     </div>
-                    <div>
-                        <img src="images/week11/image14.png" class="slide-img" alt="Bedah Kode TCP Client">
-                    </div>
                 </div>
-            </section> -->
+                <aside class="notes">Tekankan bahwa connect() wajib dijalankan sebelum send(). Jika server belum siap, connect() akan memicu ConnectionRefusedError.</aside>
+            </section>
 
             <!-- SLIDE 19: Simulasi Interaktif TCP -->
             <section>
@@ -1217,49 +1271,55 @@ clientSocket.close()</code></pre>
                     dengan timeout, menangani eksepsi, dan mengatasi kendala umum pemrograman soket.</aside>
             </section>
 
-            <!-- SLIDE 21: Mitigasi Blocking I/O & Timeout Exception (Konsolidasi Slide 25+26+27) -->
+            <!-- SLIDE 21: Mitigasi Blocking I/O & Timeout Exception -->
             <section>
                 <h3>Mitigasi Blocking I/O dengan Timeout &amp; Exception</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size: .48em;">
-                        <p><strong>Masalah Blocking I/O:</strong> Fungsi soket seperti <code>recv()</code> dan
-                            <code>accept()</code> menahan eksekusi program (*freeze*) sampai data tiba. Jika host
-                            seberang mati mendadak, program terkunci selamanya.
-                        </p>
-                        <p><strong>Solusi: <code>socket.settimeout(detik)</code></strong></p>
+                    <div class="card text-left text-smaller" style="font-size: .45em;">
+                        <p style="margin-top:0;"><strong>Korelasi dengan Kode Slide Sebelumnya:</strong></p>
+                        <p>Pada <code>UDPClient.py</code> (Slide 12) dan <code>TCPClient.py</code> (Slide 18), pemanggilan fungsi membaca seperti <code>recvfrom()</code> dan <code>recv()</code> berjalan secara <strong>blocking</strong> default. Jika paket hilang atau server hang, program klien membeku (*freeze*) tanpa batas waktu.</p>
+                        <p><strong>Solusi: <code>clientSocket.settimeout(detik)</code></strong></p>
                         <ul>
-                            <li>Memasang timer batas waktu tunggu maksimal.</li>
-                            <li>Jika dalam kurun waktu tersebut tidak ada data yang masuk, Python membangkitkan
-                                interupsi <code>socket.timeout</code>.</li>
-                            <li>Wajib dibungkus dalam blok proteksi <code>try ... except</code> agar aplikasi tidak
-                                mengalami *crash*.</li>
+                            <li>Memasang timer batas waktu tunggu maksimal pada soket (baik UDP maupun TCP).</li>
+                            <li>Jika dalam kurun waktu tersebut tidak ada data yang masuk, Python membangkitkan interupsi <code>socket.timeout</code>.</li>
+                            <li>Wajib dibungkus dalam blok proteksi <code>try ... except</code> agar aplikasi dapat melakukan mitigasi secara anggun (*graceful handling*) tanpa mengalami *crash*.</li>
                         </ul>
+                        <div class="info-box" style="margin-top:8px;">
+                            <strong>Universal:</strong> Pola proteksi <code>settimeout()</code> dan <code>try...except</code> ini berlaku identik untuk mengamankan <code>UDPClient.py</code> maupun <code>TCPClient.py</code>.
+                        </div>
                     </div>
-                    <div class="card text-left text-smaller">
-                        <div class="code-block">
-                            <pre><code>import socket
+                    <div class="card text-left text-smaller" style="font-size: .45em;">
+                        <div class="code-block" style="font-size: .83em;">
+                            <pre><code class="language-python">import socket
 
-clientSocket = socket.socket(
-    socket.AF_INET, socket.SOCK_STREAM
-)
-# Pasang bom waktu 10 detik
+# Mengamankan TCPClient dari Slide 18 dengan Timeout:
+clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# 1. Pasang batas waktu tunggu maksimal 10 detik
 clientSocket.settimeout(10.0)
 
 try:
+    # 2. Inisiasi koneksi ke server
+    clientSocket.connect(('127.0.0.1', 12000))
+    clientSocket.send(b"Hello Server")
+    
+    # 3. Menerima balasan (terlindungi batas 10 detik)
     data = clientSocket.recv(1024)
     print("Diterima:", data.decode())
     
 except socket.timeout:
-    print("Waktu tunggu 10 detik habis! Server diam.")
+    print("Error: Batas waktu 10 detik habis! Server tidak merespons.")
     
 except socket.error as e:
-    print("Kesalahan jaringan:", str(e))
+    print("Kesalahan jaringan / koneksi:", str(e))
     
 finally:
+    # 4. Pastikan soket selalu ditutup dengan aman
     clientSocket.close()</code></pre>
                         </div>
                     </div>
                 </div>
+                <aside class="notes">Tunjukkan bahwa tanpa settimeout(), jika server tidak merespons maka baris recv() akan hang selamanya dan mematikan antarmuka aplikasi.</aside>
             </section>
 
             <!-- SLIDE 22: Studi Kasus Shepherd Boy -->
