@@ -711,10 +711,10 @@
                         </p>
                         <ul>
                             <li><strong>Server:</strong> Host yang selalu menyala (<em>always-on</em>), memiliki IP
-                                permanen, dan menjalankan proses yang terus mendengarkan (*listening*) pada port
+                                permanen, dan menjalankan proses yang terus mendengarkan (<em>listening</em>) pada port
                                 tertentu.</li>
                             <li><strong>Client:</strong> Host yang berkomunikasi dengan server secara dinamis
-                                (*on-demand*), dapat menggunakan IP dinamis, dan tidak berkomunikasi langsung
+                                (<em>on-demand</em>), dapat menggunakan IP dinamis, dan tidak berkomunikasi langsung
                                 antar-klien.</li>
                         </ul>
                         <div class="info-box" style="margin-top:10px;">
@@ -841,7 +841,7 @@
                                 <code>recvfrom()</code>, sistem mengembalikan tuple <code>(data, clientAddress)</code>
                                 sehingga server tahu ke mana harus membalas.
                             </li>
-                            <li><strong>Resiko:</strong> Paket dapat hilang di rute jaringan (*packet loss*) tanpa
+                            <li><strong>Resiko:</strong> Paket dapat hilang di rute jaringan (<em>packet loss</em>) tanpa
                                 notifikasi error di sisi pengirim.</li>
                         </ul>
                     </div>
@@ -920,9 +920,9 @@ while True:
                                 port efemeral dinamis.
                             </li>
                             <li><strong>Serialisasi Teks:</strong> <code>message.encode()</code> mengubah string
-                                keyboard menjadi bita mentah (*raw bytes*).</li>
+                                keyboard menjadi bita mentah (<em>raw bytes</em>).</li>
                             <li><strong>Explicit Addressing:</strong> <code>sendto(..., (serverName, serverPort))</code>
-                                menembakkan datagram langsung ke target (*0 RTT*).</li>
+                                menembakkan datagram langsung ke target (<em>0 RTT</em>).</li>
                             <li><strong>Penerimaan Balasan:</strong> <code>recvfrom(2048)</code> membaca bita balasan
                                 dari server ke dalam buffer.</li>
                             <li><strong>Penutupan:</strong> <code>clientSocket.close()</code> melepaskan sumber daya
@@ -931,7 +931,7 @@ while True:
                         <div class="info-box" style="margin-top:8px; border-left-color: #e65100; background: #fff3e0;">
                             <strong style="color:#e65100;">⚠️ Titik Kritis Blocking I/O:</strong> Panggilan
                             <code>recvfrom(2048)</code> bersifat <em>blocking</em> default. Jika paket hilang di rute
-                            jaringan, klien akan terkunci (*freeze*) selamanya. Masalah ini akan kita pecahkan dengan
+                            jaringan, klien akan terkunci (<em>freeze</em>) selamanya. Masalah ini akan kita pecahkan dengan
                             <code>settimeout()</code> pada Bagian 4.
                         </div>
                     </div>
@@ -1335,14 +1335,14 @@ clientSocket.close()</code></pre>
                         <p>Pada <code>UDPClient.py</code> (Slide 12) dan <code>TCPClient.py</code> (Slide 18),
                             pemanggilan fungsi membaca seperti <code>recvfrom()</code> dan <code>recv()</code> berjalan
                             secara <strong>blocking</strong> default. Jika paket hilang atau server hang, program klien
-                            membeku (*freeze*) tanpa batas waktu.</p>
+                            membeku (<em>freeze</em>) tanpa batas waktu.</p>
                         <p><strong>Solusi: <code>clientSocket.settimeout(detik)</code></strong></p>
                         <ul>
                             <li>Memasang timer batas waktu tunggu maksimal pada soket (baik UDP maupun TCP).</li>
                             <li>Jika dalam kurun waktu tersebut tidak ada data yang masuk, Python membangkitkan
                                 interupsi <code>socket.timeout</code>.</li>
                             <li>Wajib dibungkus dalam blok proteksi <code>try ... except</code> agar aplikasi dapat
-                                melakukan mitigasi secara anggun (*graceful handling*) tanpa mengalami *crash*.</li>
+                                melakukan mitigasi secara anggun (<em>graceful handling</em>) tanpa mengalami <em>crash</em>.</li>
                         </ul>
                         <div class="info-box" style="margin-top:8px;">
                             <strong>Universal:</strong> Pola proteksi <code>settimeout()</code> dan
@@ -1390,14 +1390,14 @@ finally:
                 <h3>Contoh Kasus TCP Server Timeout (The Shepherd Boy)</h3>
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller" style="font-size: .48em;">
-                        <p><strong>Studi Kasus Keamanan Jaringan:</strong> Mencegah serangan *Idle Connection /
-                            Slowloris* di mana Klien iseng terhubung ke Server tetapi tidak pernah mengirim data.</p>
+                        <p><strong>Studi Kasus Keamanan Jaringan:</strong> Mencegah serangan <em>Idle Connection /
+                            Slowloris</em> di mana Klien iseng terhubung ke Server tetapi tidak pernah mengirim data.</p>
                         <p><strong>Analoginya:</strong></p>
                         <ul>
                             <li>Anak gembala (Klien) terkoneksi ke Warga Desa (Server), namun diam saja.</li>
                             <li>Server memasang timer <code>connectionSocket.settimeout(10)</code>.</li>
                             <li>Jika dalam 10 detik anak gembala tidak melapor lokasi serigala, server mencatat 1 poin
-                                keisengan (*counter* bertambah).</li>
+                                keisengan (<em>counter</em> bertambah).</li>
                             <li>Setelah 3 kali timeout berturut-turut, Server memutus sambungan secara permanen.</li>
                         </ul>
                     </div>
@@ -1639,7 +1639,7 @@ print("Batas toleransi 3x habis! Server menolak anak gembala permanen.")</code><
                                 serialisasi/deserialisasi.</li>
                             <li><strong>Filosofi Arsitektur Internet:</strong> Jaringan inti (<em>core routers</em>)
                                 dibuat sesederhana mungkin, sedangkan seluruh kompleksitas dan kecerdasan komputasi
-                                diletakkan di tepi jaringan (*complexity at the network edge*).</li>
+                                diletakkan di tepi jaringan (<em>complexity at the network edge</em>).</li>
                         </ul>
                         <p style="text-align:center; margin-top:20px; font-weight:bold; color:#1565c0;">"Complexity at
                             the network edge!"</p>
