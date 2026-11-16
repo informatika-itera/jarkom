@@ -312,6 +312,225 @@
         [data-theme="dark"] .reveal table tr:nth-child(even) td {
             background: #222 !important;
         }
+
+        /* Comparison table & troubleshooting badge */
+        .table-compare {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .table-compare th {
+            background: #1565c0 !important;
+            color: #fff !important;
+            font-size: .8em;
+            padding: 8px 10px !important;
+            text-align: center;
+        }
+
+        .table-compare td {
+            font-size: .72em !important;
+            padding: 8px 10px !important;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: middle;
+        }
+
+        .table-compare tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        .badge-err {
+            background: #fee2e2;
+            color: #991b1b;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: .85em;
+            display: inline-block;
+        }
+
+        .badge-sol {
+            background: #dcfce7;
+            color: #166534;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: .85em;
+            display: inline-block;
+        }
+
+        .badge-info {
+            background: #e0f2fe;
+            color: #0369a1;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: .85em;
+            display: inline-block;
+        }
+
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           INTERACTIVE SIMULATION STYLES FOR P12
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        .sim-container {
+            background: #0d1117;
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: #c9d1d9;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: .65em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .4);
+            max-width: 960px;
+            margin: 10px auto;
+            text-align: left;
+        }
+
+        .sim-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #21262d;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sim-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .sim-tab-btn {
+            background: #21262d;
+            color: #8b949e;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-size: .85em;
+            font-weight: 600;
+            transition: all .2s ease;
+        }
+
+        .sim-tab-btn.active {
+            background: #1f6feb;
+            color: #fff;
+            border-color: #388bfd;
+        }
+
+        .sim-btn-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .sim-btn {
+            background: #238636;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-size: .85em;
+            font-weight: 600;
+            transition: background .2s ease;
+        }
+
+        .sim-btn:hover {
+            background: #2ea043;
+        }
+
+        .sim-btn-orange {
+            background: #d97706;
+        }
+
+        .sim-btn-orange:hover {
+            background: #b45309;
+        }
+
+        .sim-btn-reset {
+            background: #30363d;
+        }
+
+        .sim-btn-reset:hover {
+            background: #484f58;
+        }
+
+        .sim-display-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .sim-pane {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 8px 12px;
+            height: 195px;
+            overflow-y: auto;
+        }
+
+        .sim-pane-title {
+            color: #58a6ff;
+            font-weight: 700;
+            font-size: .85em;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sim-log-line {
+            margin: 4px 0;
+            line-height: 1.4;
+            font-size: .82em;
+        }
+
+        .sim-tag-req {
+            background: #1f6feb;
+            color: #fff;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: .8em;
+        }
+
+        .sim-tag-res {
+            background: #238636;
+            color: #fff;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: .8em;
+        }
+
+        .sim-tag-dns {
+            background: #8957e5;
+            color: #fff;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: .8em;
+        }
+
+        .sim-tag-warn {
+            background: #d29922;
+            color: #000;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: .8em;
+            font-weight: 700;
+        }
+
+        .sim-tag-cache {
+            background: #3fb950;
+            color: #000;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: .8em;
+            font-weight: 700;
+        }
     </style>
 </head>
 
@@ -323,14 +542,14 @@
         </div>
 
         <div class="slides">
-
+            <!-- SLIDE 1: COVER (ORIGINAL PRESERVED) -->
             <section>
                 <div class="title-box">
                     <h1>Application Layer</h1>
                     <h3 class="subtitle">Pertemuan 12</h3>
                 </div>
                 <p>Pendalaman Ekstensif: Web & HTTP, E-mail (SMTP/IMAP), dan DNS</p>
-                <p>Referensi: <em>Bahan Ajar Week12.pptx & RPS Jaringan Komputer</em></p>
+                <!-- <p>Referensi: <em>Bahan Ajar Week12.pptx & RPS Jaringan Komputer</em></p> -->
                 <p class="text-small"><em>Dosen Pengampu:</em></p>
                 <div
                     style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
@@ -341,666 +560,1334 @@
                 </div>
             </section>
 
+            <!-- SLIDE 2: OUTLINE MATERI -->
             <section>
-                <h3>Goals & Overview</h3>
-                <div class="layout-text-img">
+                <h3>Outline Materi</h3>
+                <div class="layout-2col">
                     <div class="card text-left text-smaller">
-                    <p>Sasaran Pembelajaran Pertemuan 12:</p>
-                    <ul>
-                        <li>Memahami aspek konseptual dan implementasi dari protokol-protokol di Application Layer.</li>
-                        <li>Memahami model transport-layer service.</li>
-                        <li>Membedah paradigma Client-Server vs Peer-to-Peer.</li>
-                        <li>Mempelajari secara mendalam protokol-protokol populer: <strong>HTTP, SMTP, IMAP, dan DNS</strong>.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image1.png" class="slide-img" alt="Goals & Overview">
+                        <p style="font-weight:700; color:#1565c0; font-size:.95em; margin:0 0 4px 0;">
+                            <i class="bi bi-diagram-3-fill"></i> 1. Prinsip Lapisan Aplikasi
+                        </p>
+                        <ul style="margin-bottom:14px;">
+                            <li>Arsitektur: <em>Client–Server</em> vs <em>Peer-to-Peer (P2P)</em></li>
+                            <li>Kebutuhan Layanan &amp; Pemetaan Transpor (TCP / UDP)</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#e65100; font-size:.95em; margin:0 0 4px 0;">
+                            <i class="bi bi-globe"></i> 2. Protokol Web &amp; HTTP
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Sifat <em>Stateless</em> &amp; Anatomi Request/Response</li>
+                            <li>Manajemen Status (<em>Cookies</em>) &amp; <em>Web Caching</em></li>
+                            <li>Evolusi Protokol: HTTP/1.1, HTTP/2, dan HTTP/3</li>
+                        </ul>
+                    </div>
+                    <div class="card text-left text-smaller">
+                        <p style="font-weight:700; color:#1b5e20; font-size:.95em; margin:0 0 4px 0;">
+                            <i class="bi bi-folder2-open"></i> 3. FTP &amp; Ekosistem E-mail
+                        </p>
+                        <ul style="margin-bottom:14px;">
+                            <li>FTP: Dual-Channel Out-of-band (Active vs PASV)</li>
+                            <li>E-mail: Pengiriman SMTP &amp; Akses POP3 / IMAP</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#6a1b9a; font-size:.95em; margin:0 0 4px 0;">
+                            <i class="bi bi-hdd-network-fill"></i> 4. Domain Name System (DNS)
+                        </p>
+                        <ul style="margin-bottom:14px;">
+                            <li>Hierarki Server &amp; Resolusi (Iterated vs Recursive)</li>
+                            <li>Resource Records &amp; Pengamanan DNSSEC</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#c2185b; font-size:.95em; margin:0 0 4px 0;">
+                            <i class="bi bi-terminal-fill"></i> 5. Eksplorasi &amp; Simulasi
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Investigasi CLI (<code>curl</code>, <code>dig</code>) &amp; Tugas Mandiri</li>
+                        </ul>
                     </div>
                 </div>
+                <aside class="notes">Peta alur kuliah: 5 modul utama Lapisan Aplikasi — prinsip arsitektur, protokol Web
+                    HTTP, FTP & E-mail, DNS & keamanan, hingga eksplorasi praktis & tugas mandiri.</aside>
+            </section>
+
+            <!-- SLIDE 3: DIVIDER MODUL 1 -->
+            <section>
+                <h2>1. Prinsip &amp; Arsitektur Lapisan Aplikasi</h2>
+                <p class="text-small" style="color: #666; margin-top: 10px;">Paradigma Komputasi Terdistribusi,
+                    Kebutuhan Layanan Transpor (QoS), dan Pemetaan Port</p>
+                <aside class="notes">Bagian pertama membahas prinsip dasar pengembangan aplikasi jaringan, perbandingan
+                    paradigma Client-Server vs P2P, serta pemetaan profil QoS ke protokol transpor.</aside>
+            </section>
+
+            <!-- SLIDE 4: PARADIGMA CLIENT-SERVER VS P2P -->
+            <section>
+                <h3>Paradigma Aplikasi: Client–Server</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.5em;">
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-hdd-network-fill"></i> Arsitektur
+                            Client–Server</div>
+                        <div class="sec-body">
+                            <p><strong>Central Server (Always-On):</strong></p>
+                            <ul>
+                                <li>Host sentral yang selalu aktif melayani permintaan (<em>24/7 always-on</em>).</li>
+                                <li>Memiliki IP Address publik statis permanen.</li>
+                                <li>Ditempatkan di Data Center berskala besar demi skalabilitas &amp; keandalan.</li>
+                            </ul>
+                            <p style="margin-top:8px;"><strong>Clients (Heterogeneous End Systems):</strong></p>
+                            <ul>
+                                <li>Memulai kontak ke server secara on-demand (Request).</li>
+                                <li>Dapat memiliki IP dinamis (DHCP/seluler) dan terputus sewaktu-waktu.</li>
+                                <li>Klien <strong>tidak berkomunikasi langsung</strong> dengan klien lain.</li>
+                            </ul>
+                            <p class="highlight-blue" style="margin-top:8px; font-size:.85em;">
+                                <strong>Contoh Protokol:</strong> Web (HTTP/HTTPS), E-mail (SMTP/IMAP), FTP, DNS.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card"
+                        style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <img src="images/week12/paradigma_client_server.svg" class="slide-img"
+                            alt="Client-Server Architecture">
+                        <p class="img-caption">Gambar 12.1: Paradigma Arsitektur Komputasi Client–Server</p>
+                    </div>
+                </div>
+                <aside class="notes">Bandingkan skalabilitas arsitektur terpusat vs P2P. Pada Client-Server beban
+                    bertambah seiring jumlah klien, sedangkan pada P2P peer baru juga menyumbang kapasitas bandwidth
+                    untuk mengunggah file.</aside>
             </section>
 
             <section>
-                <h3>Network Apps Populer</h3>
+                <h3>Paradigma Aplikasi: Peer to Peer (P2P)</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Aplikasi jaringan adalah penggerak utama Internet modern. Beberapa contoh terpopuler:</p>
-                    <ul>
-                        <li>Web Browsing & E-mail</li>
-                        <li>Social Networking (Meta, X, TikTok)</li>
-                        <li>Multi-user Network Games</li>
-                        <li>Streaming Video Berbayar (YouTube, Netflix)</li>
-                        <li>P2P File Sharing (BitTorrent)</li>
-                        <li>Voice over IP & Video Conferencing (Skype, Zoom)</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image2.png" class="slide-img" alt="Network Apps Populer">
+                    <div class="card text-left text-smaller" style="font-size:.6em;">
+                        <div class="sec-bar sec-bar-orange"><i class="bi bi-share-fill"></i> Arsitektur Peer-to-Peer
+                            (P2P)</div>
+                        <div class="sec-body">
+                            <p><strong>Karakteristik Mandiri:</strong></p>
+                            <ul>
+                                <li><strong>Tanpa Central Server Permanen:</strong> End system (peer) berkomunikasi
+                                    langsung satu sama lain.</li>
+                                <li><strong>Self-Scalability:</strong> Setiap peer baru yang bergabung menambah beban
+                                    permintaan (<em>demand</em>), sekaligus otomatis menyumbang kapasitas komputasi
+                                    &amp; bandwidth (<em>service capacity</em>).</li>
+                                <li><strong>Tantangan Teknis:</strong> Sangat rentan terhadap <em>peer churn</em> (node
+                                    sering berganti IP dinamis dan offline) serta proteksi NAT/Firewall.</li>
+                            </ul>
+                            <p class="highlight-orange" style="margin-top:8px; font-size:.85em;">
+                                <strong>Contoh Implementasi:</strong> BitTorrent, Blockchain (Bitcoin, Ethereum).
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card"
+                        style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <img src="images/week12/paradigma_peer_to_peer.svg" class="slide-img"
+                            alt="Peer-to-Peer Architecture">
+                        <p class="img-caption">Gambar 12.2: Paradigma Arsitektur Komputasi Peer-to-Peer (P2P)</p>
                     </div>
                 </div>
+                <aside class="notes">Bandingkan skalabilitas arsitektur terpusat vs P2P. Pada Client-Server beban
+                    bertambah seiring jumlah klien, sedangkan pada P2P peer baru juga menyumbang kapasitas bandwidth
+                    untuk mengunggah file.</aside>
             </section>
 
+            <!-- SLIDE 5: KEBUTUHAN LAYANAN TRANSPOR (QoS) -->
             <section>
-                <h3>Creating a Network App</h3>
+                <h3>Kebutuhan Layanan Transpor bagi Aplikasi (QoS)</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Sebagai pengembang, tugas kita adalah menulis program yang berjalan pada <strong>end systems (host)</strong> berbeda dan saling berkomunikasi melalui jaringan.</p>
-                    <ul>
-                        <li>Kita <strong>tidak perlu</strong> memprogram perangkat network-core seperti Router atau Switch layer 2.</li>
-                        <li>Aplikasi di-deploy secara ekstrem di *edge* jaringan (ujung), memungkinkan proses inovasi aplikasi berjalan sangat cepat tanpa mengubah infrastruktur fisik internet.</li>
-                    </ul>
-                </div>
+                    <div class="card text-left text-smaller" style="font-size:.4em;">
+                        <p>Setiap aplikasi jaringan memiliki profil kualitas layanan (<em>Quality of Service</em>) yang
+                            unik:</p>
+                        <ul>
+                            <li><strong>Integritas Data (Data Integrity):</strong>
+                                <br>Aplikasi transfer file, finansial, dan email membutuhkan <strong>100% data
+                                    loss-free</strong> (Reliable). Aplikasi audio/video dapat mentoleransi sedikit
+                                kehilangan paket (loss-tolerant).
+                            </li>
+                            <li><strong>Throughput (Bandwidth):</strong>
+                                <br>Aplikasi multimedia (video streaming HD/4K) memerlukan throughput minimum konstan.
+                                Aplikasi web dan teks bersifat <em>elastic</em> (beroperasi pada bandwidth berapa pun).
+                            </li>
+                            <li><strong>Sensitivitas Waktu (Timing / Latency):</strong>
+                                <br>Game online multiplayer dan panggilan suara (VoIP) memerlukan latensi sangat rendah
+                                (&lt; 100 ms) agar interaktif.
+                            </li>
+                            <li><strong>Keamanan (Security):</strong>
+                                <br>Kerahasiaan data melalui enkripsi, integritas pesan, dan otentikasi identitas.
+                            </li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week12/image3.png" class="slide-img" alt="Creating a Network App">
+                        <img src="images/week12/qos_transpor_matrix.svg" class="slide-img"
+                            alt="Kebutuhan Transport Service Aplikasi">
+                        <div class="img-caption">Profil kebutuhan layanan transpor aplikasi populer</div>
                     </div>
                 </div>
+                <aside class="notes">Jelaskan bahwa lapisan aplikasi mendefinisikan apa yang dibutuhkan oleh proses
+                    pengguna, sedangkan lapisan transpor bertugas menyediakan layanan yang cocok sesuai kebutuhan
+                    tersebut.</aside>
             </section>
 
+            <!-- SLIDE 6: PEMETAAN PROTOKOL KE TCP VS UDP -->
             <section>
-                <h3>Paradigma Aplikasi: Client-Server</h3>
+                <h3>Pemetaan Protokol Aplikasi ke Protokol Transpor</h3>
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller">
-                    <ul>
-                        <li><strong>Server:</strong> Merupakan host yang selalu menyala (always-on). Umumnya memiliki IP Address statis permanen, dan diletakkan di dalam Data Center raksasa demi kemudahan skalabilitas.</li>
-                        <li><strong>Client:</strong> Memulai kontak ke server. Kadang tidak selalu menyala, dan IP Address-nya dapat berubah (Dynamic IP).</li>
-                        <li><strong>Batasan:</strong> Client TIDAK BISA berkomunikasi secara langsung dengan client lainnya tanpa perantara server.</li>
-                    </ul>
-                </div>
+                        <table class="table-compare">
+                            <thead>
+                                <tr>
+                                    <th>Aplikasi</th>
+                                    <th>Protokol Lapisan Aplikasi</th>
+                                    <th>Protokol Transpor &amp; Port</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>File Transfer</strong></td>
+                                    <td>FTP (File Transfer Protocol)</td>
+                                    <td><span class="badge-sol">TCP</span> Port 20, 21</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Web Browsing</strong></td>
+                                    <td>HTTP / HTTPS</td>
+                                    <td><span class="badge-sol">TCP</span> Port 80, 443</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Electronic Mail</strong></td>
+                                    <td>SMTP, IMAP, POP3</td>
+                                    <td><span class="badge-sol">TCP</span> Port 25, 143, 110</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Domain Name Resolution</strong></td>
+                                    <td>DNS (Domain Name System)</td>
+                                    <td><span class="badge-info">UDP / TCP</span> Port 53</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Audio/Video Streaming</strong></td>
+                                    <td>DASH, HLS, RTP</td>
+                                    <td><span class="badge-sol">TCP</span> (HTTP) / <span class="badge-info">UDP</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Internet Telephony (VoIP)</strong></td>
+                                    <td>SIP, RTSP, WebRTC</td>
+                                    <td><span class="badge-info">UDP</span> atau <span class="badge-sol">TCP</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="info-box" style="margin-top:8px;">
+                            <strong>Prinsip Seleksi:</strong> Jika aplikasi tidak mentoleransi kehilangan bit (loss),
+                            wajib memakai TCP. Jika aplikasi memprioritaskan latensi rendah tanpa beban handshake awal,
+                            gunakan UDP.
+                        </div>
+                    </div>
                     <div>
-                        <img src="images/week12/image4.png" class="slide-img" alt="Paradigma Aplikasi: Client-Server">
+                        <img src="images/week12/tcp_vs_udp_app_services.svg" class="slide-img" alt="TCP vs UDP Internet Service">
+                        <div class="img-caption">Komparasi layanan: Reliable TCP vs Lightweight UDP</div>
                     </div>
                 </div>
+                <aside class="notes">Ajak mahasiswa menghubungkan materi Pertemuan 11 dengan Pertemuan 12: protokol
+                    aplikasi diidentifikasi secara unik oleh IP Address host ditambah nomor Port di lapisan transpor.
+                </aside>
             </section>
 
+            <!-- SLIDE 7: DIVIDER MODUL 2 -->
             <section>
-                <h3>Paradigma Aplikasi: Peer-to-Peer (P2P)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <ul>
-                        <li><strong>Tidak ada server permanen utama:</strong> End system berkomunikasi langsung secara mandiri.</li>
-                        <li><strong>Self-scalability:</strong> Setiap kali *peer* baru bergabung, ia tak hanya menambah beban (demand), tetapi otomatis menambah *service capacity* bagi jaringan (membantu mengirim file ke peer lain).</li>
-                        <li><strong>Kendala:</strong> IP yang dinamis dan terhubung putus-nyambung membuat sistem P2P sulit untuk dikelola secara terpusat.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image5.png" class="slide-img" alt="Paradigma Aplikasi: Peer-to-Peer (P2P)">
-                    </div>
-                </div>
+                <h2>2. Protokol Web &amp; Hypertext Transfer Protocol (HTTP)</h2>
+                <p class="text-small" style="color: #666; margin-top: 10px;">Arsitektur Web, Sifat Stateless, Siklus
+                    RTT, Header HTTP, Cookies, Caching &amp; Evolusi HTTP/2-3</p>
+                <aside class="notes">Modul kedua membahas protokol pondasi web (HTTP), mekanisme pengalamatan URL, sifat
+                    stateless, siklus RTT, cookies, proxy cache, dan evolusi ke HTTP/2 dan HTTP/3.</aside>
             </section>
 
+            <!-- SLIDE 8: ARSITEKTUR WEB & STATELESS -->
             <section>
-                <h3>Proses yang Berkomunikasi (Sockets)</h3>
+                <h3>Arsitektur Web &amp; Sifat Stateless HTTP</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Sebuah <strong>Proses</strong> adalah program yang sedang berjalan di dalam host.</p>
-                    <p>Agar dua proses pada host yang berbeda dapat bertukar pesan, mereka memanfaatkan <strong>Socket</strong>.</p>
-                    <ul>
-                        <li>Socket dapat dianalogikan sebagai sebuah <em>Pintu</em>.</li>
-                        <li>Proses pengirim mendorong pesannya melewati pintu. Begitu pesan keluar dari pintu, proses pengirim percaya 100% pada infrastruktur di balik pintu (Internet/OS) untuk mengirimkannya ke pintu penerima.</li>
-                    </ul>
-                </div>
+                    <div class="card text-left text-smaller" style="font-size:.38em;">
+                        <p><strong>Komponen Dokumen Web:</strong></p>
+                        <ul>
+                            <li>Halaman web tersusun atas <strong>Base HTML File</strong> dan beberapa
+                                <strong>Referenced Objects</strong> (gambar JPEG, video, CSS, JavaScript).
+                            </li>
+                            <li>Setiap objek dialamatkan oleh sebuah <strong>URL (Uniform Resource Locator)</strong>:
+                                <br><code>http://www.itera.ac.id/jurusan/teknik-informatika/logo.png</code>
+                                <br><span class="badge-info">Host Name: www.itera.ac.id</span> | <span
+                                    class="badge-sol">Path: /jurusan/.../logo.png</span>
+                            </li>
+                        </ul>
+                        <hr style="border:none; border-top:1px dashed #cbd5e1; margin:8px 0;">
+                        <p><strong>Sifat Krusial HTTP: STATELESS</strong></p>
+                        <ul>
+                            <li>HTTP berjalan di atas <strong>TCP (Port 80 / Port 443 HTTPS)</strong>.</li>
+                            <li>Server melayani request klien, mengirimkan respon, lalu <strong>tidak mengingat</strong>
+                                apa pun tentang request klien di masa lalu.</li>
+                            <li><em>Keuntungan:</em> Desain server sangat sederhana, toleran terhadap kegagalan, dan
+                                memiliki skalabilitas tinggi.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week12/image6.jpg" class="slide-img" alt="Proses yang Berkomunikasi (Sockets)">
+                        <img src="images/week12/web_arsitektur_objek.svg" class="slide-img" alt="Web and HTTP Overview">
+                        <div class="img-caption">Struktur URL dan relasi objek web</div>
                     </div>
                 </div>
+                <aside class="notes">Jelaskan mengapa Tim Berners-Lee memilih sifat stateless untuk HTTP: server tidak
+                    perlu menyimpan status ribuan user secara kompleks, sehingga mampu melayani lonjakan trafik web.
+                </aside>
             </section>
 
+            <!-- SLIDE 9: KONEKSI HTTP & RTT -->
             <section>
-                <h3>Kebutuhan Transport Service Aplikasi</h3>
+                <h3>Koneksi HTTP: Non-Persistent vs Persistent &amp; RTT</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Aplikasi yang berbeda memiliki kebutuhan kualitas yang berbeda (QoS):</p>
-                    <ul>
-                        <li><strong>Data Integrity:</strong> File transfer dan e-mail butuh jaminan data 100% utuh tanpa kerugian satu bit pun (Reliable). Aplikasi audio kadang menoleransi kehilangan sebagian paket (Loss-tolerant).</li>
-                        <li><strong>Timing:</strong> Telepon Internet (VoIP) dan game kompetitif butuh penundaan (delay) yang sangat rendah untuk terasa *real-time*.</li>
-                        <li><strong>Throughput:</strong> Video streaming butuh bandwidth *minimum* tertentu untuk berjalan mulus.</li>
-                        <li><strong>Security:</strong> Kebutuhan enkripsi dari ujung ke ujung.</li>
-                    </ul>
-                </div>
+                    <div class="card text-left text-smaller" style="font-size:.38em;">
+                        <p><strong>1. Non-Persistent HTTP (HTTP/1.0):</strong></p>
+                        <ul>
+                            <li>Maksimal <strong>1 objek</strong> dikirim melalui 1 koneksi TCP terbuka. Setelah objek
+                                terkirim, koneksi TCP langsung ditutup.</li>
+                            <li>Jika halaman memiliki 1 base HTML + 10 gambar referensi, dibutuhkan <strong>11 kali
+                                    buka-tutup TCP</strong>!</li>
+                            <li>Setiap objek memakan waktu: <strong>2 &times; RTT + Transmit Time</strong>
+                                <br>(1 RTT untuk 3-Way Handshake TCP + 1 RTT untuk Request/Response HTTP).
+                            </li>
+                        </ul>
+                        <p style="margin-top:8px;"><strong>2. Persistent HTTP (HTTP/1.1):</strong></p>
+                        <ul>
+                            <li>Server membiarkan koneksi TCP <strong>tetap terbuka</strong> setelah mengirim respon.
+                            </li>
+                            <li>Seluruh objek referensi berikutnya dikirimkan melalui <strong>koneksi TCP yang
+                                    sama</strong>.</li>
+                            <li>Objek referensi berikutnya hanya membutuhkan <strong>1 &times; RTT</strong>! Menghemat
+                                beban kernel dan latensi pengguna secara masif.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week12/image7.png" class="slide-img" alt="Kebutuhan Transport Service Aplikasi">
+                        <img src="images/week12/http_non_persistent_vs_persistent.svg" class="slide-img"
+                            alt="Ilustrasi Waktu Non-Persistent RTT">
+                        <div class="img-caption">Analisis RTT: 1st RTT (Handshake) + 2nd RTT (HTTP Request/Response)
+                        </div>
                     </div>
                 </div>
+                <aside class="notes">Gambarkan RTT (Round Trip Time): waktu paket kecil bolak-balik dari klien ke
+                    server. Tekankan bahwa Non-persistent sangat boros karena mengulang handshake TCP untuk tiap gambar.
+                </aside>
             </section>
 
-            <section>
-                <h3>Internet Transport Protocols: TCP vs UDP</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <table style="width:100%; border-collapse:collapse; font-size:0.8em; margin-top:10px;">
-                        <thead>
-                            <tr style="background:#1565c0; color:#fff;">
-                                <th style="border:1px solid #ddd; padding:5px;">TCP Service</th>
-                                <th style="border:1px solid #ddd; padding:5px;">UDP Service</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td style="border:1px solid #ddd; padding:5px;">Connection-oriented (Setup required)</td><td style="border:1px solid #ddd; padding:5px;">Connectionless (Tidak ada handshaking)</td></tr>
-                            <tr><td style="border:1px solid #ddd; padding:5px;">Reliable Transport</td><td style="border:1px solid #ddd; padding:5px;">Unreliable data transfer (Best effort)</td></tr>
-                            <tr><td style="border:1px solid #ddd; padding:5px;">Flow & Congestion Control</td><td style="border:1px solid #ddd; padding:5px;">Tidak peduli seberapa macet jaringan</td></tr>
-                            <tr><td style="border:1px solid #ddd; padding:5px;">Cocok: E-mail (SMTP), Web (HTTP), File (FTP)</td><td style="border:1px solid #ddd; padding:5px;">Cocok: Telephony (SIP), Game, Streaming Real-time</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                    <div>
-                        <img src="images/week12/image8.png" class="slide-img" alt="Internet Transport Protocols: TCP vs UDP">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Web dan HTTP: Tinjauan Ulang</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Sebuah halaman web biasanya terdiri dari satu <strong>Base HTML File</strong> dan beberapa <strong>Referenced Objects</strong> (gambar JPEG, video, CSS).</p>
-                    <ul>
-                        <li>Setiap objek dialamatkan oleh sebuah <strong>URL</strong> (Uniform Resource Locator).</li>
-                        <li>Contoh: <code>www.someschool.edu/someDept/pic.gif</code></li>
-                        <li><strong>HTTP (Hypertext Transfer Protocol)</strong> adalah protokol aplikasi utama web. Menerapkan model arsitektur Client (Browser) dan Server (Apache/Nginx).</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image9.png" class="slide-img" alt="Web dan HTTP: Tinjauan Ulang">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>HTTP Overview (Stateless)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>HTTP berjalan di atas <strong>TCP (Port 80/443)</strong>. Urutannya:</p>
-                    <ol>
-                        <li>Client (Browser) membangun koneksi TCP ke Server.</li>
-                        <li>Server menerima (Accept).</li>
-                        <li>Client dan Server saling bertukar HTTP message.</li>
-                        <li>Koneksi TCP ditutup.</li>
-                    </ol>
-                    <div style="background:#ffebee; padding:10px; border-left:4px solid #c62828; margin-top:10px;">
-                        <p style="margin:0;"><strong>Sifat Krusial HTTP adalah STATELESS!</strong></p>
-                        <p style="margin:0;">Server tidak menyimpan memori apa pun terkait interaksi client sebelumnya. Setiap request dianggap dari orang baru.</p>
-                    </div>
-                </div>
-                    <div>
-                        <img src="images/week12/image10.png" class="slide-img" alt="HTTP Overview (Stateless)">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>HTTP Connections: 2 Tipe Historis</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p><strong>1. Non-persistent HTTP:</strong></p>
-                    <ul>
-                        <li>Hanya MAKSIMAL SATU objek yang boleh dikirim di atas satu koneksi TCP terbuka.</li>
-                        <li>Setelah 1 file JPEG terkirim, koneksi TCP ditutup. Jika butuh 10 JPEG, browser harus mengulang proses TCP 3-way handshake sebanyak 10 kali! Sangat tidak efisien (2 RTT per objek).</li>
-                    </ul>
-                    <p><strong>2. Persistent HTTP (HTTP 1.1):</strong></p>
-                    <ul>
-                        <li>Satu buah TCP koneksi dibuka.</li>
-                        <li>Berbagai macam objek (HTML, CSS, 10 JPEG) dikirimkan secara paralel/beruntun tanpa perlu memutus koneksi di tengah jalan (pipeline). Menghemat banyak waktu!</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image11.png" class="slide-img" alt="HTTP Connections: 2 Tipe Historis">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Ilustrasi Waktu Non-Persistent (RTT)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p><strong>RTT (Round Trip Time):</strong> Waktu bagi sebuah paket kecil untuk melakukan perjalanan pulang-pergi dari client ke server.</p>
-                    <ul>
-                        <li><strong>1st RTT:</strong> Membuka TCP.</li>
-                        <li><strong>2nd RTT:</strong> Mengirim HTTP Request, dan menunggu bait pertama dari HTTP Response.</li>
-                        <li><strong>File Transmission Time:</strong> Waktu mentransfer sisa data file dari server.</li>
-                    </ul>
-                    <p><em>Total = 2 RTT + File Transmission Time.</em> (Diulang-ulang untuk setiap objek!).</p>
-                </div>
-                    <div>
-                        <img src="images/week12/image12.png" class="slide-img" alt="Ilustrasi Waktu Non-Persistent (RTT)">
-                    </div>
-                </div>
-            </section>
-
+            <!-- SLIDE 10: ANATOMI PESAN HTTP REQUEST -->
             <section>
                 <h3>Anatomi Pesan HTTP Request</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Pesan HTTP berbasis ASCII (bisa dibaca manusia). Strukturnya terdiri dari:</p>
-                    <ol>
-                        <li><strong>Request Line:</strong> Mengandung <code>Method</code> (GET/POST), <code>URL</code>, dan <code>Version</code>.</li>
-                        <li><strong>Header Lines:</strong> Mengandung Metadata seperti <code>Host</code>, <code>User-Agent</code> (jenis browser), dan <code>Accept-Language</code>. Diakhiri oleh spasi baris kosong ganda (<code>
+                    <div class="card text-left text-smaller" style="font-size:.38em;">
+                        <p>Format pesan HTTP berbasis teks ASCII yang terstruktur dalam 3 bagian:</p>
+                        <div class="code-block" style="font-size:.85em; margin:6px 0;">
+                            <span style="color:#2563eb; font-weight:700;">GET</span> <span
+                                style="color:#059669;">/somedir/page.html</span> <span
+                                style="color:#d97706;">HTTP/1.1</span>
+                            &nbsp;<span class="badge-info">Request Line</span><br>
+                            <span style="color:#475569;">Host:</span> www.someschool.edu
+                            &nbsp;<span class="badge-sol">Header Line</span><br>
+                            <span style="color:#475569;">User-Agent:</span> Mozilla/5.0 (Windows NT 10.0)
+                            <br>
+                            <span style="color:#475569;">Accept:</span> text/html,application/xhtml+xml
+                            <br>
+                            <span style="color:#475569;">Accept-Language:</span> id,en-US;q=0.7
+                            <br>
+                            <span style="color:#475569;">Connection:</span> keep-alive
+                            <br>
 
-</code>).</li>
-                        <li><strong>Entity Body:</strong> Payload khusus untuk operasi <code>POST</code> atau <code>PUT</code>.</li>
-                    </ol>
-                </div>
+                            &nbsp;<span class="badge-err">Baris Kosong Pemisah</span><br>
+                            <em>[Entity Body Kosong pada Method GET]</em>
+                        </div>
+                        <p><strong>Metode Request Populer:</strong></p>
+                        <ul>
+                            <li><code>GET</code> : Meminta objek dari server (parameter di URL).</li>
+                            <li><code>POST</code>: Mengirim data formulir/payload dalam Entity Body.</li>
+                            <li><code>HEAD</code>: Meminta respon identik dengan GET tetapi <em>tanpa entity body</em>
+                                (untuk uji debugging/cache).</li>
+                            <li><code>PUT</code> / <code>DELETE</code>: Mengunggah file ke server / Menghapus file di
+                                server.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week12/image13.png" class="slide-img" alt="Anatomi Pesan HTTP Request">
+                        <img src="images/week12/http_format_request.svg" class="slide-img" alt="Format Pesan HTTP Request">
+                        <div class="img-caption">Struktur Request Line, Header Lines, dan Body</div>
                     </div>
                 </div>
+                <aside class="notes">Jelaskan bahwa baris kosong (
+                    ) adalah penanda mutlak bagi parser HTTP bahwa seluruh header telah selesai dibaca dan body data
+                    dimulai.</aside>
             </section>
 
+            <!-- SLIDE 11: ANATOMI PESAN HTTP RESPONSE -->
             <section>
-                <h3>Anatomi Pesan HTTP Response</h3>
+                <h3>Anatomi Pesan HTTP Response &amp; Status Codes</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Sama seperti request, namun memiliki <strong>Status Line</strong>:</p>
-                    <ul>
-                        <li>Contoh Status: <code>HTTP/1.1 200 OK</code>.</li>
-                        <li><strong>200 OK:</strong> Sukses, file ditemukan.</li>
-                        <li><strong>301 Moved Permanently:</strong> Halaman sudah ganti alamat (Redirection).</li>
-                        <li><strong>400 Bad Request:</strong> Sintaks klien ngawur.</li>
-                        <li><strong>404 Not Found:</strong> Data/halaman tidak ada di server.</li>
-                        <li><strong>505 Version Not Supported:</strong> Versi HTTP kadaluarsa/tak cocok.</li>
-                    </ul>
-                </div>
+                    <div class="card text-left text-smaller" style="font-size:.38em;">
+                        <div class="code-block" style="font-size:.82em; margin:4px 0;">
+                            <span style="color:#d97706;">HTTP/1.1</span> <span
+                                style="color:#059669; font-weight:700;">200 OK</span>
+                            &nbsp;<span class="badge-info">Status Line</span><br>
+                            <span style="color:#475569;">Date:</span> Sun, 15 Nov 2026 12:00:00 GMT
+                            <br>
+                            <span style="color:#475569;">Server:</span> Apache/2.4.41 (Ubuntu)
+                            <br>
+                            <span style="color:#475569;">Last-Modified:</span> Sat, 14 Nov 2026 08:30:00 GMT
+                            <br>
+                            <span style="color:#475569;">Content-Length:</span> 6821
+                            <br>
+                            <span style="color:#475569;">Content-Type:</span> text/html; charset=UTF-8
+                            <br>
+
+                            <br>
+                            &lt;html&gt;&lt;body&gt;&lt;h1&gt;Halo ITERA!&lt;/h1&gt;... [Data Objek]
+                        </div>
+                        <p style="font-weight:700; margin-top:6px;">Katalog Kode Status Esensial:</p>
+                        <table class="table-compare" style="font-size:.85em;">
+                            <tr>
+                                <td><span class="badge-sol">200 OK</span></td>
+                                <td>Permintaan berhasil, objek yang diminta disertakan pada respon.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-info">301 Moved</span></td>
+                                <td>Objek dipindahkan permanen; URL baru dicantumkan di header <code>Location:</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-info">304 Not Mod</span></td>
+                                <td>Objek di cache klien belum berubah; kirim tanpa body data (Conditional GET).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-err">400 Bad Req</span></td>
+                                <td>Pesan request tidak dipahami oleh parser server.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-err">404 Not Found</span></td>
+                                <td>Dokumen yang diminta tidak ditemukan di server.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-err">500 Server Err</span></td>
+                                <td>Terjadi eksepsi / kegagalan script backend di sisi server.</td>
+                            </tr>
+                        </table>
+                    </div>
                     <div>
-                        <img src="images/week12/image14.png" class="slide-img" alt="Anatomi Pesan HTTP Response">
+                        <img src="images/week12/http_format_response.svg" class="slide-img" alt="Format Pesan HTTP Response">
+                        <div class="img-caption">Struktur Response: Status Line, Headers, dan Data Payload</div>
                     </div>
                 </div>
+                <aside class="notes">Kategori status code: 2xx sukses, 3xx pengalihan/cache, 4xx kesalahan klien, dan
+                    5xx kesalahan server internal.</aside>
             </section>
 
+            <!-- SLIDE 12: COOKIES & PRIVASI TRACKING -->
             <section>
                 <h3>Cookies: Membawa "State" pada Protokol Stateless</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Karena HTTP itu "pelupa" (Stateless), bagaimana cara Tokopedia mengingat keranjang belanja kita walau kita pindah halaman?</p>
-                    <p><strong>Cookies</strong> adalah id unik yang disimpan di browser kita.</p>
-                    <ul>
-                        <li>Saat pertama kali berkunjung, Server membalas dengan Header: <code>Set-cookie: 1634</code></li>
-                        <li>Browser menyimpan "1634" tersebut.</li>
-                        <li>Pada request berikutnya, Browser otomatis melampirkan Header: <code>Cookie: 1634</code></li>
-                        <li>Server membaca nomor tersebut, lalu mencari di database-nya untuk memulihkan sesi profil kita.</li>
-                    </ul>
-                </div>
+                    <div class="card text-left text-smaller" style="font-size:.35em;">
+                        <p>Bagaimana Tokopedia atau Shopee mengingat keranjang belanja kita jika HTTP itu pelupa
+                            (<em>Stateless</em>)? Jawabannya adalah <strong>Cookies</strong>.</p>
+                        <p><strong>Empat Komponen Mekanisme Cookie:</strong></p>
+                        <ol>
+                            <li>Header <code>Set-Cookie: ID=1634</code> pada HTTP response pertama dari server.</li>
+                            <li>Penyimpanan file cookie di perangkat klien (dikelola oleh browser).</li>
+                            <li>Header <code>Cookie: ID=1634</code> pada seluruh HTTP request berikutnya ke situs
+                                tersebut.</li>
+                            <li>Basis data backend di server yang memetakan ID=1634 ke profil, riwayat, dan keranjang
+                                belanja pengguna.</li>
+                        </ol>
+                        <hr style="border:none; border-top:1px dashed #cbd5e1; margin:6px 0;">
+                        <p><strong>Isu Privasi: Third-Party Tracking Cookies</strong></p>
+                        <ul>
+                            <li>Jaringan iklan (contoh: Google AdX) menaruh banner pada banyak situs berbeda.</li>
+                            <li>Cookie pihak ketiga melacak rekam jejak browsing pengguna lintas situs web, menyusun
+                                profil preferensi pribadi tanpa disadari.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week12/image15.png" class="slide-img" alt="Cookies: Membawa "State" pada Protokol Stateless">
+                        <img src="images/week12/mekanisme_cookies_http.svg" class="slide-img"
+                            alt="Interaksi Cookies Client Server">
+                        <div class="img-caption">Alur 4 tahap transmisi cookie antara klien dan server</div>
                     </div>
                 </div>
+                <aside class="notes">Jelaskan kompromi antara kenyamanan pengguna (login otomatis, keranjang belanja
+                    bertahan lama) versus privasi data (pelacakan perilaku belanja oleh third-party tracker).</aside>
             </section>
 
+            <!-- SLIDE 13: WEB CACHES & CONDITIONAL GET -->
             <section>
-                <h3>Bahaya Cookies & Privasi Tracking</h3>
+                <h3>Web Caches (Proxy Server) &amp; Conditional GET</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.38em;">
+                        <p><strong>Tujuan Web Cache (Proxy Server):</strong></p>
+                        <ul>
+                            <li>Melayani permintaan klien <strong>tanpa melibatkan origin server</strong>.</li>
+                            <li>Cache bertindak ganda: sebagai <em>server</em> bagi browser pengguna lokal, dan sebagai
+                                <em>client</em> bagi server asal di internet.
+                            </li>
+                            <li>Ditempatkan di jaringan kampus/ISP untuk memangkas latensi respon dan menghemat konsumsi
+                                bandwidth tautan keluar.</li>
+                        </ul>
+                        <hr style="border:none; border-top:1px dashed #cbd5e1; margin:6px 0;">
+                        <p><strong>Mekanisme Validasi: Conditional GET</strong></p>
+                        <ul>
+                            <li>Bagaimana memastikan file di cache belum usang (<em>stale</em>)?</li>
+                            <li>Proxy mengirim request ke origin server dengan header:
+                                <br><code>If-Modified-Since: &lt;date_terakhir_di_cache&gt;</code>
+                            </li>
+                            <li>Jika file <strong>belum berubah</strong>, origin server menjawab:
+                                <br><span class="badge-sol">HTTP/1.1 304 Not Modified</span> (Body kosong / 0 byte
+                                data!).
+                            </li>
+                            <li>Jika file <strong>berubah</strong>, server mengirim <span class="badge-info">200
+                                    OK</span> beserta isi file baru.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="images/week12/web_cache_conditional_get.svg" class="slide-img"
+                            alt="Web Caches Proxy Server">
+                        <div class="img-caption">Arsitektur Web Cache lokal di jaringan institusi</div>
+                    </div>
+                </div>
+                <aside class="notes">Conditional GET adalah inovasi cerdas: server hanya memberitahu bahwa file belum
+                    berubah tanpa perlu mentransmisikan ulang payload data berukuran megabyte.</aside>
+            </section>
+
+            <!-- SLIDE 14: ANALISIS MATEMATIS WEB CACHE -->
+            <section>
+                <h3>Analisis Matematis: Evaluasi Kinerja Caching</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.38em;">
+                        <p><strong>Studi Kasus Jaringan Kampus:</strong></p>
+                        <ul>
+                            <li>LAN Institusi: 1 Gbps | Link Akses ke ISP: <strong>1.54 Mbps</strong>.</li>
+                            <li>Rata-rata ukuran objek: 100 kbit. Laju request: 15 req/detik.</li>
+                            <li>Trafik link akses = 15 &times; 100 kbps = 1.50 Mbps.</li>
+                            <li>Utilisasi link akses tanpa cache = 1.50 / 1.54 = <strong>97%</strong>!
+                                <br><span class="badge-err">Antrean buffer meledak &rarr; Delay menuju tak
+                                    terhingga!</span>
+                            </li>
+                        </ul>
+                        <p style="margin-top:8px;"><strong>Solusi 1: Upgrade Bandwidth Link ke 100 Mbps</strong></p>
+                        <ul>
+                            <li>Biaya sangat mahal secara operasional bulanan (OPEX).</li>
+                        </ul>
+                        <p style="margin-top:8px;"><strong>Solusi 2: Pasang Web Cache Lokal (Hit Rate 40%)</strong></p>
+                        <ul>
+                            <li>40% request dilayani seketika oleh cache LAN dalam tempo <strong>2 ms</strong>.</li>
+                            <li>Hanya 60% request yang keluar ke link akses ISP:
+                                <br>Utilisasi baru = (0.60 &times; 1.50) / 1.54 = <strong>58%</strong>.
+                            </li>
+                            <li>Rata-rata total delay terpangkas dari puluhan detik menjadi <strong>&approx; 1.2
+                                    detik</strong> dengan biaya server murah!</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="images/week12/topologi_kinerja_caching.svg" class="slide-img"
+                            alt="Performance Caching Analysis">
+                        <div class="img-caption">Model kalkulasi beban antrean link akses kampus</div>
+                    </div>
+                </div>
+                <aside class="notes">Buktikan ke mahasiswa bahwa optimasi di lapisan aplikasi (caching) seringkali jauh
+                    lebih efektif dan ekonomis dibanding membuang uang untuk upgrade kapasitas kabel fisik ISP.</aside>
+            </section>
+
+            <!-- SLIDE 15: EVOLUSI HTTP/1.1 KE HTTP/2 & HTTP/3 -->
+            <section>
+                <h3>Evolusi Protokol Web: HTTP/1.1, HTTP/2, &amp; HTTP/3</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.33em;">
+                        <p><strong>1. HTTP/1.1: Head-of-Line (HOL) Blocking</strong></p>
+                        <ul>
+                            <li>Mendukung koneksi <em>persistent</em>, namun objek dikirim berurutan (FIFO). Jika objek
+                                pertama terhambat, seluruh objek berikutnya ikut tertahan.</li>
+                        </ul>
+                        <p style="margin-top:6px;"><strong>2. HTTP/2 (2015): Binary Framing &amp; Multiplexing</strong>
+                        </p>
+                        <ul>
+                            <li>Mengganti pesan teks ASCII dengan frame biner.</li>
+                            <li>Mendukung <strong>Multiplexing</strong>: Banyak request dan response dipecah menjadi
+                                frame-frame kecil dan dialirkan paralel di atas <strong>satu koneksi TCP
+                                    tunggal</strong> tanpa HOL blocking di level aplikasi.</li>
+                            <li><em>Kelemahan:</em> Karena masih berjalan di atas TCP tunggal, jika 1 paket TCP hilang
+                                di jalan, kernel menghentikan seluruh antrean (HOL blocking di level transpor).</li>
+                        </ul>
+                        <p style="margin-top:6px;"><strong>3. HTTP/3 (2022): Migrasi ke QUIC (UDP)</strong></p>
+                        <ul>
+                            <li>Menggantikan TCP dengan protokol <strong>QUIC</strong> yang berjalan di atas
+                                <strong>UDP</strong>.
+                            </li>
+                            <li>Tiap aliran data biner sepenuhnya independen: kehilangan 1 paket hanya menunda stream
+                                tersebut tanpa mempengaruhi stream lainnya! Mengintegrasikan enkripsi TLS 1.3 secara
+                                bawaan.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="images/week12/evolusi_http1_http2_http3.svg" class="slide-img"
+                            alt="HTTP2 vs HTTP3 Streams">
+                        <div class="img-caption">Evolusi: Dari transmisi sekuensial ke Stream Multiplexing & QUIC</div>
+                    </div>
+                </div>
+                <aside class="notes">Tekankan bagaimana revolusi web berpindah dari teks mentah ke frame biner, dan
+                    akhirnya melepaskan diri dari batasan kaku TCP dengan mengadopsi QUIC berbasis UDP.</aside>
+            </section>
+
+            <!-- SLIDE 16: DIVIDER MODUL 3 -->
+            <section>
+                <h2>3. File Transfer Protocol (FTP) &amp; Ekosistem E-mail</h2>
+                <p class="text-small" style="color: #666; margin-top: 10px;">Arsitektur Dual-Channel Out-of-Band FTP,
+                    SMTP Push, dan Komparasi Protokol Akses POP3 vs IMAP</p>
+                <aside class="notes">Modul ketiga membedah protokol transfer berkas legendaris FTP dengan karakteristik
+                    dual-channel miliknya, serta arsitektur ekosistem email dari pengiriman (SMTP) hingga penarikan
+                    pesan (POP3/IMAP).</aside>
+            </section>
+
+            <!-- SLIDE 17: [MATERI BARU RPS] FTP DUAL-CHANNEL -->
+            <section>
+                <h3>FTP: Arsitektur Dual-Channel Out-of-Band</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.56em;">
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-folder-symlink-fill"></i> Konsep Dasar FTP
+                            (RFC 959)</div>
+                        <div class="sec-body">
+                            <p>FTP (File Transfer Protocol) memisahkan dua saluran koneksi (<strong>Out-of-Band
+                                    Control</strong>):</p>
+                            <ul>
+                                <li><strong>Control Connection (Port 21 TCP):</strong>
+                                    <br>Klien membuka koneksi kontrol ke server pada port 21 untuk mengirim perintah
+                                    teks ASCII (<code>USER</code>, <code>PASS</code>, <code>LIST</code>,
+                                    <code>RETR</code>, <code>STOR</code>) dan menerima status respon.
+                                    <br><span class="badge-sol">Koneksi kontrol tetap terbuka sepanjang sesi pengguna
+                                        aktif.</span>
+                                </li>
+                                <li><strong>Data Connection (Port 20 / PASV TCP):</strong>
+                                    <br>Diciptakan secara terpisah murni untuk mentransmisikan berkas file riil.
+                                    <br><span class="badge-info">Dibuat baru &amp; langsung ditutup otomatis untuk
+                                        setiap 1 berkas!</span>
+                                </li>
+                            </ul>
+                            <div class="info-box" style="margin-top:8px;">
+                                <strong>Beda dengan HTTP:</strong> HTTP mengirimkan request baris, header kontrol, dan
+                                body data dalam <strong>satu saluran TCP yang sama</strong> (<em>In-Band</em>).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card"
+                        style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <img src="images/week12/ftp_arsitektur_dual_channel.svg" class="slide-img"
+                            alt="FTP Dual-Channel Architecture">
+                        <p class="img-caption">Gambar 12.8: Arsitektur Dual-Channel FTP (Port 21 Control &amp; Port 20
+                            Data)</p>
+                    </div>
+                </div>
+                <aside class="notes">Tekankan pembedaan Port 21 (Control/Perintah) dan Port 20 (Data/Transfer Berkas).
+                    Ini adalah konsep arsitektur klasik jaringan yang membedakan FTP dengan protokol modern.</aside>
+            </section>
+
+            <!-- SLIDE 18: [MATERI BARU RPS] FTP ACTIVE VS PASSIVE -->
+            <section>
+                <h3>Transmisi FTP: Active Mode vs Passive Mode (PASV)</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.54em;">
+                        <div class="sec-bar sec-bar-red"><i class="bi bi-exclamation-triangle-fill"></i> Active Mode vs
+                            <i class="bi bi-shield-check"></i> Passive Mode
+                        </div>
+                        <div class="sec-body">
+                            <p><strong>1. Active Mode (Port Command) — Rentan Firewall:</strong></p>
+                            <ul>
+                                <li>Klien mengirim perintah <code>PORT N</code> ke server.</li>
+                                <li>Server Port 20 menginisiasi koneksi masuk (<em>inbound</em>) ke Port N klien.</li>
+                                <li><span class="badge-err">Masalah Fatal:</span> Firewall / router NAT klien
+                                    <strong>menolak koneksi masuk</strong> dari server. Transfer file gagal!
+                                </li>
+                            </ul>
+                            <p style="margin-top:8px;"><strong>2. Passive Mode (PASV) — Standar Industri
+                                    Modern:</strong></p>
+                            <ul>
+                                <li>Klien mengirim perintah <code>PASV</code>. Server membuka port data acak <em>P</em>
+                                    dan memberitahukan ke klien.</li>
+                                <li>Klien yang <strong>menginisiasi koneksi keluar (outbound)</strong> ke Port
+                                    <em>P</em> server.
+                                </li>
+                                <li><span class="badge-sol">Keunggulan:</span> Aman menembus Firewall &amp; NAT klien
+                                    tanpa hambatan.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card"
+                        style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <img src="images/week12/ftp_active_vs_passive_mode.svg" class="slide-img"
+                            alt="FTP Active vs Passive Mode">
+                        <p class="img-caption">Gambar 12.9: Komparasi Transmisi FTP Active Mode vs Passive Mode (PASV)
+                        </p>
+                    </div>
+                </div>
+                <aside class="notes">Jelaskan mengapa mahasiswa yang menggunakan FileZilla di jaringan kampus atau kosan
+                    sering gagal mentransfer file jika belum menyetel koneksi ke mode Passive (PASV).</aside>
+            </section>
+
+            <!-- SLIDE 19: EKOSISTEM EMAIL -->
+            <section>
+                <h3>Ekosistem Surat Elektronik (E-mail)</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.43em;">
+                        <p>Sistem email modern ditopang oleh 3 pilar komponen utama:</p>
+                        <ul>
+                            <li><strong>1. User Agent (Mail Reader):</strong>
+                                <br>Aplikasi antarmuka pengguna untuk menyusun, membaca, dan mengelola arsip email
+                                (contoh: Microsoft Outlook, Thunderbird, Apple Mail).
+                            </li>
+                            <li><strong>2. Mail Server:</strong>
+                                <br>Jantung infrastruktur pengiriman email. Memiliki dua struktur krusial:
+                                <ul>
+                                    <li><strong>User Mailbox:</strong> Gudang lokal untuk menyimpan seluruh pesan yang
+                                        telah tiba bagi pengguna lokal.</li>
+                                    <li><strong>Outgoing Message Queue:</strong> Antrean surat keluar yang menunggu
+                                        giliran untuk dikirimkan ke mail server tujuan.</li>
+                                </ul>
+                            </li>
+                            <li><strong>3. Simple Mail Transfer Protocol (SMTP):</strong>
+                                <br>Protokol standar antar-mail server untuk memindahkan surat melalui <strong>TCP Port
+                                    25</strong> (atau Port 587 dengan enkripsi TLS).
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="images/week12/ekosistem_email_end_to_end.svg" class="slide-img"
+                            alt="Mail Servers and Message Queue">
+                        <div class="img-caption">Struktur Mailbox dan Outgoing Message Queue pada Mail Server</div>
+                    </div>
+                </div>
+                <aside class="notes">Ibaratkan Mail Server seperti kantor pos: memiliki kotak surat untuk setiap warga
+                    (Mailbox) dan kantong pengiriman untuk surat yang akan diberangkatkan (Queue).</aside>
+            </section>
+
+            <!-- SLIDE 20: PROTOKOL SMTP -->
+            <section>
+                <h3>Protokol SMTP: Alur Pengiriman Pesan</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.4em;">
+                        <p><strong>Karakteristik Operasional SMTP (RFC 5321):</strong></p>
+                        <ul>
+                            <li>Merupakan <strong>Push Protocol</strong>: Menggunakan koneksi TCP handshaking langsung
+                                dari mail server pengirim ke mail server penerima.</li>
+                            <li>Berbasis teks <strong>ASCII 7-bit</strong> murni (pesan biner/gambar wajib diubah ke
+                                teks via encoding <em>MIME</em>).</li>
+                            <li>Tiga fase transfer: <em>Handshaking</em> &rarr; <em>Transfer of messages</em> &rarr;
+                                <em>Closure</em>.
+                            </li>
+                        </ul>
+                        <div class="code-block" style="font-size:.78em; margin:6px 0;">
+                            S: 220 hamburger.edu<br>
+                            C: <span style="color:#2563eb; font-weight:700;">HELO</span> crepes.fr<br>
+                            S: 250 Hello crepes.fr, pleased to meet you<br>
+                            C: <span style="color:#2563eb; font-weight:700;">MAIL FROM:</span>
+                            &lt;alice@crepes.fr&gt;<br>
+                            S: 250 sender &lt;alice@crepes.fr&gt; OK<br>
+                            C: <span style="color:#2563eb; font-weight:700;">RCPT TO:</span>
+                            &lt;bob@hamburger.edu&gt;<br>
+                            S: 250 recipient &lt;bob@hamburger.edu&gt; OK<br>
+                            C: <span style="color:#2563eb; font-weight:700;">DATA</span><br>
+                            S: 354 Enter mail, end with "." on a line by itself<br>
+                            C: Halo Bob, tugas Jaringan Komputer sudah selesai!<br>
+                            C: .<br>
+                            S: 250 Message accepted for delivery<br>
+                            C: <span style="color:#2563eb; font-weight:700;">QUIT</span><br>
+                            S: 221 hamburger.edu closing connection
+                        </div>
+                    </div>
+                    <div>
+                        <img src="images/week12/smtp_command_interaction.svg" class="slide-img" alt="Skenario Pengiriman Email Penuh">
+                        <div class="img-caption">Alur Alice &rarr; Server Pengirim &rarr; SMTP &rarr; Server Penerima
+                            &rarr; Bob</div>
+                    </div>
+                </div>
+                <aside class="notes">Perlihatkan kesantunan dialog SMTP: klien menyapa dengan HELO, meminta izin
+                    pengirim, izin penerima, mengetikkan data, menutup dengan titik (.), lalu mengucapkan QUIT.</aside>
+            </section>
+
+            <!-- SLIDE 21: [MATERI BARU RPS] PROTOKOL AKSES EMAIL POP3 VS IMAP -->
+            <section>
+                <h3>Protokol Akses Email: POP3 vs IMAP vs Webmail</h3>
+                <div class="layout-3col">
+                    <div class="card text-left text-smaller" style="font-size:.45em;">
+                        <div class="sec-bar sec-bar-orange"><i class="bi bi-inbox-fill"></i> POP3 (RFC 1939)</div>
+                        <div class="sec-body">
+                            <p><strong>Port 110 / Port 995 (SSL)</strong></p>
+                            <ul>
+                                <li>Mode: <em>Download and Delete</em> (atau simpan lokal).</li>
+                                <li>Surat diunduh ke satu komputer pengguna.</li>
+                                <li><strong>Client-Centric:</strong> Tidak ada sinkronisasi status (dibaca/belum) atau
+                                    folder antar-perangkat berbeda.</li>
+                                <li>Cocok jika kuota penyimpanan server sangat terbatas dan pengguna hanya memakai 1 PC.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card text-left text-smaller" style="font-size:.45em;">
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> IMAP (RFC 3501)</div>
+                        <div class="sec-body">
+                            <p><strong>Port 143 / Port 993 (SSL)</strong></p>
+                            <ul>
+                                <li>Mode: <em>Server-Centric Sync</em>.</li>
+                                <li>Seluruh pesan dan struktur folder (Sent, Draft, Trash) tetap disimpan di server.
+                                </li>
+                                <li>Status pesan (dibaca, dibintangi, dihapus) langsung <strong>tersinkronisasi
+                                        otomatis</strong> di laptop, smartphone, dan tablet.</li>
+                                <li>Standar de-facto aplikasi email modern (Outlook, Apple Mail).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card text-left text-smaller" style="font-size:.45em;">
+                        <div class="sec-bar sec-bar-green"><i class="bi bi-browser-chrome"></i> Webmail (HTTP/HTTPS)
+                        </div>
+                        <div class="sec-body">
+                            <p><strong>Port 80 / Port 443 (HTTPS)</strong></p>
+                            <ul>
+                                <li>Pengguna mengakses mailbox melalui peramban web (Gmail, Outlook Web).</li>
+                                <li>Klien &harr; Mail Server menggunakan protokol <strong>HTTP/HTTPS</strong>.</li>
+                                <li>Antar-Mail Server tetap berkomunikasi menggunakan protokol <strong>SMTP</strong>.
+                                </li>
+                                <li>Sangat praktis tanpa perlu instalasi aplikasi klien khusus.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:8px; font-size: .4em;">
+                    <strong>Mengapa Butuh Protokol Akses?</strong> SMTP adalah protokol <em>Push</em> (mengirimkan surat
+                    ke kotak pos tujuan). Bob tidak bisa menggunakan SMTP untuk menarik (<em>pull</em>) surat miliknya
+                    dari mailbox server!
+                </div>
+                <aside class="notes">Tekankan perbedaan konsep: SMTP adalah protokol dorong (push), sedangkan POP3,
+                    IMAP, dan HTTP adalah protokol tarik (pull). Jelaskan keunggulan IMAP dalam sinkronisasi
+                    multi-device.</aside>
+            </section>
+
+            <!-- SLIDE 22: DIVIDER MODUL 4 -->
+            <section>
+                <h2>4. Domain Name System (DNS) &amp; Keamanan Resolusi</h2>
+                <p class="text-small" style="color: #666; margin-top: 10px;">Arsitektur Basis Data Terdistribusi,
+                    Resolusi Iterated vs Recursive, Resource Records &amp; DNSSEC</p>
+                <aside class="notes">Modul keempat membedah sistem penamaan domain internet (DNS): alasan
+                    desentralisasi, hierarki 4 tingkat, penelusuran iterated vs recursive, struktur record, dan keamanan
+                    DNS.</aside>
+            </section>
+
+            <!-- SLIDE 23: FUNGSI DNS & DESENTRALISASI -->
+            <section>
+                <h3>DNS: Layanan &amp; Alasan Desentralisasi</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.33em;">
+                        <p><strong>Layanan Utama DNS:</strong></p>
+                        <ul>
+                            <li><strong>Translasi Hostname ke IP:</strong> Manusia mudah mengingat nama
+                                (<code>www.itera.ac.id</code>), namun router jaringan mutlak memerlukan alamat IP biner
+                                (<code>103.111.201.21</code>).</li>
+                            <li><strong>Host Aliasing:</strong> Domain alias kanonikal yang mudah dibaca.</li>
+                            <li><strong>Mail Server Aliasing:</strong> Memetakan nama server email institusi (MX
+                                Record).</li>
+                            <li><strong>Load Distribution:</strong> Memetakan satu domain populer ke sekumpulan alamat
+                                IP server replika secara round-robin.</li>
+                        </ul>
+                        <hr style="border:none; border-top:1px dashed #cbd5e1; margin:6px 0;">
+                        <p><strong>Mengapa DNS Tidak Boleh Disentralisasi (1 Server Dunia)?</strong></p>
+                        <ul>
+                            <li><strong>Single Point of Failure (SPOF):</strong> Jika satu server pusat tersebut
+                                meledak/down, seluruh internet dunia mati total!</li>
+                            <li><strong>Volume Trafik:</strong> Milyaran perangkat menembakkan query bersamaan.</li>
+                            <li><strong>Jarak Jaringan:</strong> Latensi tinggi bagi pengguna yang jauh dari lokasi
+                                server.</li>
+                            <li><strong>Pemeliharaan Raksasa:</strong> Database raksasa mustahil dikelola satu entitas.
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="images/week12/dns_hostname_translation.svg" class="slide-img" alt="Domain Name System Overview">
+                        <div class="img-caption">Translasi nama domain ke alamat IP numerik</div>
+                    </div>
+                </div>
+                <aside class="notes">DNS adalah basis data terdistribusi terbesar dan paling tangguh di muka bumi,
+                    dirancang dengan sistem hierarkis agar tidak ada satu titik kegagalan tunggal.</aside>
+            </section>
+
+            <!-- SLIDE 24: HIERARKI SERVER DNS -->
+            <section>
+                <h3>Hirarki Global Server DNS</h3>
+                <div class="layout-text-img">
+                    <div class="card text-left text-smaller" style="font-size:.4em;">
+                        <p>Mekanisme pencarian DNS bekerja secara berjenjang dari atas ke bawah:</p>
+                        <ol>
+                            <li><strong>Root DNS Servers:</strong>
+                                <br>Puncak hierarki global. Terdapat <strong>13 gugus alamat IP server logika</strong>
+                                (A s.d. M) yang direplikasi ke ratusan lokasi fisik di dunia via <em>Anycast
+                                    routing</em>. Bertugas merujuk query ke server TLD.
+                            </li>
+                            <li><strong>Top-Level Domain (TLD) Servers:</strong>
+                                <br>Mengelola domain tingkat teratas:
+                                <br>&bull; <em>Generic TLD (gTLD):</em> <code>.com</code>, <code>.org</code>,
+                                <code>.net</code>, <code>.edu</code>.
+                                <br>&bull; <em>Country-Code TLD (ccTLD):</em> <code>.id</code> (Indonesia),
+                                <code>.uk</code>, <code>.jp</code>.
+                            </li>
+                            <li><strong>Authoritative DNS Servers:</strong>
+                                <br>Server milik organisasi/kampus yang menyimpan catatan resmi (sebenarnya) dari host
+                                domain tersebut (contoh: DNS Server resmi ITERA).
+                            </li>
+                            <li><strong>Local DNS Server (Default Name Server / Resolver):</strong>
+                                <br>Server resolver milik ISP (Indihome, Biznet) atau jaringan kampus yang menerima
+                                kueri awal dari host pengguna dan melakukan penelusuran berjenjang.
+                            </li>
+                        </ol>
+                    </div>
+                    <div>
+                        <img src="images/week12/hirarki_server_dns_global.svg" class="slide-img"
+                            alt="Hirarki Server DNS">
+                        <div class="img-caption">Pohon hierarki: Root &rarr; TLD &rarr; Authoritative</div>
+                    </div>
+                </div>
+                <aside class="notes">Perjelas bahwa laptop mahasiswa tidak langsung mengontak Root Server, melainkan
+                    menitipkan kueri ke Local DNS Server (Resolver ISP/Kampus).</aside>
+            </section>
+
+            <!-- SLIDE 25: ITERATED RESOLUTION -->
+            <section>
+                <h3>Metode Resolusi DNS: Iterated</h3>
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller">
-                    <ul>
-                        <li><strong>First-party cookie:</strong> Cookie dari website asli yang ingin kita kunjungi (contoh: NY Times).</li>
-                        <li><strong>Third-party cookie (Tracking cookies):</strong> Cookie dari pihak ketiga penyedia iklan (contoh: AdX) yang diam-diam terselip di website NY Times.</li>
-                    </ul>
-                    <p>Ketika Anda mengunjungi website "Socks.com" yang juga memakai AdX, AdX akan melihat nomor cookie yang sama dan menyadari, <em>"Ah, orang yang kemarin baca berita sport di NY Times sekarang mencari kaus kaki!"</em>. Hal ini mengganggu privasi. (Mulai diblokir oleh Safari/Firefox modern).</p>
-                </div>
-                    <div>
-                        <img src="images/week12/image16.png" class="slide-img" alt="Bahaya Cookies & Privasi Tracking">
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> Iterated Query ("Tanya Server Rujukan")</div>
+                        <div class="sec-body">
+                            <ol style="font-size:.88em;">
+                                <li>Host meminta translasi ke <strong>Local DNS Resolver</strong>.</li>
+                                <li>Local DNS bertanya ke <strong>Root DNS</strong>. Root merujuk: <em>"Silakan tanya ke TLD .edu"</em>.</li>
+                                <li>Local DNS bertanya ke <strong>TLD .edu</strong>. TLD merujuk: <em>"Silakan tanya ke Authoritative nyu.edu"</em>.</li>
+                                <li>Local DNS bertanya ke <strong>Authoritative nyu.edu</strong> &rarr; Mendapatkan IP target asli!</li>
+                            </ol>
+                            <p class="highlight-blue" style="font-size:.85em; margin-top:6px;">
+                                <strong>Standar Internet:</strong> Local DNS melakukan seluruh pencarian aktif. Server Akar hanya memberikan rujukan sehingga tetap ringan.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <img src="images/week12/resolusi_dns_iterated.svg" class="slide-img" alt="Iterated Query DNS">
+                        <p class="img-caption">Gambar 12.11: Alur Kueri DNS Iterated (Standar Global)</p>
                     </div>
                 </div>
+                <aside class="notes">Tekankan mengapa Internet memilih kueri Iterated pada tingkatan atas: jika Root dipaksa melakukan recursive, Root Server akan tumbang dalam hitungan detik karena kelelahan memori antrean.</aside>
             </section>
 
+            <!-- SLIDE 26: RECURSIVE RESOLUTION -->
             <section>
-                <h3>Web Caches (Proxy Server)</h3>
+                <h3>Metode Resolusi DNS: Recursive</h3>
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller">
-                    <p>Di lingkungan institusi kampus/perusahaan besar, akan sangat boros jika ribuan mahasiswa mem-fetch file gambar yang persis sama ke Server di Amerika.</p>
-                    <p><strong>Solusi: Local Web Cache.</strong></p>
-                    <ul>
-                        <li>Semua browser mahasiswa diarahkan request-nya ke server Proxy (Cache) di dalam kampus.</li>
-                        <li>Jika file ada di Cache kampus, langsung dikirim ke mahasiswa dengan delay milidetik (Local LAN).</li>
-                        <li>Jika belum ada, Proxy akan mengunduh dulu dari Server Amerika, menyimpannya di harddisk kampus, baru memberikannya ke mahasiswa.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image17.png" class="slide-img" alt="Web Caches (Proxy Server)">
+                        <div class="sec-bar sec-bar-purple"><i class="bi bi-arrow-down-right-square-fill"></i> Recursive Query ("Terima Beres")</div>
+                        <div class="sec-body">
+                            <ol style="font-size:.88em;">
+                                <li>Host meminta Local DNS mencari sampai dapat.</li>
+                                <li>Local DNS melempar query berantai ke Root Server.</li>
+                                <li>Root Server yang <strong>repot bertanya ke TLD</strong>.</li>
+                                <li>TLD yang <strong>repot bertanya ke Authoritative</strong>, lalu jawaban dikembalikan berantai ke bawah.</li>
+                            </ol>
+                            <p class="badge-err" style="font-size:.85em; margin-top:6px;">
+                                ⚠️ <strong>Beban Komputasi Berat:</strong> Ditolak di Internet publik karena membebani antrean memori server akar (Root).
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <img src="images/week12/resolusi_dns_recursive.svg" class="slide-img" alt="Recursive Query DNS">
+                        <p class="img-caption">Gambar 12.12: Alur Kueri DNS Recursive (Rantai Beban di Akar)</p>
                     </div>
                 </div>
+                <aside class="notes">Recursive query hanya digunakan antara Klien dan Local DNS Resolver. Antara Local DNS ke Root/TLD mutlak menggunakan Iterated.</aside>
             </section>
 
+            <!-- SLIDE 26: RESOURCE RECORD (RR) & TTL -->
             <section>
-                <h3>Analisis Performa Web Cache</h3>
+                <h3>Format Resource Record (RR) &amp; Caching DNS</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Hitungan matematis menunjukkan Caching JAUH lebih murah daripada harus menyewa ISP dengan bandwidth yang lebih tinggi (upgrade Access Link).</p>
-                    <p><strong>Bagaimana agar data Cache tidak kadaluarsa (basi)?</strong></p>
-                    <ul>
-                        <li><strong>Conditional GET:</strong> Proxy akan bertanya ke server Amerika, "Kirimkan update terbaru, <em>JIKA DAN HANYA JIKA</em> file ini sudah dimodifikasi sejak <code>&lt;date&gt;</code>." (Menggunakan header <code>If-modified-since</code>).</li>
-                        <li>Jika tidak ada modifikasi, server Amerika hanya membalas pesan kosong <code>304 Not Modified</code> yang menghemat bandwidth besar-besaran.</li>
-                    </ul>
-                </div>
+                    <div class="card text-left text-smaller" style="font-size:.42em;">
+                        <p>Database DNS menyimpan data dalam format tuple 4 nilai:</p>
+                        <p class="highlight-blue" style="font-weight:700; text-align:center; margin:4px 0;">(Name,
+                            Value, Type, TTL)</p>
+                        <table class="table-compare" style="font-size:.82em;">
+                            <tr>
+                                <th>Tipe</th>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Keterangan Fungsi</th>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-sol">Type A</span></td>
+                                <td>Hostname</td>
+                                <td>Alamat IPv4</td>
+                                <td>Translasi standar (contoh: <code>itera.ac.id</code> &rarr;
+                                    <code>103.111.201.21</code>).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-sol">Type AAAA</span></td>
+                                <td>Hostname</td>
+                                <td>Alamat IPv6</td>
+                                <td>Translasi ke format 128-bit IPv6.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-info">Type NS</span></td>
+                                <td>Domain</td>
+                                <td>Host Name Server</td>
+                                <td>Menunjuk Authoritative Name Server domain tersebut.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-info">Type CNAME</span></td>
+                                <td>Nama Alias</td>
+                                <td>Nama Kanonikal</td>
+                                <td>Alias ke nama asli (<code>www.itera.ac.id</code> &rarr; <code>itera.ac.id</code>).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-err">Type MX</span></td>
+                                <td>Domain</td>
+                                <td>Host Mail Server</td>
+                                <td>Menentukan server penampung email masuk domain tersebut.</td>
+                            </tr>
+                        </table>
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>DNS Caching &amp; TTL (Time-To-Live):</strong> Begitu Local DNS menerima jawaban
+                            pemetaan, ia menyimpannya di memori RAM selama durasi TTL (misal 3600 detik). Kueri
+                            berikutnya langsung dijawab dari cache tanpa perlu menghubungi Root lagi!
+                        </div>
+                    </div>
                     <div>
-                        <img src="images/week12/image18.png" class="slide-img" alt="Analisis Performa Web Cache">
+                        <img src="images/week12/dns_resource_records.svg" class="slide-img" alt="Format Resource Record DNS">
+                        <div class="img-caption">Struktur database Resource Record (RR) DNS</div>
                     </div>
                 </div>
+                <aside class="notes">Jelaskan bahwa saat institusi mengganti IP server web, perubahan tersebut
+                    membutuhkan waktu hingga masa TTL pada cache DNS seluruh dunia habis (propagasi DNS).</aside>
             </section>
 
+            <!-- SLIDE 27: KEAMANAN & SERANGAN DNS -->
             <section>
-                <h3>Evolusi HTTP: HTTP/2 & HTTP/3</h3>
+                <h3>Keamanan DNS: Ancaman Serangan &amp; Solusi DNSSEC</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Meskipun HTTP 1.1 Persistent sudah baik, ia memiliki masalah <strong>Head-of-Line (HOL) Blocking</strong>.</p>
-                    <ul>
-                        <li>Jika antrean request pertama (misal Video 100MB) memakan waktu lama/hilang di jalan, maka antrean request objek kecil di belakangnya (CSS 10KB) ikut MACET.</li>
-                        <li><strong>HTTP/2:</strong> Memungkinkan pipelining pararel sejati, memecah file jadi frame kecil yang menyalip satu sama lain.</li>
-                        <li><strong>HTTP/3:</strong> Mengganti pondasi secara ekstrim! Tidak lagi menggunakan TCP, melainkan berjalan di atas <strong>UDP (dengan protokol baru bernama QUIC)</strong>. Lebih bebas hambat tanpa harus menunggu re-transmisi paket error!</li>
-                    </ul>
-                </div>
+                    <div class="card text-left text-smaller" style="font-size:.38em;">
+                        <p>Sebagai infrastruktur terpenting internet, DNS sering menjadi target serangan:</p>
+                        <ul>
+                            <li><strong>1. Serangan DDoS (Distributed Denial-of-Service):</strong>
+                                <br>Membombardir Root Servers dengan trafik sampah agar layanan lumpuh.
+                                <br><span class="badge-sol">Pertahanan:</span> Sangat tangguh berkat teknologi
+                                <em>Anycast routing</em> dan perlindungan caching berlapis di Local DNS seluruh dunia.
+                            </li>
+                            <li><strong>2. DNS Cache Poisoning / DNS Spoofing:</strong>
+                                <br>Penyerang mengirim balasan palsu ke Local DNS resolver sebelum jawaban asli tiba.
+                                Akibatnya resolver menyimpan IP palsu (korban yang membuka web bank dibelokkan ke web
+                                phishing hacker).
+                            </li>
+                            <li><strong>3. Solusi Industri: DNSSEC (DNS Security Extensions):</strong>
+                                <br>Menyediakan <strong>otentikasi asal data</strong> dan <strong>integritas
+                                    pesan</strong> menggunakan kriptografi kunci publik. Setiap Resource Record
+                                ditandatangani secara digital (RRSIG). Resolver dapat memvalidasi apakah data DNS
+                                benar-benar berasal dari pemilik domain yang sah.
+                            </li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week12/image19.png" class="slide-img" alt="Evolusi HTTP: HTTP/2 & HTTP/3">
+                        <img src="images/week12/dns_cache_poisoning_vs_dnssec.svg" class="slide-img"
+                            alt="Keamanan dan Serangan DNS">
+                        <div class="img-caption">Ancaman eksploitasi DNS Spoofing & pertahanan DNSSEC</div>
                     </div>
                 </div>
+                <aside class="notes">Soroti bahwa protokol DNS standar pada awalnya dirancang tanpa enkripsi/tanda
+                    tangan, sehingga inovasi DNSSEC sangat vital untuk mencegah pembajakan domain internet.</aside>
             </section>
 
+            <!-- SLIDE 28: DIVIDER MODUL 5 -->
             <section>
-                <h3>E-mail: Struktur Fundamental</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Sistem Surat Elektronik (E-mail) memiliki 3 pilar penyangga:</p>
-                    <ol>
-                        <li><strong>User Agent:</strong> Aplikasi *Mail reader* di HP/Laptop kita (Contoh: Outlook, Apple Mail). Digunakan untuk membaca dan merangkai email.</li>
-                        <li><strong>Mail Servers:</strong> Infrastruktur 24-jam penyedia layanan (Contoh: Server Gmail, Server Yahoo). Di sinilah tempat Kotak Surat (Mailbox) kita berlabuh.</li>
-                        <li><strong>SMTP (Simple Mail Transfer Protocol):</strong> Bahasa utama yang digunakan oleh Mail Server pengirim untuk berbicara dengan Mail Server penerima.</li>
-                    </ol>
-                </div>
-                    <div>
-                        <img src="images/week12/image20.png" class="slide-img" alt="E-mail: Struktur Fundamental">
+                <h2>5. Eksplorasi Praktis, Simulasi &amp; Evaluasi Mandiri</h2>
+                <p class="text-small" style="color: #666; margin-top: 10px;">Hands-on CLI Tools, Simulasi Interaktif
+                    Lapisan Aplikasi, Matriks Komparasi Protokol &amp; Tugas Mandiri</p>
+                <aside class="notes">Bagian kelima membawa mahasiswa ke ranah aplikasi praktis: uji terminal langsung
+                    dengan cURL, nslookup, dan dig, simulasi interaktif di slide, rangkuman holistik, serta penugasan
+                    lab mandiri.</aside>
+            </section>
+
+            <!-- SLIDE 29: [MATERI BARU] CLI NETWORKING TOOLS -->
+            <section>
+                <h3>Eksplorasi Praktis: CLI Tools (cURL &amp; DNS)</h3>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size:.55em;">
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-terminal-fill"></i> 1. Inspeksi Header HTTP
+                            via cURL</div>
+                        <div class="sec-body">
+                            <p>Perintah untuk mengambil header response tanpa body:</p>
+                            <div class="code-block" style="font-size:.8em; margin:4px 0;">
+                                $ curl -I https://www.itera.ac.id<br>
+                                <span style="color:#059669; font-weight:700;">HTTP/2 200</span><br>
+                                server: nginx<br>
+                                date: Sun, 15 Nov 2026 14:00:00 GMT<br>
+                                content-type: text/html; charset=UTF-8<br>
+                                strict-transport-security: max-age=31536000
+                            </div>
+                            <p style="font-size:.8em;">Uji <em>Conditional GET</em> langsung dari CLI:</p>
+                            <div class="code-block" style="font-size:.75em; margin:4px 0;">
+                                $ curl -I -H "If-Modified-Since: Sun, 15 Nov 2026 14:00:00 GMT"
+                                https://www.itera.ac.id<br>
+                                <span style="color:#d97706; font-weight:700;">HTTP/2 304 Not Modified</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card text-left text-smaller" style="font-size:.55em;">
+                        <div class="sec-bar sec-bar-purple"><i class="bi bi-search"></i> 2. Eksplorasi DNS via dig &amp;
+                            nslookup</div>
+                        <div class="sec-body">
+                            <p>Mencari Mail Server (MX Record) kampus:</p>
+                            <div class="code-block" style="font-size:.78em; margin:4px 0;">
+                                $ nslookup -type=MX itera.ac.id<br>
+                                itera.ac.id mail exchanger = 1 aspmx.l.google.com.
+                            </div>
+                            <p style="font-size:.8em; margin-top:4px;">Melacak penelusuran berjenjang dari Root ke
+                                Authoritative:</p>
+                            <div class="code-block" style="font-size:.75em; margin:4px 0;">
+                                $ dig +trace www.itera.ac.id<br>
+                                . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;518400 IN NS
+                                a.root-servers.net.<br>
+                                id. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 172800 IN NS a.dns.id.<br>
+                                itera.ac.id. &nbsp; &nbsp; &nbsp;86400 &nbsp;IN NS ns1.itera.ac.id.<br>
+                                www.itera.ac.id. &nbsp;3600 &nbsp; IN A &nbsp;103.111.201.21
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <aside class="notes">Tunjukkan demonstrasi langsung perintah ini di depan mahasiswa agar mereka melihat
+                    bukti fisik bahwa protokol yang dipelajari bekerja pada sistem operasi mereka saat ini.</aside>
             </section>
 
+            <!-- SLIDE 30: [FITUR BARU] SIMULASI INTERAKTIF HTTP & DNS -->
             <section>
-                <h3>Mail Servers & Message Queue</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Di dalam sebuah Mail Server, terdapat dua struktur ruang penyimpanan:</p>
-                    <ul>
-                        <li><strong>Mailbox:</strong> Gudang untuk menyimpan pesan-pesan yang <em>DITERIMA / MASUK</em> ke akun user.</li>
-                        <li><strong>Message Queue (Antrean Pesan):</strong> Ruang tunggu bagi pesan-pesan yang *hendak dikirim keluar* oleh SMTP. Jika server tujuan (misal Yahoo) sedang down, pesan akan mengantre dan dicoba dikirim terus-menerus selama beberapa hari sebelum dinyatakan "Mail Delivery Failure".</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image21.png" class="slide-img" alt="Mail Servers & Message Queue">
+                <h3>Simulasi Interaktif: HTTP &amp; DNS Tracing</h3>
+                <div class="sim-container" style="font-size:.35em;">
+                    <div class="sim-toolbar">
+                        <div class="sim-tabs">
+                            <button class="sim-tab-btn active" id="tab-http" onclick="switchSimTab('http')"><i
+                                    class="bi bi-globe"></i> Simulasi HTTP Caching</button>
+                            <button class="sim-tab-btn" id="tab-dns" onclick="switchSimTab('dns')"><i
+                                    class="bi bi-diagram-2-fill"></i> Simulasi DNS Resolusi</button>
+                        </div>
+                        <div class="sim-btn-group" id="http-controls">
+                            <label style="font-size:.85em; color:#8b949e;"><input type="checkbox" id="chk-cache">
+                                Simulasikan Cache HIT</label>
+                            <button class="sim-btn" onclick="runHttpSim()"><i class="bi bi-play-fill"></i> Kirim Request
+                                HTTP</button>
+                            <button class="sim-btn sim-btn-reset" onclick="resetHttpSim()">Reset</button>
+                        </div>
+                        <div class="sim-btn-group" id="dns-controls" style="display:none;">
+                            <select id="dns-mode"
+                                style="background:#21262d; color:#c9d1d9; border:1px solid #30363d; border-radius:4px; font-size:.85em; padding:3px 6px;">
+                                <option value="iterated">Iterated Query (Standar)</option>
+                                <option value="recursive">Recursive Query</option>
+                            </select>
+                            <button class="sim-btn sim-btn-orange" onclick="runDnsSim()"><i class="bi bi-play-fill"></i>
+                                Mulai Resolusi DNS</button>
+                            <button class="sim-btn sim-btn-reset" onclick="resetDnsSim()">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- PANE HTTP -->
+                    <div id="pane-http-view" class="sim-display-grid">
+                        <div class="sim-pane">
+                            <div class="sim-pane-title">
+                                <span><i class="bi bi-laptop"></i> Client / Browser</span>
+                                <span id="client-http-status" class="sim-tag-req">IDLE</span>
+                            </div>
+                            <div id="http-client-log">Klik tombol 'Kirim Request HTTP' di atas untuk memulai simulasi
+                                transaksi web...</div>
+                        </div>
+                        <div class="sim-pane">
+                            <div class="sim-pane-title">
+                                <span><i class="bi bi-server"></i> Web Proxy Cache &amp; Origin Server</span>
+                                <span id="server-http-status" class="sim-tag-res">STANDBY</span>
+                            </div>
+                            <div id="http-server-log">Menunggu kedatangan paket HTTP request dari browser...</div>
+                        </div>
+                    </div>
+
+                    <!-- PANE DNS -->
+                    <div id="pane-dns-view" class="sim-display-grid" style="display:none;">
+                        <div class="sim-pane">
+                            <div class="sim-pane-title">
+                                <span><i class="bi bi-pc-display"></i> Local DNS Resolver (ISP/Kampus)</span>
+                                <span id="dns-resolver-status" class="sim-tag-dns">READY</span>
+                            </div>
+                            <div id="dns-client-log">Klik 'Mulai Resolusi DNS' untuk menelusuri kueri hostname
+                                www.itera.ac.id...</div>
+                        </div>
+                        <div class="sim-pane">
+                            <div class="sim-pane-title">
+                                <span><i class="bi bi-diagram-3"></i> Hierarki Server (Root, TLD, Auth)</span>
+                                <span id="dns-server-status" class="sim-tag-req">LISTENING</span>
+                            </div>
+                            <div id="dns-server-log">Menunggu delegasi kueri dari Local DNS Resolver...</div>
+                        </div>
                     </div>
                 </div>
+                <div class="img-caption">Simulasi interaktif JavaScript Reveal.js: Transaksi HTTP Caching &amp;
+                    Penelusuran Hierarkis DNS</div>
+                <aside class="notes">Gunakan simulasi interaktif ini untuk menunjukkan secara visual perbedaan waktu
+                    respon saat Cache MISS (harus kontak origin server, 105 ms) dibanding Cache HIT (langsung dijawab
+                    proxy lokal via 304 Not Modified, 5 ms).</aside>
             </section>
 
+            <!-- SLIDE 31: [MATERI BARU] RANGKUMAN KOMPARATIF PROTOKOL -->
             <section>
-                <h3>Skenario Pengiriman E-mail Penuh</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Bagaimana nasib sebuah email dari diketik hingga dibaca?</p>
-                    <ol>
-                        <li>Alice mengetik email untuk Bob, menekan Send di Outlook (User Agent).</li>
-                        <li>Outlook mendorong email tersebut ke Server Mail milik institusi Alice.</li>
-                        <li>Server Mail Alice mendeteksi <code>@bob.edu</code>, kemudian <strong>SMTP Client</strong> milik institusi Alice membuka koneksi TCP Port 25 ke Server Mail milik institusi Bob.</li>
-                        <li>Mail Server Alice mendorong email ke Mail Server Bob secara langsung via SMTP (Push).</li>
-                        <li>Mail Server Bob meletakkan email ke dalam Mailbox khusus akun Bob.</li>
-                        <li>Besoknya, Bob membuka Outlook-nya. Outlook menarik (Pull) data dari Mail Server Bob menggunakan protokol **IMAP/POP3**.</li>
-                    </ol>
-                </div>
-                    <div>
-                        <img src="images/week12/image22.png" class="slide-img" alt="Skenario Pengiriman E-mail Penuh">
+                <h3>Rangkuman Komparasi Protokol Lapisan Aplikasi</h3>
+                <div class="card text-left text-smaller">
+                    <table class="table-compare" style="font-size:.78em;">
+                        <thead>
+                            <tr>
+                                <th>Dimensi Analisis</th>
+                                <th>HTTP / HTTPS</th>
+                                <th>FTP</th>
+                                <th>SMTP</th>
+                                <th>IMAP / POP3</th>
+                                <th>DNS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Port Default</strong></td>
+                                <td>80 / 443</td>
+                                <td>21 (Ctrl) &amp; 20 (Data)</td>
+                                <td>25 / 587</td>
+                                <td>143, 993 / 110, 995</td>
+                                <td>53</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Protokol Transpor</strong></td>
+                                <td><span class="badge-sol">TCP</span> (HTTP/3: UDP)</td>
+                                <td><span class="badge-sol">TCP</span></td>
+                                <td><span class="badge-sol">TCP</span></td>
+                                <td><span class="badge-sol">TCP</span></td>
+                                <td><span class="badge-info">UDP</span> (Fallback TCP)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pola Komunikasi</strong></td>
+                                <td>Request–Response</td>
+                                <td>Out-of-band Dual-Channel</td>
+                                <td>Direct Push</td>
+                                <td>Pull (Pengambilan)</td>
+                                <td>Query–Reply</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Karakteristik Sesi</strong></td>
+                                <td><strong>Stateless</strong> (State via Cookies)</td>
+                                <td><strong>Stateful</strong> (Koneksi kontrol tetap)</td>
+                                <td>Stateful per sesi pengiriman</td>
+                                <td>Stateful (IMAP) / Stateless (POP3)</td>
+                                <td><strong>Stateless</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Format Payload</strong></td>
+                                <td>ASCII Header + Biner/MIME</td>
+                                <td>Perintah ASCII + Berkas Biner</td>
+                                <td>Teks ASCII 7-bit murni</td>
+                                <td>Teks / MIME Encoded</td>
+                                <td>Pesan Biner Resource Record</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fungsi Utama</strong></td>
+                                <td>Distribusi dokumen web</td>
+                                <td>Transfer berkas terstruktur</td>
+                                <td>Pengiriman email antar-server</td>
+                                <td>Akses inbox oleh pengguna</td>
+                                <td>Translasi nama ke IP address</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="info-box" style="margin-top:8px;">
+                        <strong>Kesimpulan Arsitektur:</strong> Lapisan aplikasi menyediakan keragaman layanan yang
+                        sangat kaya. Pemilihan protokol transpor (TCP vs UDP) serta status sesi (Stateless vs Stateful)
+                        selalu ditentukan oleh trade-off antara keandalan, kesederhanaan, dan latensi.
                     </div>
                 </div>
+                <aside class="notes">Gunakan tabel rangkuman ini sebagai peta tinjauan akhir untuk merangkum seluruh
+                    materi Pertemuan 12 sebelum masuk ke penugasan praktikum mandiri.</aside>
             </section>
 
+            <!-- SLIDE 32: [FITUR BARU] TUGAS PRAKTIKUM MANDIRI BOX -->
             <section>
-                <h3>DNS (Domain Name System)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Mengapa kita butuh DNS?</p>
-                    <ul>
-                        <li>Manusia lebih mudah mengingat nama/alias (misal: <code>www.google.com</code>).</li>
-                        <li>Router internet mutlak HANYA bisa mengirim data menggunakan angka IP Address 32-bit (misal: <code>142.250.191.132</code>).</li>
-                    </ul>
-                    <p><strong>DNS adalah buku telepon raksasa terdistribusi</strong> yang bertugas menerjemahkan (mapping) *Hostname* bahasa manusia menjadi *IP Address* bahasa router.</p>
-                </div>
-                    <div>
-                        <img src="images/week12/image23.png" class="slide-img" alt="DNS (Domain Name System)">
+                <div class="tugas-box" style="font-size: .65em;">
+                    <h3>📝 Tugas Praktikum Mandiri: Analisis Protokol Aplikasi</h3>
+                    <p style="font-size: .62em; margin-bottom: 10px; color: #e8f5e9;">
+                        Lakukan investigasi dan analisis lalu lintas protokol <strong>HTTP &amp; DNS</strong> pada
+                        jaringan riil menggunakan perangkat analisis paket (Wireshark &amp; CLI):
+                    </p>
+                    <div class="tugas-soal">
+                        <p><span class="num">1.</span> Jalankan <strong>Wireshark</strong> dan lakukan penangkapan paket
+                            (<em>packet capture</em>) pada kartu jaringan aktif saat mengakses situs web kampus ITERA
+                            (<code>https://www.itera.ac.id</code>).</p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">2.</span> Terapkan filter <code>http</code> atau <code>dns</code>.
+                            Identifikasi dan jelaskan nilai field-field utama pada pesan <strong>HTTP GET
+                                Request</strong> (<code>Host</code>, <code>User-Agent</code>) dan <strong>HTTP
+                                Response</strong> (<code>Status-Code</code>, <code>Content-Type</code>,
+                            <code>Date</code>).
+                        </p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">3.</span> Uji mekanisme <strong>Conditional GET</strong>: Lakukan *refresh*
+                            halaman web dan buktikan kemunculan status <code>304 Not Modified</code> pada rekaman
+                            Wireshark atau via terminal <code>curl -I -H "If-Modified-Since: ..."</code>.</p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">4.</span> Jalankan perintah penelusuran hierarki
+                            <code>dig +trace www.itera.ac.id</code> (atau <code>nslookup</code>). Dokumentasikan alamat
+                            IP Root Server, TLD Server <code>.id</code>, dan Authoritative Name Server ITERA yang
+                            merespon.
+                        </p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">5.</span> Temukan dan catat perbedaan Resource Record <strong>Type
+                                A</strong>, <strong>Type CNAME</strong>, dan <strong>Type MX</strong> pada domain
+                            <code>itera.ac.id</code>.
+                        </p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">6.</span> Susun hasil pengujian ke dalam laporan praktikum mandiri
+                            berstandar template A4 margin 3 cm lengkap dengan tangkapan layar bukti eksekusi dan
+                            analisis kritis.</p>
+                    </div>
+                    <div class="tugas-info">
+                        <div class="tugas-chip"><i class="bi bi-clock-fill"></i> Batas Waktu: 1 Minggu</div>
+                        <div class="tugas-chip"><i class="bi bi-file-earmark-code-fill"></i> Format: PDF &amp; Log
+                            Wireshark (.pcapng)</div>
+                        <div class="tugas-chip"><i class="bi bi-cloud-arrow-up-fill"></i> Pengumpulan: Google Classroom
+                            / LMS</div>
                     </div>
                 </div>
+                <aside class="notes">Tugas praktikum mandiri Pertemuan 12 membimbing mahasiswa menganalisis paket data
+                    nyata di jaringan menggunakan Wireshark dan cURL, melengkapi pengalaman coding soket di Pertemuan
+                    11.</aside>
             </section>
 
-            <section>
-                <h3>Mengapa DNS Tidak Disentralisasi?</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Mengapa tidak membuat SATU SAJA server super besar berisikan seluruh tabel nama internet di dunia?</p>
-                    <ul>
-                        <li><strong>Single point of failure:</strong> Jika satu server itu meledak, seluruh internet dunia akan mati total tak bisa diakses.</li>
-                        <li><strong>Volume Trafik:</strong> Triliunan *query* pencarian datang per detik, mustahil diproses satu entitas.</li>
-                        <li><strong>Skalabilitas & Delay Jarak:</strong> Orang di Antartika akan sangat lambat mengakses server tunggal di benua Amerika.</li>
-                    </ul>
-                    <p>Karenanya DNS dibangun dengan arsitektur <strong>Desentralisasi & Hirarkis</strong> (Database Terdistribusi).</p>
-                </div>
-                    <div>
-                        <img src="images/week12/image24.png" class="slide-img" alt="Mengapa DNS Tidak Disentralisasi?">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Hirarki Server DNS</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Mekanisme pencarian bersifat berjenjang dari atas ke bawah:</p>
-                    <ol>
-                        <li><strong>Root DNS Servers:</strong> Puncak hirarki di seluruh dunia (Terdapat 13 gugus server besar). Bertugas mengarahkan ke TLD.</li>
-                        <li><strong>TLD (Top-Level Domain) Servers:</strong> Mengelola domain tingkat tinggi seperti <code>.com</code>, <code>.net</code>, <code>.org</code>, <code>.edu</code>, atau negara (<code>.id</code>, <code>.jp</code>). Server TLD tau siapa pengelola sub-domain.</li>
-                        <li><strong>Authoritative Servers:</strong> Server milik organisasi yang BENAR-BENAR menyimpan tabel asli IP address dari <code>google.com</code> atau <code>yahoo.com</code>.</li>
-                    </ol>
-                </div>
-                    <div>
-                        <img src="images/week12/image25.png" class="slide-img" alt="Hirarki Server DNS">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Metode Resolusi 1: Iterated Query</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p><em>"Saya tidak tahu alamat pastinya, tapi silakan tanya orang ini."</em></p>
-                    <ul>
-                        <li>Client bertanya ke Local DNS Server.</li>
-                        <li>Local bertanya ke Root. Root mengembalikan IP dari TLD <code>.edu</code>.</li>
-                        <li>Local bertanya langsung ke TLD <code>.edu</code>. TLD mengembalikan IP dari Authoritative <code>umass.edu</code>.</li>
-                        <li>Local bertanya ke Authoritative. Barulah IP sebenarnya didapat.</li>
-                    </ul>
-                    <p>Pada model Iterated, beban berpindah-pindah, tapi kendali pencarian tetap berada di titik Local DNS Server.</p>
-                </div>
-                    <div>
-                        <img src="images/week12/image26.png" class="slide-img" alt="Metode Resolusi 1: Iterated Query">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Metode Resolusi 2: Recursive Query</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p><em>"Tolong carikan sampai dapat, saya terima beres saja."</em></p>
-                    <ul>
-                        <li>Beban pencarian dilimpahkan ke bahu server di tingkatan atasnya.</li>
-                        <li>Local DNS melempar query ke Root. Root repot mencarikan ke TLD. TLD repot mencari ke Authoritative. Laporan IP Address diserahkan balik secara estafet.</li>
-                        <li><strong>Kelemahan:</strong> Root Server akan kelebihan beban luar biasa berat! Sangat jarang dipraktikkan dalam dunia nyata berskala tinggi.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image27.png" class="slide-img" alt="Metode Resolusi 2: Recursive Query">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Caching DNS dan Skema TTL</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Pencarian panjang berjenjang tersebut sangat memakan waktu. Maka dari itu diterapkanlah <strong>Caching</strong>.</p>
-                    <ul>
-                        <li>Begitu Local DNS Server menemukan IP <code>www.google.com</code>, ia akan menyimpannya (Cache) di memori RAM sementaranya.</li>
-                        <li>Permintaan kedua dari mahasiswa lain akan DILAYANI SECARA INSTAN TANPA HARUS NAIK KE ROOT SERVER LAGI.</li>
-                        <li><strong>TTL (Time to Live):</strong> Umur maksimal ingatan tersebut. Setelah misal 24 jam, cache dihapus untuk mencegah risiko IP server yang mungkin saja telah diganti oleh pemiliknya (Out-of-date).</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image28.png" class="slide-img" alt="Caching DNS dan Skema TTL">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Format Resource Record (RR) DNS</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Bentuk data murni dari database DNS adalah tuple 4 nilai: <code>(Name, Value, Type, TTL)</code>.</p>
-                    <ul>
-                        <li><strong>Type = A:</strong> Translasi murni Hostname ke IP Address (IPv4). Contoh: <code>(foo.com, 1.2.3.4, A)</code>.</li>
-                        <li><strong>Type = NS:</strong> Translasi Domain untuk mencari siapa Authoritative Server-nya. Contoh: <code>(foo.com, dns1.foo.com, NS)</code>.</li>
-                        <li><strong>Type = CNAME:</strong> Nama Samaran (Alias) yang menunjuk ke nama asli. (Misal <code>www.ibm.com</code> menunjuk ke *canonical name* <code>server2-backup.ibm.com</code>).</li>
-                        <li><strong>Type = MX:</strong> Khusus menunjuk alamat IP dari Mail Server SMTP (pengelolaan email institusi).</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week12/image29.png" class="slide-img" alt="Format Resource Record (RR) DNS">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Keamanan & Serangan DNS</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Karena perannya krusial, DNS sering menjadi target serangan:</p>
-                    <ul>
-                        <li><strong>DDoS Attacks:</strong> Menembakkan trafik sampah ke Root Server hingga *down*. (Sering gagal berkat Caching lokal yang berlapis-lapis).</li>
-                        <li><strong>Spoofing / DNS Cache Poisoning:</strong> Hacker mencegat *query* dan memberikan IP bohongan (Misal, Anda berniat ke m-banking BCA, tapi DNS memberikan IP palsu dari website BCA tipuan si Hacker untuk mencuri PIN Anda).</li>
-                    </ul>
-                    <p>Solusi modern: <strong>DNSSEC</strong>, memberikan tanda tangan digital otentikasi bahwa pesan DNS belum dimanipulasi.</p>
-                </div>
-                    <div>
-                        <img src="images/week12/image30.png" class="slide-img" alt="Keamanan & Serangan DNS">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (1)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image31.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (1)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (2)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image32.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (2)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (3)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image33.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (3)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (4)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image34.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (4)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (5)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image35.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (5)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (6)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image36.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (6)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (7)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image37.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (7)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (8)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image38.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (8)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (9)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image39.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (9)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (10)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image40.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (10)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (11)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image41.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (11)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (12)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image42.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (12)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (13)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image43.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (13)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (14)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image44.jpeg" class="slide-img" alt="Galeri Ilustrasi Tambahan (14)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Ilustrasi Tambahan (15)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week12/image45.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (15)">
-                </div>
-            </section>
-
-            <!-- ━━━━━━━━━━━━━━ PENUTUP / Q&A ━━━━━━━━━━━━━━ -->
+            <!-- SLIDE 33: PENUTUP / Q&A -->
             <section>
                 <h2>Tanya Jawab &amp; Diskusi</h2>
                 <div style="font-size: 2.2em; color: #1565c0; margin: 15px 0;">
                     <i class="bi bi-chat-dots-fill"></i>
                 </div>
-                <p>Pertemuan berikutnya: <strong>Pertemuan 13: Network Security (Kriptografi, TLS, IPsec, & Firewalls)</strong></p>
-                <p class="text-small" style="color: #666; max-width: 720px; margin: 10px auto;">
-                    Persiapkan pemahaman dasar mengenai prinsip kriptografi simetris/asimetris, otentikasi data, integritas pesan via hashing, protokol TLS/SSL, dan pengamanan perimeter dengan Firewall.
+                <p>Pertemuan berikutnya: <strong>Pertemuan 13: Keamanan Jaringan Komputer (Network Security)</strong>
                 </p>
-                <aside class="notes">Beri kesempatan mahasiswa bertanya mengenai hierarki DNS, mekanisme caching, atau alur kerja Cookies dan HTTP sebelum menutup sesi pertemuan.</aside>
+                <p class="text-small" style="color: #666; max-width: 720px; margin: 10px auto;">
+                    Persiapkan pemahaman dasar mengenai prinsip kriptografi simetris/asimetris, otentikasi data,
+                    integritas pesan via hashing, protokol TLS/SSL, arsitektur VPN IPsec, serta mekanisme filtrasi paket
+                    pada Firewall.
+                </p>
+                <div style="margin-top: 25px; font-size: .55em; color: #999;">
+                    <p>Program Studi Teknik Informatika - Institut Teknologi Sumatera (ITERA)</p>
+                </div>
+                <aside class="notes">Beri kesempatan mahasiswa bertanya mengenai perbedaan POP3 vs IMAP, cara kerja
+                    conditional GET, atau hierarki DNS sebelum menutup sesi perkuliahan.</aside>
             </section>
+
 
         </div><!-- /slides -->
     </div><!-- /reveal -->
@@ -1056,6 +1943,173 @@
             });
         });
     </script>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         INTERACTIVE SIMULATION SCRIPT FOR PERTEMUAN 12
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <script>
+        function switchSimTab(tab) {
+            const tabHttp = document.getElementById('tab-http');
+            const tabDns = document.getElementById('tab-dns');
+            const paneHttp = document.getElementById('pane-http-view');
+            const paneDns = document.getElementById('pane-dns-view');
+            const httpControls = document.getElementById('http-controls');
+            const dnsControls = document.getElementById('dns-controls');
+
+            if (!tabHttp || !tabDns) return;
+
+            if (tab === 'http') {
+                tabHttp.classList.add('active');
+                tabDns.classList.remove('active');
+                paneHttp.style.display = 'grid';
+                paneDns.style.display = 'none';
+                httpControls.style.display = 'flex';
+                dnsControls.style.display = 'none';
+            } else {
+                tabDns.classList.add('active');
+                tabHttp.classList.remove('active');
+                paneDns.style.display = 'grid';
+                paneHttp.style.display = 'none';
+                dnsControls.style.display = 'flex';
+                httpControls.style.display = 'none';
+            }
+        }
+
+        function runHttpSim() {
+            const chk = document.getElementById('chk-cache');
+            const isCache = chk ? chk.checked : false;
+            const clientLog = document.getElementById('http-client-log');
+            const serverLog = document.getElementById('http-server-log');
+            const clientStatus = document.getElementById('client-http-status');
+            const serverStatus = document.getElementById('server-http-status');
+
+            if (!clientLog || !serverLog) return;
+
+            clientStatus.className = 'sim-tag-req';
+            clientStatus.innerText = 'SENDING';
+            serverStatus.className = 'sim-tag-res';
+            serverStatus.innerText = 'PROCESSING';
+
+            clientLog.innerHTML = '<div class="sim-log-line"><span class="sim-tag-req">[1. BROWSER]</span> Mengirim HTTP GET /index.html...</div>';
+
+            if (isCache) {
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-cache">[2. CACHE]</span> Header: If-Modified-Since: Sun, 15 Nov 2026...</div>';
+                    serverLog.innerHTML = '<div class="sim-log-line"><span class="sim-tag-cache">[PROXY CACHE]</span> Objek ditemukan di memori cache lokal!</div>';
+                    serverLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-res">[RESPON]</span> HTTP/1.1 304 Not Modified (Payload: 0 Bita)</div>';
+                }, 300);
+
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-res">[3. SUKSES]</span> Menerima 304 Not Modified. Merender dari cache!</div>';
+                    clientLog.innerHTML += '<div class="sim-log-line" style="color:#3fb950;"><strong>Latency: 5 ms (1 RTT Lokal LAN)</strong></div>';
+                    clientStatus.className = 'sim-tag-cache';
+                    clientStatus.innerText = 'CACHE HIT';
+                    serverStatus.innerText = 'STANDBY';
+                }, 700);
+            } else {
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-warn">[2. CACHE]</span> Cache MISS! Meneruskan kueri ke origin server internet...</div>';
+                    serverLog.innerHTML = '<div class="sim-log-line"><span class="sim-tag-req">[ORIGIN SERVER]</span> Menerima TCP SYN &amp; HTTP Request Line...</div>';
+                }, 400);
+
+                setTimeout(() => {
+                    serverLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-res">[ORIGIN SERVER]</span> HTTP/1.1 200 OK (Content-Length: 48.2 KB)</div>';
+                    serverLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-cache">[PROXY CACHE]</span> Menyimpan salinan berkas baru ke RAM Cache!</div>';
+                }, 900);
+
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-res">[3. SUKSES]</span> Menerima 200 OK &amp; payload biner lengkap. Selesai!</div>';
+                    clientLog.innerHTML += '<div class="sim-log-line" style="color:#58a6ff;"><strong>Latency: 105 ms (2 RTT + Transmit Time Internet)</strong></div>';
+                    clientStatus.className = 'sim-tag-res';
+                    clientStatus.innerText = '200 OK';
+                    serverStatus.innerText = 'STANDBY';
+                }, 1400);
+            }
+        }
+
+        function resetHttpSim() {
+            const cl = document.getElementById('http-client-log');
+            const sl = document.getElementById('http-server-log');
+            if (cl) cl.innerHTML = 'Klik tombol \'Kirim Request HTTP\' di atas untuk memulai simulasi...';
+            if (sl) sl.innerHTML = 'Menunggu kedatangan paket HTTP request dari browser...';
+            const cs = document.getElementById('client-http-status');
+            const ss = document.getElementById('server-http-status');
+            if (cs) { cs.className = 'sim-tag-req'; cs.innerText = 'IDLE'; }
+            if (ss) { ss.className = 'sim-tag-res'; ss.innerText = 'STANDBY'; }
+        }
+
+        function runDnsSim() {
+            const m = document.getElementById('dns-mode');
+            const mode = m ? m.value : 'iterated';
+            const clientLog = document.getElementById('dns-client-log');
+            const serverLog = document.getElementById('dns-server-log');
+            const rStatus = document.getElementById('dns-resolver-status');
+            const sStatus = document.getElementById('dns-server-status');
+
+            if (!clientLog || !serverLog) return;
+
+            rStatus.className = 'sim-tag-dns';
+            rStatus.innerText = 'RESOLVING';
+            sStatus.innerText = 'BUSY';
+
+            clientLog.innerHTML = '<div class="sim-log-line"><span class="sim-tag-dns">[KUERI AWAL]</span> Mencari alamat IP untuk: <strong>www.itera.ac.id</strong></div>';
+
+            if (mode === 'iterated') {
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-req">[Step 1]</span> Local DNS &rarr; Root Server (.)</div>';
+                    serverLog.innerHTML = '<div class="sim-log-line"><span class="sim-tag-res">[ROOT SERVER]</span> Rujukan TLD: Silakan tanya TLD server .id (a.dns.id)</div>';
+                }, 300);
+
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-req">[Step 2]</span> Local DNS &rarr; TLD Server (.id)</div>';
+                    serverLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-res">[TLD SERVER]</span> Rujukan Auth: Silakan tanya ns1.itera.ac.id</div>';
+                }, 700);
+
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-req">[Step 3]</span> Local DNS &rarr; Authoritative Server (ns1.itera.ac.id)</div>';
+                    serverLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-cache">[AUTH SERVER]</span> Resource Record Ditemukan: (www.itera.ac.id, 103.111.201.21, A, 3600)</div>';
+                }, 1100);
+
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-cache">[HASIL SELESAI]</span> IP <strong>103.111.201.21</strong> dikembalikan ke Klien &amp; di-cache!</div>';
+                    clientLog.innerHTML += '<div class="sim-log-line" style="color:#3fb950;"><strong>Metode: Iterated Query (3 RTT bertingkat)</strong></div>';
+                    rStatus.className = 'sim-tag-cache';
+                    rStatus.innerText = 'RESOLVED';
+                    sStatus.innerText = 'LISTENING';
+                }, 1500);
+            } else {
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-req">[Recursive]</span> Local DNS melempar query ke Root Server...</div>';
+                    serverLog.innerHTML = '<div class="sim-log-line"><span class="sim-tag-warn">[ROOT]</span> Root mencari ke TLD .id atas nama resolver...</div>';
+                }, 400);
+
+                setTimeout(() => {
+                    serverLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-warn">[TLD]</span> TLD mencari ke Authoritative Server...</div>';
+                    serverLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-cache">[AUTH]</span> Menemukan Record IP 103.111.201.21</div>';
+                }, 900);
+
+                setTimeout(() => {
+                    clientLog.innerHTML += '<div class="sim-log-line"><span class="sim-tag-cache">[HASIL SELESAI]</span> Jawaban diterima berantai kembali ke Klien!</div>';
+                    clientLog.innerHTML += '<div class="sim-log-line" style="color:#8957e5;"><strong>Metode: Recursive Query (Beban berat di Server Puncak)</strong></div>';
+                    rStatus.className = 'sim-tag-cache';
+                    rStatus.innerText = 'RESOLVED';
+                    sStatus.innerText = 'LISTENING';
+                }, 1400);
+            }
+        }
+
+        function resetDnsSim() {
+            const cl = document.getElementById('dns-client-log');
+            const sl = document.getElementById('dns-server-log');
+            if (cl) cl.innerHTML = 'Klik \'Mulai Resolusi DNS\' untuk menelusuri kueri hostname www.itera.ac.id...';
+            if (sl) sl.innerHTML = 'Menunggu delegasi kueri dari Local DNS Resolver...';
+            const rs = document.getElementById('dns-resolver-status');
+            const ss = document.getElementById('dns-server-status');
+            if (rs) { rs.className = 'sim-tag-dns'; rs.innerText = 'READY'; }
+            if (ss) { ss.className = 'sim-tag-req'; ss.innerText = 'LISTENING'; }
+        }
+    </script>
+
 </body>
 
 </html>

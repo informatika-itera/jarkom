@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#9333ea"/>
+        </marker>
+        <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+
+    <!-- CLIENT (LEFT) -->
+    <g transform="translate(60, 40)">
+        <rect width="180" height="460" rx="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)"/>
+        <text x="90" y="40" font-size="32" text-anchor="middle">💻</text>
+        <text x="90" y="70" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#1e40af" text-anchor="middle">Browser</text>
+
+        <!-- Local Cookie Store -->
+        <g transform="translate(15, 230)">
+            <rect width="150" height="95" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+            <text x="75" y="26" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#1e40af" text-anchor="middle">📁 Cookie Storage</text>
+            <rect x="15" y="38" width="120" height="28" rx="4" fill="#dbeafe"/>
+            <text x="75" y="56" font-family="monospace" font-size="12" font-weight="800" fill="#1d4ed8" text-anchor="middle">ID: 1634</text>
+            <text x="75" y="80" font-family="system-ui, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Disimpan di Klien</text>
+        </g>
+    </g>
+
+    <!-- SERVER (CENTER-RIGHT) -->
+    <g transform="translate(500, 40)">
+        <rect width="170" height="460" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
+        <text x="85" y="40" font-size="32" text-anchor="middle">🏢</text>
+        <text x="85" y="70" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#166534" text-anchor="middle">Web Server</text>
+        <text x="85" y="92" font-family="monospace" font-size="12" font-weight="600" fill="#15803d" text-anchor="middle">shop.com</text>
+    </g>
+
+    <!-- DATABASE (FAR RIGHT) -->
+    <g transform="translate(740, 40)">
+        <rect width="160" height="460" rx="14" fill="#faf5ff" stroke="#a855f7" stroke-width="2" filter="url(#shadow)"/>
+        <text x="80" y="40" font-size="32" text-anchor="middle">🗄️</text>
+        <text x="80" y="70" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#6b21a8" text-anchor="middle">Database</text>
+
+        <g transform="translate(15, 130)">
+            <rect width="130" height="80" rx="6" fill="#ffffff" stroke="#d8b4fe"/>
+            <text x="65" y="26" font-family="monospace" font-size="12" font-weight="800" fill="#7e22ce" text-anchor="middle">ID: 1634</text>
+            <text x="65" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">User: Budi</text>
+            <text x="65" y="66" font-family="system-ui, sans-serif" font-size="11" fill="#15803d" text-anchor="middle">Cart: [Laptop]</text>
+        </g>
+    </g>
+
+    <!-- 4 STEPS -->
+    <!-- Step 1: Initial Request -->
+    <g transform="translate(240, 110)">
+        <line x1="0" y1="0" x2="260" y2="0" stroke="#2563eb" stroke-width="4" marker-end="url(#arrB)"/>
+        <rect x="25" y="-30" width="210" height="26" rx="6" fill="#2563eb"/>
+        <text x="130" y="-13" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">1. Request (Tanpa Cookie)</text>
+    </g>
+
+    <!-- DB Create -->
+    <line x1="670" y1="140" x2="740" y2="140" stroke="#9333ea" stroke-width="3" stroke-dasharray="4,2" marker-end="url(#arrP)"/>
+    <text x="705" y="132" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#9333ea" text-anchor="middle">Create</text>
+
+    <!-- Step 2: Set-Cookie -->
+    <g transform="translate(240, 190)">
+        <line x1="260" y1="0" x2="0" y2="0" stroke="#16a34a" stroke-width="4" marker-end="url(#arrG)"/>
+        <rect x="20" y="8" width="220" height="26" rx="6" fill="#16a34a"/>
+        <text x="130" y="25" font-family="monospace" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">2. Set-Cookie: ID=1634</text>
+    </g>
+
+    <!-- Separator -->
+    <line x1="260" y1="280" x2="480" y2="280" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4"/>
+    <text x="370" y="275" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#64748b" text-anchor="middle">⏳ 1 Minggu Kemudian...</text>
+
+    <!-- Step 3: Request with Cookie -->
+    <g transform="translate(240, 360)">
+        <line x1="0" y1="0" x2="260" y2="0" stroke="#2563eb" stroke-width="4" marker-end="url(#arrB)"/>
+        <rect x="25" y="-30" width="210" height="26" rx="6" fill="#2563eb"/>
+        <text x="130" y="-13" font-family="monospace" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">3. Cookie: ID=1634</text>
+    </g>
+
+    <!-- DB Match -->
+    <line x1="670" y1="360" x2="740" y2="360" stroke="#9333ea" stroke-width="3" stroke-dasharray="4,2" marker-end="url(#arrP)"/>
+    <text x="705" y="352" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#9333ea" text-anchor="middle">Lookup</text>
+
+    <!-- Step 4: Custom Response -->
+    <g transform="translate(240, 440)">
+        <line x1="260" y1="0" x2="0" y2="0" stroke="#16a34a" stroke-width="4" marker-end="url(#arrG)"/>
+        <rect x="25" y="8" width="210" height="26" rx="6" fill="#16a34a"/>
+        <text x="130" y="25" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">4. Respon Khusus "Budi"</text>
+    </g>
+</svg>

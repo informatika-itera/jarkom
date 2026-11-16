@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#9333ea"/>
+        </marker>
+        <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+
+    <!-- CLIENT (LEFT) -->
+    <g transform="translate(60, 80)">
+        <rect width="200" height="380" rx="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)"/>
+        <text x="100" y="55" font-size="40" text-anchor="middle">💻</text>
+        <text x="100" y="95" font-family="system-ui, sans-serif" font-size="20" font-weight="800" fill="#1e40af" text-anchor="middle">FTP Client</text>
+
+        <!-- Ports -->
+        <rect x="25" y="145" width="150" height="45" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="100" y="172" font-family="monospace" font-size="13" font-weight="700" fill="#1e40af" text-anchor="middle">Control (1044)</text>
+
+        <rect x="25" y="275" width="150" height="45" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="100" y="302" font-family="monospace" font-size="13" font-weight="700" fill="#15803d" text-anchor="middle">Data (1045)</text>
+    </g>
+
+    <!-- DUAL PIPES IN CENTER -->
+    <g transform="translate(260, 80)">
+        <!-- 1. CONTROL PIPE -->
+        <g transform="translate(0, 115)">
+            <rect width="440" height="90" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+            <text x="220" y="28" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#1e40af" text-anchor="middle">1. CONTROL CONNECTION (PORT 21)</text>
+
+            <line x1="30" y1="55" x2="410" y2="55" stroke="#2563eb" stroke-width="4" marker-end="url(#arrB)"/>
+            <text x="220" y="50" font-family="monospace" font-size="12" font-weight="700" fill="#1d4ed8" text-anchor="middle">Commands: USER, PASS, RETR, STOR</text>
+            <text x="220" y="78" font-family="system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Koneksi tetap terbuka selama sesi aktif</text>
+        </g>
+
+        <!-- BADGE -->
+        <rect x="130" y="222" width="180" height="32" rx="16" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="220" y="243" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#b45309" text-anchor="middle">⚡ OUT-OF-BAND CONTROL</text>
+
+        <!-- 2. DATA PIPE -->
+        <g transform="translate(0, 265)">
+            <rect width="440" height="90" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+            <text x="220" y="28" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#15803d" text-anchor="middle">2. DATA CONNECTION (PORT 20)</text>
+
+            <line x1="30" y1="55" x2="410" y2="55" stroke="#16a34a" stroke-width="6" marker-end="url(#arrG)"/>
+            <text x="220" y="50" font-family="monospace" font-size="13" font-weight="800" fill="#166534" text-anchor="middle">Raw File Content Stream</text>
+            <text x="220" y="78" font-family="system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Dibuat per transfer berkas &amp; langsung ditutup</text>
+        </g>
+    </g>
+
+    <!-- SERVER (RIGHT) -->
+    <g transform="translate(700, 80)">
+        <rect width="200" height="380" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
+        <text x="100" y="55" font-size="40" text-anchor="middle">🏢</text>
+        <text x="100" y="95" font-family="system-ui, sans-serif" font-size="20" font-weight="800" fill="#166534" text-anchor="middle">FTP Server</text>
+
+        <!-- Ports -->
+        <rect x="25" y="145" width="150" height="45" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="100" y="172" font-family="monospace" font-size="13" font-weight="800" fill="#1e40af" text-anchor="middle">Port 21 (Control)</text>
+
+        <rect x="25" y="275" width="150" height="45" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="100" y="302" font-family="monospace" font-size="13" font-weight="800" fill="#15803d" text-anchor="middle">Port 20 (Data)</text>
+    </g>
+</svg>

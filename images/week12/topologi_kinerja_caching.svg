@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#9333ea"/>
+        </marker>
+        <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+
+    <!-- LAN (LEFT) -->
+    <g transform="translate(40, 50)">
+        <rect width="360" height="440" rx="14" fill="#eff6ff" stroke="#93c5fd" stroke-width="2" filter="url(#shadow)"/>
+        <text x="180" y="42" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#1e40af" text-anchor="middle">INSTITUTIONAL LAN</text>
+        <text x="180" y="66" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#2563eb" text-anchor="middle">1 Gbps High-Speed Link</text>
+
+        <!-- Clients -->
+        <g transform="translate(35, 95)">
+            <rect width="135" height="70" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+            <text x="67" y="34" font-size="24" text-anchor="middle">🖥️</text>
+            <text x="67" y="56" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Clients</text>
+        </g>
+        <g transform="translate(190, 95)">
+            <rect width="135" height="70" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+            <text x="67" y="34" font-size="24" text-anchor="middle">💻</text>
+            <text x="67" y="56" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Laptops</text>
+        </g>
+
+        <!-- LOCAL CACHE -->
+        <g transform="translate(35, 195)">
+            <rect width="290" height="110" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+            <text x="145" y="40" font-size="28" text-anchor="middle">⚡</text>
+            <text x="145" y="68" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#15803d" text-anchor="middle">Local Web Proxy Cache</text>
+            <text x="145" y="92" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#166534" text-anchor="middle">Hit Rate: 40% (Delay &lt; 10ms)</text>
+        </g>
+
+        <!-- Router -->
+        <g transform="translate(130, 340)">
+            <circle cx="50" cy="40" r="32" fill="#1e293b"/>
+            <text x="50" y="47" font-size="20" text-anchor="middle">⚙️</text>
+            <text x="50" y="90" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">Border Router</text>
+        </g>
+    </g>
+
+    <!-- CENTER ACCESS LINK BOTTLENECK -->
+    <g transform="translate(400, 220)">
+        <rect x="15" y="0" width="170" height="46" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+        <text x="100" y="20" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#991b1b" text-anchor="middle">ACCESS LINK</text>
+        <text x="100" y="38" font-family="monospace" font-size="13" font-weight="800" fill="#dc2626" text-anchor="middle">1.54 Mbps</text>
+        <line x1="-5" y1="23" x2="15" y2="23" stroke="#ef4444" stroke-width="4"/>
+        <line x1="185" y1="23" x2="205" y2="23" stroke="#ef4444" stroke-width="4"/>
+
+        <rect x="25" y="56" width="150" height="24" rx="4" fill="#dc2626"/>
+        <text x="100" y="72" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">⚠️ BOTTLENECK</text>
+    </g>
+
+    <!-- RIGHT: INTERNET & ORIGIN SERVERS -->
+    <g transform="translate(605, 50)">
+        <rect width="315" height="440" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+        <text x="157" y="42" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#334155" text-anchor="middle">PUBLIC INTERNET</text>
+        <text x="157" y="66" font-family="system-ui, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">Origin Servers (Delay ~ 2s)</text>
+
+        <g transform="translate(35, 100)">
+            <rect width="245" height="65" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+            <text x="122" y="36" font-size="22" text-anchor="middle">🏢</text>
+            <text x="122" y="55" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Origin Server 1</text>
+        </g>
+        <g transform="translate(35, 190)">
+            <rect width="245" height="65" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+            <text x="122" y="36" font-size="22" text-anchor="middle">🏢</text>
+            <text x="122" y="55" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Origin Server 2</text>
+        </g>
+
+        <!-- Metric Bars -->
+        <g transform="translate(20, 290)">
+            <rect width="275" height="125" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+            <text x="15" y="28" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#dc2626">Tanpa Cache: Link 97%</text>
+            <rect x="15" y="36" width="245" height="14" rx="7" fill="#fee2e2"/>
+            <rect x="15" y="36" width="237" height="14" rx="7" fill="#dc2626"/>
+
+            <text x="15" y="80" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#16a34a">Dengan Cache: Link 58%</text>
+            <rect x="15" y="88" width="245" height="14" rx="7" fill="#dcfce7"/>
+            <rect x="15" y="88" width="142" height="14" rx="7" fill="#16a34a"/>
+        </g>
+    </g>
+</svg>

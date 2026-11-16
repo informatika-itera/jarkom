@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+    
+    <defs>
+        <marker id="arrB" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#9333ea"/>
+        </marker>
+        <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="800" height="500" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+
+    <text x="400" y="45" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#0f172a" text-anchor="middle">KOMPONEN DOKUMEN WEB &amp; REFERENCED OBJECTS</text>
+
+    <!-- Base HTML File (Center Left) -->
+    <g transform="translate(60, 110)">
+        <rect width="220" height="320" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)"/>
+        <text x="110" y="40" font-size="32" text-anchor="middle">📄</text>
+        <text x="110" y="70" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#1e40af" text-anchor="middle">Base HTML File</text>
+        <text x="110" y="92" font-family="monospace" font-size="12" fill="#2563eb" text-anchor="middle">index.html</text>
+
+        <!-- Code Snippet inside HTML -->
+        <g transform="translate(15, 110)">
+            <rect width="190" height="185" rx="6" fill="#1e293b"/>
+            <text x="12" y="28" font-family="monospace" font-size="10.5" fill="#f8fafc">&lt;html&gt;</text>
+            <text x="12" y="52" font-family="monospace" font-size="10.5" fill="#38bdf8">&lt;link href="style.css"&gt;</text>
+            <text x="12" y="82" font-family="monospace" font-size="10.5" fill="#4ade80">&lt;img src="logo.png"&gt;</text>
+            <text x="12" y="112" font-family="monospace" font-size="10.5" fill="#facc15">&lt;script src="app.js"&gt;</text>
+            <text x="12" y="142" font-family="monospace" font-size="10.5" fill="#f87171">&lt;video src="clip.mp4"&gt;</text>
+            <text x="12" y="168" font-family="monospace" font-size="10.5" fill="#f8fafc">&lt;/html&gt;</text>
+        </g>
+    </g>
+
+    <!-- Referenced Objects (Right) -->
+    <!-- Object 1: CSS -->
+    <g transform="translate(450, 95)">
+        <rect width="280" height="65" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="35" y="42" font-size="24" text-anchor="middle">🎨</text>
+        <text x="65" y="32" font-family="monospace" font-size="13" font-weight="700" fill="#1e40af">style.css</text>
+        <text x="65" y="52" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">URL: www.site.com/style.css</text>
+    </g>
+
+    <!-- Object 2: Image -->
+    <g transform="translate(450, 180)">
+        <rect width="280" height="65" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="35" y="42" font-size="24" text-anchor="middle">🖼️</text>
+        <text x="65" y="32" font-family="monospace" font-size="13" font-weight="700" fill="#166534">logo.png</text>
+        <text x="65" y="52" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">URL: www.site.com/logo.png</text>
+    </g>
+
+    <!-- Object 3: JS -->
+    <g transform="translate(450, 265)">
+        <rect width="280" height="65" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="35" y="42" font-size="24" text-anchor="middle">⚡</text>
+        <text x="65" y="32" font-family="monospace" font-size="13" font-weight="700" fill="#92400e">app.js</text>
+        <text x="65" y="52" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">URL: www.site.com/app.js</text>
+    </g>
+
+    <!-- Object 4: Video -->
+    <g transform="translate(450, 350)">
+        <rect width="280" height="65" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="35" y="42" font-size="24" text-anchor="middle">🎬</text>
+        <text x="65" y="32" font-family="monospace" font-size="13" font-weight="700" fill="#991b1b">clip.mp4</text>
+        <text x="65" y="52" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">URL: video.cdn.com/clip.mp4</text>
+    </g>
+
+    <!-- Linking arrows -->
+    <path d="M 280 230 L 450 127" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrB)"/>
+    <path d="M 280 250 L 450 212" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+    <path d="M 280 270 L 450 297" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrO)"/>
+    <path d="M 280 290 L 450 382" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arrR)"/>
+
+    <!-- Takeaway -->
+    <rect x="150" y="450" width="500" height="30" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="400" y="470" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#334155" text-anchor="middle">1 Halaman Web = 1 Base HTML + N Referenced Objects yang dialamatkan via URL unik</text>
+</svg>

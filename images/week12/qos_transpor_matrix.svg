@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+    
+    <defs>
+        <marker id="arrB" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#9333ea"/>
+        </marker>
+        <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="800" height="500" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+
+    <text x="400" y="45" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#0f172a" text-anchor="middle">4 PILAR KEBUTUHAN LAYANAN TRANSPOR (QoS)</text>
+
+    <!-- 4 Cards -->
+    <!-- 1. Data Loss -->
+    <g transform="translate(60, 80)">
+        <rect width="320" height="175" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)"/>
+        <text x="35" y="45" font-size="32">🛡️</text>
+        <text x="80" y="45" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#1e40af">Integritas Data</text>
+        <text x="35" y="80" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Loss-tolerant vs No-loss</text>
+        <text x="35" y="110" font-family="system-ui, sans-serif" font-size="12" fill="#475569">• File transfer, Web, Email: 100% Utuh</text>
+        <text x="35" y="135" font-family="system-ui, sans-serif" font-size="12" fill="#475569">• Audio / Video Streaming: Toleran drop</text>
+    </g>
+
+    <!-- 2. Throughput -->
+    <g transform="translate(420, 80)">
+        <rect width="320" height="175" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
+        <text x="35" y="45" font-size="32">🚀</text>
+        <text x="80" y="45" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#166534">Throughput / Bandwidth</text>
+        <text x="35" y="80" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Bandwidth-sensitive vs Elastic</text>
+        <text x="35" y="110" font-family="system-ui, sans-serif" font-size="12" fill="#475569">• Video 4K: Butuh throughput minimum</text>
+        <text x="35" y="135" font-family="system-ui, sans-serif" font-size="12" fill="#475569">• Email / Web: Elastis mengikuti jaringan</text>
+    </g>
+
+    <!-- 3. Timing / Delay -->
+    <g transform="translate(60, 280)">
+        <rect width="320" height="175" rx="12" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+        <text x="35" y="45" font-size="32">⏱️</text>
+        <text x="80" y="45" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#92400e">Sensitivitas Waktu (Delay)</text>
+        <text x="35" y="80" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Time-sensitive vs Delay-tolerant</text>
+        <text x="35" y="110" font-family="system-ui, sans-serif" font-size="12" fill="#475569">• VoIP / Game Online: Wajib &lt; 100ms</text>
+        <text x="35" y="135" font-family="system-ui, sans-serif" font-size="12" fill="#475569">• Email / Dokumen: Delay tidak fatal</text>
+    </g>
+
+    <!-- 4. Security -->
+    <g transform="translate(420, 280)">
+        <rect width="320" height="175" rx="12" fill="#faf5ff" stroke="#a855f7" stroke-width="2" filter="url(#shadow)"/>
+        <text x="35" y="45" font-size="32">🔒</text>
+        <text x="80" y="45" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#6b21a8">Keamanan (Security)</text>
+        <text x="35" y="80" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Enkripsi &amp; Integritas</text>
+        <text x="35" y="110" font-family="system-ui, sans-serif" font-size="12" fill="#475569">• TLS / SSL: Enkripsi end-to-end</text>
+        <text x="35" y="135" font-family="system-ui, sans-serif" font-size="12" fill="#475569">• Otentikasi server &amp; proteksi tamper</text>
+    </g>
+</svg>
