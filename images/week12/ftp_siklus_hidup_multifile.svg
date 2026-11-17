@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrO" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#ea580c"/>
+        </marker>
+        <marker id="arrP" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#9333ea"/>
+        </marker>
+        <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <!-- Background Card -->
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+
+    <!-- Title -->
+    <text x="480" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#0f172a" text-anchor="middle">SIKLUS HIDUP TRANSMISI FTP: KONEKSI KONTROL PERSISTENT &amp; DATA PER-FILE</text>
+
+    <!-- Life-lines -->
+    <line x1="220" y1="55" x2="220" y2="505" stroke="#64748b" stroke-width="2.5" stroke-dasharray="6,4"/>
+    <line x1="740" y1="55" x2="740" y2="505" stroke="#64748b" stroke-width="2.5" stroke-dasharray="6,4"/>
+
+    <!-- Actor Headers -->
+    <rect x="150" y="45" width="140" height="32" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+    <text x="220" y="66" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1d4ed8" text-anchor="middle">💻 Klien FTP</text>
+
+    <rect x="670" y="45" width="140" height="32" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="740" y="66" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">🏢 Server FTP</text>
+
+    <!-- FASE 1: CONTROL SETUP -->
+    <rect x="60" y="90" width="840" height="95" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" fill-opacity="0.5"/>
+    <text x="80" y="110" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#166534">FASE 1: Setup Kontrol (Port 21 TCP - Persistent)</text>
+
+    <line x1="220" y1="125" x2="740" y2="125" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+    <text x="480" y="120" font-family="monospace" font-size="11" font-weight="700" fill="#2563eb" text-anchor="middle">1. TCP 3-Way Handshake ke Port 21</text>
+
+    <line x1="740" y1="145" x2="220" y2="145" stroke="#16a34a" stroke-width="2" marker-end="url(#arrG)"/>
+    <text x="480" y="140" font-family="monospace" font-size="11" font-weight="700" fill="#166534" text-anchor="middle">2. 220 Service Ready for new user</text>
+
+    <line x1="220" y1="165" x2="740" y2="165" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+    <text x="480" y="160" font-family="monospace" font-size="11" font-weight="700" fill="#2563eb" text-anchor="middle">3. USER alice &amp; PASS **** → 230 User logged in</text>
+
+    <!-- FASE 2: TRANSFER FILE 1 -->
+    <rect x="60" y="195" width="840" height="125" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5" fill-opacity="0.6"/>
+    <text x="80" y="215" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#9a3412">FASE 2: Transfer Berkas 1 (Download file1.pdf)</text>
+
+    <line x1="220" y1="230" x2="740" y2="230" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+    <text x="480" y="225" font-family="monospace" font-size="10.5" font-weight="700" fill="#2563eb" text-anchor="middle">Klien kirim PASV → Server balas: 227 Entering Passive Mode (Port P1 = 49152)</text>
+
+    <line x1="220" y1="255" x2="740" y2="255" stroke="#ea580c" stroke-width="2.5" stroke-dasharray="4,2" marker-end="url(#arrO)"/>
+    <text x="480" y="250" font-family="monospace" font-size="10.5" font-weight="800" fill="#c2410c" text-anchor="middle">[Koneksi Data TCP 1 Dibuat ke Port P1]</text>
+
+    <line x1="220" y1="275" x2="740" y2="275" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+    <text x="480" y="270" font-family="monospace" font-size="10.5" font-weight="700" fill="#2563eb" text-anchor="middle">Control: RETR file1.pdf → Server: 150 Opening BINARY data connection</text>
+
+    <line x1="740" y1="295" x2="220" y2="295" stroke="#ea580c" stroke-width="3.5" marker-end="url(#arrO)"/>
+    <text x="480" y="291" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#ea580c" text-anchor="middle">═══════════ Aliran Byte Berkas file1.pdf via Port P1 ═══════════</text>
+
+    <line x1="740" y1="312" x2="220" y2="312" stroke="#dc2626" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrB)"/>
+    <text x="480" y="310" font-family="monospace" font-size="9.5" font-weight="700" fill="#b91c1c" text-anchor="middle">Server kirim TCP FIN (Port P1 DITUTUP) → Control: 226 Transfer complete</text>
+
+    <!-- FASE 3: TRANSFER FILE 2 -->
+    <rect x="60" y="330" width="840" height="115" rx="10" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5" fill-opacity="0.6"/>
+    <text x="80" y="350" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#6b21a8">FASE 3: Transfer Berkas 2 (Upload file2.jpg - Port Baru P2)</text>
+
+    <line x1="220" y1="365" x2="740" y2="365" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+    <text x="480" y="360" font-family="monospace" font-size="10.5" font-weight="700" fill="#2563eb" text-anchor="middle">Klien kirim PASV lagi → Server balas: 227 Port Baru P2 (51200)</text>
+
+    <line x1="220" y1="385" x2="740" y2="385" stroke="#9333ea" stroke-width="2" marker-end="url(#arrP)"/>
+    <text x="480" y="380" font-family="monospace" font-size="10.5" font-weight="700" fill="#7e22ce" text-anchor="middle">Control: STOR file2.jpg → [Buka Data TCP 2 ke Port P2]</text>
+
+    <line x1="220" y1="405" x2="740" y2="405" stroke="#9333ea" stroke-width="3.5" marker-end="url(#arrP)"/>
+    <text x="480" y="401" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#9333ea" text-anchor="middle">═══════════ Aliran Byte Berkas file2.jpg via Port P2 ═══════════</text>
+
+    <line x1="220" y1="422" x2="740" y2="422" stroke="#dc2626" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrB)"/>
+    <text x="480" y="420" font-family="monospace" font-size="9.5" font-weight="700" fill="#b91c1c" text-anchor="middle">Klien kirim TCP FIN (Port P2 DITUTUP) → Control: 226 Transfer complete</text>
+
+    <!-- FASE 4: TEARDOWN -->
+    <rect x="60" y="455" width="840" height="55" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="80" y="475" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#334155">FASE 4: Terminasi Sesi</text>
+
+    <line x1="220" y1="490" x2="740" y2="490" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+    <text x="480" y="485" font-family="monospace" font-size="11" font-weight="700" fill="#2563eb" text-anchor="middle">Klien: QUIT → Server: 221 Goodbye [Koneksi Kontrol Port 21 Ditutup]</text>
+</svg>
