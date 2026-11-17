@@ -62,5 +62,5 @@
 
     <!-- Phase 3: Quit -->
     <line x1="140" y1="425" x2="660" y2="445" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
-    <text x="400" y="433" font-family="monospace" font-size="11" font-weight="700" fill="#2563eb" text-anchor="middle">QUIT &rarr; 221 Bye</text>
+    <text x="400" y="433" font-family="monospace" font-size="11" font-weight="700" fill="#2563eb" text-anchor="middle">QUIT → 221 Bye</text>
 </svg>

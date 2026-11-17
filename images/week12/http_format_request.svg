@@ -56,7 +56,7 @@
         <!-- Header items -->
         <g transform="translate(160, 15)">
             <rect width="515" height="36" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
-            <text x="15" y="23" font-family="monospace" font-size="11.5" fill="#0f172a"><tspan font-weight="700" fill="#2563eb">Host:</tspan> www.itera.ac.id <tspan fill="#94a3b8">
+            <text x="15" y="23" font-family="monospace" font-size="11.5" fill="#0f172a"><tspan font-weight="700" fill="#2563eb">Host:</tspan> www.example.com <tspan fill="#94a3b8">
 </tspan></text>
 
             <rect y="42" width="515" height="36" rx="4" fill="#ffffff" stroke="#e2e8f0"/>

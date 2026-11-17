@@ -782,7 +782,8 @@
                         </div>
                     </div>
                     <div>
-                        <img src="images/week12/tcp_vs_udp_app_services.svg" class="slide-img" alt="TCP vs UDP Internet Service">
+                        <img src="images/week12/tcp_vs_udp_app_services.svg" class="slide-img"
+                            alt="TCP vs UDP Internet Service">
                         <div class="img-caption">Komparasi layanan: Reliable TCP vs Lightweight UDP</div>
                     </div>
                 </div>
@@ -909,7 +910,8 @@
                         </ul>
                     </div>
                     <div>
-                        <img src="images/week12/http_format_request.svg" class="slide-img" alt="Format Pesan HTTP Request">
+                        <img src="images/week12/http_format_request.svg" class="slide-img"
+                            alt="Format Pesan HTTP Request">
                         <div class="img-caption">Struktur Request Line, Header Lines, dan Body</div>
                     </div>
                 </div>
@@ -971,7 +973,8 @@
                         </table>
                     </div>
                     <div>
-                        <img src="images/week12/http_format_response.svg" class="slide-img" alt="Format Pesan HTTP Response">
+                        <img src="images/week12/http_format_response.svg" class="slide-img"
+                            alt="Format Pesan HTTP Response">
                         <div class="img-caption">Struktur Response: Status Line, Headers, dan Data Payload</div>
                     </div>
                 </div>
@@ -1145,7 +1148,7 @@
             <section>
                 <h3>FTP: Arsitektur Dual-Channel Out-of-Band</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.56em;">
+                    <div class="card text-left text-smaller" style="font-size:.45em;">
                         <div class="sec-bar sec-bar-blue"><i class="bi bi-folder-symlink-fill"></i> Konsep Dasar FTP
                             (RFC 959)</div>
                         <div class="sec-body">
@@ -1187,7 +1190,7 @@
             <section>
                 <h3>Transmisi FTP: Active Mode vs Passive Mode (PASV)</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.54em;">
+                    <div class="card text-left text-smaller" style="font-size:.48em;">
                         <div class="sec-bar sec-bar-red"><i class="bi bi-exclamation-triangle-fill"></i> Active Mode vs
                             <i class="bi bi-shield-check"></i> Passive Mode
                         </div>
@@ -1265,7 +1268,7 @@
             <section>
                 <h3>Protokol SMTP: Alur Pengiriman Pesan</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.4em;">
+                    <div class="card text-left text-smaller" style="font-size:.36em;">
                         <p><strong>Karakteristik Operasional SMTP (RFC 5321):</strong></p>
                         <ul>
                             <li>Merupakan <strong>Push Protocol</strong>: Menggunakan koneksi TCP handshaking langsung
@@ -1296,7 +1299,8 @@
                         </div>
                     </div>
                     <div>
-                        <img src="images/week12/smtp_command_interaction.svg" class="slide-img" alt="Skenario Pengiriman Email Penuh">
+                        <img src="images/week12/smtp_command_interaction.svg" class="slide-img"
+                            alt="Skenario Pengiriman Email Penuh">
                         <div class="img-caption">Alur Alice &rarr; Server Pengirim &rarr; SMTP &rarr; Server Penerima
                             &rarr; Bob</div>
                     </div>
@@ -1401,7 +1405,8 @@
                         </ul>
                     </div>
                     <div>
-                        <img src="images/week12/dns_hostname_translation.svg" class="slide-img" alt="Domain Name System Overview">
+                        <img src="images/week12/dns_hostname_translation.svg" class="slide-img"
+                            alt="Domain Name System Overview">
                         <div class="img-caption">Translasi nama domain ke alamat IP numerik</div>
                     </div>
                 </div>
@@ -1453,25 +1458,33 @@
                 <h3>Metode Resolusi DNS: Iterated</h3>
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller">
-                        <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> Iterated Query ("Tanya Server Rujukan")</div>
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> Iterated Query ("Tanya
+                            Server Rujukan")</div>
                         <div class="sec-body">
                             <ol style="font-size:.88em;">
                                 <li>Host meminta translasi ke <strong>Local DNS Resolver</strong>.</li>
-                                <li>Local DNS bertanya ke <strong>Root DNS</strong>. Root merujuk: <em>"Silakan tanya ke TLD .edu"</em>.</li>
-                                <li>Local DNS bertanya ke <strong>TLD .edu</strong>. TLD merujuk: <em>"Silakan tanya ke Authoritative nyu.edu"</em>.</li>
-                                <li>Local DNS bertanya ke <strong>Authoritative nyu.edu</strong> &rarr; Mendapatkan IP target asli!</li>
+                                <li>Local DNS bertanya ke <strong>Root DNS</strong>. Root merujuk: <em>"Silakan tanya ke
+                                        TLD .edu"</em>.</li>
+                                <li>Local DNS bertanya ke <strong>TLD .edu</strong>. TLD merujuk: <em>"Silakan tanya ke
+                                        Authoritative nyu.edu"</em>.</li>
+                                <li>Local DNS bertanya ke <strong>Authoritative nyu.edu</strong> &rarr; Mendapatkan IP
+                                    target asli!</li>
                             </ol>
                             <p class="highlight-blue" style="font-size:.85em; margin-top:6px;">
-                                <strong>Standar Internet:</strong> Local DNS melakukan seluruh pencarian aktif. Server Akar hanya memberikan rujukan sehingga tetap ringan.
+                                <strong>Standar Internet:</strong> Local DNS melakukan seluruh pencarian aktif. Server
+                                Akar hanya memberikan rujukan sehingga tetap ringan.
                             </p>
                         </div>
                     </div>
-                    <div class="card" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div class="card"
+                        style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
                         <img src="images/week12/resolusi_dns_iterated.svg" class="slide-img" alt="Iterated Query DNS">
                         <p class="img-caption">Gambar 12.11: Alur Kueri DNS Iterated (Standar Global)</p>
                     </div>
                 </div>
-                <aside class="notes">Tekankan mengapa Internet memilih kueri Iterated pada tingkatan atas: jika Root dipaksa melakukan recursive, Root Server akan tumbang dalam hitungan detik karena kelelahan memori antrean.</aside>
+                <aside class="notes">Tekankan mengapa Internet memilih kueri Iterated pada tingkatan atas: jika Root
+                    dipaksa melakukan recursive, Root Server akan tumbang dalam hitungan detik karena kelelahan memori
+                    antrean.</aside>
             </section>
 
             <!-- SLIDE 26: RECURSIVE RESOLUTION -->
@@ -1479,25 +1492,30 @@
                 <h3>Metode Resolusi DNS: Recursive</h3>
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller">
-                        <div class="sec-bar sec-bar-purple"><i class="bi bi-arrow-down-right-square-fill"></i> Recursive Query ("Terima Beres")</div>
+                        <div class="sec-bar sec-bar-purple"><i class="bi bi-arrow-down-right-square-fill"></i> Recursive
+                            Query ("Terima Beres")</div>
                         <div class="sec-body">
                             <ol style="font-size:.88em;">
                                 <li>Host meminta Local DNS mencari sampai dapat.</li>
                                 <li>Local DNS melempar query berantai ke Root Server.</li>
                                 <li>Root Server yang <strong>repot bertanya ke TLD</strong>.</li>
-                                <li>TLD yang <strong>repot bertanya ke Authoritative</strong>, lalu jawaban dikembalikan berantai ke bawah.</li>
+                                <li>TLD yang <strong>repot bertanya ke Authoritative</strong>, lalu jawaban dikembalikan
+                                    berantai ke bawah.</li>
                             </ol>
                             <p class="badge-err" style="font-size:.85em; margin-top:6px;">
-                                ⚠️ <strong>Beban Komputasi Berat:</strong> Ditolak di Internet publik karena membebani antrean memori server akar (Root).
+                                ⚠️ <strong>Beban Komputasi Berat:</strong> Ditolak di Internet publik karena membebani
+                                antrean memori server akar (Root).
                             </p>
                         </div>
                     </div>
-                    <div class="card" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div class="card"
+                        style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
                         <img src="images/week12/resolusi_dns_recursive.svg" class="slide-img" alt="Recursive Query DNS">
                         <p class="img-caption">Gambar 12.12: Alur Kueri DNS Recursive (Rantai Beban di Akar)</p>
                     </div>
                 </div>
-                <aside class="notes">Recursive query hanya digunakan antara Klien dan Local DNS Resolver. Antara Local DNS ke Root/TLD mutlak menggunakan Iterated.</aside>
+                <aside class="notes">Recursive query hanya digunakan antara Klien dan Local DNS Resolver. Antara Local
+                    DNS ke Root/TLD mutlak menggunakan Iterated.</aside>
             </section>
 
             <!-- SLIDE 26: RESOURCE RECORD (RR) & TTL -->
@@ -1556,7 +1574,8 @@
                         </div>
                     </div>
                     <div>
-                        <img src="images/week12/dns_resource_records.svg" class="slide-img" alt="Format Resource Record DNS">
+                        <img src="images/week12/dns_resource_records.svg" class="slide-img"
+                            alt="Format Resource Record DNS">
                         <div class="img-caption">Struktur database Resource Record (RR) DNS</div>
                     </div>
                 </div>

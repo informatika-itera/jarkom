@@ -32,9 +32,9 @@
         <rect width="330" height="155" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)"/>
         <rect x="15" y="15" width="80" height="26" rx="4" fill="#2563eb"/>
         <text x="55" y="33" font-family="monospace" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Type A</text>
-        <text x="110" y="33" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1e40af">Hostname &rarr; IPv4</text>
+        <text x="110" y="33" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1e40af">Hostname → IPv4</text>
         <rect x="15" y="55" width="300" height="42" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
-        <text x="25" y="81" font-family="monospace" font-size="11" fill="#334155">('itera.ac.id', '103.111.201.21')</text>
+        <text x="25" y="81" font-family="monospace" font-size="11" fill="#334155">('example.com', '103.111.201.21')</text>
         <text x="15" y="125" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">Translasi nama domain ke IP host server</text>
     </g>
 
@@ -43,9 +43,9 @@
         <rect width="330" height="155" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
         <rect x="15" y="15" width="80" height="26" rx="4" fill="#16a34a"/>
         <text x="55" y="33" font-family="monospace" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Type NS</text>
-        <text x="110" y="33" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#166534">Domain &rarr; Name Server</text>
+        <text x="110" y="33" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#166534">Domain → Name Server</text>
         <rect x="15" y="55" width="300" height="42" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
-        <text x="25" y="81" font-family="monospace" font-size="11" fill="#334155">('itera.ac.id', 'ns1.itera.ac.id')</text>
+        <text x="25" y="81" font-family="monospace" font-size="11" fill="#334155">('example.com', 'dns1.example.com')</text>
         <text x="15" y="125" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">Menunjuk server DNS otoritatif untuk domain</text>
     </g>
 
@@ -54,9 +54,9 @@
         <rect width="330" height="155" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
         <rect x="15" y="15" width="105" height="26" rx="4" fill="#f59e0b"/>
         <text x="67" y="33" font-family="monospace" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Type CNAME</text>
-        <text x="135" y="33" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#92400e">Alias &rarr; Canonical Name</text>
+        <text x="135" y="33" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#92400e">Alias → Canonical Name</text>
         <rect x="15" y="55" width="300" height="42" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
-        <text x="25" y="81" font-family="monospace" font-size="11" fill="#334155">('server1.itera.ac.id', 'itera.ac.id')</text>
+        <text x="25" y="81" font-family="monospace" font-size="11" fill="#334155">('relay1.example.com', 'example.com')</text>
         <text x="15" y="125" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">Menetapkan nama alias ke nama resmi server</text>
     </g>
 
@@ -65,9 +65,9 @@
         <rect width="330" height="155" rx="10" fill="#faf5ff" stroke="#a855f7" stroke-width="2" filter="url(#shadow)"/>
         <rect x="15" y="15" width="80" height="26" rx="4" fill="#a855f7"/>
         <text x="55" y="33" font-family="monospace" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Type MX</text>
-        <text x="110" y="33" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#6b21a8">Domain &rarr; Mail Server</text>
+        <text x="110" y="33" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#6b21a8">Domain → Mail Server</text>
         <rect x="15" y="55" width="300" height="42" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
-        <text x="25" y="81" font-family="monospace" font-size="11" fill="#334155">('itera.ac.id', 'mail.itera.ac.id')</text>
+        <text x="25" y="81" font-family="monospace" font-size="11" fill="#334155">('example.com', 'mail.example.com')</text>
         <text x="15" y="125" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">Mengarahkan rute pengiriman email ke server SMTP</text>
     </g>
 

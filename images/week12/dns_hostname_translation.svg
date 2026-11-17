@@ -31,7 +31,7 @@
         <text x="130" y="55" font-size="40" text-anchor="middle">👤</text>
         <text x="130" y="95" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#1e40af" text-anchor="middle">Human Hostname</text>
         <rect x="25" y="125" width="210" height="42" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
-        <text x="130" y="152" font-family="monospace" font-size="15" font-weight="800" fill="#1d4ed8" text-anchor="middle">www.itera.ac.id</text>
+        <text x="130" y="152" font-family="monospace" font-size="15" font-weight="800" fill="#1d4ed8" text-anchor="middle">www.example.com</text>
         <text x="130" y="195" font-family="system-ui, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Mudah diingat manusia</text>
     </g>
 
@@ -58,5 +58,5 @@
 
     <!-- Bottom summary -->
     <rect x="150" y="420" width="500" height="34" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
-    <text x="400" y="442" font-family="system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">Aplikasi memanggil gethostbyname() &rarr; Resolver mengembalikan IP</text>
+    <text x="400" y="442" font-family="system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">Aplikasi memanggil gethostbyname() → Resolver mengembalikan IP</text>
 </svg>
