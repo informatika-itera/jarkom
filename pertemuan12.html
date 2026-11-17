@@ -624,7 +624,7 @@
             <section>
                 <h3>Paradigma Aplikasi: Client–Server</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.5em;">
+                    <div class="card text-left text-smaller" style="font-size:.48em;">
                         <div class="sec-bar sec-bar-blue"><i class="bi bi-hdd-network-fill"></i> Arsitektur
                             Client–Server</div>
                         <div class="sec-body">
@@ -660,21 +660,33 @@
             <section>
                 <h3>Paradigma Aplikasi: Peer to Peer (P2P)</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.48em;">
-                        <div class="sec-bar sec-bar-orange"><i class="bi bi-share-fill"></i> Arsitektur Peer-to-Peer (P2P)</div>
+                    <div class="card text-left text-smaller" style="font-size:.38em;">
+                        <div class="sec-bar sec-bar-orange"><i class="bi bi-share-fill"></i> Arsitektur Peer-to-Peer
+                            (P2P)</div>
                         <div class="sec-body">
                             <p><strong>1. Karakteristik &amp; Self-Scalability:</strong></p>
                             <ul>
-                                <li><strong>Tanpa Server Terpusat Permanen:</strong> End system (peer) berkomunikasi langsung satu sama lain.</li>
-                                <li><strong>Self-Scalability:</strong> Setiap peer baru yang meminta file (<em>demand</em>) otomatis menyumbang kapasitas komputasi &amp; bandwidth unggah (<em>service capacity</em>).</li>
+                                <li><strong>Tanpa Server Terpusat Permanen:</strong> End system (peer) berkomunikasi
+                                    langsung satu sama lain.</li>
+                                <li><strong>Self-Scalability:</strong> Setiap peer baru yang meminta file
+                                    (<em>demand</em>) otomatis menyumbang kapasitas komputasi &amp; bandwidth unggah
+                                    (<em>service capacity</em>).</li>
                             </ul>
                             <p style="margin-top:6px;"><strong>2. Dua Tantangan Teknis Utama:</strong></p>
                             <ul>
-                                <li><strong>Proteksi NAT &amp; Firewall (NAT Traversal):</strong> Pengguna rumahan/seluler berada di balik NAT (IP privat) dan firewall yang menolak koneksi masuk (<em>inbound</em>). Peer tidak bisa saling kontak langsung tanpa teknik <em>hole punching</em> (STUN/TURN/ICE).</li>
-                                <li><strong>Peer Churn (IP Dinamis &amp; Offline):</strong> Node bebas keluar-masuk secara independen dan IP publik sering berganti &rarr; Menimbulkan beban sinkronisasi <em>Distributed Hash Table (DHT)</em> dan interupsi unduhan potongan file (<em>chunks</em>).</li>
+                                <li><strong>Proteksi NAT &amp; Firewall (NAT Traversal):</strong> Pengguna
+                                    rumahan/seluler berada di balik NAT (IP privat) dan firewall yang menolak koneksi
+                                    masuk (<em>inbound</em>). Peer tidak bisa saling kontak langsung tanpa teknik
+                                    <em>hole punching</em> (STUN/TURN/ICE).
+                                </li>
+                                <li><strong>Peer Churn (IP Dinamis &amp; Offline):</strong> Node bebas keluar-masuk
+                                    secara independen dan IP publik sering berganti &rarr; Menimbulkan beban
+                                    sinkronisasi <em>Distributed Hash Table (DHT)</em> dan interupsi unduhan potongan
+                                    file (<em>chunks</em>).</li>
                             </ul>
                             <div class="info-box" style="margin-top:6px; font-size:.85em;">
-                                <strong>Contoh Implementasi:</strong> BitTorrent (distribusi file besar), Blockchain (Bitcoin, Ethereum).
+                                <strong>Contoh Implementasi:</strong> BitTorrent (distribusi file besar), Blockchain
+                                (Bitcoin, Ethereum).
                             </div>
                         </div>
                     </div>
@@ -685,28 +697,39 @@
                         <p class="img-caption">Gambar 12.2: Paradigma Arsitektur Komputasi Peer-to-Peer (P2P)</p>
                     </div>
                 </div>
-                <aside class="notes">Bandingkan skalabilitas arsitektur terpusat vs P2P. Pada Client-Server beban bertambah seiring jumlah klien, sedangkan pada P2P peer baru juga menyumbang kapasitas bandwidth untuk mengunggah file. Namun P2P menghadapi tantangan NAT traversal dan peer churn.</aside>
+                <aside class="notes">Bandingkan skalabilitas arsitektur terpusat vs P2P. Pada Client-Server beban
+                    bertambah seiring jumlah klien, sedangkan pada P2P peer baru juga menyumbang kapasitas bandwidth
+                    untuk mengunggah file. Namun P2P menghadapi tantangan NAT traversal dan peer churn.</aside>
             </section>
 
             <!-- SLIDE 5: KEBUTUHAN LAYANAN TRANSPOR (QoS) -->
             <section>
                 <h3>Kebutuhan Layanan Transpor bagi Aplikasi (QoS)</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.40em;">
-                        <p>Setiap aplikasi mendefinisikan profil kualitas layanan (<em>Quality of Service</em>) ke lapisan transpor:</p>
+                    <div class="card text-left text-smaller" style="font-size:.35em;">
+                        <p>Setiap aplikasi mendefinisikan profil kualitas layanan (<em>Quality of Service</em>) ke
+                            lapisan transpor:</p>
                         <ul>
                             <li><strong>Integritas Data (Data Integrity):</strong>
-                                <br>Aplikasi transfer file, finansial, dan email membutuhkan <strong>100% loss-free</strong> (Reliable). Aplikasi multimedia dapat mentoleransi sedikit kehilangan paket (loss-tolerant).
+                                <br>Aplikasi transfer file, finansial, dan email membutuhkan <strong>100%
+                                    loss-free</strong> (Reliable). Aplikasi multimedia dapat mentoleransi sedikit
+                                kehilangan paket (loss-tolerant).
                             </li>
                             <li><strong>Throughput: Bandwidth-Sensitive vs Elastic:</strong>
-                                <br>&bull; <em>Bandwidth-Sensitive:</em> Video streaming memerlukan <strong>ambang batas throughput minimum</strong> agar pemutaran tidak macet (<em>buffer underrun</em>). Trafik tidak harus konstan, melainkan <em>bursty</em> dan beradaptasi dinamis via DASH (1080p butuh &approx; 5 Mbps, 4K butuh &approx; 20 Mbps).
-                                <br>&bull; <em>Elastic:</em> Aplikasi web dan email dapat beroperasi pada bandwidth berapa pun (hanya durasi transfer yang berubah).
+                                <br>&bull; <em>Bandwidth-Sensitive:</em> Video streaming memerlukan <strong>ambang batas
+                                    throughput minimum</strong> agar pemutaran tidak macet (<em>buffer underrun</em>).
+                                Trafik tidak harus konstan, melainkan <em>bursty</em> dan beradaptasi dinamis via DASH
+                                (1080p butuh &approx; 5 Mbps, 4K butuh &approx; 20 Mbps).
+                                <br>&bull; <em>Elastic:</em> Aplikasi web dan email dapat beroperasi pada bandwidth
+                                berapa pun (hanya durasi transfer yang berubah).
                             </li>
                             <li><strong>Sensitivitas Waktu (Timing / Latency):</strong>
-                                <br>Game online dan panggilan suara (VoIP) memerlukan latensi sangat rendah (<strong>&lt; 150 ms</strong>) agar interaktif tanpa jeda percakapan.
+                                <br>Game online dan panggilan suara (VoIP) memerlukan latensi sangat rendah
+                                (<strong>&lt; 150 ms</strong>) agar interaktif tanpa jeda percakapan.
                             </li>
                             <li><strong>Keamanan (Security):</strong>
-                                <br>Kerahasiaan data via enkripsi TLS/SSL, integritas pesan (anti-tampering), dan otentikasi identitas.
+                                <br>Kerahasiaan data via enkripsi TLS/SSL, integritas pesan (anti-tampering), dan
+                                otentikasi identitas.
                             </li>
                         </ul>
                     </div>
@@ -716,7 +739,9 @@
                         <div class="img-caption">Profil kebutuhan layanan transpor aplikasi populer</div>
                     </div>
                 </div>
-                <aside class="notes">Jelaskan bahwa lapisan aplikasi mendefinisikan apa yang dibutuhkan oleh proses pengguna, sedangkan lapisan transpor bertugas menyediakan layanan yang cocok sesuai kebutuhan tersebut. Tekankan bahwa multimedia modern bersifat adaptif (DASH).</aside>
+                <aside class="notes">Jelaskan bahwa lapisan aplikasi mendefinisikan apa yang dibutuhkan oleh proses
+                    pengguna, sedangkan lapisan transpor bertugas menyediakan layanan yang cocok sesuai kebutuhan
+                    tersebut. Tekankan bahwa multimedia modern bersifat adaptif (DASH).</aside>
             </section>
 
             <!-- SLIDE 6: PEMETAAN PROTOKOL KE TCP VS UDP -->
@@ -752,30 +777,38 @@
                                     <td><strong>DNS Resolution</strong></td>
                                     <td>DNS (Port 53)</td>
                                     <td>
-                                        <strong>Utama:</strong> <span class="badge-info">UDP</span> (1 RTT tanpa handshake)<br>
-                                        <strong>Alternatif:</strong> <span class="badge-sol">TCP</span> (Zone Transfer &amp; balasan &gt; 512 byte / DNSSEC)
+                                        <strong>Utama:</strong> <span class="badge-info">UDP</span> (1 RTT tanpa
+                                        handshake)<br>
+                                        <strong>Alternatif:</strong> <span class="badge-sol">TCP</span> (Zone Transfer
+                                        &amp; balasan &gt; 512 byte / DNSSEC)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Video Streaming</strong></td>
                                     <td>DASH, HLS, HTTP/3</td>
                                     <td>
-                                        <strong>Utama:</strong> <span class="badge-sol">TCP</span> (HTTP lolos firewall/CDN) &amp; <span class="badge-info">UDP</span> (HTTP/3-QUIC)<br>
-                                        <strong>Alternatif:</strong> <span class="badge-info">UDP</span> (RTP/RTSP legacy)
+                                        <strong>Utama:</strong> <span class="badge-sol">TCP</span> (HTTP lolos
+                                        firewall/CDN) &amp; <span class="badge-info">UDP</span> (HTTP/3-QUIC)<br>
+                                        <strong>Alternatif:</strong> <span class="badge-info">UDP</span> (RTP/RTSP
+                                        legacy)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Internet Telephony</strong></td>
                                     <td>WebRTC, SIP, RTP</td>
                                     <td>
-                                        <strong>Utama:</strong> <span class="badge-info">UDP</span> (Latensi &lt; 150ms, anti-retransmisi usang)<br>
-                                        <strong>Alternatif:</strong> <span class="badge-sol">TCP</span> (Port 443 tunneling fallback)
+                                        <strong>Utama:</strong> <span class="badge-info">UDP</span> (Latensi &lt; 150ms,
+                                        anti-retransmisi usang)<br>
+                                        <strong>Alternatif:</strong> <span class="badge-sol">TCP</span> (Port 443
+                                        tunneling fallback)
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="info-box" style="margin-top:6px; font-size:.82em;">
-                            <strong>Dasar Pemilihan Utama vs Alternatif:</strong> DNS mengutamakan UDP untuk kecepatan (fallback ke TCP jika flag Truncation <code>TC=1</code> aktif). VoIP menolak retransmisi TCP karena paket suara yang datang terlambat 200 ms sudah basi dan tidak berguna.
+                            <strong>Dasar Pemilihan Utama vs Alternatif:</strong> DNS mengutamakan UDP untuk kecepatan
+                            (fallback ke TCP jika flag Truncation <code>TC=1</code> aktif). VoIP menolak retransmisi TCP
+                            karena paket suara yang datang terlambat 200 ms sudah basi dan tidak berguna.
                         </div>
                     </div>
                     <div>
@@ -784,7 +817,8 @@
                         <div class="img-caption">Komparasi layanan: Reliable TCP vs Lightweight UDP</div>
                     </div>
                 </div>
-                <aside class="notes">Ajak mahasiswa menghubungkan materi: TCP menjamin integritas data (loss-free), sedangkan UDP menjamin aktualitas waktu tanpa terhambat antrean retransmisi.</aside>
+                <aside class="notes">Ajak mahasiswa menghubungkan materi: TCP menjamin integritas data (loss-free),
+                    sedangkan UDP menjamin aktualitas waktu tanpa terhambat antrean retransmisi.</aside>
             </section>
 
             <!-- SLIDE 7: DIVIDER MODUL 2 -->
@@ -1054,32 +1088,60 @@
             <section>
                 <h3>Analisis Matematis: Evaluasi Kinerja Caching</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.36em;">
-                        <p><strong>Parameter Studi Kasus (Kurose &amp; Ross):</strong></p>
-                        <ul>
-                            <li>Ukuran objek rata-rata: $L = 0.85	ext{ Mbit}$, Laju permintaan: $r = 16	ext{ req/detik}$.</li>
-                            <li>Access Link ISP: $R = 15	ext{ Mbps}$, LAN Kampus: $1	ext{ Gbps}$, RTT Origin: $2.0	ext{ detik}$.</li>
-                        </ul>
-                        <div style="margin-top:5px; background:#fef2f2; border-left:3px solid #ef4444; padding:3px 6px; border-radius:4px;">
-                            <strong>1. Kondisi Tanpa Cache (Bottleneck Link Akses):</strong><br>
-                            Trafik link $= 16 	imes 0.85 = 13.6	ext{ Mbps}$. Utilisasi link: $I = \frac{13.6}{15} \approx \mathbf{91\%}$.<br>
-                            Teori antrean $M/M/1$: Delay antrean $D_{\text{queue}} = \frac{L/R}{1-I} \to$ <strong>meledak puluhan detik</strong>!
-                        </div>
-                        <div style="margin-top:5px; background:#f0fdf4; border-left:3px solid #16a34a; padding:3px 6px; border-radius:4px;">
-                            <strong>2. Solusi Pasang Proxy Cache LAN (Hit Rate $h = 40\%$, Miss $m = 60\%$):</strong><br>
-                            &bull; <strong>Mengapa Delay LAN $\approx \mathbf{2\text{ ms}}$?</strong> Transmisi LAN $1\text{ Gbps}$ hanya $\frac{0.85\text{ Mb}}{1000\text{ Mbps}} = 0.85\text{ ms} + \text{baca RAM/SSD} \approx \mathbf{2\text{ ms}} = 0.002\text{ s}$.<br>
-                            &bull; <strong>Beban Link Akses Baru:</strong> $I_{\text{baru}} = \frac{0.60 \times 13.6\text{ Mbps}}{15\text{ Mbps}} = \mathbf{54.4\%}$ (Antrean router lenyap!).<br>
-                            &bull; <strong>Kalkulasi Rata-rata Total Delay ($D_{\text{avg}}$):</strong>
-                            <p style="text-align:center; font-weight:700; color:#15803d; margin:2px 0;">
-                                $D_{\text{avg}} = (h \times D_{\text{LAN}}) + (m \times [D_{\text{Internet}} + D_{\text{LAN}}])$<br>
-                                $D_{\text{avg}} = (0.40 \times 0.002\text{ s}) + (0.60 \times 2.002\text{ s}) \approx \mathbf{1.2\text{ detik}}!$
+                    <div class="card text-left text-smaller" style="font-size: .42em;">
+                        <!-- Parameter Kasus Box -->
+                        <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 10px; margin-bottom: 8px;">
+                            <p style="margin: 0; font-weight: 700; color: #1e293b; font-size: 1.05em;">
+                                <i class="bi bi-gear-fill" style="color: #2563eb;"></i> Parameter Jaringan Kampus (Kurose &amp; Ross):
                             </p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; font-size: 0.92em; color: #334155;">
+                                <div>&bull; Ukuran Objek (<em>L</em>) = <strong>100 kbit</strong></div>
+                                <div>&bull; Link Akses ISP (<em>R</em>) = <strong>1.54 Mbps</strong></div>
+                                <div>&bull; Laju Kueri (<em>r</em>) = <strong>15 req/detik</strong></div>
+                                <div>&bull; RTT Internet Origin = <strong>2.0 detik</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Kondisi 1: Tanpa Cache -->
+                        <div style="background: #fef2f2; border-left: 4px solid #ef4444; border-radius: 0 6px 6px 0; padding: 6px 10px; margin-bottom: 8px;">
+                            <div style="font-weight: 700; color: #991b1b; font-size: 0.98em; margin-bottom: 2px;">
+                                1. Kondisi Tanpa Cache (Bottleneck Link Akses):
+                            </div>
+                            <div style="font-size: 0.92em; color: #7f1d1d; line-height: 1.4;">
+                                &bull; Trafik Link = 15 req/s &times; 100 kbps = <strong>1.50 Mbps</strong><br>
+                                &bull; Utilisasi Link Akses (<em>I</em>) = 1.50 Mbps / 1.54 Mbps &approx; <span class="badge-err" style="font-size: 0.9em; padding: 1px 6px;">97% (Macet Total)</span><br>
+                                &bull; Teori Antrean (<em>M/M/1</em>): Beban 97% menyebabkan penumpukan buffer &rarr; <strong>delay membengkak puluhan detik!</strong>
+                            </div>
+                        </div>
+
+                        <!-- Kondisi 2: Solusi Pasang Proxy Cache -->
+                        <div style="background: #f0fdf4; border-left: 4px solid #16a34a; border-radius: 0 6px 6px 0; padding: 6px 10px;">
+                            <div style="font-weight: 700; color: #166534; font-size: 0.98em; margin-bottom: 2px;">
+                                2. Solusi Pasang Web Cache LAN (Hit Rate <em>h</em> = 40%, Miss <em>m</em> = 60%):
+                            </div>
+                            <div style="font-size: 0.92em; color: #14532d; line-height: 1.4;">
+                                &bull; <strong>Delay Cache LAN &approx; 2 ms:</strong> Transmisi LAN 1 Gbps (&approx; 0.1 ms) + baca memori RAM (&approx; 1.9 ms) = <strong>2 ms (0.002 s)</strong>.<br>
+                                &bull; <strong>Utilisasi Baru Link Akses:</strong> <em>I</em><sub>baru</sub> = (0.60 &times; 1.50 Mbps) / 1.54 Mbps &approx; <span class="badge-sol" style="font-size: 0.9em; padding: 1px 6px;">58% (Antrean Lenyap)</span>.
+                            </div>
+
+                            <!-- Box Rumus Ekspektasi Rata-rata Tunda -->
+                            <div style="background: #ffffff; border: 1.5px solid #86efac; border-radius: 6px; padding: 6px 8px; margin-top: 6px; text-align: center;">
+                                <div style="font-size: 0.95em; color: #15803d; font-weight: 700;">
+                                    Kalkulasi Rata-Rata Total Delay (<em>D</em><sub>avg</sub>):
+                                </div>
+                                <div style="font-family: monospace; font-size: 1.05em; color: #1e293b; margin: 3px 0; font-weight: 700;">
+                                    <em>D</em><sub>avg</sub> = (<em>h</em> &times; <em>D</em><sub>LAN</sub>) + (<em>m</em> &times; [<em>D</em><sub>Internet</sub> + <em>D</em><sub>LAN</sub>])
+                                </div>
+                                <div style="font-family: monospace; font-size: 1.02em; color: #166534; font-weight: 800;">
+                                    <em>D</em><sub>avg</sub> = (0.40 &times; 0.002 s) + (0.60 &times; 2.002 s) &approx; <span style="background: #bbf7d0; padding: 2px 6px; border-radius: 4px; color: #14532d;">1.2 detik</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <img src="images/week12/topologi_kinerja_caching.svg" class="slide-img"
                             alt="Performance Caching Analysis">
-                        <div class="img-caption">Model matematis: Utilisasi link turun dari 91% ke 54%, delay menjadi 1.2s</div>
+                        <div class="img-caption">Model matematis: Utilisasi link turun dari 97% ke 58%, delay terpangkas ke 1.2s</div>
                     </div>
                 </div>
                 <aside class="notes">Buktikan bahwa dengan rumus ekspektasi matematis berbobot, penghematan dari cache lokal 2 ms dan penurunan utilisasi link langsung memangkas delay rata-rata menjadi 1.2 detik.</aside>
@@ -1092,18 +1154,28 @@
                     <div class="card text-left text-smaller" style="font-size:.33em;">
                         <p><strong>1. HTTP/1.1: Head-of-Line (HOL) Blocking di Lapisan Aplikasi</strong></p>
                         <ul>
-                            <li>Objek dikirim secara serial (FIFO) dalam satu koneksi TCP. Jika objek pertama terhambat, seluruh objek berikutnya ikut tertahan antre.</li>
+                            <li>Objek dikirim secara serial (FIFO) dalam satu koneksi TCP. Jika objek pertama terhambat,
+                                seluruh objek berikutnya ikut tertahan antre.</li>
                         </ul>
-                        <p style="margin-top:5px;"><strong>2. HTTP/2 (2015): Binary Framing &amp; Stream Multiplexing</strong></p>
+                        <p style="margin-top:5px;"><strong>2. HTTP/2 (2015): Binary Framing &amp; Stream
+                                Multiplexing</strong></p>
                         <ul>
                             <li>Mengganti teks ASCII dengan frame biner.</li>
-                            <li><strong>Multiplexing:</strong> Banyak request/response dipecah menjadi frame-frame kecil berselang-seling (<em>interleaving</em>) dengan <strong>Stream ID</strong> di dalam satu koneksi TCP tunggal tanpa HOL blocking aplikasi. Browser langsung merender file kecil yang sudah selesai tanpa menunggu file besar.</li>
-                            <li><span class="badge-err">Kelemahan (Transport HOL Blocking):</span> Karena berjalan di atas <strong>satu pipa TCP tunggal</strong>, jika <strong>1 paket TCP hilang</strong> di jaringan, seluruh buffer TCP membeku menunggu retransmisi &rarr; semua stream lain ikut macet!</li>
+                            <li><strong>Multiplexing:</strong> Banyak request/response dipecah menjadi frame-frame kecil
+                                berselang-seling (<em>interleaving</em>) dengan <strong>Stream ID</strong> di dalam satu
+                                koneksi TCP tunggal tanpa HOL blocking aplikasi. Browser langsung merender file kecil
+                                yang sudah selesai tanpa menunggu file besar.</li>
+                            <li><span class="badge-err">Kelemahan (Transport HOL Blocking):</span> Karena berjalan di
+                                atas <strong>satu pipa TCP tunggal</strong>, jika <strong>1 paket TCP hilang</strong> di
+                                jaringan, seluruh buffer TCP membeku menunggu retransmisi &rarr; semua stream lain ikut
+                                macet!</li>
                         </ul>
                         <p style="margin-top:5px;"><strong>3. HTTP/3 (2022): Migrasi ke QUIC (di atas UDP)</strong></p>
                         <ul>
-                            <li>Menggantikan TCP dengan <strong>QUIC</strong> di atas <strong>UDP</strong>: Setiap stream memiliki nomor urut dan penanganan kehilangan paket secara mandiri.</li>
-                            <li>Kehilangan paket pada 1 stream <strong>tidak membekukan stream lain</strong>! Terintegrasi TLS 1.3 bawaan dengan koneksi 0-RTT yang sangat cepat.</li>
+                            <li>Menggantikan TCP dengan <strong>QUIC</strong> di atas <strong>UDP</strong>: Setiap
+                                stream memiliki nomor urut dan penanganan kehilangan paket secara mandiri.</li>
+                            <li>Kehilangan paket pada 1 stream <strong>tidak membekukan stream lain</strong>!
+                                Terintegrasi TLS 1.3 bawaan dengan koneksi 0-RTT yang sangat cepat.</li>
                         </ul>
                     </div>
                     <div>
@@ -1112,7 +1184,8 @@
                         <div class="img-caption">Evolusi: Dari transmisi sekuensial ke Stream Multiplexing & QUIC</div>
                     </div>
                 </div>
-                <aside class="notes">Tekankan bagaimana revolusi web berpindah dari teks mentah ke frame biner, dan akhirnya melepaskan diri dari batasan kaku TCP dengan mengadopsi QUIC berbasis UDP.</aside>
+                <aside class="notes">Tekankan bagaimana revolusi web berpindah dari teks mentah ke frame biner, dan
+                    akhirnya melepaskan diri dari batasan kaku TCP dengan mengadopsi QUIC berbasis UDP.</aside>
             </section>
 
             <!-- SLIDE 16: DIVIDER MODUL 3 -->
@@ -1172,22 +1245,33 @@
                 <h3>Transmisi FTP: Active Mode vs Passive Mode (PASV)</h3>
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller" style="font-size:.44em;">
-                        <div class="sec-bar sec-bar-red"><i class="bi bi-shield-exclamation"></i> Firewall, NAT, &amp; Dilema Koneksi Masuk</div>
+                        <div class="sec-bar sec-bar-red"><i class="bi bi-shield-exclamation"></i> Firewall, NAT, &amp;
+                            Dilema Koneksi Masuk</div>
                         <div class="sec-body">
                             <p><strong>Prinsip Stateful Firewall &amp; NAT Klien:</strong></p>
                             <ul>
-                                <li><strong>Outbound (Keluar):</strong> Diizinkan bebas. Router NAT membuat tabel pemetaan port keluar otomatis.</li>
-                                <li><strong>Inbound (Masuk):</strong> DITOLAK secara <em>default</em> jika tidak diinisiasi dari dalam, untuk melindungi host dari peretas.</li>
+                                <li><strong>Outbound (Keluar):</strong> Diizinkan bebas. Router NAT membuat tabel
+                                    pemetaan port keluar otomatis.</li>
+                                <li><strong>Inbound (Masuk):</strong> DITOLAK secara <em>default</em> jika tidak
+                                    diinisiasi dari dalam, untuk melindungi host dari peretas.</li>
                             </ul>
-                            <p style="margin-top:6px;"><strong>1. Active Mode (PORT) &mdash; Gagal Menembus Firewall &amp; NAT:</strong></p>
+                            <p style="margin-top:6px;"><strong>1. Active Mode (PORT) &mdash; Gagal Menembus Firewall
+                                    &amp; NAT:</strong></p>
                             <ul>
-                                <li>Klien kirim perintah <code>PORT N</code>. Server Port 20 menginisiasi koneksi <strong>masuk (inbound)</strong> ke Port N klien.</li>
-                                <li><span class="badge-err">Gagal:</span> Firewall klien memblokir koneksi masuk asing, dan Router NAT tidak bisa me-routing paket ke IP privat klien!</li>
+                                <li>Klien kirim perintah <code>PORT N</code>. Server Port 20 menginisiasi koneksi
+                                    <strong>masuk (inbound)</strong> ke Port N klien.
+                                </li>
+                                <li><span class="badge-err">Gagal:</span> Firewall klien memblokir koneksi masuk asing,
+                                    dan Router NAT tidak bisa me-routing paket ke IP privat klien!</li>
                             </ul>
-                            <p style="margin-top:6px;"><strong>2. Passive Mode (PASV) &mdash; Standar Internet Modern:</strong></p>
+                            <p style="margin-top:6px;"><strong>2. Passive Mode (PASV) &mdash; Standar Internet
+                                    Modern:</strong></p>
                             <ul>
-                                <li>Server membuka port data acak <em>P</em>. Klien yang menginisiasi koneksi <strong>keluar (outbound)</strong> ke Server:<em>P</em>.</li>
-                                <li><span class="badge-sol">Sukses:</span> Koneksi keluar diizinkan firewall klien dan ditranslasikan otomatis oleh router NAT.</li>
+                                <li>Server membuka port data acak <em>P</em>. Klien yang menginisiasi koneksi
+                                    <strong>keluar (outbound)</strong> ke Server:<em>P</em>.
+                                </li>
+                                <li><span class="badge-sol">Sukses:</span> Koneksi keluar diizinkan firewall klien dan
+                                    ditranslasikan otomatis oleh router NAT.</li>
                             </ul>
                         </div>
                     </div>
@@ -1195,10 +1279,12 @@
                         style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
                         <img src="images/week12/ftp_active_vs_passive_mode.svg" class="slide-img"
                             alt="FTP Active vs Passive Mode">
-                        <p class="img-caption">Gambar 12.9: Komparasi Transmisi FTP Active Mode vs Passive Mode (PASV)</p>
+                        <p class="img-caption">Gambar 12.9: Komparasi Transmisi FTP Active Mode vs Passive Mode (PASV)
+                        </p>
                     </div>
                 </div>
-                <aside class="notes">Jelaskan mengapa mahasiswa yang menggunakan FileZilla di jaringan kampus atau kosan sering gagal mentransfer file jika belum menyetel koneksi ke mode Passive (PASV).</aside>
+                <aside class="notes">Jelaskan mengapa mahasiswa yang menggunakan FileZilla di jaringan kampus atau kosan
+                    sering gagal mentransfer file jika belum menyetel koneksi ke mode Passive (PASV).</aside>
             </section>
 
             <!-- SLIDE 20: SIKLUS HIDUP LENGKAP FTP MULTI-FILE -->
@@ -1206,36 +1292,49 @@
                 <h3>Siklus Hidup Transmisi FTP: Multi-File Transfer</h3>
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller" style="font-size:.41em;">
-                        <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> Alur 4 Fase Sesi FTP (RFC 959)</div>
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> Alur 4 Fase Sesi FTP (RFC
+                            959)</div>
                         <div class="sec-body">
                             <p><strong>1. Setup Kontrol (Port 21 TCP &mdash; Persistent):</strong></p>
                             <ul>
-                                <li>Klien inisiasi TCP ke Port 21 &rarr; Server sapa <code>220 Service Ready</code>.</li>
-                                <li>Autentikasi: <code>USER</code> / <code>PASS</code> &rarr; Server balas <code>230 Logged in</code>.</li>
-                                <li><span class="badge-sol">Kanal kontrol tetap terbuka sepanjang sesi pengguna aktif.</span></li>
+                                <li>Klien inisiasi TCP ke Port 21 &rarr; Server sapa <code>220 Service Ready</code>.
+                                </li>
+                                <li>Autentikasi: <code>USER</code> / <code>PASS</code> &rarr; Server balas
+                                    <code>230 Logged in</code>.
+                                </li>
+                                <li><span class="badge-sol">Kanal kontrol tetap terbuka sepanjang sesi pengguna
+                                        aktif.</span></li>
                             </ul>
                             <p style="margin-top:5px;"><strong>2. Transfer Berkas 1 (Download file1.pdf):</strong></p>
                             <ul>
-                                <li>Klien kirim <code>PASV</code> &rarr; Server buka Port data acak P1 (misal 49152).</li>
+                                <li>Klien kirim <code>PASV</code> &rarr; Server buka Port data acak P1 (misal 49152).
+                                </li>
                                 <li>Klien buka TCP ke Port P1 &rarr; kirim <code>RETR file1.pdf</code> di kontrol.</li>
-                                <li>Data dialirkan via Port P1 &rarr; Selesai: Server kirim <strong>TCP FIN</strong> (Port P1 ditutup).</li>
+                                <li>Data dialirkan via Port P1 &rarr; Selesai: Server kirim <strong>TCP FIN</strong>
+                                    (Port P1 ditutup).</li>
                             </ul>
                             <p style="margin-top:5px;"><strong>3. Transfer Berkas 2 (Upload file2.jpg):</strong></p>
                             <ul>
-                                <li>Klien kirim <code>PASV</code> lagi &rarr; Server buka <strong>Port data baru P2</strong> (misal 51200).</li>
-                                <li>Klien kirim <code>STOR file2.jpg</code> &rarr; Data dialirkan via P2 &rarr; Selesai: Klien kirim TCP FIN (Port P2 ditutup).</li>
+                                <li>Klien kirim <code>PASV</code> lagi &rarr; Server buka <strong>Port data baru
+                                        P2</strong> (misal 51200).</li>
+                                <li>Klien kirim <code>STOR file2.jpg</code> &rarr; Data dialirkan via P2 &rarr; Selesai:
+                                    Klien kirim TCP FIN (Port P2 ditutup).</li>
                             </ul>
-                            <p style="margin-top:5px;"><strong>4. Terminasi Sesi:</strong> Klien kirim <code>QUIT</code> &rarr; Server balas <code>221 Goodbye</code> &rarr; Kanal Kontrol Port 21 ditutup.</p>
+                            <p style="margin-top:5px;"><strong>4. Terminasi Sesi:</strong> Klien kirim <code>QUIT</code>
+                                &rarr; Server balas <code>221 Goodbye</code> &rarr; Kanal Kontrol Port 21 ditutup.</p>
                         </div>
                     </div>
                     <div class="card"
                         style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
                         <img src="images/week12/ftp_siklus_hidup_multifile.svg" class="slide-img"
                             alt="Siklus Hidup Lengkap Transmisi FTP">
-                        <p class="img-caption">Gambar 12.10: Siklus Hidup Transmisi FTP: Kontrol Persistent &amp; Data Ephemeral per Berkas</p>
+                        <p class="img-caption">Gambar 12.10: Siklus Hidup Transmisi FTP: Kontrol Persistent &amp; Data
+                            Ephemeral per Berkas</p>
                     </div>
                 </div>
-                <aside class="notes">Tekankan konsep penting: Kanal kontrol (Port 21) bersifat persistent (hidup dari awal sampai QUIT), sedangkan kanal data (Port PASV) bersifat ephemeral (dibuat baru dan langsung ditutup via TCP FIN untuk setiap satu berkas).</aside>
+                <aside class="notes">Tekankan konsep penting: Kanal kontrol (Port 21) bersifat persistent (hidup dari
+                    awal sampai QUIT), sedangkan kanal data (Port PASV) bersifat ephemeral (dibuat baru dan langsung
+                    ditutup via TCP FIN untuk setiap satu berkas).</aside>
             </section>
 
             <!-- SLIDE 19: EKOSISTEM EMAIL -->
@@ -1289,17 +1388,20 @@
                             <tr>
                                 <td><code>220</code></td>
                                 <td>Service Ready</td>
-                                <td><strong>Server Greeting Banner:</strong> Server siap melayani setelah TCP terbentuk.</td>
+                                <td><strong>Server Greeting Banner:</strong> Server siap melayani setelah TCP terbentuk.
+                                </td>
                             </tr>
                             <tr>
                                 <td><code>250</code></td>
                                 <td>Action OK</td>
-                                <td>Perintah klien (<code>HELO</code>, <code>MAIL FROM</code>, <code>RCPT TO</code>) sukses diterima.</td>
+                                <td>Perintah klien (<code>HELO</code>, <code>MAIL FROM</code>, <code>RCPT TO</code>)
+                                    sukses diterima.</td>
                             </tr>
                             <tr>
                                 <td><code>354</code></td>
                                 <td>Start Mail Input</td>
-                                <td>Izin mengetik body email. Diakhiri tanda titik tunggal pada baris baru (<code>.</code>).</td>
+                                <td>Izin mengetik body email. Diakhiri tanda titik tunggal pada baris baru
+                                    (<code>.</code>).</td>
                             </tr>
                             <tr>
                                 <td><code>221</code></td>
@@ -1309,16 +1411,21 @@
                         </table>
                         <div class="info-box" style="margin-top:6px; font-size:.85em;">
                             <strong>Mengapa Server Berbicara Duluan (220 Greeting Banner)?</strong><br>
-                            Secara transpor, klien memang yang menginisiasi TCP 3-way handshake. Namun pada <strong>layer aplikasi SMTP</strong>, klien wajib menunggu server menyapa terlebih dahulu untuk: (1) memastikan buffer antrean server siap, (2) mengumumkan kapabilitas ESMTP, dan (3) <em>Early-Talker Defense</em> (menangkal bot spam yang menembak perintah sebelum disapa).
+                            Secara transpor, klien memang yang menginisiasi TCP 3-way handshake. Namun pada
+                            <strong>layer aplikasi SMTP</strong>, klien wajib menunggu server menyapa terlebih dahulu
+                            untuk: (1) memastikan buffer antrean server siap, (2) mengumumkan kapabilitas ESMTP, dan (3)
+                            <em>Early-Talker Defense</em> (menangkal bot spam yang menembak perintah sebelum disapa).
                         </div>
                     </div>
                     <div>
                         <img src="images/week12/smtp_command_interaction.svg" class="slide-img"
                             alt="Skenario Pengiriman Email Penuh">
-                        <div class="img-caption">Sekuens SMTP: Server Greeting (220) &rarr; Dialog Perintah &rarr; Closing (221)</div>
+                        <div class="img-caption">Sekuens SMTP: Server Greeting (220) &rarr; Dialog Perintah &rarr;
+                            Closing (221)</div>
                     </div>
                 </div>
-                <aside class="notes">Perlihatkan kesantunan dialog SMTP: klien menyapa dengan HELO, meminta izin pengirim, izin penerima, mengetikkan data, menutup dengan titik (.), lalu mengucapkan QUIT.</aside>
+                <aside class="notes">Perlihatkan kesantunan dialog SMTP: klien menyapa dengan HELO, meminta izin
+                    pengirim, izin penerima, mengetikkan data, menutup dengan titik (.), lalu mengucapkan QUIT.</aside>
             </section>
 
             <!-- SLIDE 21: [MATERI BARU RPS] PROTOKOL AKSES EMAIL POP3 VS IMAP -->
@@ -1434,18 +1541,27 @@
                         <p>Mekanisme pencarian DNS bekerja secara berjenjang dari atas ke bawah:</p>
                         <ol>
                             <li><strong>Root DNS Servers (13 Gugus Logika A s.d. M):</strong>
-                                <br>&bull; <em>Arti Gugus A s.d. M:</em> Nama resmi 13 server root internet (<code>a.root-servers.net</code> s.d. <code>m.root-servers.net</code>) yang dikelola 12 lembaga independen (Verisign, NASA, ICANN, WIDE, dll.).
-                                <br>&bull; <em>Mengapa Tepat 13?</em> Batasan historis paket DNS via UDP maksimal <strong>512 bytes</strong> (RFC 1035) yang hanya muat data 13 server root.
-                                <br>&bull; <em>Bukan 13 Komputer Fisik:</em> Menggunakan teknologi <strong>IP Anycast</strong>, di mana tiap gugus direplikasi ke ratusan server fisik di seluruh dunia (&gt; 1.700 server fisik global).
+                                <br>&bull; <em>Arti Gugus A s.d. M:</em> Nama resmi 13 server root internet
+                                (<code>a.root-servers.net</code> s.d. <code>m.root-servers.net</code>) yang dikelola 12
+                                lembaga independen (Verisign, NASA, ICANN, WIDE, dll.).
+                                <br>&bull; <em>Mengapa Tepat 13?</em> Batasan historis paket DNS via UDP maksimal
+                                <strong>512 bytes</strong> (RFC 1035) yang hanya muat data 13 server root.
+                                <br>&bull; <em>Bukan 13 Komputer Fisik:</em> Menggunakan teknologi <strong>IP
+                                    Anycast</strong>, di mana tiap gugus direplikasi ke ratusan server fisik di seluruh
+                                dunia (&gt; 1.700 server fisik global).
                             </li>
                             <li><strong>Top-Level Domain (TLD) Servers:</strong>
-                                <br>Mengelola domain tingkat teratas: <em>Generic TLD</em> (<code>.com</code>, <code>.org</code>, <code>.edu</code>) dan <em>Country-Code TLD</em> (<code>.id</code>, <code>.uk</code>, <code>.jp</code>).
+                                <br>Mengelola domain tingkat teratas: <em>Generic TLD</em> (<code>.com</code>,
+                                <code>.org</code>, <code>.edu</code>) dan <em>Country-Code TLD</em> (<code>.id</code>,
+                                <code>.uk</code>, <code>.jp</code>).
                             </li>
                             <li><strong>Authoritative DNS Servers:</strong>
-                                <br>Server resmi milik organisasi yang menyimpan catatan asli host (misal DNS resmi kampus).
+                                <br>Server resmi milik organisasi yang menyimpan catatan asli host (misal DNS resmi
+                                kampus).
                             </li>
                             <li><strong>Local DNS Resolver:</strong>
-                                <br>Server DNS milik ISP/kampus yang menerima kueri awal dari host pengguna dan melakukan penelusuran berjenjang.
+                                <br>Server DNS milik ISP/kampus yang menerima kueri awal dari host pengguna dan
+                                melakukan penelusuran berjenjang.
                             </li>
                         </ol>
                     </div>
@@ -1455,7 +1571,8 @@
                         <div class="img-caption">Pohon hierarki: 13 Root Anycast &rarr; TLD &rarr; Authoritative</div>
                     </div>
                 </div>
-                <aside class="notes">Perjelas bahwa laptop mahasiswa tidak langsung mengontak Root Server, melainkan menitipkan kueri ke Local DNS Server (Resolver ISP/Kampus).</aside>
+                <aside class="notes">Perjelas bahwa laptop mahasiswa tidak langsung mengontak Root Server, melainkan
+                    menitipkan kueri ke Local DNS Server (Resolver ISP/Kampus).</aside>
             </section>
 
             <!-- SLIDE 25: ITERATED RESOLUTION -->
@@ -1463,16 +1580,23 @@
                 <h3>Metode Resolusi DNS: Iterated</h3>
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller">
-                        <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> Iterated Query ("Tanya Server Rujukan")</div>
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> Iterated Query ("Tanya
+                            Server Rujukan")</div>
                         <div class="sec-body">
                             <ol style="font-size:.88em;">
                                 <li>Host meminta translasi ke <strong>Local DNS Resolver</strong>.</li>
-                                <li>Local DNS bertanya ke <strong>Root DNS</strong>. Root merujuk: <em>"Silakan tanya ke TLD .edu"</em>.</li>
-                                <li>Local DNS bertanya ke <strong>TLD .edu</strong>. TLD merujuk: <em>"Silakan tanya ke Authoritative example.edu"</em>.</li>
-                                <li>Local DNS bertanya ke <strong>Authoritative example.edu</strong> &rarr; Mendapatkan IP target asli!</li>
+                                <li>Local DNS bertanya ke <strong>Root DNS</strong>. Root merujuk: <em>"Silakan tanya ke
+                                        TLD .edu"</em>.</li>
+                                <li>Local DNS bertanya ke <strong>TLD .edu</strong>. TLD merujuk: <em>"Silakan tanya ke
+                                        Authoritative example.edu"</em>.</li>
+                                <li>Local DNS bertanya ke <strong>Authoritative example.edu</strong> &rarr; Mendapatkan
+                                    IP target asli!</li>
                             </ol>
                             <p class="highlight-blue" style="font-size:.82em; margin-top:6px;">
-                                <strong>Mengapa Root Tidak Terbebani?</strong> Root Server bersifat <strong>Stateless</strong>: hanya memberi alamat rujukan server TLD lalu langsung lepas tangan (menutup sesi). Beban komputasi dan antrean menunggu dibebankan ke <strong>Local DNS Resolver</strong>.
+                                <strong>Mengapa Root Tidak Terbebani?</strong> Root Server bersifat
+                                <strong>Stateless</strong>: hanya memberi alamat rujukan server TLD lalu langsung lepas
+                                tangan (menutup sesi). Beban komputasi dan antrean menunggu dibebankan ke <strong>Local
+                                    DNS Resolver</strong>.
                             </p>
                         </div>
                     </div>
@@ -1482,7 +1606,9 @@
                         <p class="img-caption">Gambar 12.12: Alur Kueri DNS Iterated (Standar Global)</p>
                     </div>
                 </div>
-                <aside class="notes">Tekankan mengapa Internet memilih kueri Iterated pada tingkatan atas: jika Root dipaksa melakukan recursive, Root Server akan tumbang dalam hitungan detik karena kelelahan memori antrean.</aside>
+                <aside class="notes">Tekankan mengapa Internet memilih kueri Iterated pada tingkatan atas: jika Root
+                    dipaksa melakukan recursive, Root Server akan tumbang dalam hitungan detik karena kelelahan memori
+                    antrean.</aside>
             </section>
 
             <!-- SLIDE 26: RECURSIVE RESOLUTION -->
@@ -1522,7 +1648,8 @@
                 <div class="layout-text-img">
                     <div class="card text-left text-smaller" style="font-size:.40em;">
                         <p>Database DNS menyimpan data dalam format tuple 4 nilai:</p>
-                        <p class="highlight-blue" style="font-weight:700; text-align:center; margin:3px 0;">(Name, Value, Type, TTL)</p>
+                        <p class="highlight-blue" style="font-weight:700; text-align:center; margin:3px 0;">(Name,
+                            Value, Type, TTL)</p>
                         <table class="table-compare" style="font-size:.82em;">
                             <tr>
                                 <th>Tipe</th>
@@ -1534,7 +1661,9 @@
                                 <td><span class="badge-sol">Type A</span></td>
                                 <td>Hostname</td>
                                 <td>Alamat IPv4</td>
-                                <td>Translasi standar nama host ke IPv4 (<code>example.com</code> &rarr; <code>103.111.201.21</code>).</td>
+                                <td>Translasi standar nama host ke IPv4 (<code>example.com</code> &rarr;
+                                    <code>103.111.201.21</code>).
+                                </td>
                             </tr>
                             <tr>
                                 <td><span class="badge-sol">Type AAAA</span></td>
@@ -1552,7 +1681,9 @@
                                 <td><span class="badge-info">Type CNAME</span></td>
                                 <td>Nama Alias</td>
                                 <td>Nama Kanonikal</td>
-                                <td>Alias ke nama asli server (<code>relay1.example.com</code> &rarr; <code>example.com</code>).</td>
+                                <td>Alias ke nama asli server (<code>relay1.example.com</code> &rarr;
+                                    <code>example.com</code>).
+                                </td>
                             </tr>
                             <tr>
                                 <td><span class="badge-err">Type MX</span></td>
@@ -1563,7 +1694,10 @@
                         </table>
                         <div class="info-box" style="margin-top:5px; font-size:.82em;">
                             <strong>DNS Caching &amp; TTL: Penyelamat Beban Server Root!</strong><br>
-                            Begitu Local DNS menerima jawaban rujukan TLD/Authoritative, ia menyimpannya di memori RAM selama durasi <strong>TTL (biasanya 48 jam / 2 hari)</strong>. Akibatnya, jutaan kueri pengguna berikutnya langsung dijawab dari cache lokal &rarr; <strong>lebih dari 99% kueri DNS di dunia tidak pernah menyentuh Root Server lagi!</strong>
+                            Begitu Local DNS menerima jawaban rujukan TLD/Authoritative, ia menyimpannya di memori RAM
+                            selama durasi <strong>TTL (biasanya 48 jam / 2 hari)</strong>. Akibatnya, jutaan kueri
+                            pengguna berikutnya langsung dijawab dari cache lokal &rarr; <strong>lebih dari 99% kueri
+                                DNS di dunia tidak pernah menyentuh Root Server lagi!</strong>
                         </div>
                     </div>
                     <div>
@@ -1572,7 +1706,9 @@
                         <div class="img-caption">Struktur database Resource Record (RR) DNS</div>
                     </div>
                 </div>
-                <aside class="notes">Jelaskan bahwa TTL yang panjang melindungi Root Server dari beban berlebih. Saat institusi mengganti IP server web, propagasi perubahan membutuhkan waktu hingga masa TTL pada cache DNS seluruh dunia habis.</aside>
+                <aside class="notes">Jelaskan bahwa TTL yang panjang melindungi Root Server dari beban berlebih. Saat
+                    institusi mengganti IP server web, propagasi perubahan membutuhkan waktu hingga masa TTL pada cache
+                    DNS seluruh dunia habis.</aside>
             </section>
 
             <!-- SLIDE 27: KEAMANAN & SERANGAN DNS -->
@@ -1625,7 +1761,8 @@
                 <h3>Eksplorasi Praktis: CLI Tools (cURL &amp; DNS)</h3>
                 <div class="layout-2col">
                     <div class="card text-left text-smaller" style="font-size:.48em;">
-                        <div class="sec-bar sec-bar-blue"><i class="bi bi-terminal-fill"></i> 1. Inspeksi Header HTTP via cURL</div>
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-terminal-fill"></i> 1. Inspeksi Header HTTP
+                            via cURL</div>
                         <div class="sec-body">
                             <p><strong>Mengambil Header Saja (Tanpa Body Payload):</strong></p>
                             <div class="code-block" style="font-size:.82em; margin:3px 0;">
@@ -1635,13 +1772,16 @@
                                 strict-transport-security: max-age=31536000
                             </div>
                             <ul style="font-size:.88em; margin-bottom:6px;">
-                                <li><code>-I</code>: Parameter <em>HEAD request</em> (hanya minta metadata header, hemat bandwidth).</li>
-                                <li><code>200 OK</code>: Dokumen ditemukan &amp; valid. <code>HSTS</code>: Wajib HTTPS 1 tahun.</li>
+                                <li><code>-I</code>: Parameter <em>HEAD request</em> (hanya minta metadata header, hemat
+                                    bandwidth).</li>
+                                <li><code>200 OK</code>: Dokumen ditemukan &amp; valid. <code>HSTS</code>: Wajib HTTPS 1
+                                    tahun.</li>
                             </ul>
 
                             <p><strong>Uji Conditional GET (Verifikasi Cache):</strong></p>
                             <div class="code-block" style="font-size:.82em; margin:3px 0;">
-                                $ curl -I -H "If-Modified-Since: Sun, 15 Nov 2026 14:00:00 GMT" https://www.example.com<br>
+                                $ curl -I -H "If-Modified-Since: Sun, 15 Nov 2026 14:00:00 GMT"
+                                https://www.example.com<br>
                                 <span style="color:#d97706; font-weight:700;">HTTP/2 304 Not Modified</span>
                             </div>
                             <ul style="font-size:.88em; margin-bottom:0;">
@@ -1651,7 +1791,8 @@
                         </div>
                     </div>
                     <div class="card text-left text-smaller" style="font-size:.48em;">
-                        <div class="sec-bar sec-bar-purple"><i class="bi bi-search"></i> 2. Eksplorasi DNS via nslookup &amp; dig</div>
+                        <div class="sec-bar sec-bar-purple"><i class="bi bi-search"></i> 2. Eksplorasi DNS via nslookup
+                            &amp; dig</div>
                         <div class="sec-body">
                             <p><strong>Pencarian Mail Exchanger (MX Record):</strong></p>
                             <div class="code-block" style="font-size:.82em; margin:3px 0;">
@@ -1659,7 +1800,8 @@
                                 example.com mail exchanger = 1 mail.example.com.
                             </div>
                             <ul style="font-size:.88em; margin-bottom:6px;">
-                                <li><code>-type=MX</code>: Parameter kueri spesifik server mail. Nilai <code>1</code> adalah tingkat prioritas (tertinggi).</li>
+                                <li><code>-type=MX</code>: Parameter kueri spesifik server mail. Nilai <code>1</code>
+                                    adalah tingkat prioritas (tertinggi).</li>
                             </ul>
 
                             <p><strong>Pelacakan Hirarkis Delegasi DNS (+trace):</strong></p>
@@ -1671,12 +1813,16 @@
                                 www.example.com. 3600 IN A 103.111.201.21
                             </div>
                             <ul style="font-size:.88em; margin-bottom:0;">
-                                <li><code>+trace</code>: Mematikan kueri rekursif resolver dan melacak berjenjang dari <strong>Root (.) &rarr; TLD (.id) &rarr; Authoritative &rarr; IP host final</strong>. Angka: sisa durasi TTL (detik).</li>
+                                <li><code>+trace</code>: Mematikan kueri rekursif resolver dan melacak berjenjang dari
+                                    <strong>Root (.) &rarr; TLD (.id) &rarr; Authoritative &rarr; IP host
+                                        final</strong>. Angka: sisa durasi TTL (detik).
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <aside class="notes">Ajak mahasiswa mempraktikkan langsung: curl -I dan dig +trace adalah dua senjata diagnosis utama network engineer untuk mendeteksi masalah web dan DNS.</aside>
+                <aside class="notes">Ajak mahasiswa mempraktikkan langsung: curl -I dan dig +trace adalah dua senjata
+                    diagnosis utama network engineer untuk mendeteksi masalah web dan DNS.</aside>
             </section>
 
             <!-- SLIDE 30: [FITUR BARU] SIMULASI INTERAKTIF HTTP & DNS -->
