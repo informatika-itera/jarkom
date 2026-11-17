@@ -1086,15 +1086,18 @@
 
             <!-- SLIDE 14: ANALISIS MATEMATIS WEB CACHE -->
             <section>
-                <h3>Analisis Matematis: Evaluasi Kinerja Caching</h3>
+                <h4>Analisis Matematis: Evaluasi Kinerja Caching</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size: .42em;">
+                    <div class="card text-left text-smaller" style="font-size: .3em;">
                         <!-- Parameter Kasus Box -->
-                        <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 10px; margin-bottom: 8px;">
+                        <div
+                            style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 10px; margin-bottom: 8px;">
                             <p style="margin: 0; font-weight: 700; color: #1e293b; font-size: 1.05em;">
-                                <i class="bi bi-gear-fill" style="color: #2563eb;"></i> Parameter Jaringan Kampus (Kurose &amp; Ross):
+                                <i class="bi bi-gear-fill" style="color: #2563eb;"></i> Parameter Jaringan Kampus
+                                (Kurose &amp; Ross):
                             </p>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; font-size: 0.92em; color: #334155;">
+                            <div
+                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; font-size: 0.92em; color: #334155;">
                                 <div>&bull; Ukuran Objek (<em>L</em>) = <strong>100 kbit</strong></div>
                                 <div>&bull; Link Akses ISP (<em>R</em>) = <strong>1.54 Mbps</strong></div>
                                 <div>&bull; Laju Kueri (<em>r</em>) = <strong>15 req/detik</strong></div>
@@ -1103,37 +1106,52 @@
                         </div>
 
                         <!-- Kondisi 1: Tanpa Cache -->
-                        <div style="background: #fef2f2; border-left: 4px solid #ef4444; border-radius: 0 6px 6px 0; padding: 6px 10px; margin-bottom: 8px;">
+                        <div
+                            style="background: #fef2f2; border-left: 4px solid #ef4444; border-radius: 0 6px 6px 0; padding: 6px 10px; margin-bottom: 8px;">
                             <div style="font-weight: 700; color: #991b1b; font-size: 0.98em; margin-bottom: 2px;">
                                 1. Kondisi Tanpa Cache (Bottleneck Link Akses):
                             </div>
                             <div style="font-size: 0.92em; color: #7f1d1d; line-height: 1.4;">
                                 &bull; Trafik Link = 15 req/s &times; 100 kbps = <strong>1.50 Mbps</strong><br>
-                                &bull; Utilisasi Link Akses (<em>I</em>) = 1.50 Mbps / 1.54 Mbps &approx; <span class="badge-err" style="font-size: 0.9em; padding: 1px 6px;">97% (Macet Total)</span><br>
-                                &bull; Teori Antrean (<em>M/M/1</em>): Beban 97% menyebabkan penumpukan buffer &rarr; <strong>delay membengkak puluhan detik!</strong>
+                                &bull; Utilisasi Link Akses (<em>I</em>) = 1.50 Mbps / 1.54 Mbps &approx; <span
+                                    class="badge-err" style="font-size: 0.9em; padding: 1px 6px;">97% (Macet
+                                    Total)</span><br>
+                                &bull; Teori Antrean (<em>M/M/1</em>): Beban 97% menyebabkan penumpukan buffer &rarr;
+                                <strong>delay membengkak puluhan detik!</strong>
                             </div>
                         </div>
 
                         <!-- Kondisi 2: Solusi Pasang Proxy Cache -->
-                        <div style="background: #f0fdf4; border-left: 4px solid #16a34a; border-radius: 0 6px 6px 0; padding: 6px 10px;">
+                        <div
+                            style="background: #f0fdf4; border-left: 4px solid #16a34a; border-radius: 0 6px 6px 0; padding: 6px 10px;">
                             <div style="font-weight: 700; color: #166534; font-size: 0.98em; margin-bottom: 2px;">
                                 2. Solusi Pasang Web Cache LAN (Hit Rate <em>h</em> = 40%, Miss <em>m</em> = 60%):
                             </div>
                             <div style="font-size: 0.92em; color: #14532d; line-height: 1.4;">
-                                &bull; <strong>Delay Cache LAN &approx; 2 ms:</strong> Transmisi LAN 1 Gbps (&approx; 0.1 ms) + baca memori RAM (&approx; 1.9 ms) = <strong>2 ms (0.002 s)</strong>.<br>
-                                &bull; <strong>Utilisasi Baru Link Akses:</strong> <em>I</em><sub>baru</sub> = (0.60 &times; 1.50 Mbps) / 1.54 Mbps &approx; <span class="badge-sol" style="font-size: 0.9em; padding: 1px 6px;">58% (Antrean Lenyap)</span>.
+                                &bull; <strong>Delay Cache LAN &approx; 2 ms:</strong> Transmisi LAN 1 Gbps (&approx;
+                                0.1 ms) + baca memori RAM (&approx; 1.9 ms) = <strong>2 ms (0.002 s)</strong>.<br>
+                                &bull; <strong>Utilisasi Baru Link Akses:</strong> <em>I</em><sub>baru</sub> = (0.60
+                                &times; 1.50 Mbps) / 1.54 Mbps &approx; <span class="badge-sol"
+                                    style="font-size: 0.9em; padding: 1px 6px;">58% (Antrean Lenyap)</span>.
                             </div>
 
                             <!-- Box Rumus Ekspektasi Rata-rata Tunda -->
-                            <div style="background: #ffffff; border: 1.5px solid #86efac; border-radius: 6px; padding: 6px 8px; margin-top: 6px; text-align: center;">
+                            <div
+                                style="background: #ffffff; border: 1.5px solid #86efac; border-radius: 6px; padding: 6px 8px; margin-top: 6px; text-align: center;">
                                 <div style="font-size: 0.95em; color: #15803d; font-weight: 700;">
                                     Kalkulasi Rata-Rata Total Delay (<em>D</em><sub>avg</sub>):
                                 </div>
-                                <div style="font-family: monospace; font-size: 1.05em; color: #1e293b; margin: 3px 0; font-weight: 700;">
-                                    <em>D</em><sub>avg</sub> = (<em>h</em> &times; <em>D</em><sub>LAN</sub>) + (<em>m</em> &times; [<em>D</em><sub>Internet</sub> + <em>D</em><sub>LAN</sub>])
+                                <div
+                                    style="font-family: monospace; font-size: 1.05em; color: #1e293b; margin: 3px 0; font-weight: 700;">
+                                    <em>D</em><sub>avg</sub> = (<em>h</em> &times; <em>D</em><sub>LAN</sub>) +
+                                    (<em>m</em> &times; [<em>D</em><sub>Internet</sub> + <em>D</em><sub>LAN</sub>])
                                 </div>
-                                <div style="font-family: monospace; font-size: 1.02em; color: #166534; font-weight: 800;">
-                                    <em>D</em><sub>avg</sub> = (0.40 &times; 0.002 s) + (0.60 &times; 2.002 s) &approx; <span style="background: #bbf7d0; padding: 2px 6px; border-radius: 4px; color: #14532d;">1.2 detik</span>
+                                <div
+                                    style="font-family: monospace; font-size: 1.02em; color: #166534; font-weight: 800;">
+                                    <em>D</em><sub>avg</sub> = (0.40 &times; 0.002 s) + (0.60 &times; 2.002 s) &approx;
+                                    <span
+                                        style="background: #bbf7d0; padding: 2px 6px; border-radius: 4px; color: #14532d;">1.2
+                                        detik</span>
                                 </div>
                             </div>
                         </div>
@@ -1141,10 +1159,13 @@
                     <div>
                         <img src="images/week12/topologi_kinerja_caching.svg" class="slide-img"
                             alt="Performance Caching Analysis">
-                        <div class="img-caption">Model matematis: Utilisasi link turun dari 97% ke 58%, delay terpangkas ke 1.2s</div>
+                        <div class="img-caption">Model matematis: Utilisasi link turun dari 97% ke 58%, delay terpangkas
+                            ke 1.2s</div>
                     </div>
                 </div>
-                <aside class="notes">Buktikan bahwa dengan rumus ekspektasi matematis berbobot, penghematan dari cache lokal 2 ms dan penurunan utilisasi link langsung memangkas delay rata-rata menjadi 1.2 detik.</aside>
+                <aside class="notes">Buktikan bahwa dengan rumus ekspektasi matematis berbobot, penghematan dari cache
+                    lokal 2 ms dan penurunan utilisasi link langsung memangkas delay rata-rata menjadi 1.2 detik.
+                </aside>
             </section>
 
             <!-- SLIDE 15: EVOLUSI HTTP/1.1 KE HTTP/2 & HTTP/3 -->
@@ -1244,7 +1265,7 @@
             <section>
                 <h3>Transmisi FTP: Active Mode vs Passive Mode (PASV)</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.44em;">
+                    <div class="card text-left text-smaller" style="font-size:.4em;">
                         <div class="sec-bar sec-bar-red"><i class="bi bi-shield-exclamation"></i> Firewall, NAT, &amp;
                             Dilema Koneksi Masuk</div>
                         <div class="sec-body">
@@ -1291,7 +1312,7 @@
             <section>
                 <h3>Siklus Hidup Transmisi FTP: Multi-File Transfer</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.41em;">
+                    <div class="card text-left text-smaller" style="font-size:.38em;">
                         <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> Alur 4 Fase Sesi FTP (RFC
                             959)</div>
                         <div class="sec-body">
@@ -1341,7 +1362,7 @@
             <section>
                 <h3>Ekosistem Surat Elektronik (E-mail)</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.43em;">
+                    <div class="card text-left text-smaller" style="font-size:.42em;">
                         <p>Sistem email modern ditopang oleh 3 pilar komponen utama:</p>
                         <ul>
                             <li><strong>1. User Agent (Mail Reader):</strong>
@@ -1377,7 +1398,7 @@
             <section>
                 <h3>Protokol SMTP: Alur Pengiriman Pesan</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.34em;">
+                    <div class="card text-left text-smaller" style="font-size:.4em;">
                         <p><strong>1. Dialog SMTP &amp; Status Code (RFC 5321):</strong></p>
                         <table class="table-compare" style="font-size:.88em; margin-bottom:5px;">
                             <tr>
@@ -1432,7 +1453,7 @@
             <section>
                 <h3>Protokol Akses Email: POP3 vs IMAP vs Webmail</h3>
                 <div class="layout-3col">
-                    <div class="card text-left text-smaller" style="font-size:.45em;">
+                    <div class="card text-left text-smaller" style="font-size:.43em;">
                         <div class="sec-bar sec-bar-orange"><i class="bi bi-inbox-fill"></i> POP3 (RFC 1939)</div>
                         <div class="sec-body">
                             <p><strong>Port 110 / Port 995 (SSL)</strong></p>
@@ -1446,7 +1467,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card text-left text-smaller" style="font-size:.45em;">
+                    <div class="card text-left text-smaller" style="font-size:.43em;">
                         <div class="sec-bar sec-bar-blue"><i class="bi bi-arrow-repeat"></i> IMAP (RFC 3501)</div>
                         <div class="sec-body">
                             <p><strong>Port 143 / Port 993 (SSL)</strong></p>
@@ -1460,7 +1481,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card text-left text-smaller" style="font-size:.45em;">
+                    <div class="card text-left text-smaller" style="font-size:.43em;">
                         <div class="sec-bar sec-bar-green"><i class="bi bi-browser-chrome"></i> Webmail (HTTP/HTTPS)
                         </div>
                         <div class="sec-body">
@@ -1475,7 +1496,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="info-box" style="margin-top:8px; font-size: .4em;">
+                <div class="info-box" style="margin-top:8px; font-size: .38em;">
                     <strong>Mengapa Butuh Protokol Akses?</strong> SMTP adalah protokol <em>Push</em> (mengirimkan surat
                     ke kotak pos tujuan). Bob tidak bisa menggunakan SMTP untuk menarik (<em>pull</em>) surat miliknya
                     dari mailbox server!
@@ -1537,7 +1558,7 @@
             <section>
                 <h3>Hirarki Global Server DNS</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller" style="font-size:.38em;">
+                    <div class="card text-left text-smaller" style="font-size:.36em;">
                         <p>Mekanisme pencarian DNS bekerja secara berjenjang dari atas ke bawah:</p>
                         <ol>
                             <li><strong>Root DNS Servers (13 Gugus Logika A s.d. M):</strong>
@@ -1758,9 +1779,10 @@
 
             <!-- SLIDE 29: [MATERI BARU] CLI NETWORKING TOOLS -->
             <section>
-                <h3>Eksplorasi Praktis: CLI Tools (cURL &amp; DNS)</h3>
+                <h3>Eksplorasi Praktis:</h3>
+                <h4>CLI Tools (cURL &amp; DNS)</h4>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller" style="font-size:.48em;">
+                    <div class="card text-left text-smaller" style="font-size:.42em;">
                         <div class="sec-bar sec-bar-blue"><i class="bi bi-terminal-fill"></i> 1. Inspeksi Header HTTP
                             via cURL</div>
                         <div class="sec-body">
@@ -1790,7 +1812,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card text-left text-smaller" style="font-size:.48em;">
+                    <div class="card text-left text-smaller" style="font-size:.43em;">
                         <div class="sec-bar sec-bar-purple"><i class="bi bi-search"></i> 2. Eksplorasi DNS via nslookup
                             &amp; dig</div>
                         <div class="sec-body">
