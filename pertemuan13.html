@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
     <link rel="stylesheet" href="css/pkom-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
 
     <style>
         @media screen {
@@ -330,7 +332,7 @@
                     <h3 class="subtitle">Pertemuan 13</h3>
                 </div>
                 <p>Pendalaman Ekstensif: Kriptografi, Authentication, TLS, IPsec, & Firewalls</p>
-                <p>Referensi: <em>Bahan Ajar Week13.pptx & RPS Jaringan Komputer</em></p>
+                <!-- <p>Referensi: <em>Bahan Ajar Week13.pptx & RPS Jaringan Komputer</em></p> -->
                 <p class="text-small"><em>Dosen Pengampu:</em></p>
                 <div
                     style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
@@ -343,410 +345,1731 @@
 
             <section>
                 <h3>Network Security: Overview</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Sasaran Pembelajaran Pertemuan 13:</p>
-                    <ul>
-                        <li>Memahami prinsip-prinsip kriptografi dan penggunaannya melebihi "sekadar kerahasiaan".</li>
-                        <li>Memahami teknik Autentikasi dan Integritas Pesan.</li>
-                        <li>Implementasi keamanan praktis di dunia nyata: Firewalls & Intrusion Detection Systems (IDS).</li>
-                        <li>Keamanan pada tiap layer: Application, Transport (TLS), Network (IPsec), dan Wireless (802.11).</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size:.45em;">
+                        <p style="font-weight: 700; color: #1565c0; margin-bottom: 6px;">
+                            <i class="bi bi-shield-check"></i> 4 Sasaran Pembelajaran Utama:
+                        </p>
+                        <ul style="font-size: 0.95em; line-height: 1.55;">
+                            <li><strong>Prinsip Kriptografi (Beyond Secrecy):</strong> Memahami transformasi pesan,
+                                perbedaan kunci simetris (AES) vs asimetris (RSA), dan solusi distribusi kunci.</li>
+                            <li><strong>Otentikasi &amp; Integritas Pesan:</strong> Mencegah pemalsuan identitas, replay
+                                attack (Nonce $R$), fungsi hash ($H(m)$), tanda tangan digital, dan sertifikat CA.</li>
+                            <li><strong>Keamanan Operasional Jaringan:</strong> Implementasi perisai perimeter melalui
+                                Stateless ACL, Stateful Inspection, serta IDS/IPS (Deep Packet Inspection).</li>
+                            <li><strong>Proteksi Berlapis (Protocol Stack):</strong> Penerapan pertahanan dari lapis
+                                Fisik/WiFi (WPA3), Jaringan (IPsec VPN), Transpor (TLS 1.3), hingga Aplikasi.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image1.png" class="slide-img" alt="Network Security: Overview">
+                        <img src="images/week13/network_security_overview.svg" class="slide-img"
+                            alt="Arsitektur Keamanan Jaringan: 4 Pilar Pertahanan Komprehensif">
+                        <p class="img-caption">Infografis Arsitektur: 4 Pilar Keamanan Jaringan &amp; Alur Pertahanan
+                            End-to-End</p>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h3>Apa itu Keamanan Jaringan?</h3>
-                <div class="card text-left text-smaller">
-                    <p>Fondasi utama dari keamanan mencakup 4 elemen berikut:</p>
-                    <ul>
-                        <li><strong>Confidentiality (Kerahasiaan):</strong> Hanya pengirim dan penerima yang sah yang bisa memahami isi pesan (via Enkripsi).</li>
-                        <li><strong>Authentication (Otentikasi):</strong> Pengirim & penerima ingin memverifikasi identitas satu sama lain secara absolut.</li>
-                        <li><strong>Message Integrity (Integritas Pesan):</strong> Kepastian bahwa pesan TIDAK dimanipulasi atau diubah di tengah jalan oleh pihak ketiga.</li>
-                        <li><strong>Access and Availability:</strong> Layanan harus selalu tersedia dan bisa diakses ketika dibutuhkan (Terlindungi dari serangan DoS).</li>
-                    </ul>
+                <h4>Apa itu Keamanan Jaringan? (4 Pilar CIA+A)</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; text-align: left;">
+                    <!-- Card 1: Confidentiality -->
+                    <div class="card"
+                        style="padding: 14px; background: #ffffff; border: 1.5px solid #bbf7d0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <div
+                                style="background: #dcfce7; color: #16a34a; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1em;">
+                                <i class="bi bi-shield-lock-fill"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 800; font-size: 0.62em; color: #14532d;">1. Confidentiality
+                                    (Kerahasiaan)</div>
+                                <div style="font-size: 0.44em; color: #15803d; font-weight: 600;">Hanya entitas sah yang
+                                    dapat memahami isi pesan</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.46em; color: #374151; line-height: 1.5;">
+                            Mencegah pihak ketiga/penyusup membaca informasi rahasia yang melintas di saluran transmisi
+                            terbuka.
+                            <div
+                                style="margin-top: 5px; background: #f0fdf4; padding: 4px 6px; border-radius: 4px; border: 1px solid #bbf7d0; color: #166534; font-weight: 600;">
+                                Solusi: Enkripsi Simetris (AES-256) &amp; Asimetris (RSA).
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Authentication -->
+                    <div class="card"
+                        style="padding: 14px; background: #ffffff; border: 1.5px solid #bfdbfe; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <div
+                                style="background: #dbeafe; color: #2563eb; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1em;">
+                                <i class="bi bi-person-check-fill"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 800; font-size: 0.62em; color: #1e3a8a;">2. Authentication
+                                    (Otentikasi)</div>
+                                <div style="font-size: 0.44em; color: #1d4ed8; font-weight: 600;">Verifikasi keaslian
+                                    identitas kedua belah pihak</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.46em; color: #374151; line-height: 1.5;">
+                            Memastikan bahwa lawan bicara di jaringan adalah pihak yang sebenarnya, bukan penipu atau
+                            penyamar.
+                            <div
+                                style="margin-top: 5px; background: #eff6ff; padding: 4px 6px; border-radius: 4px; border: 1px solid #bfdbfe; color: #1e40af; font-weight: 600;">
+                                Solusi: Tantangan Nonce ($R$) &amp; Sertifikat Digital (CA X.509).
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Message Integrity -->
+                    <div class="card"
+                        style="padding: 14px; background: #ffffff; border: 1.5px solid #fde047; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <div
+                                style="background: #fef9c3; color: #ca8a04; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1em;">
+                                <i class="bi bi-patch-check-fill"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 800; font-size: 0.62em; color: #854d0e;">3. Message Integrity
+                                    (Integritas)</div>
+                                <div style="font-size: 0.44em; color: #a16207; font-weight: 600;">Jaminan data tidak
+                                    dimanipulasi saat transmisi</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.46em; color: #374151; line-height: 1.5;">
+                            Mendeteksi jika ada pihak yang mengubah 1 bit data, menyisipkan muatan berbahaya, atau
+                            memotong paket.
+                            <div
+                                style="margin-top: 5px; background: #fefce8; padding: 4px 6px; border-radius: 4px; border: 1px solid #fef08a; color: #854d0e; font-weight: 600;">
+                                Solusi: Cryptographic Hash (SHA-256) &amp; Digital Signature.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Access and Availability -->
+                    <div class="card"
+                        style="padding: 14px; background: #ffffff; border: 1.5px solid #fca5a5; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <div
+                                style="background: #fee2e2; color: #dc2626; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1em;">
+                                <i class="bi bi-hdd-network-fill"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 800; font-size: 0.62em; color: #991b1b;">4. Access &amp;
+                                    Availability (Ketersediaan)</div>
+                                <div style="font-size: 0.44em; color: #b91c1c; font-weight: 600;">Layanan harus selalu
+                                    siap diakses pihak sah</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.46em; color: #374151; line-height: 1.5;">
+                            Melindungi infrastruktur server dan router kampus dari kelumpuhan akibat banjir serangan
+                            DoS/DDoS.
+                            <div
+                                style="margin-top: 5px; background: #fef2f2; padding: 4px 6px; border-radius: 4px; border: 1px solid #fecaca; color: #991b1b; font-weight: 600;">
+                                Solusi: Stateful Firewall, SYN-Proxy, &amp; IDS/IPS Filtering.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <section>
                 <h3>Teman dan Musuh: Alice, Bob, Trudy</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Karakter fiktif yang selalu digunakan dalam dunia keamanan jaringan:</p>
-                    <ul>
-                        <li><strong>Alice & Bob:</strong> Pihak yang ingin berkomunikasi secara aman.</li>
-                        <li><strong>Trudy (Intruder):</strong> Penyusup di tengah jalan. Trudy bisa mencegat pesan, menghapus pesan, atau bahkan menyuntikkan pesan palsu.</li>
-                    </ul>
-                    <p>Trudy dapat berada di mana saja: sebagai router *rogue*, WiFi sniffer, atau server DNS abal-abal.</p>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: .45em;">
+                        <p style="font-weight: 700; color: #1565c0; margin-bottom: 6px;">
+                            <i class="bi bi-people-fill"></i> Model Karakter Komunikasi (Kurose &amp; Ross):
+                        </p>
+                        <ul style="font-size: 0.95em; line-height: 1.55;">
+                            <li><strong>Alice (Sender):</strong> Pihak pengirim sah yang mentransmisikan pesan asli
+                                (<em>plaintext</em>) dan menuntut jaminan kerahasiaan.</li>
+                            <li><strong>Bob (Receiver):</strong> Pihak penerima sah yang membutuhkan verifikasi
+                                identitas pengirim dan integritas data.</li>
+                            <li><strong>Trudy (Intruder / Adversary):</strong> Entitas penyerang di saluran publik yang
+                                berupaya menyadap (<em>sniffing</em>), memanipulasi (<em>tampering</em>), hingga
+                                memalsukan identitas (<em>spoofing</em>).</li>
+                        </ul>
+                        <div class="info-box" style="margin-top: 8px; font-size: 0.9em;">
+                            <strong>Posisi Nyata Trudy:</strong> Beroperasi sebagai <em>Rogue Router</em> pada backbone,
+                            <em>WiFi Sniffer</em> pada jaringan nirkabel publik, atau <em>Rogue DNS Server</em> yang
+                            membelokkan resolusi nama domain.
+                        </div>
+                    </div>
                     <div>
-                        <img src="images/week13/image2.png" class="slide-img" alt="Teman dan Musuh: Alice, Bob, Trudy">
+                        <img src="images/week13/teman_dan_musuh_alice_bob_trudy.svg" class="slide-img"
+                            alt="Model Keamanan Komunikasi: Alice, Bob, dan Trudy">
+                        <p class="img-caption">Model Komunikasi: Entitas Sah, Saluran Terbuka, dan 4 Vektor Ancaman
+                            Trudy</p>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Prinsip Kriptografi (Symmetric Key)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p><strong>Bahasa Kriptografi:</strong></p>
-                    <ul>
-                        <li><code>m</code> = plaintext message (Pesan asli)</li>
-                        <li><code>K_A(m)</code> = ciphertext (Pesan yang dienkripsi dengan kunci K milik Alice)</li>
-                    </ul>
-                    <p><strong>Symmetric Key Cryptography:</strong><br>
-                    Bob dan Alice berbagi KUNCI RAHASIA YANG SAMA (K). Kunci yang dipakai Alice untuk mengunci, sama persis dengan kunci yang dipakai Bob untuk membuka gembok. Pertanyaannya: <em>Bagaimana mereka menyepakati kunci rahasia ini jika mereka belum pernah bertemu?</em></p>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size:.4em;">
+                        <p style="font-weight: 700; color: #1565c0; margin-bottom: 6px;">
+                            <i class="bi bi-key-fill"></i> Notasi Matematis Kriptografi Simetris:
+                        </p>
+                        <ul style="line-height: 1.55;">
+                            <li>Pesan asli (<em>plaintext</em>): $m$</li>
+                            <li>Kunci rahasia bersama: $K_S$ (atau $K_A$)</li>
+                            <li>Enkripsi menghasilkan <em>ciphertext</em>: $c = K_S(m)$</li>
+                            <li>Dekripsi memulihkan <em>plaintext</em>: $m = K_S(c) = K_S(K_S(m))$</li>
+                            <li>Identitas simetris esensial: $K_S(K_S(m)) = m$</li>
+                        </ul>
+                        <div class="info-box" style="margin-top: 8px; font-size: 0.9em;">
+                            <strong>Symmetric Key Cryptography:</strong> Bob dan Alice berbagi kunci rahasia yang sama
+                            ($K_S$).
+                            Kunci enkripsi identik dengan kunci dekripsi.
+                            <em>Tantangan teknis: Bagaimana mendistribusikan $K_S$ dengan aman tanpa saluran fisik
+                                terproteksi? (Key Distribution Problem).</em>
+                        </div>
+                    </div>
                     <div>
-                        <img src="images/week13/image3.png" class="slide-img" alt="Prinsip Kriptografi (Symmetric Key)">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.5em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-arrow-left-right" style="color: #16a34a;"></i> Alur Komunikasi
+                                    Kunci Simetris</span>
+                                <span
+                                    style="font-size: 0.85em; background: #fefce8; color: #854d0e; padding: 2px 7px; border-radius: 10px; font-weight: 700;">1
+                                    Kunci Sama</span>
+                            </div>
+                            <!-- Alice Encrypt -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.4em;">
+                                <div style="font-weight: 700; color: #166534; margin-bottom: 2px;">1. Pengirim (Alice):
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; color: #14532d;">
+                                    <span>Plaintext $m$ + <strong style="color: #ca8a04;">Kunci Bersama
+                                            $K_S$</strong></span>
+                                    <span>&rarr;</span>
+                                    <span
+                                        style="background: #fff; padding: 2px 5px; border-radius: 3px; border: 1px solid #86efac; font-weight: 700;">Ciphertext
+                                        $c = K_S(m)$</span>
+                                </div>
+                            </div>
+                            <!-- Channel & Trudy -->
+                            <div
+                                style="background: #fef2f2; border: 1.2px solid #fecaca; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.4em; color: #991b1b; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-eye-slash-fill"></i> Saluran Publik: Trudy menyadap $c$</span>
+                                <span
+                                    style="background: #dc2626; color: #fff; padding: 1px 5px; border-radius: 3px; font-weight: 700;">Gagal
+                                    Baca Tanpa $K_S$</span>
+                            </div>
+                            <!-- Bob Decrypt -->
+                            <div
+                                style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.44em;">
+                                <div style="font-weight: 700; color: #1e40af; margin-bottom: 2px;">2. Penerima (Bob):
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; color: #1e3a8a;">
+                                    <span>Ciphertext $c$ + <strong style="color: #ca8a04;">Kunci Identik
+                                            $K_S$</strong></span>
+                                    <span>&rarr;</span>
+                                    <span
+                                        style="background: #fff; padding: 2px 5px; border-radius: 3px; border: 1px solid #93c5fd; font-weight: 700; color: #15803d;">Plaintext
+                                        Asli $m$</span>
+                                </div>
+                            </div>
+                            <!-- Dilemma Box -->
+                            <div
+                                style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 6px; padding: 5px; font-size: 0.42em; color: #9a3412;">
+                                <strong>Dilemma Distribusi Kunci:</strong> Bagaimana Alice dan Bob menyepakati $K_S$
+                                jika mereka terpisah ribuan kilometer tanpa saluran fisik aman?
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Kriptografi Simetris: DES dan AES</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <ul>
-                        <li><strong>DES (Data Encryption Standard):</strong> Standar AS tahun 1993 (Kunci 56-bit). Kini sudah TIDAK AMAN. 56-bit bisa dibobol dengan *brute-force attack* dalam waktu kurang dari sehari oleh komputer modern.</li>
-                        <li><strong>AES (Advanced Encryption Standard):</strong> Pengganti DES sejak Nov 2001. Memproses blok 128-bit dengan kunci 128, 192, atau 256-bit. Sangat tangguh! Jika DES bisa dibobol dalam 1 detik, AES butuh waktu 149 triliun tahun untuk dibongkar secara brute-force.</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size:.5em;">
+                        <ul>
+                            <li><strong>DES (Data Encryption Standard):</strong> Standar AS tahun 1993 (Kunci 56-bit).
+                                Kini sudah TIDAK AMAN. 56-bit bisa dibobol dengan <em>brute-force attack</em> dalam
+                                waktu kurang dari sehari oleh komputer modern.</li>
+                            <li><strong>AES (Advanced Encryption Standard):</strong> Pengganti DES sejak Nov 2001.
+                                Memproses blok 128-bit dengan kunci 128, 192, atau 256-bit. Sangat tangguh! Jika DES
+                                bisa dibobol dalam 1 detik, AES butuh waktu 149 triliun tahun untuk dibongkar secara
+                                brute-force.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image4.png" class="slide-img" alt="Kriptografi Simetris: DES dan AES">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.45em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-shield-shaded" style="color: #2563eb;"></i> Perbandingan Enkripsi
+                                    Blok Simetris</span>
+                                <span
+                                    style="font-size: 0.85em; background: #eff6ff; color: #1d4ed8; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Block
+                                    Cipher</span>
+                            </div>
+                            <!-- DES Card -->
+                            <div
+                                style="background: #fef2f2; border: 1.2px solid #fecaca; border-radius: 7px; padding: 8px; margin-bottom: 8px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
+                                    <span style="font-weight: 800; font-size: 0.55em; color: #991b1b;"><i
+                                            class="bi bi-x-octagon-fill" style="color: #dc2626;"></i> DES (1993)</span>
+                                    <span
+                                        style="font-size: 0.4em; font-weight: 700; background: #dc2626; color: #fff; padding: 1px 5px; border-radius: 3px;">USANG
+                                        / OBSOLETE</span>
+                                </div>
+                                <div
+                                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 0.4em; color: #7f1d1d;">
+                                    <div>• <strong>Kunci:</strong> 56-bit ($2^{56}$)</div>
+                                    <div>• <strong>Ketahanan:</strong> Rentan Brute Force (&lt; 24 jam)</div>
+                                    <div>• <strong>Blok:</strong> 64-bit plaintext</div>
+                                    <div>• <strong>Status:</strong> Dihentikan sejak 2001</div>
+                                </div>
+                            </div>
+                            <!-- AES Card -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 7px; padding: 8px; margin-bottom: 8px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
+                                    <span style="font-weight: 800; font-size: 0.55em; color: #166534;"><i
+                                            class="bi bi-shield-check" style="color: #16a34a;"></i> AES (2001 -
+                                        Sekarang)</span>
+                                    <span
+                                        style="font-size: 0.4em; font-weight: 700; background: #16a34a; color: #fff; padding: 1px 5px; border-radius: 3px;">STANDAR
+                                        GLOBAL</span>
+                                </div>
+                                <div
+                                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 0.4em; color: #14532d;">
+                                    <div>• <strong>Kunci:</strong> 128, 192, 256-bit ($2^{128} - 2^{256}$)</div>
+                                    <div>• <strong>Ketahanan:</strong> Kebal Brute Force (&gt; triliun thn)</div>
+                                    <div>• <strong>Blok:</strong> 128-bit tetap</div>
+                                    <div>• <strong>Aplikasi:</strong> TLS/HTTPS, WiFi WPA2/3, VPN</div>
+                                </div>
+                            </div>
+                            <!-- Block Flow Diagram -->
+                            <div
+                                style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 6px; display: flex; align-items: center; justify-content: space-around; font-size: 0.38em; color: #475569;">
+                                <span style="font-weight: 700; color: #1e293b;">Plaintext (128-bit)</span>
+                                <span style="color: #64748b;">&rarr;</span>
+                                <span
+                                    style="background: #e2e8f0; padding: 2px 5px; border-radius: 4px; font-weight: 700; color: #1e293b;">10
+                                    / 12 / 14 Ronde SPN</span>
+                                <span style="color: #64748b;">&rarr;</span>
+                                <span style="font-weight: 700; color: #16a34a;">Ciphertext (128-bit)</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Public Key Cryptography (Asymmetric)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Mengatasi masalah distribusi kunci rahasia pada metode simetris. Pada Public Key Cryptography:</p>
-                    <ul>
-                        <li>Alice dan Bob <strong>TIDAK BERBAGI</strong> kunci rahasia.</li>
-                        <li>Setiap orang memiliki SEPASANG Kunci: <strong>Public Key</strong> (Disebarluaskan ke seluruh dunia) dan <strong>Private Key</strong> (Disimpan rapat-rapat oleh pemiliknya).</li>
-                    </ul>
-                    <p><em>Konsep:</em> Jika Alice ingin mengirim pesan rahasia ke Bob, Alice akan membungkus pesannya dengan <strong>Public Key milik Bob</strong>. Kerennya, satu-satunya cara membuka bungkus tersebut hanyalah dengan <strong>Private Key milik Bob</strong>!</p>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size:.4em;">
+                        <p>Mengatasi kendala pertukaran kunci simetris melalui pasangan kunci asimetris:</p>
+                        <ul>
+                            <li>Setiap entitas (misal Bob) memiliki sepasang kunci terkomputasi:
+                                <ul>
+                                    <li><strong>Public Key ($K_B^+$):</strong> Dipublikasikan ke seluruh dunia.</li>
+                                    <li><strong>Private Key ($K_B^-$):</strong> Disimpan secara rahasia oleh pemiliknya.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Enkripsi oleh Alice untuk Bob: $c = K_B^+(m)$</li>
+                            <li>Dekripsi eksklusif oleh Bob: $m = K_B^-(c) = K_B^-(K_B^+(m))$</li>
+                            <li><strong>Relasi Dual Matematis:</strong>
+                                $$K_B^-(K_B^+(m)) = m \quad \text{dan} \quad K_B^+(K_B^-(m)) = m$$
+                            </li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image5.png" class="slide-img" alt="Public Key Cryptography (Asymmetric)">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.45em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-key-fill" style="color: #ca8a04;"></i> Mekanisme Asymmetric
+                                    Public-Key</span>
+                                <span
+                                    style="font-size: 0.85em; background: #fefce8; color: #854d0e; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Pasangan
+                                    Kunci</span>
+                            </div>
+                            <!-- Flow 1: Alice Encrypts with Bob's Public Key -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 7px; padding: 8px; margin-bottom: 8px;">
+                                <div style="font-weight: 700; font-size: 0.5em; color: #166534; margin-bottom: 4px;">1.
+                                    Pengirim (Alice) Enkripsi Pesan:</div>
+                                <div
+                                    style="display: flex; align-items: center; justify-content: space-between; font-size: 0.4em; color: #14532d;">
+                                    <span
+                                        style="background: #fff; padding: 3px 6px; border-radius: 4px; border: 1px solid #86efac; font-weight: 700;">Plaintext
+                                        $m$</span>
+                                    <span>+</span>
+                                    <span
+                                        style="background: #dbeafe; padding: 3px 6px; border-radius: 4px; border: 1px solid #93c5fd; font-weight: 700; color: #1d4ed8;">Public
+                                        Key Bob ($K_B^+$)</span>
+                                    <span>&rarr;</span>
+                                    <span
+                                        style="background: #ffedd5; padding: 3px 6px; border-radius: 4px; border: 1px solid #fdba74; font-weight: 700; color: #c2410c;">Ciphertext
+                                        $c = K_B^+(m)$</span>
+                                </div>
+                            </div>
+                            <!-- Flow 2: Insecure Channel -->
+                            <div
+                                style="background: #fef2f2; border: 1.2px solid #fecaca; border-radius: 7px; padding: 6px; margin-bottom: 8px; font-size: 0.44em; color: #991b1b; display: flex; align-items: center; justify-content: space-between;">
+                                <span><i class="bi bi-eye-slash-fill" style="color: #dc2626;"></i> <strong>Saluran
+                                        Publik (Internet):</strong> Trudy menyadap $c$ &amp; tahu $K_B^+$</span>
+                                <span
+                                    style="background: #dc2626; color: #fff; padding: 1px 5px; border-radius: 3px; font-weight: 700;">GAGAL
+                                    BONGKAR</span>
+                            </div>
+                            <!-- Flow 3: Bob Decrypts with Private Key -->
+                            <div
+                                style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 7px; padding: 8px; margin-bottom: 8px;">
+                                <div style="font-weight: 700; font-size: 0.52em; color: #1e40af; margin-bottom: 4px;">2.
+                                    Penerima (Bob) Dekripsi Pesan:</div>
+                                <div
+                                    style="display: flex; align-items: center; justify-content: space-between; font-size: 0.45em; color: #1e3a8a;">
+                                    <span
+                                        style="background: #ffedd5; padding: 3px 6px; border-radius: 4px; border: 1px solid #fdba74; font-weight: 700; color: #c2410c;">Ciphertext
+                                        $c$</span>
+                                    <span>+</span>
+                                    <span
+                                        style="background: #fef08a; padding: 3px 6px; border-radius: 4px; border: 1px solid #eab308; font-weight: 700; color: #854d0e;">Private
+                                        Key Bob ($K_B^-$)</span>
+                                    <span>&rarr;</span>
+                                    <span
+                                        style="background: #dcfce7; padding: 3px 6px; border-radius: 4px; border: 1px solid #86efac; font-weight: 700; color: #15803d;">Plaintext
+                                        Asli $m$</span>
+                                </div>
+                            </div>
+                            <!-- Bottom highlight -->
+                            <div
+                                style="font-size: 0.43em; color: #64748b; background: #f8fafc; border-radius: 5px; padding: 5px; text-align: center;">
+                                <strong>Prinsip Emas:</strong> $K_B^-(K_B^+(m)) = m$. Kunci publik untuk mengunci, hanya
+                                kunci privat pasangan yang bisa membuka.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h3>Matematika Kriptografi: RSA</h3>
-                <div class="card text-left text-smaller">
-                    <p>Semua bit pesan (teks, gambar, video) pada dasarnya adalah sederet angka integer. Mengenkripsi pesan sama artinya dengan merumuskan matematika pada sebuah angka besar.</p>
-                    <p><strong>Mengapa Algoritma RSA Aman?</strong></p>
-                    <ul>
-                        <li>RSA bersandar pada fakta matematika bahwa: Sangat mudah mengalikan dua bilangan prima raksasa (<code>p * q = n</code>).</li>
-                        <li>Namun, sangat, sangat, SANGAT SULIT untuk melakukan <strong>faktorisasi</strong> (mencari nilai <code>p</code> dan <code>q</code> jika kita hanya diberi tahu nilai <code>n</code>). Itulah pelindung utama RSA.</li>
-                    </ul>
+                <h4>Matematika Kriptografi: Algoritma RSA</h4>
+                <div class="layout-2col">
+                    <div class="card text-left text-smaller" style="font-size: 0.45em;">
+                        <div class="sec-bar sec-bar-blue"
+                            style="font-size: 0.9em; padding: 4px 10px; margin: -10px -10px 8px -10px; border-radius: 6px 6px 0 0;">
+                            <i class="bi bi-key-fill"></i> Pembangkitan Kunci (Key Generation)
+                        </div>
+                        <ol style="margin-left: 14px; padding-left: 0;">
+                            <li>Pilih dua bilangan prima besar acak: $p$ dan $q$.</li>
+                            <li>Hitung modulus publik: $n = p \cdot q$</li>
+                            <li>Hitung fungsi totient Euler: $z = (p - 1)(q - 1)$</li>
+                            <li>Pilih nilai $e$ sedemikian sehingga:
+                                $$\gcd(e, z) = 1 \quad (e \text{ dan } z \text{ relatif prima, } e < z)$$ </li>
+                            <li>Hitung eksponen privat $d$ (invers perkalian modular):
+                                $$e \cdot d \equiv 1 \pmod{z} \quad \iff \quad ed - 1 = k \cdot z$$
+                            </li>
+                            <li><strong>Pasangan Kunci:</strong>
+                                <div>&bull; Public Key: $K_B^+ = (n, e)$</div>
+                                <div>&bull; Private Key: $K_B^- = (n, d)$</div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="card text-left text-smaller" style="font-size: 0.44em;">
+                        <div class="sec-bar sec-bar-green"
+                            style="font-size: 0.9em; padding: 4px 10px; margin: -10px -10px 8px -10px; border-radius: 6px 6px 0 0;">
+                            <i class="bi bi-calculator"></i> Operasi &amp; Pembuktian Matematis
+                        </div>
+                        <p style="margin-bottom: 4px;">Pesan $m$ diperlakukan sebagai integer ($0 \le m < n$):</p>
+                                <div
+                                    style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 6px; padding: 6px; margin-bottom: 8px;">
+                                    <div>&bull; <strong>Enkripsi ($m \to c$):</strong> $c = m^e \bmod n$</div>
+                                    <div>&bull; <strong>Dekripsi ($c \to m$):</strong> $m = c^d \bmod n$</div>
+                                    <div style="margin-top: 4px; font-size: 0.95em; color: #1565c0;">
+                                        Identitas Modular: $(m^e)^d \equiv m^{ed} \equiv m \pmod{n}$
+                                    </div>
+                                </div>
+
+                                <div class="info-box" style="font-size: 0.92em; padding: 6px 10px; margin-top: 4px;">
+                                    <strong>Contoh Numerik (Toy Example):</strong><br>
+                                    $p = 5, q = 7 \implies n = 35,\; z = (4)(6) = 24$<br>
+                                    Pilih $e = 5$ ($\gcd(5, 24) = 1$) $\implies d = 29$ ($5 \times 29 = 145 = 6 \times
+                                    24 + 1$)<br>
+                                    Pesan $m = 12$:<br>
+                                    Enkripsi: $c = 12^5 \bmod 35 = 248832 \bmod 35 = 17$<br>
+                                    Dekripsi: $m = 17^{29} \bmod 35 = 12$ <em>(Pesan pulih sempurna!)</em>
+                                </div>
+                    </div>
                 </div>
             </section>
 
             <section>
                 <h3>Authentication (Otentikasi)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p><strong>Tujuan:</strong> Bob ingin Alice "Membuktikan" identitasnya.</p>
-                    <ul>
-                        <li><strong>Protokol 1.0:</strong> Alice bilang "Saya Alice". (Gagal: Trudy bisa dengan mudah mengaku sebagai Alice).</li>
-                        <li><strong>Protokol 2.0:</strong> Alice mengirim IP Address aslinya. (Gagal: Trudy bisa melakukan *IP Spoofing* memalsukan alamat IP).</li>
-                        <li><strong>Protokol 3.0:</strong> Alice mengirim Password aslinya (Gagal: Trudy bisa menyadap (Sniff) password).</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size:.5em;">
+                        <p><strong>Tujuan:</strong> Bob ingin Alice "Membuktikan" identitasnya.</p>
+                        <ul>
+                            <li><strong>Protokol 1.0:</strong> Alice bilang "Saya Alice". (Gagal: Trudy bisa dengan
+                                mudah mengaku sebagai Alice).</li>
+                            <li><strong>Protokol 2.0:</strong> Alice mengirim IP Address aslinya. (Gagal: Trudy bisa
+                                melakukan <em>IP Spoofing</em> memalsukan alamat IP).</li>
+                            <li><strong>Protokol 3.0:</strong> Alice mengirim Password aslinya (Gagal: Trudy bisa
+                                menyadap (Sniff) password).</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image6.jpg" class="slide-img" alt="Authentication (Otentikasi)">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.5em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-person-badge-fill" style="color: #dc2626;"></i> Evolusi Kegagalan
+                                    Otentikasi</span>
+                                <span
+                                    style="font-size: 0.85em; background: #fee2e2; color: #991b1b; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Flawed
+                                    Protocols</span>
+                            </div>
+                            <!-- Proto 1.0 -->
+                            <div
+                                style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.4em;">
+                                <div
+                                    style="display: flex; justify-content: space-between; font-weight: 700; color: #991b1b;">
+                                    <span>Protokol 1.0: Pernyataan Identitas ("Saya Alice")</span>
+                                    <span style="color: #dc2626;">❌ GAGAL</span>
+                                </div>
+                                <div style="color: #7f1d1d; margin-top: 2px;">Celah: Trudy dapat langsung mengaku "Saya
+                                    Alice" tanpa verifikasi apa pun.</div>
+                            </div>
+                            <!-- Proto 2.0 -->
+                            <div
+                                style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.4em;">
+                                <div
+                                    style="display: flex; justify-content: space-between; font-weight: 700; color: #991b1b;">
+                                    <span>Protokol 2.0: Verifikasi Alamat IP Sumber</span>
+                                    <span style="color: #dc2626;">❌ GAGAL</span>
+                                </div>
+                                <div style="color: #7f1d1d; margin-top: 2px;">Celah: Trudy melakukan <em>IP
+                                        Spoofing</em> memalsukan alamat IP asal paket.</div>
+                            </div>
+                            <!-- Proto 3.0 -->
+                            <div
+                                style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 6px; margin-bottom: 8px; font-size: 0.4em;">
+                                <div
+                                    style="display: flex; justify-content: space-between; font-weight: 700; color: #991b1b;">
+                                    <span>Protokol 3.0: Password Rahasia Teks Terbuka</span>
+                                    <span style="color: #dc2626;">❌ GAGAL</span>
+                                </div>
+                                <div style="color: #7f1d1d; margin-top: 2px;">Celah: Trudy melakukan <em>Eavesdropping /
+                                        Packet Sniffing</em> membaca password.</div>
+                            </div>
+                            <!-- Conclusion -->
+                            <div
+                                style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 6px; padding: 6px; font-size: 0.44em; color: #1e40af;">
+                                <strong>Kebutuhan Kritis:</strong> Otentikasi sejati membutuhkan pembuktian keaktifan
+                                (<em>liveness</em>) yang tahan penyadapan dan pemalsuan.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h3>Ancaman Playback Attack (Protokol 3.1)</h3>
-                <div class="layout-text-img">
+                <h4>Ancaman Playback Attack (Protokol 3.1)</h4>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
                     <div class="card text-left text-smaller">
-                    <p><strong>Protokol 3.1:</strong> Alice mengirimkan Password yang SUDAH DIENKRIPSI.</p>
-                    <p>Apakah aman? <strong>TIDAK!</strong></p>
-                    <p>Trudy memang tidak bisa membaca isi passwordnya, namun Trudy bisa merekam paket yang terenkripsi itu secara utuh. Besoknya, Trudy mengirim ulang paket rekaman tersebut ke Bob (Playback Attack). Bob akan menerima dan mengotentikasi Trudy sebagai Alice!</p>
-                </div>
+                        <p><strong>Protokol 3.1:</strong> Alice mengirimkan Password yang SUDAH DIENKRIPSI.</p>
+                        <p>Apakah aman? <strong>TIDAK!</strong></p>
+                        <p>Trudy memang tidak bisa membaca isi passwordnya, namun Trudy bisa merekam paket yang
+                            terenkripsi itu secara utuh. Besoknya, Trudy mengirim ulang paket rekaman tersebut ke Bob
+                            (Playback Attack). Bob akan menerima dan mengotentikasi Trudy sebagai Alice!</p>
+                    </div>
                     <div>
-                        <img src="images/week13/image7.png" class="slide-img" alt="Ancaman Playback Attack (Protokol 3.1)">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.45em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-arrow-repeat" style="color: #ea580c;"></i> Kronologi Serangan
+                                    Playback (Replay)</span>
+                                <span
+                                    style="font-size: 0.85em; background: #fff7ed; color: #c2410c; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Protokol
+                                    3.1</span>
+                            </div>
+                            <!-- Step 1: Alice Legitimate Session -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 6px; padding: 7px; margin-bottom: 7px; font-size: 0.45em;">
+                                <div style="font-weight: 700; color: #166534; margin-bottom: 2px;">Hari Ini (Sesi Sah):
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; color: #14532d;">
+                                    <span>Alice &rarr; Bob: Password Terenkripsi $K_{A-B}( ext{password})$</span>
+                                    <span
+                                        style="background: #16a34a; color: #fff; padding: 1px 5px; border-radius: 3px; font-weight: 700;">Bob
+                                        Autentikasi OK</span>
+                                </div>
+                            </div>
+                            <!-- Step 2: Trudy Sniffs & Records -->
+                            <div
+                                style="background: #fefce8; border: 1.2px solid #fde047; border-radius: 6px; padding: 7px; margin-bottom: 7px; font-size: 0.45em; color: #854d0e;">
+                                <div style="font-weight: 700; margin-bottom: 2px;"><i class="bi bi-record-circle"
+                                        style="color: #ca8a04;"></i> Rekaman Pasif Trudy:</div>
+                                <div>Trudy tidak bisa membaca password, tetapi merekam paket $K_{A-B}( ext{password})$
+                                    secara utuh di saluran publik.</div>
+                            </div>
+                            <!-- Step 3: Trudy Replays Tomorrow -->
+                            <div
+                                style="background: #fef2f2; border: 1.2px solid #fecaca; border-radius: 6px; padding: 7px; margin-bottom: 8px; font-size: 0.45em;">
+                                <div style="font-weight: 700; color: #991b1b; margin-bottom: 2px;">Besok (Serangan
+                                    Replay):</div>
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; color: #7f1d1d;">
+                                    <span>Trudy &rarr; Bob: Kirim ulang rekaman paket $K_{A-B}( ext{password})$</span>
+                                    <span
+                                        style="background: #dc2626; color: #fff; padding: 1px 5px; border-radius: 3px; font-weight: 700;">Bob
+                                        Tertipu!</span>
+                                </div>
+                            </div>
+                            <!-- Takeaway -->
+                            <div
+                                style="font-size: 0.43em; color: #475569; background: #f8fafc; border-radius: 5px; padding: 5px; text-align: center;">
+                                <strong>Kelemahan Fatal:</strong> Enkripsi statis tanpa variabel waktu/acak tetap rentan
+                                disalin ulang oleh penyerang.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h3>Solusi Otentikasi: Menggunakan NONCE</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p><strong>Protokol 4.0:</strong> Untuk membuktikan Alice sedang "hidup" dan bukan rekaman masa lalu, Bob mengirim sebuah nilai acak <strong>Nonce (Number used ONCE in a lifetime)</strong> bernama <code>R</code>.</p>
-                    <ul>
-                        <li>Alice WAJIB merespons dengan membalas <code>R</code> yang telah dienkripsi menggunakan Kunci Rahasia.</li>
-                        <li>Karena <code>R</code> selalu berganti setiap waktu, maka teknik merekam paket (*playback attack*) yang dilakukan Trudy kemarin menjadi tidak berguna.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week13/image8.png" class="slide-img" alt="Solusi Otentikasi: Menggunakan NONCE">
+                <h4>Solusi Otentikasi: Menggunakan NONCE</h4>
+                <div class="layout-text-img"
+                    style="display: grid; grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+
+                    <!-- KOLOM KIRI: Ditambahkan min-width: 0; overflow-wrap: break-word; box-sizing: border-box; -->
+                    <div class="card text-left text-smaller"
+                        style="font-size: 0.4em; min-width: 0; overflow-wrap: break-word; box-sizing: border-box;">
+                        <p><strong>Protokol 4.0:</strong> Untuk membuktikan keaktifan (<em>liveness</em>) Alice dan
+                            mencegah serangan replay, Bob mengirimkan nilai acak <strong>Nonce (Number used
+                                ONCE)</strong> bernama $R$.</p>
+                        <ul style="padding-left: 1.4em; margin: 0;">
+                            <li>Bob menantang Alice dengan mengirimkan nilai acak $R$.</li>
+                            <li>Alice membalas tantangan dengan mengenkripsi nonce:
+                                <!-- Rumus dipecah/diperkecil sedikit agar tidak melebihi lebar kolom -->
+                                <div style="font-size: 0.9em; overflow-x: auto;">
+                                    $$c = K_{A-B}(R) \quad \text{atau} \quad s = K_A^-(R)$$
+                                </div>
+                            </li>
+                            <li>Bob memverifikasi balasan:
+                                <div style="font-size: 0.9em; overflow-x: auto;">
+                                    $$K_{A-B}(c) = R \quad \text{atau} \quad K_A^+(s) = R$$
+                                </div>
+                            </li>
+                            <li>Karena nilai $R$ selalu diperbarui unik di setiap sesi koneksi, rekaman masa lalu dari
+                                Trudy (<em>playback attack</em>) otomatis tertolak secara deterministik.</li>
+                        </ul>
+                    </div>
+
+                    <!-- KOLOM KANAN: Ditambahkan min-width: 0; -->
+                    <div style="min-width: 0;">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.4em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-dice-5-fill" style="color: #2563eb;"></i> Protokol 4.0:
+                                    Challenge-Response (Nonce)</span>
+                                <span
+                                    style="font-size: 0.85em; background: #eff6ff; color: #1d4ed8; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Anti-Replay</span>
+                            </div>
+                            <!-- Step 1: Alice Connect Request -->
+                            <div
+                                style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.45em; display: flex; justify-content: space-between;">
+                                <span style="font-weight: 700; color: #1e293b;">1. Permintaan Koneksi:</span>
+                                <span style="color: #166534;">Alice &rarr; Bob: "Saya Alice"</span>
+                            </div>
+                            <!-- Step 2: Bob Challenge Nonce -->
+                            <div
+                                style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.45em;">
+                                <div style="font-weight: 700; color: #1e40af; margin-bottom: 2px;">2. Bob Mengirim
+                                    Tantangan (Challenge):</div>
+                                <div style="display: flex; justify-content: space-between; color: #1d4ed8;">
+                                    <span>Bob &rarr; Alice: Nonce $R$ (Angka acak 1x pakai)</span>
+                                    <span
+                                        style="background: #3b82f6; color: #fff; padding: 1px 5px; border-radius: 3px; font-weight: 700;">Nonce
+                                        R</span>
+                                </div>
+                            </div>
+                            <!-- Step 3: Alice Encrypts Nonce -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.45em;">
+                                <div style="font-weight: 700; color: #166534; margin-bottom: 2px;">3. Alice Membalas
+                                    Respon:</div>
+                                <div style="display: flex; justify-content: space-between; color: #15803d;">
+                                    <span>Alice &rarr; Bob: $K_{A-B}(R)$ (Hanya Alice sah yang bisa)</span>
+                                    <span
+                                        style="background: #16a34a; color: #fff; padding: 1px 5px; border-radius: 3px; font-weight: 700;">Validasi
+                                        Sah</span>
+                                </div>
+                            </div>
+                            <!-- Anti-Replay Guard -->
+                            <div
+                                style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 6px; font-size: 0.43em; color: #991b1b;">
+                                <strong>Mengapa Trudy Gagal?</strong> Karena nilai $R$ selalu berganti acak setiap sesi,
+                                rekaman lama Trudy tidak akan pernah cocok dengan tantangan baru Bob.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Man in the Middle Attack (MITM)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Bahkan dengan kunci publik, masih ada celah berbahaya. Saat Alice meminta Public Key Bob, Trudy bisa berada di tengah jalan memblokirnya.</p>
-                    <ul>
-                        <li>Trudy mengirimkan Public Key miliknya (berpura-pura itu milik Bob) kepada Alice.</li>
-                        <li>Alice mengenkripsi pesan cinta ke Bob memakai kunci Trudy. Trudy bebas membaca pesan itu!</li>
-                        <li>Setelah dibaca, Trudy mengenkripsi ulang dengan kunci Bob dan merelay-nya ke Bob tanpa disadari.</li>
-                    </ul>
-                    <p><em>Solusi: Kita butuh pihak ketiga yang menjamin kepemilikan kunci publik!</em></p>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: 0.5em;">
+                        <p>Bahkan dengan kunci publik, masih ada celah berbahaya. Saat Alice meminta Public Key Bob,
+                            Trudy bisa berada di tengah jalan memblokirnya.</p>
+                        <ul>
+                            <li>Trudy mengirimkan Public Key miliknya (berpura-pura itu milik Bob) kepada Alice.</li>
+                            <li>Alice mengenkripsi pesan cinta ke Bob memakai kunci Trudy. Trudy bebas membaca pesan
+                                itu!</li>
+                            <li>Setelah dibaca, Trudy mengenkripsi ulang dengan kunci Bob dan merelay-nya ke Bob tanpa
+                                disadari.</li>
+                        </ul>
+                        <p><em>Solusi: Kita butuh pihak ketiga yang menjamin kepemilikan kunci publik!</em></p>
+                    </div>
                     <div>
-                        <img src="images/week13/image9.png" class="slide-img" alt="Man in the Middle Attack (MITM)">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.4em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-shuffle" style="color: #dc2626;"></i> Anatomi Man-in-the-Middle
+                                    (MITM) Attack</span>
+                                <span
+                                    style="font-size: 0.85em; background: #fee2e2; color: #991b1b; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Pembajakan
+                                    Kunci</span>
+                            </div>
+                            <!-- Step 1: Alice to Trudy -->
+                            <div
+                                style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.44em;">
+                                <div style="font-weight: 700; color: #991b1b;">1. Alice Mengira Berbicara dengan Bob:
+                                </div>
+                                <div style="color: #7f1d1d;">Alice meminta Public Key Bob &rarr; Trudy mencegat dan
+                                    mengirimkan <strong>Public Key Trudy ($K_T^+$)</strong>. Alice mengenkripsi pesan
+                                    cinta dengan $K_T^+$.</div>
+                            </div>
+                            <!-- Step 2: Trudy Intercepts & Reads -->
+                            <div
+                                style="background: #fee2e2; border: 1.2px solid #f87171; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.44em;">
+                                <div style="font-weight: 700; color: #b91c1c;">2. Trudy Membaca &amp; Memanipulasi di
+                                    Tengah:</div>
+                                <div style="color: #991b1b;">Trudy mendekripsi pesan memakai $K_T^-$ (membaca isi pesan
+                                    asli!), lalu mengubah isinya jika diinginkan.</div>
+                            </div>
+                            <!-- Step 3: Trudy to Bob -->
+                            <div
+                                style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 6px; margin-bottom: 7px; font-size: 0.44em;">
+                                <div style="font-weight: 700; color: #991b1b;">3. Bob Mengira Berbicara dengan Alice:
+                                </div>
+                                <div style="color: #7f1d1d;">Trudy mengenkripsi ulang memakai $K_B^+$ milik Bob &rarr;
+                                    Bob mendekripsi memakai $K_B^-$. Bob tidak sadar disusupi!</div>
+                            </div>
+                            <!-- Solution Note -->
+                            <div
+                                style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 6px; padding: 5px; font-size: 0.43em; color: #1e40af; text-align: center;">
+                                <strong>Solusi Mutlak:</strong> Kunci Publik harus disertifikasi oleh otoritas
+                                terpercaya (<strong>Certification Authority / CA</strong>).
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h3>Message Digest & Fungsi Hash</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Mengenksripsi satu dokumen 10.000 halaman memakai RSA akan sangat lambat (memakan CPU). Sebagai alternatif untuk <em>Integritas Data</em>, kita menggunakan Hashing.</p>
-                    <ul>
-                        <li>Sebuah file sebesar apa pun, jika dilewatkan Fungsi Hash (misal SHA-256), akan menghasilkan <strong>sidik jari</strong> (Digest) pendek berukuran persis 256-bit.</li>
-                        <li>Jika ada SATU KOMA saja yang dirubah dari dokumen 10.000 halaman itu, sidik jari hash akan berubah total.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week13/image11.png" class="slide-img" alt="Message Digest & Fungsi Hash">
+                <h3>Message Digest & Fungsi Hash Kriptografis</h3>
+                <div class="layout-text-img"
+                    style="display: grid; grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+
+                    <!-- KOLOM KIRI: Ditambahkan min-width: 0, box-sizing, dan ukuran font yang konsisten -->
+                    <div class="card text-left text-smaller"
+                        style="font-size: 0.36em; min-width: 0; overflow-wrap: break-word; box-sizing: border-box;">
+                        <p>Enkripsi dokumen berukuran masif dengan algoritma asimetris (RSA) memerlukan beban komputasi
+                            CPU yang sangat intensif. Sebagai solusi efisiensi integritas, digunakan fungsi hash $H$:
+                        </p>
+                        <ul style="padding-left: 1.4em; margin: 0;">
+                            <li><strong>Komputasi Intisari Pesan (Digest):</strong>
+                                <div style="overflow-x: auto;">
+                                    $$h = H(m)$$
+                                </div>
+                            </li>
+                            <li><strong>Panjang Output Tetap (Fixed Output):</strong>
+                                <!-- Rumus dipersingkat agar pas di dalam lebar 46%, keterangan dipindah ke teks biasa -->
+                                <div style="overflow-x: auto;">
+                                    $$\forall m \in \{0, 1\}^*, \quad |H(m)| = k \text{ bit}$$
+                                </div>
+                                <span>(Contoh: pada SHA-256, nilai $k = 256\text{ bit}$)</span>
+                            </li>
+                            <li><strong>Ketahanan Tabrakan (Collision Resistance):</strong>
+                                Secara komputasi mustahil menemukan $m_1 \neq m_2$ sedemikian sehingga:
+                                <div style="overflow-x: auto;">
+                                    $$H(m_1) = H(m_2)$$
+                                </div>
+                            </li>
+                            <li>Perubahan 1 bit pada pesan $m$ menghasilkan variasi drastis pada $H(m)$ (<em>Avalanche
+                                    Effect</em>).</li>
+                        </ul>
+                    </div>
+
+                    <!-- KOLOM KANAN: Ditambahkan min-width: 0 -->
+                    <div style="min-width: 0;">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.5em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-hash" style="color: #059669;"></i> Karakteristik Fungsi Hash
+                                    Kriptografis</span>
+                                <span
+                                    style="font-size: 0.85em; background: #d1fae5; color: #065f46; padding: 2px 7px; border-radius: 10px; font-weight: 700;">SHA-256</span>
+                            </div>
+                            <!-- Pipeline Box -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #a7f3d0; border-radius: 7px; padding: 8px; margin-bottom: 8px; font-size: 0.45em; display: flex; align-items: center; justify-content: space-between;">
+                                <div style="text-align: center;">
+                                    <span style="font-weight: 700; color: #166534;">Pesan $m$</span><br>
+                                    <span style="font-size: 0.85em; color: #4b5563;">(Sembarang Ukuran)</span>
+                                </div>
+                                <span style="color: #059669; font-weight: 700;">&rarr; [ Hash $H(m)$ ] &rarr;</span>
+                                <div style="text-align: center;">
+                                    <span style="font-weight: 700; color: #047857;">Digest $h$</span><br>
+                                    <span
+                                        style="font-size: 0.85em; color: #065f46; background: #dcfce7; padding: 1px 4px; border-radius: 3px;">Pasti
+                                        256-bit</span>
+                                </div>
+                            </div>
+                            <!-- 3 Golden Properties -->
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 5px; font-size: 0.44em;">
+                                <div
+                                    style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 5px;">
+                                    <strong style="color: #1e293b;">1. One-Way Property (Pre-image Resistance):</strong>
+                                    Komputasi $h = H(m)$ sangat cepat, tetapi mencari $m$ dari $h$ mustahil secara
+                                    matematis.
+                                </div>
+                                <div
+                                    style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 5px;">
+                                    <!-- Perbaikan typo: $x \neq y$ -->
+                                    <strong style="color: #1e293b;">2. Collision Resistance:</strong> Mustahil menemukan
+                                    dua pesan berbeda $x \neq y$ yang menghasilkan $H(x) = H(y)$.
+                                </div>
+                                <div
+                                    style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 5px;">
+                                    <strong style="color: #1e293b;">3. Avalanche Effect:</strong> Mengubah 1 bit pesan
+                                    asli akan mengubah lebih dari 50% bit nilai digest secara acak.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Digital Signatures (Tanda Tangan Digital)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Berkebalikan dengan kerahasiaan, Tanda Tangan Digital tidak menyembunyikan dokumen aslinya, namun menjamin bahwa dokumen ITU ASLI dari pengirim.</p>
-                    <ul>
-                        <li>Bob membuat Hash dari pesannya.</li>
-                        <li>Bob <strong>Mengenkripsi HASH tersebut menggunakan PRIVATE KEY miliknya.</strong> Itulah Tanda Tangan Digital!</li>
-                        <li>Alice menerima pesan dan hash terenkripsi. Alice mendekripsi hash memakai <strong>Public Key Bob</strong>. Jika hasilnya sama dengan hash file, terbukti valid!</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: .4em;">
+                        <p>Tanda tangan digital memadukan fungsi hash kriptografis dengan enkripsi kunci privat untuk
+                            menjamin <em>Authenticity</em>, <em>Integrity</em>, dan <em>Non-repudiation</em>:</p>
+                        <ul>
+                            <li><strong>Penandatanganan oleh Bob:</strong>
+                                Bob menghitung hash $H(m)$ dan menandatanganinya dengan kunci privat miliknya ($K_B^-$):
+                                $$s = K_B^-(H(m))$$
+                                Bob mentransmisikan pasangan pesan dan tanda tangan: $(m, s)$.
+                            </li>
+                            <li><strong>Verifikasi oleh Alice:</strong>
+                                Alice mendekripsi signature $s$ menggunakan kunci publik Bob ($K_B^+$):
+                                $$h' = K_B^+(s) = K_B^+(K_B^-(H(m))) = H(m)$$
+                            </li>
+                            <li>Jika $h' = H(m)$, maka dokumen terbukti otentik berasal dari Bob dan tidak dimodifikasi
+                                di jalan.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image12.jpeg" class="slide-img" alt="Digital Signatures (Tanda Tangan Digital)">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.5em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-pen-fill" style="color: #2563eb;"></i> Alur Kerja Digital
+                                    Signature (Tanda Tangan Digital)</span>
+                                <span
+                                    style="font-size: 0.85em; background: #eff6ff; color: #1d4ed8; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Integritas
+                                    &amp; Keaslian</span>
+                            </div>
+                            <!-- Stage 1: Signing -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 6px; padding: 7px; margin-bottom: 7px; font-size: 0.4em;">
+                                <div style="font-weight: 700; color: #166534; margin-bottom: 3px;">1. Penandatanganan
+                                    (Oleh Bob):</div>
+                                <div style="color: #14532d;">
+                                    Pesan $m$ &rarr; Hash $H(m)$ &rarr; Enkripsi memakai <strong>Private Key Bob
+                                        ($K_B^-$)</strong> &rarr; Dihasilkan Tanda Tangan: <strong>$s =
+                                        K_B^-(H(m))$</strong>.
+                                </div>
+                            </div>
+                            <!-- Stage 2: Transmission -->
+                            <div
+                                style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 5px; margin-bottom: 7px; font-size: 0.4em; text-align: center; color: #475569;">
+                                Paket dikirim bersamaan: <strong>[ Dokumen Asli $m$ ] + [ Digital Signature $s$
+                                    ]</strong>
+                            </div>
+                            <!-- Stage 3: Verification -->
+                            <div
+                                style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 6px; padding: 7px; margin-bottom: 7px; font-size: 0.4em;">
+                                <div style="font-weight: 700; color: #1e40af; margin-bottom: 3px;">2. Verifikasi (Oleh
+                                    Alice):</div>
+                                <div style="color: #1e3a8a;">
+                                    Alice mendekripsi $s$ menggunakan <strong>Public Key Bob ($K_B^+$)</strong> &rarr;
+                                    diperoleh $H(m)$. Bandingkan dengan hash dokumen asli. Jika identik: <strong>Tanda
+                                        Tangan Valid!</strong>
+                                </div>
+                            </div>
+                            <!-- Benefit -->
+                            <div
+                                style="font-size: 0.42em; color: #047857; background: #dcfce7; border-radius: 5px; padding: 4px; text-align: center; font-weight: 700;">
+                                ✔ Menjamin Keaslian (Authenticity), Keutuhan Data (Integrity), dan Anti-Sangkalan
+                                (Non-repudiation).
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Certification Authorities (CA)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Solusi dari *Man in the Middle Attack* adalah **CA (Otoritas Sertifikat)**.</p>
-                    <ul>
-                        <li>CA adalah pihak ke-3 yang terpercaya secara global (misal VeriSign, Let's Encrypt).</li>
-                        <li>Bob datang ke CA dengan membawa KTP dan Public Key-nya.</li>
-                        <li>CA mengikat (menggembok) Public Key Bob dengan Tanda Tangan Digital CA. Itulah <strong>Sertifikat Digital</strong>.</li>
-                        <li>Kini Alice 100% yakin bahwa Public Key tersebut sungguh milik Bob.</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: .52em;">
+                        <p>Solusi dari <em>Man in the Middle Attack</em> adalah <strong>CA (Otoritas
+                                Sertifikat)</strong>.</p>
+                        <ul>
+                            <li>CA adalah pihak ke-3 yang terpercaya secara global (misal VeriSign, Let's Encrypt).</li>
+                            <li>Bob datang ke CA dengan membawa KTP dan Public Key-nya.</li>
+                            <li>CA mengikat (menggembok) Public Key Bob dengan Tanda Tangan Digital CA. Itulah
+                                <strong>Sertifikat Digital</strong>.
+                            </li>
+                            <li>Kini Alice 100% yakin bahwa Public Key tersebut sungguh milik Bob.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image14.png" class="slide-img" alt="Certification Authorities (CA)">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.4em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-patch-check-fill" style="color: #059669;"></i> Segitiga
+                                    Kepercayaan Sertifikat Digital (CA)</span>
+                                <span
+                                    style="font-size: 0.85em; background: #d1fae5; color: #065f46; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Public
+                                    Key PKI</span>
+                            </div>
+                            <!-- Step 1: Registration -->
+                            <div
+                                style="background: #f8fafc; border: 1.2px solid #e2e8f0; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.44em;">
+                                <strong style="color: #1e293b;">1. Pendaftaran Identitas:</strong> Bob membawa
+                                KTP/Domain legal dan Kunci Publiknya ($K_B^+$) ke lembaga CA terpercaya (misal Let's
+                                Encrypt / DigiCert).
+                            </div>
+                            <!-- Step 2: Certification -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.44em;">
+                                <strong style="color: #166534;">2. Penerbitan Sertifikat X.509:</strong> CA mengikat
+                                identitas Bob dengan $K_B^+$, lalu menandatanganinya dengan <strong>Kunci Privat CA
+                                    ($K_{CA}^-$)</strong>.
+                            </div>
+                            <!-- Step 3: Verification -->
+                            <div
+                                style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 6px; padding: 6px; margin-bottom: 7px; font-size: 0.44em;">
+                                <strong style="color: #1e40af;">3. Validasi oleh Alice (Browser):</strong> Browser Alice
+                                memvalidasi sertifikat Bob memakai <strong>Kunci Publik CA ($K_{CA}^+$)</strong> yang
+                                sudah tertanam di sistem operasi.
+                            </div>
+                            <!-- MITM Defeated -->
+                            <div
+                                style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 5px; padding: 5px; font-size: 0.42em; color: #991b1b; text-align: center;">
+                                <strong>MITM Lumpuh:</strong> Trudy tidak bisa memalsukan sertifikat karena tidak
+                                memiliki Kunci Privat milik CA ($K_{CA}^-$).
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Transport-Layer Security (TLS)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Penerapan protokol keamanan paling populer di lapisan Transport yang mengubah HTTP menjadi <strong>HTTPS</strong> (Port 443).</p>
-                    <ul>
-                        <li><strong>Confidentiality:</strong> Lewat enkripsi Simetris (Symmetric).</li>
-                        <li><strong>Integrity:</strong> Lewat Cryptographic hashing (HMAC/SHA).</li>
-                        <li><strong>Authentication:</strong> Lewat sertifikat CA & Kunci Publik (RSA).</li>
-                        <li>Sejarah: Dulu bernama SSL (Secure Socket Layer) lalu berevolusi menjadi TLS. Saat ini standar mutakhir adalah <strong>TLS 1.3</strong> (RFC 8846).</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: .5em;">
+                        <p>Penerapan protokol keamanan paling populer di lapisan Transport yang mengubah HTTP menjadi
+                            <strong>HTTPS</strong> (Port 443).
+                        </p>
+                        <ul>
+                            <li><strong>Confidentiality:</strong> Lewat enkripsi Simetris (Symmetric).</li>
+                            <li><strong>Integrity:</strong> Lewat Cryptographic hashing (HMAC/SHA).</li>
+                            <li><strong>Authentication:</strong> Lewat sertifikat CA & Kunci Publik (RSA).</li>
+                            <li>Sejarah: Dulu bernama SSL (Secure Socket Layer) lalu berevolusi menjadi TLS. Saat ini
+                                standar mutakhir adalah <strong>TLS 1.3</strong> (RFC 8846).</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image18.png" class="slide-img" alt="Transport-Layer Security (TLS)">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.4em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-layers-fill" style="color: #2563eb;"></i> Arsitektur Protokol TLS
+                                    pada Protocol Stack</span>
+                                <span
+                                    style="font-size: 0.85em; background: #eff6ff; color: #1d4ed8; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Port
+                                    443</span>
+                            </div>
+                            <!-- Stack Layers -->
+                            <div
+                                style="display: flex; flex-direction: column; gap: 5px; font-size: 0.45em; margin-bottom: 8px;">
+                                <div
+                                    style="background: #f0fdf4; border: 1.2px solid #86efac; border-radius: 5px; padding: 6px; text-align: center; font-weight: 700; color: #166534;">
+                                    Application Layer: HTTP (Web), SMTP, IMAP
+                                </div>
+                                <div
+                                    style="background: #3b82f6; border-radius: 5px; padding: 7px; text-align: center; font-weight: 800; color: #ffffff; box-shadow: 0 2px 6px rgba(59,130,246,0.3);">
+                                    🔒 TLS - Mengamankan Sesi
+                                    <div style="font-size: 0.85em; font-weight: 500; opacity: 0.9; margin-top: 2px;">
+                                        Enkripsi Simetris (AES) + Integritas (HMAC/SHA) + Otentikasi (CA)</div>
+                                </div>
+                                <div
+                                    style="background: #f8fafc; border: 1.2px solid #cbd5e1; border-radius: 5px; padding: 6px; text-align: center; font-weight: 700; color: #334155;">
+                                    Transport Layer: TCP (Koneksi Handshake Port 443)
+                                </div>
+                                <div
+                                    style="background: #f1f5f9; border: 1.2px solid #cbd5e1; border-radius: 5px; padding: 5px; text-align: center; color: #64748b;">
+                                    Network &amp; Link Layer: IP &amp; Ethernet / WiFi
+                                </div>
+                            </div>
+                            <!-- Highlight -->
+                            <div
+                                style="font-size: 0.43em; color: #1e40af; background: #eff6ff; border-radius: 5px; padding: 5px; text-align: center;">
+                                TLS berada tepat di atas TCP, menyediakan saluran terenkripsi transparan untuk aplikasi.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h3>TLS 1.3 Handshake</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Di TLS 1.3, proses negosiasi dipercepat menjadi hanya <strong>1 RTT</strong>:</p>
-                    <ol>
-                        <li><strong>Client Hello:</strong> Mengirim usulan kunci (Diffie-Hellman parameters).</li>
-                        <li><strong>Server Hello:</strong> Mengirim Sertifikat digital, setuju parameter, dan paket terkunci pertama kali.</li>
-                        <li><strong>Client:</strong> Memverifikasi sertifikat, menyelaraskan master key, dan HTTPS GET bisa langsung mengalir!</li>
-                    </ol>
-                    <p>Bahkan untuk pengunjung yang pernah datang, TLS 1.3 punya fitur <strong>0-RTT</strong> (meski rentan replay attack ringan).</p>
-                </div>
-                    <div>
-                        <img src="images/week13/image19.png" class="slide-img" alt="TLS 1.3 Handshake">
+                <h3>TLS 1.3 Handshake &amp; Diffie-Hellman</h3>
+                <div class="layout-text-img"
+                    style="display: grid; grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+
+                    <!-- KOLOM KIRI: Dikunci dengan min-width: 0, box-sizing, dan font-size proporsional -->
+                    <div class="card text-left text-smaller"
+                        style="font-size: 0.42em; min-width: 0; overflow-wrap: break-word; box-sizing: border-box;">
+                        <p>Pada TLS 1.3, proses negosiasi kunci dipercepat menjadi hanya <strong>$1\text{ RTT}$</strong>
+                            berbasis <em>Elliptic-Curve Diffie-Hellman Ephemeral</em> (ECDHE):</p>
+                        <ol style="margin-left: 14px; padding-left: 0;">
+                            <li><strong>Client Hello:</strong> Mengirimkan parameter Diffie-Hellman berupa nilai publik
+                                $A = g^a \bmod p$ bersama usulan <em>cipher suite</em>.</li>
+                            <li><strong>Server Hello:</strong> Mengirimkan sertifikat digital terverifikasi serta nilai
+                                publik balasan $B = g^b \bmod p$.</li>
+                            <li><strong>Penurunan Kunci Sesi (Shared Master Key):</strong>
+                                Kedua pihak menurunkan kunci simetris yang sama tanpa mentransmisikan rahasia:
+                                <!-- Rumus diperkecil sedikit & diberi overflow-x agar tidak mendorong batas kolom -->
+                                <div style="font-size: 0.9em; overflow-x: auto;">
+                                    $$K_{\text{session}} = B^a \bmod p = A^b \bmod p = g^{ab} \bmod p$$
+                                </div>
+                            </li>
+                        </ol>
+                        <div class="info-box" style="margin-top: 6px; font-size: 0.9em;">
+                            Tersedia juga fitur <strong>$0\text{-RTT}$ (Early Data)</strong> untuk koneksi berulang
+                            (<em>resumption</em>), meski membutuhkan mitigasi terhadap replay attack.
+                        </div>
+                    </div>
+
+                    <!-- KOLOM KANAN: Ditambahkan min-width: 0 dan perbaikan karakter \bmod -->
+                    <div style="min-width: 0;">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.5em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-lightning-charge-fill" style="color: #ca8a04;"></i> TLS 1.3 1-RTT
+                                    Handshake (ECDHE)</span>
+                                <span
+                                    style="font-size: 0.85em; background: #fefce8; color: #854d0e; padding: 2px 7px; border-radius: 10px; font-weight: 700;">1
+                                    Round Trip</span>
+                            </div>
+                            <!-- Round Trip Flow -->
+                            <div
+                                style="display: flex; flex-direction: column; gap: 6px; font-size: 0.44em; margin-bottom: 8px;">
+                                <!-- Step 1: Perbaikan \bmod -->
+                                <div
+                                    style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 6px; padding: 6px;">
+                                    <div style="font-weight: 700; color: #1e40af;">1. Client &rarr; Server (Client
+                                        Hello):</div>
+                                    <div style="color: #1e3a8a;">Mengirimkan usulan Cipher Suite + Parameter Kunci
+                                        Klien: $A = g^a \bmod p$</div>
+                                </div>
+                                <!-- Step 2: Perbaikan \bmod -->
+                                <div
+                                    style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 6px; padding: 6px;">
+                                    <div style="font-weight: 700; color: #166534;">2. Server &rarr; Client (Server Hello
+                                        + Cert):</div>
+                                    <div style="color: #14532d;">Membalas Sertifikat Digital + Parameter Server: $B =
+                                        g^b \bmod p$</div>
+                                </div>
+                                <!-- Master Secret Computation: Perbaikan \bmod -->
+                                <div
+                                    style="background: #fefce8; border: 1.2px solid #fde047; border-radius: 6px; padding: 6px; text-align: center; color: #854d0e; font-weight: 700;">
+                                    Keduanya langsung menghitung Master Secret: $S = g^{ab} \bmod p$
+                                </div>
+                            </div>
+                            <!-- Benefit -->
+                            <div
+                                style="font-size: 0.42em; color: #047857; background: #dcfce7; border-radius: 5px; padding: 4px; text-align: center; font-weight: 700;">
+                                ✔ Efisiensi Maksimal: Latensi turun 50% dibanding TLS 1.2 (hanya butuh 1-RTT sebelum
+                                data dikirim).
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Network Layer Security: IPsec</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>IPsec mengamankan komunikasi pada lapis Network (Level IP/Router). Digunakan secara masif untuk <strong>Virtual Private Network (VPN)</strong>.</p>
-                    <ul>
-                        <li><strong>Transport Mode:</strong> Hanya muatan *Payload* (data dalam paket) yang dienkripsi. Header IP luar dibiarkan utuh.</li>
-                        <li><strong>Tunnel Mode:</strong> Seluruh Datagram IP secara utuh dienkripsi, kemudian *dimasukkan/dibungkus (Tunneling)* ke dalam datagram IP BARU.</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: 0.5em; min-width: 0;">
+                        <p>IPsec mengamankan komunikasi pada lapis Network (Level IP/Router). Digunakan secara masif
+                            untuk <strong>Virtual Private Network (VPN)</strong>.</p>
+                        <ul>
+                            <li><strong>Transport Mode:</strong> Hanya muatan <em>Payload</em> (data dalam paket) yang
+                                dienkripsi. Header IP luar dibiarkan utuh.</li>
+                            <li><strong>Tunnel Mode:</strong> Seluruh Datagram IP secara utuh dienkripsi, kemudian
+                                <em>dimasukkan/dibungkus (Tunneling)</em> ke dalam datagram IP BARU.
+                            </li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image20.png" class="slide-img" alt="Network Layer Security: IPsec">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.4em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-hdd-network-fill" style="color: #2563eb;"></i> IPsec: Transport
+                                    Mode vs Tunnel Mode</span>
+                                <span
+                                    style="font-size: 0.85em; background: #eff6ff; color: #1d4ed8; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Network
+                                    Layer</span>
+                            </div>
+                            <!-- Transport Mode -->
+                            <div
+                                style="background: #f8fafc; border: 1.2px solid #cbd5e1; border-radius: 6px; padding: 7px; margin-bottom: 7px; font-size: 0.44em;">
+                                <div style="font-weight: 700; color: #1e293b; margin-bottom: 3px;">1. Transport Mode
+                                    (Host-to-Host):</div>
+                                <div style="display: flex; gap: 3px; font-size: 0.9em; text-align: center;">
+                                    <span style="background: #e2e8f0; padding: 2px 4px; border-radius: 3px; flex: 1;">IP
+                                        Header Asli</span>
+                                    <span
+                                        style="background: #dbeafe; padding: 2px 4px; border-radius: 3px; color: #1d4ed8; font-weight: 700; flex: 1;">ESP
+                                        Header</span>
+                                    <span
+                                        style="background: #fee2e2; padding: 2px 4px; border-radius: 3px; color: #991b1b; font-weight: 700; flex: 2;">Payload
+                                        Terenkripsi</span>
+                                </div>
+                                <div style="color: #64748b; font-size: 0.88em; margin-top: 3px;">Hanya muatan data yang
+                                    dienkripsi; IP Header tetap terbuka.</div>
+                            </div>
+                            <!-- Tunnel Mode -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #86efac; border-radius: 6px; padding: 7px; margin-bottom: 7px; font-size: 0.44em;">
+                                <div style="font-weight: 700; color: #166534; margin-bottom: 3px;">2. Tunnel Mode
+                                    (Gateway-to-Gateway / VPN):</div>
+                                <div style="display: flex; gap: 3px; font-size: 0.9em; text-align: center;">
+                                    <span
+                                        style="background: #dcfce7; padding: 2px 4px; border-radius: 3px; color: #15803d; font-weight: 700; flex: 1.2;">IP
+                                        Baru (VPN)</span>
+                                    <span
+                                        style="background: #dbeafe; padding: 2px 4px; border-radius: 3px; color: #1d4ed8; font-weight: 700; flex: 1;">ESP
+                                        Header</span>
+                                    <span
+                                        style="background: #fee2e2; padding: 2px 4px; border-radius: 3px; color: #991b1b; font-weight: 700; flex: 2.2;">Seluruh
+                                        IP Asli + Payload</span>
+                                </div>
+                                <div style="color: #166534; font-size: 0.88em; margin-top: 3px;">Paket IP internal
+                                    terbungkus total; menyembunyikan topologi kantor.</div>
+                            </div>
+                            <!-- Takeaway -->
+                            <div
+                                style="font-size: 0.42em; color: #475569; background: #f8fafc; border-radius: 5px; padding: 4px; text-align: center;">
+                                Tunnel Mode adalah fondasi utama infrastruktur koneksi aman VPN antar kantor cabang.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>ESP & IKE pada IPsec</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <ul>
-                        <li><strong>ESP (Encapsulation Security Protocol):</strong> Memberikan Otentikasi, Integritas Data, dan <em>Kerahasiaan/Enkripsi</em> sekaligus. Jauh lebih populer dipakai ketimbang protokol lawas AH.</li>
-                        <li><strong>IKE (Internet Key Exchange):</strong> Proses negosiasi otomatis antar 2 router ujung VPN untuk menyepakati kata sandi kunci enkripsi dan algoritma, membebaskan admin jaringan dari tugas manual keying yang mustahil (terutama untuk 100+ cabang VPN).</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: 0.55em; min-width: 0;">
+                        <ul>
+                            <li><strong>ESP (Encapsulation Security Protocol):</strong> Memberikan Otentikasi,
+                                Integritas Data, dan <em>Kerahasiaan/Enkripsi</em> sekaligus. Jauh lebih populer dipakai
+                                ketimbang protokol lawas AH.</li>
+                            <li><strong>IKE (Internet Key Exchange):</strong> Proses negosiasi otomatis antar 2 router
+                                ujung VPN untuk menyepakati kata sandi kunci enkripsi dan algoritma, membebaskan admin
+                                jaringan dari tugas manual keying yang mustahil (terutama untuk 100+ cabang VPN).</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image21.png" class="slide-img" alt="ESP & IKE pada IPsec">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.5em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-shield-fill-check" style="color: #059669;"></i> Dua Pilar Utama
+                                    Protokol IPsec</span>
+                                <span
+                                    style="font-size: 0.85em; background: #d1fae5; color: #065f46; padding: 2px 7px; border-radius: 10px; font-weight: 700;">ESP
+                                    &amp; IKE</span>
+                            </div>
+                            <!-- Pillar 1: ESP -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 6px; padding: 7px; margin-bottom: 7px; font-size: 0.45em;">
+                                <div style="font-weight: 700; color: #166534; margin-bottom: 2px;"><i
+                                        class="bi bi-lock-fill"></i> 1. ESP (Encapsulating Security Payload):</div>
+                                <div style="color: #14532d;">
+                                    • <strong>Fungsi:</strong> Bidang Data (Data Plane).<br>
+                                    • <strong>Proteksi:</strong> Enkripsi muatan (Confidentiality) + Integritas Data
+                                    (SHA) + Anti-Replay via Sequence Number.
+                                </div>
+                            </div>
+                            <!-- Pillar 2: IKE -->
+                            <div
+                                style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 6px; padding: 7px; margin-bottom: 7px; font-size: 0.45em;">
+                                <div style="font-weight: 700; color: #1e40af; margin-bottom: 2px;"><i
+                                        class="bi bi-gear-fill"></i> 2. IKE (Internet Key Exchange):</div>
+                                <div style="color: #1e3a8a;">
+                                    • <strong>Fungsi:</strong> Bidang Kontrol (Control Plane).<br>
+                                    • <strong>Negosiasi:</strong> Menyepakati Security Association (SA), algoritma
+                                    cipher, dan pertukaran kunci rahasia otomatis.
+                                </div>
+                            </div>
+                            <!-- Summary -->
+                            <div
+                                style="font-size: 0.42em; color: #475569; background: #f8fafc; border-radius: 5px; padding: 5px; text-align: center;">
+                                IKE menegosiasikan aturan &amp; kunci di awal, lalu ESP mengamankan seluruh aliran paket
+                                data.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Keamanan Wireless: WPA3 & 802.11</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Jaringan Wireless via gelombang radio sangat mudah disadap oleh siapa saja. Dibutuhkan perlindungan keamanan khusus.</p>
-                    <ul>
-                        <li>Ponsel Anda akan mengotentikasi diri ke AP (Access Point) yang berkoordinasi dengan AS (Authentication Server).</li>
-                        <li>Handshake WPA3 menggunakan metode <em>Mutual Authentication</em> (saling menguji tanpa mengirim password mentah).</li>
-                        <li>Setelah tervalidasi, algoritma akan menurunkan <em>Shared Symmetric Session Key</em> (AES) yang hanya digunakan untuk sesi nongkrong WiFi Anda hari itu.</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: 0.5em; min-width: 0;">
+                        <p>Jaringan Wireless via gelombang radio sangat mudah disadap oleh siapa saja. Dibutuhkan
+                            perlindungan keamanan khusus.</p>
+                        <ul>
+                            <li>Ponsel Anda akan mengotentikasi diri ke AP (Access Point) yang berkoordinasi dengan AS
+                                (Authentication Server).</li>
+                            <li>Handshake WPA3 menggunakan metode <em>Mutual Authentication</em> (saling menguji tanpa
+                                mengirim password mentah).</li>
+                            <li>Setelah tervalidasi, algoritma akan menurunkan <em>Shared Symmetric Session Key</em>
+                                (AES) yang hanya digunakan untuk sesi nongkrong WiFi Anda hari itu.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image22.png" class="slide-img" alt="Keamanan Wireless: WPA3 & 802.11">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.62em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-wifi" style="color: #2563eb;"></i> Arsitektur Keamanan Wireless
+                                    802.11 / WPA3</span>
+                                <span
+                                    style="font-size: 0.85em; background: #eff6ff; color: #1d4ed8; padding: 2px 7px; border-radius: 10px; font-weight: 700;">WPA3
+                                    SAE</span>
+                            </div>
+                            <!-- Triad Entities -->
+                            <div
+                                style="display: flex; gap: 4px; font-size: 0.44em; text-align: center; margin-bottom: 8px;">
+                                <div
+                                    style="background: #f8fafc; border: 1.2px solid #cbd5e1; border-radius: 5px; padding: 5px; flex: 1;">
+                                    <i class="bi bi-phone" style="font-size: 1.3em; color: #3b82f6;"></i><br>
+                                    <strong>Klien Nirkabel</strong><br>
+                                    <span style="font-size: 0.85em; color: #64748b;">(Supplicant)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; color: #94a3b8;">&harr;</div>
+                                <div
+                                    style="background: #f8fafc; border: 1.2px solid #cbd5e1; border-radius: 5px; padding: 5px; flex: 1;">
+                                    <i class="bi bi-router" style="font-size: 1.3em; color: #10b981;"></i><br>
+                                    <strong>Access Point</strong><br>
+                                    <span style="font-size: 0.85em; color: #64748b;">(Authenticator)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; color: #94a3b8;">&harr;</div>
+                                <div
+                                    style="background: #f8fafc; border: 1.2px solid #cbd5e1; border-radius: 5px; padding: 5px; flex: 1;">
+                                    <i class="bi bi-server" style="font-size: 1.3em; color: #8b5cf6;"></i><br>
+                                    <strong>Auth Server</strong><br>
+                                    <span style="font-size: 0.85em; color: #64748b;">(RADIUS)</span>
+                                </div>
+                            </div>
+                            <!-- WPA3 Feature -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #86efac; border-radius: 6px; padding: 6px; font-size: 0.44em; color: #166534; margin-bottom: 6px;">
+                                <strong>Keunggulan WPA3 (SAE - Simultaneous Authentication of Equals):</strong>
+                                Mencegah <em>Offline Dictionary Attack</em> bahkan saat kata sandi WiFi relatif mudah
+                                ditebak.
+                            </div>
+                            <div
+                                style="font-size: 0.42em; color: #475569; background: #f8fafc; border-radius: 5px; padding: 4px; text-align: center;">
+                                Enkripsi 192-bit tingkat enterprise untuk institusi pemerintahan &amp; kampus.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Keamanan Operasional: Firewalls</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Firewall adalah dinding perisai yang mengisolasi jaringan internal institusi Anda dari kebuasan jagat internet luar ("Bad Guys").</p>
-                    <p>Fungsi utama:</p>
-                    <ul>
-                        <li>Mencegah <em>Denial of Service (DoS) / SYN Flooding</em> attack.</li>
-                        <li>Mencegah akses ilegal ke database/server internal perusahaan.</li>
-                        <li>Menentukan layanan apa saja yang boleh keluar-masuk.</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: 0.6em; min-width: 0;">
+                        <p>Firewall adalah dinding perisai yang mengisolasi jaringan internal institusi Anda dari
+                            kebuasan jagat internet luar ("Bad Guys").</p>
+                        <p>Fungsi utama:</p>
+                        <ul>
+                            <li>Mencegah <em>Denial of Service (DoS) / SYN Flooding</em> attack.</li>
+                            <li>Mencegah akses ilegal ke database/server internal perusahaan.</li>
+                            <li>Menentukan layanan apa saja yang boleh keluar-masuk.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image23.png" class="slide-img" alt="Keamanan Operasional: Firewalls">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.4em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-bricks" style="color: #ea580c;"></i> Dinding Perimeter: Fungsi
+                                    Utama Firewall</span>
+                                <span
+                                    style="font-size: 0.85em; background: #fff7ed; color: #c2410c; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Perimeter
+                                    Security</span>
+                            </div>
+                            <!-- Zones Flow -->
+                            <div
+                                style="display: flex; align-items: center; justify-content: space-between; font-size: 0.44em; margin-bottom: 8px;">
+                                <div
+                                    style="background: #fef2f2; border: 1.2px solid #fecaca; border-radius: 5px; padding: 6px; flex: 1; text-align: center;">
+                                    <span style="font-weight: 700; color: #991b1b;">Internet Publik</span><br>
+                                    <span style="font-size: 0.85em; color: #dc2626;">(Wild Web / Threat)</span>
+                                </div>
+                                <div
+                                    style="margin: 0 6px; background: #ea580c; color: #fff; padding: 6px 10px; border-radius: 6px; font-weight: 800; text-align: center;">
+                                    🛡️ FIREWALL<br><span style="font-size: 0.8em; font-weight: 500;">Filter
+                                        Gerbang</span>
+                                </div>
+                                <div
+                                    style="background: #f0fdf4; border: 1.2px solid #bbf7d0; border-radius: 5px; padding: 6px; flex: 1; text-align: center;">
+                                    <span style="font-weight: 700; color: #166534;">Jaringan Internal</span><br>
+                                    <span style="font-size: 0.85em; color: #16a34a;">(LAN Terproteksi)</span>
+                                </div>
+                            </div>
+                            <!-- 3 Core Defenses -->
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 4px; font-size: 0.43em;">
+                                <div
+                                    style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px;">
+                                    ✔ <strong>Anti-DoS:</strong> Memblokir banjir paket SYN Flooding dan Ping of Death.
+                                </div>
+                                <div
+                                    style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px;">
+                                    ✔ <strong>Isolasi Layanan:</strong> Mencegah akses internet luar ke database server
+                                    internal.
+                                </div>
+                                <div
+                                    style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px;">
+                                    ✔ <strong>Kontrol Kebijakan:</strong> Menentukan siapa yang boleh mengakses port
+                                    tertentu.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Stateless Packet Filtering</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Penyaringan primitif namun sangat cepat berbasis aturan mentah baris-demi-baris (ACL - Access Control Lists).</p>
-                    <ul>
-                        <li><em>"Jatuhkan semua paket UDP dari luar kecuali Port 53 (DNS)."</em></li>
-                        <li><em>"Blokir semua paket ICMP yang menuju alamat broadcast (mencegah smurf DoS)."</em></li>
-                    </ul>
-                    <p><strong>Kelemahan Stateless:</strong> Dia sangat kaku. Jika hacker menembakkan paket palsu dengan Flag TCP ACK terpasang dari antah berantah, Stateless filter bisa tertipu (mengira itu paket balasan sah).</p>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: 0.5em; min-width: 0;">
+                        <p>Penyaringan primitif namun sangat cepat berbasis aturan mentah baris-demi-baris (ACL - Access
+                            Control Lists).</p>
+                        <ul>
+                            <li><em>"Jatuhkan semua paket UDP dari luar kecuali Port 53 (DNS)."</em></li>
+                            <li><em>"Blokir semua paket ICMP yang menuju alamat broadcast (mencegah smurf DoS)."</em>
+                            </li>
+                        </ul>
+                        <p><strong>Kelemahan Stateless:</strong> Dia sangat kaku. Jika hacker menembakkan paket palsu
+                            dengan Flag TCP ACK terpasang dari antah berantah, Stateless filter bisa tertipu (mengira
+                            itu paket balasan sah).</p>
+                    </div>
                     <div>
-                        <img src="images/week13/image24.png" class="slide-img" alt="Stateless Packet Filtering">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.62em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-table" style="color: #2563eb;"></i> Simulasi Tabel Aturan ACL
+                                    (Stateless Filter)</span>
+                                <span
+                                    style="font-size: 0.85em; background: #eff6ff; color: #1d4ed8; padding: 2px 7px; border-radius: 10px; font-weight: 700;">No
+                                    History</span>
+                            </div>
+                            <!-- ACL Table -->
+                            <table
+                                style="width: 100%; border-collapse: collapse; font-size: 0.42em; margin-bottom: 8px;">
+                                <thead>
+                                    <tr
+                                        style="background: #f1f5f9; border-bottom: 1.5px solid #cbd5e1; text-align: left;">
+                                        <th style="padding: 3px 5px;">Aksi</th>
+                                        <th style="padding: 3px 5px;">Protokol</th>
+                                        <th style="padding: 3px 5px;">Dest Port</th>
+                                        <th style="padding: 3px 5px;">Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #f1f5f9; color: #166534;">
+                                        <td style="padding: 3px 5px; font-weight: 700;">ALLOW</td>
+                                        <td style="padding: 3px 5px;">TCP</td>
+                                        <td style="padding: 3px 5px;">80, 443</td>
+                                        <td style="padding: 3px 5px;">Lalu lintas Web publik</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #f1f5f9; color: #166534;">
+                                        <td style="padding: 3px 5px; font-weight: 700;">ALLOW</td>
+                                        <td style="padding: 3px 5px;">UDP</td>
+                                        <td style="padding: 3px 5px;">53</td>
+                                        <td style="padding: 3px 5px;">Resolusi DNS internal</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #f1f5f9; color: #991b1b;">
+                                        <td style="padding: 3px 5px; font-weight: 700;">DENY</td>
+                                        <td style="padding: 3px 5px;">ICMP</td>
+                                        <td style="padding: 3px 5px;">Any</td>
+                                        <td style="padding: 3px 5px;">Mencegah Ping broadcast DoS</td>
+                                    </tr>
+                                    <tr style="color: #991b1b; font-weight: 700;">
+                                        <td style="padding: 3px 5px;">DENY</td>
+                                        <td style="padding: 3px 5px;">All</td>
+                                        <td style="padding: 3px 5px;">All</td>
+                                        <td style="padding: 3px 5px;">Default drop sisa paket</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- Limitation note -->
+                            <div
+                                style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 5px; padding: 4px; font-size: 0.42em; color: #991b1b;">
+                                <strong>Kelemahan Stateless:</strong> Tidak tahu apakah paket TCP ACK yang datang
+                                merupakan balasan yang sah atau paket serangan dari peretas.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Stateful Packet Filtering</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Firewall canggih yang <strong>Melacak Status Memori Koneksi</strong>.</p>
-                    <ul>
-                        <li>Firewall pintar ini mencatat: <em>"Oh, tadi mahasiswa internal bernama Budi me-request TCP SYN ke Google. Maka balasan TCP SYN-ACK dari Google sah."</em></li>
-                        <li>Sebaliknya, jika ada paket TCP ACK tiba-tiba masuk dari Rusia (tanpa ada orang di dalam institusi yang mengundang sebelumnya), Firewall Stateful akan menampar jatuh paket tersebut karena dianggap "Makes no sense"!</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: 0.5em; min-width: 0;">
+                        <p>Firewall canggih yang <strong>Melacak Status Memori Koneksi</strong>.</p>
+                        <ul>
+                            <li>Firewall pintar ini mencatat: <em>"Oh, tadi mahasiswa internal bernama Budi me-request
+                                    TCP SYN ke Google. Maka balasan TCP SYN-ACK dari Google sah."</em></li>
+                            <li>Sebaliknya, jika ada paket TCP ACK tiba-tiba masuk dari Rusia (tanpa ada orang di dalam
+                                institusi yang mengundang sebelumnya), Firewall Stateful akan menampar jatuh paket
+                                tersebut karena dianggap "Makes no sense"!</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image25.png" class="slide-img" alt="Stateful Packet Filtering">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.62em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-memory" style="color: #16a34a;"></i> Stateful Inspection:
+                                    Pelacakan Memori Sesi</span>
+                                <span
+                                    style="font-size: 0.85em; background: #dcfce7; color: #15803d; padding: 2px 7px; border-radius: 10px; font-weight: 700;">State
+                                    Table</span>
+                            </div>
+                            <!-- Scenario 1: Legitimate Handshake -->
+                            <div
+                                style="background: #f0fdf4; border: 1.2px solid #86efac; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.44em;">
+                                <div style="font-weight: 700; color: #166534; margin-bottom: 2px;">1. Klien Internal
+                                    Menginisiasi Koneksi:</div>
+                                <div style="color: #14532d;">
+                                    PC internal kirim <code>TCP SYN</code> ke Google &rarr; Firewall mencatat sesi di
+                                    <strong>State Table</strong>.<br>
+                                    Saat Google membalas <code>SYN-ACK</code>, firewall mengecek tabel: "Cocok dengan
+                                    sesi aktif" &rarr; <span
+                                        style="background: #16a34a; color: #fff; padding: 1px 4px; border-radius: 3px; font-weight: 700;">DIIZINKAN</span>
+                                </div>
+                            </div>
+                            <!-- Scenario 2: Hacker Blind Attack -->
+                            <div
+                                style="background: #fef2f2; border: 1.2px solid #fca5a5; border-radius: 6px; padding: 6px; margin-bottom: 6px; font-size: 0.44em;">
+                                <div style="font-weight: 700; color: #991b1b; margin-bottom: 2px;">2. Peretas Mengirim
+                                    Paket Ilegal:</div>
+                                <div style="color: #7f1d1d;">
+                                    Paket <code>TCP ACK</code> tiba-tiba masuk dari luar tanpa ada riwayat SYN dari
+                                    klien &rarr; Firewall cek State Table: "Tidak ada riwayat permintaan!" &rarr; <span
+                                        style="background: #dc2626; color: #fff; padding: 1px 4px; border-radius: 3px; font-weight: 700;">DIBLOKIR
+                                        / DROP</span>
+                                </div>
+                            </div>
+                            <!-- Advantage -->
+                            <div
+                                style="font-size: 0.42em; color: #047857; background: #dcfce7; border-radius: 5px; padding: 4px; text-align: center; font-weight: 700;">
+                                Mencegah port scanning, connection hijacking, dan serangan TCP tanpa sesi sah.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Intrusion Detection Systems (IDS)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Firewall standar hanya melihat "Kulit" Header (Port & IP). Hacker bisa mengirimkan perintah Hacking SQL Injection dengan sangat sah melalui pelabuhan legal Web Port 80.</p>
-                    <p><strong>IDS (Intrusion Detection System)</strong> bertindak seperti anjing pelacak bandara. Ia tidak hanya melihat label koper, tapi akan membongkar <em>Isi Koper (Payload)</em>.</p>
-                    <ul>
-                        <li><strong>Deep Packet Inspection:</strong> Mengintip isi data untuk mencari tanda tangan virus atau skrip hacking.</li>
-                        <li>Menelusuri anomali atau scanning jaringan (*Port Scanning*).</li>
-                    </ul>
-                </div>
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
+                    <div class="card text-left text-smaller" style="font-size: 0.5em; min-width: 0;">
+                        <p>Firewall standar hanya melihat "Kulit" Header (Port & IP). Hacker bisa mengirimkan perintah
+                            Hacking SQL Injection dengan sangat sah melalui pelabuhan legal Web Port 80.</p>
+                        <p><strong>IDS (Intrusion Detection System)</strong> bertindak seperti anjing pelacak bandara.
+                            Ia tidak hanya melihat label koper, tapi akan membongkar <em>Isi Koper (Payload)</em>.</p>
+                        <ul>
+                            <li><strong>Deep Packet Inspection:</strong> Mengintip isi data untuk mencari tanda tangan
+                                virus atau skrip hacking.</li>
+                            <li>Menelusuri anomali atau scanning jaringan (<em>Port Scanning</em>).</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image26.png" class="slide-img" alt="Intrusion Detection Systems (IDS)">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.62em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-radar" style="color: #dc2626;"></i> Perbedaan Cakupan: Firewall vs
+                                    IDS / IPS</span>
+                                <span
+                                    style="font-size: 0.85em; background: #fee2e2; color: #991b1b; padding: 2px 7px; border-radius: 10px; font-weight: 700;">Deep
+                                    Inspection</span>
+                            </div>
+                            <!-- Comparison Grid -->
+                            <div
+                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 0.44em; margin-bottom: 7px;">
+                                <!-- Firewall Box -->
+                                <div
+                                    style="background: #eff6ff; border: 1.2px solid #bfdbfe; border-radius: 6px; padding: 6px;">
+                                    <div style="font-weight: 700; color: #1e40af; margin-bottom: 2px;">🛡️ Firewall (L3
+                                        / L4)</div>
+                                    <div style="color: #1e3a8a;">
+                                        • Inspeksi <strong>Header</strong> paket saja.<br>
+                                        • Hanya cek IP &amp; Port.<br>
+                                        • Buta terhadap muatan payload (SQL Injection lolos jika lewat Port 80!).
+                                    </div>
+                                </div>
+                                <!-- IDS/IPS Box -->
+                                <div
+                                    style="background: #fef2f2; border: 1.2px solid #fecaca; border-radius: 6px; padding: 6px;">
+                                    <div style="font-weight: 700; color: #991b1b; margin-bottom: 2px;">🐕 IDS / IPS (L7
+                                        DPI)</div>
+                                    <div style="color: #7f1d1d;">
+                                        • <strong>Deep Packet Inspection</strong>.<br>
+                                        • Membongkar isi muatan data.<br>
+                                        • Mencocokkan signature virus, SQL Injection, dan anomali perilaku trafik.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Analogy -->
+                            <div
+                                style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 5px; padding: 5px; font-size: 0.42em; color: #475569; text-align: center;">
+                                <strong>Analogi Bandara:</strong> Firewall memeriksa paspor penumpang (kulit luar),
+                                sedangkan IDS memeriksa koper dengan sinar-X (muatan dalam).
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Topologi Keamanan Berlapis Modern</h3>
-                <div class="layout-text-img">
+                <div class="layout-text-img" style="grid-template-columns: 46% 1fr; gap: 16px; align-items: center;">
                     <div class="card text-left text-smaller">
-                    <p>Perusahaan modern menerapkan kombinasi seluruh perlindungan. Mereka membentuk <strong>DMZ (Demilitarized Zone)</strong> untuk menaruh web server publik.</p>
-                    <ul>
-                        <li>Terdapat Firewall utama di gerbang.</li>
-                        <li>Terdapat IDS Sensor yang mengawasi lalu lalang lalu lintas web publik dan jaringan karyawan internal.</li>
-                    </ul>
-                </div>
+                        <p>Perusahaan modern menerapkan kombinasi seluruh perlindungan. Mereka membentuk <strong>DMZ
+                                (Demilitarized Zone)</strong> untuk menaruh web server publik.</p>
+                        <ul>
+                            <li>Terdapat Firewall utama di gerbang.</li>
+                            <li>Terdapat IDS Sensor yang mengawasi lalu lalang lalu lintas web publik dan jaringan
+                                karyawan internal.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week13/image27.png" class="slide-img" alt="Topologi Keamanan Berlapis Modern">
+                        <div class="card"
+                            style="padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-align: left;">
+                            <div
+                                style="font-weight: 800; font-size: 0.62em; color: #1e293b; margin-bottom: 8px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="bi bi-diagram-3-fill" style="color: #2563eb;"></i> Topologi Keamanan
+                                    Berlapis (Defense-in-Depth)</span>
+                                <span
+                                    style="font-size: 0.85em; background: #eff6ff; color: #1d4ed8; padding: 2px 7px; border-radius: 10px; font-weight: 700;">DMZ
+                                    Zone</span>
+                            </div>
+                            <!-- 3 Layers Architecture -->
+                            <div
+                                style="display: flex; flex-direction: column; gap: 5px; font-size: 0.44em; margin-bottom: 7px;">
+                                <!-- External -->
+                                <div
+                                    style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 5px; padding: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-weight: 700; color: #991b1b;">1. Perimeter Luar:</span>
+                                    <span style="color: #7f1d1d;">Internet Liar &rarr; <strong>Firewall
+                                            Eksternal</strong></span>
+                                </div>
+                                <!-- DMZ -->
+                                <div
+                                    style="background: #fff7ed; border: 1.2px solid #fdba74; border-radius: 5px; padding: 6px;">
+                                    <div style="font-weight: 700; color: #c2410c;">2. DMZ (Demilitarized Zone):</div>
+                                    <div style="color: #9a3412;">Menempatkan Web Server &amp; DNS Publik. Jika server
+                                        web diretas, peretas tetap terisolasi di DMZ.</div>
+                                </div>
+                                <!-- Internal Core -->
+                                <div
+                                    style="background: #f0fdf4; border: 1.2px solid #86efac; border-radius: 5px; padding: 6px;">
+                                    <div style="font-weight: 700; color: #166534;">3. Jaringan Inti Terproteksi:</div>
+                                    <div style="color: #14532d;"><strong>Firewall Internal + IDS Sensor</strong> &rarr;
+                                        Melindungi Database Sensitif &amp; LAN Karyawan.</div>
+                                </div>
+                            </div>
+                            <!-- Philosophy -->
+                            <div
+                                style="font-size: 0.42em; color: #1e40af; background: #eff6ff; border-radius: 5px; padding: 4px; text-align: center; font-weight: 700;">
+                                Prinsip Berlapis: Tidak ada titik kegagalan tunggal (Single Point of Failure).
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h3>Galeri Ilustrasi Tambahan (1)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week13/image28.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (1)">
+                <h3>Sintesis: Matriks Pertahanan Berlapis (Defense-in-Depth)</h3>
+                <div class="card text-left text-smaller" style="font-size: 0.48em; padding: 14px;">
+                    <p style="font-weight: 700; color: #1565c0; margin-bottom: 8px;">
+                        <i class="bi bi-table"></i> Pemetaan Protokol Keamanan di Seluruh Protocol Stack (Kurose &amp;
+                        Ross):
+                    </p>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.95em;">
+                        <thead>
+                            <tr style="background: #1565c0; color: #fff;">
+                                <th style="padding: 6px 8px; width: 18%;">Lapisan Jaringan</th>
+                                <th style="padding: 6px 8px; width: 22%;">Protokol / Teknologi</th>
+                                <th style="padding: 6px 8px; width: 30%;">Mekanisme Proteksi</th>
+                                <th style="padding: 6px 8px; width: 30%;">Ancaman yang Ditangkal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: #f8fafc;">
+                                <td style="padding: 6px 8px; font-weight: 700; color: #1e293b;">Application</td>
+                                <td style="padding: 6px 8px; font-weight: 700; color: #2563eb;">PGP, S/MIME, DNSSEC</td>
+                                <td style="padding: 6px 8px;">Enkripsi data aplikasi &amp; tanda tangan digital</td>
+                                <td style="padding: 6px 8px;">Penyadapan email, DNS Cache Poisoning</td>
+                            </tr>
+                            <tr style="background: #ffffff;">
+                                <td style="padding: 6px 8px; font-weight: 700; color: #1e293b;">Transport</td>
+                                <td style="padding: 6px 8px; font-weight: 700; color: #16a34a;">TLS 1.3 (HTTPS Port 443)
+                                </td>
+                                <td style="padding: 6px 8px;">Enkripsi sesi AES, HMAC SHA-256, CA Trust X.509</td>
+                                <td style="padding: 6px 8px;">Eavesdropping, Tampering, Serangan MITM</td>
+                            </tr>
+                            <tr style="background: #f8fafc;">
+                                <td style="padding: 6px 8px; font-weight: 700; color: #1e293b;">Network (IP)</td>
+                                <td style="padding: 6px 8px; font-weight: 700; color: #ca8a04;">IPsec (ESP &amp; IKEv2)
+                                </td>
+                                <td style="padding: 6px 8px;">Tunnel Mode enkripsi seluruh datagram IP router-ke-router
+                                </td>
+                                <td style="padding: 6px 8px;">IP Spoofing, sniffing paket WAN/VPN</td>
+                            </tr>
+                            <tr style="background: #ffffff;">
+                                <td style="padding: 6px 8px; font-weight: 700; color: #1e293b;">Data Link / Phys</td>
+                                <td style="padding: 6px 8px; font-weight: 700; color: #9333ea;">WPA3 Enterprise (SAE)
+                                </td>
+                                <td style="padding: 6px 8px;">Enkripsi radio 192-bit &amp; otentikasi RADIUS 802.1X</td>
+                                <td style="padding: 6px 8px;">WiFi Sniffing liar, offline dictionary attack</td>
+                            </tr>
+                            <tr style="background: #fff1f2;">
+                                <td style="padding: 6px 8px; font-weight: 700; color: #dc2626;">Perimeter Gateway</td>
+                                <td style="padding: 6px 8px; font-weight: 700; color: #dc2626;">Stateful Firewall +
+                                    IDS/IPS</td>
+                                <td style="padding: 6px 8px;">State Table tracking + Deep Packet Inspection (DPI L7)
+                                </td>
+                                <td style="padding: 6px 8px;">SYN Flooding DoS, Malware exploit, Port Scanning</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 8px; font-size: 0.88em; color: #475569; text-align: center;">
+                        <strong>Prinsip Inti Keamanan Komputer:</strong> <em>Security is not a product, but a layered
+                            process.</em> (Tidak ada lapisan tunggal yang kebal).
+                    </div>
                 </div>
             </section>
 
             <section>
-                <h3>Galeri Ilustrasi Tambahan (2)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week13/image29.png" class="slide-img" alt="Galeri Ilustrasi Tambahan (2)">
+                <div class="tugas-box" style="font-size: .65em;">
+                    <h3>📝 Tugas Praktikum Mandiri: Audit Keamanan Jaringan &amp; Kriptografi</h3>
+                    <p style="font-size: .62em; margin-bottom: 10px; color: #e8f5e9;">
+                        Lakukan investigasi praktis, analisis lalu lintas terenkripsi, dan audit keamanan sistem
+                        jaringan riil menggunakan perangkat analisis paket (Wireshark), OpenSSL, dan CLI:
+                    </p>
+                    <div class="tugas-soal">
+                        <p><span class="num">1.</span> <strong>Inspeksi Plaintext vs Ciphertext (Wireshark):</strong>
+                            Lakukan penangkapan paket (<em>packet capture</em>) pada komunikasi HTTP tanpa enkripsi
+                            (port 80) versus HTTPS (port 443). Buktikan bahwa muatan data (payload) pada HTTP terbaca
+                            telanjang (plaintext), sedangkan pada HTTPS terenkripsi TLS (ciphertext).</p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">2.</span> <strong>Analisis Handshake TLS 1.3:</strong> Terapkan filter
+                            <code>tls</code> pada Wireshark saat mengakses <code>https://www.itera.ac.id</code>. Temukan
+                            paket <code>Client Hello</code> dan <code>Server Hello</code>, lalu catat <em>Cipher
+                                Suite</em> dan parameter enkripsi yang disepakati.</p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">3.</span> <strong>Verifikasi Sertifikat Digital X.509 &amp; CA:</strong>
+                            Jalankan perintah terminal
+                            <code>openssl s_client -connect www.itera.ac.id:443 -showcerts</code> (atau viewer
+                            sertifikat browser). Dokumentasikan hierarki sertifikat (<em>Chain of Trust</em>) dari
+                            Server hingga Root CA serta masa berlakunya.</p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">4.</span> <strong>Uji Integritas &amp; Efek Avalanche (SHA-256):</strong>
+                            Buat file teks berisikan pesan rahasia, lalu hitung nilai hash menggunakan
+                            <code>sha256sum</code> (atau <code>shasum -a 256</code>). Ubah tepat 1 karakter di dalamnya
+                            dan buktikan perubahan drastis output digest sebagai jaminan integritas data.</p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">5.</span> <strong>Audit Port &amp; Deteksi Firewall (Nmap):</strong>
+                            Lakukan pemindaian port lokal/lab menggunakan perintah
+                            <code>nmap -sS -p 22,80,443 &lt;target_IP&gt;</code>. Jelaskan perbedaan respon paket TCP
+                            SYN untuk status port <em>open</em>, <em>closed</em>, dan <em>filtered</em> oleh firewall.
+                        </p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">6.</span> <strong>Penyusunan Laporan Praktikum:</strong> Susun hasil
+                            pengujian ke dalam laporan praktikum mandiri berstandar template A4 margin 3 cm lengkap
+                            dengan tangkapan layar bukti eksekusi dan analisis kritis.</p>
+                    </div>
+                    <div class="tugas-info">
+                        <div class="tugas-chip"><i class="bi bi-clock-fill"></i> Batas Waktu: 1 Minggu</div>
+                        <div class="tugas-chip"><i class="bi bi-file-earmark-code-fill"></i> Format: PDF &amp; Log
+                            Wireshark (.pcapng)</div>
+                        <div class="tugas-chip"><i class="bi bi-cloud-arrow-up-fill"></i> Pengumpulan: Google Classroom
+                            / LMS</div>
+                    </div>
                 </div>
+                <aside class="notes">Tugas praktikum mandiri Pertemuan 13 membimbing mahasiswa mempraktikkan audit
+                    keamanan jaringan nyata, inspeksi TLS handshake di Wireshark, verifikasi sertifikat X.509 via
+                    OpenSSL, dan pengujian integritas hash.</aside>
             </section>
 
             <!-- ━━━━━━━━━━━━━━ PENUTUP / Q&A ━━━━━━━━━━━━━━ -->
@@ -755,11 +2078,14 @@
                 <div style="font-size: 2.2em; color: #1565c0; margin: 15px 0;">
                     <i class="bi bi-chat-dots-fill"></i>
                 </div>
-                <p>Pertemuan berikutnya: <strong>Pertemuan 14: Wireless & Mobile Networks (WiFi, Cellular 4G/5G, & Mobilitas)</strong></p>
+                <p>Pertemuan berikutnya: <strong>Pertemuan 14: Wireless & Mobile Networks (WiFi, Cellular 4G/5G, &
+                        Mobilitas)</strong></p>
                 <p class="text-small" style="color: #666; max-width: 720px; margin: 10px auto;">
-                    Persiapkan pemahaman mengenai medium transmisi gelombang radio nirkabel, standar IEEE 802.11 (WiFi), arsitektur seluler 4G LTE/5G, serta tantangan routing mobilitas pengguna.
+                    Persiapkan pemahaman mengenai medium transmisi gelombang radio nirkabel, standar IEEE 802.11 (WiFi),
+                    arsitektur seluler 4G LTE/5G, serta tantangan routing mobilitas pengguna.
                 </p>
-                <aside class="notes">Beri kesempatan mahasiswa bertanya mengenai implementasi TLS handshake, enkripsi RSA/AES, atau konfigurasi firewall sebelum menutup sesi pertemuan.</aside>
+                <aside class="notes">Beri kesempatan mahasiswa bertanya mengenai implementasi TLS handshake, enkripsi
+                    RSA/AES, atau konfigurasi firewall sebelum menutup sesi pertemuan.</aside>
             </section>
 
         </div><!-- /slides -->
@@ -767,12 +2093,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/math/math.js"></script>
     <script>
         Reveal.initialize({
             hash: true,
             slideNumber: 'c/t',
             transition: 'slide',
-            plugins: [RevealNotes]
+            plugins: [RevealNotes, RevealMath.KaTeX]
         });
     </script>
 

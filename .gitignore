@@ -1,4 +1,4 @@
 node_modules/
 .DS_Store
-*.bak
+*.bak*
 scratch_slides.txt
