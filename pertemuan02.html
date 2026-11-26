@@ -41,6 +41,88 @@
         .reveal .card {
             margin-bottom: 10px;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .95em;
+        }
+
     </style>
 </head>
 
@@ -69,23 +151,71 @@
                 </div>
             </section>
 
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>Konsep Arsitektur Berlapis (Layering)</li>
-                        <li>Model Referensi OSI 7 Lapis</li>
-                        <li>Enkapsulasi & Dekapsulasi Data</li>
-                        <li>Model TCP/IP (Protokol Internet)</li>
-                        <li>Perbandingan OSI vs TCP/IP</li>
-                        <li>Pengalamatan (Addressing) di Jaringan</li>
-                    </ul>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-stack"></i> 1. Konsep Arsitektur Berlapis
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Mengapa Membutuhkan Model Referensi &amp; Analogi Pengiriman Surat</li>
+                            <li>Modularitas Layer &amp; Konsep <em>Peer-to-Peer Process</em></li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-layers-fill"></i> 2. Model Referensi OSI (7 Lapisan)
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Fungsi Layer 1 (Physical) hingga Layer 7 (Application)</li>
+                            <li>Mnemonic Urutan Lapisan &amp; Peran IP vs MAC Address</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-box-seam-fill"></i> 3. Enkapsulasi &amp; Dekapsulasi Data
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Alur Penambahan &amp; Pembukaan Header Lapis demi Lapis</li>
+                            <li>Terminologi PDU (Data, Segment, Packet, Frame, Bits)</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-globe"></i> 4. Model TCP/IP (Protokol Internet)
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Sejarah &amp; 4 Lapisan Asli TCP/IP (Versi DoD)</li>
+                            <li>Network Access, Internet, Transport, &amp; Application Layer</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 4px 0;">
+                            <i class="bi bi-arrow-left-right"></i> 5. Perbandingan OSI vs TCP/IP
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Perbedaan Konseptual (Teori vs Praktik) &amp; Alasan Dominasi TCP/IP</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#0f766e; margin:0 0 4px 0;">
+                            <i class="bi bi-geo-alt-fill"></i> 6. Empat Level Pengalamatan &amp; Tugas
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Hierarki Alamat Forouzan (MAC, IP, Port, Specific Address) &amp; Tugas</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu membedakan fungsi tiap lapisan pada model OSI dan TCP/IP, menelusuri proses enkapsulasi/PDU, serta memetakan 4 tingkat pengalamatan jaringan.
+                        </div>
+                    </div>
                 </div>
+                <aside class="notes">Jelaskan alur pertemuan kedua: dimulai dari filosofi modularitas berlapis, bedah 7 lapis OSI, mekanisme enkapsulasi PDU, perbandingan dengan TCP/IP, hingga empat level pengalamatan dalam TCP/IP.</aside>
             </section>
 
             <!-- SECTION 1: KONSEP LAYERING -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Konsep Arsitektur Berlapis">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Konsep Arsitektur Berlapis</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Motivasi Model Referensi, Analogi Pengiriman Surat, Modularitas, dan Peer-to-Peer Process</p>
+                <aside class="notes">Bangun intuisi pentingnya pembagian tugas jaringan menjadi lapisan-lapisan modular.</aside>
             </section>
 
             <section>
@@ -159,9 +289,11 @@
             </section>
 
             <!-- SECTION 2: OSI MODEL -->
-            <section>
-                <h2>2. Model Referensi OSI</h2>
-                <p>(Open Systems Interconnection)</p>
+            <section class="section-slide" data-topic="Bagian 2: Model Referensi OSI">
+                <div class="section-part-label">Bagian 2</div>
+                <h2>2. Model Referensi OSI (Open Systems Interconnection)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Bedah Tugas Layer 1 (Physical) hingga Layer 7 (Application) beserta IP vs MAC Address</p>
+                <aside class="notes">Bahas karakteristik dan unit fungsi dari ketujuh lapisan pada model referensi OSI.</aside>
             </section>
 
             <section>
@@ -376,8 +508,11 @@
             </section>
 
             <!-- SECTION 3: ENCAPSULATION -->
-            <section>
-                <h2>3. Enkapsulasi & Dekapsulasi Data</h2>
+            <section class="section-slide" data-topic="Bagian 3: Enkapsulasi &amp; Dekapsulasi Data">
+                <div class="section-part-label">Bagian 3</div>
+                <h2>3. Enkapsulasi &amp; Dekapsulasi Data</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Alur Turun Penambahan Header, Alur Naik Pembukaan Header, dan Terminologi PDU</p>
+                <aside class="notes">Visualisasikan bagaimana pesan aplikasi dibungkus header dari L7 ke L1 lalu dibuka kembali di penerima.</aside>
             </section>
 
             <section>
@@ -482,9 +617,11 @@
             </section>
 
             <!-- SECTION 4: TCP/IP MODEL -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4: Model TCP/IP">
+                <div class="section-part-label">Bagian 4</div>
                 <h2>4. Model TCP/IP</h2>
-                <p>Penguasa Internet Modern</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Sejarah DoD ARPANET dan 4 Lapisan Praktis Penguasa Internet Modern</p>
+                <aside class="notes">Tunjukkan evolusi model praktis TCP/IP yang menjadi standar de facto Internet saat ini.</aside>
             </section>
 
             <section>
@@ -560,8 +697,11 @@
             </section>
 
             <!-- SECTION 5: OSI VS TCP/IP -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 5: Perbandingan OSI vs TCP/IP">
+                <div class="section-part-label">Bagian 5</div>
                 <h2>5. Perbandingan OSI vs TCP/IP</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Komparasi Jumlah Lapisan, Perbedaan Konseptual Teori vs Praktik, dan Dominasi TCP/IP</p>
+                <aside class="notes">Bandingkan kelebihan dan kelemahan pendekatan teoritis OSI dengan pendekatan pragmatis TCP/IP.</aside>
             </section>
 
             <section>
@@ -629,9 +769,11 @@
             </section>
 
             <!-- SECTION 6: ADDRESSING -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 6: Empat Level Pengalamatan">
+                <div class="section-part-label">Bagian 6</div>
                 <h2>6. Empat Level Pengalamatan</h2>
-                <p>Addressing di dunia TCP/IP</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Hierarki Alamat Forouzan: Physical (MAC), Logical (IP), Port (L4), dan Specific Address</p>
+                <aside class="notes">Tutup materi dengan pemetaan keempat tingkat alamat agar mahasiswa paham perbedaan MAC, IP, dan Port.</aside>
             </section>
 
             <section>

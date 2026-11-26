@@ -413,6 +413,79 @@
             color: #333;
             margin: 8px 0;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
     </style>
 </head>
 
@@ -443,50 +516,61 @@
             </section>
 
             <!-- Outline -->
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
-                <div class="layout-col">
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1565c0;">Bagian 1: Konsep Network Layer</p>
-                        <ul>
-                            <li>Forwarding vs Routing</li>
-                            <li>Anatomi IPv4 & Kelas IP (A, B, C, D, E)</li>
-                            <li>Tipe Komunikasi (Unicast, Broadcast, Multicast)</li>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-signpost-2-fill"></i> 1. Peran Network Layer &amp; 2. Anatomi IPv4
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Fungsi Forwarding vs Routing (Data &amp; Control Plane)</li>
+                            <li>Format 32-Bit IPv4, Porsi Network vs Host, &amp; Subnet Mask</li>
                         </ul>
-                        <p style="font-weight:700; color:#1b5e20; margin-top:.5em;">Bagian 2: Subnetting & VLSM</p>
-                        <ul>
-                            <li>Konsep Dasar Subnetting & Tabel Subnet</li>
-                            <li>VLSM (Variable Length Subnet Mask)</li>
-                            <li>Studi Kasus Perhitungan Blok & VLSM</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
 
-            <section>
-                <h3>Outline Materi</h3>
-                <div class="layout-col">
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#4a148c;">Bagian 3: IPv6</p>
-                        <ul>
-                            <li>Kelemahan IPv4 & Solusi IPv6</li>
-                            <li>Format Hexadesimal & Konversi</li>
-                            <li>Implementasi, Subnetting & VLSM di IPv6</li>
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-grid-3x3-gap-fill"></i> 3. Kelas IP &amp; Tipe Komunikasi
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Kelas A–E, IP Private, Pengenalan NAT, &amp; Unicast / Broadcast / Multicast</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-scissors"></i> 4. Subnetting CIDR &amp; VLSM
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Konversi Biner–Desimal, Prefix <code>/8</code>–<code>/32</code>, &amp; Studi Kasus VLSM</li>
                         </ul>
                     </div>
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#e65100;">Bagian 4: DHCP</p>
-                        <ul>
-                            <li>Konfigurasi IP Dinamis</li>
-                            <li>Proses D.O.R.A Secara Detail</li>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-6-circle-fill"></i> 5. IP Version 6 (IPv6)
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Motivasi IPv6, Format 128-Bit Heksadesimal, &amp; Implementasi Subnet</li>
                         </ul>
+
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 4px 0;">
+                            <i class="bi bi-magic"></i> 6. Konfigurasi IP Dinamis (DHCP)
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Mekanisme <strong>D.O.R.A</strong> (Discover–Offer–Request–Ack), APIPA, &amp; Tugas</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu merancang alokasi alamat IPv4 menggunakan teknik Subnetting CIDR &amp; VLSM, memahami transisi ke IPv6, serta menjelaskan siklus alokasi IP otomatis via DHCP.
+                        </div>
                     </div>
                 </div>
+                <aside class="notes">Outline Pertemuan 6 menggabungkan fondasi Network Layer, anatomi IPv4, latihan terpandu CIDR dan VLSM, pengalamatan modern IPv6, hingga otomasi konfigurasi IP oleh DHCP.</aside>
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 1: NETWORK LAYER ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Peran Network Layer">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Peran Network Layer</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Perbedaan Fundamental Forwarding (Data Plane) dan Routing (Control Plane) pada IP</p>
+                <aside class="notes">Mulai bahasan Layer-3 dengan membedakan routing (menentukan peta jalan) vs forwarding (memindahkan paket).</aside>
             </section>
 
             <section>
@@ -581,8 +665,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 2: ANATOMI IP ADDRESS ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 2: Anatomi IP Address (IPv4)">
+                <div class="section-part-label">Bagian 2</div>
                 <h2>2. Anatomi IP Address (IPv4)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Struktur 32-Bit Biner/Dotted-Decimal serta Pemisahan Porsi Network dan Porsi Host</p>
+                <aside class="notes">Pastikan mahasiswa paham struktur 4 oktet 32-bit dan peran prefix/subnet mask memisahkan Network dan Host.</aside>
             </section>
 
             <section>
@@ -631,8 +718,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 3: TIPE KOMUNIKASI & KELAS IP ━━━━━━━━━━━━━━ -->
-            <section>
-                <h2>3. Kelas IP Address & Tipe Komunikasi IPv4</h2>
+            <section class="section-slide" data-topic="Bagian 3: Kelas IP &amp; Tipe Komunikasi">
+                <div class="section-part-label">Bagian 3</div>
+                <h2>3. Kelas IP Address &amp; Tipe Komunikasi IPv4</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Kelas IP A–E, Rentang Private IP (NAT), serta Mode Unicast, Broadcast, dan Multicast</p>
+                <aside class="notes">Jelaskan sejarah classful addressing, rentang IP privat RFC 1918, dan tiga tipe lalu lintas IP.</aside>
             </section>
 
             <section>
@@ -749,8 +839,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 4: SUBNETTING, CIDR, & VLSM ━━━━━━━━━━━━━━ -->
-            <section>
-                <h2>4. Subnetting & CIDR</h2>
+            <section class="section-slide" data-topic="Bagian 4: Subnetting &amp; CIDR">
+                <div class="section-part-label">Bagian 4</div>
+                <h2>4. Subnetting &amp; CIDR</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Konversi Biner–Desimal, Classless Addressing, Tabel Prefix (/8–/32), &amp; Latihan /24–/26</p>
+                <aside class="notes">Masuk ke bagian inti praktikum Network Layer: memecah jaringan agar hemat alamat dan rapi.</aside>
             </section>
 
             <section>
@@ -1239,9 +1332,11 @@
             </section>
 
             <!-- VLSM Section -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4b: Subnetting Lanjut VLSM">
+                <div class="section-part-label">Bagian 4 &bull; Lanjutan</div>
                 <h2>Subnetting Lanjut: VLSM</h2>
-                <p>Variable Length Subnet Mask</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Variable Length Subnet Mask untuk Alokasi Blok IP Sesuai Kebutuhan Tiap Sub-Jaringan</p>
+                <aside class="notes">Tekankan aturan wajib VLSM: selalu urutkan dan hitung kebutuhan subnet dari jumlah host terbesar ke terkecil.</aside>
             </section>
 
             <section>
@@ -1440,8 +1535,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 5: IPV6 ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 5: IP Version 6 (IPv6)">
+                <div class="section-part-label">Bagian 5</div>
                 <h2>5. IP Version 6 (IPv6)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Mengatasi Kelangkaan IPv4: Format 128-Bit Heksadesimal, Fitur Keamanan, &amp; Subnetting</p>
+                <aside class="notes">Kenalkan format heksadesimal 128-bit IPv6 serta cara menyederhanakan penulisan blok nol.</aside>
             </section>
 
 
@@ -1650,8 +1748,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 6: DHCP ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 6: Konfigurasi IP Dinamis (DHCP)">
+                <div class="section-part-label">Bagian 6</div>
                 <h2>6. Konfigurasi IP Dinamis (DHCP)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Proses Pertukaran 4 Pesan D.O.R.A (Discover, Offer, Request, Ack) dan Mekanisme APIPA</p>
+                <aside class="notes">Jelaskan bagaimana komputer memperoleh IP, subnet mask, gateway, dan DNS otomatis via DHCP.</aside>
             </section>
 
             <section>

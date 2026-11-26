@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">ARSITEKTUR ALL-IN-ONE SOHO ROUTER & SEGMENTASI 3 VLAN</text>
+
+    <!-- WAN Side -->
+    <rect x="35" y="180" width="130" height="150" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2" filter="url(#sh)"/>
+    <text x="100" y="210" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#1e40af" text-anchor="middle">ISP / INTERNET</text>
+    <text x="100" y="235" font-family="system-ui, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Modem ONT Fiber</text>
+    <text x="100" y="255" font-family="monospace" font-size="10" fill="#2563eb" text-anchor="middle">Public IP WAN</text>
+    <rect x="55" y="275" width="90" height="24" rx="5" fill="#dbeafe"/>
+    <text x="100" y="291" font-family="monospace" font-size="10" font-weight="700" fill="#1e40af" text-anchor="middle">180.252.x.x</text>
+
+    <!-- Arrow to Router -->
+    <line x1="165" y1="255" x2="225" y2="255" stroke="#2563eb" stroke-width="3" marker-end="url(#arrB)"/>
+    <text x="195" y="245" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#2563eb" text-anchor="middle">WAN Port</text>
+
+    <!-- SOHO Router Box -->
+    <rect x="230" y="80" width="350" height="420" rx="12" fill="#f8fafc" stroke="#334155" stroke-width="2.5" filter="url(#sh)"/>
+    <rect x="245" y="95" width="320" height="30" rx="6" fill="#1e293b"/>
+    <text x="405" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#f8fafc" text-anchor="middle">ALL-IN-ONE SOHO ROUTER CHASSIS</text>
+
+    <!-- Internal Modules -->
+    <rect x="250" y="140" width="145" height="70" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="322" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#0369a1" text-anchor="middle">NAT &amp; Firewall SPI</text>
+    <text x="322" y="185" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">NAPT 1:N + DoS Guard</text>
+
+    <rect x="415" y="140" width="145" height="70" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="487" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#92400e" text-anchor="middle">DHCP &amp; DNS Cache</text>
+    <text x="487" y="185" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Multi-Scope DHCP Pools</text>
+
+    <rect x="250" y="230" width="310" height="110" rx="8" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+    <text x="405" y="255" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#0f172a" text-anchor="middle">L2 Managed Switch Matrix &amp; 802.1Q VLAN</text>
+    <!-- VLAN badges -->
+    <rect x="265" y="270" width="85" height="55" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.2"/>
+    <text x="307" y="290" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#047857" text-anchor="middle">VLAN 10</text>
+    <text x="307" y="308" font-family="system-ui, sans-serif" font-size="9" fill="#065f46" text-anchor="middle">Work/Office</text>
+
+    <rect x="362" y="270" width="85" height="55" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="1.2"/>
+    <text x="404" y="290" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#c2410c" text-anchor="middle">VLAN 20</text>
+    <text x="404" y="308" font-family="system-ui, sans-serif" font-size="9" fill="#9a3412" text-anchor="middle">IoT Isolated</text>
+
+    <rect x="460" y="270" width="85" height="55" rx="6" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.2"/>
+    <text x="502" y="290" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#6d28d9" text-anchor="middle">VLAN 30</text>
+    <text x="502" y="308" font-family="system-ui, sans-serif" font-size="9" fill="#5b21b6" text-anchor="middle">Guest Isolation</text>
+
+    <!-- Wi-Fi AP Module -->
+    <rect x="250" y="360" width="310" height="115" rx="8" fill="#f1f5f9" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="405" y="382" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#0369a1" text-anchor="middle">Access Point Multi-SSID Radios (2.4 / 5 GHz)</text>
+    <text x="405" y="405" font-family="monospace" font-size="10" fill="#334155" text-anchor="middle">SSID: Office-Corp &rarr; Tagged VLAN 10 (WPA3-Ent)</text>
+    <text x="405" y="425" font-family="monospace" font-size="10" fill="#ea580c" text-anchor="middle">SSID: SmartHome-IoT &rarr; Tagged VLAN 20 (WPA2-PSK)</text>
+    <text x="405" y="445" font-family="monospace" font-size="10" fill="#7c3aed" text-anchor="middle">SSID: SOHO-Tamu &rarr; Tagged VLAN 30 (Captive Portal)</text>
+
+    <!-- Output Zones (Right) -->
+    <!-- Zone 1 -->
+    <rect x="640" y="110" width="280" height="95" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+    <text x="780" y="135" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#047857" text-anchor="middle">ZONA 1: KANTOR (VLAN 10)</text>
+    <text x="780" y="155" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">PC Kerja, Laptop Karyawan, Server NAS</text>
+    <text x="780" y="175" font-family="monospace" font-size="10" fill="#047857" text-anchor="middle">Subnet: 192.168.10.0/24 (Full Trust)</text>
+    <line x1="580" y1="285" x2="640" y2="157" stroke="#10b981" stroke-width="2" marker-end="url(#arrG)"/>
+
+    <!-- Zone 2 -->
+    <rect x="640" y="235" width="280" height="95" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="1.5" filter="url(#sh)"/>
+    <text x="780" y="260" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#c2410c" text-anchor="middle">ZONA 2: IOT TERISOLASI (VLAN 20)</text>
+    <text x="780" y="280" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">CCTV, Smart Bulb, Smart TV, AC Pintar</text>
+    <text x="780" y="300" font-family="monospace" font-size="10" fill="#c2410c" text-anchor="middle">192.168.20.0/24 (BLOCK ke VLAN 10!)</text>
+    <line x1="580" y1="300" x2="640" y2="282" stroke="#f97316" stroke-width="2" marker-end="url(#arrO)"/>
+
+    <!-- Zone 3 -->
+    <rect x="640" y="360" width="280" height="95" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5" filter="url(#sh)"/>
+    <text x="780" y="385" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#6d28d9" text-anchor="middle">ZONA 3: TAMU / GUEST (VLAN 30)</text>
+    <text x="780" y="405" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">Smartphone Tamu, Laptop Vendor Luar</text>
+    <text x="780" y="425" font-family="monospace" font-size="10" fill="#6d28d9" text-anchor="middle">192.168.30.0/24 (Akses Internet Murni)</text>
+    <line x1="580" y1="320" x2="640" y2="407" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrP)"/>
+</svg>

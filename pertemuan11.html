@@ -590,6 +590,79 @@
             font-family: monospace;
             font-size: .9em;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
     </style>
 </head>
 
@@ -620,48 +693,48 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SLIDE 02: OUTLINE MATERI ━━━━━━━━━━━━━━ -->
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1565c0; font-size:.85em; margin:0;">1. Fondasi &amp; Konsep
-                            Socket API</p>
-                        <ul style="margin-bottom:8px;">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-plug-fill"></i> 1. Fondasi &amp; Konsep Socket API
+                        </p>
+                        <ul style="margin-bottom:10px;">
                             <li>Abstraksi Soket: Antarmuka Aplikasi (User Space) ke Kernel OS</li>
-                            <li>Paradigma Client–Server &amp; Pemetaan IP + Port Number</li>
-                            <li>Karakteristik Layanan Transport: Stream (TCP) vs Datagram (UDP)</li>
+                            <li>Paradigma Client–Server, IP + Port, &amp; Stream (TCP) vs Datagram (UDP)</li>
                         </ul>
 
-                        <p style="font-weight:700; color:#e65100; font-size:.85em; margin:0;">2. Pemrograman Socket UDP
-                            &amp; Simulasi</p>
-                        <ul style="margin-bottom:8px;">
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-send-fill"></i> 2. Pemrograman Socket UDP &amp; Simulasi
+                        </p>
+                        <ul style="margin-bottom:0;">
                             <li>Komunikasi Tanpa Koneksi (<em>Connectionless</em> &amp; Format Datagram)</li>
-                            <li>Bedah Kode Python: UDPServer &amp; UDPClient</li>
-                            <li>Simulasi Interaktif Dual-Terminal: Server &amp; Client UDP</li>
+                            <li>Bedah Kode Python (UDPServer/Client) &amp; Simulasi Dual-Terminal</li>
                         </ul>
                     </div>
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1b5e20; font-size:.85em; margin:0;">3. Pemrograman Socket TCP
-                            &amp; Handshake</p>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-arrow-left-right"></i> 3. Pemrograman Socket TCP &amp; Handshake
+                        </p>
                         <ul style="margin-bottom:8px;">
-                            <li>Arsitektur Reliable Byte-Stream &amp; 3-Way Handshake</li>
-                            <li>Pembedaan Welcoming Socket vs Dedicated Connection Socket</li>
-                            <li>Bedah Kode Python: TCPServer &amp; TCPClient</li>
-                            <li>Simulasi Interaktif Dual-Terminal: TCP Handshake &amp; Stream</li>
+                            <li>Reliable Byte-Stream, 3-Way Handshake, Welcoming vs Connection Socket</li>
+                            <li>Bedah Kode Python (TCPServer/Client) &amp; Simulasi Dual-Terminal</li>
                         </ul>
 
-                        <p style="font-weight:700; color:#6a1b9a; font-size:.85em; margin:0;">4. Keandalan, Timeout
-                            &amp; Troubleshooting</p>
-                        <ul>
-                            <li>Penanganan Blocking I/O &amp; Penerapan <code>settimeout()</code></li>
-                            <li>Studi Kasus <em>The Shepherd Boy</em> &amp; Simulasi Idle Client</li>
-                            <!-- <li>Tabel Komparasi API, Solusi <code>SO_REUSEADDR</code> &amp; Format Bita</li> -->
-                            <!-- <li>Tugas Praktikum Mandiri: Socket Programming Python</li> -->
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-hourglass-split"></i> 4. Timeout &amp; 5. Tugas Praktikum
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Blocking I/O, <code>settimeout()</code>, Kasus <em>The Shepherd Boy</em>, &amp; Eksperimen Python</li>
                         </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu membangun aplikasi jaringan Client–Server sederhana menggunakan Socket API Python berbasis protokol UDP maupun TCP serta menangani potensi blocking I/O.
+                        </div>
                     </div>
                 </div>
-                <aside class="notes">Peta alur kuliah: 4 modul utama mulai dari konsep gerbang soket, implementasi UDP &
-                    TCP (Server-first), simulasi live, hingga penanganan blocking & timeout.</aside>
+                <aside class="notes">Peta alur kuliah: 5 bagian utama mulai dari konsep gerbang soket, implementasi &amp; simulasi live UDP dan TCP (Server-first), penanganan blocking timeout, hingga panduan tugas eksperimen praktikum Python.</aside>
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SLIDE 03: ROADMAP APPLICATION LAYER ━━━━━━━━━━━━━━ -->
@@ -693,12 +766,11 @@
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 1: FONDASI & KONSEP SOCKET API ━━━━━━━━━━━━━━ -->
             <!-- SLIDE 04 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Fondasi &amp; Konsep Socket API">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Fondasi &amp; Konsep Socket API</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Abstraksi Soket, Paradigma Client–Server,
-                    Pemetaan IP &amp; Port, dan Karakteristik Layanan</p>
-                <aside class="notes">Bagian pertama membahas konsep dasar soket sebagai antarmuka antara aplikasi dan
-                    sistem operasi, serta paradigma arsitektur jaringan.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Abstraksi Soket User-Space ke Kernel OS, Paradigma Client–Server, serta Pemetaan IP &amp; Port</p>
+                <aside class="notes">Bagian pertama membahas konsep dasar soket sebagai antarmuka antara aplikasi dan sistem operasi, serta paradigma arsitektur jaringan.</aside>
             </section>
 
             <!-- SLIDE 05: Paradigma Layanan Client-Server -->
@@ -818,12 +890,11 @@
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 2: PEMROGRAMAN SOCKET UDP & SIMULASI ━━━━━━━━━━━━━━ -->
             <!-- SLIDE 09 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 2: Pemrograman Socket UDP">
+                <div class="section-part-label">Bagian 2</div>
                 <h2>2. Pemrograman Socket UDP &amp; Simulasi</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Komunikasi Connectionless, Format Datagram,
-                    Siklus Hidup API, dan Live Simulasi Dual-Terminal</p>
-                <aside class="notes">Bagian kedua membedah pemrograman soket berbasis UDP: sifat tanpa koneksi,
-                    implementasi kode Python, dan demonstrasi terminal langsung.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Komunikasi Connectionless, Format Datagram, Bedah Kode Python, &amp; Live Simulasi Terminal</p>
+                <aside class="notes">Bagian kedua membedah pemrograman soket berbasis UDP: sifat tanpa koneksi, implementasi kode Python, dan demonstrasi terminal langsung.</aside>
             </section>
 
             <!-- SLIDE 10: Konsep UDP -->
@@ -1046,12 +1117,11 @@ clientSocket.close()</code></pre>
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 3: PEMROGRAMAN SOCKET TCP & HANDSHAKE ━━━━━━━━━━━━━━ -->
             <!-- SLIDE 14 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 3: Pemrograman Socket TCP">
+                <div class="section-part-label">Bagian 3</div>
                 <h2>3. Pemrograman Socket TCP &amp; Handshake</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Reliable Byte-Stream, 3-Way Handshake,
-                    Welcoming vs Connection Socket, dan Live Simulasi Dual-Terminal</p>
-                <aside class="notes">Bagian ketiga membahas TCP yang berorientasi koneksi: jabat tangan 3 arah,
-                    pemisahan soket di sisi server, dan simulasi transmisi aliran bita.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Reliable Byte-Stream, 3-Way Handshake, Welcoming vs Connection Socket, &amp; Live Simulasi</p>
+                <aside class="notes">Bagian ketiga membahas TCP yang berorientasi koneksi: jabat tangan 3 arah, pemisahan soket di sisi server, dan simulasi transmisi aliran bita.</aside>
             </section>
 
             <!-- SLIDE 15: Konsep TCP -->
@@ -1320,12 +1390,11 @@ clientSocket.close()</code></pre>
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 4: KEANDALAN, TIMEOUT & TROUBLESHOOTING ━━━━━━━━━━━━━━ -->
             <!-- SLIDE 20 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4: Keandalan &amp; Timeout Socket">
+                <div class="section-part-label">Bagian 4</div>
                 <h2>4. Keandalan, Timeout &amp; Troubleshooting</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Penanganan Blocking I/O, Penerapan
-                    settimeout(), Kasus The Shepherd Boy, Komparasi API &amp; Best Practices</p>
-                <aside class="notes">Bagian keempat fokus pada aspek keandalan tingkat lanjut: mencegah server hang
-                    dengan timeout, menangani eksepsi, dan mengatasi kendala umum pemrograman soket.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Penanganan Blocking I/O, Penerapan settimeout(), Kasus The Shepherd Boy, &amp; Best Practices</p>
+                <aside class="notes">Bagian keempat fokus pada aspek keandalan tingkat lanjut: mencegah server hang dengan timeout, menangani eksepsi, dan mengatasi kendala umum pemrograman soket.</aside>
             </section>
 
             <!-- SLIDE 21: Mitigasi Blocking I/O & Timeout Exception -->
@@ -1660,12 +1729,11 @@ print("Batas toleransi 3x habis! Server menolak anak gembala permanen.")</code><
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 5: TUGAS MANDIRI ━━━━━━━━━━━━━━ -->
             <!-- SLIDE 28 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 5: Tugas Praktikum Socket">
+                <div class="section-part-label">Bagian 5</div>
                 <h2>5. Tugas Mandiri &amp; Eksperimen Praktikum</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Implementasi Socket Client–Server Python
-                    (TCP/UDP) &amp; Validasi Jaringan</p>
-                <aside class="notes">Bagian kelima memandu mahasiswa untuk mengimplementasikan dan membuktikan sendiri
-                    kode socket client-server di perangkat masing-masing.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Implementasi Socket Client–Server Python (TCP/UDP) &amp; Validasi Pertukaran Paket Jaringan</p>
+                <aside class="notes">Bagian kelima memandu mahasiswa untuk mengimplementasikan dan membuktikan sendiri kode socket client-server di perangkat masing-masing.</aside>
             </section>
 
             <!-- SLIDE 29: Tugas Box -->

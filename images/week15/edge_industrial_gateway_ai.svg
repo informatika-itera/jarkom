@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">ANATOMI INDUSTRIAL EDGE GATEWAY & KOMPUTASI EDGE AI</text>
+
+    <!-- Factory Field Devices -->
+    <rect x="35" y="110" width="160" height="350" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" filter="url(#sh)"/>
+    <text x="115" y="140" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#0f172a" text-anchor="middle">FIELD SENSORS</text>
+    <rect x="45" y="160" width="140" height="50" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="115" y="185" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">Kamera CCTV 4K</text>
+    <text x="115" y="200" font-family="monospace" font-size="9" fill="#dc2626" text-anchor="middle">30 FPS Video Stream</text>
+
+    <rect x="45" y="225" width="140" height="50" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="115" y="250" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">PLC Siemens S7</text>
+    <text x="115" y="265" font-family="monospace" font-size="9" fill="#2563eb" text-anchor="middle">Modbus TCP / PROFINET</text>
+
+    <rect x="45" y="290" width="140" height="50" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="115" y="315" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">Sensor Getaran &amp; Suhu</text>
+    <text x="115" y="330" font-family="monospace" font-size="9" fill="#16a34a" text-anchor="middle">RS-485 Serial Modbus</text>
+
+    <!-- Edge Gateway Box Central -->
+    <rect x="240" y="80" width="460" height="420" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5" filter="url(#sh)"/>
+    <rect x="255" y="95" width="430" height="30" rx="6" fill="#c2410c"/>
+    <text x="470" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">INDUSTRIAL EDGE GATEWAY (RUGGED MINI-PC)</text>
+
+    <!-- Hardware Modules -->
+    <rect x="260" y="140" width="200" height="85" rx="6" fill="#ffffff" stroke="#fed7aa"/>
+    <text x="360" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#9a3412" text-anchor="middle">Industrial I/O Interface</text>
+    <text x="360" y="185" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">Dual GbE LAN + Isolated RS485</text>
+    <text x="360" y="202" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">CAN Bus + GPIO + 4G LTE Slot</text>
+
+    <!-- Edge AI Chip -->
+    <rect x="480" y="140" width="200" height="85" rx="6" fill="#fdf4ff" stroke="#c084fc"/>
+    <text x="580" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#7e22ce" text-anchor="middle">Edge AI Accelerator (NPU)</text>
+    <text x="580" y="185" font-family="monospace" font-size="9" fill="#6b21a8" text-anchor="middle">Google Coral TPU / Jetson Orin</text>
+    <text x="580" y="202" font-family="monospace" font-size="9" fill="#7e22ce" text-anchor="middle">4 - 40 TOPS Low-Power AI</text>
+
+    <!-- Software Stack Inside Gateway -->
+    <rect x="260" y="240" width="420" height="150" rx="8" fill="#ffffff" stroke="#ea580c"/>
+    <text x="470" y="265" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#c2410c" text-anchor="middle">Software &amp; Microservices Runtime (Docker / K3s)</text>
+
+    <rect x="275" y="280" width="185" height="50" rx="4" fill="#f1f5f9"/>
+    <text x="367" y="302" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#0f172a" text-anchor="middle">Protocol Converter</text>
+    <text x="367" y="318" font-family="monospace" font-size="9" fill="#2563eb" text-anchor="middle">Modbus/OPC-UA &rarr; MQTT</text>
+
+    <rect x="480" y="280" width="185" height="50" rx="4" fill="#faf5ff"/>
+    <text x="572" y="302" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#7e22ce" text-anchor="middle">Edge AI Object Detection</text>
+    <text x="572" y="318" font-family="monospace" font-size="9" fill="#9333ea" text-anchor="middle">YOLOv8 On-Device (3 ms)</text>
+
+    <rect x="275" y="340" width="390" height="35" rx="4" fill="#f0fdf4" stroke="#86efac"/>
+    <text x="470" y="362" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#15803d" text-anchor="middle">Local Filtering: 98% Video Sampah Dibuang di Sini!</text>
+
+    <text x="470" y="425" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#c2410c" text-anchor="middle">Hanya Anomali / JSON Alert Berukuran 500 Byte yang Dikirim ke Cloud!</text>
+
+    <!-- Cloud Side Right -->
+    <rect x="740" y="160" width="180" height="250" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2" filter="url(#sh)"/>
+    <text x="830" y="195" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#1e40af" text-anchor="middle">ENTERPRISE CLOUD</text>
+    <text x="830" y="225" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Pusat Analitik &amp; Dashboard</text>
+    <rect x="755" y="250" width="150" height="50" rx="4" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="830" y="272" font-family="monospace" font-size="10" font-weight="700" fill="#1e3a8a" text-anchor="middle">Bandwidth Hemat!</text>
+    <text x="830" y="288" font-family="system-ui, sans-serif" font-size="9" fill="#15803d" text-anchor="middle">Hanya Kirim Alert</text>
+
+    <!-- Arrows -->
+    <line x1="195" y1="280" x2="240" y2="280" stroke="#64748b" stroke-width="3" marker-end="url(#arrS)"/>
+    <line x1="700" y1="280" x2="740" y2="280" stroke="#2563eb" stroke-width="3" marker-end="url(#arrB)"/>
+</svg>

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">FENOMENA BUFFERBLOAT VS SMART QUEUE MANAGEMENT (SQM)</text>
+
+    <!-- Problem: FIFO Bufferbloat -->
+    <rect x="40" y="80" width="420" height="420" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2" filter="url(#sh)"/>
+    <rect x="55" y="95" width="390" height="30" rx="6" fill="#b91c1c"/>
+    <text x="250" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">MASALAH: TRADISIONAL FIFO DROP-TAIL</text>
+
+    <text x="70" y="155" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#991b1b">Kapasitas Buffer Router Terlalu Besar &amp; Bodoh:</text>
+    <text x="70" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Paket unduhan file besar (Torrent/Netflix 4K) menumpuk.</text>
+
+    <!-- Queue visualization FIFO -->
+    <rect x="70" y="200" width="360" height="50" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <!-- Packets inside queue -->
+    <rect x="80" y="208" width="55" height="34" rx="4" fill="#fca5a5" stroke="#dc2626"/>
+    <text x="107" y="229" font-family="monospace" font-size="9" fill="#7f1d1d" text-anchor="middle">Bulk #1</text>
+    <rect x="145" y="208" width="55" height="34" rx="4" fill="#fca5a5" stroke="#dc2626"/>
+    <text x="172" y="229" font-family="monospace" font-size="9" fill="#7f1d1d" text-anchor="middle">Bulk #2</text>
+    <rect x="210" y="208" width="55" height="34" rx="4" fill="#fca5a5" stroke="#dc2626"/>
+    <text x="237" y="229" font-family="monospace" font-size="9" fill="#7f1d1d" text-anchor="middle">Bulk #3</text>
+    <rect x="275" y="208" width="55" height="34" rx="4" fill="#fca5a5" stroke="#dc2626"/>
+    <text x="302" y="229" font-family="monospace" font-size="9" fill="#7f1d1d" text-anchor="middle">Bulk #4</text>
+    <!-- Trapped VoIP packet -->
+    <rect x="340" y="208" width="80" height="34" rx="4" fill="#fef08a" stroke="#ca8a04"/>
+    <text x="380" y="229" font-family="monospace" font-size="9" font-weight="700" fill="#713f12" text-anchor="middle">Zoom Audio</text>
+
+    <text x="250" y="275" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle">&uarr; Paket Zoom Terjebak Antrean Ratusan MB! &uarr;</text>
+
+    <!-- Latency Impact -->
+    <rect x="70" y="300" width="360" height="90" rx="8" fill="#ffffff" stroke="#f87171" stroke-width="1"/>
+    <text x="85" y="325" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#b91c1c">Dampak Kinerja Nyata (Bufferbloat):</text>
+    <text x="85" y="348" font-family="monospace" font-size="11" fill="#dc2626">&bull; Ping Tanpa Beban : 12 ms</text>
+    <text x="85" y="368" font-family="monospace" font-size="11" fill="#dc2626">&bull; Ping Saat Download: 850 ms (Patah-patah &amp; Jitter!)</text>
+
+    <!-- Solution: SQM FQ-CoDel -->
+    <rect x="500" y="80" width="420" height="420" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" filter="url(#sh)"/>
+    <rect x="515" y="95" width="390" height="30" rx="6" fill="#15803d"/>
+    <text x="710" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">SOLUSI: SQM (FQ-CODEL / CAKE ALGORITHM)</text>
+
+    <text x="530" y="155" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#166534">Fair Queueing + Controlled Delay Management:</text>
+    <text x="530" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Trafik dipecah ke ratusan antrean independen per aliran aliran.</text>
+
+    <!-- Separate queues -->
+    <rect x="530" y="195" width="360" height="30" rx="4" fill="#ffffff" stroke="#16a34a"/>
+    <text x="540" y="215" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#166534">Flow 1 (VoIP / Zoom / DNS):</text>
+    <rect x="730" y="200" width="70" height="20" rx="3" fill="#bbf7d0" stroke="#16a34a"/>
+    <text x="765" y="214" font-family="monospace" font-size="9" font-weight="700" fill="#14532d" text-anchor="middle">VoIP #1</text>
+    <rect x="810" y="200" width="70" height="20" rx="3" fill="#bbf7d0" stroke="#16a34a"/>
+    <text x="845" y="214" font-family="monospace" font-size="9" font-weight="700" fill="#14532d" text-anchor="middle">DNS Req</text>
+
+    <rect x="530" y="235" width="360" height="30" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+    <text x="540" y="255" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Flow 2 (Bulk Download):</text>
+    <rect x="730" y="240" width="40" height="20" rx="3" fill="#fed7aa" stroke="#ea580c"/>
+    <text x="750" y="254" font-family="monospace" font-size="8" fill="#7c2d12" text-anchor="middle">B1</text>
+    <rect x="775" y="240" width="40" height="20" rx="3" fill="#fed7aa" stroke="#ea580c"/>
+    <text x="795" y="254" font-family="monospace" font-size="8" fill="#7c2d12" text-anchor="middle">B2</text>
+    <rect x="820" y="240" width="40" height="20" rx="3" fill="#fed7aa" stroke="#ea580c"/>
+    <text x="840" y="254" font-family="monospace" font-size="8" fill="#7c2d12" text-anchor="middle">B3</text>
+
+    <!-- CoDel Dropper active -->
+    <text x="710" y="295" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Paket interaktif langsung lewat tanpa antre di belakang Bulk!</text>
+
+    <rect x="530" y="315" width="360" height="90" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+    <text x="545" y="340" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#166534">Hasil Penerapan SQM di Router SOHO:</text>
+    <text x="545" y="363" font-family="monospace" font-size="11" fill="#15803d">&bull; Ping Tanpa Beban : 12 ms</text>
+    <text x="545" y="383" font-family="monospace" font-size="11" font-weight="700" fill="#15803d">&bull; Ping Saat Download Penuh: 16 ms (&Delta; hanya +4 ms!)</text>
+
+    <rect x="180" y="440" width="600" height="40" rx="6" fill="#0f172a"/>
+    <text x="480" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">Standar OpenWrt / Router Modern: Mengaktifkan SQM mengeliminasi Bufferbloat 100%.</text>
+</svg>

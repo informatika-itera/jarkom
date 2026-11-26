@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/>
+        </marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/>
+        </marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="44" rx="10" fill="#0f172a"/>
+    <text x="480" y="44" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">PERENCANAAN RADIO MULTI-AP: CCI vs ACI, 5 GHz &amp; OVERLAP ROAMING</text>
+
+    <!-- TOP: MULTI-AP HONEYCOMB CELLS & 15-20% OVERLAP -->
+    <g transform="translate(24, 74)">
+        <rect width="912" height="226" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.6" filter="url(#sh)"/>
+        <text x="456" y="26" font-family="system-ui, sans-serif" font-size="13.5" font-weight="800" fill="#1e3a8a" text-anchor="middle">Desain Sel Multi-AP Kampus (2.4 GHz Kanal 1, 6, 11 + 15–20% Overlap untuk Seamless Handoff)</text>
+
+        <!-- Cell AP 1 (Ch 1) -->
+        <circle cx="155" cy="128" r="82" fill="#dbeafe" fill-opacity="0.55" stroke="#2563eb" stroke-width="2.2"/>
+        <text x="155" y="106" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1e40af" text-anchor="middle">AP-1 (Lab A)</text>
+        <rect x="115" y="116" width="80" height="22" rx="11" fill="#2563eb"/>
+        <text x="155" y="131" font-family="monospace" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">Kanal 1</text>
+        <text x="155" y="156" font-family="system-ui, sans-serif" font-size="9.5" fill="#1e3a8a" text-anchor="middle">TX Power: Sedang</text>
+
+        <!-- Cell AP 2 (Ch 6) overlapping ~18% -->
+        <circle cx="290" cy="128" r="82" fill="#dcfce7" fill-opacity="0.55" stroke="#16a34a" stroke-width="2.2"/>
+        <text x="290" y="106" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#166534" text-anchor="middle">AP-2 (Koridor)</text>
+        <rect x="250" y="116" width="80" height="22" rx="11" fill="#16a34a"/>
+        <text x="290" y="131" font-family="monospace" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">Kanal 6</text>
+        <text x="290" y="156" font-family="system-ui, sans-serif" font-size="9.5" fill="#14532d" text-anchor="middle">TX Power: Sedang</text>
+
+        <!-- Cell AP 3 (Ch 11) overlapping ~18% -->
+        <circle cx="425" cy="128" r="82" fill="#fff7ed" fill-opacity="0.6" stroke="#ea580c" stroke-width="2.2"/>
+        <text x="425" y="106" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#9a3412" text-anchor="middle">AP-3 (Lab B)</text>
+        <rect x="385" y="116" width="80" height="22" rx="11" fill="#ea580c"/>
+        <text x="425" y="131" font-family="monospace" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">Kanal 11</text>
+        <text x="425" y="156" font-family="system-ui, sans-serif" font-size="9.5" fill="#7c2d12" text-anchor="middle">TX Power: Sedang</text>
+
+        <!-- Overlap callout -->
+        <line x1="222" y1="74" x2="222" y2="180" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <rect x="172" y="190" width="198" height="24" rx="5" fill="#f3e8ff" stroke="#a855f7"/>
+        <text x="271" y="206" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#6b21a8" text-anchor="middle">Zona Overlap 15–20% (-67 dBm)</text>
+
+        <!-- Right side explanation box inside Top Panel -->
+        <rect x="530" y="42" width="364" height="170" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+        <text x="546" y="64" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#1e40af">Mengapa Atur TX Power &amp; 15–20% Overlap?</text>
+        <text x="546" y="86" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">1. <tspan font-weight="700">Cegah Dead Zone:</tspan> Tanpa overlap, koneksi putus</text>
+        <text x="560" y="102" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">total saat mahasiswa berjalan antar ruangan.</text>
+        <text x="546" y="124" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">2. <tspan font-weight="700">Cegah "Sticky Client":</tspan> Jika TX Power disetel</text>
+        <text x="560" y="140" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">100% Max, HP tetap menempel pada AP jauh meski</text>
+        <text x="560" y="156" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">sudah berdiri persis di bawah AP baru!</text>
+        <text x="546" y="180" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#059669">Solusi: Samakan TX Power AP dengan daya HP (~14 dBm).</text>
+    </g>
+
+    <!-- BOTTOM LEFT: CCI vs ACI -->
+    <g transform="translate(24, 314)">
+        <rect width="446" height="204" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.6" filter="url(#sh)"/>
+        <rect x="14" y="12" width="418" height="26" rx="6" fill="#d97706"/>
+        <text x="223" y="29" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">CCI (Co-Channel) vs ACI (Adjacent-Channel Interference)</text>
+
+        <rect x="16" y="48" width="414" height="66" rx="7" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+        <text x="28" y="68" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#166534">CCI — Dua AP di Kanal SAMA (misal sama-sama Kanal 1)</text>
+        <text x="28" y="86" font-family="system-ui, sans-serif" font-size="10" fill="#334155">• Kedua AP bisa membaca CSMA/CA satu sama lain &amp; bergantian sopan.</text>
+        <text x="28" y="102" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">• Kecepatan terbagi, tetapi transmisi TETAP BERSIH minim tabrakan.</text>
+
+        <rect x="16" y="122" width="414" height="70" rx="7" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
+        <text x="28" y="142" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#991b1b">ACI — Kanal BERDEKATAN (misal Kanal 1 vs Kanal 3)</text>
+        <text x="28" y="160" font-family="system-ui, sans-serif" font-size="10" fill="#334155">• Spektrum 22 MHz saling menimpa, NAMUN header frame tak terbaca!</text>
+        <text x="28" y="176" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#dc2626">• CSMA/CA gagal menunda kirim -&gt; Tabrakan &amp; Noise parah! Hindari!</text>
+    </g>
+
+    <!-- BOTTOM RIGHT: 5 GHZ SPECTRUM & CHANNEL WIDTH -->
+    <g transform="translate(486, 314)">
+        <rect width="450" height="204" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.6" filter="url(#sh)"/>
+        <rect x="14" y="12" width="422" height="26" rx="6" fill="#2563eb"/>
+        <text x="225" y="29" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">Keunggulan Spektrum 5 GHz (Wi-Fi 5 / Wi-Fi 6)</text>
+
+        <rect x="16" y="48" width="418" height="44" rx="7" fill="#ffffff" stroke="#93c5fd"/>
+        <text x="28" y="67" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#1e40af">UNII-1 (Ch 36, 40, 44, 48) &amp; UNII-3 (Ch 149–161):</text>
+        <text x="28" y="83" font-family="system-ui, sans-serif" font-size="10" fill="#334155">Kanal 20 MHz NON-OVERLAPPING melimpah (bebas tabrakan).</text>
+
+        <rect x="16" y="100" width="418" height="44" rx="7" fill="#ffffff" stroke="#fcd34d"/>
+        <text x="28" y="119" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#92400e">Kanal DFS (Ch 52 – 144):</text>
+        <text x="28" y="135" font-family="system-ui, sans-serif" font-size="10" fill="#334155">Wajib pindah kanal otomatis bila mendeteksi sinyal radar cuaca/bandara.</text>
+
+        <rect x="16" y="152" width="418" height="40" rx="7" fill="#dcfce7" stroke="#16a34a"/>
+        <text x="28" y="170" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#14532d">Channel Width: 20 MHz (Kampus Padat) vs 80 MHz (Rumah)</text>
+        <text x="28" y="185" font-family="system-ui, sans-serif" font-size="9.5" fill="#166534">Kanal sempit (20/40 MHz) lebih stabil untuk puluhan AP berdekatan.</text>
+    </g>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">KOMPARASI PROTOKOL VPN SOHO: WIREGUARD VS OPENVPN</text>
+
+    <!-- Left: WireGuard -->
+    <rect x="40" y="80" width="420" height="420" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" filter="url(#sh)"/>
+    <rect x="55" y="95" width="390" height="30" rx="6" fill="#15803d"/>
+    <text x="250" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">WIREGUARD (STATE-OF-THE-ART)</text>
+
+    <text x="70" y="150" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#166534">Modern Kernel-Space Linux VPN:</text>
+    <rect x="70" y="165" width="360" height="75" rx="6" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="85" y="190" font-family="monospace" font-size="11" fill="#15803d">&bull; Ukuran Kode: ~4.000 baris (Mudah diaudit)</text>
+    <text x="85" y="210" font-family="monospace" font-size="11" fill="#15803d">&bull; Kriptografi: ChaCha20-Poly1305, Curve25519</text>
+    <text x="85" y="230" font-family="monospace" font-size="11" fill="#15803d">&bull; Ruang Eksekusi: Linux Kernel Space (Cepat!)</text>
+
+    <rect x="70" y="255" width="360" height="85" rx="6" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="85" y="280" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#15803d">Keunggulan Operasional:</text>
+    <text x="85" y="302" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Roaming Instan: Pindah Wi-Fi ke 4G tanpa putus koneksi</text>
+    <text x="85" y="322" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Mode Silent: Tidak membalas ping/scan tanpa kunci publik valid</text>
+
+    <rect x="70" y="355" width="360" height="70" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="85" y="380" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#14532d">Hasil Benchmark Throughput:</text>
+    <text x="85" y="405" font-family="monospace" font-size="12" font-weight="700" fill="#15803d">1011 Mbps | Ping: 0.40 ms (Overhead Minimal)</text>
+
+    <!-- Right: OpenVPN -->
+    <rect x="500" y="80" width="420" height="420" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2" filter="url(#sh)"/>
+    <rect x="515" y="95" width="390" height="30" rx="6" fill="#475569"/>
+    <text x="710" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">OPENVPN (LEGACY DE-FACTO)</text>
+
+    <text x="530" y="150" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#334155">Arsitektur Tradisional User-Space:</text>
+    <rect x="530" y="165" width="360" height="75" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="545" y="190" font-family="monospace" font-size="11" fill="#475569">&bull; Ukuran Kode: ~100.000+ baris (Kompleks)</text>
+    <text x="545" y="210" font-family="monospace" font-size="11" fill="#475569">&bull; Kriptografi: OpenSSL (RSA, AES-CBC, dll)</text>
+    <text x="545" y="230" font-family="monospace" font-size="11" fill="#475569">&bull; Ruang Eksekusi: User-Space (TUN/TAP context-switch)</text>
+
+    <rect x="530" y="255" width="360" height="85" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="545" y="280" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#334155">Karakteristik Operasional:</text>
+    <text x="545" y="302" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Handshake lambat: Pertukaran TLS renegotiation berkala</text>
+    <text x="545" y="322" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Re-autentikasi wajib saat perangkat berpindah IP jaringan</text>
+
+    <rect x="530" y="355" width="360" height="70" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="545" y="380" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#1e293b">Hasil Benchmark Throughput:</text>
+    <text x="545" y="405" font-family="monospace" font-size="12" font-weight="700" fill="#dc2626">258 Mbps | Ping: 1.54 ms (CPU Bottleneck)</text>
+
+    <rect x="180" y="445" width="600" height="40" rx="6" fill="#0f172a"/>
+    <text x="480" y="470" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">Tren SOHO/Industri: Migrasi masif dari OpenVPN ke WireGuard untuk efisiensi baterai &amp; kecepatan.</text>
+</svg>

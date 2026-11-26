@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/>
+        </marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/>
+        </marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="44" rx="10" fill="#0f172a"/>
+    <text x="480" y="44" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">ELEMEN INFRASTRUKTUR &amp; TAKSONOMI JARINGAN NIRKABEL</text>
+
+    <!-- LEFT: 3 Main Elements -->
+    <g transform="translate(24, 76)">
+        <rect width="416" height="440" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="208" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#1e3a8a" text-anchor="middle">3 Komponen Dasar Jaringan Nirkabel</text>
+
+        <!-- Wired Internet Backbone -->
+        <ellipse cx="208" cy="92" rx="145" ry="38" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+        <text x="208" y="89" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#1e293b" text-anchor="middle">Wired Network Infrastructure</text>
+        <text x="208" y="108" font-family="system-ui, sans-serif" font-size="11.5" fill="#475569" text-anchor="middle">(Backbone Fiber, Router Core, Internet)</text>
+
+        <!-- Links wired to BS -->
+        <line x1="120" y1="126" x2="120" y2="178" stroke="#334155" stroke-width="4"/>
+        <line x1="296" y1="126" x2="296" y2="178" stroke="#334155" stroke-width="4"/>
+
+        <!-- Base Stations -->
+        <g transform="translate(45, 180)">
+            <rect width="150" height="66" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+            <text x="75" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1e40af" text-anchor="middle">Base Station</text>
+            <text x="75" y="42" font-family="system-ui, sans-serif" font-size="11" fill="#1d4ed8" text-anchor="middle">Wi-Fi Access Point</text>
+            <text x="75" y="57" font-family="system-ui, sans-serif" font-size="10.5" fill="#3b82f6" text-anchor="middle">(Relay Kabel ↔ Radio)</text>
+        </g>
+        <g transform="translate(221, 180)">
+            <rect width="150" height="66" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+            <text x="75" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#166534" text-anchor="middle">Base Station</text>
+            <text x="75" y="42" font-family="system-ui, sans-serif" font-size="11" fill="#15803d" text-anchor="middle">Cell Tower (eNode-B)</text>
+            <text x="75" y="57" font-family="system-ui, sans-serif" font-size="10.5" fill="#16a34a" text-anchor="middle">(Koordinasi Handoff)</text>
+        </g>
+
+        <!-- Wireless Links (Dashed waves) -->
+        <path d="M 95 246 L 65 322" stroke="#ea580c" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrO)"/>
+        <path d="M 145 246 L 170 322" stroke="#ea580c" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrO)"/>
+        <path d="M 296 246 L 296 322" stroke="#ea580c" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrO)"/>
+        <rect x="115" y="274" width="186" height="24" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+        <text x="208" y="290" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#c2410c" text-anchor="middle">Wireless Link (Radio RF)</text>
+
+        <!-- Wireless Hosts -->
+        <g transform="translate(22, 330)">
+            <rect width="114" height="86" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="57" y="28" font-size="22" text-anchor="middle">💻</text>
+            <text x="57" y="50" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#0f172a" text-anchor="middle">Laptop</text>
+            <text x="57" y="67" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Wireless Host</text>
+        </g>
+        <g transform="translate(151, 330)">
+            <rect width="114" height="86" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="57" y="28" font-size="22" text-anchor="middle">🖥️</text>
+            <text x="57" y="50" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#0f172a" text-anchor="middle">PC Desktop Wi-Fi</text>
+            <text x="57" y="67" font-family="system-ui, sans-serif" font-size="10" fill="#dc2626" font-weight="700" text-anchor="middle">(Stationary!)</text>
+        </g>
+        <g transform="translate(280, 330)">
+            <rect width="114" height="86" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="57" y="28" font-size="22" text-anchor="middle">📱</text>
+            <text x="57" y="50" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#0f172a" text-anchor="middle">Smartphone/IoT</text>
+            <text x="57" y="67" font-family="system-ui, sans-serif" font-size="10" fill="#16a34a" font-weight="700" text-anchor="middle">(Mobile Host)</text>
+        </g>
+    </g>
+
+    <!-- RIGHT: 2x2 Taxonomy Grid -->
+    <g transform="translate(460, 76)">
+        <rect width="476" height="440" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="238" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#1e3a8a" text-anchor="middle">Taksonomi Jaringan Nirkabel (4 Kuadran)</text>
+
+        <!-- Column Headers -->
+        <rect x="118" y="46" width="166" height="32" rx="6" fill="#1e40af"/>
+        <text x="201" y="67" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#ffffff" text-anchor="middle">Single-Hop</text>
+        <rect x="294" y="46" width="166" height="32" rx="6" fill="#7c3aed"/>
+        <text x="377" y="67" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#ffffff" text-anchor="middle">Multiple-Hops</text>
+
+        <!-- Row 1 Header: Infrastructure -->
+        <rect x="14" y="90" width="96" height="156" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
+        <text x="62" y="156" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#1e3a8a" text-anchor="middle">Dengan</text>
+        <text x="62" y="174" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#1e3a8a" text-anchor="middle">Infrastruktur</text>
+        <text x="62" y="192" font-family="system-ui, sans-serif" font-size="10.5" fill="#2563eb" text-anchor="middle">(Base Station)</text>
+
+        <!-- Q1: Infrastructure + Single Hop -->
+        <rect x="118" y="90" width="166" height="156" rx="8" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="201" y="116" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1e40af" text-anchor="middle">Wi-Fi &amp; 4G/5G</text>
+        <text x="201" y="142" font-size="24" text-anchor="middle">📱 ┈ 📡 ━ 🌐</text>
+        <text x="201" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">Host terhubung ke</text>
+        <text x="201" y="186" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">AP / Tower (1 hop)</text>
+        <text x="201" y="204" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">lalu ke Internet</text>
+        <rect x="134" y="216" width="134" height="20" rx="4" fill="#bfdbfe"/>
+        <text x="201" y="230" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#1e3a8a" text-anchor="middle">Terhubung Internet</text>
+
+        <!-- Q2: Infrastructure + Multi-Hop -->
+        <rect x="294" y="90" width="166" height="156" rx="8" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="377" y="116" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#5b21b6" text-anchor="middle">Mesh Network</text>
+        <text x="377" y="142" font-size="22" text-anchor="middle">💻┈💻┈📡━🌐</text>
+        <text x="377" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">Host me-relay paket</text>
+        <text x="377" y="186" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">via node lain agar</text>
+        <text x="377" y="204" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">mencapai gateway</text>
+        <rect x="310" y="216" width="134" height="20" rx="4" fill="#ddd6fe"/>
+        <text x="377" y="230" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#5b21b6" text-anchor="middle">Multi-hop Relay</text>
+
+        <!-- Row 2 Header: No Infrastructure -->
+        <rect x="14" y="260" width="96" height="164" rx="8" fill="#ffedd5" stroke="#f97316"/>
+        <text x="62" y="330" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#9a3412" text-anchor="middle">Tanpa</text>
+        <text x="62" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#9a3412" text-anchor="middle">Infrastruktur</text>
+        <text x="62" y="366" font-family="system-ui, sans-serif" font-size="10.5" fill="#c2410c" text-anchor="middle">(Ad-Hoc)</text>
+
+        <!-- Q3: No Infra + Single Hop -->
+        <rect x="118" y="260" width="166" height="164" rx="8" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+        <text x="201" y="286" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#9a3412" text-anchor="middle">Bluetooth / PAN</text>
+        <text x="201" y="314" font-size="24" text-anchor="middle">🎧 ┈ 📱</text>
+        <text x="201" y="342" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">Tanpa Base Station,</text>
+        <text x="201" y="358" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">komunikasi langsung</text>
+        <text x="201" y="374" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">jarak dekat (&lt;10 m)</text>
+        <rect x="134" y="390" width="134" height="20" rx="4" fill="#fed7aa"/>
+        <text x="201" y="404" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#9a3412" text-anchor="middle">Direct Point-to-Point</text>
+
+        <!-- Q4: No Infra + Multi-Hop -->
+        <rect x="294" y="260" width="166" height="164" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+        <text x="377" y="286" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#166534" text-anchor="middle">MANET / VANET</text>
+        <text x="377" y="314" font-size="22" text-anchor="middle">🚗 ┈ 🚗 ┈ 🚗</text>
+        <text x="377" y="342" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">Tanpa BS &amp; Internet;</text>
+        <text x="377" y="358" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">routing otonom antar</text>
+        <text x="377" y="374" font-family="system-ui, sans-serif" font-size="11" fill="#334155" text-anchor="middle">node bergerak</text>
+        <rect x="310" y="390" width="134" height="20" rx="4" fill="#bbf7d0"/>
+        <text x="377" y="404" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#166534" text-anchor="middle">Self-Organizing</text>
+    </g>
+</svg>

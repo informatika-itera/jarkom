@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">KOMPARASI NIRKABEL IOT LPWAN: LORAWAN VS NB-IOT</text>
+
+    <!-- LoRaWAN Box -->
+    <rect x="40" y="80" width="420" height="420" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2" filter="url(#sh)"/>
+    <rect x="55" y="95" width="390" height="30" rx="6" fill="#c2410c"/>
+    <text x="250" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">LORAWAN (UNLICENSED ISM BAND)</text>
+
+    <rect x="65" y="140" width="370" height="85" rx="6" fill="#ffffff" stroke="#fed7aa"/>
+    <text x="80" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#c2410c">Frekuensi &amp; Regulasi di Indonesia:</text>
+    <text x="80" y="185" font-family="monospace" font-size="10" fill="#9a3412">&bull; Pita ISM 920 - 923 MHz (Tanpa Biaya Lisensi!)</text>
+    <text x="80" y="205" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Modulasi: Chirp Spread Spectrum (CSS) tangguh derau</text>
+
+    <rect x="65" y="240" width="370" height="100" rx="6" fill="#ffffff" stroke="#fed7aa"/>
+    <text x="80" y="265" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#c2410c">Arsitektur &amp; Topologi Jaringan:</text>
+    <text x="80" y="285" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Topologi: Star-of-Stars (Node &rarr; Gateway &rarr; Network Server)</text>
+    <text x="80" y="303" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Jangkauan: 2 - 5 km (Kota), hingga 15 km (Desa/Sawah)</text>
+    <text x="80" y="321" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Biaya Operasional: Rp 0 (Membangun BTS Gateway Sendiri)</text>
+
+    <rect x="65" y="355" width="370" height="65" rx="6" fill="#ffedd5"/>
+    <text x="80" y="378" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#9a3412">Contoh Kasus Penggunaan Ideal:</text>
+    <text x="80" y="400" font-family="system-ui, sans-serif" font-size="10" fill="#7c2d12">Smart Agriculture ITERA, Sensor Gunung Krakatau, PDAM Mandiri</text>
+
+    <!-- NB-IoT Box -->
+    <rect x="500" y="80" width="420" height="420" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2" filter="url(#sh)"/>
+    <rect x="515" y="95" width="390" height="30" rx="6" fill="#1e40af"/>
+    <text x="710" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">NB-IOT (LICENSED 3GPP CELLULAR)</text>
+
+    <rect x="525" y="140" width="370" height="85" rx="6" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="540" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#1e40af">Spektrum &amp; Standar Operator Seluler:</text>
+    <text x="540" y="185" font-family="monospace" font-size="10" fill="#1e3a8a">&bull; Spektrum Berlisensi Telkomsel / Indosat / XL</text>
+    <text x="540" y="205" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Modulasi: OFDMA / SC-FDMA (Bandwidth 200 kHz)</text>
+
+    <rect x="525" y="240" width="370" height="100" rx="6" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="540" y="265" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#1e40af">Karakteristik Operasional:</text>
+    <text x="540" y="285" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Menumpang BTS 4G LTE yang sudah berdiri di seluruh RI</text>
+    <text x="540" y="303" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Kualitas Layanan (QoS): Terjamin oleh operator seluler</text>
+    <text x="540" y="321" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Biaya: Membutuhkan SIM Card IoT &amp; Biaya Langganan Bulanan</text>
+
+    <rect x="525" y="355" width="370" height="65" rx="6" fill="#dbeafe"/>
+    <text x="540" y="378" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#1e40af">Contoh Kasus Penggunaan Ideal:</text>
+    <text x="540" y="400" font-family="system-ui, sans-serif" font-size="10" fill="#1e3a8a">Smart Meter PLN Nasional, Pelacak Armada Truk Lintas Sumatera</text>
+
+    <rect x="180" y="445" width="600" height="40" rx="6" fill="#0f172a"/>
+    <text x="480" y="470" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">Trade-off: LoRaWAN untuk jaringan privat gratis; NB-IoT untuk jangkauan skala nasional.</text>
+</svg>

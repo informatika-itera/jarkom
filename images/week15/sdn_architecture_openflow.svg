@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">ARSITEKTUR SOFTWARE-DEFINED NETWORKING (SDN) & OPENFLOW</text>
+
+    <!-- Top Layer: Application -->
+    <rect x="200" y="80" width="560" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2" filter="url(#sh)"/>
+    <rect x="215" y="92" width="530" height="26" rx="5" fill="#1e40af"/>
+    <text x="480" y="110" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">1. APPLICATION LAYER (MANAGEMENT &amp; ORCHESTRATION)</text>
+    <text x="480" y="138" font-family="system-ui, sans-serif" font-size="11" fill="#1e3a8a" text-anchor="middle">Business Logic: Routing Optimization, Load Balancer, Firewall, IDS/IPS Apps</text>
+    <text x="480" y="156" font-family="monospace" font-size="10" fill="#2563eb" text-anchor="middle">Ditulis dalam Python / Java (Skrip Otomasi)</text>
+
+    <!-- Northbound API Arrow -->
+    <line x1="480" y1="170" x2="480" y2="215" stroke="#2563eb" stroke-width="3" marker-end="url(#arrB)"/>
+    <line x1="475" y1="215" x2="475" y2="170" stroke="#2563eb" stroke-width="2"/>
+    <rect x="360" y="180" width="240" height="22" rx="4" fill="#ffffff" stroke="#2563eb"/>
+    <text x="480" y="195" font-family="monospace" font-size="10" font-weight="700" fill="#1e40af" text-anchor="middle">NORTHBOUND REST API / JSON</text>
+
+    <!-- Middle Layer: Control Plane -->
+    <rect x="200" y="215" width="560" height="110" rx="10" fill="#ecfdf5" stroke="#16a34a" stroke-width="2" filter="url(#sh)"/>
+    <rect x="215" y="227" width="530" height="26" rx="5" fill="#166534"/>
+    <text x="480" y="245" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">2. CONTROL LAYER (SDN CONTROLLER SERVER)</text>
+    <text x="480" y="275" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#14532d" text-anchor="middle">Network Operating System: OpenDaylight, ONOS, Ryu, POX</text>
+    <text x="480" y="295" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Memegang GLOBAL TOPOLOGY VIEW peta seluruh sakelar di jaringan</text>
+    <text x="480" y="312" font-family="monospace" font-size="10" fill="#16a34a" text-anchor="middle">Kalkulasi Algoritma Dijkstra Terpusat</text>
+
+    <!-- Southbound API Arrow -->
+    <line x1="480" y1="325" x2="480" y2="375" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG)"/>
+    <line x1="475" y1="375" x2="475" y2="325" stroke="#16a34a" stroke-width="2"/>
+    <rect x="340" y="338" width="280" height="22" rx="4" fill="#ffffff" stroke="#16a34a"/>
+    <text x="480" y="353" font-family="monospace" font-size="10" font-weight="700" fill="#14532d" text-anchor="middle">SOUTHBOUND PROTOCOL (OPENFLOW / P4)</text>
+
+    <!-- Bottom Layer: Data Plane -->
+    <rect x="60" y="375" width="840" height="135" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="2" filter="url(#sh)"/>
+    <rect x="75" y="387" width="810" height="26" rx="5" fill="#334155"/>
+    <text x="480" y="405" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">3. DATA PLANE (INFRASTRUCTURE LAYER: DUMB SWITCHES)</text>
+
+    <!-- Switches -->
+    <rect x="80" y="425" width="230" height="70" rx="6" fill="#ffffff" stroke="#94a3b8"/>
+    <text x="195" y="445" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#0f172a" text-anchor="middle">OpenFlow Switch 1</text>
+    <text x="195" y="465" font-family="monospace" font-size="9" fill="#2563eb" text-anchor="middle">Match [IP Src, Dst] &rarr; Fwd 2</text>
+    <text x="195" y="482" font-family="monospace" font-size="9" fill="#16a34a" text-anchor="middle">Flow Table: Hardware TCAM</text>
+
+    <rect x="365" y="425" width="230" height="70" rx="6" fill="#ffffff" stroke="#94a3b8"/>
+    <text x="480" y="445" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#0f172a" text-anchor="middle">OpenFlow Switch 2</text>
+    <text x="480" y="465" font-family="monospace" font-size="9" fill="#2563eb" text-anchor="middle">Match [TCP Port 80] &rarr; Fwd 4</text>
+    <text x="480" y="482" font-family="monospace" font-size="9" fill="#16a34a" text-anchor="middle">Flow Table: Hardware TCAM</text>
+
+    <rect x="650" y="425" width="230" height="70" rx="6" fill="#ffffff" stroke="#94a3b8"/>
+    <text x="765" y="445" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#0f172a" text-anchor="middle">OpenFlow Switch 3</text>
+    <text x="765" y="465" font-family="monospace" font-size="9" fill="#dc2626" text-anchor="middle">Table-Miss &rarr; Send Packet-In</text>
+    <text x="765" y="482" font-family="monospace" font-size="9" fill="#16a34a" text-anchor="middle">Flow Table: Hardware TCAM</text>
+</svg>

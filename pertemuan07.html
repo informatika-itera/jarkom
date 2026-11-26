@@ -419,6 +419,79 @@
             align-items: center;
             gap: 5px;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
     </style>
 </head>
 
@@ -451,49 +524,55 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ OUTLINE ━━━━━━━━━━━━━━ -->
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-small">
-                        <p style="font-weight:700; color:#1565c0; font-size: .85em; margin: 0;">
-                            Bagian 1: Pendahuluan Control Plane</p>
-                        <ul>
-                            <li>Dua Pendekatan Control Plane</li>
-                            <li>Per-router (Tradisional) vs SDN</li>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-cpu-fill"></i> 1. Pendahuluan Control Plane
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Perbandingan Data Plane vs Control Plane pada Network Layer</li>
+                            <li>Pendekatan Per-Router (Tradisional) vs Terpusat (<em>SDN</em>)</li>
                         </ul>
 
-                        <p style="font-weight:700; color:#e65100; font-size: .85em; margin-top:1em;">Bagian 2: Algoritma
-                            Routing</p>
-                        <ul>
-                            <li>Konsep Graph Abstraction</li>
-                            <li>Link State (Dijkstra)</li>
-                            <li>Distance Vector (Bellman-Ford)</li>
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-diagram-3-fill"></i> 2. Algoritma Routing (Graf)
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Abstraksi Topologi Graf &amp; Klasifikasi Algoritma Routing</li>
+                            <li>Link-State (<strong>Dijkstra</strong> + Simulasi Tabel) vs Distance Vector (<strong>Bellman-Ford</strong>)</li>
                         </ul>
                     </div>
-                    <div class="card text-left text-small">
-                        <p style="font-weight:700; font-size: .85em; color:#1b5e20;  margin: 0;">Bagian 3: Protokol
-                            Routing di
-                            Internet</p>
-                        <ul>
-                            <li>Intra-AS vs Inter-AS</li>
-                            <li>OSPF (Intra-ISP) &amp; BGP (Inter-ISP)</li>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-globe2"></i> 3. Protokol Routing di Internet
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Routing Hierarkis: <em>Intra-AS</em> (OSPF) vs <em>Inter-AS</em> (BGP)</li>
                         </ul>
 
-                        <p style="font-weight:700; font-size: .85em; color:#4a148c; margin-top:1em;">Bagian 4: Protokol
-                            Bantuan &amp;
-                            Manajemen</p>
-                        <ul>
-                            <li>ICMP (Ping &amp; Traceroute)</li>
-                            <li>Network Management (SNMP)</li>
-                            <li>NETCONF &amp; YANG</li>
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-tools"></i> 4. Protokol Bantuan &amp; Manajemen
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>ICMP (<code>ping</code> &amp; <code>traceroute</code>), SNMP, serta NETCONF &amp; YANG</li>
                         </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu membedakan Control Plane terdistribusi vs terpusat, menghitung rute terpendek dengan algoritma Dijkstra &amp; Bellman-Ford, serta memahami protokol ICMP dan manajemen jaringan.
+                        </div>
                     </div>
                 </div>
+                <aside class="notes">Outline Pertemuan 7 memetakan arsitektur Control Plane: perhitungan jalur terpendek Dijkstra dan Bellman-Ford, penskalaan routing Internet dengan AS, serta utilitas diagnostik ICMP/SNMP.</aside>
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 1: PENDAHULUAN CONTROL PLANE ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Pendahuluan Control Plane">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Pendahuluan Control Plane</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Membedakan Arsitektur Control Plane Terdistribusi (Per-Router) vs Terpusat (SDN)</p>
+                <aside class="notes">Bandingkan paradigma klasik router-by-router dengan paradigma modern Software-Defined Networking.</aside>
             </section>
 
             <section>
@@ -767,8 +846,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 2: ALGORITMA ROUTING ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 2: Algoritma Routing">
+                <div class="section-part-label">Bagian 2</div>
                 <h2>2. Algoritma Routing</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Abstraksi Graf Topologi, Simulasi Link-State (Dijkstra), &amp; Distance Vector (Bellman-Ford)</p>
+                <aside class="notes">Bimbing mahasiswa menelusuri iterasi tabel Dijkstra selangkah demi selangkah di topologi graf.</aside>
             </section>
 
             <section>
@@ -1000,8 +1082,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 3: PROTOKOL ROUTING DI INTERNET ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 3: Protokol Routing di Internet">
+                <div class="section-part-label">Bagian 3</div>
                 <h2>3. Protokol Routing di Internet</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Skalabilitas Autonomous System (AS): Routing Hierarkis Intra-AS (OSPF) vs Inter-AS (BGP)</p>
+                <aside class="notes">Jelaskan mengapa satu algoritma global tunggal tidak mungkin melayani seluruh Internet tanpa hierarki AS.</aside>
             </section>
 
             <section>
@@ -1105,8 +1190,11 @@
 
 
             <!-- ━━━━━━━━━━━━━━ SECTION 4: PROTOKOL BANTUAN & MANAJEMEN ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4: Protokol Bantuan &amp; Manajemen">
+                <div class="section-part-label">Bagian 4</div>
                 <h2>4. Protokol Bantuan &amp; Manajemen</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Utilitas Diagnostik ICMP (Ping &amp; Traceroute), SNMP Monitoring, serta NETCONF / YANG</p>
+                <aside class="notes">Perkenalkan protokol pendukung jaringan untuk diagnostik kesalahan rute dan otomasi manajemen.</aside>
             </section>
 
             <section>

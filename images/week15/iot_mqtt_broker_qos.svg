@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">ALUR KERJA PROTOKOL MQTT & TINGKAT KEANDALAN QOS 0, 1, 2</text>
+
+    <!-- Left: Publisher -->
+    <rect x="40" y="90" width="220" height="400" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2" filter="url(#sh)"/>
+    <rect x="55" y="105" width="190" height="28" rx="5" fill="#1e40af"/>
+    <text x="150" y="124" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">PUBLISHER (SENSOR)</text>
+
+    <rect x="55" y="150" width="190" height="65" rx="6" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="150" y="173" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">Node ESP32 Lab Jarkom</text>
+    <text x="150" y="193" font-family="monospace" font-size="9" fill="#2563eb" text-anchor="middle">Topic: itera/lab/suhu</text>
+    <text x="150" y="207" font-family="monospace" font-size="9" fill="#16a34a" text-anchor="middle">Payload: {"val": 28.5}</text>
+
+    <rect x="55" y="235" width="190" height="235" rx="6" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="150" y="260" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a" text-anchor="middle">Mekanisme Publish:</text>
+    <text x="65" y="285" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Hanya berbicara ke Broker</text>
+    <text x="65" y="305" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Tidak tahu siapa Subscriber</text>
+    <text x="65" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#334155">&bull; Ruang &amp; waktu terdekopling</text>
+    <text x="65" y="350" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#1e40af">&bull; Tiga Tingkat QoS:</text>
+    <text x="75" y="375" font-family="monospace" font-size="9" fill="#475569">QoS 0: Fire &amp; Forget</text>
+    <text x="75" y="395" font-family="monospace" font-size="9" fill="#ca8a04">QoS 1: PUBACK (Duplikat)</text>
+    <text x="75" y="415" font-family="monospace" font-size="9" fill="#16a34a">QoS 2: Exactly Once</text>
+    <text x="75" y="435" font-family="monospace" font-size="8" fill="#475569">PUBREC/PUBREL/PUBCOMP</text>
+
+    <!-- Center: Broker -->
+    <rect x="340" y="90" width="280" height="400" rx="10" fill="#ecfdf5" stroke="#16a34a" stroke-width="2.5" filter="url(#sh)"/>
+    <rect x="355" y="105" width="250" height="28" rx="5" fill="#166534"/>
+    <text x="480" y="124" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">MQTT BROKER (EMQX / MOSQUITTO)</text>
+
+    <rect x="355" y="150" width="250" height="85" rx="6" fill="#ffffff" stroke="#86efac"/>
+    <text x="480" y="173" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#14532d" text-anchor="middle">Topic Match Engine</text>
+    <text x="480" y="195" font-family="monospace" font-size="10" fill="#15803d" text-anchor="middle">Evaluasi Filter: itera/+/suhu</text>
+    <text x="480" y="215" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Mencocokkan wildcard (+) dan (#)</text>
+
+    <rect x="355" y="250" width="250" height="110" rx="6" fill="#ffffff" stroke="#86efac"/>
+    <text x="480" y="273" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#14532d" text-anchor="middle">Session State &amp; Queue</text>
+    <text x="480" y="295" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">Menyimpan pesan saat subscriber</text>
+    <text x="480" y="313" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">sedang offline (Persistent Session)</text>
+    <text x="480" y="335" font-family="monospace" font-size="9" fill="#ca8a04" text-anchor="middle">Retained Message Flag Support</text>
+
+    <rect x="355" y="380" width="250" height="90" rx="6" fill="#dcfce7"/>
+    <text x="480" y="405" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#14532d" text-anchor="middle">Keep-Alive Heartbeat</text>
+    <text x="480" y="425" font-family="monospace" font-size="10" fill="#15803d" text-anchor="middle">PINGREQ &amp; PINGRESP</text>
+    <text x="480" y="445" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Deteksi cepat jika koneksi terputus</text>
+
+    <!-- Right: Subscribers -->
+    <rect x="700" y="90" width="220" height="400" rx="10" fill="#fdf4ff" stroke="#c084fc" stroke-width="2" filter="url(#sh)"/>
+    <rect x="715" y="105" width="190" height="28" rx="5" fill="#7e22ce"/>
+    <text x="810" y="124" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">SUBSCRIBERS (CLIENTS)</text>
+
+    <rect x="715" y="150" width="190" height="95" rx="6" fill="#ffffff" stroke="#e9d5ff"/>
+    <text x="810" y="173" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">Web Dashboard Mahasiswa</text>
+    <text x="810" y="195" font-family="monospace" font-size="9" fill="#7e22ce" text-anchor="middle">SUB: itera/lab/#</text>
+    <text x="810" y="215" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Grafik Suhu Real-time</text>
+    <text x="810" y="230" font-family="system-ui, sans-serif" font-size="9" fill="#16a34a" text-anchor="middle">WebSockets Transport</text>
+
+    <rect x="715" y="265" width="190" height="95" rx="6" fill="#ffffff" stroke="#e9d5ff"/>
+    <text x="810" y="288" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">Kontroler AC Otomatis</text>
+    <text x="810" y="310" font-family="monospace" font-size="9" fill="#7e22ce" text-anchor="middle">SUB: itera/lab/suhu</text>
+    <text x="810" y="330" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Jika &gt; 27&deg;C &rarr; Nyalakan AC</text>
+    <text x="810" y="345" font-family="system-ui, sans-serif" font-size="9" fill="#2563eb" text-anchor="middle">Aktuator Lapangan</text>
+
+    <rect x="715" y="380" width="190" height="90" rx="6" fill="#ffffff" stroke="#e9d5ff"/>
+    <text x="810" y="403" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">Bot Alert Telegram Dosen</text>
+    <text x="810" y="425" font-family="monospace" font-size="9" fill="#7e22ce" text-anchor="middle">SUB: itera/+/alert</text>
+    <text x="810" y="445" font-family="system-ui, sans-serif" font-size="9" fill="#dc2626" text-anchor="middle">Peringatan Bahaya Kebakaran</text>
+
+    <!-- Connective lines -->
+    <line x1="260" y1="180" x2="340" y2="180" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrB)"/>
+    <line x1="620" y1="180" x2="700" y2="180" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+    <line x1="620" y1="300" x2="700" y2="300" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+</svg>

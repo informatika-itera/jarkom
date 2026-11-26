@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">NETWORK FUNCTIONS VIRTUALIZATION (NFV) & SERVICE CHAINING</text>
+
+    <!-- Top: Traditional Middleboxes -->
+    <rect x="40" y="80" width="880" height="150" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.8" filter="url(#sh)"/>
+    <rect x="55" y="92" width="850" height="26" rx="4" fill="#b91c1c"/>
+    <text x="480" y="110" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">TRADISIONAL: HARDWARE MIDDLEBOXES KHUSUS (MAHAL &amp; KAKU)</text>
+
+    <rect x="65" y="130" width="180" height="80" rx="6" fill="#ffffff" stroke="#fca5a5"/>
+    <text x="155" y="155" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#991b1b" text-anchor="middle">Hardware Firewall</text>
+    <text x="155" y="175" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Sasis Fisik Vendor A</text>
+    <text x="155" y="195" font-family="monospace" font-size="9" fill="#dc2626" text-anchor="middle">Harga: Ratusan Juta Rp</text>
+
+    <rect x="285" y="130" width="180" height="80" rx="6" fill="#ffffff" stroke="#fca5a5"/>
+    <text x="375" y="155" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#991b1b" text-anchor="middle">Hardware DPI Box</text>
+    <text x="375" y="175" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Sasis Fisik Vendor B</text>
+    <text x="375" y="195" font-family="monospace" font-size="9" fill="#dc2626" text-anchor="middle">Kabel Patch Fisik Kaku</text>
+
+    <rect x="505" y="130" width="180" height="80" rx="6" fill="#ffffff" stroke="#fca5a5"/>
+    <text x="595" y="155" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#991b1b" text-anchor="middle">Hardware Load Balancer</text>
+    <text x="595" y="175" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Sasis Fisik Vendor C</text>
+    <text x="595" y="195" font-family="monospace" font-size="9" fill="#dc2626" text-anchor="middle">Sulit Di-scale Dinamis</text>
+
+    <rect x="725" y="130" width="180" height="80" rx="6" fill="#ffffff" stroke="#fca5a5"/>
+    <text x="815" y="155" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#991b1b" text-anchor="middle">Hardware WAN Opt.</text>
+    <text x="815" y="175" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Sasis Fisik Vendor D</text>
+    <text x="815" y="195" font-family="monospace" font-size="9" fill="#dc2626" text-anchor="middle">Pembaruan Butuh Beli Baru</text>
+
+    <!-- Bottom: NFV Architecture -->
+    <rect x="40" y="250" width="880" height="260" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2" filter="url(#sh)"/>
+    <rect x="55" y="262" width="850" height="26" rx="4" fill="#1e40af"/>
+    <text x="480" y="280" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">PARADIGMA MODERN: NFV (VIRTUAL NETWORK FUNCTIONS BERBASIS SERVER STANDAR)</text>
+
+    <!-- VNF Container Boxes -->
+    <rect x="65" y="300" width="180" height="70" rx="6" fill="#ffffff" stroke="#2563eb"/>
+    <text x="155" y="325" font-family="monospace" font-size="11" font-weight="800" fill="#1e40af" text-anchor="middle">VNF 1: vFirewall</text>
+    <text x="155" y="345" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Linux iptables / pfSense VM</text>
+
+    <rect x="285" y="300" width="180" height="70" rx="6" fill="#ffffff" stroke="#2563eb"/>
+    <text x="375" y="325" font-family="monospace" font-size="11" font-weight="800" fill="#1e40af" text-anchor="middle">VNF 2: vDPI / Snort</text>
+    <text x="375" y="345" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Suricata Container</text>
+
+    <rect x="505" y="300" width="180" height="70" rx="6" fill="#ffffff" stroke="#2563eb"/>
+    <text x="595" y="325" font-family="monospace" font-size="11" font-weight="800" fill="#1e40af" text-anchor="middle">VNF 3: vLoadBalancer</text>
+    <text x="595" y="345" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">HAProxy / NGINX VM</text>
+
+    <rect x="725" y="300" width="180" height="70" rx="6" fill="#ffffff" stroke="#2563eb"/>
+    <text x="815" y="325" font-family="monospace" font-size="11" font-weight="800" fill="#1e40af" text-anchor="middle">VNF 4: vVPN Gateway</text>
+    <text x="815" y="345" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">WireGuard Docker</text>
+
+    <!-- Service chaining arrow -->
+    <line x1="155" y1="370" x2="375" y2="370" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <line x1="375" y1="370" x2="595" y2="370" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <line x1="595" y1="370" x2="815" y2="370" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <text x="480" y="390" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#15803d" text-anchor="middle">&uarr; Service Function Chaining (SFC): Rangkaian Alur Paket Dibuat Dinamis Lewat Software &uarr;</text>
+
+    <!-- Underlying Hardware Layer -->
+    <rect x="65" y="410" width="840" height="85" rx="6" fill="#f8fafc" stroke="#94a3b8"/>
+    <text x="480" y="435" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#0f172a" text-anchor="middle">NFVI (NFV INFRASTRUCTURE): SERVER STANDAR COTS X86 (DELL / HP)</text>
+    <text x="480" y="458" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Virtualization Layer: KVM Hypervisor / Kubernetes / OpenStack &bull; NIC DPDK Akselerasi Paket</text>
+    <text x="480" y="478" font-family="monospace" font-size="10" font-weight="700" fill="#2563eb" text-anchor="middle">Keuntungan: Biaya Capex Turun 70%, Skalabilitas Otomatis dalam Hitungan Detik!</text>
+</svg>

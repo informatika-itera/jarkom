@@ -4,13 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jaringan Komputer - Pertemuan 14: Wireless & Mobile Networks</title>
+    <title>Jaringan Komputer - Pertemuan 14: Wireless &amp; Mobile Networks</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
     <link rel="stylesheet" href="css/pkom-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
     <style>
         @media screen {
@@ -21,7 +22,7 @@
             }
 
             .reveal img {
-                max-height: 45vh;
+                max-height: 46vh;
                 object-fit: contain;
             }
         }
@@ -40,28 +41,75 @@
         }
 
         .reveal .card {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        /* images */
+        /* Proportionally scaled card for 960x700 Reveal canvas (40px base) */
+        .card,
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .card-compact {
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul,
+        .card-compact ol {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .formula-box {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 4px 8px;
+            margin: 5px 0;
+            text-align: center;
+            box-sizing: border-box;
+            width: 100%;
+            font-size: 0.9em;
+            line-height: 1.3;
+        }
+
+        .formula-box .katex-display {
+            font-size: 0.82em !important;
+            margin: 2px 0 !important;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        [data-theme="dark"] .formula-box {
+            background: #1e293b !important;
+            border-color: #334155 !important;
+            color: #38bdf8 !important;
+        }
+
+        /* Images */
         .slide-img {
             width: 100%;
             height: auto;
-            max-height: 44vh;
+            max-height: 48vh;
             object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
-            display: block;
-            margin: 0 auto;
-        }
-
-        .slide-img-sm {
-            width: 100%;
-            height: auto;
-            max-height: 32vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
             display: block;
             margin: 0 auto;
         }
@@ -70,40 +118,51 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            align-items: start;
+            align-items: stretch;
             width: 100%;
         }
 
         .layout-text-img {
             display: grid;
-            grid-template-columns: 52% 1fr;
+            grid-template-columns: 46% 1fr;
             gap: 16px;
             align-items: center;
             width: 100%;
         }
 
-        .layout-3col {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-            width: 100%;
+        .layout-text-img>*,
+        .layout-2col>* {
+            min-width: 0;
         }
 
         .img-caption {
-            font-size: .55em;
-            color: #777;
+            font-size: .45em;
+            color: #64748b;
             text-align: center;
-            margin-top: .2em;
+            margin-top: 6px;
             font-style: italic;
+        }
+
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
         }
 
         /* Section bars & headers */
         .sec-bar {
             border-radius: 8px 8px 0 0;
-            padding: 8px 16px;
-            font-size: .75em;
+            padding: 9px 14px;
+            font-size: 1.05em;
             font-weight: 700;
-            letter-spacing: .04em;
+            letter-spacing: .02em;
         }
 
         .sec-body {
@@ -111,16 +170,8 @@
             border: 1px solid #dee2e6;
             border-radius: 0 0 8px 8px;
             padding: 12px 16px;
-            font-size: .68em;
+            font-size: 1em;
             box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
-        }
-
-        .card .sec-bar {
-            font-size: .88em;
-        }
-
-        .card .sec-body {
-            font-size: .82em;
         }
 
         .sec-bar-blue {
@@ -149,97 +200,83 @@
         }
 
         /* Info boxes */
+        .info-box,
+        .info-box-warn,
+        .info-box-green,
+        .info-box-red {
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
         .info-box {
             border-left: 4px solid #1565c0;
             background: #e8f0fe;
-            border-radius: 0 8px 8px 0;
-            padding: 10px 14px;
-            font-size: .68em;
-            margin-top: .5em;
-            line-height: 1.5;
+            color: #1e3a8a;
         }
 
         .info-box-warn {
             border-left: 4px solid #e65100;
             background: #fff3e0;
-            border-radius: 0 8px 8px 0;
-            padding: 10px 14px;
-            font-size: .68em;
-            margin-top: .5em;
-            line-height: 1.5;
+            color: #7c2d12;
         }
 
         .info-box-green {
             border-left: 4px solid #1b5e20;
             background: #e8f5e9;
-            border-radius: 0 8px 8px 0;
-            padding: 10px 14px;
-            font-size: .68em;
-            margin-top: .5em;
-            line-height: 1.5;
+            color: #14532d;
         }
 
         .info-box-red {
             border-left: 4px solid #b71c1c;
             background: #ffebee;
-            border-radius: 0 8px 8px 0;
-            padding: 10px 14px;
-            font-size: .68em;
-            margin-top: .5em;
-            line-height: 1.5;
-        }
-
-        .card .info-box,
-        .card .info-box-warn,
-        .card .info-box-green,
-        .card .info-box-red {
-            font-size: .88em;
+            color: #7f1d1d;
         }
 
         .reveal h3 {
-            font-size: 1.35em;
+            font-size: 1.25em;
             margin-bottom: 12px;
         }
 
-        .reveal table {
-            font-size: .55em;
+        .reveal table.std-table {
+            font-size: .96em;
             width: 100%;
             border-collapse: collapse;
         }
 
-        .reveal table th,
-        .reveal table td {
+        .reveal table.std-table th,
+        .reveal table.std-table td {
             border: 1px solid #dee2e6;
-            padding: 6px 10px;
+            padding: 6px 9px;
             text-align: left;
+            vertical-align: middle;
         }
 
-        .reveal table th {
+        .reveal table.std-table th {
             background: #1565c0;
             color: #fff;
             font-weight: 700;
         }
 
-        .reveal table tr:nth-child(even) td {
-            background: #f8f9fa;
+        .reveal table.std-table tr:nth-child(even) td {
+            background: #f8fafc;
         }
 
-        .code-block {
-            background: #282c34;
-            color: #abb2bf;
-            font-family: monospace;
-            padding: 10px 14px;
-            border-radius: 6px;
-            font-size: .62em;
-            text-align: left;
-            overflow-x: auto;
-            line-height: 1.45;
+        .reveal code {
+            background: #f1f5f9;
+            color: #be185d;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-size: .92em;
         }
 
+        /* Tugas Box (Standard P12/P13/P14) */
         .tugas-box {
             background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
             border-radius: 14px;
-            padding: 22px 28px;
+            padding: 20px 26px;
             color: #fff;
             text-align: left;
         }
@@ -247,25 +284,31 @@
         .tugas-box h3 {
             color: #fff !important;
             margin-top: 0;
-            font-size: 1.2em;
+            font-size: 1.15em;
+            margin-bottom: 8px;
         }
 
         .tugas-soal {
             background: rgba(255, 255, 255, .15);
             border-radius: 10px;
-            padding: 14px 18px;
-            margin: 10px 0;
+            padding: 10px 15px;
+            margin: 7px 0;
         }
 
         .tugas-soal p {
-            font-size: .6em;
-            line-height: 1.6;
+            font-size: .58em;
+            line-height: 1.5;
             margin: 0;
             color: #e8f5e9;
         }
 
+        .tugas-soal code {
+            background: rgba(0, 0, 0, .25);
+            color: #fef08a;
+        }
+
         .tugas-soal .num {
-            font-size: 1.1em;
+            font-size: 1.05em;
             font-weight: 700;
             color: #ffeb3b;
         }
@@ -273,44 +316,530 @@
         .tugas-info {
             display: flex;
             gap: 10px;
-            margin-top: 14px;
+            margin-top: 12px;
             flex-wrap: wrap;
         }
 
         .tugas-chip {
             background: rgba(255, 255, 255, .2);
             border-radius: 20px;
-            padding: 6px 14px;
-            font-size: .6em;
+            padding: 5px 14px;
+            font-size: .58em;
             color: #fff;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* Dark mode overrides for custom components */
+        /* Interactive Sim Styles */
+        .sim-container {
+            background: #0d1117;
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: #c9d1d9;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: .48em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .35);
+            max-width: 960px;
+            margin: 8px auto;
+            text-align: left;
+        }
+
+        .sim-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #21262d;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sim-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .sim-tab-btn {
+            background: #21262d;
+            color: #8b949e;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-size: .92em;
+            font-weight: 600;
+        }
+
+        .sim-tab-btn.active {
+            background: #1f6feb;
+            color: #fff;
+            border-color: #388bfd;
+        }
+
+        .sim-btn-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .sim-btn {
+            background: #238636;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-size: .92em;
+            font-weight: 600;
+        }
+
+        .sim-btn:hover {
+            background: #2ea043;
+        }
+
+        .sim-btn-orange {
+            background: #d97706;
+        }
+
+        .sim-btn-orange:hover {
+            background: #b45309;
+        }
+
+        .sim-btn-reset {
+            background: #30363d;
+        }
+
+        .sim-btn-reset:hover {
+            background: #484f58;
+        }
+
+        .sim-display-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .sim-pane {
+            background: #161b22;
+            border: 1.5px solid #30363d;
+            border-radius: 6px;
+            padding: 10px 12px;
+            height: 265px;
+            overflow-y: auto;
+            font-size: .65em;
+            line-height: 1.5;
+            transition: border-color .22s ease, box-shadow .22s ease;
+        }
+
+        .sim-pane.sim-pane-active {
+            border-color: #388bfd !important;
+            box-shadow: 0 0 0 1px rgba(56, 139, 253, .45);
+        }
+
+        .sim-pane-title {
+            color: #58a6ff;
+            font-weight: 700;
+            font-size: 1.06em;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @keyframes simSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+                background: rgba(56, 139, 253, .16);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                background: transparent;
+            }
+        }
+
+        .sim-log-line {
+            margin: 5px 0;
+            line-height: 1.5;
+            font-size: 1em;
+            padding: 1px 4px;
+            border-radius: 4px;
+            animation: simSlideIn .3s ease-out both;
+        }
+
+        .sim-pane code {
+            background: #21262d !important;
+            color: #79c0ff !important;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .95em;
+        }
+
+        .sim-tag-req {
+            background: #1f6feb;
+            color: #fff;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .85em;
+        }
+
+        .sim-tag-res {
+            background: #238636;
+            color: #fff;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .85em;
+        }
+
+        .sim-tag-dns {
+            background: #8957e5;
+            color: #fff;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .85em;
+        }
+
+        .sim-tag-warn {
+            background: #d29922;
+            color: #000;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .85em;
+            font-weight: 700;
+        }
+
+        .sim-tag-cache {
+            background: #3fb950;
+            color: #000;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .85em;
+            font-weight: 700;
+        }
+
+
+        /* Animated Right Panel (.rpanel-stage & .rpanel-spotlight) */
+        .rpanel-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .rpanel-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .42em;
+            font-weight: 800;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 999px;
+            border: 1.5px solid currentColor;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, .08);
+        }
+
+        .rpanel-badge-blue {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .rpanel-badge-green {
+            background: #ecfdf5;
+            color: #15803d;
+        }
+
+        .rpanel-badge-red {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .rpanel-badge-purple {
+            background: #f5f3ff;
+            color: #6d28d9;
+        }
+
+        .rpanel-badge-orange {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .rpanel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            flex-shrink: 0;
+            animation: rpanelDotPing 1.6s ease-in-out infinite;
+        }
+
+        @keyframes rpanelDotPing {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.45);
+                opacity: .45;
+            }
+        }
+
+        .rpanel-frame {
+            position: relative;
+            display: inline-block;
+            width: fit-content;
+            max-width: 100%;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, .12);
+            border: 1px solid #cbd5e1;
+        }
+
+        .rpanel-frame img.slide-img {
+            display: block;
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 45vh;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+            transition: transform .4s ease;
+        }
+
+        .rpanel-frame:hover img.slide-img {
+            transform: scale(1.03);
+        }
+
+        @keyframes rpanelZoomFade {
+            0% {
+                opacity: 0;
+                transform: translateX(18px) scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        section.present .rpanel-img-enter {
+            animation: rpanelZoomFade .62s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .rpanel-spotlight {
+            position: absolute;
+            border-radius: 10px;
+            pointer-events: none;
+            z-index: 3;
+            box-sizing: border-box;
+        }
+
+        @keyframes spPulseBlue {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 2px rgba(37, 99, 235, .28), inset 0 0 12px rgba(37, 99, 235, .08);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(37, 99, 235, .14), 0 0 20px rgba(37, 99, 235, .36);
+            }
+        }
+
+        @keyframes spPulseGreen {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 2px rgba(22, 163, 74, .28), inset 0 0 12px rgba(22, 163, 74, .08);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(22, 163, 74, .14), 0 0 20px rgba(22, 163, 74, .36);
+            }
+        }
+
+        @keyframes spPulseRed {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 2px rgba(220, 38, 38, .3), inset 0 0 12px rgba(220, 38, 38, .08);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(220, 38, 38, .15), 0 0 20px rgba(220, 38, 38, .38);
+            }
+        }
+
+        @keyframes spPulsePurple {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 2px rgba(124, 58, 237, .3), inset 0 0 12px rgba(124, 58, 237, .08);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(124, 58, 237, .15), 0 0 20px rgba(124, 58, 237, .38);
+            }
+        }
+
+        @keyframes spPulseOrange {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 2px rgba(234, 88, 12, .3), inset 0 0 12px rgba(234, 88, 12, .08);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(234, 88, 12, .15), 0 0 20px rgba(234, 88, 12, .38);
+            }
+        }
+
+        .sp-blue {
+            border: 3px solid #2563eb;
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .sp-green {
+            border: 3px solid #16a34a;
+            background: rgba(22, 163, 74, 0.05);
+        }
+
+        .sp-red {
+            border: 3px solid #dc2626;
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .sp-purple {
+            border: 3px solid #7c3aed;
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        .sp-orange {
+            border: 3px solid #ea580c;
+            background: rgba(234, 88, 12, 0.05);
+        }
+
+        section.present .sp-blue {
+            animation: spPulseBlue 2s ease-in-out infinite;
+        }
+
+        section.present .sp-green {
+            animation: spPulseGreen 2s ease-in-out infinite;
+        }
+
+        section.present .sp-red {
+            animation: spPulseRed 2s ease-in-out infinite;
+        }
+
+        section.present .sp-purple {
+            animation: spPulsePurple 2s ease-in-out infinite;
+        }
+
+        section.present .sp-orange {
+            animation: spPulseOrange 2s ease-in-out infinite;
+        }
+
+        /* Dark Mode Overrides */
+        [data-theme="dark"] .card {
+            background: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+
         [data-theme="dark"] .sec-body {
             background: #2a2a2a !important;
             color: #eee !important;
             border-color: #444 !important;
         }
 
-        [data-theme="dark"] .code-block {
-            background: #1e1e1e !important;
-            color: #d4d4d4 !important;
-            border: 1px solid #444;
+        [data-theme="dark"] .info-box {
+            background: #1e3a5f !important;
+            color: #dbeafe !important;
         }
 
-        [data-theme="dark"] .reveal table th {
+        [data-theme="dark"] .info-box-warn {
+            background: #45260a !important;
+            color: #fed7aa !important;
+        }
+
+        [data-theme="dark"] .info-box-green {
+            background: #143821 !important;
+            color: #dcfce7 !important;
+        }
+
+        [data-theme="dark"] .info-box-red {
+            background: #4c1717 !important;
+            color: #fecaca !important;
+        }
+
+        [data-theme="dark"] .reveal code {
+            background: #334155;
+            color: #f9a8d4;
+        }
+
+        [data-theme="dark"] .reveal table.std-table th {
             background: #1a365d !important;
         }
 
-        [data-theme="dark"] .reveal table td {
+        [data-theme="dark"] .reveal table.std-table td {
             border-color: #444 !important;
         }
 
-        [data-theme="dark"] .reveal table tr:nth-child(even) td {
-            background: #222 !important;
+        [data-theme="dark"] .reveal table.std-table tr:nth-child(even) td {
+            background: #252525 !important;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        [data-theme="dark"] .rpanel-frame {
+            border-color: #475569;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .45);
+        }
+
+        [data-theme="dark"] .rpanel-badge-blue {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        [data-theme="dark"] .rpanel-badge-green {
+            background: #14532d;
+            color: #bbf7d0;
+        }
+
+        [data-theme="dark"] .rpanel-badge-red {
+            background: #7f1d1d;
+            color: #fecaca;
+        }
+
+        [data-theme="dark"] .rpanel-badge-purple {
+            background: #4c1d95;
+            color: #ddd6fe;
+        }
+
+        [data-theme="dark"] .rpanel-badge-orange {
+            background: #7c2d12;
+            color: #fed7aa;
         }
     </style>
 </head>
@@ -324,13 +853,15 @@
 
         <div class="slides">
 
-            <section>
+            <!-- SLIDE 1: COVER -->
+            <section data-topic="Pertemuan 14: Wireless &amp; Mobile Networks">
                 <div class="title-box">
-                    <h1>Wireless & Mobile Networks</h1>
+                    <h1>Wireless &amp; Mobile Networks</h1>
                     <h3 class="subtitle">Pertemuan 14</h3>
                 </div>
-                <p>Pendalaman Ekstensif: WiFi, Sinyal Radio, Cellular (4G LTE/5G), & Mobilitas</p>
-                <p>Referensi: <em>Bahan Ajar Week14.pptx & RPS Jaringan Komputer</em></p>
+                <!-- <p>Karakteristik Link Nirkabel, IEEE 802.11 (Wi-Fi), Seluler 4G/5G, Mobile IP, &amp; Konfigurasi Access Point</p> -->
+                <p class="text-small">Referensi Utama: Kurose &amp; Ross — <em>Computer Networking: A Top-Down Approach
+                        (8th Ed., Ch. 7)</em></p>
                 <p class="text-small"><em>Dosen Pengampu:</em></p>
                 <div
                     style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
@@ -339,812 +870,1479 @@
                     <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
                     <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
                 </div>
+                <aside class="notes">Selamat datang di Pertemuan 14: Wireless &amp; Mobile Networks. Hari ini kita
+                    membedah jaringan nirkabel (Wi-Fi &amp; seluler 4G/5G), manajemen mobilitas (Mobile IP), hingga
+                    desain radio &amp; konfigurasi Access Point.</aside>
             </section>
 
-            <section>
-                <h3>Goals & Overview</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Fokus Pertemuan 14:</p>
-                    <ul>
-                        <li><strong>Wireless:</strong> Membedah karakteristik fisik medium komunikasi (sinyal radio) dibandingkan kabel tembaga/optik. Termasuk WiFi 802.11 dan Seluler 4G/5G.</li>
-                        <li><strong>Mobility:</strong> Bagaimana cara sebuah node berpindah lokasi dari satu sel ke sel lain, terputus dari tower lama dan menyambung ke tower baru, tanpa memutus koneksi internetnya?</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week14/image1.png" class="slide-img" alt="Goals & Overview">
+            <!-- SLIDE 2: OUTLINE MATERI -->
+            <section data-topic="Outline Materi">
+                <h3>Outline Materi</h3>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-broadcast"></i> 1. Fondasi &amp; Tantangan Fisik Radio
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Komponen Nirkabel, Mode <em>Infrastructure</em> vs <em>Ad-Hoc</em>, &amp; Taksonomi</li>
+                            <li>Redaman <em>Path Loss</em>, <em>Multipath</em>, Trade-off SNR/BER, &amp; Skala
+                                <strong>RSSI (dBm)</strong>
+                            </li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-wifi"></i> 2. LAN Nirkabel: IEEE 802.11 (Wi-Fi) &amp; PAN
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Evolusi 802.11b–ax, BSS/ESS, Scanning, &amp; <em>Hidden Terminal</em> (CSMA/CA)</li>
+                            <li>RTS/CTS, Frame 4-Alamat, <strong>802.11 Rate Anomaly</strong>, &amp; Bluetooth / BLE
+                            </li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-reception-4"></i> 3. Jaringan Seluler 4G LTE &amp; 5G NR
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Arsitektur RAN (UE, eNode-B) &amp; Core EPC All-IP (MME, HSS, S-GW, P-GW)</li>
+                            <li>OFDM Multiplexing &amp; Evolusi 5G (mmWave, eMBB, URLLC, mMTC)</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-signpost-split-fill"></i> 4. Manajemen Mobilitas &amp; Mobile IP
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Tantangan Roaming Layer-3 (Home vs Visited Network, CoA)</li>
+                            <li><em>Indirect</em> vs <em>Direct Routing</em>, Mobile IP RFC 5944, &amp; GTP Tunneling 4G
+                            </li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 4px 0;">
+                            <i class="bi bi-router-fill"></i> 5. Desain Radio, Konfigurasi AP &amp; Simulasi
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Desain Multi-AP (CCI vs ACI, 5 GHz, Overlap) &amp; Panduan Setup AP Lab</li>
+                            <li>2 Simulasi Auto-Step (CSMA/CA &amp; Mobile IP), Rangkuman &amp; Tugas Lab</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu menjelaskan karakteristik &amp;
+                            tantangan fisik jaringan nirkabel, mekanisme Wi-Fi/Seluler/Mobile IP, serta merancang dan
+                            mengonfigurasi perangkat Wireless Access Point.
+                        </div>
                     </div>
                 </div>
+                <aside class="notes">Peta alur Pertemuan 14 telah dirampingkan agar bebas pengulangan materi Pertemuan
+                    1, 3, 4, dan 13, serta diperkaya materi praktis lapangan: membaca skala RSSI dBm, 802.11 Rate
+                    Anomaly, perencanaan multi-AP, hingga panduan setup AP lab.</aside>
             </section>
 
-            <section>
-                <h3>Elemen Jaringan Nirkabel</h3>
+            <!-- ━━━━━━━━━━━━━━ BAGIAN 1 ━━━━━━━━━━━━━━ -->
+            <section class="section-slide" data-topic="Bagian 1: Fondasi &amp; Tantangan Fisik Radio">
+                <div class="section-part-label">Bagian 1</div>
+                <h2>1. Fondasi &amp; Tantangan Fisik Radio</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Elemen Infrastruktur, Mode
+                    Infrastructure vs Ad-Hoc, Path Loss, SNR/BER, &amp; Skala RSSI (dBm)</p>
+                <aside class="notes">Bagian pertama memusatkan fokus pada keunikan lapisan fisik medium udara (radio)
+                    serta bagaimana mengukur kualitas sinyal secara praktis dalam satuan dBm.</aside>
+            </section>
+
+            <!-- SLIDE 4 (Merged Elements + Infrastructure vs Ad-Hoc Mode) -->
+            <section data-topic="Elemen, Mode Operasi &amp; Taksonomi">
+                <h4>Elemen, Mode Operasi &amp; Taksonomi Nirkabel</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <ul>
-                        <li><strong>Wireless Hosts:</strong> Perangkat akhir (Smartphone, Laptop, IoT). Dapat bergerak (mobile) atau diam/menetap. <em>Ingat: Nirkabel tidak selalu berarti Mobile (contoh: PC desktop tersambung WiFi).</em></li>
-                        <li><strong>Base Station:</strong> Menjembatani (relay) data dari perangkat nirkabel menuju ke jaringan kabel (infrastruktur internet utama). Contoh: Access Point WiFi, Menara BTS (Cell Towers).</li>
-                        <li><strong>Wireless Link:</strong> Jalur radio frekuensi. Memiliki berbagai batasan laju transmisi, jarak pancar, dan pita frekuensi.</li>
-                    </ul>
-                </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">3 Komponen Dasar Jaringan Nirkabel:
+                        </p>
+                        <ul style="margin-bottom:6px;">
+                            <li><strong>Wireless Hosts:</strong> Perangkat akhir (HP, laptop, IoT). Bisa bergerak maupun
+                                diam (<em>Wireless &ne; selalu mobile!</em>).</li>
+                            <li><strong>Base Station &amp; Wireless Link:</strong> Penjembatan kabel–radio (Wi-Fi AP /
+                                eNode-B 4G) beserta medium udara berbatas jarak.</li>
+                        </ul>
+                        <p style="font-weight:700; color:#e65100; margin:4px 0;">2 Mode Operasi Utama:</p>
+                        <ul style="margin-bottom:6px;">
+                            <li><strong>Infrastructure Mode:</strong> Semua paket lewat Base Station + mendukung
+                                <em>Handoff</em> antar-sel (contoh: Wi-Fi kampus <code>eduroam</code>, 4G/5G).
+                            </li>
+                            <li><strong>Ad-Hoc &amp; Mesh Mode:</strong> Komunikasi langsung <em>multi-hop</em> tanpa
+                                AP/router pusat (contoh: AirDrop, Wi-Fi Direct, <strong>MANET/VANET</strong>).</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week14/image2.png" class="slide-img" alt="Elemen Jaringan Nirkabel">
+                        <img src="images/week14/wireless_elements_taxonomy.svg" class="slide-img"
+                            alt="Elemen Infrastruktur dan Taksonomi 4 Kuadran Jaringan Nirkabel">
+                        <p class="img-caption">Komponen Infrastruktur &amp; Taksonomi 4 Kuadran: Single/Multi-hop vs
+                            Infrastructure/Ad-Hoc</p>
                     </div>
                 </div>
+                <aside class="notes">Menggabungkan taksonomi komponen dengan dua mode operasi utama (Infrastructure vs
+                    Ad-Hoc) membuat mahasiswa langsung memahami posisi masing-masing teknologi pada diagram 4 kuadran
+                    Kurose &amp; Ross.</aside>
             </section>
 
-            <section>
-                <h3>Dua Mode Jaringan Nirkabel</h3>
+            <!-- SLIDE 5 -->
+            <section data-topic="Tantangan Fisik Medium Radio">
+                <h4>Tantangan Fisik Medium Radio (vs Kabel)</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p><strong>1. Infrastructure Mode</strong></p>
-                    <ul>
-                        <li>Semua perangkat HARUS terhubung ke *Base Station* (seperti router AP di rumah).</li>
-                        <li>Jika perangkat berpindah jangkauan, terjadilah <strong>Handoff</strong> (pemindahan layan dari satu base station ke yang lain).</li>
-                    </ul>
-                    <p><strong>2. Ad Hoc Mode</strong></p>
-                    <ul>
-                        <li>TIDAK ADA *Base Station* pusat.</li>
-                        <li>Perangkat mengorganisasi dirinya sendiri. Jika jaraknya terlalu jauh, sebuah node bisa menitipkan paketnya ke node di sebelahnya untuk direlay (*mesh networking*).</li>
-                    </ul>
-                </div>
+                    <div class="card card-compact text-left">
+                        <p>Melampaui konsep umum gangguan sinyal kabel (Pertemuan 3), propagasi gelombang radio
+                            menghadapi tantangan spesifik:</p>
+                        <ol>
+                            <li><strong>Free-Space Path Loss:</strong> Energi sinyal menyebar ke ruang 3D dan melemah
+                                kuadratik seiring kenaikan frekuensi $f$ &amp; jarak $d$:
+                                <div style="text-align:center; margin:4px 0; font-weight:700; color:#1565c0;">
+                                    $$\text{Path Loss} \propto (f \cdot d)^2$$</div>
+                            </li>
+                            <li><strong>Multipath Propagation:</strong> Gelombang memantul di dinding, logam, dan
+                                kendaraan sehingga versi langsung (<em>LOS</em>) &amp; pantulan tiba dengan fasa berbeda
+                                (saling melemahkan/mengaburkan simbol).</li>
+                            <li><strong>Shared Medium Interference:</strong> Pita bebas lisensi (2.4 GHz) digunakan
+                                bersamaan oleh Wi-Fi, Bluetooth, microwave, dan AP tetangga.</li>
+                        </ol>
+                    </div>
                     <div>
-                        <img src="images/week14/image3.png" class="slide-img" alt="Dua Mode Jaringan Nirkabel">
+                        <img src="images/week14/radio_propagation_snr_ber.svg" class="slide-img"
+                            alt="Propagasi Sinyal Radio dan Kurva SNR vs BER">
+                        <p class="img-caption">Tiga Fenomena Pelemahan Radio &amp; Kurva Hubungan SNR vs BER</p>
                     </div>
                 </div>
+                <aside class="notes">Soroti konsekuensi rumus (f * d)^2: inilah penjelasan fisika mengapa Wi-Fi 5 GHz
+                    cepat melemah menembus tembok beton dibanding 2.4 GHz karena nilai frekuensi f-nya lebih dari dua
+                    kali lipat.</aside>
             </section>
 
-            <section>
-                <h3>Tantangan Fisik Medium Radio</h3>
+            <!-- SLIDE 6 -->
+            <!-- SLIDE 06 (1/2) -->
+            <section data-auto-animate data-auto-animate-id="pair06"
+                data-topic="Metrik SNR, BER &amp; Daya Pancar (1/2)">
+                <h3>Trade-off SNR, BER &amp; Daya Pancar (1/2)</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Komunikasi nirkabel JAUH lebih bermasalah dibandingkan kabel tembaga:</p>
-                    <ol>
-                        <li><strong>Fading / Attenuation:</strong> Sinyal radio otomatis melemah (kehilangan daya) seiring jarak bertambah. (Makin jauh frekuensi/jaraknya, makin parah *path loss*-nya).</li>
-                        <li><strong>Multipath Propagation:</strong> Sinyal memantul di dinding, tanah, dan gedung, menyebabkan sinyal asli dan pantulannya tiba di antena penerima pada waktu yang sedikit berbeda.</li>
-                        <li><strong>Interference & Noise:</strong> Diganggu oleh microwave, motor listrik, dan transmisi perangkat nirkabel tetangga.</li>
-                    </ol>
-                </div>
-                    <div>
-                        <img src="images/week14/image4.png" class="slide-img" alt="Tantangan Fisik Medium Radio">
+                    <div class="card card-compact text-left" data-id="left-06-1">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 6px 0;"><i class="bi bi-graph-up"></i>
+                            Metrik Kualitas Sinyal Radio</p>
+                        <ul>
+                            <li><strong>SNR (Signal-to-Noise Ratio):</strong> Perbandingan daya sinyal informasi yang
+                                diterima terhadap kebisingan latar (<em>noise</em>) dalam satuan dB.</li>
+                            <li><strong>BER (Bit Error Rate):</strong> Probabilitas terjadinya kerusakan/pembalikan bit
+                                akibat noise (misal $10^{-6}$ vs $10^{-2}$).</li>
+                        </ul>
+                        <div class="info-box-warn" style="margin-top:8px;">
+                            <strong>Trade-off Daya Pancar:</strong> Menaikkan TX Power &rarr; SNR naik &rarr; BER turun.
+                            Namun konsekuensinya <strong>baterai cepat habis</strong> dan memicu
+                            <strong>interferensi</strong> ke Access Point tetangga!
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-06">
+                        <div class="rpanel-badge rpanel-badge-blue" data-id="rbadge-06">
+                            <span class="rpanel-dot"></span> Fokus 1/2: Metrik SNR &amp; Interferensi
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-06">
+                            <img src="images/week14/modulation_adaptation_rooms.jpg" class="slide-img rpanel-img-enter"
+                                data-id="rimg-06"
+                                alt="Ilustrasi SNR, noise radio, dan zona adaptasi modulasi antar ruangan">
+                            <div class="rpanel-spotlight sp-blue" data-id="rspot-06"
+                                style="left: 4%; top: 24%; width: 39%; height: 59%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-06">Kualitas sinyal (SNR &amp; Noise) diukur relatif
+                            terhadap kebisingan latar &amp; daya pancar AP.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 1/2: Tekankan hubungan SNR dan BER serta trade-off menaikkan TX Power
+                    terhadap baterai dan interferensi AP tetangga.</aside>
             </section>
 
-            <section>
-                <h3>Trade-off: SNR dan BER</h3>
+            <!-- SLIDE 06 (2/2) -->
+            <section data-auto-animate data-auto-animate-id="pair06" data-topic="Adaptasi Modulasi Dinamis (2/2)">
+                <h4>Adaptasi Modulasi Dinamis Wi-Fi/4G (2/2)</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <ul>
-                        <li><strong>SNR (Signal-to-Noise Ratio):</strong> Rasio kekuatan sinyal asli terhadap kekuatan sinyal berisik di sekitarnya. Makin besar, makin bagus!</li>
-                        <li><strong>BER (Bit Error Rate):</strong> Persentase paket bit yang rusak saat diterima.</li>
-                    </ul>
-                    <p><strong>Aturan Emas:</strong> Meningkatkan kekuatan pancaran daya perangkat Anda (Power) akan menaikkan SNR, yang pada akhirnya menurunkan tingkat kesalahan data (BER). Tapi ini membuat baterai HP Anda cepat habis.</p>
-                </div>
-                    <div>
-                        <img src="images/week14/image5.png" class="slide-img" alt="Trade-off: SNR dan BER">
+                    <div class="card card-compact text-left" data-id="left-06-2">
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 6px 0;"><i class="bi bi-sliders"></i>
+                            Dynamic Rate &amp; Modulation Adaptation</p>
+                        <p>Saat klien menjauh dari AP dan SNR turun, Wi-Fi/4G otomatis menurunkan kompleksitas modulasi
+                            demi menjaga BER tetap aman:</p>
+                        <div class="info-box-red" style="margin-top:4px;">
+                            <strong>Dekat AP (SNR &ge; 30 dB) &rarr; QAM-256 / 1024 (High Rate)</strong><br>
+                            Padat bit per simbol, kecepatan sangat tinggi, namun rentan error jika ada noise.
+                        </div>
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Jarak Sedang (SNR ~20 dB) &rarr; QAM-16 (Medium Rate)</strong><br>
+                            Keseimbangan optimal antara kecepatan transfer dan ketahanan sinyal.
+                        </div>
+                        <div class="info-box-green" style="margin-top:6px;">
+                            <strong>Jauh / Terhalang Tembok (SNR ~10 dB) &rarr; BPSK (1–6 Mbps)</strong><br>
+                            Modulasi paling tangguh agar koneksi tidak putus walau throughput lambat.
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-06">
+                        <div class="rpanel-badge rpanel-badge-green" data-id="rbadge-06">
+                            <span class="rpanel-dot"></span> Fokus 2/2: Laju Modulasi per Ruangan
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-06">
+                            <img src="images/week14/modulation_adaptation_rooms.jpg" class="slide-img" data-id="rimg-06"
+                                alt="Adaptasi modulasi QAM-256 ke QAM-16 hingga BPSK melewati dinding beton">
+                            <div class="rpanel-spotlight sp-green" data-id="rspot-06"
+                                style="left: 19%; top: 22%; width: 76%; height: 61%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-06">Saat klien berpindah menembus sekat beton, modulasi
+                            otomatis diturunkan demi menjaga BER aman.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 2/2: Itulah sebabnya indikator link rate Wi-Fi turun dari ratusan Mbps ke
+                    belasan Mbps saat pindah ke kamar bersekat beton.</aside>
             </section>
 
-            <section>
-                <h3>Hidden Terminal Problem</h3>
+            <!-- SLIDE 7 (NEW: RSSI dBm, Noise Floor & Link Budget) -->
+            <section data-topic="Skala Sinyal Wi-Fi: RSSI (dBm) &amp; SNR">
+                <h4>Skala Sinyal Wi-Fi: RSSI (dBm) &amp; Noise Floor</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Masalah klasik di jaringan nirkabel. Bayangkan 3 orang: A, B (di tengah), dan C.</p>
-                    <ul>
-                        <li>A dan B saling mendengar.</li>
-                        <li>B dan C saling mendengar.</li>
-                        <li>Tetapi karena jarak atau halangan fisik, <strong>A dan C tidak saling mendengar (Hidden)</strong>.</li>
-                        <li>Akibatnya, A dan C bisa tanpa sengaja mengirim data ke B SECARA BERSAMAAN. Terjadilah tabrakan (Collision) parah di B!</li>
-                    </ul>
-                </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">Membaca Angka Audit Wi-Fi (Tugas
+                            Praktikum 1):</p>
+                        <ul>
+                            <li><strong>RSSI (<em>Received Signal Strength Indicator</em>):</strong> Diukur dalam
+                                logaritmik negatif <strong>dBm</strong> (daya relatif thd 1 mW).</li>
+                            <li><strong>Patokan Praktis:</strong>
+                                <code>-30..-50 dBm</code> (optimal), <code>-67 dBm</code> (aman Zoom/VoIP),
+                                <code>&le;-80 dBm</code> (putus), <code>~-95 dBm</code> (<em>Noise Floor</em>).
+                            </li>
+                            <li><strong>Rumus SNR Cepat Admin Jaringan:</strong>
+                                <div class="formula-box">
+                                    $$\text{SNR (dB)} = \text{RSSI (dBm)} - \text{Noise Floor (dBm)}$$
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="info-box-warn" style="margin-top:4px;">
+                            <strong>Catatan Penting:</strong> Sinyal terlihat <code>-62 dBm</code> bisa tetap macet jika
+                            <em>Noise Floor</em> tinggi (misal <code>-74 dBm</code> &rarr; SNR hanya 12 dB)!
+                        </div>
+                    </div>
                     <div>
-                        <img src="images/week14/image6.png" class="slide-img" alt="Hidden Terminal Problem">
+                        <img src="images/week14/rssi_signal_levels_dbm.svg" class="slide-img"
+                            alt="Skala RSSI dBm dan Perhitungan SNR Wi-Fi">
+                        <p class="img-caption">Tangga Kualitas RSSI (dBm) dan Cara Menghitung SNR dari Pengukuran
+                            Lapangan</p>
                     </div>
                 </div>
+                <aside class="notes">Slide baru ini menjembatani teori SNR dengan pengukuran nyata pada Tugas Praktikum
+                    1 (WiFi Analyzer / netsh wlan). Ajarkan cara membaca angka negatif dBm (-50 dBm 100 kali lebih kuat
+                    daripada -70 dBm karena tiap 10 dB = 10 kali daya).</aside>
             </section>
 
-            <section>
-                <h3>Solusi 1: CDMA (Code Division Multiple Access)</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Bagaimana agar A dan C bisa bicara bersamaan tanpa bertabrakan?</p>
-                    <ul>
-                        <li>Pada seluler generasi lama (3G/CDMA), setiap perangkat diberi <strong>Kode Unik</strong>.</li>
-                        <li>Semua orang berbicara berbarengan pada <em>frekuensi yang persis sama</em>. Namun karena memakai bahasa kode matematika yang ortogonal, Base Station dapat menyaring dan menterjemahkan percakapan A tanpa tercampur ucapan C.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week14/image7.jpg" class="slide-img" alt="Solusi 1: CDMA (Code Division Multiple Access)">
+            <!-- ━━━━━━━━━━━━━━ BAGIAN 2 ━━━━━━━━━━━━━━ -->
+            <section class="section-slide" data-topic="Bagian 2: LAN Nirkabel IEEE 802.11 (Wi-Fi) &amp; PAN">
+                <div class="section-part-label">Bagian 2</div>
+                <h2>2. LAN Nirkabel: IEEE 802.11 (Wi-Fi) &amp; PAN</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Evolusi Wi-Fi, Arsitektur BSS/ESS,
+                    Scanning, Hidden Terminal &amp; CSMA/CA, Rate Anomaly, serta Bluetooth</p>
+                <aside class="notes">Bagian kedua membedah arsitektur dan protokol Layer 2 IEEE 802.11 (Wi-Fi) secara
+                    utuh dari standar fisik, asosiasi, mekanisme akses CSMA/CA, fenomena Rate Anomaly, hingga PAN
+                    Bluetooth.</aside>
+            </section>
+
+            <!-- SLIDE 9 -->
+            <section data-topic="Evolusi Standar IEEE 802.11 (Wi-Fi)">
+                <h3>Evolusi Standar IEEE 802.11 (Wi-Fi)</h3>
+                <div class="card card-compact text-left" style="padding: 12px 16px;">
+                    <table class="std-table">
+                        <thead>
+                            <tr>
+                                <th>Standar IEEE</th>
+                                <th>Nama Populer</th>
+                                <th>Tahun</th>
+                                <th>Max Data Rate</th>
+                                <th>Frekuensi</th>
+                                <th>Jangkauan &amp; Fitur Kunci</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>802.11b / g</strong></td>
+                                <td>Wi-Fi 1 / 3</td>
+                                <td>1999–2003</td>
+                                <td>11 – 54 Mbps</td>
+                                <td>2.4 GHz</td>
+                                <td>~30 m indoor; pelopor Wi-Fi massal (DSSS &rarr; OFDM)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>802.11n</strong></td>
+                                <td><strong>Wi-Fi 4</strong></td>
+                                <td>2009</td>
+                                <td>600 Mbps</td>
+                                <td>2.4 / 5 GHz</td>
+                                <td>~70 m indoor; memperkenalkan MIMO multi-antena</td>
+                            </tr>
+                            <tr>
+                                <td><strong>802.11ac</strong></td>
+                                <td><strong>Wi-Fi 5</strong></td>
+                                <td>2013</td>
+                                <td>3.47 Gbps</td>
+                                <td>5 GHz</td>
+                                <td>~70 m; kanal lebar 80/160 MHz &amp; MU-MIMO downlink</td>
+                            </tr>
+                            <tr>
+                                <td><strong>802.11ax</strong></td>
+                                <td><strong>Wi-Fi 6 / 6E</strong></td>
+                                <td>2020</td>
+                                <td>9.6 – 14 Gbps</td>
+                                <td>2.4 / 5 / 6 GHz</td>
+                                <td>~70 m; OFDMA efisiensi area padat + <em>Target Wake Time</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>802.11be</strong></td>
+                                <td><strong>Wi-Fi 7</strong></td>
+                                <td>2024</td>
+                                <td>Hingga 46 Gbps</td>
+                                <td>2.4 / 5 / 6 GHz</td>
+                                <td>Kanal 320 MHz + <em>Multi-Link Operation (MLO)</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>802.11ah</strong></td>
+                                <td>Wi-Fi HaLow</td>
+                                <td>2017</td>
+                                <td>347 Mbps</td>
+                                <td>900 MHz</td>
+                                <td>~1 km outdoor; hemat daya untuk sensor IoT jarak jauh</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="info-box-green" style="margin-top:10px;">
+                        <strong>Kesamaan Fundamental:</strong> Meskipun laju fisiknya melesat dari 11 Mbps hingga 46
+                        Gbps, seluruh generasi Wi-Fi tetap berakar pada <strong>protokol MAC yang sama
+                            (CSMA/CA)</strong> serta mendukung mode <em>Infrastructure</em> &amp; <em>Ad-Hoc</em>.
                     </div>
                 </div>
+                <aside class="notes">Tabel evolusi sudah diperbarui hingga 802.11be (Wi-Fi 7) dengan Multi-Link
+                    Operation agar materi relevan dengan perangkat modern, sembari menegaskan benang merah CSMA/CA di
+                    seluruh generasi.</aside>
             </section>
 
-            <section>
-                <h3>LAN Nirkabel: IEEE 802.11 (WiFi)</h3>
+            <!-- SLIDE 10 -->
+            <section data-topic="Arsitektur BSS, ESS &amp; Kanal 2.4 GHz">
+                <h3>Arsitektur 802.11 (BSS / ESS) &amp; Manajemen Kanal 2.4 GHz</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Standar IEEE terus berevolusi meningkatkan *Data Rate* dan beroperasi di rentang 2.4 GHz atau 5 GHz:</p>
-                    <ul>
-                        <li><strong>802.11b (1999):</strong> Maksimal 11 Mbps.</li>
-                        <li><strong>802.11g (2003):</strong> Maksimal 54 Mbps.</li>
-                        <li><strong>802.11n / WiFi 4 (2009):</strong> Maksimal 600 Mbps.</li>
-                        <li><strong>802.11ac / WiFi 5 (2013):</strong> Maksimal 3.47 Gbps.</li>
-                        <li><strong>802.11ax / WiFi 6 (2020):</strong> Tembus 14 Gbps.</li>
-                    </ul>
-                    <p>Semuanya menggunakan protokol MAC yang sama: <strong>CSMA/CA</strong>.</p>
-                </div>
+                    <div class="card card-compact text-left">
+                        <ul>
+                            <li><strong>BSS (Basic Service Set):</strong> Sel dasar Wi-Fi dalam mode infrastruktur yang
+                                terdiri atas klien nirkabel + satu <strong>Access Point (AP)</strong>.</li>
+                            <li><strong>ESS (Extended Service Set):</strong> Beberapa BSS terhubung melalui
+                                <em>Distribution System</em> (Switch/Router) memakai <strong>SSID seragam</strong> agar
+                                klien bisa roaming antar-ruangan.
+                            </li>
+                            <li><strong>Masalah Kanal 2.4 GHz:</strong> Pita 2.4 GHz terbagi ke 11 kanal berjarak hanya
+                                5 MHz, sedangkan lebar satu kanal Wi-Fi adalah <strong>22 MHz</strong>.</li>
+                        </ul>
+                        <div class="info-box-warn" style="margin-top:8px;">
+                            <strong>Aturan Emas Admin:</strong> Pada 2.4 GHz, gunakan <strong>HANYA Kanal 1, 6, atau
+                                11</strong> (satu-satunya set kanal <em>non-overlapping</em>) agar tidak merusak sinyal
+                            AP tetangga!
+                        </div>
+                    </div>
                     <div>
-                        <img src="images/week14/image8.png" class="slide-img" alt="LAN Nirkabel: IEEE 802.11 (WiFi)">
+                        <img src="images/week14/wifi_80211_bss_channels.svg" class="slide-img"
+                            alt="Arsitektur IEEE 802.11 BSS dan Kanal 2.4 GHz">
+                        <p class="img-caption">Topologi BSS/ESS Terhubung Switch &amp; Spektrum Non-Overlapping Kanal 1,
+                            6, 11</p>
                     </div>
                 </div>
+                <aside class="notes">Tekankan mengapa konfigurasi Wi-Fi di rumah atau kampus tidak boleh memilih Channel
+                    2, 3, atau 4 — karena lebar pita 22 MHz akan menimpa Channel 1 dan 6 sekaligus.</aside>
             </section>
 
-            <section>
-                <h3>Arsitektur 802.11 (BSS & Channels)</h3>
+            <!-- SLIDE 11 -->
+            <!-- SLIDE 11 (1/2) -->
+            <section data-auto-animate data-auto-animate-id="pair11"
+                data-topic="Asosiasi Wi-Fi: Passive Scanning (1/2)">
+                <h4>Proses Asosiasi Wi-Fi (1/2): Passive Scanning</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p><strong>BSS (Basic Service Set):</strong> Komponen dasar WiFi, terdiri atas 1 AP (Access Point) dan klien-klien nirkabelnya.</p>
-                    <ul>
-                        <li>Pita frekuensi 2.4 GHz dibagi menjadi 11 Kanal yang tumpang tindih (beririsan).</li>
-                        <li>Admin jaringan harus berhati-hati memilih kanal (misal 1, 6, 11) agar tidak bentrok dengan sinyal AP tetangga kosannya.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week14/image9.png" class="slide-img" alt="Arsitektur 802.11 (BSS & Channels)">
+                    <div class="card card-compact text-left" style="padding:0; overflow:hidden;" data-id="left-11-1">
+                        <div class="sec-bar sec-bar-blue"><i class="bi bi-broadcast-pin"></i> 1. Passive Scanning
+                            (Menunggu Beacon)</div>
+                        <div class="sec-body" style="border:none; box-shadow:none;">
+                            <ol>
+                                <li>Setiap AP secara berkala menyiarkan <strong>Beacon Frame</strong> berisi nama
+                                    jaringan (<code>SSID</code>) dan alamat MAC AP (<code>BSSID</code>).</li>
+                                <li>Host (Laptop/HP) memindai tiap kanal mendengarkan Beacon dari AP 1, AP 2, dst.</li>
+                                <li>Host memilih AP dengan sinyal terkuat, lalu mengirim <em>Association Request
+                                        Frame</em>.</li>
+                                <li>AP membalas <em>Association Response Frame</em>.</li>
+                            </ol>
+                            <div class="info-box" style="margin-top:8px;">
+                                Hemat daya baterai karena klien cukup mendengar pasif hingga siap terhubung.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-11">
+                        <div class="rpanel-badge rpanel-badge-blue" data-id="rbadge-11">
+                            <span class="rpanel-dot"></span> Fokus 1/2: Passive Scanning (Beacon)
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-11">
+                            <img src="images/week14/wifi_passive_vs_active_scanning.jpg"
+                                class="slide-img rpanel-img-enter" data-id="rimg-11"
+                                alt="Diagram perbandingan Passive Scanning dan Active Scanning Wi-Fi">
+                            <div class="rpanel-spotlight sp-blue" data-id="rspot-11"
+                                style="left: 5%; top: 15%; width: 44%; height: 80%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-11">Klien cukup menyimak Beacon Frame periodik dari Access
+                            Point untuk menghemat baterai.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 1/2: Passive Scanning menunggu Beacon Frame yang berisi SSID dan BSSID AP
+                    sebelum mengirim Association Request.</aside>
             </section>
 
-            <section>
-                <h3>Proses Asosiasi WiFi (Passive vs Active)</h3>
+            <!-- SLIDE 11 (2/2) -->
+            <section data-auto-animate data-auto-animate-id="pair11" data-topic="Asosiasi Wi-Fi: Active Scanning (2/2)">
+                <h4>Proses Asosiasi Wi-Fi (2/2): Active Scanning</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Sebelum mengirim data, laptop Anda harus "memilih dan bergabung" ke AP lewat Asosiasi:</p>
-                    <ul>
-                        <li><strong>Passive Scanning:</strong> AP secara rutin menyiarkan *Beacon Frames* ke seluruh area mengabarkan namanya (SSID) misal: `Kos_Aman`. Laptop mendengar dan meminta bergabung.</li>
-                        <li><strong>Active Scanning:</strong> Laptop yang keliling bertanya, <em>"Halo, adakah AP Kos_Aman di sini?" (Probe Request)</em>. Jika AP ada, ia akan membalas <em>"Ya, saya di sini."</em></li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week14/image10.png" class="slide-img" alt="Proses Asosiasi WiFi (Passive vs Active)">
+                    <div class="card card-compact text-left" style="padding:0; overflow:hidden;" data-id="left-11-2">
+                        <div class="sec-bar sec-bar-green"><i class="bi bi-search"></i> 2. Active Scanning (Probe
+                            Request)</div>
+                        <div class="sec-body" style="border:none; box-shadow:none;">
+                            <ol>
+                                <li>Host proaktif menyiarkan broadcast <strong>Probe Request Frame</strong>: <em>"Adakah
+                                        AP <code>ITERA-WiFi</code> di kanal ini?"</em></li>
+                                <li>Semua AP dalam jangkauan membalas dengan <strong>Probe Response Frame</strong>.</li>
+                                <li>Host memilih AP terbaik, lalu bertukar <em>Association Request</em> &amp;
+                                    <em>Response</em>.
+                                </li>
+                                <li><strong>Tahap Lanjut:</strong> Otentikasi keamanan (WPA2/WPA3) diikuti
+                                    <strong>DHCP</strong> untuk memperoleh IP subnet.
+                                </li>
+                            </ol>
+                            <div class="info-box-green" style="margin-top:8px;">
+                                Lebih cepat menemukan jaringan, termasuk <em>Hidden SSID</em> yang tidak menyiarkan
+                                Beacon.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-11">
+                        <div class="rpanel-badge rpanel-badge-green" data-id="rbadge-11">
+                            <span class="rpanel-dot"></span> Fokus 2/2: Active Scanning (Probe)
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-11">
+                            <img src="images/week14/wifi_passive_vs_active_scanning.jpg" class="slide-img"
+                                data-id="rimg-11"
+                                alt="Sorotan Active Scanning menggunakan Probe Request dan Probe Response">
+                            <div class="rpanel-spotlight sp-green" data-id="rspot-11"
+                                style="left: 51%; top: 15%; width: 44%; height: 80%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-11">Host proaktif menyiarkan Probe Request untuk penemuan
+                            cepat &amp; mendeteksi Hidden SSID.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 2/2: Scanning -> Association -> Authentication (WPA2/WPA3 P13) -> DHCP IP
+                    Assignment (P06).</aside>
             </section>
 
-            <section>
-                <h3>MAC Protocol WiFi: CSMA/CA</h3>
+            <!-- SLIDE 12 (Hidden Terminal + CSMA/CA seamlessly integrated, CDMA removed) -->
+            <section data-topic="Hidden Terminal &amp; Protokol MAC CSMA/CA">
+                <h3>Hidden Terminal &amp;</h3>
+                <h4>Protokol MAC Wi-Fi (CSMA/CA)</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Mengapa tidak memakai CSMA/CD seperti kabel Ethernet?</p>
-                    <ul>
-                        <li><strong>Collision Detection (CD)</strong> mustahil dilakukan di nirkabel. Perangkat tidak bisa mendengar tabrakan di tempat penerima akibat pelemahan sinyal dan fenomena <em>Hidden Terminal</em>.</li>
-                        <li>Oleh karena itu kita memakai <strong>CA (Collision Avoidance)</strong>: Mencegah sebelum terjadi!</li>
-                        <li>Klien menunggu jalan kosong (DIFS), lalu mengirim paket utuh tanpa CD.</li>
-                        <li>Penerima <strong>WAJIB</strong> membalas sinyal `ACK` (Acknowledgment) untuk memastikan paket benar-benar selamat.</li>
-                    </ul>
-                </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#b71c1c; margin:0 0 4px 0;">Mengapa CSMA/CD Kabel (Pertemuan 4)
+                            Gagal di Wi-Fi?</p>
+                        <ul style="margin-bottom:6px;">
+                            <li><strong>Hidden Terminal:</strong> Node <strong>A</strong> &amp; <strong>C</strong>
+                                sama-sama mendengar AP (<strong>B</strong>), tetapi <em>tidak saling mendengar</em>
+                                akibat terhalang jarak/tembok &rarr; kirim bersamaan &rarr; tabrakan di B!</li>
+                            <li><strong>Self-Interference:</strong> Daya pancar antena lokal jauh lebih kuat dibanding
+                                sinyal terima lemah sehingga radio tidak bisa "mendengar tabrakan" sambil mengirim.</li>
+                        </ul>
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">Mekanisme CSMA/CA (Collision
+                            Avoidance):</p>
+                        <ol style="margin-bottom:0;">
+                            <li>Jika kanal kosong selama <strong>DIFS</strong> &rarr; kirim penuh; bila sibuk &rarr;
+                                <strong>Random Backoff</strong>.
+                            </li>
+                            <li>AP <strong>WAJIB</strong> membalas <code>ACK</code> setelah jeda singkat
+                                <strong>SIFS</strong> (jika gagal, CW &times; 2).
+                            </li>
+                        </ol>
+                    </div>
                     <div>
-                        <img src="images/week14/image11.png" class="slide-img" alt="MAC Protocol WiFi: CSMA/CA">
+                        <img src="images/week14/hidden_terminal_rts_cts.svg" class="slide-img"
+                            alt="Hidden Terminal Problem dan Solusi CSMA/CA RTS/CTS">
+                        <p class="img-caption">Masalah Hidden Terminal &amp; Alur Timing DIFS, RTS, CTS, Data, SIFS, dan
+                            ACK</p>
                     </div>
                 </div>
+                <aside class="notes">Dengan menghapus bagian CDMA yang sudah dibahas di Pertemuan 4 dan menggabungkan
+                    Hidden Terminal langsung ke slide CSMA/CA ini, mahasiswa langsung memahami MENGAPA Wi-Fi wajib
+                    memakai Collision Avoidance + link-layer ACK.</aside>
             </section>
 
-            <section>
-                <h3>Solusi Hidden Terminal: RTS dan CTS</h3>
-                <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Langkah ekstra untuk menghindari tabrakan karena <em>Hidden Terminal</em> (Node A dan C tidak saling lihat):</p>
-                    <ol>
-                        <li>A mengirim paket reservasi kecil: <strong>RTS (Request to Send)</strong> ke Base Station.</li>
-                        <li>Base Station meneriakkan <strong>CTS (Clear to Send)</strong> ke seluruh area.</li>
-                        <li>C yang mendengar teriakan CTS akan diam dan "menunda" transmisinya. A bisa mengirim data dengan tenang.</li>
-                    </ol>
-                </div>
-                    <div>
-                        <img src="images/week14/image12.png" class="slide-img" alt="Solusi Hidden Terminal: RTS dan CTS">
+            <!-- SLIDE 13 -->
+            <section data-topic="RTS/CTS &amp; Struktur Frame IEEE 802.11">
+                <h3>Reservasi RTS/CTS &amp;</h3>
+                <h4>Struktur 4-Address Frame 802.11</h4>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 6px 0;"><i class="bi bi-shield-check"></i>
+                            Mekanisme Reservasi Saluran RTS / CTS</p>
+                        <ol>
+                            <li>Pengirim <strong>A</strong> mengirim frame kontrol super pendek <strong>RTS (Request to
+                                    Send)</strong> ke AP.</li>
+                            <li>AP menyiarkan <strong>CTS (Clear to Send)</strong> ke <em>seluruh</em> sel — didengar A
+                                maupun C (yang tadinya tersembunyi).</li>
+                            <li>Frame CTS membawa nilai waktu pesan (<em>Duration / NAV</em>). Node <strong>C</strong>
+                                otomatis menahan diri (<em>defer</em>) sampai timer NAV habis.</li>
+                            <li><strong>A</strong> mengirim Data Frame besar bebas tabrakan, ditutup <code>ACK</code>
+                                dari AP.</li>
+                        </ol>
+                        <div class="info-box" style="margin-top:6px;">
+                            <em>Catatan:</em> RTS tetap bisa bertabrakan dengan RTS lain, tetapi biayanya sangat kecil
+                            dibanding mengulang frame data 1500 byte!
+                        </div>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#4a148c; margin:0 0 6px 0;"><i
+                                class="bi bi-diagram-2-fill"></i> Anatomi 4 Alamat MAC Frame 802.11</p>
+                        <p>Mengapa frame Wi-Fi punya <strong>4 alamat MAC</strong> (sedangkan Ethernet P04 cuma punya
+                            2)?</p>
+                        <div class="layout-2col" style="gap:6px; margin:6px 0;">
+                            <div class="info-box" style="margin:0; font-size:.86em;">
+                                <strong>Addr 1 (Receiver)</strong><br>MAC Wireless tujuan langsung (AP / Host)
+                            </div>
+                            <div class="info-box-green" style="margin:0; font-size:.86em;">
+                                <strong>Addr 2 (Transmitter)</strong><br>MAC Wireless pengirim langsung
+                            </div>
+                            <div class="info-box-warn" style="margin:0; font-size:.86em;">
+                                <strong>Addr 3 (Router MAC)</strong><br>MAC Router Gateway pada subnet kabel
+                            </div>
+                            <div class="info-box-red" style="margin:0; font-size:.86em;">
+                                <strong>Addr 4 (Ad-Hoc/WDS)</strong><br>Khusus bridge nirkabel antar-AP
+                            </div>
+                        </div>
+                        <div class="info-box-warn" style="margin-top:6px;">
+                            Karena AP adalah jembatan L2 tanpa IP routing sendiri, <strong>Addr 3</strong> krusial agar
+                            AP tahu MAC Router mana tujuan frame Ethernet 802.3!
+                        </div>
                     </div>
                 </div>
+                <aside class="notes">Gunakan skema 4-Address 802.11 untuk menghubungkan Pertemuan 4 (Frame Ethernet 2
+                    MAC) dengan Pertemuan 14 (Access Point L2 Bridge membutuhkan Address 3 untuk mengisi Destination MAC
+                    saat diteruskan ke kabel).</aside>
             </section>
 
-            <section>
-                <h3>Jaringan Seluler 4G LTE</h3>
+            <!-- SLIDE 14 (NEW: 802.11 Rate Anomaly & Cross-Layer TCP Impact) -->
+            <!-- SLIDE 14 (1/2) -->
+            <section data-auto-animate data-auto-animate-id="pair14" data-topic="802.11 Rate Anomaly Wi-Fi (1/2)">
+                <h4>Performa Wi-Fi (1/2): 802.11 Rate Anomaly</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>LTE (Long Term Evolution) adalah arsitektur yang 100% berbasis Paket (All-IP Packet Core), tidak lagi memakai sirkuit analog lawas.</p>
-                    <ul>
-                        <li><strong>UE (User Equipment):</strong> Smartphone Anda. Memiliki identitas global (IMSI) di SIM card.</li>
-                        <li><strong>eNode-B (Base Station):</strong> Menara operator seluler di pinggir jalan. Berbeda dengan WiFi AP rumahan, tower ini terintegrasi ketat mengatur koordinasi *handoff* secara aktif dengan tower tetangganya.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week14/image13.png" class="slide-img" alt="Jaringan Seluler 4G LTE">
+                    <div class="card card-compact text-left" style="padding:0; overflow:hidden;" data-id="left-14-1">
+                        <div class="sec-bar sec-bar-red"><i class="bi bi-speedometer"></i> Fenomena 802.11 Rate Anomaly
+                        </div>
+                        <div class="sec-body">
+                            <p>Bayangkan 1 Access Point melayani dua klien bersamaan: <strong>Laptop A</strong> dekat AP
+                                (<strong>54 Mbps</strong>) dan <strong>HP B</strong> jauh di ujung gedung (turun ke
+                                <strong>1 Mbps</strong> akibat <em>Rate Adaptation</em>):
+                            </p>
+                            <ul>
+                                <li>Protokol <strong>CSMA/CA</strong> memberi kesempatan transmisi per paket yang adil
+                                    (<em>packet fairness</em>), bukan pembagian waktu udara (<em>airtime fairness</em>).
+                                </li>
+                                <li><strong>Dampaknya:</strong> HP B butuh waktu udara <strong>~54&times; lebih
+                                        lama</strong> untuk mengirim satu paket 1500 byte, sehingga Laptop A harus
+                                    menunggu jauh lebih lama!</li>
+                            </ul>
+                            <div class="info-box-red">
+                                <strong>Hasil Kritis:</strong> Satu perangkat bersinyal lemah di ujung ruangan bisa
+                                menurunkan kecepatan seluruh pengguna di AP tersebut mendekati laju terendah!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-14">
+                        <div class="rpanel-badge rpanel-badge-red" data-id="rbadge-14">
+                            <span class="rpanel-dot"></span> Fokus 1/2: Antrean Airtime 1 Mbps
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-14">
+                            <img src="images/week14/wifi_rate_anomaly_analogy.jpg" class="slide-img rpanel-img-enter"
+                                data-id="rimg-14-1"
+                                alt="Analogi 802.11 Rate Anomaly: HP lambat 1 Mbps memblokir laptop 54 Mbps">
+                            <div class="rpanel-spotlight sp-red" data-id="rspot-14"
+                                style="left: 11%; top: 27%; width: 65%; height: 58%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-14">Satu perangkat bersinyal lemah (1 Mbps) menyita waktu
+                            udara ~54&times; lebih lama &amp; menahan seluruh klien.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 1/2: Jelaskan mengapa AP enterprise membatasi minimum basic rate agar klien
+                    lemah tidak menimbulkan Rate Anomaly.</aside>
             </section>
 
-            <section>
-                <h3>Arsitektur Core 4G (EPC)</h3>
+            <!-- SLIDE 14 (2/2) -->
+            <section data-auto-animate data-auto-animate-id="pair14" data-topic="Pengaruh Radio Loss ke TCP (2/2)">
+                <h4>Performa Wi-Fi (2/2): Dampak Noise ke TCP</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Di balik menara BTS, terdapat infrastruktur besar bernama <strong>EPC (Enhanced Packet Core)</strong>:</p>
-                    <ul>
-                        <li><strong>MME (Mobility Management Entity):</strong> Otak utamanya. Mengatur otentikasi, pergerakan *handoff*, dan melacak pergerakan lokasi device (paging).</li>
-                        <li><strong>HSS (Home Subscriber Service):</strong> Database sentral pelanggan. Berisi kunci rahasia pelanggan.</li>
-                        <li><strong>S-GW (Serving Gateway) & P-GW (PDN Gateway):</strong> Router gerbang yang men-tunnel lalu lintas IP ke dunia internet luar lewat fungsi NAT.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week14/image14.png" class="slide-img" alt="Arsitektur Core 4G (EPC)">
+                    <div class="card card-compact text-left" style="padding:0; overflow:hidden;" data-id="left-14-2">
+                        <div class="sec-bar sec-bar-purple"><i class="bi bi-layers-half"></i> Pengaruh Radio ke TCP
+                            (Pertemuan 5)</div>
+                        <div class="sec-body">
+                            <p>Pada <strong>Pertemuan 5</strong>, TCP mengasumsikan setiap kehilangan paket berasal dari
+                                <strong>antrean router yang penuh (Congestion)</strong>. Di jaringan nirkabel, asumsi
+                                ini sering keliru:
+                            </p>
+                            <ul>
+                                <li>Paket hilang karena <em>noise/BER sesaat</em> atau <em>jeda handoff</em> tetap
+                                    memicu TCP memangkas <strong>Congestion Window (cwnd)</strong> separuh (AIMD)!</li>
+                                <li>Akibatnya throughput turun padahal bandwidth Internet sebenarnya masih kosong.</li>
+                            </ul>
+                            <div class="info-box-green">
+                                <strong>Mitigasi Modern:</strong> Wi-Fi link-layer <code>ARQ/ACK</code> cepat mencoba
+                                ulang di Layer 2 sebelum TCP sadar, serta algoritma modern seperti <strong>TCP
+                                    BBR</strong> &amp; <strong>Airtime Fairness</strong> pada AP!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-14">
+                        <div class="rpanel-badge rpanel-badge-purple" data-id="rbadge-14">
+                            <span class="rpanel-dot"></span> Fokus 2/2: Noise Radio vs cwnd TCP
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-14">
+                            <img src="images/week14/wifi_tcp_loss_confusion.jpg" class="slide-img rpanel-img-enter"
+                                data-id="rimg-14-2"
+                                alt="Ilustrasi packet loss akibat radio noise membuat TCP memangkas cwnd separuh">
+                            <div class="rpanel-spotlight sp-purple" data-id="rspot-14"
+                                style="left: 46%; top: 30%; width: 51%; height: 57%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-14">TCP mengira packet loss akibat noise radio adalah
+                            kongesti router, lalu memangkas cwnd 50%.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 2/2: Hubungkan materi TCP Pertemuan 5 dengan layer-2 Wi-Fi ARQ serta
+                    algoritma BBR dan Airtime Fairness.</aside>
             </section>
 
-            <section>
-                <h3>Multiplexing Seluler: OFDM</h3>
+            <!-- SLIDE 15 -->
+            <!-- SLIDE 15 (1/2) -->
+            <section data-auto-animate data-auto-animate-id="pair15" data-topic="Bluetooth Piconet &amp; FHSS (1/2)">
+                <h4>Personal Area Networks (1/2): Topologi Piconet</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Bagaimana satu tower bisa melayani ratusan ponsel sekaligus untuk menonton YouTube?</p>
-                    <ul>
-                        <li>4G memakai kombinasi pembagian waktu dan frekuensi bernama <strong>OFDM (Orthogonal Frequency Division Multiplexing)</strong>.</li>
-                        <li>Terdapat ratusan alokasi "Kotak-kotak pita frekuensi dan detik waktu" yang terus dibagikan secara adil oleh menara ke ponsel-ponsel klien di bawahnya setiap detiknya.</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week14/image15.png" class="slide-img" alt="Multiplexing Seluler: OFDM">
+                    <div class="card card-compact text-left" data-id="left-15-1">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 6px 0;"><i class="bi bi-bluetooth"></i>
+                            Karakteristik &amp; Topologi Piconet</p>
+                        <ul>
+                            <li><strong>Jangkauan &amp; Pita:</strong> Diameter &lt; 10 m pada pita <strong>2.4 – 2.485
+                                    GHz (ISM)</strong>, laju 2–3 Mbps, tanpa Access Point maupun router.</li>
+                            <li><strong>Arsitektur Master / Client (Piconet):</strong> 1 Master Controller mengatur
+                                detak jam serta giliran kirim (<em>polling</em>) untuk maksimal <strong>7 Active
+                                    Client</strong> (+ ratusan perangkat <em>Parked</em>).</li>
+                            <li><strong>FHSS (Frequency Hopping):</strong> Melompati 79 kanal secara acak (1.600
+                                lompatan/detik) untuk menghindari interferensi Wi-Fi.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-15">
+                        <div class="rpanel-badge rpanel-badge-blue" data-id="rbadge-15">
+                            <span class="rpanel-dot"></span> Fokus 1/2: Piconet &lt;10m &amp; FHSS
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-15">
+                            <img src="images/week14/bluetooth_piconet_ble_fhss.jpg" class="slide-img rpanel-img-enter"
+                                data-id="rimg-15"
+                                alt="Diagram topologi Piconet Bluetooth 1 Master 7 Active Client dan FHSS">
+                            <div class="rpanel-spotlight sp-blue" data-id="rspot-15"
+                                style="left: 3%; top: 14%; width: 63%; height: 68%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-15">1 Master mengoordinasikan hingga 7 Active Client lewat
+                            polling TDM + lompatan kanal FHSS.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 1/2: Jelaskan topologi terpusat Bluetooth Piconet (<10 m) serta ketahanan
+                        FHSS 1.600 lompatan/detik terhadap Wi-Fi.</aside>
             </section>
 
-            <section>
-                <h3>Dari 4G Menuju 5G (New Radio)</h3>
+            <!-- SLIDE 15 (2/2) -->
+            <section data-auto-animate data-auto-animate-id="pair15"
+                data-topic="Bluetooth Low Energy &amp; Privasi (2/2)">
+                <h3>Personal Area Networks (2/2): Bluetooth Low Energy</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Visi 5G: Bitrate 10x lebih besar, Latency 10x lebih rendah.</p>
-                    <ul>
-                        <li><strong>5G NR (New Radio):</strong> Menggunakan pita frekuensi jauh lebih tinggi hingga kelas <strong>Millimeter Wave</strong> (24 GHz–52 GHz).</li>
-                        <li>Karena frekuensi Millimeter Wave jarak pancarnya sangat pendek dan tidak bisa menembus dinding tembok tebal, arsitektur menara raksasa tidak lagi efektif.</li>
-                        <li>Solusinya: Penempatan jutaan antena kecil <em>Pico-cells</em> di setiap sudut jalan, lampu jalan, dan dalam koridor gedung!</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week14/image16.png" class="slide-img" alt="Dari 4G Menuju 5G (New Radio)">
+                    <div class="card card-compact text-left" data-id="left-15-2">
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 6px 0;"><i class="bi bi-cpu-fill"></i>
+                            Bluetooth Low Energy (BLE) &amp; Efisiensi</p>
+                        <ul>
+                            <li>Dirancang untuk sensor IoT, smartwatch, beacon indoor, dan perangkat medis berdaya
+                                baterai koin (hemat energi ekstrem).</li>
+                            <li><strong>Studi Kasus Privasi (Exposure Notification):</strong> Menyiarkan pengenal
+                                kriptografis acak sementara (<em>ephemeral ID</em>) via BLE untuk mendeteksi kedekatan
+                                jarak tanpa pelacakan GPS.</li>
+                        </ul>
+                        <div class="info-box-green" style="margin-top:8px;">
+                            <strong>Beda Kunci vs Wi-Fi:</strong> Bluetooth memakai koordinasi terpusat berbasis
+                            <em>polling</em> Master (TDM/FHSS), sehingga bebas tabrakan acak seperti CSMA/CA.
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-15">
+                        <div class="rpanel-badge rpanel-badge-green" data-id="rbadge-15">
+                            <span class="rpanel-dot"></span> Fokus 2/2: BLE Sensor &amp; Wearable
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-15">
+                            <img src="images/week14/bluetooth_piconet_ble_fhss.jpg" class="slide-img" data-id="rimg-15"
+                                alt="Sorotan perangkat Bluetooth Low Energy sensor beacon dan wearable">
+                            <div class="rpanel-spotlight sp-green" data-id="rspot-15"
+                                style="left: 66%; top: 43%; width: 31%; height: 40%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-15">BLE menghemat daya baterai koin untuk sensor IoT,
+                            wearable, dan siaran ephemeral ID.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 2/2: Tutup Bagian 2 dengan membandingkan koordinasi polling terpusat
+                    Bluetooth melawan CSMA/CA terdistribusi Wi-Fi.</aside>
             </section>
 
-            <section>
-                <h3>Tantangan Mobilitas Jaringan</h3>
+            <!-- ━━━━━━━━━━━━━━ BAGIAN 3 ━━━━━━━━━━━━━━ -->
+            <section class="section-slide" data-topic="Bagian 3: Jaringan Seluler 4G LTE &amp; 5G NR">
+                <div class="section-part-label">Bagian 3</div>
+                <h2>3. Jaringan Seluler: 4G LTE &amp; 5G New Radio</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Arsitektur Radio Access Network, Core
+                    EPC All-IP, OFDM Multiplexing &amp; Evolusi 5G</p>
+                <aside class="notes">Masuk ke bagian ketiga: jaringan seluler skala WAN (4G LTE dan 5G NR). Slide
+                    pengantar perbandingan edge/core sebelumnya telah dihapus karena sudah dibahas di Pertemuan 1.
+                </aside>
+            </section>
+
+            <!-- SLIDE 17 -->
+            <section data-topic="Arsitektur 4G LTE: RAN &amp; Core EPC">
+                <h3>Arsitektur 4G LTE: RAN &amp; Enhanced Packet Core (EPC)</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Saat Anda naik kereta cepat dari Lampung ke Palembang, Anda akan terus berpindah melintasi puluhan menara Telkomsel. IP Address Anda mungkin berganti.</p>
-                    <p><strong>Pertanyaan Kunci:</strong> Bagaimana paket WhatsApp teman Anda tau alamat IP baru Anda secara *real-time* dan mengirimkannya ke menara tujuan akhir Anda tanpa delay?</p>
-                </div>
+                    <div class="card card-compact text-left">
+                        <ul>
+                            <li><strong>UE (User Equipment):</strong> Smartphone/IoT dengan identitas unik global
+                                <strong>IMSI 64-bit</strong> di dalam kartu SIM (terpisah dari alamat IP).
+                            </li>
+                            <li><strong>eNode-B (Base Station):</strong> Menara pemancar di tepi jaringan; mengatur
+                                penjadwalan radio dan koordinasi <em>handoff</em> antar-menara.</li>
+                            <li><strong>MME (Mobility Management Entity):</strong> Otak <em>Control Plane</em>;
+                                menangani otentikasi (bersama database <strong>HSS</strong>), <em>paging</em> lokasi UE,
+                                &amp; pendirian tunnel.</li>
+                            <li><strong>S-GW &amp; P-GW:</strong> Router jalur <em>Data Plane</em> All-IP yang
+                                menjalankan NAT serta terowongan GTP menuju Internet publik.</li>
+                        </ul>
+                    </div>
                     <div>
-                        <img src="images/week14/image17.png" class="slide-img" alt="Tantangan Mobilitas Jaringan">
+                        <img src="images/week14/cellular_4g_epc_vs_5g.svg" class="slide-img"
+                            alt="Arsitektur All-IP 4G LTE EPC dan Tiga Pilar 5G NR">
+                        <p class="img-caption">Pemisahan Control/Data Plane pada 4G EPC &amp; Tiga Pilar Layanan 5G
+                            IMT-2020</p>
                     </div>
                 </div>
+                <aside class="notes">Gunakan diagram atas pada SVG untuk menunjukkan pemisahan tegas antara jalur
+                    pensinyalan Control Plane (eNode-B &lt;-&gt; MME &lt;-&gt; HSS) dan jalur paket pengguna Data Plane
+                    (UE &lt;-&gt; eNode-B &lt;-&gt; S-GW &lt;-&gt; P-GW).</aside>
             </section>
 
-            <section>
-                <h3>Konsep Routing Mobilitas: Indirect Routing</h3>
+            <!-- SLIDE 18 -->
+            <!-- SLIDE 18 (1/2) -->
+            <section data-auto-animate data-auto-animate-id="pair18" data-topic="Multiplexing Seluler OFDM (1/2)">
+                <h4>Akses Radio Seluler (1/2): Multiplexing OFDM</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Alih-alih mencari tau IP Anda yang terus berubah (NAT IP / Visited Address), pesan selalu dikirim ke "Rumah Utama".</p>
-                    <ol>
-                        <li>Pesan datang menuju <strong>Home Network Gateway</strong> Anda.</li>
-                        <li>Home Network tahu bahwa Anda sedang "Roaming" atau berkelana di jaringan Visited Network (misal di kota lain).</li>
-                        <li>Home Network <strong>Membungkus (Tunnel)</strong> paket tersebut, lalu mengirimkannya ke alamat Visited Network Anda.</li>
-                        <li>Visited Gateway membuka bungkus tunnel dan memberikannya pada Anda. Sangat bisa diandalkan, namun memperpanjang jarak ping (Triangle Routing problem).</li>
-                    </ol>
-                </div>
-                    <div>
-                        <img src="images/week14/image18.png" class="slide-img" alt="Konsep Routing Mobilitas: Indirect Routing">
+                    <div class="card card-compact text-left" data-id="left-18-1">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 6px 0;"><i
+                                class="bi bi-grid-3x3-gap-fill"></i> Multiplexing Seluler: OFDM (4G/5G)</p>
+                        <ul>
+                            <li>Beroperasi di pita berlisensi (600, 700, 850, 1800, 2100, 2600 MHz) dengan kanal
+                                <em>uplink/downlink</em> terpisah tanpa interferensi liar.
+                            </li>
+                            <li><strong>OFDM (Orthogonal Frequency Division Multiplexing):</strong> Membagi spektrum ke
+                                ribuan <em>sub-carrier</em> sempit serta membagi waktu dalam slot milidetik (grid
+                                frekuensi-waktu).</li>
+                            <li>Base station menjadwalkan "kotak waktu-frekuensi" secara dinamis ke ratusan ponsel
+                                sekaligus demi laju ratusan Mbps.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-18">
+                        <div class="rpanel-badge rpanel-badge-blue" data-id="rbadge-18">
+                            <span class="rpanel-dot"></span> Fokus 1/2: Grid Frekuensi-Waktu
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-18">
+                            <img src="images/week14/cellular_ofdm_resource_grid.jpg" class="slide-img rpanel-img-enter"
+                                data-id="rimg-18-1"
+                                alt="Diagram grid frekuensi sub-carrier dan slot waktu OFDM pada 4G/5G">
+                            <div class="rpanel-spotlight sp-blue" data-id="rspot-18"
+                                style="left: 3%; top: 30%; width: 76%; height: 66%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-18">eNode-B/gNode-B mengalokasikan blok sub-carrier &amp;
+                            slot milidetik secara dinamis ke banyak user.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 1/2: Jelaskan bagaimana OFDM membagi spektrum berlisensi menjadi ribuan
+                    kotak waktu-frekuensi ortogonal tanpa interferensi.</aside>
             </section>
 
-            <section>
-                <h3>Konsep Routing Mobilitas: Direct Routing</h3>
+            <!-- SLIDE 18 (2/2) -->
+            <section data-auto-animate data-auto-animate-id="pair18" data-topic="Visi &amp; Arsitektur 5G NR (2/2)">
+                <h4>Evolusi Seluler (2/2): Arsitektur 5G New Radio</h4>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Untuk mengatasi inefisiensi jarak (Triangle Routing):</p>
-                    <ol>
-                        <li>Pengirim bertanya langsung ke Database (HSS) Anda: "Di mana alamat IP Visited Budi sekarang?"</li>
-                        <li>Database menjawab dengan alamat Visited Network terbaru Anda.</li>
-                        <li>Pengirim menembakkan paket LANGSUNG menembus ke Visited Network Anda tanpa perlu singgah (Tunneling) di Home Gateway.</li>
-                        <li><strong>Kelemahan:</strong> Jauh lebih sulit melacak pergerakan jika Anda sangat sering pindah sel tiap 10 detik.</li>
-                    </ol>
-                </div>
-                    <div>
-                        <img src="images/week14/image19.png" class="slide-img" alt="Konsep Routing Mobilitas: Direct Routing">
+                    <div class="card card-compact text-left" data-id="left-18-2">
+                        <p style="font-weight:700; color:#5b21b6; margin:0 0 6px 0;"><i
+                                class="bi bi-lightning-charge-fill"></i> Visi &amp; Arsitektur 5G New Radio (NR)</p>
+                        <ul>
+                            <li>Target lompatan <strong>10&times; Bitrate</strong>, <strong>Latency &lt;1 ms</strong>,
+                                dan <strong>100&times; Traffic Capacity</strong>.</li>
+                            <li><strong>2 Pita Spektrum:</strong> <em>FR1 (450 MHz–6 GHz)</em> untuk jangkauan luas
+                                &amp; <em>FR2 Millimeter Wave (24–52 GHz)</em> ultra-cepat.</li>
+                            <li><strong>Massive MIMO &amp; Pico-cells:</strong> Karena mmWave tidak tembus tembok (jarak
+                                10–100 m), dibutuhkan antena pengarah (<em>Beamforming</em>) &amp; sel mikro padat!</li>
+                            <li><strong>3 Pilar IMT-2020:</strong> <strong>eMBB</strong> (Video/AR),
+                                <strong>URLLC</strong> (Medis/Otonom), &amp; <strong>mMTC</strong> (Smart City IoT).
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-18">
+                        <div class="rpanel-badge rpanel-badge-purple" data-id="rbadge-18">
+                            <span class="rpanel-dot"></span> Fokus 2/2: FR1 vs FR2 Beamforming
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-18">
+                            <img src="images/week14/cellular_5g_fr1_fr2_architecture.jpg"
+                                class="slide-img rpanel-img-enter" data-id="rimg-18-2"
+                                alt="Potongan kota 5G NR membandingkan Macro FR1, Pico-cell mmWave FR2 Beamforming, dan eMBB URLLC mMTC">
+                            <div class="rpanel-spotlight sp-purple" data-id="rspot-18"
+                                style="left: 7%; top: 21%; width: 90%; height: 76%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-18">Kombinasi cakupan luas FR1 dan pico-cell mmWave FR2
+                            ber-Beamforming menopang eMBB, URLLC, &amp; mMTC.</p>
                     </div>
                 </div>
+                <aside class="notes">Bagian 2/2: Kaitkan keterbatasan jarak mmWave FR2 (10-100 m) kembali ke rumus
+                    redaman Path Loss pada Bagian 1.</aside>
             </section>
 
-            <section>
-                <h3>Mobilitas Nyata di 4G (GPRS Tunneling)</h3>
+            <!-- ━━━━━━━━━━━━━━ BAGIAN 4 ━━━━━━━━━━━━━━ -->
+            <section class="section-slide" data-topic="Bagian 4: Manajemen Mobilitas &amp; Mobile IP">
+                <div class="section-part-label">Bagian 4</div>
+                <h2>4. Manajemen Mobilitas &amp; Mobile IP</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Tantangan Roaming IP, Indirect vs Direct
+                    Routing, Mobile IP (HA/FA/CoA), Handoff &amp; GTP Tunneling</p>
+                <aside class="notes">Bagian keempat membahas tantangan Layer-3 ketika perangkat berpindah titik koneksi
+                    (PoA) dari satu jaringan IP ke jaringan lain tanpa memutus koneksi aplikasi.</aside>
+            </section>
+
+            <!-- SLIDE 20 -->
+            <!-- SLIDE 20 (1/2) -->
+            <section data-auto-animate data-auto-animate-id="pair20" data-topic="Tantangan Mobilitas Layer-3 (1/2)">
+                <h3>Tantangan Mobilitas Layer-3 (1/2): Mengapa Sulit?</h3>
                 <div class="layout-text-img">
-                    <div class="card text-left text-smaller">
-                    <p>Secara praktik, 4G menggabungkan konsep Tunneling via protokol <strong>GTP (GPRS Tunneling Protocol)</strong>.</p>
-                    <ul>
-                        <li>Setiap kali HP Anda pindah menara, MME (Otak Pengatur) akan memperbarui endpoint tunnel GTP-nya.</li>
-                        <li>Paket asli Anda (IP, TCP, HTTP) akan dibungkus mentah-mentah ke dalam UDP baru milik jaringan operasional, memastikan aplikasi Streaming YouTube Anda tidak menyadari sama sekali bahwa koneksi fisiknya di menara baru saja diganti secara drastis!</li>
-                    </ul>
-                </div>
-                    <div>
-                        <img src="images/week14/image20.png" class="slide-img" alt="Mobilitas Nyata di 4G (GPRS Tunneling)">
+                    <div class="card card-compact text-left" data-id="left-20-1">
+                        <p style="font-weight:700; color:#b71c1c; margin:0 0 6px 0;"><i
+                                class="bi bi-question-circle-fill"></i> Mengapa Mobilitas Sulit di Layer-3 (IP)?</p>
+                        <ul>
+                            <li>Saat pengguna berpindah dari Wi-Fi kampus ke 4G atau antar-kota, titik lampiran jaringan
+                                (<em>PoA</em>) terus berganti.</li>
+                            <li>Jika alamat IP perangkat berubah di tengah jalan, koneksi <strong>TCP 4-tuple</strong>
+                                (<em>Src IP, Src Port, Dst IP, Dst Port</em>) untuk video call/unduhan <strong>langsung
+                                    putus</strong>!</li>
+                            <li>Di sisi lain, mustahil menyiarkan rute <code>/32</code> miliaran ponsel via BGP global
+                                setiap detik (tabel routing Internet meledak).</li>
+                        </ul>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-20">
+                        <div class="rpanel-badge rpanel-badge-red" data-id="rbadge-20">
+                            <span class="rpanel-dot"></span> Fokus 1/2: Jaga Identitas &amp; Socket TCP
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-20">
+                            <img src="images/week14/mobile_ip_home_vs_coa.jpg" class="slide-img rpanel-img-enter"
+                                data-id="rimg-20"
+                                alt="Perbandingan Home Address tetap untuk menjaga TCP dan Care-of Address saat roaming">
+                            <div class="rpanel-spotlight sp-red" data-id="rspot-20"
+                                style="left: 4%; top: 16%; width: 43%; height: 79%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-20">Identitas permanen (Home Address) harus dijaga agar
+                            koneksi TCP 4-tuple tidak putus saat berpindah.</p>
                     </div>
                 </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (1)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image21.png" class="slide-img" alt="Galeri Arsitektur Tambahan (1)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (2)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image22.png" class="slide-img" alt="Galeri Arsitektur Tambahan (2)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (3)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image23.png" class="slide-img" alt="Galeri Arsitektur Tambahan (3)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (4)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image24.png" class="slide-img" alt="Galeri Arsitektur Tambahan (4)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (5)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image25.png" class="slide-img" alt="Galeri Arsitektur Tambahan (5)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (6)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image26.png" class="slide-img" alt="Galeri Arsitektur Tambahan (6)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (7)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image27.png" class="slide-img" alt="Galeri Arsitektur Tambahan (7)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (8)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image28.png" class="slide-img" alt="Galeri Arsitektur Tambahan (8)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (9)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image29.png" class="slide-img" alt="Galeri Arsitektur Tambahan (9)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (10)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image30.png" class="slide-img" alt="Galeri Arsitektur Tambahan (10)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (11)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image31.png" class="slide-img" alt="Galeri Arsitektur Tambahan (11)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (12)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image32.png" class="slide-img" alt="Galeri Arsitektur Tambahan (12)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (13)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image33.png" class="slide-img" alt="Galeri Arsitektur Tambahan (13)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (14)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image34.png" class="slide-img" alt="Galeri Arsitektur Tambahan (14)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (15)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image35.png" class="slide-img" alt="Galeri Arsitektur Tambahan (15)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (16)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image36.png" class="slide-img" alt="Galeri Arsitektur Tambahan (16)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (17)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image37.png" class="slide-img" alt="Galeri Arsitektur Tambahan (17)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (18)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image38.png" class="slide-img" alt="Galeri Arsitektur Tambahan (18)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (19)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image39.png" class="slide-img" alt="Galeri Arsitektur Tambahan (19)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (20)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image40.png" class="slide-img" alt="Galeri Arsitektur Tambahan (20)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (21)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image41.png" class="slide-img" alt="Galeri Arsitektur Tambahan (21)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (22)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image42.png" class="slide-img" alt="Galeri Arsitektur Tambahan (22)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (23)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image43.png" class="slide-img" alt="Galeri Arsitektur Tambahan (23)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (24)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image44.png" class="slide-img" alt="Galeri Arsitektur Tambahan (24)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (25)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image45.png" class="slide-img" alt="Galeri Arsitektur Tambahan (25)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (26)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image46.png" class="slide-img" alt="Galeri Arsitektur Tambahan (26)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (27)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image47.png" class="slide-img" alt="Galeri Arsitektur Tambahan (27)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (28)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image48.png" class="slide-img" alt="Galeri Arsitektur Tambahan (28)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (29)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image49.png" class="slide-img" alt="Galeri Arsitektur Tambahan (29)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (30)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image50.png" class="slide-img" alt="Galeri Arsitektur Tambahan (30)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (31)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image51.png" class="slide-img" alt="Galeri Arsitektur Tambahan (31)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (32)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image52.png" class="slide-img" alt="Galeri Arsitektur Tambahan (32)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (33)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image53.png" class="slide-img" alt="Galeri Arsitektur Tambahan (33)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (34)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image54.png" class="slide-img" alt="Galeri Arsitektur Tambahan (34)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (35)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image55.png" class="slide-img" alt="Galeri Arsitektur Tambahan (35)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (36)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image56.png" class="slide-img" alt="Galeri Arsitektur Tambahan (36)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (37)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image57.png" class="slide-img" alt="Galeri Arsitektur Tambahan (37)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (38)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image58.png" class="slide-img" alt="Galeri Arsitektur Tambahan (38)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (39)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image59.png" class="slide-img" alt="Galeri Arsitektur Tambahan (39)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (40)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image60.png" class="slide-img" alt="Galeri Arsitektur Tambahan (40)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (41)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image61.png" class="slide-img" alt="Galeri Arsitektur Tambahan (41)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (42)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image62.png" class="slide-img" alt="Galeri Arsitektur Tambahan (42)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (43)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image63.png" class="slide-img" alt="Galeri Arsitektur Tambahan (43)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (44)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image64.png" class="slide-img" alt="Galeri Arsitektur Tambahan (44)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (45)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image65.png" class="slide-img" alt="Galeri Arsitektur Tambahan (45)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (46)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image66.png" class="slide-img" alt="Galeri Arsitektur Tambahan (46)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (47)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image67.png" class="slide-img" alt="Galeri Arsitektur Tambahan (47)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (48)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image68.jpeg" class="slide-img" alt="Galeri Arsitektur Tambahan (48)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (49)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image69.png" class="slide-img" alt="Galeri Arsitektur Tambahan (49)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (50)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image70.png" class="slide-img" alt="Galeri Arsitektur Tambahan (50)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (51)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image71.png" class="slide-img" alt="Galeri Arsitektur Tambahan (51)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (52)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image72.png" class="slide-img" alt="Galeri Arsitektur Tambahan (52)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (53)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image73.png" class="slide-img" alt="Galeri Arsitektur Tambahan (53)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (54)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image74.png" class="slide-img" alt="Galeri Arsitektur Tambahan (54)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (55)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image75.png" class="slide-img" alt="Galeri Arsitektur Tambahan (55)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (56)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image76.png" class="slide-img" alt="Galeri Arsitektur Tambahan (56)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (57)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image77.png" class="slide-img" alt="Galeri Arsitektur Tambahan (57)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (58)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image78.png" class="slide-img" alt="Galeri Arsitektur Tambahan (58)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (59)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image79.png" class="slide-img" alt="Galeri Arsitektur Tambahan (59)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (60)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image80.png" class="slide-img" alt="Galeri Arsitektur Tambahan (60)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (61)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image81.png" class="slide-img" alt="Galeri Arsitektur Tambahan (61)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (62)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image82.png" class="slide-img" alt="Galeri Arsitektur Tambahan (62)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (63)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image83.png" class="slide-img" alt="Galeri Arsitektur Tambahan (63)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (64)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image84.png" class="slide-img" alt="Galeri Arsitektur Tambahan (64)">
-                </div>
-            </section>
-
-            <section>
-                <h3>Galeri Arsitektur Tambahan (65)</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week14/image85.png" class="slide-img" alt="Galeri Arsitektur Tambahan (65)">
-                </div>
-            </section>
-
-            <!-- ━━━━━━━━━━━━━━ PENUTUP / Q&A ━━━━━━━━━━━━━━ -->
-            <section>
+                <aside class="notes">Bagian 1/2: Tekankan bahwa mengganti IP di tengah sesi langsung memutus TCP
+                    4-tuple, sedangkan mengumumkan /32 ke BGP global tidak mungkin.</aside>
+            </section>
+
+            <!-- SLIDE 20 (2/2) -->
+            <section data-auto-animate data-auto-animate-id="pair20"
+                data-topic="Terminologi Arsitektur Mobilitas (2/2)">
+                <h3>Arsitektur Mobilitas (2/2): 4 Istilah Kunci</h3>
+                <div class="layout-text-img">
+                    <div class="card card-compact text-left" data-id="left-20-2">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 6px 0;"><i class="bi bi-tags-fill"></i> 4
+                            Istilah Kunci Arsitektur Mobilitas</p>
+                        <ul>
+                            <li><strong>Home Network:</strong> Jaringan rumah permanen tempat identitas perangkat
+                                (<em>Permanent IP / SIM</em>) terdaftar resmi.</li>
+                            <li><strong>Home Agent / HSS:</strong> Entitas di Home Network yang melacak lokasi terkini
+                                perangkat yang sedang pergi.</li>
+                            <li><strong>Visited Network:</strong> Jaringan asing tempat perangkat sedang
+                                berkunjung/<em>roaming</em> saat ini.</li>
+                            <li><strong>Care-of Address (CoA / Visited IP):</strong> Alamat IP sementara dari Visited
+                                Network agar paket tetap dapat dirutekan ke lokasi baru.</li>
+                        </ul>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-20">
+                        <div class="rpanel-badge rpanel-badge-blue" data-id="rbadge-20">
+                            <span class="rpanel-dot"></span> Fokus 2/2: Home Agent &harr; Care-of Addr
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-20">
+                            <img src="images/week14/mobile_ip_home_vs_coa.jpg" class="slide-img" data-id="rimg-20"
+                                alt="Pemetaan Home Network, Home Agent, Visited Network, dan Care-of Address">
+                            <div class="rpanel-spotlight sp-blue" data-id="rspot-20"
+                                style="left: 30%; top: 16%; width: 66%; height: 79%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-20">Pemisahan alamat identitas (Home Address) dari alamat
+                            rute lokasi baru (Care-of Address).</p>
+                    </div>
+                </div>
+                <aside class="notes">Bagian 2/2: Kunci Layer-3 Mobility adalah memisahkan Permanent Identity Address dan
+                    Care-of Address (CoA) yang dilacak Home Agent.</aside>
+            </section>
+
+            <!-- SLIDE 21 -->
+            <section data-topic="Routing Mobilitas: Indirect vs Direct">
+                <h3>Konsep Routing Mobilitas: Indirect vs Direct Routing</h3>
+                <div class="layout-text-img">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1e40af; margin:0 0 4px 0;">1. Indirect Routing (Via Home
+                            Gateway)</p>
+                        <ul style="margin-bottom:8px;">
+                            <li><em>Correspondent</em> selalu mengirim paket ke <strong>Permanent Home IP</strong> tanpa
+                                perlu tahu perangkat sedang roaming.</li>
+                            <li>Home Gateway mencegat paket, <strong>membungkusnya dalam Tunnel</strong> menuju Visited
+                                Network (CoA), lalu Visited GW menyerahkan ke mobile.</li>
+                            <li><strong>Kelemahan:</strong> Menimbulkan <em>Triangle Routing Problem</em> (jalur memutar
+                                jauh meski Correspondent dekat Visited Network).</li>
+                        </ul>
+                        <p style="font-weight:700; color:#166534; margin:0 0 4px 0;">2. Direct Routing (Optimal Path)
+                        </p>
+                        <ul>
+                            <li><em>Correspondent Agent</em> bertanya dulu ke HSS/Home Network: <em>"Di mana CoA mobile
+                                    sekarang?"</em> lalu menembak paket langsung ke Visited Network.</li>
+                            <li>Mengatasi <em>Triangle Routing</em>, namun kompleks saat mobilitas antar-sel sangat
+                                cepat.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="images/week14/mobility_indirect_direct_mobileip.svg" class="slide-img"
+                            alt="Indirect Routing Mobile IP Tunneling vs Direct Routing">
+                        <p class="img-caption">Komparasi Alur Paket Indirect Routing (Tunneling &amp; Triangle Routing)
+                            vs Direct Routing</p>
+                    </div>
+                </div>
+                <aside class="notes">Bandingkan Indirect Routing (sederhana &amp; transparan bagi Correspondent tanpa
+                    perubahan protokol TCP/IP lawan) vs Direct Routing (bebas Triangle Routing tapi membutuhkan
+                    mekanisme lookup lokasi terbaru).</aside>
+            </section>
+
+            <!-- SLIDE 22 -->
+            <section data-topic="Arsitektur Mobile IP (RFC 5944)">
+                <h4>Arsitektur Resmi Mobile IP (IETF RFC 5944)</h4>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 6px 0;"><i
+                                class="bi bi-hdd-network-fill"></i> Implementasi Entitas Mobile IP (IPv4/IPv6)</p>
+                        <ul>
+                            <li><strong>Mobile Node (MN):</strong> Perangkat bergerak dengan satu alamat permanen tetap
+                                (<em>Home Address</em>).</li>
+                            <li><strong>Home Agent (HA):</strong> Router rumah yang memelihara tabel ikatan
+                                <code>Home Addr &harr; CoA</code> serta menjalankan <strong>IP-in-IP
+                                    Encapsulation</strong>.
+                            </li>
+                            <li><strong>Foreign Agent (FA):</strong> Router jaringan tamu yang menyiarkan CoA dan
+                                membuka kapsul tunnel untuk MN.</li>
+                        </ul>
+                        <div class="info-box" style="margin-top:6px;">
+                            <em>Mobile IPv6:</em> Mobile Node memperoleh <em>Colocated CoA</em> langsung lewat
+                            DHCPv6/SLAAC sehingga tidak butuh Foreign Agent terpisah.
+                        </div>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 6px 0;"><i class="bi bi-arrow-repeat"></i>
+                            3 Fase Siklus Operasional Mobile IP</p>
+                        <div class="info-box" style="margin-top:4px;">
+                            <strong>Fase 1: Agent Discovery</strong><br>
+                            FA menyiarkan iklan agen (ICMP Router Advertisement) berisi alamat CoA; MN mendeteksi
+                            perpindahan jaringan.
+                        </div>
+                        <div class="info-box-warn" style="margin-top:6px;">
+                            <strong>Fase 2: Registration (UDP Port 434)</strong><br>
+                            MN mengirim <em>Registration Request</em> lewat FA ke HA agar tabel
+                            <code>Home Address &rarr; CoA</code> diperbarui.
+                        </div>
+                        <div class="info-box-green" style="margin-top:6px;">
+                            <strong>Fase 3: Indirect Routing &amp; Tunneling</strong><br>
+                            HA membungkus paket untuk Home Address memakai header IP tujuan CoA, lalu FA mengekstraknya
+                            ke MN.
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">Rincikan protokol resmi IETF RFC 5944: Agent Discovery via ICMP, Registration via
+                    UDP 434, dan IP-in-IP Encapsulation oleh Home Agent.</aside>
+            </section>
+
+            <!-- SLIDE 23 -->
+            <!-- SLIDE 23 (1/2) -->
+            <section data-auto-animate data-auto-animate-id="pair23"
+                data-topic="4G LTE Control Plane &amp; GTP Tunnel (1/2)">
+                <h4>Mobilitas 4G LTE (1/2): Control &amp; GTP Tunnel</h4>
+                <div class="layout-text-img">
+                    <div class="card card-compact text-left" data-id="left-23-1">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 6px 0;"><i class="bi bi-layers-fill"></i>
+                            Control Plane &amp; GTP Data-Plane Tunnel</p>
+                        <ul>
+                            <li><strong>Control Plane:</strong> UE berbicara ke <strong>MME</strong> lokal via eNode-B;
+                                MME memverifikasi profil &amp; kunci otentikasi ke <strong>HSS</strong> via IMSI.</li>
+                            <li><strong>Data Plane (GTP Tunneling):</strong> Menggunakan <strong>GPRS Tunneling Protocol
+                                    (GTP)</strong> di atas UDP/IP pada dua segmen:
+                                <ul style="margin-top:4px; margin-bottom:4px;">
+                                    <li><strong>S-GW &harr; Home P-GW:</strong> Implementasi nyata <em>Indirect
+                                            Routing</em> saat roaming antar-daerah.</li>
+                                    <li><strong>S-GW &harr; Base Station:</strong> Saat UE pindah menara, S-GW memindah
+                                        ujung tunnel GTP tanpa memutus aliran TCP!</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-23">
+                        <div class="rpanel-badge rpanel-badge-blue" data-id="rbadge-23">
+                            <span class="rpanel-dot"></span> Fokus 1/2: Core EPC &amp; GTP Tunnel
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-23">
+                            <img src="images/week14/lte_handoff_gtp_tunnel.jpg" class="slide-img rpanel-img-enter"
+                                data-id="rimg-23"
+                                alt="Arsitektur GTP Tunnel antar S-GW/P-GW Core Network dan menara eNode-B">
+                            <div class="rpanel-spotlight sp-blue" data-id="rspot-23"
+                                style="left: 17%; top: 17%; width: 66%; height: 47%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-23">MME/HSS menangani pensinyalan kontrol sementara
+                            S-GW/P-GW memelihara terowongan data GTP.</p>
+                    </div>
+                </div>
+                <aside class="notes">Bagian 1/2: Tunjukkan bagaimana Mobile IP diimplementasikan di dunia nyata oleh
+                    4G/5G via terowongan GTP UDP/IP.</aside>
+            </section>
+
+            <!-- SLIDE 23 (2/2) -->
+            <section data-auto-animate data-auto-animate-id="pair23" data-topic="Proses Handoff 4G LTE (2/2)">
+                <h4>Mobilitas 4G LTE (2/2): Proses Handoff Menara</h4>
+                <div class="layout-text-img">
+                    <div class="card card-compact text-left" data-id="left-23-2">
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 6px 0;"><i
+                                class="bi bi-arrow-left-right"></i> Proses Handoff Antar-Menara (eNode-B)</p>
+                        <ol>
+                            <li><strong>Source BS</strong> mendeteksi sinyal UE melemah &rarr; memilih <strong>Target
+                                    BS</strong> terkuat.</li>
+                            <li>Source BS mengirim <em>Handover Request</em> dan meneruskan paket tertunda ke Target BS.
+                            </li>
+                            <li>UE memutus link radio lama dan tersinkronisasi ke Target BS.</li>
+                            <li>Target BS memberi tahu <strong>MME / S-GW</strong> untuk memindahkan rute tunnel GTP ke
+                                menara baru (tanpa ganti IP UE!).</li>
+                        </ol>
+                        <div class="info-box-green" style="margin-top:6px;">
+                            <strong>Keunggulan Seluler:</strong> Handoff berlangsung mulus hanya dalam puluhan milidetik
+                            meski pengguna melaju di tol 100+ km/jam!
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-23">
+                        <div class="rpanel-badge rpanel-badge-red" data-id="rbadge-23">
+                            <span class="rpanel-dot"></span> Fokus 2/2: Handoff Source &rarr; Target BS
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-23">
+                            <img src="images/week14/lte_handoff_gtp_tunnel.jpg" class="slide-img" data-id="rimg-23"
+                                alt="Sorotan perpindahan kendaraan 100 km/jam dari Source BS ke Target BS saat video call">
+                            <div class="rpanel-spotlight sp-red" data-id="rspot-23"
+                                style="left: 10%; top: 48%; width: 81%; height: 47%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-23">Ujung tunnel GTP berpindah mulus ke Target BS dalam
+                            puluhan milidetik tanpa mengganti IP UE.</p>
+                    </div>
+                </div>
+                <aside class="notes">Bagian 2/2: Jelaskan 4 langkah handoff eNode-B dari Source BS ke Target BS saat
+                    pengguna melaju di jalan tol.</aside>
+            </section>
+
+            <!-- ━━━━━━━━━━━━━━ BAGIAN 5 ━━━━━━━━━━━━━━ -->
+            <section class="section-slide" data-topic="Bagian 5: Desain Radio, Konfigurasi AP &amp; Simulasi">
+                <div class="section-part-label">Bagian 5</div>
+                <h2>5. Desain Radio, Konfigurasi AP &amp; Simulasi</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Perencanaan Multi-AP (CCI/ACI/5 GHz),
+                    Parameter &amp; Panduan Setup AP Lab, 2 Simulasi Auto-Step &amp; Tugas</p>
+                <aside class="notes">Bagian terakhir memberikan bekal praktis lengkap bagi mahasiswa untuk merancang
+                    penempatan beberapa Access Point, mengonfigurasi AP langkah demi langkah, serta mempraktikkannya via
+                    2 simulator interaktif.</aside>
+            </section>
+
+            <!-- SLIDE 25 (NEW: Multi-AP Radio Planning CCI vs ACI, 5 GHz & Roaming Overlap) -->
+            <section data-topic="Desain Radio Multi-AP (CCI vs ACI &amp; 5 GHz)">
+                <h3>Desain Radio Multi-AP: CCI vs ACI, 5 GHz &amp; Overlap</h3>
+                <div class="layout-text-img">
+                    <div class="card card-compact text-left">
+                        <ul>
+                            <li><strong>CCI vs ACI:</strong> Dua AP berbagi kanal <em>sama</em> (misal sama-sama Kanal 1
+                                = <strong>CCI</strong>) masih saling menghormati via CSMA/CA. Kanal <em>berdempetan</em>
+                                (Kanal 1 vs 3 = <strong>ACI</strong>) bertabrakan tanpa terbaca!</li>
+                            <li><strong>Spektrum 5 GHz (Wi-Fi 5/6):</strong> Jauh lebih lega dengan banyak kanal 20 MHz
+                                bebas tumpang tindih (<strong>UNII-1 Ch 36–48</strong> &amp; <strong>UNII-3 Ch
+                                    149–161</strong>; kanal <strong>DFS Ch 52–144</strong> wajib menghindar radar).</li>
+                            <li><strong>Overlap 15–20% &amp; Sticky Client:</strong> Jaga batas overlap sel di sekitar
+                                <code>-67 dBm</code> dan jangan menyetel <em>TX Power 100%</em> agar HP mau pindah ke AP
+                                terdekat!
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="images/week14/wifi_multi_ap_planning.svg" class="slide-img"
+                            alt="Desain Sel Multi-AP Kampus CCI vs ACI dan Spektrum 5 GHz">
+                        <p class="img-caption">Pola Sel Multi-AP Kampus, Perbandingan CCI vs ACI, &amp; Kanal 5 GHz</p>
+                    </div>
+                </div>
+                <aside class="notes">Jelaskan masalah paling umum saat admin baru memasang Wi-Fi di gedung bertingkat:
+                    menyetel TX Power ke 100% Max menyebabkan "sticky client" (HP tetap menempel ke AP lantai 1 yang
+                    lemah daripada pindah ke AP lantai 2).</aside>
+            </section>
+
+            <!-- SLIDE 26 -->
+            <section data-topic="Arsitektur Integrasi AP &amp; 4 Parameter Kritis">
+                <h4>Arsitektur Integrasi AP &amp; 4 Parameter Kritis</h4>
+                <div class="layout-text-img">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">4 Parameter Wajib Saat
+                            Mengonfigurasi AP:</p>
+                        <ol>
+                            <li><strong>Mode Operasi (Bridge vs NAT Router):</strong> Di jaringan kampus/perusahaan
+                                dengan router inti, pakai <em>AP / Bridge Mode</em> agar klien mendapat IP langsung dari
+                                DHCP Router pusat (hindari <em>Double-NAT</em>).</li>
+                            <li><strong>Radio, Kanal &amp; Daya Pancar:</strong> Setel 2.4 GHz pada kanal tetap
+                                <strong>1, 6, atau 11</strong> (20 MHz) dan sesuaikan TX Power per ruangan.
+                            </li>
+                            <li><strong>Keamanan Enkripsi:</strong> Pilih <strong>WPA2-PSK (AES)</strong> /
+                                <strong>WPA3-SAE</strong> untuk SOHO, atau <strong>802.1X + RADIUS</strong> di kampus.
+                            </li>
+                            <li><strong>Segmentasi VLAN per SSID:</strong> Petakan tiap SSID ke VLAN terpisah via Trunk
+                                Switch + aktifkan <strong>Client Isolation</strong> di SSID tamu.</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <img src="images/week14/wireless_ap_configuration.svg" class="slide-img"
+                            alt="Arsitektur Konfigurasi Wireless Access Point Kampus dan SOHO">
+                        <p class="img-caption">Topologi Integrasi PoE Switch, Trunk VLAN, RADIUS, &amp; 4 Parameter
+                            Konfigurasi AP</p>
+                    </div>
+                </div>
+                <aside class="notes">Diagram ini menjadi acuan arsitektur saat AP terhubung ke PoE Switch dengan port
+                    802.1Q Trunk yang memisahkan SSID Dosen (VLAN 10) dan Mahasiswa (VLAN 20).</aside>
+            </section>
+
+            <!-- SLIDE 27 (NEW: Step-by-Step Lab AP Config & Troubleshooting) -->
+            <!-- SLIDE 27 (1/2) -->
+            <section data-auto-animate data-auto-animate-id="pair27" data-topic="Setup AP Lab: Alur Benar (1/2)">
+                <h3>Langkah Konfigurasi AP Lab (1/2): Setup Benar</h3>
+                <div class="layout-text-img">
+                    <div class="card card-compact text-left" style="padding:0; overflow:hidden;" data-id="left-27-1">
+                        <div class="sec-bar sec-bar-green"><i class="bi bi-wrench-adjustable-circle-fill"></i> Alur
+                            Konfigurasi AP di Lab / Packet Tracer</div>
+                        <div class="sec-body">
+                            <ol style="margin-bottom:6px;">
+                                <li><strong>IP Manajemen Statis AP:</strong> Beri IP manajemen di subnet LAN (misal
+                                    <code>192.168.10.2/24</code> agar tidak bentrok dengan gateway router
+                                    <code>.1</code>).
+                                </li>
+                                <li><strong>Matikan DHCP Internal AP:</strong> Jika memakai Wireless Router sebagai AP
+                                    murni, colok kabel uplink ke <strong>port LAN</strong> (bukan WAN!) dan set DHCP AP
+                                    = <code>Disabled</code>.</li>
+                                <li><strong>Setel Radio &amp; Enkripsi:</strong> Beri SSID sama untuk ESS roaming (atau
+                                    SSID terpisah sesuai soal lab), kunci kanal <code>AP-A = Ch 1</code>,
+                                    <code>AP-B = Ch 6</code>, &amp; <code>WPA2-PSK AES</code>.
+                                </li>
+                                <li><strong>Verifikasi Handoff &amp; Ping:</strong> Klien terima IP dari DHCP Router
+                                    pusat, lalu uji geser klien dari AP-A ke AP-B sambil cek ping gateway.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-27">
+                        <div class="rpanel-badge rpanel-badge-green" data-id="rbadge-27">
+                            <span class="rpanel-dot"></span> Fokus 1/2: Port LAN (Bridge Mode)
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-27">
+                            <img src="images/week14/ap_lab_wan_vs_lan_setup.jpg" class="slide-img rpanel-img-enter"
+                                data-id="rimg-27"
+                                alt="Diagram panel belakang Wireless Router: kabel uplink ke Port LAN (benar) vs Port WAN">
+                            <div class="rpanel-spotlight sp-green" data-id="rspot-27"
+                                style="left: 4%; top: 16%; width: 45%; height: 79%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-27">Gunakan Port LAN + matikan DHCP internal agar Wireless
+                            Router bertindak sebagai AP Bridge murni.</p>
+                    </div>
+                </div>
+                <aside class="notes">Bagian 1/2: Panduan langsung untuk mengerjakan Tugas Praktikum nomor 2 dan 3 di
+                    Cisco Packet Tracer atau perangkat AP fisik.</aside>
+            </section>
+
+            <!-- SLIDE 27 (2/2) -->
+            <section data-auto-animate data-auto-animate-id="pair27" data-topic="Kesalahan Umum Setup AP Lab (2/2)">
+                <h3>Konfigurasi AP Lab (2/2): 4 Kesalahan Umum</h3>
+                <div class="layout-text-img">
+                    <div class="card card-compact text-left" style="padding:0; overflow:hidden;" data-id="left-27-2">
+                        <div class="sec-bar sec-bar-red"><i class="bi bi-bug-fill"></i> 4 Kesalahan Umum di Lapangan /
+                            Lab</div>
+                        <div class="sec-body">
+                            <ul>
+                                <li><strong>Double-NAT Akibat Port WAN:</strong> Colok ke port WAN membuat klien berada
+                                    di subnet NAT ganda dan tidak bisa mengakses printer/server lokal kampus!</li>
+                                <li><strong>Channel Width 40 MHz di 2.4 GHz:</strong> Memakan hampir seluruh spektrum
+                                    2.4 GHz sehingga memicu ACI parah ke AP tetangga.</li>
+                                <li><strong>Channel = Auto di Multi-AP:</strong> AP sering memilih kanal berdempetan
+                                    seperti Ch 2 atau Ch 4 secara otomatis.</li>
+                                <li><strong>Lupa Client Isolation di Guest Wi-Fi:</strong> Tamu bisa menjalankan ARP
+                                    spoofing/port scan terhadap sesama pengguna publik.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="img-col rpanel-stage" data-id="rpanel-27">
+                        <div class="rpanel-badge rpanel-badge-red" data-id="rbadge-27">
+                            <span class="rpanel-dot"></span> Fokus 2/2: Hindari Port WAN (Double-NAT)
+                        </div>
+                        <div class="rpanel-frame" data-id="rframe-27">
+                            <img src="images/week14/ap_lab_wan_vs_lan_setup.jpg" class="slide-img" data-id="rimg-27"
+                                alt="Sorotan kesalahan umum mencolok kabel uplink ke Port WAN yang memicu Double-NAT">
+                            <div class="rpanel-spotlight sp-red" data-id="rspot-27"
+                                style="left: 51%; top: 16%; width: 45%; height: 79%;"></div>
+                        </div>
+                        <p class="img-caption" data-id="rcap-27">Salah mencolok uplink ke Port WAN memecah subnet
+                            (Double-NAT) dan memblokir akses LAN lokal.</p>
+                    </div>
+                </div>
+                <aside class="notes">Bagian 2/2: Soroti 4 kesalahan klasik admin lab/SOHO: Port WAN Double-NAT, lebar 40
+                    MHz di 2.4 GHz, Auto channel, dan lupa Client Isolation.</aside>
+            </section>
+
+            <!-- SLIDE 28: SIMULASI INTERAKTIF (1/2) WI-FI CSMA/CA -->
+            <section data-topic="Simulasi 1/2: Wi-Fi CSMA/CA &amp; RTS/CTS">
+                <h3>Simulasi Interaktif (1/2): Wi-Fi CSMA/CA &amp; RTS/CTS</h3>
+                <div class="sim-container">
+                    <div class="sim-toolbar">
+                        <div class="sim-tabs">
+                            <span class="sim-tab-btn active" style="cursor:default;"><i class="bi bi-wifi"></i> Skenario
+                                1: Hidden Terminal A &amp; C ke AP (B)</span>
+                        </div>
+                        <div class="sim-btn-group">
+                            <label
+                                style="font-size:.88em; cursor:pointer; display:flex; align-items:center; gap:5px; color:#e6edf3;">
+                                <input type="checkbox" id="chk-rts" checked> Aktifkan RTS / CTS
+                            </label>
+                            <button type="button" class="sim-btn" onclick="runWifiSim()"><i class="bi bi-play-fill"></i>
+                                Kirim Data (A &amp; C)</button>
+                            <button type="button" class="sim-btn sim-btn-reset" onclick="resetWifiSim()"><i
+                                    class="bi bi-arrow-clockwise"></i> Reset</button>
+                        </div>
+                    </div>
+                    <div class="sim-display-grid">
+                        <div class="sim-pane">
+                            <div class="sim-pane-title">
+                                <span><i class="bi bi-laptop"></i> Pengirim (Node A &amp; Hidden Node C)</span>
+                                <span id="wifi-tx-status" class="sim-tag-req">IDLE</span>
+                            </div>
+                            <div id="wifi-tx-log">Aktifkan/matikan <strong>RTS / CTS</strong>, lalu klik <strong>Kirim
+                                    Data (A &amp; C)</strong> untuk jalankan urutan frame otomatis...</div>
+                        </div>
+                        <div class="sim-pane">
+                            <div class="sim-pane-title">
+                                <span><i class="bi bi-router"></i> Access Point (Node B &mdash; Medium Udara)</span>
+                                <span id="wifi-ap-status" class="sim-tag-res">LISTENING</span>
+                            </div>
+                            <div id="wifi-ap-log">Access Point memantau kanal 6 (2.437 GHz). Menunggu transmisi frame
+                                802.11...</div>
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">Jalankan terlebih dahulu dengan RTS/CTS OFF agar mahasiswa menyaksikan tabrakan
+                    serempak Node A dan C di AP (CRC Error + CW x 2), kemudian aktifkan RTS/CTS untuk menunjukkan efek
+                    NAV Defer pada Node C.</aside>
+            </section>
+
+            <!-- SLIDE 29: SIMULASI INTERAKTIF (2/2) MOBILE IP ROUTING -->
+            <section data-topic="Simulasi 2/2: Mobile IP Indirect vs Direct">
+                <h3>Simulasi Interaktif (2/2): Mobile IP &amp; Tunneling</h3>
+                <div class="sim-container">
+                    <div class="sim-toolbar">
+                        <div class="sim-tabs">
+                            <span class="sim-tab-btn active" style="cursor:default;"><i
+                                    class="bi bi-signpost-split-fill"></i> Skenario 2: Roaming IP
+                                (128.119.40.186)</span>
+                        </div>
+                        <div class="sim-btn-group">
+                            <select id="mip-mode" onchange="resetMipSim()"
+                                style="background:#21262d; color:#fff; border:1px solid #30363d; border-radius:6px; padding:4px 8px; font-size:.86em;">
+                                <option value="indirect">Indirect Routing (Mobile IP Tunnel)</option>
+                                <option value="direct">Direct Routing (Lookup CoA)</option>
+                            </select>
+                            <button type="button" class="sim-btn sim-btn-orange" onclick="runMipSim()"><i
+                                    class="bi bi-send-fill"></i> Kirim ke Mobile Node</button>
+                            <button type="button" class="sim-btn sim-btn-reset" onclick="resetMipSim()"><i
+                                    class="bi bi-arrow-clockwise"></i> Reset</button>
+                        </div>
+                    </div>
+                    <div class="sim-display-grid">
+                        <div class="sim-pane">
+                            <div class="sim-pane-title">
+                                <span><i class="bi bi-pc-display"></i> Correspondent &amp; Home Agent
+                                    (128.119.40.186)</span>
+                                <span id="mip-ha-status" class="sim-tag-dns">READY</span>
+                            </div>
+                            <div id="mip-ha-log">Mobile Node roaming di Visited Network (CoA: <code>79.129.13.2</code>).
+                                Pilih mode routing lalu klik Kirim...</div>
+                        </div>
+                        <div class="sim-pane">
+                            <div class="sim-pane-title">
+                                <span><i class="bi bi-phone"></i> Foreign Agent / Visited GW &amp; Mobile Node</span>
+                                <span id="mip-fa-status" class="sim-tag-req">STANDBY</span>
+                            </div>
+                            <div id="mip-fa-log">Tabel ikatan terdaftar di Home Agent:
+                                <code>128.119.40.186 &harr; 79.129.13.2</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">Demonstrasikan beda latensi dan alur paket antara Indirect Routing (IP-in-IP
+                    Tunneling lewat Home Agent + Triangle Routing) dibanding Direct Routing (lookup CoA ke HSS lalu
+                    langsung kirim ke Visited Network).</aside>
+            </section>
+
+            <!-- SLIDE 30: RANGKUMAN -->
+            <section data-topic="Rangkuman Pertemuan 14">
+                <h3>Rangkuman Komparasi Teknologi Jaringan Nirkabel</h3>
+                <div class="card card-compact text-left" style="padding: 12px 16px;">
+                    <table class="std-table">
+                        <thead>
+                            <tr>
+                                <th>Aspek Evaluasi</th>
+                                <th>Bluetooth (802.15.1 / BLE)</th>
+                                <th>Wi-Fi (IEEE 802.11)</th>
+                                <th>4G LTE Seluler</th>
+                                <th>5G New Radio (NR)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Skala &amp; Jangkauan</strong></td>
+                                <td>PAN (&lt; 10 m)</td>
+                                <td>LAN (30 – 70 m indoor)</td>
+                                <td>WAN (4 – 15 km makro)</td>
+                                <td>Pico (10–100 m) / Makro km</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Protokol Akses / Mux</strong></td>
+                                <td>Polling Master + FHSS</td>
+                                <td>CSMA/CA (+ RTS/CTS)</td>
+                                <td>OFDM (FDM + TDM)</td>
+                                <td>OFDM Fleksibel + Beamforming</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kecepatan Maksimal</strong></td>
+                                <td>2 – 3 Mbps</td>
+                                <td>11 Mbps – 46 Gbps (Wi-Fi 7)</td>
+                                <td>100+ Mbps – 1 Gbps</td>
+                                <td>10 – 20 Gbps (mmWave)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Manajemen Mobilitas</strong></td>
+                                <td>Terbatas satu Piconet</td>
+                                <td>Handoff antar-AP (1 ESS)</td>
+                                <td>Handoff penuh + GTP + MME/HSS</td>
+                                <td>Ultra-dense handoff + SDN Core</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Keunggulan Utama</strong></td>
+                                <td>Sangat hemat daya, tanpa AP</td>
+                                <td>Spektrum gratis, murah &amp; cepat</td>
+                                <td>Cakupan luas &amp; mobilitas tinggi</td>
+                                <td>Latensi &lt;1 ms, massive IoT &amp; eMBB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="info-box-green" style="margin-top:10px;">
+                        <strong>Kesimpulan Utama:</strong> Komunikasi radio menghadapi tantangan fisik inheren (<em>path
+                            loss</em>, <em>multipath</em>, <em>hidden terminal</em>, <em>rate anomaly</em>), sehingga
+                        menuntut protokol akses adaptif (CSMA/CA, OFDM), perencanaan radio multi-AP yang tepat, dan
+                        manajemen mobilitas terstruktur (Mobile IP / GTP Tunneling).
+                    </div>
+                </div>
+                <aside class="notes">Gunakan matriks sintesis tunggal ini (tanpa duplikasi tabel awal) untuk mengulas
+                    seluruh teknologi nirkabel sebelum masuk ke rincian Tugas Praktikum Mandiri.</aside>
+            </section>
+
+            <!-- SLIDE 31: TUGAS PRAKTIKUM MANDIRI -->
+            <section data-topic="Tugas Praktikum Mandiri">
+                <div class="tugas-box" style="font-size: .65em;">
+                    <h3>📝 Tugas Praktikum Mandiri: Audit Wi-Fi, Konfigurasi AP &amp; Mobilitas</h3>
+                    <p style="font-size: .62em; margin-bottom: 10px; color: #e8f5e9;">
+                        Lakukan audit spektrum Wi-Fi riil, perancangan konfigurasi Access Point di simulator jaringan,
+                        dan analisis mekanisme Mobile IP berikut:
+                    </p>
+                    <div class="tugas-soal">
+                        <p><span class="num">1.</span> <strong>Audit Kanal &amp; Sinyal Wi-Fi Lingkungan Nyata:</strong>
+                            Jalankan utilitas pemindai nirkabel (seperti WiFi Analyzer /
+                            <code>netsh wlan show networks mode=bssid</code> / Wireshark) di sekitar kampus atau kos.
+                            Catat SSID, BSSID MAC, pita frekuensi (2.4/5 GHz), nomor kanal, RSSI (dBm), serta
+                            identifikasi apakah ada tumpang tindih di luar kanal 1, 6, 11.
+                        </p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">2.</span> <strong>Simulasi Infrastruktur Access Point (Cisco Packet
+                                Tracer):</strong> Bangun topologi terdiri atas 1 Router Gateway, 1 Switch, 2 Access
+                            Point (<code>AP-A</code> Kanal 1, <code>AP-B</code> Kanal 6), dan minimal 4 perangkat
+                            nirkabel (Laptop/Smartphone) dengan SSID berbeda dan pengalamatan IP otomatis dari DHCP
+                            Server Router.</p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">3.</span> <strong>Pengamanan Wireless &amp; Pengujian Handoff:</strong>
+                            Konfigurasikan keamanan enkripsi <strong>WPA2-PSK (AES)</strong> pada kedua AP. Lakukan uji
+                            konektivitas (<em>Ping</em>) ke Router serta simulasi perpindahan klien dari jangkauan
+                            <code>AP-A</code> menuju <code>AP-B</code>.
+                        </p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">4.</span> <strong>Analisis Teoretis CSMA/CA &amp; Hidden Terminal:</strong>
+                            Jelaskan secara teknis bagaimana mekanisme <code>DIFS</code>, <code>RTS/CTS</code>,
+                            <code>NAV</code>, dan <code>ACK</code> menyelamatkan transmisi saat dua klien tidak saling
+                            mendengar di jaringan Wi-Fi yang Anda bangun.
+                        </p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">5.</span> <strong>Studi Kasus Mobile IP &amp; 4G LTE:</strong> Gambarkan
+                            alur paket saat host berpindah ke <em>Visited Network</em> menggunakan <em>Indirect
+                                Routing</em> (Home Agent, Foreign Agent, Care-of Address) serta jelaskan fungsi
+                            <em>Triangle Routing</em> dibanding <em>Direct Routing</em>.
+                        </p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><span class="num">6.</span> <strong>Penyusunan Laporan Praktikum:</strong> Susun seluruh
+                            hasil pengukuran, tangkapan layar konfigurasi AP &amp; bukti ping pada Packet Tracer, serta
+                            analisis kritis ke dalam laporan berstandar template A4 margin 3 cm.</p>
+                    </div>
+                    <div class="tugas-info">
+                        <div class="tugas-chip"><i class="bi bi-clock-fill"></i> Batas Waktu: 1 Minggu</div>
+                        <div class="tugas-chip"><i class="bi bi-file-earmark-zip-fill"></i> Format: .pkt &amp; Laporan
+                            PDF</div>
+                        <div class="tugas-chip"><i class="bi bi-cloud-arrow-up-fill"></i> Pengumpulan: Google Classroom
+                            / LMS</div>
+                    </div>
+                </div>
+                <aside class="notes">Tugas praktikum mandiri Pertemuan 14 kini didukung langsung oleh materi baru RSSI
+                    dBm (butir 1) dan panduan setup AP Lab &amp; Packet Tracer (butir 2 &amp; 3).</aside>
+            </section>
+
+            <!-- SLIDE 32: PENUTUP / Q&A -->
+            <section data-topic="Tanya Jawab &amp; Diskusi">
                 <h2>Tanya Jawab &amp; Diskusi</h2>
                 <div style="font-size: 2.2em; color: #1565c0; margin: 15px 0;">
                     <i class="bi bi-chat-dots-fill"></i>
                 </div>
-                <p>Pertemuan berikutnya: <strong>Pertemuan 15: Studi Kasus & Tren Jaringan (SOHO, IoT, & SDN)</strong></p>
-                <p class="text-small" style="color: #666; max-width: 720px; margin: 10px auto;">
-                    Persiapkan pemahaman mengenai arsitektur jaringan kantor kecil/rumah (SOHO), ekosistem Internet of Things (IoT), konsep Software-Defined Networking (SDN), dan isu etika privasi data.
+                <p>Pertemuan berikutnya: <strong>Pertemuan 15: Studi Kasus &amp; Tren Jaringan (SOHO, IoT, Edge Device
+                        &amp; SDN)</strong></p>
+                <p class="text-small" style="color: #64748b; max-width: 720px; margin: 10px auto;">
+                    Persiapkan pemahaman mengenai desain jaringan kantor kecil/rumah (SOHO), ekosistem Internet of
+                    Things (IoT) &amp; Edge Computing, pemisahan control-data plane pada Software-Defined Networking
+                    (SDN), serta isu etika dan privasi data.
                 </p>
-                <aside class="notes">Beri kesempatan mahasiswa bertanya mengenai protokol CSMA/CA WiFi, handoff seluler, atau perbedaan 4G vs 5G sebelum menutup sesi pertemuan.</aside>
+                <div style="margin-top: 25px; font-size: .55em; color: #94a3b8;">
+                    <p>Program Studi Teknik Informatika - Institut Teknologi Sumatera (ITERA)</p>
+                </div>
+                <aside class="notes">Beri kesempatan mahasiswa bertanya mengenai protokol CSMA/CA, skala RSSI dBm,
+                    perencanaan kanal Wi-Fi, 4G/5G, atau Mobile IP sebelum menutup perkuliahan.</aside>
             </section>
 
         </div><!-- /slides -->
@@ -1152,12 +2350,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/math/math.js"></script>
     <script>
         Reveal.initialize({
             hash: true,
             slideNumber: 'c/t',
             transition: 'slide',
-            plugins: [RevealNotes]
+            autoAnimateDuration: 0.75,
+            autoAnimateEasing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            plugins: [RevealNotes, RevealMath.KaTeX]
         });
     </script>
 
@@ -1201,6 +2402,215 @@
             });
         });
     </script>
+
+    <script>
+        const W14_TIMERS = { wifi: [], mip: [] };
+
+        function clearW14Timers(group) {
+            if (!W14_TIMERS[group]) return;
+            while (W14_TIMERS[group].length) {
+                clearTimeout(W14_TIMERS[group].pop());
+            }
+        }
+
+        function setW14PaneActive(logId) {
+            const el = document.getElementById(logId);
+            if (!el || !el.parentElement) return;
+            const pane = el.parentElement;
+            const grid = pane.parentElement;
+            if (grid) {
+                grid.querySelectorAll('.sim-pane').forEach(p => p.classList.remove('sim-pane-active'));
+            }
+            pane.classList.add('sim-pane-active');
+        }
+
+        function clearW14Highlight(logId) {
+            const el = document.getElementById(logId);
+            if (el && el.parentElement) el.parentElement.classList.remove('sim-pane-active');
+        }
+
+        function appendW14Log(id, html) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.innerHTML += '<div class="sim-log-line">' + html + '</div>';
+            el.parentElement.scrollTop = el.parentElement.scrollHeight;
+            setW14PaneActive(id);
+        }
+
+        function scheduleW14Steps(group, steps, stepMs) {
+            clearW14Timers(group);
+            steps.forEach((fn, idx) => {
+                if (idx === 0) {
+                    fn();
+                } else {
+                    const t = setTimeout(fn, idx * (stepMs || 700));
+                    W14_TIMERS[group].push(t);
+                }
+            });
+        }
+
+        function runWifiSim() {
+            const chk = document.getElementById('chk-rts');
+            const useRts = chk ? chk.checked : true;
+            const txLog = document.getElementById('wifi-tx-log');
+            const apLog = document.getElementById('wifi-ap-log');
+            const txSt = document.getElementById('wifi-tx-status');
+            const apSt = document.getElementById('wifi-ap-status');
+            if (!txLog || !apLog) return;
+
+            txLog.innerHTML = '';
+            apLog.innerHTML = '';
+
+            if (useRts) {
+                scheduleW14Steps('wifi', [
+                    () => {
+                        txSt.className = 'sim-tag-req'; txSt.textContent = 'STEP 1: DIFS+RTS';
+                        apSt.className = 'sim-tag-res'; apSt.textContent = 'LISTENING';
+                        appendW14Log('wifi-tx-log', '<span class="sim-tag-req">NODE A</span> Kanal sepi DIFS &rarr; Kirim <code>RTS (450 &mu;s)</code>!');
+                    },
+                    () => {
+                        apSt.textContent = 'STEP 2: SIFS+CTS';
+                        appendW14Log('wifi-ap-log', '<span class="sim-tag-req">AP (B)</span> Terima <code>RTS</code> dari A. Siapkan <code>CTS</code> (tunggu SIFS)...');
+                    },
+                    () => {
+                        apSt.textContent = 'NAV BROADCAST';
+                        appendW14Log('wifi-ap-log', '<span class="sim-tag-res">BCAST CTS</span> AP siarkan <code>CTS (NAV=450&mu;s)</code> ke A &amp; C!');
+                    },
+                    () => {
+                        txSt.textContent = 'C DEFERRED';
+                        appendW14Log('wifi-tx-log', '<span class="sim-tag-warn">NODE C</span> Dengar <code>CTS</code> &rarr; Set NAV Timer, <strong>DIAM menunda!</strong>');
+                    },
+                    () => {
+                        txSt.textContent = 'STEP 3: DATA TX';
+                        appendW14Log('wifi-tx-log', '<span class="sim-tag-req">NODE A</span> Kirim <strong>DATA FRAME</strong> (1500 B) bebas kolisi!');
+                    },
+                    () => {
+                        apSt.className = 'sim-tag-cache'; apSt.textContent = 'CRC OK + ACK';
+                        appendW14Log('wifi-ap-log', '<span class="sim-tag-res">AP (B)</span> DATA 100% utuh (CRC OK) &rarr; Balas <code>ACK</code> (SIFS)!');
+                    },
+                    () => {
+                        txSt.className = 'sim-tag-cache'; txSt.textContent = 'ACK RECEIVED';
+                        appendW14Log('wifi-tx-log', '<span class="sim-tag-cache">SUKSES</span> A terima <code>ACK</code>. Setelah NAV habis, C mulai antre!');
+                    }
+                ], 680);
+            } else {
+                scheduleW14Steps('wifi', [
+                    () => {
+                        txSt.className = 'sim-tag-req'; txSt.textContent = 'A SENDING';
+                        apSt.className = 'sim-tag-res'; apSt.textContent = 'RECEIVING';
+                        appendW14Log('wifi-tx-log', '<span class="sim-tag-req">NODE A</span> Tak dengar C &rarr; Merasa kosong, kirim <strong>DATA</strong>!');
+                    },
+                    () => {
+                        txSt.className = 'sim-tag-warn'; txSt.textContent = 'A & C TX SIMUL!';
+                        appendW14Log('wifi-tx-log', '<span class="sim-tag-warn">NODE C</span> Tak dengar A &rarr; Merasa kosong, kirim <strong>DATA</strong> juga!');
+                    },
+                    () => {
+                        apSt.className = 'sim-tag-warn'; apSt.textContent = 'COLLISION!';
+                        appendW14Log('wifi-ap-log', '<span class="sim-tag-warn">COLLIDE</span> Sinyal A &amp; C bertabrakan serempak di antena AP!');
+                    },
+                    () => {
+                        apSt.textContent = 'CRC ERROR';
+                        appendW14Log('wifi-ap-log', '<span class="sim-tag-warn">RUSAK</span> Checksum CRC gagal! AP TIDAK membalas <code>ACK</code>.');
+                    },
+                    () => {
+                        txSt.textContent = 'BACKOFF x2';
+                        appendW14Log('wifi-tx-log', '<span class="sim-tag-warn">TIMEOUT</span> A &amp; C gandakan <strong>Backoff Window</strong> (CW &times; 2)!');
+                    }
+                ], 720);
+            }
+        }
+
+        function resetWifiSim() {
+            clearW14Timers('wifi');
+            clearW14Highlight('wifi-tx-log');
+            clearW14Highlight('wifi-ap-log');
+            const txLog = document.getElementById('wifi-tx-log');
+            const apLog = document.getElementById('wifi-ap-log');
+            if (txLog) txLog.innerHTML = 'Aktifkan/matikan <strong>RTS / CTS</strong>, lalu klik <strong>Kirim Data (A &amp; C)</strong> untuk jalankan urutan frame otomatis...';
+            if (apLog) apLog.innerHTML = 'Access Point memantau kanal 6 (2.437 GHz). Menunggu transmisi frame 802.11...';
+            const txSt = document.getElementById('wifi-tx-status');
+            const apSt = document.getElementById('wifi-ap-status');
+            if (txSt) { txSt.className = 'sim-tag-req'; txSt.textContent = 'IDLE'; }
+            if (apSt) { apSt.className = 'sim-tag-res'; apSt.textContent = 'LISTENING'; }
+        }
+
+        function runMipSim() {
+            const m = document.getElementById('mip-mode');
+            const mode = m ? m.value : 'indirect';
+            const haLog = document.getElementById('mip-ha-log');
+            const faLog = document.getElementById('mip-fa-log');
+            const haSt = document.getElementById('mip-ha-status');
+            const faSt = document.getElementById('mip-fa-status');
+            if (!haLog || !faLog) return;
+
+            haLog.innerHTML = '';
+            faLog.innerHTML = '';
+
+            if (mode === 'indirect') {
+                scheduleW14Steps('mip', [
+                    () => {
+                        haSt.className = 'sim-tag-req'; haSt.textContent = 'STEP 1: HOME PKT';
+                        faSt.className = 'sim-tag-req'; faSt.textContent = 'ROAMING';
+                        appendW14Log('mip-ha-log', '<span class="sim-tag-req">CORRESP</span> Kirim paket ke Home IP: <code>128.119.40.186</code>');
+                    },
+                    () => {
+                        haSt.className = 'sim-tag-dns'; haSt.textContent = 'STEP 2: INTERCEPT';
+                        appendW14Log('mip-ha-log', '<span class="sim-tag-dns">HOME AGT</span> Cegat paket &rarr; Lookup CoA: <code>79.129.13.2</code>');
+                    },
+                    () => {
+                        haSt.textContent = 'ENCAPSULATING';
+                        appendW14Log('mip-ha-log', '<span class="sim-tag-warn">TUNNEL</span> Bungkus <code>IP-in-IP</code> menuju Foreign Agent!');
+                    },
+                    () => {
+                        faSt.className = 'sim-tag-res'; faSt.textContent = 'DECAPSULATING';
+                        appendW14Log('mip-fa-log', '<span class="sim-tag-res">FOREIGN</span> Buka kapsul tunnel &rarr; Serahkan ke Mobile Node!');
+                    },
+                    () => {
+                        faSt.className = 'sim-tag-cache'; faSt.textContent = 'DELIVERED';
+                        haSt.className = 'sim-tag-cache'; haSt.textContent = 'TRIANGLE PATH';
+                        appendW14Log('mip-fa-log', '<span class="sim-tag-cache">REPLY</span> MN balas langsung ke Correspondent (Triangle Routing).');
+                    },
+                    () => {
+                        appendW14Log('mip-ha-log', '<span class="sim-tag-cache">HASIL</span> Transparan bagi TCP Correspondent, namun RTT memutar (+45 ms).');
+                    }
+                ], 700);
+            } else {
+                scheduleW14Steps('mip', [
+                    () => {
+                        haSt.className = 'sim-tag-dns'; haSt.textContent = 'STEP 1: QUERY';
+                        faSt.className = 'sim-tag-req'; faSt.textContent = 'WAITING';
+                        appendW14Log('mip-ha-log', '<span class="sim-tag-dns">AGENT</span> Correspondent Agent tanya HA/HSS: <em>"CoA Mobile?"</em>');
+                    },
+                    () => {
+                        haSt.className = 'sim-tag-cache'; haSt.textContent = 'CoA RESOLVED';
+                        appendW14Log('mip-ha-log', '<span class="sim-tag-res">HSS REPLY</span> Lokasi CoA terkini: <code>79.129.13.2</code>.');
+                    },
+                    () => {
+                        faSt.className = 'sim-tag-cache'; faSt.textContent = 'DIRECT DELIVERY';
+                        appendW14Log('mip-fa-log', '<span class="sim-tag-res">DIRECT</span> Paket ditembak LANGSUNG ke <code>79.129.13.2</code> (bebas HA)!');
+                    },
+                    () => {
+                        appendW14Log('mip-ha-log', '<span class="sim-tag-cache">OPTIMAL</span> Bebas Triangle Routing (RTT ~18 ms), namun butuh tracking.');
+                    }
+                ], 720);
+            }
+        }
+
+        function resetMipSim() {
+            clearW14Timers('mip');
+            clearW14Highlight('mip-ha-log');
+            clearW14Highlight('mip-fa-log');
+            const haLog = document.getElementById('mip-ha-log');
+            const faLog = document.getElementById('mip-fa-log');
+            if (haLog) haLog.innerHTML = 'Mobile Node roaming di Visited Network (CoA: <code>79.129.13.2</code>). Pilih mode routing lalu klik Kirim...';
+            if (faLog) faLog.innerHTML = 'Tabel ikatan terdaftar di Home Agent: <code>128.119.40.186 &harr; 79.129.13.2</code>';
+            const haSt = document.getElementById('mip-ha-status');
+            const faSt = document.getElementById('mip-fa-status');
+            if (haSt) { haSt.className = 'sim-tag-dns'; haSt.textContent = 'READY'; }
+            if (faSt) { faSt.className = 'sim-tag-req'; faSt.textContent = 'STANDBY'; }
+        }
+    </script>
+
 </body>
 
 </html>

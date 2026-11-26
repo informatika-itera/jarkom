@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">DEEP PACKET INSPECTION (DPI), ETIKA & REGULASI UU PDP NO. 27/2022</text>
+
+    <!-- Left: Inspection Spectrum -->
+    <rect x="40" y="80" width="420" height="420" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="2" filter="url(#sh)"/>
+    <rect x="55" y="95" width="390" height="30" rx="6" fill="#334155"/>
+    <text x="250" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">SPEKTRUM INSPEKSI PAKET: STATIS VS DEEP</text>
+
+    <rect x="65" y="145" width="370" height="95" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="80" y="170" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Shallow Packet Inspection (Firewall Biasa):</text>
+    <text x="80" y="190" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Hanya memeriksa Header: IP Asal, IP Tujuan, Port TCP/UDP</text>
+    <text x="80" y="208" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Privasi Pengguna Terjaga (Isi surat tidak dibaca)</text>
+    <text x="80" y="226" font-family="system-ui, sans-serif" font-size="10" fill="#16a34a">&bull; Etis untuk routing dasar lalu lintas internet</text>
+
+    <rect x="65" y="255" width="370" height="110" rx="6" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="80" y="280" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#b91c1c">Deep Packet Inspection (DPI):</text>
+    <text x="80" y="300" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Membedah isi PAYLOAD aplikasi data (Chat, Email, URL)</text>
+    <text x="80" y="318" font-family="system-ui, sans-serif" font-size="10" fill="#dc2626">&bull; Mampu merekonstruksi dokumen dan histori unduhan</text>
+    <text x="80" y="336" font-family="system-ui, sans-serif" font-size="10" fill="#b91c1c">&bull; Bahaya Pelanggaran Hak Asasi &amp; Privasi Pegawai!</text>
+    <text x="80" y="352" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Sering disalahgunakan untuk surveilans massal ilegal</text>
+
+    <rect x="65" y="380" width="370" height="100" rx="6" fill="#ffffff" stroke="#94a3b8"/>
+    <text x="80" y="405" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Kapan DPI Sah Secara Etika Industri?</text>
+    <text x="80" y="425" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">&bull; Pembersihan signature malware / ransomware di perimeter</text>
+    <text x="80" y="443" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">&bull; Pencegahan kebocoran data rahasia korporat (DLP Policy)</text>
+    <text x="80" y="461" font-family="system-ui, sans-serif" font-size="10" fill="#dc2626">&bull; WAJIB ada persetujuan tertulis transparan kepada staf!</text>
+
+    <!-- Right: UU PDP Indonesia -->
+    <rect x="500" y="80" width="420" height="420" rx="10" fill="#ecfdf5" stroke="#16a34a" stroke-width="2" filter="url(#sh)"/>
+    <rect x="515" y="95" width="390" height="30" rx="6" fill="#15803d"/>
+    <text x="710" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">REGULASI UU PDP INDONESIA (UU NO. 27/2022)</text>
+
+    <text x="530" y="150" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#166534">Tanggung Jawab Hukum Pengendali Jaringan:</text>
+
+    <rect x="525" y="165" width="370" height="85" rx="6" fill="#ffffff" stroke="#86efac"/>
+    <text x="540" y="190" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#14532d">Prinsip Keamanan Pemrosesan (Pasal 35):</text>
+    <text x="540" y="210" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Pengendali data pribadi wajib melindungi data dari</text>
+    <text x="540" y="228" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">kebocoran lewat enkripsi yang kuat dan audit berkala.</text>
+
+    <rect x="525" y="260" width="370" height="85" rx="6" fill="#ffffff" stroke="#86efac"/>
+    <text x="540" y="285" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#14532d">Pemberitahuan Insiden 3 x 24 Jam (Pasal 46):</text>
+    <text x="540" y="305" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Jika jaringan kebobolan peretas, admin wajib melaporkan</text>
+    <text x="540" y="323" font-family="system-ui, sans-serif" font-size="10" fill="#dc2626">secara resmi ke publik dan lembaga otoritas negara.</text>
+
+    <rect x="525" y="355" width="370" height="120" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+    <text x="540" y="380" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#991b1b">Sanksi Hukum Kelalaian Admin Jaringan:</text>
+    <text x="540" y="405" font-family="system-ui, sans-serif" font-size="10" fill="#7f1d1d">&bull; Denda Administratif hingga 2% dari Pendapatan Tahunan!</text>
+    <text x="540" y="425" font-family="system-ui, sans-serif" font-size="10" fill="#7f1d1d">&bull; Pidana Penjara hingga 5 - 6 Tahun untuk pembocoran</text>
+    <text x="540" y="445" font-family="system-ui, sans-serif" font-size="10" fill="#7f1d1d">  atau penjualan data pribadi secara sengaja!</text>
+    <text x="540" y="465" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#b91c1c">&bull; Insinyur Jaringan Memegang Tanggung Jawab Moral &amp; Pidana.</text>
+</svg>

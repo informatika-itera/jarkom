@@ -666,6 +666,79 @@
             align-items: center;
             gap: 5px;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
     </style>
 </head>
 
@@ -698,34 +771,68 @@
             </section>
 
             <!-- Outline -->
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-small">
-                        <p style="font-weight:700; color:#1565c0;">Bagian 1: Konsep Transport &amp; UDP</p>
-                        <ul>
-                            <li>1. Layanan Lapisan Transport</li>
-                            <li>2. Multiplexing &amp; Demultiplexing</li>
-                            <li>3. User Datagram Protocol (UDP)</li>
-                            <li>4. Prinsip Reliable Data Transfer (RDT)</li>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 3px 0;">
+                            <i class="bi bi-arrow-down-up"></i> 1. Layanan Transport &amp; 2. Mux / Demux
+                        </p>
+                        <ul style="margin-bottom:6px;">
+                            <li>Komunikasi Proses-ke-Proses &amp; Demultiplexing Socket UDP vs TCP</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#e65100; margin:0 0 3px 0;">
+                            <i class="bi bi-lightning-fill"></i> 3. User Datagram Protocol (UDP)
+                        </p>
+                        <ul style="margin-bottom:6px;">
+                            <li>Karakteristik <em>Connectionless</em>, Kegunaan Real-Time, &amp; UDP Checksum</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 3px 0;">
+                            <i class="bi bi-shield-check"></i> 4. Prinsip Reliable Data Transfer (RDT)
+                        </p>
+                        <ul style="margin-bottom:6px;">
+                            <li>RTT, Timeout (RTO) vs Unreachable, Stop-and-Wait, &amp; Pipelining (GBN/SR)</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 3px 0;">
+                            <i class="bi bi-diagram-3-fill"></i> 5. TCP &amp; 6. Manajemen Koneksi
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Struktur Segmen, Fast Retransmit, 3-Way Handshake, &amp; 4-Way Teardown</li>
                         </ul>
                     </div>
-                    <div class="card text-left text-small">
-                        <p style="font-weight:700; color:#e65100;">Bagian 2: TCP &amp; Protokol Modern</p>
-                        <ul>
-                            <li>5. Transmission Control Protocol (TCP)</li>
-                            <li>6. Manajemen Koneksi TCP</li>
-                            <li>7. Flow Control (Kendali Aliran)</li>
-                            <li>8. TCP Congestion Control</li>
-                            <li>9. Evolusi Transport Layer (QUIC)</li>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 3px 0;">
+                            <i class="bi bi-sliders"></i> 7. Flow Control &amp; 8. Congestion Control
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li><em>Receive Window</em> (<code>rwnd</code>) vs Kemacetan Jaringan (<code>cwnd</code>)</li>
+                            <li>Algoritma AIMD, <em>Slow Start</em>, <em>Congestion Avoidance</em>, &amp; Sawtooth TCP</li>
                         </ul>
+
+                        <p style="font-weight:700; color:#0f766e; margin:0 0 3px 0;">
+                            <i class="bi bi-rocket-takeoff-fill"></i> 9. Evolusi Transport (QUIC) &amp; Evaluasi
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Protokol QUIC (HTTP/3 over UDP), Rangkuman, &amp; Tugas Individu</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu membandingkan protokol UDP vs TCP, menelusuri mekanisme RDT dan 3-Way Handshake, serta menganalisis pengendalian aliran (Flow) dan kemacetan (Congestion).
+                        </div>
                     </div>
                 </div>
+                <aside class="notes">Outline Pertemuan 5 menyusun 9 bagian Lapisan Transport dari dasar multiplexing socket dan UDP, evolusi keandalan RDT ke TCP, kendali aliran/kemacetan, hingga protokol modern QUIC.</aside>
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 1: LAYANAN TRANSPORT ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Layanan Lapisan Transport">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Layanan Lapisan Transport</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Komunikasi Logis Antar-Proses Aplikasi (End-to-End) di Atas Layanan Network Layer</p>
+                <aside class="notes">Jelaskan peran Transport Layer sebagai jembatan komunikasi antar-aplikasi di host ujung yang berbeda.</aside>
             </section>
 
             <section>
@@ -829,8 +936,11 @@
 
 
             <!-- ━━━━━━━━━━━━━━ SECTION 2: MUX & DEMUX ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 2: Multiplexing &amp; Demultiplexing">
+                <div class="section-part-label">Bagian 2</div>
                 <h2>2. Multiplexing &amp; Demultiplexing</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Menggabungkan dan Memilah Segmen Berdasarkan Nomor Port pada Socket UDP vs TCP</p>
+                <aside class="notes">Tunjukkan bagaimana satu host menjalankan banyak aplikasi sekaligus dengan membedakan nomor port.</aside>
             </section>
 
             <section>
@@ -920,8 +1030,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 3: UDP ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 3: User Datagram Protocol (UDP)">
+                <div class="section-part-label">Bagian 3</div>
                 <h2>3. User Datagram Protocol (UDP)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Layanan Ringan Connectionless Tanpa Handshake, Kegunaan Real-Time, dan Checksum</p>
+                <aside class="notes">Bahas mengapa banyak aplikasi modern (DNS, VoIP, Gaming) tetap memilih UDP yang sederhana dan cepat.</aside>
             </section>
 
             <section>
@@ -1029,8 +1142,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 4: RDT ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4: Prinsip Reliable Data Transfer">
+                <div class="section-part-label">Bagian 4</div>
                 <h2>4. Prinsip Reliable Data Transfer (RDT)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Membangun Pengiriman Andal di Atas Kanal Tidak Andal: ACK, Timer RTT/RTO, dan Pipelining</p>
+                <aside class="notes">Bangun pemahaman dasar bagaimana ACK, retransmission timer, dan pipelining menjamin data utuh.</aside>
             </section>
 
             <section>
@@ -1268,8 +1384,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 5: TCP ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 5: Transmission Control Protocol (TCP)">
+                <div class="section-part-label">Bagian 5</div>
                 <h2>5. Transmission Control Protocol (TCP)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Anatomi Segmen TCP, Sequence &amp; ACK Number, Estimasi RTT, dan Fast Retransmit</p>
+                <aside class="notes">Bedah struktur header TCP yang membawa mekanisme keandalan dan penomoran aliran byte.</aside>
             </section>
 
             <section>
@@ -1360,8 +1479,11 @@
 
 
             <!-- ━━━━━━━━━━━━━━ TCP HANDSHAKE & TEARDOWN ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 6: Manajemen Koneksi TCP">
+                <div class="section-part-label">Bagian 6</div>
                 <h2>6. Manajemen Koneksi TCP</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Pembentukan Koneksi via 3-Way Handshake (SYN/SYN-ACK/ACK) &amp; 4-Way Teardown</p>
+                <aside class="notes">Peragakan siklus pembukaan dan penutupan sesi TCP agar tidak terjadi sesi setengah terbuka.</aside>
             </section>
 
             <section>
@@ -1456,8 +1578,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ FLOW CONTROL ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 7: Flow Control">
+                <div class="section-part-label">Bagian 7</div>
                 <h2>7. Flow Control (Kendali Aliran)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Menjaga Pengirim Tidak Membanjiri Buffer Penerima Menggunakan Receive Window (rwnd)</p>
+                <aside class="notes">Bedakan Flow Control (melindungi penerima) dengan Congestion Control yang akan dibahas berikutnya.</aside>
             </section>
 
             <section>
@@ -1508,8 +1633,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 6: CONGESTION CONTROL ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 8: TCP Congestion Control">
+                <div class="section-part-label">Bagian 8</div>
                 <h2>8. TCP Congestion Control</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Mekanisme AIMD, Pola Sawtooth, Fase Slow Start, Congestion Avoidance, dan Fairness</p>
+                <aside class="notes">Jelaskan bagaimana TCP mendeteksi kemacetan jaringan secara implisit dan menyesuaikan cwnd.</aside>
             </section>
 
             <section>
@@ -1788,8 +1916,11 @@
 
 
             <!-- ━━━━━━━━━━━━━━ SECTION 7: QUIC ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 9: Evolusi Transport Layer (QUIC)">
+                <div class="section-part-label">Bagian 9</div>
                 <h2>9. Evolusi Transport Layer (QUIC)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Protokol Modern Berbasis UDP untuk HTTP/3: 0-RTT Handshake &amp; Bebas Head-of-Line Blocking</p>
+                <aside class="notes">Tutup materi dengan mengenalkan QUIC sebagai fondasi transport web modern HTTP/3.</aside>
             </section>
 
             <section>

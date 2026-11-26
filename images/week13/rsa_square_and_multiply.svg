@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/>
+        </marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/>
+        </marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="44" rx="10" fill="#0f172a"/>
+    <text x="480" y="44" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">DEKRIPSI RSA (17^29 mod 35) TANPA OVERFLOW: SQUARE-AND-MULTIPLY</text>
+
+    <!-- LEFT COLUMN: STEP 1 REPEATED SQUARING -->
+    <g transform="translate(24, 76)">
+        <rect width="430" height="378" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.8" filter="url(#sh)"/>
+        <rect x="16" y="12" width="398" height="28" rx="7" fill="#1d4ed8"/>
+        <text x="215" y="30" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#ffffff" text-anchor="middle">TAHAP 1: Tabel Kuadrat Berulang (Reduksi mod 35)</text>
+
+        <rect x="20" y="54" width="390" height="46" rx="7" fill="#ffffff" stroke="#16a34a" stroke-width="1.6"/>
+        <text x="32" y="75" font-family="monospace" font-size="11.5" font-weight="800" fill="#14532d">17^1  mod 35 = 17</text>
+        <text x="32" y="92" font-family="system-ui, sans-serif" font-size="9.8" fill="#166534">Nilai dasar (bit ke-0 dari 29 = 16+8+4+1)</text>
+        <rect x="342" y="65" width="58" height="24" rx="5" fill="#dcfce7"/>
+        <text x="371" y="81" font-family="monospace" font-size="10.5" font-weight="800" fill="#166534" text-anchor="middle">PAKAI</text>
+
+        <line x1="215" y1="100" x2="215" y2="114" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+
+        <rect x="20" y="116" width="390" height="46" rx="7" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+        <text x="32" y="137" font-family="monospace" font-size="11.5" font-weight="800" fill="#475569">17^2 = 289 = 8(35) + 9 -&gt; sisa 9</text>
+        <text x="32" y="154" font-family="system-ui, sans-serif" font-size="9.8" fill="#64748b">Bantu hitung 17^4 (bit ke-1 = 0, dilewati)</text>
+        <rect x="342" y="127" width="58" height="24" rx="5" fill="#e2e8f0"/>
+        <text x="371" y="143" font-family="monospace" font-size="10.5" font-weight="700" fill="#475569" text-anchor="middle">LEWATI</text>
+
+        <line x1="215" y1="162" x2="215" y2="176" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+
+        <rect x="20" y="178" width="390" height="46" rx="7" fill="#ffffff" stroke="#16a34a" stroke-width="1.6"/>
+        <text x="32" y="199" font-family="monospace" font-size="11.5" font-weight="800" fill="#14532d">17^4 ~ 9^2 = 81 = 2(35) + 11 -&gt; 11</text>
+        <text x="32" y="216" font-family="system-ui, sans-serif" font-size="9.8" fill="#166534">Ambil hasil sebelumnya (9), kuadratkan lagi</text>
+        <rect x="342" y="189" width="58" height="24" rx="5" fill="#dcfce7"/>
+        <text x="371" y="205" font-family="monospace" font-size="10.5" font-weight="800" fill="#166534" text-anchor="middle">PAKAI</text>
+
+        <line x1="215" y1="224" x2="215" y2="238" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+
+        <rect x="20" y="240" width="390" height="46" rx="7" fill="#ffffff" stroke="#16a34a" stroke-width="1.6"/>
+        <text x="32" y="261" font-family="monospace" font-size="11.5" font-weight="800" fill="#14532d">17^8 ~ 11^2 = 121 = 3(35)+16 -&gt; 16</text>
+        <text x="32" y="278" font-family="system-ui, sans-serif" font-size="9.8" fill="#166534">Angka tetap ratusan, mudah dihitung tangan</text>
+        <rect x="342" y="251" width="58" height="24" rx="5" fill="#dcfce7"/>
+        <text x="371" y="267" font-family="monospace" font-size="10.5" font-weight="800" fill="#166534" text-anchor="middle">PAKAI</text>
+
+        <line x1="215" y1="286" x2="215" y2="300" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+
+        <rect x="20" y="302" width="390" height="58" rx="7" fill="#ffffff" stroke="#16a34a" stroke-width="1.6"/>
+        <text x="32" y="325" font-family="monospace" font-size="11.5" font-weight="800" fill="#14532d">17^16 ~ 16^2 = 256 = 7(35)+11 -&gt; 11</text>
+        <text x="32" y="344" font-family="system-ui, sans-serif" font-size="9.8" fill="#166534">Selesai! Seluruh komponen pangkat 2^k siap</text>
+        <rect x="342" y="319" width="58" height="24" rx="5" fill="#dcfce7"/>
+        <text x="371" y="335" font-family="monospace" font-size="10.5" font-weight="800" fill="#166534" text-anchor="middle">PAKAI</text>
+    </g>
+
+    <!-- RIGHT COLUMN: STEP 2 BINARY COMBINATION -->
+    <g transform="translate(474, 76)">
+        <rect width="462" height="378" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.8" filter="url(#sh)"/>
+        <rect x="16" y="12" width="430" height="28" rx="7" fill="#059669"/>
+        <text x="231" y="30" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#ffffff" text-anchor="middle">TAHAP 2: Pecah 29 = 16 + 8 + 4 + 1 (Kalikan Bertahap)</text>
+
+        <!-- Binary Box -->
+        <rect x="20" y="54" width="422" height="54" rx="8" fill="#ffffff" stroke="#34d399"/>
+        <text x="231" y="75" font-family="monospace" font-size="12.5" font-weight="800" fill="#065f46" text-anchor="middle">29 = (11101)2 = 16 + 8 + 4 + 0 + 1</text>
+        <text x="231" y="96" font-family="monospace" font-size="11.5" font-weight="700" fill="#1e40af" text-anchor="middle">17^29 = 17^16 * 17^8 * 17^4 * 17^1 (mod 35)</text>
+
+        <!-- Step A -->
+        <rect x="20" y="122" width="422" height="62" rx="8" fill="#ffffff" stroke="#6ee7b7"/>
+        <text x="34" y="143" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#14532d">Langkah A: Kalikan 17^16 dengan 17^8</text>
+        <text x="34" y="162" font-family="monospace" font-size="12" font-weight="700" fill="#0f172a">11 x 16 = 176 = 5(35) + 1  -&gt; sisa = 1 !!</text>
+        <text x="34" y="177" font-family="system-ui, sans-serif" font-size="10" fill="#059669">Kebetulan sangat manis: 17^24 mod 35 langsung menjadi 1</text>
+
+        <line x1="231" y1="184" x2="231" y2="202" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+
+        <!-- Step B -->
+        <rect x="20" y="206" width="422" height="62" rx="8" fill="#ffffff" stroke="#6ee7b7"/>
+        <text x="34" y="227" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#14532d">Langkah B: Kalikan hasil (1) dengan 17^4 dan 17^1</text>
+        <text x="34" y="246" font-family="monospace" font-size="12" font-weight="700" fill="#0f172a">1 x 11 x 17 = 187</text>
+        <text x="34" y="261" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Tinggal cari sisa 187 dibagi 35 (kelipatan 35 terdekat: 5x35=175)</text>
+
+        <line x1="231" y1="268" x2="231" y2="286" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+
+        <!-- Final Output -->
+        <rect x="20" y="290" width="422" height="72" rx="9" fill="#15803d" stroke="#166534" stroke-width="2"/>
+        <text x="231" y="317" font-family="monospace" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">187 = 5(35) + 12  ==&gt;  m = 12</text>
+        <text x="231" y="340" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fef08a" text-anchor="middle">Dekripsi Berhasil! Kembali tepat ke huruf ke-12 ('l')</text>
+    </g>
+
+    <!-- BOTTOM BANNER COMPARISON -->
+    <g transform="translate(24, 468)">
+        <rect width="912" height="52" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.6"/>
+        <text x="20" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#92400e">Tips Mengajar di Papan Tulis:</text>
+        <text x="220" y="22" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#dc2626">Cara Naif: 17^29 ~ 4,8 x 10^35 (Kalkulator Biasa ERROR!)</text>
+        <text x="20" y="41" font-family="system-ui, sans-serif" font-size="11.5" fill="#78350f">Dengan Square-and-Multiply (reduksi mod 35 setiap langkah), angka perkalian terbesar cuma 289 (cukup kalkulator HP sederhana!).</text>
+    </g>
+</svg>

@@ -531,6 +531,79 @@
             font-size: .8em;
             font-weight: 700;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
     </style>
 </head>
 
@@ -561,63 +634,64 @@
             </section>
 
             <!-- SLIDE 2: OUTLINE MATERI -->
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1565c0; font-size:.95em; margin:0 0 4px 0;">
-                            <i class="bi bi-diagram-3-fill"></i> 1. Prinsip Lapisan Aplikasi
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-diagram-3-fill"></i> 1. Prinsip &amp; Arsitektur Lapisan Aplikasi
                         </p>
-                        <ul style="margin-bottom:14px;">
+                        <ul style="margin-bottom:10px;">
                             <li>Arsitektur: <em>Client–Server</em> vs <em>Peer-to-Peer (P2P)</em></li>
                             <li>Kebutuhan Layanan &amp; Pemetaan Transpor (TCP / UDP)</li>
                         </ul>
 
-                        <p style="font-weight:700; color:#e65100; font-size:.95em; margin:0 0 4px 0;">
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
                             <i class="bi bi-globe"></i> 2. Protokol Web &amp; HTTP
                         </p>
-                        <ul style="margin-bottom:0;">
-                            <li>Sifat <em>Stateless</em> &amp; Anatomi Request/Response</li>
-                            <li>Manajemen Status (<em>Cookies</em>) &amp; <em>Web Caching</em></li>
+                        <ul style="margin-bottom:10px;">
+                            <li>Sifat <em>Stateless</em>, Anatomi Request/Response, <em>Cookies</em>, &amp; <em>Web Caching</em></li>
                             <li>Evolusi Protokol: HTTP/1.1, HTTP/2, dan HTTP/3</li>
                         </ul>
-                    </div>
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1b5e20; font-size:.95em; margin:0 0 4px 0;">
+
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
                             <i class="bi bi-folder2-open"></i> 3. FTP &amp; Ekosistem E-mail
                         </p>
-                        <ul style="margin-bottom:14px;">
-                            <li>FTP: Dual-Channel Out-of-band (Active vs PASV)</li>
-                            <li>E-mail: Pengiriman SMTP &amp; Akses POP3 / IMAP</li>
-                        </ul>
-
-                        <p style="font-weight:700; color:#6a1b9a; font-size:.95em; margin:0 0 4px 0;">
-                            <i class="bi bi-hdd-network-fill"></i> 4. Domain Name System (DNS)
-                        </p>
-                        <ul style="margin-bottom:14px;">
-                            <li>Hierarki Server &amp; Resolusi (Iterated vs Recursive)</li>
-                            <li>Resource Records &amp; Pengamanan DNSSEC</li>
-                        </ul>
-
-                        <p style="font-weight:700; color:#c2185b; font-size:.95em; margin:0 0 4px 0;">
-                            <i class="bi bi-terminal-fill"></i> 5. Eksplorasi &amp; Simulasi
-                        </p>
                         <ul style="margin-bottom:0;">
-                            <li>Investigasi CLI (<code>curl</code>, <code>dig</code>) &amp; Tugas Mandiri</li>
+                            <li>FTP: Dual-Channel Out-of-Band (Active vs PASV)</li>
+                            <li>E-mail: Pengiriman SMTP &amp; Akses POP3 / IMAP / Webmail</li>
                         </ul>
                     </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-hdd-network-fill"></i> 4. Domain Name System (DNS)
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Hierarki Server &amp; Resolusi (<em>Iterated</em> vs <em>Recursive</em>)</li>
+                            <li>Resource Records (A/AAAA/NS/MX/CNAME) &amp; Pengamanan DNSSEC</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 4px 0;">
+                            <i class="bi bi-terminal-fill"></i> 5. Eksplorasi Praktis, Simulasi &amp; Tugas
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Investigasi CLI (<code>curl</code>, <code>nslookup</code>, <code>dig</code>), Simulasi Live, &amp; Tugas Mandiri</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu menganalisis cara kerja protokol lapisan aplikasi utama (HTTP, FTP, SMTP/POP3/IMAP, DNS), mengidentifikasi kebutuhan transport TCP/UDP-nya, serta melakukan tracing lewat CLI tools.
+                        </div>
+                    </div>
                 </div>
-                <aside class="notes">Peta alur kuliah: 5 modul utama Lapisan Aplikasi — prinsip arsitektur, protokol Web
-                    HTTP, FTP & E-mail, DNS & keamanan, hingga eksplorasi praktis & tugas mandiri.</aside>
+                <aside class="notes">Peta alur kuliah: 5 modul utama Lapisan Aplikasi — prinsip arsitektur, protokol Web HTTP, FTP &amp; E-mail, DNS &amp; keamanan, hingga eksplorasi praktis &amp; tugas mandiri.</aside>
             </section>
 
             <!-- SLIDE 3: DIVIDER MODUL 1 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Prinsip Lapisan Aplikasi">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Prinsip &amp; Arsitektur Lapisan Aplikasi</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Paradigma Komputasi Terdistribusi,
-                    Kebutuhan Layanan Transpor (QoS), dan Pemetaan Port</p>
-                <aside class="notes">Bagian pertama membahas prinsip dasar pengembangan aplikasi jaringan, perbandingan
-                    paradigma Client-Server vs P2P, serta pemetaan profil QoS ke protokol transpor.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Paradigma Komputasi Terdistribusi (Client–Server vs P2P), Kebutuhan QoS, dan Pemetaan Port</p>
+                <aside class="notes">Bagian pertama membahas prinsip dasar pengembangan aplikasi jaringan, perbandingan paradigma Client-Server vs P2P, serta pemetaan profil QoS ke protokol transpor.</aside>
             </section>
 
             <!-- SLIDE 4: PARADIGMA CLIENT-SERVER VS P2P -->
@@ -822,12 +896,11 @@
             </section>
 
             <!-- SLIDE 7: DIVIDER MODUL 2 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 2: Protokol Web &amp; HTTP">
+                <div class="section-part-label">Bagian 2</div>
                 <h2>2. Protokol Web &amp; Hypertext Transfer Protocol (HTTP)</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Arsitektur Web, Sifat Stateless, Siklus
-                    RTT, Header HTTP, Cookies, Caching &amp; Evolusi HTTP/2-3</p>
-                <aside class="notes">Modul kedua membahas protokol pondasi web (HTTP), mekanisme pengalamatan URL, sifat
-                    stateless, siklus RTT, cookies, proxy cache, dan evolusi ke HTTP/2 dan HTTP/3.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Arsitektur Web, Sifat Stateless, Siklus RTT, Header HTTP, Cookies, Caching &amp; Evolusi HTTP/2–3</p>
+                <aside class="notes">Modul kedua membahas protokol pondasi web (HTTP), mekanisme pengalamatan URL, sifat stateless, siklus RTT, cookies, proxy cache, dan evolusi ke HTTP/2 dan HTTP/3.</aside>
             </section>
 
             <!-- SLIDE 8: ARSITEKTUR WEB & STATELESS -->
@@ -1210,13 +1283,11 @@
             </section>
 
             <!-- SLIDE 16: DIVIDER MODUL 3 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 3: FTP &amp; Ekosistem E-mail">
+                <div class="section-part-label">Bagian 3</div>
                 <h2>3. File Transfer Protocol (FTP) &amp; Ekosistem E-mail</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Arsitektur Dual-Channel Out-of-Band FTP,
-                    SMTP Push, dan Komparasi Protokol Akses POP3 vs IMAP</p>
-                <aside class="notes">Modul ketiga membedah protokol transfer berkas legendaris FTP dengan karakteristik
-                    dual-channel miliknya, serta arsitektur ekosistem email dari pengiriman (SMTP) hingga penarikan
-                    pesan (POP3/IMAP).</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Arsitektur Dual-Channel Out-of-Band FTP (Active vs PASV), SMTP Push, serta POP3 vs IMAP</p>
+                <aside class="notes">Modul ketiga membedah protokol transfer berkas legendaris FTP dengan karakteristik dual-channel miliknya, serta arsitektur ekosistem email dari pengiriman (SMTP) hingga penarikan pesan (POP3/IMAP).</aside>
             </section>
 
             <!-- SLIDE 17: [MATERI BARU RPS] FTP DUAL-CHANNEL -->
@@ -1507,13 +1578,11 @@
             </section>
 
             <!-- SLIDE 22: DIVIDER MODUL 4 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4: Domain Name System (DNS)">
+                <div class="section-part-label">Bagian 4</div>
                 <h2>4. Domain Name System (DNS) &amp; Keamanan Resolusi</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Arsitektur Basis Data Terdistribusi,
-                    Resolusi Iterated vs Recursive, Resource Records &amp; DNSSEC</p>
-                <aside class="notes">Modul keempat membedah sistem penamaan domain internet (DNS): alasan
-                    desentralisasi, hierarki 4 tingkat, penelusuran iterated vs recursive, struktur record, dan keamanan
-                    DNS.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Arsitektur Basis Data Terdistribusi, Resolusi Iterated vs Recursive, Resource Records &amp; DNSSEC</p>
+                <aside class="notes">Modul keempat membedah sistem penamaan domain internet (DNS): alasan desentralisasi, hierarki 4 tingkat, penelusuran iterated vs recursive, struktur record, dan keamanan DNS.</aside>
             </section>
 
             <!-- SLIDE 23: FUNGSI DNS & DESENTRALISASI -->
@@ -1768,13 +1837,11 @@
             </section>
 
             <!-- SLIDE 28: DIVIDER MODUL 5 -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 5: Eksplorasi &amp; Tugas Mandiri">
+                <div class="section-part-label">Bagian 5</div>
                 <h2>5. Eksplorasi Praktis, Simulasi &amp; Evaluasi Mandiri</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Hands-on CLI Tools, Simulasi Interaktif
-                    Lapisan Aplikasi, Matriks Komparasi Protokol &amp; Tugas Mandiri</p>
-                <aside class="notes">Bagian kelima membawa mahasiswa ke ranah aplikasi praktis: uji terminal langsung
-                    dengan cURL, nslookup, dan dig, simulasi interaktif di slide, rangkuman holistik, serta penugasan
-                    lab mandiri.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Hands-on CLI Tools (curl, nslookup, dig), Simulasi Live, Matriks Protokol &amp; Tugas Mandiri</p>
+                <aside class="notes">Bagian kelima membawa mahasiswa ke ranah aplikasi praktis: uji terminal langsung dengan cURL, nslookup, dan dig, simulasi interaktif di slide, rangkuman holistik, serta penugasan lab mandiri.</aside>
             </section>
 
             <!-- SLIDE 29: [MATERI BARU] CLI NETWORKING TOOLS -->

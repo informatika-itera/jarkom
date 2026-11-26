@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/>
+        </marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/>
+        </marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="44" rx="10" fill="#0f172a"/>
+    <text x="480" y="44" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">KRIPTOGRAFI SIMETRIS vs ASIMETRIS &amp; ARSITEKTUR HIBRID</text>
+
+    <!-- TOP: SYMMETRIC CRYPTOGRAPHY -->
+    <g transform="translate(24, 76)">
+        <rect width="912" height="206" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.8" filter="url(#sh)"/>
+        <rect x="16" y="12" width="320" height="26" rx="13" fill="#16a34a"/>
+        <text x="176" y="29" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">1. KRIPTOGRAFI SIMETRIS (AES-128 / AES-256)</text>
+        <text x="892" y="29" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#166534" text-anchor="end">Sangat Cepat (100–1000x RSA) • 1 Kunci Bersama</text>
+
+        <!-- Alice Plaintext -->
+        <rect x="24" y="54" width="142" height="72" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="95" y="76" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#14532d" text-anchor="middle">Alice (Pengirim)</text>
+        <text x="95" y="96" font-family="monospace" font-size="11.5" fill="#334155" text-anchor="middle">Plaintext: m</text>
+        <text x="95" y="114" font-family="system-ui, sans-serif" font-size="10" fill="#16a34a" text-anchor="middle">Pegang kunci Ks</text>
+
+        <line x1="166" y1="90" x2="214" y2="90" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+
+        <!-- Encrypt Box -->
+        <rect x="220" y="50" width="150" height="80" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+        <text x="295" y="74" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#166534" text-anchor="middle">Algoritma Enkripsi</text>
+        <text x="295" y="95" font-family="monospace" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">c = Ks(m)</text>
+        <text x="295" y="115" font-family="system-ui, sans-serif" font-size="10.5" fill="#15803d" text-anchor="middle">Kunci Rahasia Ks</text>
+
+        <line x1="370" y1="90" x2="414" y2="90" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrR)"/>
+
+        <!-- Unsafe Channel / Trudy -->
+        <rect x="420" y="54" width="136" height="72" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.8" stroke-dasharray="5,3"/>
+        <text x="488" y="76" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#991b1b" text-anchor="middle">Kanal Publik</text>
+        <text x="488" y="95" font-family="monospace" font-size="11.5" font-weight="700" fill="#b91c1c" text-anchor="middle">Ciphertext: c</text>
+        <text x="488" y="114" font-family="system-ui, sans-serif" font-size="9.5" fill="#dc2626" text-anchor="middle">Trudy hanya lihat bit acak</text>
+
+        <line x1="556" y1="90" x2="600" y2="90" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+
+        <!-- Decrypt Box -->
+        <rect x="606" y="50" width="150" height="80" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+        <text x="681" y="74" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#166534" text-anchor="middle">Algoritma Dekripsi</text>
+        <text x="681" y="95" font-family="monospace" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">m = Ks(c)</text>
+        <text x="681" y="115" font-family="system-ui, sans-serif" font-size="10.5" fill="#15803d" text-anchor="middle">Kunci Sama: Ks</text>
+
+        <line x1="756" y1="90" x2="788" y2="90" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+
+        <!-- Bob Plaintext -->
+        <rect x="794" y="54" width="102" height="72" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="845" y="78" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#14532d" text-anchor="middle">Bob</text>
+        <text x="845" y="97" font-family="monospace" font-size="11.5" fill="#334155" text-anchor="middle">Pesan: m</text>
+        <text x="845" y="114" font-family="system-ui, sans-serif" font-size="10" fill="#16a34a" text-anchor="middle">Terbaca utuh</text>
+
+        <!-- Key Distribution Dilemma Banner -->
+        <rect x="24" y="144" width="872" height="46" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="40" y="164" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#92400e">Dilema Distribusi Kunci (Key Distribution Problem):</text>
+        <text x="40" y="181" font-family="system-ui, sans-serif" font-size="11" fill="#78350f">Bagaimana Alice dan Bob menyepakati kunci rahasia Ks lewat Internet terbuka tanpa pernah bertemu langsung sebelumnya?</text>
+    </g>
+
+    <!-- BOTTOM: ASYMMETRIC & HYBRID SESSION KEY -->
+    <g transform="translate(24, 296)">
+        <rect width="912" height="224" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.8" filter="url(#sh)"/>
+        <rect x="16" y="12" width="380" height="26" rx="13" fill="#2563eb"/>
+        <text x="206" y="29" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">2. ASIMETRIS (RSA / ECDHE) + HIBRID SESSION KEY</text>
+        <text x="892" y="29" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#1e40af" text-anchor="end">Pasangan Kunci Matematis (K+ Publik, K- Privat)</text>
+
+        <!-- Asymmetric Flow (Left) -->
+        <rect x="24" y="50" width="490" height="156" rx="10" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+        <text x="269" y="72" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1e3a8a" text-anchor="middle">Mekanisme Asimetris: Enkripsi Publik, Dekripsi Privat</text>
+
+        <rect x="38" y="88" width="130" height="62" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+        <text x="103" y="109" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#1e40af" text-anchor="middle">Alice</text>
+        <text x="103" y="126" font-family="monospace" font-size="11" fill="#0f172a" text-anchor="middle">c = Kb+(m)</text>
+        <text x="103" y="142" font-family="system-ui, sans-serif" font-size="9.5" fill="#1d4ed8" text-anchor="middle">Pakai Kunci Publik Bob</text>
+
+        <line x1="168" y1="119" x2="212" y2="119" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrB)"/>
+
+        <rect x="218" y="88" width="110" height="62" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+        <text x="273" y="110" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#334155" text-anchor="middle">Kunci Publik</text>
+        <text x="273" y="128" font-family="monospace" font-size="12" font-weight="700" fill="#2563eb" text-anchor="middle">Kb+ (Bebas)</text>
+        <text x="273" y="143" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b" text-anchor="middle">Tersebar di direktori</text>
+
+        <line x1="328" y1="119" x2="368" y2="119" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrP)"/>
+
+        <rect x="374" y="88" width="126" height="62" rx="8" fill="#f3e8ff" stroke="#7c3aed"/>
+        <text x="437" y="109" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#6b21a8" text-anchor="middle">Bob</text>
+        <text x="437" y="126" font-family="monospace" font-size="11" fill="#0f172a" text-anchor="middle">m = Kb-(c)</text>
+        <text x="437" y="142" font-family="system-ui, sans-serif" font-size="9.5" fill="#7c3aed" text-anchor="middle">Hanya Bob pegang Kb-</text>
+
+        <text x="269" y="182" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#475569" text-anchor="middle">Syarat: Kb-(Kb+(m)) = m  &amp;  Menurunkan Kb- dari Kb+ mustahil secara komputasi</text>
+
+        <!-- Hybrid Best Practice (Right) -->
+        <rect x="530" y="50" width="366" height="156" rx="10" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
+        <text x="713" y="72" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#6b21a8" text-anchor="middle">Praktik Nyata (TLS/HTTPS): Enkripsi Hibrid</text>
+
+        <rect x="546" y="88" width="334" height="44" rx="7" fill="#ffffff" stroke="#c084fc"/>
+        <text x="558" y="106" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#6b21a8">Tahap 1 — Asimetris (Pertukaran Session Key):</text>
+        <text x="558" y="123" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">Tukar kunci sesi acak Ks via RSA / ECDHE saat Handshake.</text>
+
+        <rect x="546" y="142" width="334" height="48" rx="7" fill="#dcfce7" stroke="#22c55e"/>
+        <text x="558" y="161" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#166534">Tahap 2 — Simetris (Transfer Data Massif):</text>
+        <text x="558" y="178" font-family="system-ui, sans-serif" font-size="10.5" fill="#14532d">Seluruh payload data dienkripsi cepat memakai AES(Ks).</text>
+    </g>
+</svg>

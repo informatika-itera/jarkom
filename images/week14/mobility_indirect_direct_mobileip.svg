@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/>
+        </marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/>
+        </marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="44" rx="10" fill="#0f172a"/>
+    <text x="480" y="44" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">ROUTING MOBILITAS &amp; MOBILE IP: INDIRECT vs DIRECT ROUTING</text>
+
+    <!-- LEFT: Indirect Routing (Mobile IP Tunneling) -->
+    <g transform="translate(24, 76)">
+        <rect width="444" height="440" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="222" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#1e40af" text-anchor="middle">1. Indirect Routing (Mobile IP Tunneling)</text>
+        <text x="222" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#1d4ed8" text-anchor="middle">Paket selalu singgah ke Home Agent → Triangle Routing</text>
+
+        <!-- Home Network -->
+        <rect x="24" y="70" width="165" height="128" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+        <text x="106" y="92" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#1e40af" text-anchor="middle">Home Network</text>
+        <rect x="40" y="106" width="133" height="44" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+        <text x="106" y="125" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#1e3a8a" text-anchor="middle">Home Agent (HA)</text>
+        <text x="106" y="141" font-family="monospace" font-size="9.5" fill="#1d4ed8" text-anchor="middle">Home IP: 128.119.40.186</text>
+        <text x="106" y="176" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Mencegat &amp; membungkus paket</text>
+
+        <!-- Visited Network -->
+        <rect x="255" y="70" width="165" height="128" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+        <text x="337" y="92" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#166534" text-anchor="middle">Visited Network</text>
+        <rect x="271" y="106" width="133" height="44" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+        <text x="337" y="125" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#14532d" text-anchor="middle">Foreign Agent (FA)</text>
+        <text x="337" y="141" font-family="monospace" font-size="9.5" fill="#15803d" text-anchor="middle">CoA: 79.129.13.2</text>
+        <text x="337" y="176" font-family="system-ui, sans-serif" font-size="10" fill="#16a34a" font-weight="700" text-anchor="middle">📱 Mobile Node (Roaming)</text>
+
+        <!-- Correspondent (Bottom) -->
+        <rect x="132" y="290" width="180" height="58" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+        <text x="222" y="314" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#0f172a" text-anchor="middle">💻 Correspondent</text>
+        <text x="222" y="332" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Kirim ke Permanent Home IP</text>
+
+        <!-- Step 1: Corr -> HA -->
+        <path d="M 162 290 L 116 202" stroke="#2563eb" stroke-width="3" marker-end="url(#arrB)"/>
+        <rect x="52" y="232" width="106" height="22" rx="4" fill="#2563eb"/>
+        <text x="105" y="247" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">1. Dest: Home IP</text>
+
+        <!-- Step 2: HA -> FA (Tunnel) -->
+        <path d="M 189 128 L 250 128" stroke="#dc2626" stroke-width="3.5" stroke-dasharray="5,3" marker-end="url(#arrR)"/>
+        <rect x="180" y="96" width="84" height="20" rx="4" fill="#dc2626"/>
+        <text x="222" y="110" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">2. IP Tunnel</text>
+
+        <!-- Step 3: Reply FA -> Corr (Triangle) -->
+        <path d="M 332 202 L 284 290" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="4,3" marker-end="url(#arrG)"/>
+        <rect x="278" y="232" width="128" height="22" rx="4" fill="#16a34a"/>
+        <text x="342" y="247" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">3. Balasan Langsung</text>
+
+        <rect x="20" y="366" width="404" height="58" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+        <text x="222" y="388" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#1e40af" text-anchor="middle">✓ Transparan bagi Correspondent (koneksi TCP tidak putus)</text>
+        <text x="222" y="408" font-family="system-ui, sans-serif" font-size="11" fill="#dc2626" font-weight="700" text-anchor="middle">⚠ Triangle Routing Problem: jalur memutar via Home Agent</text>
+    </g>
+
+    <!-- RIGHT: Direct Routing -->
+    <g transform="translate(492, 76)">
+        <rect width="444" height="440" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="222" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#166534" text-anchor="middle">2. Direct Routing (Optimal Path)</text>
+        <text x="222" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#15803d" text-anchor="middle">Correspondent menanyakan CoA terlebih dahulu lalu kirim langsung</text>
+
+        <!-- Home Network -->
+        <rect x="24" y="70" width="165" height="128" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+        <text x="106" y="92" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#1e40af" text-anchor="middle">Home Network</text>
+        <rect x="40" y="106" width="133" height="44" rx="6" fill="#fef3c7" stroke="#d97706"/>
+        <text x="106" y="125" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#92400e" text-anchor="middle">HSS / Home Agent</text>
+        <text x="106" y="141" font-family="system-ui, sans-serif" font-size="9.5" fill="#78350f" text-anchor="middle">Simpan Lokasi CoA Terbaru</text>
+        <text x="106" y="176" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Menjawab kueri lokasi</text>
+
+        <!-- Visited Network -->
+        <rect x="255" y="70" width="165" height="128" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+        <text x="337" y="92" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#166534" text-anchor="middle">Visited Network</text>
+        <rect x="271" y="106" width="133" height="44" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+        <text x="337" y="125" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#14532d" text-anchor="middle">Visited GW / FA</text>
+        <text x="337" y="141" font-family="monospace" font-size="9.5" fill="#15803d" text-anchor="middle">CoA: 79.129.13.2</text>
+        <text x="337" y="176" font-family="system-ui, sans-serif" font-size="10" fill="#16a34a" font-weight="700" text-anchor="middle">📱 Mobile Node (Tujuan)</text>
+
+        <!-- Correspondent -->
+        <rect x="132" y="290" width="180" height="58" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+        <text x="222" y="314" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#0f172a" text-anchor="middle">💻 Correspondent Agent</text>
+        <text x="222" y="332" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Tahu alamat Visited (CoA)</text>
+
+        <!-- Step 1 & 2: Query/Response between Corr & HSS -->
+        <path d="M 155 290 L 110 202" stroke="#d97706" stroke-width="2.5" stroke-dasharray="4,3" marker-end="url(#arrO)"/>
+        <rect x="44" y="232" width="118" height="22" rx="4" fill="#d97706"/>
+        <text x="103" y="247" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">1. Tanya Lokasi CoA</text>
+
+        <!-- Step 3: Direct data to Visited Network -->
+        <path d="M 272 290 L 325 202" stroke="#16a34a" stroke-width="3.5" marker-end="url(#arrG)"/>
+        <rect x="260" y="232" width="152" height="22" rx="4" fill="#16a34a"/>
+        <text x="336" y="247" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">2. Kirim Langsung ke CoA</text>
+
+        <rect x="20" y="366" width="404" height="58" rx="8" fill="#ffffff" stroke="#86efac"/>
+        <text x="222" y="388" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#166534" text-anchor="middle">✓ Tanpa Triangle Routing: latensi ping lebih singkat</text>
+        <text x="222" y="408" font-family="system-ui, sans-serif" font-size="10.5" fill="#b45309" font-weight="700" text-anchor="middle">⚠ Non-transparan: butuh Correspondent Agent saat roaming cepat</text>
+    </g>
+</svg>

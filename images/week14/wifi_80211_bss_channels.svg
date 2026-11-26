@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/>
+        </marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/>
+        </marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="44" rx="10" fill="#0f172a"/>
+    <text x="480" y="44" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">ARSITEKTUR IEEE 802.11 (BSS / ESS) &amp; KANAL 2.4 GHz</text>
+
+    <!-- LEFT: BSS 1, BSS 2, Switch, Internet -->
+    <g transform="translate(24, 76)">
+        <rect width="450" height="440" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="225" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#1e3a8a" text-anchor="middle">Basic Service Set (BSS) &amp; Distribution System</text>
+
+        <!-- Internet + Switch/Router -->
+        <ellipse cx="225" cy="78" rx="100" ry="28" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+        <text x="225" y="83" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">🌐 Internet / Core</text>
+        <line x1="225" y1="106" x2="225" y2="138" stroke="#334155" stroke-width="3"/>
+
+        <rect x="145" y="138" width="160" height="38" rx="8" fill="#1e40af"/>
+        <text x="225" y="162" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#ffffff" text-anchor="middle">Switch / Router (DS)</text>
+
+        <!-- Links to APs -->
+        <line x1="175" y1="176" x2="115" y2="232" stroke="#334155" stroke-width="3"/>
+        <line x1="275" y1="176" x2="335" y2="232" stroke="#334155" stroke-width="3"/>
+
+        <!-- BSS 1 Circle -->
+        <ellipse cx="115" cy="315" rx="95" ry="102" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6,4"/>
+        <text x="115" y="232" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1e40af" text-anchor="middle">BSS 1 (Sel A)</text>
+        <rect x="65" y="242" width="100" height="34" rx="6" fill="#2563eb"/>
+        <text x="115" y="263" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">📡 AP 1 (Ch 1)</text>
+        <text x="72" y="346" font-size="22" text-anchor="middle">💻</text>
+        <text x="72" y="366" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a" text-anchor="middle">H1</text>
+        <text x="158" y="346" font-size="22" text-anchor="middle">📱</text>
+        <text x="158" y="366" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a" text-anchor="middle">H2</text>
+        <line x1="100" y1="276" x2="75" y2="322" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,3"/>
+        <line x1="130" y1="276" x2="155" y2="322" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,3"/>
+
+        <!-- BSS 2 Circle -->
+        <ellipse cx="335" cy="315" rx="95" ry="102" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,4"/>
+        <text x="335" y="232" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#166534" text-anchor="middle">BSS 2 (Sel B)</text>
+        <rect x="285" y="242" width="100" height="34" rx="6" fill="#16a34a"/>
+        <text x="335" y="263" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">📡 AP 2 (Ch 6)</text>
+        <text x="292" y="346" font-size="22" text-anchor="middle">💻</text>
+        <text x="292" y="366" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#166534" text-anchor="middle">H3</text>
+        <text x="378" y="346" font-size="22" text-anchor="middle">📱</text>
+        <text x="378" y="366" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#166534" text-anchor="middle">H4</text>
+        <line x1="320" y1="276" x2="295" y2="322" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,3"/>
+        <line x1="350" y1="276" x2="375" y2="322" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,3"/>
+
+        <text x="225" y="430" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#475569" text-anchor="middle">BSS 1 + BSS 2 terhubung pada DS yang sama = Extended Service Set (ESS)</text>
+    </g>
+
+    <!-- RIGHT: 2.4 GHz Channels 1, 6, 11 -->
+    <g transform="translate(492, 76)">
+        <rect width="444" height="440" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="222" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#1e3a8a" text-anchor="middle">Spektrum Kanal Wi-Fi 2.4 GHz (Non-Overlapping)</text>
+
+        <!-- Overlapping warning section -->
+        <rect x="18" y="48" width="408" height="142" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+        <text x="222" y="70" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#991b1b" text-anchor="middle">❌ Kanal Berdekatan (Ch 1, 2, 3) → Interferensi Parah!</text>
+        <!-- Overlapping Curves -->
+        <path d="M 45 162 Q 95 85 145 162" fill="#ef4444" fill-opacity="0.18" stroke="#dc2626" stroke-width="2.5"/>
+        <path d="M 75 162 Q 125 85 175 162" fill="#f97316" fill-opacity="0.18" stroke="#ea580c" stroke-width="2.5"/>
+        <path d="M 105 162 Q 155 85 205 162" fill="#eab308" fill-opacity="0.18" stroke="#ca8a04" stroke-width="2.5"/>
+        <text x="95" y="177" font-family="monospace" font-size="11" font-weight="700" fill="#991b1b" text-anchor="middle">Ch 1</text>
+        <text x="125" y="177" font-family="monospace" font-size="11" font-weight="700" fill="#9a3412" text-anchor="middle">Ch 2</text>
+        <text x="155" y="177" font-family="monospace" font-size="11" font-weight="700" fill="#854d0e" text-anchor="middle">Ch 3</text>
+        <text x="305" y="118" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#7f1d1d" text-anchor="middle">Lebar 1 kanal = 22 MHz</text>
+        <text x="305" y="136" font-family="system-ui, sans-serif" font-size="11" fill="#7f1d1d" text-anchor="middle">Jarak antar tengah kanal hanya 5 MHz</text>
+        <text x="305" y="154" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle">→ Saling menabrak sinyal!</text>
+
+        <!-- Clean Non-overlapping Channels 1, 6, 11 -->
+        <rect x="18" y="204" width="408" height="218" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+        <text x="222" y="226" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#166534" text-anchor="middle">✅ Best Practice Admin: Hanya Gunakan Kanal 1, 6, dan 11</text>
+
+        <line x1="36" y1="350" x2="408" y2="350" stroke="#334155" stroke-width="2"/>
+        <!-- Ch 1 -->
+        <path d="M 42 350 Q 100 245 158 350" fill="#3b82f6" fill-opacity="0.22" stroke="#2563eb" stroke-width="3"/>
+        <text x="100" y="320" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1e40af" text-anchor="middle">Ch 1</text>
+        <text x="100" y="336" font-family="monospace" font-size="10" fill="#1e3a8a" text-anchor="middle">2.412 GHz</text>
+
+        <!-- Ch 6 -->
+        <path d="M 164 350 Q 222 245 280 350" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-width="3"/>
+        <text x="222" y="320" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#166534" text-anchor="middle">Ch 6</text>
+        <text x="222" y="336" font-family="monospace" font-size="10" fill="#14532d" text-anchor="middle">2.437 GHz</text>
+
+        <!-- Ch 11 -->
+        <path d="M 286 350 Q 344 245 402 350" fill="#7c3aed" fill-opacity="0.22" stroke="#7c3aed" stroke-width="3"/>
+        <text x="344" y="320" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#5b21b6" text-anchor="middle">Ch 11</text>
+        <text x="344" y="336" font-family="monospace" font-size="10" fill="#4c1d95" text-anchor="middle">2.462 GHz</text>
+
+        <!-- Frequency ticks -->
+        <text x="100" y="368" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">22 MHz</text>
+        <text x="222" y="368" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">22 MHz</text>
+        <text x="344" y="368" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">22 MHz</text>
+
+        <rect x="34" y="380" width="376" height="30" rx="6" fill="#dcfce7"/>
+        <text x="222" y="399" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#166534" text-anchor="middle">Bebas interferensi! Pita 5 GHz menyediakan 20+ kanal non-overlap</text>
+    </g>
+</svg>

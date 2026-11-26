@@ -456,6 +456,79 @@
             line-height: 1.45;
             margin: 0;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
     </style>
 </head>
 
@@ -490,29 +563,53 @@
             </section>
 
             <!-- Outline -->
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1565c0;">Bagian 1: Layanan &amp; Error Handling</p>
-                        <ul>
-                            <li>Layanan Lapisan Data Link</li>
-                            <li>Framing &amp; Struktur Frame</li>
-                            <li>Deteksi Error: Parity, Checksum, CRC</li>
-                            <li>Kontrol Aliran &amp; Koreksi Error</li>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-link-45deg"></i> 1. Layanan Data Link &amp; 2. Framing
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Peran Framing, Error Handling, Link Access, &amp; Implementasi NIC</li>
+                            <li>Anatomi Struktur Frame Ethernet (Header, Payload, FCS)</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-bug-fill"></i> 3. Teknik Deteksi &amp; Koreksi Error
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Parity Check (1D/2D), Cyclic Redundancy Check (CRC), &amp; Checksum</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-broadcast-pin"></i> 4. Multiple Access Protocols (MAC)
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Channel Partitioning (TDMA/FDMA/CDMA), Slotted ALOHA, CSMA/CD</li>
                         </ul>
                     </div>
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#e65100;">Bagian 2: MAC &amp; Jaringan LAN</p>
-                        <ul>
-                            <li>Multiple Access Protocols (ALOHA, CSMA)</li>
-                            <li>MAC Address &amp; ARP</li>
-                            <li>Ethernet &amp; Frame Ethernet</li>
-                            <li>Switch: Self-Learning &amp; Forwarding</li>
-                            <li>Switch vs Router</li>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-upc-scan"></i> 5. MAC Address &amp; Protokol ARP
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Alamat Fisik 48-Bit, Resolusi IP ke MAC (ARP), &amp; Pengiriman Antar-Subnet</li>
                         </ul>
+
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 4px 0;">
+                            <i class="bi bi-hdd-network-fill"></i> 6. Ethernet &amp; 7. Ethernet Switch
+                        </p>
+                        <ul style="margin-bottom:8px;">
+                            <li>Standar IEEE 802.3, Mekanisme <em>Self-Learning Switch</em>, &amp; Switch vs Router</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu menjelaskan layanan Layer-2, menghitung teknik deteksi error (Parity/CRC/Checksum), menganalisis protokol CSMA/CD &amp; ARP, serta cara kerja Ethernet Switch.
+                        </div>
                     </div>
                 </div>
+                <aside class="notes">Outline Pertemuan 4 merangkum 7 modul Lapisan Data Link: dimulai dari layanan framing &amp; deteksi error, protokol berbagi kanal (MAC), pemetaan MAC/ARP, hingga arsitektur Ethernet dan Switch modern.</aside>
             </section>
 
             <!-- Analogi transportasi -->
@@ -548,10 +645,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 1: LAYANAN ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Layanan Lapisan Data Link">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Layanan Lapisan Data Link</h2>
-                <aside class="notes">Data link bertanggung jawab atas pengiriman frame antar node yang terhubung
-                    langsung (satu hop). Ini berbeda dengan network layer yang mengurus ujung-ke-ujung.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Framing, Error Handling, Link Access, Flow Control, serta Implementasi pada NIC</p>
+                <aside class="notes">Data link bertanggung jawab atas pengiriman frame antar node yang terhubung langsung (satu hop). Ini berbeda dengan network layer yang mengurus ujung-ke-ujung.</aside>
             </section>
 
             <!-- Layanan 1: Framing -->
@@ -700,10 +798,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 2: FRAMING ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 2: Framing &amp; Struktur Frame">
+                <div class="section-part-label">Bagian 2</div>
                 <h2>2. Framing &amp; Struktur Frame</h2>
-                <aside class="notes">Frame adalah unit data di lapisan data link, seperti paket di lapisan network. Mari
-                    kita lihat strukturnya.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Anatomi Unit Data Layer-2 Ethernet: Preamble, MAC Header, Payload, dan FCS</p>
+                <aside class="notes">Frame adalah unit data di lapisan data link, seperti paket di lapisan network. Mari kita lihat strukturnya.</aside>
             </section>
 
             <!-- Struktur Frame Ethernet -->
@@ -804,10 +903,11 @@
                 </div>
             </section>
             <!-- ━━━━━━━━━━━━━━ SECTION 3: ERROR DETECTION ━━━━━━━━━━━━━━ -->
-            <section>
-                <h2>3. Deteksi Error</h2>
-                <aside class="notes">Ada tiga teknik utama deteksi error yang perlu dipahami: Parity Check, Internet
-                    Checksum, dan CRC.</aside>
+            <section class="section-slide" data-topic="Bagian 3: Deteksi Error">
+                <div class="section-part-label">Bagian 3</div>
+                <h2>3. Deteksi &amp; Koreksi Error</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Tiga Mekanisme Validasi Integritas Bit: Parity Check (1D/2D), CRC, dan Internet Checksum</p>
+                <aside class="notes">Ada tiga teknik utama deteksi error yang perlu dipahami: Parity Check, Internet Checksum, dan CRC.</aside>
             </section>
 
             <!-- Konsep EDC -->
@@ -1162,10 +1262,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 4: MULTIPLE ACCESS ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4: Multiple Access Protocols">
+                <div class="section-part-label">Bagian 4</div>
                 <h2>4. Multiple Access Protocols</h2>
-                <aside class="notes">Ketika banyak node berbagi satu channel, bagaimana mereka mengatur giliran? Inilah
-                    masalah multiple access.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Channel Partitioning (TDMA/FDMA/CDMA), Slotted ALOHA, CSMA/CD, &amp; Exponential Backoff</p>
+                <aside class="notes">Ketika banyak node berbagi satu channel, bagaimana mereka mengatur giliran? Inilah masalah multiple access.</aside>
             </section>
 
             <!-- Dua jenis link -->
@@ -1445,10 +1546,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 5: MAC ADDRESS & ARP ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 5: MAC Address &amp; ARP">
+                <div class="section-part-label">Bagian 5</div>
                 <h2>5. MAC Address &amp; ARP</h2>
-                <aside class="notes">Sekarang kita bahas bagaimana pengalamatan di lapisan link bekerja, dan bagaimana
-                    IP address dipetakan ke MAC address.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Pengalamatan Hardware 48-Bit, Resolusi IP ke MAC (ARP), dan Pengiriman Antar-Subnet</p>
+                <aside class="notes">Sekarang kita bahas bagaimana pengalamatan di lapisan link bekerja, dan bagaimana IP address dipetakan ke MAC address.</aside>
             </section>
 
             <!-- MAC Address -->
@@ -1580,10 +1682,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 6: ETHERNET ━━━━━━━━━━━━━━ -->
-            <section>
-                <h2>6. Ethernet</h2>
-                <aside class="notes">Ethernet adalah teknologi LAN yang dominan sejak 1970-an. Mari kita pelajari
-                    evolusi dan karakteristiknya.</aside>
+            <section class="section-slide" data-topic="Bagian 6: Ethernet">
+                <div class="section-part-label">Bagian 6</div>
+                <h2>6. Ethernet (IEEE 802.3)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Evolusi Teknologi LAN Kabel dari 10 Mbps hingga Gigabit Ethernet Modern</p>
+                <aside class="notes">Ethernet adalah teknologi LAN yang dominan sejak 1970-an. Mari kita pelajari evolusi dan karakteristiknya.</aside>
             </section>
 
             <!-- Sejarah & Dominasi -->
@@ -1690,10 +1793,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 7: SWITCH ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 7: Ethernet Switch">
+                <div class="section-part-label">Bagian 7</div>
                 <h2>7. Ethernet Switch</h2>
-                <aside class="notes">Switch adalah perangkat layer 2 yang menggantikan hub. Perbedaan utamanya: switch
-                    cerdas, hub bodoh.</aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Mekanisme Self-Learning Switch Table, Forwarding Frame, dan Perbandingan Switch vs Router</p>
+                <aside class="notes">Switch adalah perangkat layer 2 yang menggantikan hub. Perbedaan utamanya: switch cerdas, hub bodoh.</aside>
             </section>
 
             <!-- Switch vs Hub -->

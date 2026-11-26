@@ -312,6 +312,79 @@
         [data-theme="dark"] .reveal table tr:nth-child(even) td {
             background: #222 !important;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
     </style>
 </head>
 
@@ -342,43 +415,55 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SLIDE 2: OUTLINE ━━━━━━━━━━━━━━ -->
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1565c0; font-size:.85em; margin:0;">1. Konsep Dasar &amp;
-                            Arsitektur VLAN</p>
-                        <ul style="margin-bottom:8px;">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-hdd-network-fill"></i> 1. Konsep Dasar &amp; Arsitektur VLAN
+                        </p>
+                        <ul style="margin-bottom:10px;">
                             <li>Motivasi, Masalah Broadcast Domain &amp; Isolasi Trafik</li>
-                            <li>Port-Based VLANs, Keuntungan &amp; Tipe-Tipe VLAN</li>
+                            <li>Port-Based VLANs, Keuntungan &amp; Klasifikasi Tipe VLAN</li>
                         </ul>
 
-                        <p style="font-weight:700; color:#e65100; font-size:.85em; margin:0;">2. VLAN Trunking &amp;
-                            Protokol Tagging</p>
-                        <ul style="margin-bottom:8px;">
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-tags-fill"></i> 2. VLAN Trunking &amp; Protokol Tagging
+                        </p>
+                        <ul style="margin-bottom:10px;">
                             <li>Konsep Link TRUNK, Tagging ISL vs IEEE 802.1Q (Dot1Q)</li>
                             <li>Dynamic Trunking Protocol (DTP) &amp; Tabel Negosiasi</li>
                         </ul>
-                    </div>
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1b5e20; font-size:.85em; margin:0;">3. Konfigurasi Cisco IOS
-                            &amp; Troubleshooting</p>
-                        <ul style="margin-bottom:8px;">
+
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-terminal-fill"></i> 3. Konfigurasi Cisco IOS &amp; Troubleshooting
+                        </p>
+                        <ul style="margin-bottom:0;">
                             <li>Sintaks Pembuatan VLAN, Assignment &amp; Allowed Trunk</li>
                             <li>Solusi Mismatch Native VLAN, Mode &amp; Allowed List</li>
                         </ul>
-
-                        <p style="font-weight:700; color:#6a1b9a; font-size:.85em; margin:0;">4. Metode Inter-VLAN
-                            Routing</p>
-                        <ul>
-                            <li>Traditional vs Router-on-a-Stick (ROAS) vs SVI (Switch L3)</li>
-                            <li>Praktikum Mandiri Cisco Packet Tracer</li>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-shuffle"></i> 4. Metode Inter-VLAN Routing
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Traditional vs Router-on-a-Stick (ROAS) vs Switch Layer 3 (SVI)</li>
                         </ul>
+
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 4px 0;">
+                            <i class="bi bi-laptop"></i> 5. Tugas Mandiri &amp; Simulasi Praktikum
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Laboratorium Virtual Cisco Packet Tracer &amp; Validasi Routing Antar-VLAN</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu merancang segmentasi broadcast domain dengan VLAN, memahami mekanisme frame tagging 802.1Q pada link trunk, serta mengonfigurasi Inter-VLAN Routing di Cisco IOS.
+                        </div>
                     </div>
                 </div>
-                <aside class="notes">Berikut adalah peta alur pembelajaran kita hari ini: mulai dari pemahaman mengapa
-                    VLAN dibutuhkan, bagaimana frame diberi tag saat melintasi trunk, hingga cara menghubungkan subnet
-                    antar VLAN dengan routing.</aside>
+                <aside class="notes">Berikut adalah peta alur pembelajaran kita hari ini: mulai dari pemahaman mengapa VLAN dibutuhkan, bagaimana frame diberi tag saat melintasi trunk, konfigurasi &amp; troubleshooting CLI, hingga cara menghubungkan subnet antar VLAN dengan routing.</aside>
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SLIDE 3: ROADMAP ━━━━━━━━━━━━━━ -->
@@ -420,10 +505,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 1: KONSEP DASAR VLAN ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Konsep Dasar VLAN">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Konsep Dasar &amp; Arsitektur VLAN</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Broadcast Domain, Isolasi Trafik, dan
-                    Klasifikasi Tipe VLAN</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Broadcast Domain, Isolasi Trafik Switch Layer-2, dan Klasifikasi Tipe VLAN</p>
+                <aside class="notes">Bahas mengapa pembagian broadcast domain secara logis di switch meningkatkan keamanan dan efisiensi.</aside>
             </section>
 
             <!-- Slide 5 -->
@@ -984,10 +1070,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 2: TRUNKING & TAGGING ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 2: VLAN Trunking &amp; 802.1Q">
+                <div class="section-part-label">Bagian 2</div>
                 <h2>2. VLAN Trunking &amp; Protokol Tagging</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Link Trunk, Format Frame IEEE 802.1Q, ISL,
-                    dan Negosiasi Dinamis DTP</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Link Trunk Multi-VLAN, Format Frame IEEE 802.1Q (Dot1Q), ISL, dan Negosiasi DTP</p>
+                <aside class="notes">Jelaskan bagaimana header Tag 4-byte 802.1Q menandai identitas VLAN saat melintasi link antar switch.</aside>
             </section>
 
             <!-- Slide 23 -->
@@ -1182,10 +1269,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 3: KONFIGURASI & TROUBLESHOOTING ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 3: Konfigurasi &amp; Troubleshooting VLAN">
+                <div class="section-part-label">Bagian 3</div>
                 <h2>3. Konfigurasi Cisco IOS &amp; Troubleshooting</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Implementasi CLI, Allowed VLAN, dan
-                    Penanganan Berbagai Error Mismatch</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Implementasi CLI, Allowed VLAN List, dan Penanganan Berbagai Error Mismatch</p>
+                <aside class="notes">Latih mahasiswa membaca perintah CLI pembuatan VLAN hingga mendiagnosis error Native VLAN mismatch.</aside>
             </section>
 
             <!-- Slide 30 -->
@@ -1331,10 +1419,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 4: INTER-VLAN ROUTING ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4: Metode Inter-VLAN Routing">
+                <div class="section-part-label">Bagian 4</div>
                 <h2>4. Metode Inter-VLAN Routing</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Menghubungkan Antar-VLAN: Traditional,
-                    Router-on-a-Stick (ROAS), dan Switch Layer 3 (SVI)</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Menghubungkan Antar-VLAN: Traditional, Router-on-a-Stick (ROAS), dan Switch Layer 3 (SVI)</p>
+                <aside class="notes">Bandingkan keterbatasan port fisik pada metode tradisional dengan efisiensi sub-interface ROAS dan SVI.</aside>
             </section>
 
             <!-- Slide 36 -->
@@ -1504,10 +1593,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ BAGIAN 5: TUGAS MANDIRI ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 5: Tugas Praktikum VLAN">
+                <div class="section-part-label">Bagian 5</div>
                 <h2>5. Tugas Mandiri &amp; Simulasi Praktikum</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Laboratorium Virtual Cisco Packet Tracer
-                    &amp; Validasi Routing</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Laboratorium Virtual Cisco Packet Tracer &amp; Validasi Routing Antar-VLAN</p>
+                <aside class="notes">Jelaskan rubrik tugas praktikum Packet Tracer yang harus diselesaikan oleh mahasiswa.</aside>
             </section>
 
             <!-- Slide 42 -->

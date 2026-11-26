@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">KONTINUM KOMPUTASI: CLOUD VS FOG VS EDGE COMPUTING</text>
+
+    <!-- Central Pyramid -->
+    <!-- Cloud Layer Top -->
+    <polygon points="480,90 280,210 680,210" fill="#eff6ff" stroke="#2563eb" stroke-width="2" filter="url(#sh)"/>
+    <text x="480" y="145" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#1e40af" text-anchor="middle">CLOUD COMPUTING LAYER</text>
+    <text x="480" y="168" font-family="system-ui, sans-serif" font-size="11" fill="#3b82f6" text-anchor="middle">Global Data Center (AWS, Google Cloud, Azure)</text>
+    <text x="480" y="190" font-family="monospace" font-size="10" font-weight="700" fill="#1e3a8a" text-anchor="middle">Latency: 50 - 200 ms | Unlimited Big Data</text>
+
+    <!-- Fog Layer Middle -->
+    <polygon points="280,215 170,335 790,335 680,215" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" filter="url(#sh)"/>
+    <text x="480" y="260" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#15803d" text-anchor="middle">FOG COMPUTING LAYER</text>
+    <text x="480" y="283" font-family="system-ui, sans-serif" font-size="11" fill="#16a34a" text-anchor="middle">Server Kampus / ISP Edge / Base Station 5G UPF</text>
+    <text x="480" y="305" font-family="monospace" font-size="10" font-weight="700" fill="#14532d" text-anchor="middle">Latency: 10 - 40 ms | Regional Aggregation</text>
+
+    <!-- Edge Layer Bottom -->
+    <polygon points="170,340 50,470 910,470 790,340" fill="#fff7ed" stroke="#ea580c" stroke-width="2" filter="url(#sh)"/>
+    <text x="480" y="385" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#c2410c" text-anchor="middle">EDGE COMPUTING &amp; EDGE DEVICES LAYER</text>
+    <text x="480" y="410" font-family="system-ui, sans-serif" font-size="11" fill="#ea580c" text-anchor="middle">Smart Cameras, Jetson Nano, Google Coral, ESP32, PLC Industri</text>
+    <text x="480" y="433" font-family="monospace" font-size="11" font-weight="800" fill="#7c2d12" text-anchor="middle">Latency: &lt; 1 - 5 ms (Real-time On-Device AI Inference!)</text>
+
+    <!-- Metric comparison left and right -->
+    <rect x="50" y="485" width="860" height="40" rx="6" fill="#0f172a"/>
+    <text x="480" y="510" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">Edge AI mengeliminasi 95% beban bandwidth WAN: Hanya hasil deteksi/alert yang dikirim ke Cloud!</text>
+</svg>

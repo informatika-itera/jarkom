@@ -12,59 +12,259 @@
     <link rel="stylesheet" href="css/pkom-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
-        /* Kurose SVG Diagram */
-        .kurose-svg {
+        @media screen {
+            .reveal .slides section {
+                max-height: 100%;
+                overflow-y: auto;
+                padding-bottom: 20px;
+            }
+
+            .reveal img {
+                max-height: 46vh;
+                object-fit: contain;
+            }
+        }
+
+        @media print {
+            .reveal .slides section {
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            .reveal img,
+            .card {
+                page-break-inside: avoid;
+            }
+        }
+
+        .reveal .card {
+            margin-bottom: 10px;
+        }
+
+        .reveal h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .slide-img {
+            width: 100%;
+            height: auto;
+            max-height: 44vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slide-img-diagram {
+            width: 100%;
+            height: auto;
+            max-height: 360px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            display: block;
+            margin: 0 auto;
+            background: #fff;
+        }
+
+        .layout-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-3col > div {
+            min-width: 0;
+        }
+
+        .layout-text-img {
+            display: grid;
+            grid-template-columns: 52% 1fr;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .layout-text-img > * {
+            min-width: 0;
+        }
+
+        .info-box-warn {
+            border-left: 4px solid #e65100;
+            background: #fff3e0;
+            color: #7c2d12;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 8px;
+        }
+
+        .info-box-green {
+            border-left: 4px solid #1b5e20;
+            background: #e8f5e9;
+            color: #14532d;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 8px;
+        }
+
+        .tugas-box {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            border-radius: 14px;
+            padding: 20px 26px;
+            color: #fff;
+        }
+
+        .tugas-box h3 {
+            color: #fff !important;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .tugas-soal {
+            background: rgba(255, 255, 255, .13);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin: 8px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .58em;
+            line-height: 1.55;
+            margin: 0;
+            color: #e8eaf6;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: .54em;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        [data-theme="dark"] .layer-col-title {
+            color: #f1f5f9 !important;
+        }
+        .tugas-soal {
+            background: rgba(255, 255, 255, .13);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin: 8px 0;
+        }
+
+        .tugas-soal p {
+            font-size: .58em;
+            line-height: 1.55;
+            margin: 0;
+            color: #e8eaf6;
+        }
+
+        .tugas-chip {
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: .54em;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        [data-theme="dark"] .layer-col-title {
+            color: #f1f5f9 !important;
+        }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
             display: block;
             width: 100%;
-            max-width: 820px;
-            margin: 0 auto 8px auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
         }
 
-        .highlight-end-systems .end-system {
-            animation: pulse-red 1.5s infinite;
-            color: #dc3545 !important;
-            border-radius: 50%;
-            box-shadow: 0 0 15px #dc3545;
-            background: rgba(220, 53, 69, 0.2);
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
         }
 
-        .highlight-packet-switches .packet-switch {
-            animation: pulse-blue 1.5s infinite;
-            color: #0d6efd !important;
-            border-radius: 5px;
-            box-shadow: 0 0 15px #0d6efd;
-            background: rgba(13, 110, 253, 0.2);
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
         }
 
-        @keyframes pulse-red {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.3);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .95em;
         }
 
-        @keyframes pulse-blue {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.3);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
     </style>
 </head>
 
@@ -76,19 +276,19 @@
         </div>
 
         <div class="slides">
-            <!-- SECTION 0: INTRO -->
+            <!-- INTRO -->
             <section>
                 <div class="title-box">
-                    <h1>Pengantar Jaringan Komputer</h1>
+                    <h1>Pengantar Jarkom</h1>
                     <h3 class="subtitle">Pertemuan 1</h3>
                 </div>
-                <div class="text-small" style="margin-bottom: 20px;">
+                <div class="text-smaller" style="margin-bottom: 20px;">
                     <strong>Referensi:</strong><br>
-                    1. Kurose & Ross - <em>Computer Networking: A Top-Down Approach</em><br>
+                    1. Kurose &amp; Ross - <em>Computer Networking: A Top-Down Approach</em><br>
                     2. Forouzan, B. A. - <em>Data Communications and Networking</em><br>
                     3. Tanenbaum, A. S. - <em>Computer Networks</em>
                 </div>
-                <p class="text-small"><em>Dosen Pengampu:</em></p>
+                <p class="text-smaller"><em>Dosen Pengampu:</em></p>
                 <div
                     style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
                     <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
@@ -102,487 +302,206 @@
                 </aside>
             </section>
 
-            <section>
+            <!-- OUTLINE MATERI -->
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
-                <ul class="text-small" style="column-count: 2;">
-                    <li>Pengertian & Klasifikasi Jaringan</li>
-                    <li>1.1 Apa itu Internet?</li>
-                    <li>1.2 The Network Edge (Pinggiran Jaringan)</li>
-                    <li>1.3 The Network Core (Inti Jaringan)</li>
-                    <li>1.4 QoS (Delay, Loss, dan Throughput)</li>
-                    <li>1.5 Protocol Layers (OSI & TCP/IP)</li>
-                    <li>1.6 Keamanan Jaringan (Pengantar)</li>
-                    <li>1.7 Sejarah Singkat Jaringan</li>
-                    <li>Tugas / PR</li>
-                </ul>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-globe2"></i> 1. Pengantar &amp; Apa Itu Internet?
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Definisi, Manfaat, &amp; Klasifikasi Jaringan (LAN, MAN, WAN)</li>
+                            <li>Pendekatan <em>Nuts &amp; Bolts</em> vs <em>Services View</em> &amp; Arti Protokol</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-diagram-2-fill"></i> 2. The Network Edge &amp; Access Media
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>End Systems, Access Networks (HFC, DSL, FTTH, Wireless)</li>
+                            <li>Media Fisik: Guided (Tembaga, Fiber Optik) vs Unguided (Radio/Satelit)</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-hdd-network-fill"></i> 3. The Network Core &amp; Switching
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Routing vs Forwarding &amp; <em>Store-and-Forward Packet Switching</em></li>
+                            <li><em>Circuit Switching</em> (FDM/TDM) &amp; Hierarki <em>Network of Networks</em></li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-speedometer2"></i> 4. Quality of Service (QoS) &amp; Model Berlapis
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>4 Sumber Delay (Processing, Queueing, Transmission, Propagation), Loss &amp; Throughput</li>
+                            <li>Arsitektur Berlapis: Model OSI vs TCP/IP &amp; Proses Enkapsulasi</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 4px 0;">
+                            <i class="bi bi-shield-exclamation"></i> 5. Keamanan Dasar, Sejarah &amp; Evaluasi
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Ancaman Malware, DoS/DDoS, Sniffing &amp; Spoofing</li>
+                            <li>Sejarah Perkembangan Internet, Rangkuman, &amp; Tugas Individu</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu menjelaskan komponen fundamental Internet (Edge, Core, Protokol), menganalisis metrik QoS (delay, loss, throughput), serta membedakan arsitektur OSI dan TCP/IP.
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">Berikan gambaran besar peta perjalanan kuliah perdana: dari definisi Internet dan komponen pinggiran/inti jaringan, kinerja QoS, arsitektur berlapis, hingga pengantar keamanan dan sejarah Internet.</aside>
             </section>
 
-            <!-- PENGERTIAN & KLASIFIKASI JARINGAN -->
+            <!-- BAGIAN 1 -->
+            <section class="section-slide" data-topic="Bagian 1: Pengantar &amp; Apa Itu Internet?">
+                <div class="section-part-label">Bagian 1</div>
+                <h2>1. Pengantar &amp; Apa Itu Internet?</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Definisi &amp; Klasifikasi Jaringan, Pendekatan Nuts &amp; Bolts vs Services View, serta Protokol &amp; Standar</p>
+                <aside class="notes">Mulai dengan definisi jaringan komputer dan Internet, dua sudut pandang utama, serta konsep protokol komunikasi.</aside>
+            </section>
+
             <section>
-                <h2>Pengertian Jaringan Komputer</h2>
-                <div class="card text-left text-small">
-                    <p><strong>Menurut KBBI:</strong> Sekelompok komputer dan perangkat terkait yang dihubungkan dengan
-                        fasilitas komunikasi.</p>
-                    <p>Secara umum, <strong>Jaringan Komputer</strong> adalah sekumpulan komputer yang saling terhubung
-                        sehingga memungkinkan komunikasi, pertukaran data, dan pemanfaatan sumber daya secara bersama.
-                    </p>
+                <h3>Pengertian &amp; Pentingnya Jaringan Komputer</h3>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0;"><i class="bi bi-book-fill"></i> Definisi Jaringan</p>
+                        <p><strong>Menurut KBBI:</strong> Sekelompok komputer dan perangkat terkait yang dihubungkan dengan fasilitas komunikasi.</p>
+                        <p>Secara umum, <strong>Jaringan Komputer</strong> adalah sekumpulan komputer yang saling terhubung sehingga memungkinkan komunikasi, pertukaran data, dan pemanfaatan sumber daya bersama.</p>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#e65100;"><i class="bi bi-lightning-charge-fill"></i> Mengapa Penting?</p>
+                        <ul>
+                            <li>Memudahkan berbagi data dan informasi secara instan.</li>
+                            <li>Memungkinkan komunikasi global masif (Email, Video Call, Chat).</li>
+                            <li>Menghubungkan pengguna dengan pasar luas (<em>E-Commerce</em>).</li>
+                            <li>Menopang sektor industri modern lewat infrastruktur digital yang andal.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
             <section>
-                <h3>Mengapa Jaringan Komputer Penting?</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>Memudahkan berbagi data dan informasi secara instan.</li>
-                        <li>Memungkinkan komunikasi global yang masif (Email, Video Call, Chat).</li>
-                        <li>Menghubungkan pengguna dengan pasar yang luas (E-Commerce).</li>
-                        <li>Berbagai sektor industri kini sangat bergantung pada infrastruktur jaringan yang handal.
-                        </li>
-                    </ul>
+                <h3>Klasifikasi Jaringan Komputer</h3>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <h4 class="highlight-blue" style="margin-top:0;"><i class="bi bi-geo-alt-fill"></i> Berdasarkan Cakupan Area</h4>
+                        <ul>
+                            <li><strong>LAN (Local Area Network):</strong> Area kecil seperti rumah, kantor, laboratorium.</li>
+                            <li><strong>MAN (Metropolitan Area Network):</strong> Area kota atau kampus besar.</li>
+                            <li><strong>WAN (Wide Area Network):</strong> Area luas antar kota/negara (contoh: Internet).</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <h4 class="highlight-orange" style="margin-top:0;"><i class="bi bi-people-fill"></i> Berdasarkan Metode Manajemen</h4>
+                        <ul>
+                            <li><strong>Client-Server:</strong> Terdapat komputer pusat (<em>server</em>) yang melayani permintaan komputer pengguna (<em>client</em>).</li>
+                            <li><strong>Peer-to-Peer (P2P):</strong> Semua komputer berkedudukan setara dan dapat saling berbagi langsung.</li>
+                        </ul>
+                    </div>
                 </div>
-            </section>
-
-            <section>
-                <h3>Klasifikasi Jaringan</h3>
-                <div class="card text-left text-small">
-                    <h4 class="highlight-blue">Berdasarkan Cakupan Area:</h4>
-                    <ul>
-                        <li><strong>LAN (Local Area Network):</strong> Mencakup area kecil seperti rumah, kantor, lab.
-                        </li>
-                        <li><strong>MAN (Metropolitan Area Network):</strong> Mencakup area kota atau kampus besar.</li>
-                        <li><strong>WAN (Wide Area Network):</strong> Mencakup area luas, antar kota/negara (contoh:
-                            Internet).</li>
-                    </ul>
-                    <h4 class="highlight-orange">Berdasarkan Metode Manajemen:</h4>
-                    <ul>
-                        <li><strong>Client-Server:</strong> Ada komputer pusat (server) yang melayani komputer lain
-                            (client).</li>
-                        <li><strong>Peer-to-Peer:</strong> Semua komputer memiliki kedudukan yang sama.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- SECTION 1: APA ITU INTERNET -->
-            <section>
-                <h2>1.1 Apa Itu Internet?</h2>
-                <aside class="notes">Mari kita mulai dengan mendefinisikan internet.</aside>
             </section>
 
             <section>
                 <h3>Dua Pendekatan Definisi Internet</h3>
-                <!-- SVG Kurose Figure 1.1 -->
-                <!-- <svg class="kurose-svg" viewBox="0 0 820 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
-                    <rect width="820" height="240" fill="#f8f9fa" rx="12"/>
-                    
-                    <line x1="155" y1="95" x2="290" y2="110" stroke="#555" stroke-width="2.5" stroke-dasharray="6,3"/>
-                    <line x1="155" y1="170" x2="290" y2="140" stroke="#555" stroke-width="2.5" stroke-dasharray="6,3"/>
-                    <line x1="530" y1="110" x2="640" y2="100" stroke="#555" stroke-width="2.5" stroke-dasharray="6,3"/>
-                    <line x1="530" y1="140" x2="640" y2="170" stroke="#555" stroke-width="2.5" stroke-dasharray="6,3"/>
-                    <line x1="410" y1="85" x2="410" y2="55" stroke="#555" stroke-width="2.5" stroke-dasharray="6,3"/>
-                    
-                    
-                    <ellipse cx="410" cy="130" rx="125" ry="60" fill="#dbeafe" stroke="#60a5fa" stroke-width="2"/>
-                    <text x="410" y="122" text-anchor="middle" fill="#1d4ed8" font-weight="bold" font-size="13">Global ISP</text>
-                    
-                    
-                    <rect x="355" y="128" width="18" height="18" rx="3" fill="#2563eb"/>
-                    <rect x="437" y="128" width="18" height="18" rx="3" fill="#2563eb"/>
-                    <line x1="373" y1="137" x2="437" y2="137" stroke="#93c5fd" stroke-width="1.5"/>
-                    
-                    
-                    <ellipse cx="410" cy="38" rx="70" ry="25" fill="#d1fae5" stroke="#34d399" stroke-width="2"/>
-                    <text x="410" y="34" text-anchor="middle" fill="#065f46" font-size="10" font-weight="bold">Content Provider</text>
-                    <text x="410" y="46" text-anchor="middle" fill="#065f46" font-size="10">Network (e.g. Google)</text>
-                    
-                    
-                    <rect x="50" y="75" width="100" height="55" rx="8" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.5"/>
-                    <text x="100" y="97" text-anchor="middle" fill="#0369a1" font-size="10" font-weight="bold">Regional ISP</text>
-                    <rect x="72" y="102" width="14" height="14" rx="2" fill="#0284c7"/>
-                    <rect x="114" y="102" width="14" height="14" rx="2" fill="#0284c7"/>
-                    
-                    
-                    <rect x="670" y="75" width="100" height="55" rx="8" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.5"/>
-                    <text x="720" y="97" text-anchor="middle" fill="#0369a1" font-size="10" font-weight="bold">Regional ISP</text>
-                    <rect x="692" y="102" width="14" height="14" rx="2" fill="#0284c7"/>
-                    <rect x="734" y="102" width="14" height="14" rx="2" fill="#0284c7"/>
-                    
-                    
-                    <rect x="20" y="155" width="115" height="68" rx="8" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,2"/>
-                    <text x="78" y="170" text-anchor="middle" fill="#15803d" font-size="9" font-weight="bold">Home Network</text>
-                    <text x="37" y="205" font-size="18">💻</text><text x="65" y="205" font-size="18">📱</text><text x="93" y="205" font-size="14">📡</text><text x="113" y="205" font-size="15">🔌</text>
-                    
-                    
-                    <rect x="685" y="155" width="120" height="68" rx="8" fill="#faf5ff" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,2"/>
-                    <text x="745" y="170" text-anchor="middle" fill="#7e22ce" font-size="9" font-weight="bold">Enterprise Network</text>
-                    <text x="700" y="205" font-size="15">🖥️</text><text x="723" y="205" font-size="15">🖥️</text><text x="748" y="205" font-size="18">🔀</text><text x="773" y="205" font-size="15">📡</text>
-                    
-                    
-                    <rect x="50" y="155" width="95" height="68" rx="8" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="4,2"/>
-                    <text x="97" y="170" text-anchor="middle" fill="#c2410c" font-size="9" font-weight="bold">Mobile Network</text>
-                    <text x="60" y="205" font-size="18">📶</text><text x="85" y="205" font-size="18">📱</text><text x="113" y="205" font-size="18">🚗</text>
-                </svg> -->
-                <div style="display:flex; gap:15px; justify-content:center;">
-                    <div class="card text-left text-small" style="flex:1;">
-                        <div style="text-align:center; font-size:2.5rem; color:#007bff; margin-bottom:5px;"><i
-                                class="bi bi-hdd-network"></i></div>
-                        <h4 class="highlight-blue" style="text-align:center;">1. Nuts and Bolts</h4>
-                        <p style="text-align:center;">Mendefinisikan internet berdasarkan <strong>infrastruktur
-                                perangkat keras</strong> (kabel, router) dan perangkat lunaknya.</p>
+                <div class="layout-2col">
+                    <div class="card text-left text-small">
+                        <div style="text-align:center; font-size:2.4rem; color:#007bff; margin-bottom:6px;"><i class="bi bi-hdd-network"></i></div>
+                        <h4 class="highlight-blue" style="text-align:center; margin-top:0;">1. Nuts and Bolts View</h4>
+                        <p style="text-align:center;">Mendefinisikan internet berdasarkan <strong>infrastruktur perangkat keras</strong> (<em>hosts</em>, kabel, router/switch) beserta perangkat lunak pengendali jaringan.</p>
                     </div>
-                    <div class="card text-left text-small" style="flex:1;">
-                        <div style="text-align:center; font-size:2.5rem; color:#fd7e14; margin-bottom:5px;"><i
-                                class="bi bi-globe2"></i></div>
-                        <h4 class="highlight-orange" style="text-align:center;">2. Services View</h4>
-                        <p style="text-align:center;">Mendefinisikan internet sebagai infrastruktur yang melayani
-                            <strong>aplikasi terdistribusi</strong> (Web, Game, Email, dll).
-                        </p>
+                    <div class="card text-left text-small">
+                        <div style="text-align:center; font-size:2.4rem; color:#fd7e14; margin-bottom:6px;"><i class="bi bi-globe2"></i></div>
+                        <h4 class="highlight-orange" style="text-align:center; margin-top:0;">2. Services View</h4>
+                        <p style="text-align:center;">Mendefinisikan internet sebagai infrastruktur yang menyediakan layanan bagi <strong>aplikasi terdistribusi</strong> (Web, Game, Email, Streaming).</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide: Nuts and Bolts full view - GAMBAR ASLI KUROSE -->
             <section>
                 <h3>Nuts and Bolts: Gambaran Lengkap</h3>
-                <img src="img/pptx_slide3_nuts_bolts.png" alt="Kurose Figure 1.1 - Internet Nuts and Bolts View"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Ini adalah gambaran lengkap komponen Internet dari Kurose & Ross: end systems,
-                    packet switches, communication links, dan networks.</aside>
-            </section>
-
-            <!-- Slide: Fun Internet-connected devices - GAMBAR ASLI KUROSE -->
-            <section>
-                <h3>"Fun" Internet-Connected Devices</h3>
-                <img src="img/pptx_slide4_fun_devices.png" alt="Fun Internet-Connected Devices"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">End systems bukan hanya komputer — hampir semua perangkat sekarang bisa terhubung
-                    ke Internet.</aside>
-            </section>
-
-            <!-- Slide: Protocols & Internet Standards - GAMBAR ASLI KUROSE -->
-            <section>
-                <h3>Nuts and Bolts: Protokol &amp; Standar Internet</h3>
-                <img src="img/pptx_slide5_protocols.png" alt="Internet Protocols and Standards"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Protokol ada di mana-mana: HTTP, IP, TCP, WiFi, 4G, Ethernet. Standar diatur oleh
-                    IETF melalui RFC.</aside>
-            </section>
-
-            <!-- Slide: Services View - GAMBAR ASLI KUROSE -->
-            <section>
-                <h3>Services View: Internet sebagai Layanan</h3>
-                <img src="img/pptx_slide6_services.png" alt="The Internet: a Services View"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Dari sudut pandang layanan: Internet menyediakan programming interface ke aplikasi
-                    terdistribusi (Web, streaming, game, email).</aside>
-            </section>
-
-            <!-- <section class="highlight-end-systems">
-                <h3>Nuts and Bolts: End Systems (Hosts)</h3>
-                <p class="text-small" style="margin-bottom: 5px;">Berada di bagian ujung jaringan internet, mencakup
-                    berbagai perangkat komputasi masa kini:</p>
-            
-                <svg class="kurose-svg" viewBox="0 0 820 190" xmlns="http://www.w3.org/2000/svg"
-                    font-family="Arial,sans-serif">
-                    <rect width="820" height="190" fill="#fff5f5" rx="12" />
-                    <line x1="155" y1="73" x2="290" y2="85" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <line x1="155" y1="132" x2="290" y2="112" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <line x1="530" y1="85" x2="640" y2="77" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <line x1="530" y1="112" x2="640" y2="132" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <line x1="410" y1="62" x2="410" y2="42" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <ellipse cx="410" cy="102" rx="122" ry="50" fill="#dbeafe" stroke="#60a5fa" stroke-width="2" />
-                    <text x="410" y="96" text-anchor="middle" fill="#1d4ed8" font-weight="bold" font-size="12">Global
-                        ISP</text>
-                    <rect x="353" y="103" width="16" height="16" rx="3" fill="#2563eb" />
-                    <rect x="451" y="103" width="16" height="16" rx="3" fill="#2563eb" />
-                    <line x1="369" y1="111" x2="451" y2="111" stroke="#93c5fd" stroke-width="1.5" />
-                    <ellipse cx="410" cy="30" rx="64" ry="19" fill="#d1fae5" stroke="#34d399" stroke-width="1.5" />
-                    <text x="410" y="27" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Content
-                        Provider Network</text>
-                    <text x="410" y="38" text-anchor="middle" fill="#065f46" font-size="9">(e.g., Google)</text>
-                    <rect x="52" y="60" width="100" height="44" rx="7" fill="#e0f2fe" stroke="#38bdf8"
-                        stroke-width="1.5" />
-                    <text x="102" y="77" text-anchor="middle" fill="#0369a1" font-size="9" font-weight="bold">Regional
-                        ISP</text>
-                    <rect x="74" y="82" width="12" height="12" rx="2" fill="#0284c7" />
-                    <rect x="115" y="82" width="12" height="12" rx="2" fill="#0284c7" />
-                    <rect x="668" y="60" width="100" height="44" rx="7" fill="#e0f2fe" stroke="#38bdf8"
-                        stroke-width="1.5" />
-                    <text x="718" y="77" text-anchor="middle" fill="#0369a1" font-size="9" font-weight="bold">Regional
-                        ISP</text>
-                    <rect x="690" y="82" width="12" height="12" rx="2" fill="#0284c7" />
-                    <rect x="731" y="82" width="12" height="12" rx="2" fill="#0284c7" />
-                    <rect x="12" y="118" width="112" height="60" rx="7" fill="#fff" stroke="#ef4444" stroke-width="2"
-                        stroke-dasharray="4,2" />
-                    <text x="68" y="132" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">Home
-                        Network</text>
-                    <text x="20" y="165" font-size="14">&#128187;</text><text x="44" y="165"
-                        font-size="14">&#128241;</text><text x="69" y="165" font-size="13">&#128225;</text><text x="93"
-                        y="165" font-size="13">&#128268;</text>
-                    <rect x="132" y="118" width="95" height="60" rx="7" fill="#fff" stroke="#ef4444" stroke-width="2"
-                        stroke-dasharray="4,2" />
-                    <text x="179" y="132" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">Mobile
-                        Network</text>
-                    <text x="138" y="165" font-size="14">&#128246;</text><text x="162" y="165"
-                        font-size="14">&#128241;</text><text x="186" y="165" font-size="14">&#128663;</text>
-                    <rect x="675" y="118" width="132" height="60" rx="7" fill="#fff" stroke="#ef4444" stroke-width="2"
-                        stroke-dasharray="4,2" />
-                    <text x="741" y="132" text-anchor="middle" fill="#dc2626" font-size="8"
-                        font-weight="bold">Enterprise Network</text>
-                    <text x="685" y="165" font-size="13">&#128421;&#65039;</text><text x="709" y="165"
-                        font-size="13">&#128421;&#65039;</text><text x="734" y="165"
-                        font-size="12">&#128256;</text><text x="757" y="165" font-size="12">&#128225;</text><text
-                        x="778" y="165" font-size="13">&#128187;</text>
-                    <rect x="306" y="172" width="10" height="10" rx="2" fill="#ef4444" />
-                    <text x="320" y="181" fill="#dc2626" font-size="9" font-weight="bold">= End Systems (Hosts) —
-                        perangkat di ujung jaringan</text>
-                </svg>
-                <div style="display:grid; grid-template-columns: repeat(6, 1fr); gap:10px; margin-top:5px;">
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-pc-display" style="font-size:2rem; color:#333;"></i><br><span class="text-small"
-                            style="color:#333; font-size:0.7em;">PC/Desktop</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-laptop" style="font-size:2rem; color:#333;"></i><br><span class="text-small"
-                            style="color:#333; font-size:0.7em;">Laptop</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-phone" style="font-size:2rem; color:#333;"></i><br><span class="text-small"
-                            style="color:#333; font-size:0.7em;">Smartphone</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-tablet" style="font-size:2rem; color:#333;"></i><br><span class="text-small"
-                            style="color:#333; font-size:0.7em;">Tablet</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-server" style="font-size:2rem; color:#007bff;"></i><br><span class="text-small"
-                            style="color:#333; font-size:0.7em;">Web Server</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-tv" style="font-size:2rem; color:#28a745;"></i><br><span class="text-small"
-                            style="color:#333; font-size:0.7em;">Smart TV</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-camera-video" style="font-size:2rem; color:#fd7e14;"></i><br><span
-                            class="text-small" style="color:#333; font-size:0.7em;">IP Camera</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-smartwatch" style="font-size:2rem; color:#17a2b8;"></i><br><span
-                            class="text-small" style="color:#333; font-size:0.7em;">IoT Sensor</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-controller" style="font-size:2rem; color:#6f42c1;"></i><br><span
-                            class="text-small" style="color:#333; font-size:0.7em;">Console</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-car-front" style="font-size:2rem; color:#e83e8c;"></i><br><span
-                            class="text-small" style="color:#333; font-size:0.7em;">Smart Car</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-speaker" style="font-size:2rem; color:#20c997;"></i><br><span class="text-small"
-                            style="color:#333; font-size:0.7em;">Smart Speaker</span>
-                    </div>
-                    <div
-                        style="text-align:center; background:#fff; padding:5px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="bi bi-robot" style="font-size:2rem; color:#dc3545;"></i><br><span class="text-small"
-                            style="color:#333; font-size:0.7em;">Smart Robot</span>
+                <img src="img/pptx_slide3_nuts_bolts.png" alt="Kurose Figure 1.1 - Internet Nuts and Bolts View" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box" style="margin-top:0;">
+                        <strong>4 Komponen Utama:</strong> <em>End systems</em> (hosts), <em>Packet switches</em> (router &amp; switch), <em>Communication links</em> (kabel/fiber/radio dengan laju transmisi bps), dan <em>Networks</em> yang saling terhubung.
                     </div>
                 </div>
-                <aside class="notes">Disebut "End System" karena mereka berada di bagian paling ujung dari internet.
-                </aside>
-            </section> -->
-
-            <section>
-                <h3>Nuts and Bolts: Communication Links</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>End systems dihubungkan oleh <strong>Communication Links</strong> (jalur komunikasi).</li>
-                        <li>Media fisik: kabel tembaga, serat optik, dan gelombang radio (Wi-Fi, 5G).</li>
-                        <li>Setiap link memiliki kapasitas <strong>Transmission Rate</strong> (bit/sec).</li>
-                    </ul>
-                </div>
+                <aside class="notes">Ini adalah gambaran lengkap komponen Internet dari Kurose &amp; Ross: end systems, packet switches, communication links, dan networks.</aside>
             </section>
 
-            <section class="highlight-packet-switches">
-                <h3>Nuts and Bolts: Packet Switches</h3>
-                <div class="card text-left text-small" style="margin-bottom: 5px;">
-                    <p>Data diteruskan oleh perangkat yang disebut <strong>Packet Switch</strong>. Ada dua jenis utama:
-                    </p>
-                </div>
-                <!-- SVG: Packet Switches highlighted (blue=Router, orange=Switch) -->
-                <!-- <svg class="kurose-svg" viewBox="0 0 820 185" xmlns="http://www.w3.org/2000/svg"
-                    font-family="Arial,sans-serif">
-                    <rect width="820" height="185" fill="#eff6ff" rx="12" />
-                    <line x1="155" y1="72" x2="290" y2="84" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <line x1="155" y1="130" x2="290" y2="110" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <line x1="530" y1="84" x2="638" y2="76" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <line x1="530" y1="110" x2="638" y2="130" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <line x1="410" y1="60" x2="410" y2="38" stroke="#555" stroke-width="2" stroke-dasharray="5,3" />
-                    <ellipse cx="410" cy="100" rx="122" ry="50" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5" />
-                    <text x="410" y="94" text-anchor="middle" fill="#1d4ed8" font-weight="bold" font-size="12">Global
-                        ISP</text>
-                    <rect x="348" y="100" width="20" height="20" rx="3" fill="#1d4ed8" stroke="#93c5fd"
-                        stroke-width="3" />
-                    <text x="358" y="114" text-anchor="middle" fill="white" font-size="9" font-weight="bold">R</text>
-                    <rect x="452" y="100" width="20" height="20" rx="3" fill="#1d4ed8" stroke="#93c5fd"
-                        stroke-width="3" />
-                    <text x="462" y="114" text-anchor="middle" fill="white" font-size="9" font-weight="bold">R</text>
-                    <line x1="368" y1="110" x2="452" y2="110" stroke="#60a5fa" stroke-width="2" />
-                    <ellipse cx="410" cy="27" rx="62" ry="18" fill="#d1fae5" stroke="#34d399" stroke-width="1.5" />
-                    <text x="410" y="30" text-anchor="middle" fill="#065f46" font-size="9">Content Provider
-                        Network</text>
-                    <rect x="52" y="58" width="100" height="44" rx="7" fill="#e0f2fe" stroke="#3b82f6"
-                        stroke-width="2" />
-                    <text x="102" y="74" text-anchor="middle" fill="#1e40af" font-size="9" font-weight="bold">Regional
-                        ISP</text>
-                    <rect x="73" y="79" width="14" height="14" rx="2" fill="#1d4ed8" stroke="#93c5fd"
-                        stroke-width="2" />
-                    <text x="80" y="90" text-anchor="middle" fill="white" font-size="8" font-weight="bold">R</text>
-                    <rect x="113" y="79" width="14" height="14" rx="2" fill="#1d4ed8" stroke="#93c5fd"
-                        stroke-width="2" />
-                    <text x="120" y="90" text-anchor="middle" fill="white" font-size="8" font-weight="bold">R</text>
-                    <rect x="668" y="58" width="100" height="44" rx="7" fill="#e0f2fe" stroke="#3b82f6"
-                        stroke-width="2" />
-                    <text x="718" y="74" text-anchor="middle" fill="#1e40af" font-size="9" font-weight="bold">Regional
-                        ISP</text>
-                    <rect x="690" y="79" width="14" height="14" rx="2" fill="#1d4ed8" stroke="#93c5fd"
-                        stroke-width="2" />
-                    <text x="697" y="90" text-anchor="middle" fill="white" font-size="8" font-weight="bold">R</text>
-                    <rect x="729" y="79" width="14" height="14" rx="2" fill="#1d4ed8" stroke="#93c5fd"
-                        stroke-width="2" />
-                    <text x="736" y="90" text-anchor="middle" fill="white" font-size="8" font-weight="bold">R</text>
-                    <rect x="12" y="115" width="112" height="60" rx="7" fill="#f0fdf4" stroke="#4ade80"
-                        stroke-width="1.5" stroke-dasharray="4,2" />
-                    <text x="68" y="128" text-anchor="middle" fill="#15803d" font-size="8">Home Network</text>
-                    <text x="18" y="160" font-size="13">&#128187;</text><text x="40" y="160"
-                        font-size="13">&#128241;</text>
-                    <rect x="68" y="138" width="16" height="16" rx="2" fill="#f97316" stroke="#fed7aa"
-                        stroke-width="2" />
-                    <text x="76" y="150" text-anchor="middle" fill="white" font-size="8" font-weight="bold">SW</text>
-                    <rect x="675" y="115" width="132" height="60" rx="7" fill="#faf5ff" stroke="#a855f7"
-                        stroke-width="1.5" stroke-dasharray="4,2" />
-                    <text x="741" y="128" text-anchor="middle" fill="#7e22ce" font-size="8">Enterprise Network</text>
-                    <text x="683" y="160" font-size="13">&#128421;&#65039;</text><text x="704" y="160"
-                        font-size="13">&#128421;&#65039;</text>
-                    <rect x="730" y="138" width="16" height="16" rx="2" fill="#f97316" stroke="#fed7aa"
-                        stroke-width="2" />
-                    <text x="738" y="150" text-anchor="middle" fill="white" font-size="8" font-weight="bold">SW</text>
-                    <rect x="754" y="138" width="16" height="16" rx="2" fill="#1d4ed8" stroke="#93c5fd"
-                        stroke-width="2" />
-                    <text x="762" y="150" text-anchor="middle" fill="white" font-size="8" font-weight="bold">R</text>
-                    <rect x="240" y="170" width="10" height="10" rx="2" fill="#1d4ed8" />
-                    <text x="254" y="179" fill="#1e40af" font-size="9" font-weight="bold">R = Router (Network
-                        Core)</text>
-                    <rect x="425" y="170" width="10" height="10" rx="2" fill="#f97316" />
-                    <text x="439" y="179" fill="#c2410c" font-size="9" font-weight="bold">SW = Link-Layer Switch (Access
-                        Network)</text>
-                </svg> -->
-                <div style="display:flex; justify-content:center; gap:20px; margin-top:5px;">
-                    <!-- Router -->
-                    <div
-                        style="flex:1; background:#f8f9fa; border:2px solid #007bff; border-radius:10px; padding:10px; text-align:center;">
-                        <i class="bi bi-router-fill" style="font-size:2.2rem; color:#007bff;"></i>
-                        <h4 class="highlight-blue" style="margin-top:5px; margin-bottom:5px; font-size:0.75em;">Router
-                        </h4>
-                        <ul class="text-small"
-                            style="text-align:left; margin:0; padding-left:20px; color:#333; font-size:0.55em;">
-                            <li>Bekerja di Layer 3 (Network).</li>
-                            <li>Merutekan paket antar jaringan.</li>
-                            <li>Ditemukan di inti jaringan (Network Core).</li>
-                            <li>Tugas kompleks (IP Addressing).</li>
+            <section>
+                <h3>Packet Switches: Router vs Link-Layer Switch</h3>
+                <div class="layout-2col">
+                    <div class="card card-compact text-center" style="border-top: 4px solid #1565c0;">
+                        <i class="bi bi-router-fill" style="font-size:2.4rem; color:#1565c0;"></i>
+                        <h4 class="highlight-blue" style="margin:6px 0;">Router</h4>
+                        <ul class="text-left" style="margin-bottom:0;">
+                            <li>Bekerja di <strong>Layer 3 (Network)</strong> menggunakan alamat IP.</li>
+                            <li>Merutekan paket antar jaringan yang berbeda.</li>
+                            <li>Berada di inti jaringan (<em>Network Core</em>).</li>
                         </ul>
                     </div>
-                    <!-- Switch -->
-                    <div
-                        style="flex:1; background:#f8f9fa; border:2px solid #fd7e14; border-radius:10px; padding:10px; text-align:center;">
-                        <i class="bi bi-hdd-network-fill" style="font-size:2.2rem; color:#fd7e14;"></i>
-                        <h4 class="highlight-orange" style="margin-top:5px; margin-bottom:5px; font-size:0.75em;">
-                            Link-Layer Switch</h4>
-                        <ul class="text-small"
-                            style="text-align:left; margin:0; padding-left:20px; color:#333; font-size:0.55em;">
-                            <li>Bekerja di Layer 2 (Data Link).</li>
-                            <li>Meneruskan paket dalam satu jaringan.</li>
-                            <li>Ditemukan di Access Network/LAN lokal.</li>
-                            <li>Tugas lebih cepat (MAC Addressing).</li>
+                    <div class="card card-compact text-center" style="border-top: 4px solid #e65100;">
+                        <i class="bi bi-hdd-network-fill" style="font-size:2.4rem; color:#e65100;"></i>
+                        <h4 class="highlight-orange" style="margin:6px 0;">Link-Layer Switch</h4>
+                        <ul class="text-left" style="margin-bottom:0;">
+                            <li>Bekerja di <strong>Layer 2 (Data Link)</strong> menggunakan alamat MAC.</li>
+                            <li>Meneruskan frame di dalam satu jaringan lokal (LAN).</li>
+                            <li>Berada di <em>Access Network</em> dengan pemrosesan cepat.</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h3>Nuts and Bolts: Network of Networks</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>Anda mengakses internet melalui <strong>ISP (Internet Service Provider)</strong>.</li>
-                        <li>Contoh: Telkomsel, Indihome, Biznet.</li>
-                        <li>Internet adalah jaringan raksasa yang menghubungkan ISP-ISP ini secara global.</li>
-                    </ul>
+                <h3>Services View: Aplikasi &amp; Socket Interface</h3>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0;"><i class="bi bi-app-indicator"></i> Infrastruktur Aplikasi Terdistribusi</p>
+                        <ul>
+                            <li>Aplikasi jaringan (Web, Email, Streaming, Game Online) berjalan di <em>End Systems</em> (PC, HP, Server), bukan di dalam router inti.</li>
+                            <li>Banyak program di lokasi berbeda saling bertukar data lewat jaringan.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1b5e20;"><i class="bi bi-plug-fill"></i> Socket Interface</p>
+                        <ul>
+                            <li>Antarmuka pemrograman standar (API) yang mengatur cara program mengirim &amp; menerima data lewat Internet.</li>
+                            <li><strong>Analogi:</strong> Memasukkan surat ke kotak pos mengikuti aturan pos agar pasti terkirim ke alamat tujuan.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
             <section>
-                <h3>Service View: Infrastruktur Aplikasi</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>Dari sudut pandang layanan, internet melayani <strong>Aplikasi Terdistribusi</strong>.</li>
-                        <li>Aplikasi berjalan di <em>End Systems</em> (PC, Server), bukan di dalam Router.</li>
-                        <li>Contoh aplikasi: Web, Email, Streaming Video, Game Online.</li>
-                    </ul>
+                <h3>Apa Itu Protokol? &amp; Analoginya</h3>
+                <div class="card card-compact text-left" style="margin-bottom:10px;">
+                    <div class="info-box" style="margin-top:0;">
+                        <strong>Definisi Protokol:</strong> Menentukan <strong>format</strong> dan <strong>urutan</strong> pesan yang dipertukarkan antar entitas jaringan, serta <strong>tindakan</strong> yang diambil saat mengirim maupun menerima pesan. Tanpa protokol, penerima hanya melihat deretan bit tanpa makna.
+                    </div>
                 </div>
-            </section>
-
-            <section>
-                <h3>Service View: Socket Interface</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>Bagaimana program mengirim data ke program lain?</li>
-                        <li>Menggunakan <strong>Socket Interface</strong> (API standar).</li>
-                        <li>Analogi: Anda menulis surat dan harus memasukkannya ke kotak pos agar kantor pos tahu apa
-                            yang harus dilakukan.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h3>Apa itu Protokol?</h3>
-                <div class="card text-left text-small">
-                    <blockquote style="background: #f1f8ff; padding: 15px; border-left: 5px solid #007bff;">
-                        "Sebuah protokol mendefinisikan <strong>format</strong> dan <strong>urutan</strong> pesan yang
-                        dipertukarkan, serta <strong>tindakan</strong> yang diambil saat mentransmisikan dan menerima
-                        pesan."
-                    </blockquote>
-                    <p>Tanpa protokol, komputer penerima hanya akan melihat kumpulan bit tanpa makna (sampah digital).
-                    </p>
-                </div>
-            </section>
-
-            <section>
-                <h3>Analogi Protokol</h3>
-                <div class="card text-left text-small">
-                    <h4 class="highlight-blue">Protokol Manusia (Tanya Waktu)</h4>
-                    <ol>
-                        <li>A berkata "Halo"</li>
-                        <li>B menjawab "Halo"</li>
-                        <li>A bertanya "Jam berapa?"</li>
-                        <li>B menjawab "Jam 2."</li>
-                    </ol>
-                    <h4 class="highlight-orange">Protokol Komputer (Web Request)</h4>
-                    <ol>
-                        <li>PC kirim TCP SYN</li>
-                        <li>Server jawab TCP SYN ACK</li>
-                        <li>PC minta "GET index.html"</li>
-                        <li>Server kirim file web HTML.</li>
-                    </ol>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <h4 class="highlight-blue" style="margin-top:0;"><i class="bi bi-chat-dots-fill"></i> Protokol Manusia (Tanya Waktu)</h4>
+                        <ol style="margin-bottom:0; padding-left:1.3em;">
+                            <li>A menyapa: <em>"Halo"</em></li>
+                            <li>B membalas: <em>"Halo"</em></li>
+                            <li>A bertanya: <em>"Jam berapa?"</em></li>
+                            <li>B menjawab: <em>"Jam 2."</em></li>
+                        </ol>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <h4 class="highlight-orange" style="margin-top:0;"><i class="bi bi-pc-display"></i> Protokol Komputer (Web Request)</h4>
+                        <ol style="margin-bottom:0; padding-left:1.3em;">
+                            <li>PC mengirim paket <code>TCP SYN</code></li>
+                            <li>Server membalas <code>TCP SYN-ACK</code></li>
+                            <li>PC meminta <code>GET index.html</code></li>
+                            <li>Server mengirimkan file HTML halaman web.</li>
+                        </ol>
+                    </div>
                 </div>
             </section>
 
@@ -590,914 +509,464 @@
                 <h3>Standar Internet</h3>
                 <div class="card text-left text-small">
                     <ul>
-                        <li><strong>Standarisasi:</strong> Memastikan perangkat dari vendor berbeda (misal Apple dan
-                            Microsoft) bisa saling mengobrol.</li>
-                        <li><strong>IETF (Internet Engineering Task Force):</strong> Pembuat standar internet.
-                            Dokumennya disebut <strong>RFC</strong> (Request For Comments).</li>
-                        <li><strong>IEEE:</strong> Standar untuk hardware (Contoh: IEEE 802.11 untuk Wi-Fi).</li>
+                        <li><strong>Tujuan Standarisasi:</strong> Memastikan perangkat dari vendor berbeda (Apple, Microsoft, Cisco, Mikrotik) dapat saling berkomunikasi tanpa hambatan (interoperabilitas).</li>
+                        <li><strong>IETF (Internet Engineering Task Force):</strong> Organisasi penyusun standar protokol Internet; dokumen standarnya disebut <strong>RFC (Request For Comments)</strong>.</li>
+                        <li><strong>IEEE:</strong> Organisasi standar lapisan fisik dan link (contoh: IEEE 802.3 untuk Ethernet dan IEEE 802.11 untuk Wi-Fi).</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- SECTION 2: NETWORK EDGE -->
+            <!-- BAGIAN 2 -->
+            <section class="section-slide" data-topic="Bagian 2: The Network Edge &amp; Access Media">
+                <div class="section-part-label">Bagian 2</div>
+                <h2>2. The Network Edge &amp; Access Media</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">End Systems, Access Networks (Home HFC/DSL/FTTH, Wireless, Enterprise), serta Media Fisik Guided &amp; Unguided</p>
+                <aside class="notes">Masuk ke bagian pinggiran jaringan tempat pengguna terhubung melalui beragam akses dan media transmisi fisik.</aside>
+            </section>
+
             <section>
-                <h2>1.2 The Network Edge</h2>
-                <p>Mendalami bagian "Pinggiran" dari jaringan.</p>
-                <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin: 30px 0;">
+                <h3>The Network Edge &amp; Tiga Jenis Access Network</h3>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 18px; margin: 10px 0 18px 0;">
                     <div style="text-align: center;">
-                        <i class="bi bi-laptop" style="font-size: 3rem; color: #007bff;"></i>
-                        <div class="text-small" style="font-weight: bold; margin-top: 10px;">End System (Client)</div>
+                        <i class="bi bi-laptop" style="font-size: 2.5rem; color: #1565c0;"></i>
+                        <div class="text-smaller" style="font-weight: bold;">End System (Client)</div>
                     </div>
-                    <div style="color: #6c757d;"><i class="bi bi-arrow-right-short" style="font-size: 3rem;"></i></div>
-                    <div
-                        style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 50%; border: 2px dashed #6c757d; color: #333;">
-                        <i class="bi bi-cloud-network" style="font-size: 3rem; color: #fd7e14;"></i>
-                        <div class="text-small" style="font-weight: bold; margin-top: 10px;">Network Core</div>
+                    <div style="color: #6c757d;"><i class="bi bi-arrow-right-short" style="font-size: 2.4rem;"></i></div>
+                    <div class="card" style="text-align: center; padding: 12px 22px; border-radius: 999px; border: 2px dashed #e65100; margin-bottom:0;">
+                        <i class="bi bi-diagram-3-fill" style="font-size: 2.2rem; color: #e65100;"></i>
+                        <div class="text-smaller" style="font-weight: bold;">Access &amp; Network Core</div>
                     </div>
-                    <div style="color: #6c757d;"><i class="bi bi-arrow-right-short" style="font-size: 3rem;"></i></div>
+                    <div style="color: #6c757d;"><i class="bi bi-arrow-right-short" style="font-size: 2.4rem;"></i></div>
                     <div style="text-align: center;">
-                        <i class="bi bi-server" style="font-size: 3rem; color: #28a745;"></i>
-                        <div class="text-small" style="font-weight: bold; margin-top: 10px;">End System (Server)</div>
+                        <i class="bi bi-server" style="font-size: 2.5rem; color: #1b5e20;"></i>
+                        <div class="text-smaller" style="font-weight: bold;">End System (Server)</div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Slide: Network Edge (Kurose Original) -->
-            <section>
-                <h3>A closer look at Internet structure: Network Edge</h3>
-                <img src="img/pptx_slide_1_10_network_edge.png" alt="A closer look at Internet structure: Network Edge"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Di bagian ujung jaringan (Network Edge) terdapat Hosts: yaitu clients dan servers.
-                    Server biasanya ditempatkan di data centers.</aside>
-            </section>
-
-            <!-- Slide: Access Networks Intro (Kurose Original) -->
-            <section>
-                <h3>A closer look at Internet structure: Access Networks</h3>
-                <img src="img/pptx_slide_1_11_access_networks_intro.png"
-                    alt="A closer look at Internet structure: Access Networks Intro"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Untuk mengakses internet, end systems terhubung menggunakan Access networks (wired,
-                    wireless communication links).</aside>
-            </section>
-
-            <!-- Slide: Network Core (Kurose Original) -->
-            <section>
-                <h3>A closer look at Internet structure: Network Core</h3>
-                <img src="img/pptx_slide_1_12_network_core.png" alt="A closer look at Internet structure: Network Core"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Di bagian inti (Network Core), terdapat kumpulan router yang saling terhubung
-                    membentuk "network of networks".</aside>
-            </section>
-
-            <!-- Slide: Access Networks (Kurose Original) -->
-            <section>
-                <h3>Access networks and physical media</h3>
-                <img src="img/pptx_slide_1_13_access_networks.png" alt="Access networks and physical media"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Bagaimana menghubungkan End Systems ke Edge Router? Menggunakan Access Networks
-                    (residential, institutional, mobile/wireless).</aside>
-            </section>
-
-            <section>
-                <h3>Access Networks</h3>
-                <div class="card text-left text-small">
-                    <p>Jalur fisik penghubung dari komputer Anda ke Edge Router ISP disebut <strong>Access
-                            Network</strong>.</p>
-                    <p>Tiga jenis utama:</p>
-                    <ol>
-                        <li>Home Access (Akses Rumahan)</li>
-                        <li>Enterprise Access (Kantor/Kampus)</li>
-                        <li>Wide-Area Wireless Access (Seluler 4G/5G)</li>
+                <div class="card card-compact text-left">
+                    <p style="margin-top:0;"><strong>Access Network</strong> adalah jalur fisik penghubung antara perangkat ujung (<em>End System / Host</em>) ke <strong>Edge Router</strong> pertama milik ISP. Terbagi dalam tiga kategori utama:</p>
+                    <ol style="margin-bottom:0; padding-left:1.3em;">
+                        <li><strong>Home Access:</strong> Akses internet rumahan (DSL, Cable HFC, Fiber FTTH).</li>
+                        <li><strong>Enterprise / Institutional Access:</strong> Jaringan kantor, kampus, dan pusat data.</li>
+                        <li><strong>Wide-Area Wireless Access:</strong> Akses nirkabel bergerak via jaringan seluler 4G/5G.</li>
                     </ol>
                 </div>
             </section>
 
-            <!-- Slide: Access networks: cable-based access (FDM) -->
             <section>
-                <h3>Access networks: cable-based access</h3>
-                <img src="img/pptx_slide_1_14_cable_fdm.png" alt="Access networks: cable-based access (FDM)"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Pada jaringan akses berbasis kabel TV, frekuensi dibagi-bagi untuk data dan video.
-                    Ini disebut frequency division multiplexing (FDM), dimana channel yang berbeda ditransmisikan pada
-                    pita frekuensi yang berbeda.</aside>
-            </section>
-
-            <!-- Slide: Access networks: cable-based access (HFC) -->
-            <section>
-                <h3>Access networks: cable-based access (HFC)</h3>
-                <img src="img/pptx_slide_1_15_cable_hfc.png" alt="Access networks: cable-based access (HFC)"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Infrastruktur ini disebut HFC (hybrid fiber coax). Data dan TV ditransmisikan pada
-                    frekuensi yang berbeda melalui jaringan kabel bersama (shared network). Kecepatannya asimetris,
-                    lebih cepat saat download (downstream) daripada upload (upstream).</aside>
-            </section>
-
-            <section>
-                <h3>Home Access: Cable Internet</h3>
-                <div class="card text-left text-small">
-                    <h4 class="highlight-orange">Cable Internet (HFC)</h4>
-                    <ul>
-                        <li>Memanfaatkan infrastruktur kabel antena TV (Coaxial).</li>
-                        <li>Sering disebut HFC (Hybrid Fiber Coax).</li>
-                        <li>Kabel ini bersifat <strong>Shared</strong>. Artinya Anda dan tetangga Anda berbagi bandwidth
-                            (bisa melambat saat jam sibuk).</li>
-                    </ul>
+                <h3>Home Access: Cable (HFC), DSL, &amp; FTTH</h3>
+                <div class="layout-3col">
+                    <div class="card card-compact text-left" style="border-top: 4px solid #e65100;">
+                        <h4 class="highlight-orange" style="margin-top:0;">Cable (HFC)</h4>
+                        <ul>
+                            <li>Memakai infrastruktur kabel antena TV (Coaxial + Fiber / Hybrid Fiber Coax).</li>
+                            <li>Data &amp; siaran TV dibagi lewat frekuensi berbeda (FDM).</li>
+                            <li>Sifatnya <strong>Shared</strong>: bandwidth dibagi bersama tetangga sekitar.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left" style="border-top: 4px solid #1565c0;">
+                        <h4 class="highlight-blue" style="margin-top:0;">DSL (Digital Subscriber Line)</h4>
+                        <ul>
+                            <li>Memakai kabel telepon tembaga (<em>twisted-pair</em>) menuju sentral (DSLAM).</li>
+                            <li>Data &amp; suara berjalan di kanal frekuensi berbeda.</li>
+                            <li>Sifatnya <strong>Dedicated</strong> (tidak dibagi dengan tetangga).</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left" style="border-top: 4px solid #1b5e20;">
+                        <h4 class="highlight-green" style="margin-top:0;">FTTH (Fiber To The Home)</h4>
+                        <ul>
+                            <li>Menarik kabel serat optik langsung dari sentral ISP ke rumah.</li>
+                            <li>Memakai arsitektur PON (<em>Passive Optical Network</em>) dengan splitter cahaya.</li>
+                            <li>Kecepatan sangat tinggi (ratusan Mbps hingga Gbps).</li>
+                        </ul>
+                    </div>
                 </div>
-            </section>
-
-            <section>
-                <h3>Home Access: FTTH</h3>
-                <div class="card text-left text-small">
-                    <h4 class="highlight-green">FTTH (Fiber To The Home)</h4>
-                    <ul>
-                        <li>Kabel fiber optik ditarik dari sentral ISP langsung menuju rumah.</li>
-                        <li>Sangat cepat (bisa ratusan Mbps hingga Gbps).</li>
-                        <li>Menggunakan PON (Passive Optical Network) dengan *splitter* cahaya. (Contoh: Biznet,
-                            Indihome FTTH).</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Access networks: digital subscriber line (DSL) -->
-            <section>
-                <h3>Access networks: digital subscriber line (DSL)</h3>
-                <img src="img/pptx_slide_1_16_dsl.png" alt="Access networks: digital subscriber line (DSL)"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">DSL menggunakan jalur telepon yang sudah ada untuk akses internet. Data internet
-                    dikirim ke DSLAM, sementara suara dikirim ke jaringan telepon. DSL adalah sambungan dedicated (tidak
-                    dibagi dengan tetangga), dengan kecepatan yang juga asimetris.</aside>
-            </section>
-
-            <section>
-                <h3>Home Access: DSL</h3>
-                <div class="card text-left text-small">
-                    <h4 class="highlight-blue">DSL (Digital Subscriber Line)</h4>
-                    <ul>
-                        <li>Memanfaatkan kabel telepon tembaga (twisted-pair) rumah yang sudah ada menuju sentral
-                            telepon.</li>
-                        <li>Data internet dan suara telepon berjalan di frekuensi yang berbeda.</li>
-                        <li>Koneksinya <strong>Dedicated</strong> (tidak dibagi dengan tetangga).</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Access networks: home networks -->
-            <section>
-                <h3>Access networks: home networks</h3>
-                <img src="img/pptx_slide_1_17_home_networks.png" alt="Access networks: home networks"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Dalam jaringan rumah (home network), biasanya terdapat modem (kabel/DSL),
-                    router/firewall/NAT, switch lokal, dan WiFi access point. Seringkali semua fungsi ini digabung dalam
-                    satu perangkat (single box).</aside>
             </section>
 
             <section>
                 <h3>Home Network Layout</h3>
-                <div class="card text-left text-small">
-                    <p>Di rumah Anda, ada jaringan lokal (LAN) kecil:</p>
-                    <ul>
-                        <li><strong>Modem (ONT/DSL):</strong> Pengubah sinyal masuk ISP.</li>
-                        <li><strong>Router:</strong> Merutekan paket dalam jaringan lokal ke internet.</li>
-                        <li><strong>Wi-Fi Access Point:</strong> Penghubung perangkat nirkabel.</li>
-                    </ul>
-                    <p><em>(Saat ini, ketiganya sering digabung dalam 1 kotak plastik dari ISP).</em></p>
-                </div>
-            </section>
-
-            <!-- Slide: Wireless access networks -->
-            <section>
-                <h3>Wireless access networks</h3>
-                <img src="img/pptx_slide_1_18_wireless.png" alt="Wireless access networks"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Jaringan akses nirkabel terbagi dua: Wireless LANs (seperti WiFi) yang mencakup
-                    area kecil dalam gedung, dan Wide-area cellular networks (seperti 4G/5G) yang disediakan oleh
-                    operator seluler dengan jangkauan lebih luas (puluhan km).</aside>
-            </section>
-
-            <section>
-                <h3>Wide-Area Wireless Access</h3>
-                <div class="card text-left text-small">
-                    <p>Akses internet *Mobile* via menara seluler (BTS).</p>
-                    <ul>
-                        <li>Cakupan sinyal mencapai puluhan kilometer (dibandingkan Wi-Fi yang hanya puluhan meter).
-                        </li>
-                        <li>Standar modern: <strong>LTE (4G)</strong> dan <strong>5G</strong>.</li>
-                        <li>Keunggulan utama adalah mobilitas penggunanya.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h3>Physical Media (Media Fisik)</h3>
-                <div class="card text-left text-small">
-                    <p>Bit-bit informasi harus berjalan di atas media fisik dalam bentuk energi (listrik, cahaya,
-                        radio).</p>
-                    <ul>
-                        <li><strong class="highlight-blue">Guided Media:</strong> Gelombang diarahkan melalui medium
-                            padat. (Kabel tembaga, fiber optik).</li>
-                        <li><strong class="highlight-orange">Unguided Media:</strong> Gelombang disebarkan bebas di
-                            atmosfer atau ruang angkasa (Radio, satelit).</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h3>Guided Media: Kabel Tembaga</h3>
-                <div class="card text-left text-small">
-                    <h4 class="highlight-blue">Twisted-Pair (UTP)</h4>
-                    <p>Kabel tembaga berinsulasi yang dipilin spiral. Pilinan ini berfungsi menghilangkan interferensi
-                        (noise). Paling murah dan populer untuk LAN.</p>
-                    <h4 class="highlight-orange">Coaxial Cable</h4>
-                    <p>Dua tembaga konsentris (sepusat). Cocok untuk membawa frekuensi tinggi seperti siaran TV kabel
-                        dan internet shared-medium.</p>
-                </div>
-                <div
-                    style="display:flex; justify-content:space-around; margin-top:15px; background:#fff; padding:10px; border-radius:10px;">
-                    <div style="text-align:center;">
-                        <img src="img/chapter1/image79.jpeg" alt="Twisted Pair"
-                            style="max-height:140px; border-radius:5px; margin-bottom:5px;">
-                        <div class="text-small" style="color:#333; font-weight:bold;">Twisted-Pair (UTP)</div>
-                    </div>
-                    <div style="text-align:center;">
-                        <img src="img/chapter1/image78.jpeg" alt="Coaxial Cable"
-                            style="max-height:140px; border-radius:5px; margin-bottom:5px;">
-                        <div class="text-small" style="color:#333; font-weight:bold;">Coaxial Cable</div>
+                <img src="img/pptx_slide_1_17_home_networks.png" alt="Access networks: home networks" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box" style="margin-top:0;">
+                        <strong>Komponen Jaringan Rumah:</strong> <strong>Modem/ONT</strong> (pengubah sinyal masuk ISP), <strong>Router / Firewall / NAT</strong> (penghubung ke Internet), dan <strong>Wi-Fi Access Point + Switch</strong> lokal—umumnya terintegrasi dalam satu perangkat dari ISP.
                     </div>
                 </div>
+                <aside class="notes">Dalam jaringan rumah (home network), biasanya terdapat modem (kabel/DSL/ONT), router/firewall/NAT, switch lokal, dan Wi-Fi access point dalam satu perangkat.</aside>
             </section>
 
             <section>
-                <h3>Guided Media: Fiber Optics</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>Serat kaca yang fleksibel, menghantarkan pulsa cahaya.</li>
-                        <li>Satu pulsa cahaya = satu bit informasi.</li>
-                        <li>Kecepatan luar biasa tinggi dan <strong class="highlight-green">kebal interferensi
-                                listrik</strong>.</li>
-                        <li>Cocok membentang di dasar samudra antar benua (karena redaman sinyalnya sangat kecil).</li>
-                    </ul>
-                </div>
-                <div
-                    style="display:flex; justify-content:space-around; margin-top:15px; background:#fff; padding:10px; border-radius:10px;">
-                    <div style="text-align:center;">
-                        <img src="img/chapter1/image80.png" alt="Fiber Optic 1"
-                            style="max-height:120px; border-radius:5px; margin-bottom:5px;">
-                    </div>
-                    <div style="text-align:center;">
-                        <img src="img/chapter1/image81.png" alt="Fiber Optic 2"
-                            style="max-height:120px; border-radius:5px; margin-bottom:5px;">
+                <h3>Wireless Access Networks (Wi-Fi vs 4G/5G)</h3>
+                <img src="img/pptx_slide_1_18_wireless.png" alt="Wireless access networks" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box" style="margin-top:0;">
+                        <strong>Dua Skala Nirkabel:</strong> <strong>Wireless LAN (Wi-Fi / IEEE 802.11)</strong> menjangkau area dalam gedung (~puluhan meter via Access Point), sedangkan <strong>Wide-Area Cellular (4G LTE / 5G)</strong> menjangkau puluhan kilometer via menara BTS operator untuk mobilitas penuh.
                     </div>
                 </div>
+                <aside class="notes">Jaringan akses nirkabel terbagi dua: Wireless LANs (seperti Wi-Fi) dalam gedung, dan Wide-area cellular networks (4G/5G) dari operator seluler.</aside>
             </section>
 
             <section>
-                <h3>Unguided Media: Radio & Satelit</h3>
-                <div class="card text-left text-small">
-                    <h4 class="highlight-blue">Terrestrial Radio</h4>
-                    <p>Gelombang Wi-Fi, 4G. Rawan pantulan dinding dan gangguan cuaca.</p>
-                    <h4 class="highlight-orange">Satellite Radio</h4>
-                    <ul>
-                        <li><strong>Geostationary:</strong> Satelit jauh (36.000 km), delay propagasi sangat besar (~280
-                            ms).</li>
-                        <li><strong>LEO (Low Earth Orbit):</strong> Satelit dekat bumi. Jauh lebih cepat, butuh
-                            konstelasi banyak satelit (Contoh: Starlink).</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Access networks: enterprise networks -->
-            <section>
-                <h3>Access networks: enterprise networks</h3>
-                <img src="img/pptx_slide_1_19_enterprise.png" alt="Access networks: enterprise networks"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Jaringan perusahaan atau kampus biasanya terdiri dari gabungan koneksi kabel
-                    (Ethernet) dan nirkabel (WiFi) yang terhubung ke sekumpulan switch dan router, sebelum akhirnya
-                    terhubung ke ISP luar.</aside>
-            </section>
-
-            <section>
-                <h3>Enterprise Access (LAN)</h3>
-                <div class="card text-left text-small">
-                    <p>Jaringan untuk kantor atau kampus besar.</p>
-                    <ul>
-                        <li>Mengandalkan kabel <strong>Ethernet</strong> ke meja pegawai, dan <strong>Wi-Fi</strong>
-                            untuk area publik.</li>
-                        <li>Menghubungkan ratusan komputer ke <strong>Ethernet Switch</strong> berkecepatan tinggi (1
-                            Gbps - 10 Gbps).</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Access networks: data center networks -->
-            <section>
-                <h3>Access networks: data center networks</h3>
-                <img src="img/pptx_slide_1_20_datacenter.png" alt="Access networks: data center networks"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Jaringan pusat data (data center) menghubungkan ratusan hingga ribuan server
-                    bersama-sama menggunakan koneksi berkecepatan sangat tinggi (10 sampai 100 Gbps). Ini penting untuk
-                    penyedia layanan besar seperti Google atau Amazon.</aside>
-            </section>
-
-            <!-- Slide: Host: sends packets of data -->
-            <section>
-                <h3>Host: sends packets of data</h3>
-                <img src="img/pptx_slide_1_21_host_sends.png" alt="Host: sends packets of data"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Saat host mengirim pesan, pesan tersebut dipecah menjadi potongan-potongan kecil
-                    yang disebut "packets" dengan panjang L bit. Paket-paket ini lalu dikirim melalui access network
-                    dengan kecepatan transmisi (transmission rate/bandwidth) sebesar R bits/sec.</aside>
-            </section>
-
-            <section>
-                <h3>Packet Switching</h3>
-                <div class="card text-left text-small">
-                    <p>Di internet, data yang panjang dipecah-pecah menjadi banyak <strong>Paket (Packets)</strong>
-                        kecil sebelum dikirim.</p>
-                    <p>Setiap paket menempuh perjalanan melalui router satu per satu.</p>
-                </div>
-                <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin: 20px 0;">
-                    <div style="display: flex; gap: 5px;">
-                        <div style="width: 25px; height: 35px; background: #007bff; border-radius: 3px;"></div>
-                        <div style="width: 25px; height: 35px; background: #007bff; border-radius: 3px;"></div>
+                <h3>Enterprise LAN &amp; Data Center Networks</h3>
+                <img src="img/pptx_slide_1_19_enterprise.png" alt="Access networks: enterprise networks" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box" style="margin-top:0;">
+                        <strong>Kampus/Kantor &amp; Data Center:</strong> Jaringan institusi menggabungkan kabel <strong>Ethernet</strong> dan <strong>Wi-Fi</strong> melalui switch 1–10 Gbps ke router institusi; sedangkan <strong>Data Center</strong> (Google/Amazon) menghubungkan ribuan server berkecepatan 10–100 Gbps.
                     </div>
-                    <div style="color: #6c757d;"><i class="bi bi-arrow-right" style="font-size: 2rem;"></i></div>
-                    <div
-                        style="border: 2px solid #fd7e14; padding: 10px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; background: #fff;">
-                        <div
-                            style="display: flex; gap: 3px; margin-bottom: 5px; border: 1px solid #ccc; padding: 3px; width: 70px;">
-                            <div style="width: 15px; height: 25px; background: #28a745;"></div>
-                            <div style="width: 15px; height: 25px; background: #28a745;"></div>
-                            <div style="width: 15px; height: 25px; background: #dc3545;"></div>
+                </div>
+                <aside class="notes">Jaringan perusahaan atau kampus memakai gabungan Ethernet dan Wi-Fi yang terhubung ke switch dan router sebelum ke ISP, sedangkan data center menautkan ribuan server berkecepatan 10–100 Gbps.</aside>
+            </section>
+
+            <section>
+                <h3>Media Fisik: Guided Media (Tembaga &amp; Fiber Optik)</h3>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <h4 class="highlight-blue" style="margin-top:0;">Kabel Tembaga (Sinyal Listrik)</h4>
+                        <ul>
+                            <li><strong>Twisted-Pair (UTP):</strong> Dua kabel tembaga dipilin spiral untuk mengurangi interferensi; murah &amp; populer untuk LAN.</li>
+                            <li><strong>Coaxial:</strong> Dua konduktor sepusat untuk frekuensi tinggi &amp; TV kabel.</li>
+                        </ul>
+                        <div style="display:flex; justify-content:space-around; gap:8px; background:#fff; padding:6px; border-radius:8px; margin-top:6px;">
+                            <div style="text-align:center;">
+                                <img src="img/chapter1/image78.jpeg" alt="Twisted-Pair UTP Kupas" style="max-height:90px; border-radius:4px;">
+                                <div style="font-size:.8em; color:#333; font-weight:bold;">UTP Kupas</div>
+                            </div>
+                            <div style="text-align:center;">
+                                <img src="img/chapter1/image79.jpeg" alt="UTP RJ45" style="max-height:90px; border-radius:4px;">
+                                <div style="font-size:.8em; color:#333; font-weight:bold;">UTP (RJ45)</div>
+                            </div>
+                            <div style="text-align:center;">
+                                <img src="img/chapter1/image80.png" alt="Coaxial Cable" style="max-height:90px; border-radius:4px;">
+                                <div style="font-size:.8em; color:#333; font-weight:bold;">Coaxial</div>
+                            </div>
                         </div>
-                        <i class="bi bi-router-fill" style="font-size: 2rem; color: #fd7e14;"></i>
-                        <div class="text-small" style="color: #333; margin-top: 5px;">Router Buffer</div>
                     </div>
-                    <div style="color: #6c757d;"><i class="bi bi-arrow-right" style="font-size: 2rem;"></i></div>
-                    <div style="width: 25px; height: 35px; background: #28a745; border-radius: 3px;"></div>
+                    <div class="card card-compact text-left">
+                        <h4 class="highlight-green" style="margin-top:0;">Fiber Optik (Pulsa Cahaya)</h4>
+                        <ul>
+                            <li>Serat kaca fleksibel yang menghantarkan pulsa cahaya (1 pulsa = bit informasi).</li>
+                            <li>Kecepatan sangat tinggi, redaman kecil, serta <strong>kebal interferensi listrik</strong> (ideal untuk kabel bawah laut antar benua).</li>
+                        </ul>
+                        <div style="display:flex; justify-content:center; background:#fff; padding:6px; border-radius:8px; margin-top:6px;">
+                            <div style="text-align:center;">
+                                <img src="img/chapter1/image81.png" alt="Fiber Optik Multi-Core" style="max-height:90px; border-radius:4px;">
+                                <div style="font-size:.8em; color:#333; font-weight:bold;">Serat Fiber Optik</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </section>
-
-            <!-- SECTION 3: NETWORK CORE -->
-            <section>
-                <h2>1.3 The Network Core</h2>
-                <p>Jantung Internet: <em>Mesh of interconnected routers</em>.</p>
-            </section>
-
-
-            <!-- Slide: The network core -->
-            <section>
-                <h3>The network core</h3>
-                <img src="img/pptx_slide_1_26_network_core.png" alt="The network core"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Masuk ke Network Core: Ini adalah sekumpulan router yang saling terhubung membentuk
-                    "jaring" (mesh). Network Core menggunakan teknik "packet-switching", di mana jaringan meneruskan
-                    paket dari satu router ke router berikutnya sampai mencapai tujuan.</aside>
-            </section>
-
-            <!-- Slide: Two key network-core functions -->
-            <section>
-                <h3>Two key network-core functions</h3>
-                <img src="img/pptx_slide_1_27_core_functions.png" alt="Two key network-core functions"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Di dalam Network Core, ada dua fungsi utama: Forwarding dan Routing. Forwarding
-                    adalah aksi lokal memindahkan paket dari pintu masuk router ke pintu keluar yang tepat. Routing
-                    adalah aksi global menentukan rute atau jalur dari sumber ke tujuan menggunakan algoritma.</aside>
-            </section>
-
-            <!-- Slide: Routing -->
-            <section>
-                <h3>Routing</h3>
-                <img src="img/pptx_slide_1_28_routing.png" alt="Routing"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Routing adalah proses global yang menentukan jalur tempuh dari sumber (source) ke
-                    tujuan (destination). Ibarat merencanakan perjalanan jauh melintasi berbagai negara bagian dari awal
-                    sampai akhir.</aside>
-            </section>
-
-            <!-- Slide: Forwarding -->
-            <section>
-                <h3>Forwarding</h3>
-                <img src="img/pptx_slide_1_29_forwarding.png" alt="Forwarding"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Sedangkan Forwarding adalah proses lokal pada setiap titik persimpangan (router).
-                    Ibaratnya ketika Anda sampai di persimpangan jalan, Anda hanya memutuskan mau belok kiri atau kanan
-                    untuk lanjut ke rute berikutnya.</aside>
-            </section>
-
-            <section>
-                <h3>Forwarding Tables & Routing</h3>
-                <div class="card text-left text-small">
-                    <p>Bagaimana router tahu arah yang benar?</p>
-                    <ul>
-                        <li>Setiap paket membawa alamat <strong>IP Address Tujuan</strong>.</li>
-                        <li>Router melihat IP tersebut, lalu mencocokkannya dengan peta panduan miliknya yang disebut
-                            <strong>Forwarding Table</strong>.
-                        </li>
-                        <li><strong>Routing Protocol</strong> adalah algoritma AI/matematika yang bertugas memperbarui
-                            tabel ini agar rute selalu optimal.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Packet-switching: store-and-forward -->
-            <section>
-                <h3>Packet-switching: store-and-forward</h3>
-                <img src="img/pptx_slide_1_30_store_forward.png" alt="Packet-switching: store-and-forward"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Packet-switching menggunakan prinsip store-and-forward. Artinya, router harus
-                    menerima keseluruhan paket (semua bit-nya) terlebih dahulu sebelum bisa mulai mengirimkannya ke link
-                    berikutnya. Ini menimbulkan delay transmisi sebesar L/R detik.</aside>
-            </section>
-
-            <section>
-                <h3>Store-and-Forward Transmission</h3>
-                <div class="card text-left text-small">
-                    <p>Ini adalah prinsip kerja router packet-switching:</p>
-                    <ul>
-                        <li>Router harus <strong>menerima dan menyimpan utuh (store)</strong> seluruh bit dari satu
-                            paket ke memorinya.</li>
-                        <li>Hanya setelah paket diterima lengkap tanpa cacat, router akan <strong>meneruskannya
-                                (forward)</strong> ke link berikutnya.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Packet-switching: queueing (1) -->
-            <section>
-                <h3>Packet-switching: queueing</h3>
-                <img src="img/pptx_slide_1_31_queueing_1.png" alt="Packet-switching: queueing"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Masalah yang sering terjadi adalah Antrean (Queueing). Antrean terjadi ketika laju
-                    kedatangan paket (work arrival) lebih cepat daripada kecepatan layanan atau kapasitas link keluar
-                    (transmission rate).</aside>
-            </section>
-
-            <!-- Slide: Packet-switching: queueing (2) -->
-            <section>
-                <h3>Packet-switching: queueing and loss</h3>
-                <img src="img/pptx_slide_1_32_queueing_2.png" alt="Packet-switching: queueing and loss"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Akibat dari queueing adalah "Packet loss" atau paket hilang. Paket-paket akan
-                    mengantre di buffer router, dan jika antrean penuh melebihi kapasitas memori, maka paket yang baru
-                    datang akan dibuang atau di-drop.</aside>
-            </section>
-
-            <section>
-                <h3>Queuing Delay dan Packet Loss</h3>
-                <div class="card text-left text-small">
-                    <p>Setiap router memiliki <strong>Output Buffer (Antrean)</strong>.</p>
-                    <ul>
-                        <li><strong class="highlight-orange">Queuing Delay:</strong> Terjadi jika paket datang tapi link
-                            keluaran masih sibuk mengirim paket lain. Paket harus mengantre.</li>
-                        <li><strong class="highlight-red">Packet Loss:</strong> Jika antrean memori penuh dan ada paket
-                            baru datang, router terpaksa membuang (drop) paket tersebut.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Circuit switching -->
-            <section>
-                <h3>Alternative to packet switching: circuit switching</h3>
-                <img src="img/pptx_slide_1_33_circuit_switching.png" alt="Circuit switching"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Sebagai alternatif dari packet-switching, ada "circuit switching". Pada circuit
-                    switching, resource atau jalur komunikasi (bandwidth) dialokasikan dan di-reserve khusus sejak awal
-                    (dedicated) untuk satu panggilan/komunikasi dari sumber ke tujuan. Umumnya digunakan pada jaringan
-                    telepon tradisional.</aside>
-            </section>
-
-            <section>
-                <h3>Circuit Switching (Alternatif Lama)</h3>
-                <div class="card text-left text-small">
-                    <p>Jaringan telepon tradisional menggunakan <strong>Circuit Switching</strong>.</p>
-                    <ul>
-                        <li>Jalur komunikasi (sirkuit) <strong>dipesan/dialokasikan eksklusif</strong> untuk Anda selama
-                            sesi berlangsung.</li>
-                        <li>Kinerja terjamin 100% tanpa delay antrean.</li>
-                        <li>Namun, sangat boros. Jika Anda sedang diam tidak menelepon, kabel itu tetap tidak boleh
-                            dipakai orang lain.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Circuit switching: FDM and TDM -->
-            <section>
-                <h3>Circuit switching: FDM and TDM</h3>
-                <img src="img/pptx_slide_1_34_fdm_tdm.png" alt="Circuit switching: FDM and TDM"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Circuit switching biasanya diimplementasikan dengan dua cara: FDM (Frequency
-                    Division Multiplexing) membagi bandwidth berdasarkan frekuensi, sedangkan TDM (Time Division
-                    Multiplexing) membagi bandwidth berdasarkan slot waktu.</aside>
-            </section>
-
-            <section>
-                <h3>Multiplexing di Circuit Switching</h3>
-                <div class="card text-left text-small">
-                    <p>Cara membagi 1 kabel untuk banyak panggilan telepon:</p>
-                    <ul>
-                        <li><strong class="highlight-blue">FDM (Frequency-Division):</strong> Kabel dibagi menjadi
-                            frekuensi berbeda-beda layaknya frekuensi stasiun radio FM.</li>
-                        <li><strong class="highlight-orange">TDM (Time-Division):</strong> Waktu dibagi bergiliran dalam
-                            slot mikrodetik (giliran A, giliran B, giliran A lagi).</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Packet switching vs circuit switching -->
-            <section>
-                <h3>Packet switching versus circuit switching</h3>
-                <img src="img/pptx_slide_1_35_packet_vs_circuit.png" alt="Packet switching vs circuit switching"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Packet switching memungkinkan lebih banyak pengguna untuk berbagi kapasitas
-                    jaringan yang sama (karena sifatnya yang on-demand) dibandingkan circuit switching yang jalurnya
-                    eksklusif (dedicated) dan tidak bisa dipakai orang lain walau sedang tidak ada transmisi (idle).
-                </aside>
-            </section>
-
-            <section>
-                <h3>Packet vs Circuit Switching</h3>
-                <div class="card text-left text-small">
-                    <p>Mengapa Internet memilih Packet Switching?</p>
-                    <ul>
-                        <li><strong>Resource Sharing:</strong> Karena internet bersifat <em>bursty</em> (diam lama saat
-                            baca web, lalu tiba-tiba butuh download file). Packet switching memungkinkan kabel dipakai
-                            ramai-ramai.</li>
-                        <li>Jauh lebih efisien dan murah.</li>
-                        <li><span class="highlight-red">Kelemahannya:</span> Jika lalu lintas penuh, terjadi macet parah
-                            (congestion) dan delay tak menentu.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide: Network of networks -->
-            <section>
-                <h3>Internet structure: a “network of networks”</h3>
-                <img src="img/pptx_slide_1_36_network_of_networks.png" alt="Network of networks"
-                    style="width:100%; max-height:490px; object-fit:contain; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <aside class="notes">Internet adalah kumpulan jaringan-jaringan (network of networks). Host terhubung ke
-                    ISP lokal (Access ISPs), dan ISP-ISP ini juga harus saling terhubung satu sama lain secara hierarkis
-                    (melalui regional dan global ISP) agar host manapun di dunia bisa saling berinteraksi.</aside>
-            </section>
-
-            <section>
-                <h3>Network of Networks</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li><strong>Tier-1 ISPs:</strong> ISP global raksasa (AT&T, Level 3). Backbone internet dunia.
-                        </li>
-                        <li><strong>Regional ISPs:</strong> ISP tingkat negara/pulau yang menyewa jalur dari Tier-1.
-                        </li>
-                        <li><strong>IXP (Internet Exchange Point):</strong> Tempat pertemuan fisik berbagai ISP untuk
-                            saling menukar paket secara gratis/murah demi efisiensi.</li>
-                        <li><strong>Content Provider Networks:</strong> Jaringan pribadi Google/Microsoft yang
-                            mem-bypass ISP publik.</li>
-                    </ul>
+                <div class="card-compact" style="padding: 4px 0 0 0;">
+                    <div class="info-box-green" style="margin-top:4px;"><strong>Catatan Kuliah:</strong> Detail struktur kabel, standar TIA/EIA-568B, dan pelemahan sinyal dibahas lengkap pada <strong>Pertemuan 3 (Lapisan Fisik &amp; Cabling)</strong>.</div>
                 </div>
             </section>
 
             <section>
-                <h3>Host: Client & Server</h3>
-                <div class="card text-left text-small">
-                    <p>End systems di ujung jaringan terbagi menjadi dua:</p>
-                    <ul>
-                        <li><strong class="highlight-blue">Clients:</strong> Perangkat (laptop, HP) yang mengajukan
-                            permintaan layanan.</li>
-                        <li><strong class="highlight-orange">Servers:</strong> Mesin kuat di <em>Data Center</em>
-                            (Google, Amazon) yang melayani permintaan web, email, dll.</li>
-                    </ul>
+                <h3>Media Fisik: Unguided Media (Radio &amp; Satelit)</h3>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <h4 class="highlight-blue" style="margin-top:0;"><i class="bi bi-wifi"></i> Terrestrial Radio</h4>
+                        <p>Gelombang elektromagnetik merambat bebas di atmosfer tanpa medium padat (contoh: Wi-Fi, Bluetooth, 4G/5G, Microwave).</p>
+                        <p style="margin-bottom:0;"><strong>Tantangan:</strong> Rawan pantulan dinding (<em>multipath</em>), halangan fisik, interferensi, dan cuaca.</p>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <h4 class="highlight-orange" style="margin-top:0;"><i class="bi bi-broadcast"></i> Satellite Radio</h4>
+                        <ul style="margin-bottom:0;">
+                            <li><strong>Geostationary (GEO ~36.000 km):</strong> Cakupan luas namun <em>propagation delay</em> besar (~280 ms).</li>
+                            <li><strong>LEO (Low Earth Orbit):</strong> Jauh lebih dekat ke bumi → latensi rendah, butuh konstelasi banyak satelit (contoh: Starlink).</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- SECTION 4: DELAY, LOSS, THROUGHPUT -->
-            <section>
-                <h2>1.4 Quality of Service (QoS)</h2>
-                <p>Delay, Loss, dan Throughput</p>
+            <!-- BAGIAN 3 -->
+            <section class="section-slide" data-topic="Bagian 3: The Network Core &amp; Switching">
+                <div class="section-part-label">Bagian 3</div>
+                <h2>3. The Network Core &amp; Switching</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Routing vs Forwarding, Packet Switching (Store-and-Forward &amp; Queueing), Circuit Switching, dan Network of Networks</p>
+                <aside class="notes">Masuk ke inti jaringan: bagaimana miliaran paket data diarahkan melewati mesh router global.</aside>
             </section>
 
             <section>
-                <h3>4 Sumber Delay Keterlambatan (Bag. 1)</h3>
-                <div class="card text-left text-small">
-                    <p>Total Delay = d_proc + d_queue + d_trans + d_prop</p>
-                    <ol>
-                        <li><strong class="highlight-blue">Processing Delay (d_proc):</strong> Waktu bagi router untuk
-                            memeriksa header paket dan mengecek error. (Sangat cepat, hitungan mikrosekon).</li>
-                        <li><strong class="highlight-orange">Queuing Delay (d_queue):</strong> Waktu menunggu dalam
-                            antrean buffer router sebelum bisa masuk ke kabel. (Paling sulit diprediksi, tergantung
-                            kemacetan).</li>
-                    </ol>
+                <h3>Fungsi Inti Network Core: Routing vs Forwarding</h3>
+                <img src="img/pptx_slide_1_27_core_functions.png" alt="Two key network-core functions" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box" style="margin-top:0;">
+                        <strong>Routing (Global / Control Plane):</strong> Algoritma routing menentukan jalur rute dari sumber ke tujuan. &nbsp;|&nbsp; <strong>Forwarding (Lokal / Data Plane):</strong> Router memeriksa IP tujuan di <em>Forwarding Table</em> untuk memindahkan paket dari port masuk ke port keluar yang tepat.
+                    </div>
                 </div>
+                <aside class="notes">Di dalam Network Core ada dua fungsi utama: Routing (aksi global menentukan peta jalan) dan Forwarding (aksi lokal memindahkan paket di tiap router berdasarkan Forwarding Table).</aside>
             </section>
 
             <section>
-                <h3>4 Sumber Delay Keterlambatan (Bag. 2)</h3>
-                <div class="card text-left text-small">
-                    <ol start="3">
-                        <li><strong class="highlight-green">Transmission Delay (d_trans):</strong> Waktu yang butuh
-                            untuk "mendorong" semua bit paket masuk ke dalam kabel. Bergantung pada <em>Bandwidth</em>
-                            link, bukan jarak.</li>
-                        <li><strong class="highlight-red">Propagation Delay (d_prop):</strong> Waktu perjalanan fisik
-                            sebuah bit melintasi panjang kabel dengan kecepatan cahaya. Bergantung pada jarak antar
-                            negara/kota.</li>
-                    </ol>
+                <h3>Packet Switching: Store-and-Forward</h3>
+                <img src="img/pptx_slide_1_30_store_forward.png" alt="Packet-switching: store-and-forward" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box" style="margin-top:0;">
+                        <strong>Prinsip Store-and-Forward:</strong> Router wajib menerima &amp; menyimpan <strong>seluruh <em>L</em> bit paket secara utuh</strong> sebelum mulai meneruskannya ke link berikutnya berkecepatan <em>R</em> bps, menimbulkan delay transmisi sebesar <strong><em>L</em> / <em>R</em> detik</strong> per hop.
+                    </div>
+                </div>
+                <aside class="notes">Packet-switching menggunakan prinsip store-and-forward: seluruh bit paket harus tiba di router terlebih dahulu sebelum diteruskan ke link berikutnya.</aside>
+            </section>
+
+            <section>
+                <h3>Queuing Delay &amp; Packet Loss</h3>
+                <img src="img/pptx_slide_1_32_queueing_2.png" alt="Packet-switching: queueing and loss" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box-warn" style="margin-top:0;">
+                        <strong>Antrean Output Buffer:</strong> Jika laju kedatangan paket melebihi kapasitas link keluar, paket mengantre (<strong>Queuing Delay</strong>). Bila memori buffer penuh, paket baru terpaksa dibuang/di-<em>drop</em> (<strong>Packet Loss</strong>).
+                    </div>
+                </div>
+                <aside class="notes">Antrean terjadi saat kedatangan paket lebih cepat daripada laju kirim link keluar; jika buffer penuh maka terjadi packet loss.</aside>
+            </section>
+
+            <section>
+                <h3>Circuit Switching &amp; Multiplexing (FDM vs TDM)</h3>
+                <img src="img/pptx_slide_1_34_fdm_tdm.png" alt="Circuit switching: FDM and TDM" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box" style="margin-top:0;">
+                        <strong>Circuit Switching (Telepon Tradisional):</strong> Jalur komunikasi dipesan eksklusif selama sesi berlangsung (kinerja terjamin tanpa antrean, tetapi boros saat diam). Kapasitas link dibagi dengan <strong>FDM</strong> (membagi frekuensi) atau <strong>TDM</strong> (membagi slot waktu bergiliran).
+                    </div>
+                </div>
+                <aside class="notes">Circuit switching memesan jalur eksklusif dari awal sampai akhir panggilan, umumnya dibagi via FDM (frekuensi) atau TDM (slot waktu).</aside>
+            </section>
+
+            <section>
+                <h3>Packet Switching vs Circuit Switching</h3>
+                <img src="img/pptx_slide_1_35_packet_vs_circuit.png" alt="Packet switching versus circuit switching" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box-green" style="margin-top:0;">
+                        <strong>Mengapa Internet Memilih Packet Switching?</strong> Karena lalu lintas data bersifat <em>bursty</em> (aktif sesaat lalu diam), <em>resource sharing</em> memungkinkan kabel dipakai lebih banyak pengguna secara hemat, meski berisiko macet (<em>congestion</em>) saat penuh.
+                    </div>
+                </div>
+                <aside class="notes">Packet switching jauh lebih efisien untuk trafik bursty karena kapasitas link dibagi bersama (on-demand), berbeda dengan circuit switching yang dedicated.</aside>
+            </section>
+
+            <section>
+                <h3>Struktur Internet: Network of Networks</h3>
+                <img src="img/pptx_slide_1_36_network_of_networks.png" alt="Internet structure: a network of networks" class="slide-img-diagram">
+                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
+                    <div class="info-box" style="margin-top:0;">
+                        <strong>Hierarki Global:</strong> End systems terhubung ke <strong>Access ISP</strong> &rarr; <strong>Regional ISP</strong> &rarr; <strong>Tier-1 Global ISP</strong>, saling bertukar trafik melalui <strong>IXP (Internet Exchange Point)</strong> dan terhubung dengan <strong>Content Provider Networks</strong> (Google, Meta, Microsoft).
+                    </div>
+                </div>
+                <aside class="notes">Internet tersusun secara hierarkis dari Access ISP, Regional ISP, Tier-1 Global ISP, IXP untuk peering, hingga jaringan Content Provider.</aside>
+            </section>
+
+            <!-- BAGIAN 4 -->
+            <section class="section-slide" data-topic="Bagian 4: Quality of Service (QoS) &amp; Model Berlapis">
+                <div class="section-part-label">Bagian 4</div>
+                <h2>4. Quality of Service (QoS) &amp; Model Berlapis</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Empat Sumber Delay, Analogi Karavan, Throughput, Arsitektur Berlapis (OSI vs TCP/IP), dan Enkapsulasi</p>
+                <aside class="notes">Bahas metrik kinerja jaringan (delay, loss, throughput) serta peta arsitektur berlapis sebelum pendalaman di Pertemuan 2.</aside>
+            </section>
+
+            <section>
+                <h3>4 Sumber Delay Keterlambatan (Nodal Delay)</h3>
+                <p class="text-small" style="margin-bottom:10px;"><code>d_nodal = d_proc + d_queue + d_trans + d_prop</code></p>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left" style="border-left: 4px solid #1565c0;">
+                        <p style="font-weight:700; color:#1565c0; margin-top:0;">1. Processing Delay (<code>d_proc</code>)</p>
+                        <p style="margin-bottom:0;">Waktu router memeriksa header paket, mengecek error bit, dan menentukan link keluar (sangat cepat, hitungan mikrodetik).</p>
+                    </div>
+                    <div class="card card-compact text-left" style="border-left: 4px solid #e65100;">
+                        <p style="font-weight:700; color:#e65100; margin-top:0;">2. Queuing Delay (<code>d_queue</code>)</p>
+                        <p style="margin-bottom:0;">Waktu paket menunggu antrean di buffer sebelum ditransmisikan ke kabel; paling bervariasi sesuai kepadatan trafik.</p>
+                    </div>
+                    <div class="card card-compact text-left" style="border-left: 4px solid #1b5e20;">
+                        <p style="font-weight:700; color:#1b5e20; margin-top:0;">3. Transmission Delay (<code>d_trans = L / R</code>)</p>
+                        <p style="margin-bottom:0;">Waktu "mendorong" seluruh <em>L</em> bit paket masuk ke kabel dengan kapasitas <em>bandwidth</em> <em>R</em> bps (bukan soal jarak).</p>
+                    </div>
+                    <div class="card card-compact text-left" style="border-left: 4px solid #b71c1c;">
+                        <p style="font-weight:700; color:#b71c1c; margin-top:0;">4. Propagation Delay (<code>d_prop = d / s</code>)</p>
+                        <p style="margin-bottom:0;">Waktu perambatan fisik bit sepanjang jarak kabel <em>d</em> dengan kecepatan gelombang <em>s</em> (bergantung jarak kota/negara).</p>
+                    </div>
                 </div>
             </section>
 
             <section>
                 <h3>Analogi Karavan Mobil (Transmission vs Propagation)</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li>Sebuah paket diibaratkan rombongan 10 mobil.</li>
-                        <li>Waktu mendorong 10 mobil melewati gerbang tol lambat = <strong
-                                class="highlight-green">Transmission Delay</strong>.</li>
-                        <li>Waktu mobil melaju dari pintu tol Jakarta ke pintu tol Bandung (jarak tempuh) = <strong
-                                class="highlight-red">Propagation Delay</strong>.</li>
-                    </ul>
-                </div>
-                <!-- <div style="text-align:center; margin-top:15px;">
-                    <img src="img/chapter1/image83.jpg" alt="Caravan Analogy"
-                        style="max-height:250px; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                </div> -->
-            </section>
-
-            <section>
-                <h3>Throughput</h3>
-                <div class="card text-left text-small">
-                    <p>Adalah laju aktual bit data yang berhasil dipindahkan dari sender ke receiver (bits/sec).</p>
-                    <ul>
-                        <li><strong>Instantaneous:</strong> Throughput saat detik ini saja.</li>
-                        <li><strong>Average:</strong> Rata-rata throughput dalam 1 sesi download.</li>
-                        <li>Terhambat oleh link paling lemah/sempit di jalur tersebut (disebut <strong
-                                class="highlight-red">Bottleneck Link</strong>).</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- SECTION 5: PROTOCOL LAYERS -->
-            <section>
-                <h2>1.5 Protocol Layers & Service Models</h2>
-            </section>
-
-            <section>
-                <h3>Mengapa Arsitektur Berlapis?</h3>
-                <div class="card text-left text-small">
-                    <p>Jaringan adalah sistem raksasa. Layering memberikan keuntungan:</p>
-                    <ul>
-                        <li><strong>Modularitas:</strong> Mudah merawat dan mengubah satu bagian tanpa mengganggu bagian
-                            lain. (Contoh: Mengganti kabel tembaga jadi fiber, tidak membuat aplikasi browser error).
-                        </li>
-                        <li><strong>Struktur Diskusi:</strong> Mudah memisahkan fungsi kompleks menjadi tugas spesifik
-                            per layer.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h3>Model OSI (Open Systems Interconnection)</h3>
-                <div class="card text-left text-small">
-                    <p>Dirilis oleh ISO tahun 1984, Model OSI membagi jaringan menjadi 7 layer untuk standar komunikasi:
-                    </p>
-                    <ol reversed style="margin-left: 20px;">
-                        <li><strong>Application:</strong> Antarmuka aplikasi jaringan.</li>
-                        <li><strong>Presentation:</strong> Format data, enkripsi, kompresi.</li>
-                        <li><strong>Session:</strong> Sinkronisasi dan manajemen sesi.</li>
-                        <li><strong>Transport:</strong> Pengiriman ujung-ke-ujung yang handal.</li>
-                        <li><strong>Network:</strong> Pengalamatan logis (IP) dan routing.</li>
-                        <li><strong>Data Link:</strong> Pengalamatan fisik (MAC) dan transfer node-to-node.</li>
-                        <li><strong>Physical:</strong> Sinyal fisik dan media kabel/nirkabel.</li>
-                    </ol>
-                </div>
-            </section>
-
-            <section>
-                <h3>The Internet Protocol Stack (TCP/IP)</h3>
-                <div class="card text-left text-small">
-                    <p>Berbeda dengan OSI, standar yang paling banyak digunakan di internet saat ini adalah TCP/IP (5
-                        layer):</p>
-                    <ul>
-                        <li><strong>5. Application:</strong> (Menggabungkan Application, Presentation, Session OSI).
-                            Layanan HTTP, SMTP. Pesan: <em>Message</em>.</li>
-                        <li><strong>4. Transport:</strong> Transfer data antar aplikasi (TCP, UDP). Pesan:
-                            <em>Segment</em>.
-                        </li>
-                        <li><strong>3. Network:</strong> Routing alamat IP global. Pesan: <em>Datagram</em>.</li>
-                        <li><strong>2. Link:</strong> Transfer data ke tetangga dekat. Pesan: <em>Frame</em>.</li>
-                        <li><strong>1. Physical:</strong> Pergerakan gelombang/sinyal. Pesan: <em>Bits</em>.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h3>Perbandingan Model OSI & TCP/IP</h3>
-                <div
-                    style="display: flex; justify-content: center; gap: 40px; margin: 20px 0; font-size: 0.6em; color: #333;">
-                    <!-- OSI -->
-                    <div style="width: 220px;">
-                        <h4 style="text-align: center; margin-bottom: 10px;">OSI Model</h4>
-                        <div
-                            style="background: #e3f2fd; padding: 8px; border: 1px solid #b6d4fe; text-align: center; margin-bottom: 2px;">
-                            7. Application</div>
-                        <div
-                            style="background: #e3f2fd; padding: 8px; border: 1px solid #b6d4fe; text-align: center; margin-bottom: 2px;">
-                            6. Presentation</div>
-                        <div
-                            style="background: #e3f2fd; padding: 8px; border: 1px solid #b6d4fe; text-align: center; margin-bottom: 2px;">
-                            5. Session</div>
-                        <div
-                            style="background: #d1e7dd; padding: 8px; border: 1px solid #a3cfbb; text-align: center; margin-bottom: 2px;">
-                            4. Transport</div>
-                        <div
-                            style="background: #fff3cd; padding: 8px; border: 1px solid #ffe69c; text-align: center; margin-bottom: 2px;">
-                            3. Network</div>
-                        <div
-                            style="background: #f8d7da; padding: 8px; border: 1px solid #f5c2c7; text-align: center; margin-bottom: 2px;">
-                            2. Data Link</div>
-                        <div style="background: #e2e3e5; padding: 8px; border: 1px solid #d3d6d8; text-align: center;">
-                            1. Physical</div>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left" style="border-top: 4px solid #1b5e20;">
+                        <h4 class="highlight-green" style="margin-top:0;"><i class="bi bi-stoplights-fill"></i> Transmission Delay (Gerbang Tol)</h4>
+                        <p>Bayangkan 1 paket adalah <strong>rombongan 10 mobil</strong> yang harus melewati gerbang tol satu per satu.</p>
+                        <p style="margin-bottom:0;">Waktu untuk melayani dan "mendorong" kesepuluh mobil keluar dari gerbang tol menuju jalan bebas hambatan = <strong>Transmission Delay</strong>.</p>
                     </div>
-                    <!-- TCP/IP -->
-                    <div style="width: 220px;">
-                        <h4 style="text-align: center; margin-bottom: 10px;">TCP/IP Model</h4>
-                        <div
-                            style="background: #e3f2fd; padding: 8px; border: 1px solid #b6d4fe; text-align: center; margin-bottom: 2px; display: flex; align-items: center; justify-content: center; height: 110px; box-sizing: border-box;">
-                            5. Application</div>
-                        <div
-                            style="background: #d1e7dd; padding: 8px; border: 1px solid #a3cfbb; text-align: center; margin-bottom: 2px;">
-                            4. Transport</div>
-                        <div
-                            style="background: #fff3cd; padding: 8px; border: 1px solid #ffe69c; text-align: center; margin-bottom: 2px;">
-                            3. Network</div>
-                        <div
-                            style="background: #f8d7da; padding: 8px; border: 1px solid #f5c2c7; text-align: center; margin-bottom: 2px;">
-                            2. Link</div>
-                        <div style="background: #e2e3e5; padding: 8px; border: 1px solid #d3d6d8; text-align: center;">
-                            1. Physical</div>
+                    <div class="card card-compact text-left" style="border-top: 4px solid #b71c1c;">
+                        <h4 class="highlight-red" style="margin-top:0;"><i class="bi bi-signpost-split-fill"></i> Propagation Delay (Jarak Tempuh)</h4>
+                        <p>Setelah keluar gerbang tol, mobil melaju di jalan tol dengan kecepatan tetap (misal 100 km/jam).</p>
+                        <p style="margin-bottom:0;">Waktu tempuh fisik mobil dari gerbang tol <strong>Jakarta ke Bandung</strong> = <strong>Propagation Delay</strong>.</p>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h3>Proses Enkapsulasi (Bungkus Membungkus)</h3>
+                <h3>Throughput &amp; Bottleneck Link</h3>
                 <div class="card text-left text-small">
+                    <p><strong>Throughput</strong> adalah laju aktual bit data yang berhasil dipindahkan dari <em>sender</em> ke <em>receiver</em> per detik (bits/sec).</p>
                     <ul>
-                        <li><strong>Encapsulation:</strong> Saat pesan dikirim turun ke physical layer, tiap layer akan
-                            menambahkan informasi kontrol miliknya ke bagian depan data (disebut <em>Header</em>).</li>
-                        <li><strong>Decapsulation:</strong> Di komputer tujuan, data naik ke atas. Tiap layer membaca
-                            headernya, lalu membuang header tersebut sebelum memberikannya ke layer atas.</li>
+                        <li><strong>Instantaneous Throughput:</strong> Kecepatan transfer pada satu titik waktu sesaat.</li>
+                        <li><strong>Average Throughput:</strong> Rata-rata kecepatan transfer sepanjang satu sesi unduhan.</li>
+                        <li><strong>Bottleneck Link:</strong> Throughput ujung-ke-ujung dibatasi oleh link paling lambat di sepanjang rute (<code>min(R_c, R_s)</code>).</li>
                     </ul>
-                    <!-- </div>
-                <div style="margin: 20px 0; font-size: 0.6em; text-align: center; color:#333;">
-                    <div style="display: flex; justify-content: center; margin-bottom: 5px;">
-                        <div style="background: #e3f2fd; padding: 8px; width: 400px; border: 1px solid #b6d4fe;">Message
-                            (Data)</div>
-                    </div>
-                    <div style="display: flex; justify-content: center; margin-bottom: 5px;">
-                        <div
-                            style="background: #d1e7dd; padding: 8px; width: 60px; border: 1px solid #a3cfbb; font-weight:bold;">
-                            H_t</div>
-                        <div style="background: #e3f2fd; padding: 8px; width: 400px; border: 1px solid #b6d4fe;">Message
+                </div>
+            </section>
+
+            <section>
+                <h3>Arsitektur Berlapis: Model OSI vs TCP/IP</h3>
+                <div class="layout-2col" style="align-items:center;">
+                    <div class="card card-compact text-left">
+                        <h4 class="highlight-blue" style="margin-top:0;">Mengapa Arsitektur Berlapis?</h4>
+                        <ul>
+                            <li><strong>Modularitas:</strong> Mengubah satu komponen (misal kabel tembaga menjadi fiber optik) tidak merusak aplikasi browser.</li>
+                            <li><strong>Pemisahan Fungsi:</strong> Memudahkan desain, pemeliharaan, dan pembelajaran sistem jaringan raksasa.</li>
+                        </ul>
+                        <div class="info-box" style="margin-top:8px;">
+                            <strong>Catatan Kuliah:</strong> Ketujuh lapisan OSI, model TCP/IP, serta 4 level pengalamatan dibahas tuntas pada <strong>Pertemuan 2 (Model Referensi)</strong>.
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: center; margin-bottom: 5px;">
-                        <div
-                            style="background: #fff3cd; padding: 8px; width: 60px; border: 1px solid #ffe69c; font-weight:bold;">
-                            H_n</div>
-                        <div
-                            style="background: #d1e7dd; padding: 8px; width: 60px; border: 1px solid #a3cfbb; font-weight:bold;">
-                            H_t</div>
-                        <div style="background: #e3f2fd; padding: 8px; width: 400px; border: 1px solid #b6d4fe;">Message
+                    <div style="display: flex; justify-content: center; gap: 20px; font-size: 0.48em; color: #333;">
+                        <div style="width: 190px;">
+                            <h4 class="layer-col-title" style="text-align: center; margin: 0 0 8px 0;">OSI (7 Layer)</h4>
+                            <div style="background: #e3f2fd; padding: 6px; border: 1px solid #b6d4fe; text-align: center; margin-bottom: 2px;">7. Application</div>
+                            <div style="background: #e3f2fd; padding: 6px; border: 1px solid #b6d4fe; text-align: center; margin-bottom: 2px;">6. Presentation</div>
+                            <div style="background: #e3f2fd; padding: 6px; border: 1px solid #b6d4fe; text-align: center; margin-bottom: 2px;">5. Session</div>
+                            <div style="background: #d1e7dd; padding: 6px; border: 1px solid #a3cfbb; text-align: center; margin-bottom: 2px;">4. Transport</div>
+                            <div style="background: #fff3cd; padding: 6px; border: 1px solid #ffe69c; text-align: center; margin-bottom: 2px;">3. Network</div>
+                            <div style="background: #f8d7da; padding: 6px; border: 1px solid #f5c2c7; text-align: center; margin-bottom: 2px;">2. Data Link</div>
+                            <div style="background: #e2e3e5; padding: 6px; border: 1px solid #d3d6d8; text-align: center;">1. Physical</div>
+                        </div>
+                        <div style="width: 190px;">
+                            <h4 class="layer-col-title" style="text-align: center; margin: 0 0 8px 0;">TCP/IP (5 Layer)</h4>
+                            <div style="background: #e3f2fd; padding: 6px; border: 1px solid #b6d4fe; text-align: center; margin-bottom: 2px; display: flex; align-items: center; justify-content: center; height: 92px; box-sizing: border-box;">5. Application<br>(Message)</div>
+                            <div style="background: #d1e7dd; padding: 6px; border: 1px solid #a3cfbb; text-align: center; margin-bottom: 2px;">4. Transport (Segment)</div>
+                            <div style="background: #fff3cd; padding: 6px; border: 1px solid #ffe69c; text-align: center; margin-bottom: 2px;">3. Network (Datagram)</div>
+                            <div style="background: #f8d7da; padding: 6px; border: 1px solid #f5c2c7; text-align: center; margin-bottom: 2px;">2. Link (Frame)</div>
+                            <div style="background: #e2e3e5; padding: 6px; border: 1px solid #d3d6d8; text-align: center;">1. Physical (Bits)</div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Proses Enkapsulasi &amp; Dekapsulasi</h3>
+                <div class="card card-compact text-left" style="margin-bottom: 12px;">
+                    <ul style="margin-bottom:0;">
+                        <li><strong>Encapsulation (Pengirim):</strong> Saat data turun dari layer atas ke physical layer, tiap lapisan membungkus data dengan informasi kontrolnya (<em>Header</em>).</li>
+                        <li><strong>Decapsulation (Penerima):</strong> Saat data naik ke atas, tiap lapisan membaca dan melepaskan header miliknya sebelum menyerahkan muatan ke layer di atasnya.</li>
+                    </ul>
+                </div>
+                <div style="font-size: 0.48em; text-align: center; color:#333;">
                     <div style="display: flex; justify-content: center; margin-bottom: 5px;">
-                        <div
-                            style="background: #f8d7da; padding: 8px; width: 60px; border: 1px solid #f5c2c7; font-weight:bold;">
-                            H_l</div>
-                        <div
-                            style="background: #fff3cd; padding: 8px; width: 60px; border: 1px solid #ffe69c; font-weight:bold;">
-                            H_n</div>
-                        <div
-                            style="background: #d1e7dd; padding: 8px; width: 60px; border: 1px solid #a3cfbb; font-weight:bold;">
-                            H_t</div>
-                        <div style="background: #e3f2fd; padding: 8px; width: 400px; border: 1px solid #b6d4fe;">Message
+                        <div style="background: #e3f2fd; padding: 7px; width: 420px; border: 1px solid #b6d4fe;">Message (Application Layer)</div>
+                    </div>
+                    <div style="display: flex; justify-content: center; margin-bottom: 5px;">
+                        <div style="background: #d1e7dd; padding: 7px; width: 65px; border: 1px solid #a3cfbb; font-weight:bold;">H_t</div>
+                        <div style="background: #e3f2fd; padding: 7px; width: 420px; border: 1px solid #b6d4fe;">Segment (Transport Layer)</div>
+                    </div>
+                    <div style="display: flex; justify-content: center; margin-bottom: 5px;">
+                        <div style="background: #fff3cd; padding: 7px; width: 65px; border: 1px solid #ffe69c; font-weight:bold;">H_n</div>
+                        <div style="background: #d1e7dd; padding: 7px; width: 65px; border: 1px solid #a3cfbb; font-weight:bold;">H_t</div>
+                        <div style="background: #e3f2fd; padding: 7px; width: 420px; border: 1px solid #b6d4fe;">Datagram (Network Layer)</div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <div style="background: #f8d7da; padding: 7px; width: 65px; border: 1px solid #f5c2c7; font-weight:bold;">H_l</div>
+                        <div style="background: #fff3cd; padding: 7px; width: 65px; border: 1px solid #ffe69c; font-weight:bold;">H_n</div>
+                        <div style="background: #d1e7dd; padding: 7px; width: 65px; border: 1px solid #a3cfbb; font-weight:bold;">H_t</div>
+                        <div style="background: #e3f2fd; padding: 7px; width: 420px; border: 1px solid #b6d4fe;">Frame (Link Layer)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BAGIAN 5 -->
+            <section class="section-slide" data-topic="Bagian 5: Keamanan Dasar, Sejarah &amp; Evaluasi">
+                <div class="section-part-label">Bagian 5</div>
+                <h2>5. Keamanan Dasar, Sejarah &amp; Evaluasi</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Ancaman Malware, DoS/DDoS, Sniffing &amp; Spoofing, Sejarah Singkat Internet, Rangkuman, dan Tugas</p>
+                <aside class="notes">Berikan pengantar kesadaran keamanan jaringan sebelum menutup dengan sejarah Internet, rangkuman, dan tugas.</aside>
+            </section>
+
+            <section>
+                <h3>Ancaman Keamanan: Malware, Sniffing &amp; Spoofing</h3>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left" style="border-top: 4px solid #b71c1c;">
+                        <h4 class="highlight-red" style="margin-top:0;"><i class="bi bi-bug-fill"></i> Malware (Virus &amp; Worms)</h4>
+                        <p>Perangkat lunak jahat yang menginfeksi host untuk mencuri data atau membentuk jaringan <em>botnet</em>.</p>
+                        <ul style="margin-bottom:0;">
+                            <li><strong>Virus:</strong> Butuh interaksi pengguna untuk aktif (misal klik lampiran email).</li>
+                            <li><strong>Worms:</strong> Menyebar otomatis lewat celah jaringan tanpa perlu diklik.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left" style="border-top: 4px solid #6a1b9a;">
+                        <h4 style="color:#6a1b9a; margin-top:0;"><i class="bi bi-eye-slash-fill"></i> Sniffing &amp; IP Spoofing</h4>
+                        <ul style="margin-bottom:0;">
+                            <li><strong class="highlight-blue">Packet Sniffing:</strong> Menyadap/merekam paket yang lewat di jaringan (seperti Wi-Fi publik). Solusi: enkripsi data (TLS/HTTPS).</li>
+                            <li><strong class="highlight-green">IP Spoofing:</strong> Memalsukan alamat IP pengirim agar paket seolah berasal dari sumber tepercaya.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Serangan DoS dan DDoS</h3>
+                <div class="layout-text-img">
+                    <div class="card card-compact text-left">
+                        <ul>
+                            <li><strong class="highlight-red">DoS (Denial of Service):</strong> Membanjiri server/jaringan target dengan trafik sampah hingga sumber daya penuh dan pengguna sah tidak dapat mengakses layanan.</li>
+                            <li><strong class="highlight-orange">DDoS (Distributed DoS):</strong> Serangan DoS secara terkoordinasi oleh puluhan ribu perangkat <em>botnet</em> dari berbagai lokasi, sehingga sangat sulit diblokir.</li>
+                        </ul>
+                        <div class="info-box" style="margin-top:8px;">
+                            <strong>Catatan Kuliah:</strong> Kriptografi, otentikasi, TLS/IPsec, dan pertahanan DoS dibahas mendalam di <strong>Pertemuan 13 (Network Security)</strong>.
                         </div>
                     </div>
-                </div> -->
-            </section>
-
-            <!-- SECTION 6: SECURITY & HISTORY -->
-            <section>
-                <h2>1.6 Pengantar Keamanan Jaringan</h2>
+                    <div style="text-align:center; background:#fff; padding:8px; border-radius:10px; box-shadow: 0 4px 12px rgba(0,0,0,0.12);">
+                        <img src="img/week1/dos_vs_ddos.svg" alt="Diagram Serangan DoS vs DDoS" class="slide-img">
+                    </div>
+                </div>
             </section>
 
             <section>
-                <h3>Malware</h3>
+                <h3>Sejarah Singkat Jaringan &amp; Internet</h3>
                 <div class="card text-left text-small">
-                    <p>Malware (Perangkat Lunak Jahat) dapat menginfeksi host untuk mencuri data atau menjadikannya
-                        mesin penyerang botnet.</p>
                     <ul>
-                        <li><strong>Virus:</strong> Malware yang butuh interaksi Anda untuk aktif (misal klik lampiran
-                            email).</li>
-                        <li><strong>Worms:</strong> Malware pintar yang bisa menyebar otomatis lewat kelemahan jaringan
-                            tanpa perlu diklik.</li>
+                        <li><strong>1961–1972 (Era ARPAnet):</strong> Konsep <em>Packet Switching</em> lahir dan diimplementasikan pada ARPAnet, menggeser dominasi jaringan telepon <em>Circuit Switching</em>.</li>
+                        <li><strong>1972–1990 (Standardisasi TCP/IP):</strong> Arsitektur antarjaringan terbuka dan protokol TCP/IP dibakukan sebagai standar Internet modern.</li>
+                        <li><strong>1990-an–Sekarang (WWW &amp; Komersialisasi):</strong> Tim Berners-Lee menciptakan <em>World Wide Web</em> (HTTP &amp; HTML), membuka ledakan aplikasi web, seluler, cloud, dan IoT.</li>
                     </ul>
                 </div>
             </section>
 
-            <section>
-                <h3>DoS dan DDoS Attacks</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li><strong class="highlight-red">DoS (Denial of Service):</strong> Menyerang server dengan
-                            banjir trafik sampah, sehingga memori/bandwith server penuh dan website lumpuh (tidak bisa
-                            diakses pengguna asli).</li>
-                        <li><strong class="highlight-orange">DDoS (Distributed DoS):</strong> Serangan DoS tapi
-                            dilakukan secara keroyokan oleh puluhan ribu komputer <em>botnet</em> bajakan dari seluruh
-                            dunia. Sangat sulit ditangkal.</li>
-                    </ul>
-                </div>
-                <div style="text-align:center; margin-top:15px; background:#fff; padding:10px; border-radius:10px;">
-                    <img src="img/chapter1/image99.jpeg" alt="DDoS Attack" style="max-height:200px; border-radius:5px;">
-                </div>
-            </section>
-
-            <section>
-                <h3>Sniffing dan Spoofing</h3>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li><strong class="highlight-blue">Packet Sniffing:</strong> Penjahat "menguping" dan merekam
-                            paket yang lalu lalang di Wi-Fi publik. Solusinya: Enkripsi data.</li>
-                        <li><strong class="highlight-green">IP Spoofing:</strong> Penjahat memalsukan alamat IP pengirim
-                            di paketnya, sehingga seolah-olah paket berasal dari komputer tepercaya (teman/bank).</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h2>1.7 Sejarah Singkat Jaringan</h2>
-                <div class="card text-left text-small">
-                    <ul>
-                        <li><strong>1961-1972:</strong> Era ARPAnet, konsep Packet Switching lahir menggantikan monopoli
-                            telepon Circuit Switching.</li>
-                        <li><strong>1972-1990:</strong> Protokol TCP/IP dibakukan.</li>
-                        <li><strong>1990-an:</strong> Tim Berners-Lee menemukan <em>World Wide Web</em> (Web dan HTML).
-                            Mengubah internet menjadi industri raksasa komersial.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- OUTRO -->
             <section>
                 <h3>Rangkuman Pertemuan 1</h3>
                 <div class="card text-left text-small">
                     <ul>
-                        <li>Internet ("Network of Networks") mendasari revolusi komunikasi global.</li>
-                        <li>Infrastrukturnya: End Systems, Edge Router, Communication Links, Core Router.</li>
-                        <li>Packet Switching memenangkan pertarungan melawan Circuit Switching.</li>
-                        <li>Kinerja diukur dengan Delay, Loss, dan Throughput.</li>
-                        <li>Arsitektur berlapis (TCP/IP) mempermudah rekayasa jaringan.</li>
+                        <li>Internet ("Network of Networks") mendasari revolusi komunikasi dan layanan aplikasi terdistribusi.</li>
+                        <li>Infrastruktur utamanya meliputi <em>End Systems</em>, <em>Access Networks</em> &amp; <em>Media Fisik</em>, serta <em>Network Core</em> (Router).</li>
+                        <li><em>Packet Switching</em> unggul atas <em>Circuit Switching</em> untuk trafik internet yang bersifat <em>bursty</em>.</li>
+                        <li>Kinerja jaringan diukur lewat 4 sumber <em>Delay</em>, <em>Packet Loss</em>, dan <em>Throughput</em> (<em>Bottleneck Link</em>).</li>
+                        <li>Arsitektur berlapis (OSI/TCP-IP) dan kesadaran keamanan dasar menjadi fondasi seluruh kuliah Jaringan Komputer.</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- TUGAS / PR -->
             <section>
-                <h2>Tugas Individu / PR</h2>
-                <div class="card text-left text-small">
-                    <p>Kerjakan soal berikut dengan <strong>tulis tangan</strong>, lalu di-scan/difoto untuk
-                        dikumpulkan:</p>
-                    <ol style="margin-left: 20px;">
-                        <li style="margin-bottom: 10px;">Apakah tugas dan fungsi utama dari seorang <strong>Network
-                                Administrator</strong>? Jelaskan!</li>
-                        <li>Sebutkan dan jelaskan karakteristik dari berbagai macam <strong>Topologi</strong> dalam
-                            jaringan komputer (Bus, Star, Ring, Mesh)!</li>
-                    </ol>
+                <div class="tugas-box text-left">
+                    <h3><i class="bi bi-pencil-square"></i> Tugas Individu / PR</h3>
+                    <p style="font-size:.58em; margin-top:0; color:#c5cae9;">Kerjakan soal berikut dengan <strong>tulis tangan</strong>, lalu scan/foto untuk dikumpulkan ke E-Learning:</p>
+                    <div class="tugas-soal">
+                        <p><strong>1.</strong> Apakah tugas dan fungsi utama dari seorang <strong>Network Administrator</strong>? Jelaskan!</p>
+                    </div>
+                    <div class="tugas-soal">
+                        <p><strong>2.</strong> Sebutkan dan jelaskan karakteristik dari berbagai macam <strong>Topologi</strong> dalam jaringan komputer (Bus, Star, Ring, Mesh)!</p>
+                    </div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+                        <span class="tugas-chip"><i class="bi bi-pen"></i> Tulis Tangan (Kertas Folio)</span>
+                        <span class="tugas-chip"><i class="bi bi-file-earmark-pdf"></i> Scan / Foto PDF ke E-Learning</span>
+                    </div>
                 </div>
             </section>
 
             <section>
-                <h2>Tanya Jawab (Q&A)</h2>
-                <p>Silakan jika ada pertanyaan terkait materi Pengantar Jaringan.</p>
-                <aside class="notes">Beri waktu mahasiswa 5-10 menit untuk bertanya.</aside>
+                <h2>Tanya Jawab (Q&amp;A)</h2>
+                <p>Silakan jika ada pertanyaan terkait materi Pengantar Jaringan Komputer.</p>
+                <aside class="notes">Beri waktu mahasiswa 5–10 menit untuk bertanya.</aside>
             </section>
         </div>
     </div>

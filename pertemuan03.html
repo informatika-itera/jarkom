@@ -361,6 +361,79 @@
         [data-theme="dark"] .reveal table td {
             border-color: #555 !important;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
     </style>
 </head>
 
@@ -393,36 +466,64 @@
             </section>
 
             <!-- OUTLINE -->
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
-                <div class="card text-left text-small" style="max-width: 700px; margin: 0 auto; padding: 20px 40px;">
-                    <ol style="line-height: 1.6;">
-                        <li>Konsep Sinyal: Analog vs Digital</li>
-                        <li>Gangguan Transmisi</li>
-                        <li>Guided Media:
-                            <ol type="a" style="margin-top:0; padding-left:1.4em; font-size:.92em;">
-                                <li>Coaxial</li>
-                                <li>Twisted Pair</li>
-                                <li>Fiber Optik</li>
-                            </ol>
-                        </li>
-                        <li>Unguided Media:
-                            <ol type="a" style="margin-top:0; padding-left:1.4em; font-size:.92em;">
-                                <li>Radio</li>
-                                <li>Microwave</li>
-                                <li>Infrared</li>
-                                <li>Satelit</li>
-                            </ol>
-                        </li>
-                    </ol>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-activity"></i> 1. Konsep Sinyal &amp; Transmisi
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Perbedaan Data vs Sinyal (Analog vs Digital)</li>
+                            <li>Modulasi (<em>Mo-Dem</em>): Mengubah Bit ke Sinyal Gelombang</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-exclamation-diamond-fill"></i> 2. Gangguan Transmisi (Impairment)
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li><em>Attenuation</em> (Redaman), <em>Distortion</em> (Distorsi Fase), &amp; <em>Noise</em></li>
+                            <li>Dampak Sinyal Lemah terhadap Kualitas Link Fisik</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-ethernet"></i> 3. Media Transmisi Terpandu (Guided Media)
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Coaxial, Twisted Pair (UTP/STP, Cat 5e–8), Standar RJ45 568-B</li>
+                            <li>Kabel UTP <em>Straight-Through</em> vs <em>Crossover</em> &amp; Fiber Optik</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-broadcast"></i> 4. Media Tak Terpandu (Unguided / Nirkabel)
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Gelombang Radio, Gelombang Mikro (<em>Microwave</em>), &amp; Infrared</li>
+                            <li>Komunikasi Satelit (LEO/MEO/GEO) &amp; Perbandingan Media</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#c2185b; margin:0 0 4px 0;">
+                            <i class="bi bi-journal-check"></i> 5. Rangkuman &amp; Evaluasi Mandiri
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Matriks Pemilihan Media Kabel vs Nirkabel &amp; Tugas Pertemuan 3</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu membedakan karakteristik sinyal dan gangguan transmisi pada Lapisan Fisik serta memilih media transmisi kabel (UTP/Fiber) maupun nirkabel yang tepat.
+                        </div>
+                    </div>
                 </div>
+                <aside class="notes">Outline Pertemuan 3 memetakan kajian Lapisan Fisik secara sistematis: sifat sinyal dasar, tiga gangguan transmisi utama, pembedahan media kabel (termasuk praktik UTP 568-B), dan perbandingan media nirkabel.</aside>
             </section>
 
             <!-- SECTION 1: SINYAL -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Konsep Sinyal &amp; Transmisi">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Konsep Sinyal &amp; Transmisi</h2>
-                <aside class="notes">Sebelum membahas kabel, kita harus tahu apa wujud data yang mengalir di dalamnya.
-                </aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Data vs Sinyal (Analog &amp; Digital) serta Prinsip Dasar Modulasi (Mo-Dem)</p>
+                <aside class="notes">Sebelum membahas kabel, kita harus tahu apa wujud data yang mengalir di dalamnya.</aside>
             </section>
 
             <!-- 1a. Data vs Sinyal -->
@@ -528,10 +629,11 @@
             </section>
 
             <!-- SECTION 2: IMPAIRMENT -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 2: Gangguan Transmisi (Impairment)">
+                <div class="section-part-label">Bagian 2</div>
                 <h2>2. Gangguan Transmisi (Impairment)</h2>
-                <aside class="notes">Sinyal yang dikirim tidak pernah sampai persis sama. Ada 3 jenis gangguan utama.
-                </aside>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Tiga Faktor Penurun Kualitas Sinyal: Attenuation, Distortion, dan Noise</p>
+                <aside class="notes">Sinyal yang dikirim tidak pernah sampai persis sama. Ada 3 jenis gangguan utama.</aside>
             </section>
 
             <!-- 2a. Tiga jenis -->
@@ -647,9 +749,10 @@
             </section>
 
             <!-- SECTION 3: MEDIA TRANSMISI -->
-            <section>
-                <h2>3. Media Transmisi</h2>
-                <p>Jalan Raya Bagi Sinyal</p>
+            <section class="section-slide" data-topic="Bagian 3: Media Transmisi">
+                <div class="section-part-label">Bagian 3</div>
+                <h2>3. Media Transmisi (Guided Media)</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Jalan Raya Bagi Sinyal: Kabel Coaxial, Twisted Pair (UTP/STP), RJ45 568-B, dan Fiber Optik</p>
                 <aside class="notes">Kita bahas dua kategori besar: Guided (kabel) dan Unguided (nirkabel).</aside>
             </section>
 
@@ -899,10 +1002,11 @@
             </section>
 
             <!-- KABEL UTP STRAIGHT & CROSS -->
-            <section>
-                <h2>Kabel UTP: Straight &amp; Cross</h2>
-                <aside class="notes">Mari kita bahas dua jenis susunan kabel UTP yang sering digunakan: Straight-through
-                    dan Crossover, beserta fungsinya masing-masing.</aside>
+            <section class="section-slide" data-topic="Bagian 3b: Kabel UTP Straight &amp; Cross">
+                <div class="section-part-label">Bagian 3 &bull; Sub-Topik</div>
+                <h2>Kabel UTP: Straight-Through &amp; Crossover</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Aturan Susunan Pin TIA/EIA-568A/B untuk Koneksi Perangkat Berbeda vs Sejenis</p>
+                <aside class="notes">Mari kita bahas dua jenis susunan kabel UTP yang sering digunakan: Straight-through dan Crossover, beserta fungsinya masing-masing.</aside>
             </section>
 
             <!-- Straight-Through -->
@@ -1081,9 +1185,10 @@
 
 
             <!-- SECTION 4: UNGUIDED MEDIA -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4: Unguided Media (Nirkabel)">
+                <div class="section-part-label">Bagian 4</div>
                 <h2>4. Unguided Media (Nirkabel)</h2>
-                <p>Gelombang elektromagnetik merambat bebas tanpa panduan fisik</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Gelombang Elektromagnetik Tanpa Kabel: Radio, Microwave, Infrared, dan Satelit</p>
                 <aside class="notes">Ada 4 jenis utama yang akan kita bahas satu per satu.</aside>
             </section>
 

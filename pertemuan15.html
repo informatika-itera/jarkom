@@ -4,314 +4,367 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jaringan Komputer - Pertemuan 15: Studi Kasus & Tren Jaringan</title>
+    <title>Jaringan Komputer - Pertemuan 15: Studi Kasus, IoT & Tren Jaringan</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css" id="theme">
     <link rel="stylesheet" href="css/pkom-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
     <style>
+
         @media screen {
             .reveal .slides section {
                 max-height: 100%;
                 overflow-y: auto;
-                padding-bottom: 20px;
+                padding-bottom: 24px;
+                box-sizing: border-box;
             }
 
             .reveal img {
-                max-height: 45vh;
+                max-height: 48vh;
                 object-fit: contain;
             }
         }
 
-        @media print {
-            .reveal .slides section {
-                max-height: none !important;
-                height: auto !important;
-                overflow: visible !important;
-            }
-
-            .reveal img,
-            .card {
-                page-break-inside: avoid;
-            }
+        .reveal .card {
+            margin-bottom: 8px;
         }
 
-        .reveal .card {
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
             margin-bottom: 10px;
         }
 
-        /* images */
-        .slide-img {
-            width: 100%;
-            height: auto;
-            max-height: 44vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
-            display: block;
-            margin: 0 auto;
+        .title-box {
+            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+            padding: 26px;
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 16px;
         }
 
-        .slide-img-sm {
+        .title-box h1 {
+            color: white !important;
+            font-size: 2em;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .title-box .subtitle {
+            color: #bbdefb !important;
+            font-size: 1.1em;
+            margin: 8px 0 0 0;
+            font-weight: 400;
+        }
+
+        .text-small {
+            font-size: .68em;
+            color: #64748b;
+            margin: 4px 0;
+        }
+
+        .text-left {
+            text-align: left !important;
+        }
+
+        .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .90em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
+        /* Calibrated font scale matching P14 for Reveal 40px base */
+        .card,
+        .card-compact {
+            box-sizing: border-box;
             width: 100%;
-            height: auto;
-            max-height: 32vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+            max-width: 100%;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .card-compact {
+            font-size: .41em; /* Smaller, crisp, plenty of breathing room */
+            line-height: 1.42;
+            padding: 10px 14px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 0.95em;
+            margin-bottom: 4px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul,
+        .card-compact ol {
             display: block;
-            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.1em;
+            margin: 3px 0 5px 0;
         }
 
         .layout-2col {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            align-items: start;
+            align-items: stretch;
             width: 100%;
         }
 
         .layout-text-img {
             display: grid;
-            grid-template-columns: 52% 1fr;
+            grid-template-columns: 48% 1fr;
             gap: 16px;
             align-items: center;
             width: 100%;
+            height: calc(100% - 65px);
+            margin-top: 8px;
         }
 
-        .layout-3col {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-            width: 100%;
+        .layout-text-img > *,
+        .layout-2col > * {
+            min-width: 0; /* CRITICAL: prevents column overflow in CSS grid */
+        }
+
+        .lcol-text {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+            max-height: 100%;
+            padding-right: 4px;
+            min-width: 0;
+            box-sizing: border-box;
+        }
+
+        .rcol-img {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        .rcol-img img {
+            max-width: 100%;
+            max-height: 480px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin: auto;
         }
 
         .img-caption {
-            font-size: .55em;
-            color: #777;
+            font-size: .40em;
+            color: #64748b;
             text-align: center;
-            margin-top: .2em;
+            margin-top: 5px;
             font-style: italic;
         }
 
-        /* Section bars & headers */
-        .sec-bar {
-            border-radius: 8px 8px 0 0;
-            padding: 8px 16px;
-            font-size: .75em;
-            font-weight: 700;
-            letter-spacing: .04em;
-        }
-
-        .sec-body {
-            background: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: 0 0 8px 8px;
-            padding: 12px 16px;
-            font-size: .68em;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
-        }
-
-        .card .sec-bar {
-            font-size: .88em;
-        }
-
-        .card .sec-body {
-            font-size: .82em;
-        }
-
-        .sec-bar-blue {
-            background: #1565c0;
-            color: #fff;
-        }
-
-        .sec-bar-orange {
-            background: #e65100;
-            color: #fff;
-        }
-
-        .sec-bar-green {
-            background: #1b5e20;
-            color: #fff;
-        }
-
-        .sec-bar-purple {
-            background: #4a148c;
-            color: #fff;
-        }
-
-        .sec-bar-red {
-            background: #b71c1c;
-            color: #fff;
-        }
-
-        /* Info boxes */
-        .info-box {
-            border-left: 4px solid #1565c0;
-            background: #e8f0fe;
-            border-radius: 0 8px 8px 0;
-            padding: 10px 14px;
-            font-size: .68em;
-            margin-top: .5em;
-            line-height: 1.5;
-        }
-
-        .info-box-warn {
-            border-left: 4px solid #e65100;
-            background: #fff3e0;
-            border-radius: 0 8px 8px 0;
-            padding: 10px 14px;
-            font-size: .68em;
-            margin-top: .5em;
-            line-height: 1.5;
-        }
-
-        .info-box-green {
-            border-left: 4px solid #1b5e20;
-            background: #e8f5e9;
-            border-radius: 0 8px 8px 0;
-            padding: 10px 14px;
-            font-size: .68em;
-            margin-top: .5em;
-            line-height: 1.5;
-        }
-
-        .info-box-red {
-            border-left: 4px solid #b71c1c;
-            background: #ffebee;
-            border-radius: 0 8px 8px 0;
-            padding: 10px 14px;
-            font-size: .68em;
-            margin-top: .5em;
-            line-height: 1.5;
-        }
-
-        .card .info-box,
-        .card .info-box-warn,
-        .card .info-box-green,
-        .card .info-box-red {
-            font-size: .88em;
-        }
-
-        .reveal h3 {
-            font-size: 1.35em;
-            margin-bottom: 12px;
-        }
-
-        .reveal table {
-            font-size: .55em;
+        .formula-box {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-left: 4px solid #3b82f6;
+            padding: 4px 8px;
+            margin: 4px 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.88em;
+            box-sizing: border-box;
             width: 100%;
-            border-collapse: collapse;
+            overflow-wrap: break-word;
         }
 
-        .reveal table th,
-        .reveal table td {
-            border: 1px solid #dee2e6;
-            padding: 6px 10px;
-            text-align: left;
-        }
-
-        .reveal table th {
-            background: #1565c0;
-            color: #fff;
-            font-weight: 700;
-        }
-
-        .reveal table tr:nth-child(even) td {
-            background: #f8f9fa;
-        }
-
-        .code-block {
-            background: #282c34;
-            color: #abb2bf;
-            font-family: monospace;
-            padding: 10px 14px;
-            border-radius: 6px;
-            font-size: .62em;
-            text-align: left;
+        .formula-box .katex-display {
+            font-size: 0.80em !important;
+            margin: 2px 0 !important;
             overflow-x: auto;
-            line-height: 1.45;
+            overflow-y: hidden;
         }
 
-        .tugas-box {
-            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
-            border-radius: 14px;
-            padding: 22px 28px;
-            color: #fff;
-            text-align: left;
-        }
-
-        .tugas-box h3 {
-            color: #fff !important;
-            margin-top: 0;
-            font-size: 1.2em;
-        }
-
-        .tugas-soal {
-            background: rgba(255, 255, 255, .15);
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin: 10px 0;
-        }
-
-        .tugas-soal p {
-            font-size: .6em;
-            line-height: 1.6;
-            margin: 0;
-            color: #e8f5e9;
-        }
-
-        .tugas-soal .num {
-            font-size: 1.1em;
-            font-weight: 700;
-            color: #ffeb3b;
-        }
-
-        .tugas-info {
-            display: flex;
-            gap: 10px;
-            margin-top: 14px;
-            flex-wrap: wrap;
-        }
-
-        .tugas-chip {
-            background: rgba(255, 255, 255, .2);
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: .6em;
-            color: #fff;
+        .sec-bar {
             display: flex;
             align-items: center;
+            gap: 7px;
+            font-weight: 700;
+            font-size: 0.98em;
+            padding: 5px 9px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+        }
+
+        .sec-bar-blue { background: #eff6ff; color: #1d4ed8; border-left: 4px solid #2563eb; }
+        .sec-bar-purple { background: #faf5ff; color: #6b21a8; border-left: 4px solid #9333ea; }
+        .sec-bar-teal { background: #f0fdfa; color: #0f766e; border-left: 4px solid #0d9488; }
+        .sec-bar-amber { background: #fffbeb; color: #92400e; border-left: 4px solid #d97706; }
+        .sec-bar-red { background: #fef2f2; color: #991b1b; border-left: 4px solid #dc2626; }
+        .sec-bar-green { background: #f0fdf4; color: #166534; border-left: 4px solid #16a34a; }
+
+        .reveal h3 {
+            font-size: 1.15em;
+            margin-bottom: 8px;
+        }
+
+        .reveal code {
+            background: #f1f5f9;
+            color: #be185d;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-size: .90em;
+            word-break: break-all;
+        }
+
+        /* Simulation CSS */
+        .sim-container {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            margin-top: 6px;
+            box-sizing: border-box;
+            font-size: .46em;
+        }
+
+        .sim-controls {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .sim-btn {
+            display: inline-flex;
+            align-items: center;
             gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 0.88em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sim-btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
+        .sim-btn-primary { background: #2563eb; color: #ffffff; }
+        .sim-btn-secondary { background: #0d9488; color: #ffffff; }
+        .sim-btn-warn { background: #d97706; color: #ffffff; }
+        .sim-btn-reset { background: #64748b; color: #ffffff; }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
         }
 
-        /* Dark mode overrides for custom components */
-        [data-theme="dark"] .sec-body {
-            background: #2a2a2a !important;
-            color: #eee !important;
-            border-color: #444 !important;
+        .sim-pane {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 0;
         }
 
-        [data-theme="dark"] .code-block {
-            background: #1e1e1e !important;
-            color: #d4d4d4 !important;
-            border: 1px solid #444;
+        .sim-pane-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82em;
+            font-weight: 700;
+            color: #334155;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 4px;
         }
 
-        [data-theme="dark"] .reveal table th {
-            background: #1a365d !important;
+        .sim-badge {
+            font-size: 0.85em;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .sim-status-idle { background: #e2e8f0; color: #475569; }
+        .sim-status-active { background: #bbf7d0; color: #166534; }
+        .sim-status-wait { background: #fed7aa; color: #9a3412; }
+
+        .sim-log {
+            font-family: monospace;
+            font-size: 0.82em;
+            line-height: 1.4;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 6px;
+            min-height: 140px;
+            max-height: 180px;
+            overflow-y: auto;
+            color: #1e293b;
         }
 
-        [data-theme="dark"] .reveal table td {
-            border-color: #444 !important;
+        .sim-log-item {
+            margin-bottom: 4px;
+            padding-bottom: 3px;
+            border-bottom: 1px dashed #e2e8f0;
         }
+        .sim-tag-req { color: #2563eb; font-weight: bold; }
+        .sim-tag-res { color: #16a34a; font-weight: bold; }
+        .sim-tag-cache { color: #7c3aed; font-weight: bold; }
+        .sim-tag-err { color: #dc2626; font-weight: bold; }
 
-        [data-theme="dark"] .reveal table tr:nth-child(even) td {
-            background: #222 !important;
+        /* Dark Mode overrides */
+        html[data-theme="dark"] .card {
+            background: #1e293b;
+            border-color: #334155;
+            color: #f1f5f9;
         }
+        html[data-theme="dark"] .rcol-img {
+            background: #0f172a;
+            border-color: #334155;
+        }
+        html[data-theme="dark"] .sec-bar-blue { background: #1e3a8a; color: #93c5fd; }
+        html[data-theme="dark"] .sec-bar-purple { background: #3b0764; color: #d8b4fe; }
+        html[data-theme="dark"] .sec-bar-teal { background: #042f2e; color: #5eead4; }
+        html[data-theme="dark"] .sec-bar-amber { background: #451a03; color: #fde68a; }
+        html[data-theme="dark"] .sec-bar-red { background: #450a0a; color: #fca5a5; }
+        html[data-theme="dark"] .sec-bar-green { background: #052e16; color: #86efac; }
+        html[data-theme="dark"] .sim-container { background: #1e293b; border-color: #334155; }
+        html[data-theme="dark"] .sim-pane { background: #0f172a; border-color: #334155; }
+        html[data-theme="dark"] .sim-pane-header { color: #e2e8f0; border-color: #334155; }
+        html[data-theme="dark"] .sim-log { background: #020617; border-color: #1e293b; color: #cbd5e1; }
+        html[data-theme="dark"] .formula-box { background: #0f172a; border-left-color: #60a5fa; color: #e2e8f0; }
+    
     </style>
 </head>
 
@@ -324,154 +377,830 @@
 
         <div class="slides">
 
-            <section>
+            <!-- SLIDE 1: COVER -->
+            <section data-topic="Pertemuan 15: Studi Kasus, IoT &amp; Tren Jaringan">
                 <div class="title-box">
-                    <h1>Studi Kasus & Tren Jaringan</h1>
+                    <h1>Studi Kasus, IoT &amp; Tren Jaringan</h1>
                     <h3 class="subtitle">Pertemuan 15</h3>
                 </div>
-                <p>Eksplorasi Mendalam: SOHO, IoT, SDN Dasar, dan Isu Etika Keamanan</p>
-                <p>Referensi: <em>Paper Studi Kasus Jaringan & RPS Jaringan Komputer</em></p>
+                <p class="text-small">Referensi Utama: Kurose &amp; Ross — <em>Computer Networking: A Top-Down Approach (8th Ed., Ch. 8)</em> &amp; Standar RFC/NIST</p>
                 <p class="text-small"><em>Dosen Pengampu:</em></p>
-                <div
-                    style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
+                <div style="display:flex; justify-content:center; gap:15px; margin-top:10px; font-size:.5em; color:#777; flex-wrap:wrap;">
                     <div><i class="bi bi-person-fill"></i> Rajif Agung Yunmar, S.Kom., M.Cs.</div>
                     <div><i class="bi bi-person-fill"></i> I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.</div>
                     <div><i class="bi bi-person-fill"></i> Hartanto Tantriawan, S.Kom., M.Kom.</div>
                     <div><i class="bi bi-person-fill"></i> Ilham Firman Ashari, S.Kom., M.T.</div>
                 </div>
+                <aside class="notes">Selamat datang di Pertemuan 15: Studi Kasus, IoT, Edge Device &amp; Tren Jaringan. Hari ini adalah pertemuan kuliah reguler terakhir sebelum Ujian Akhir Semester. Di sesi ini kita membedah integrasi arsitektur nyata (SOHO, IoT, Edge, SDN/NFV, Zero Trust) dan melaksanakan Kuis 2 di kelas.</aside>
             </section>
 
-            <section>
-                <h3>Bagian 1: SOHO Networks</h3>
-                <div class="card text-left text-smaller">
-                    <p>SOHO (*Small Office / Home Office*) adalah tulang punggung operasional kerja hibrida modern.</p>
-                    <ul>
-                        <li><strong>Karakteristik:</strong> Jaringan berskala kecil (1-10 pengguna) namun menuntut stabilitas tinggi layaknya korporasi.</li>
-                        <li><strong>Arsitektur Sederhana:</strong> Biasanya ditenagai oleh <em>All-in-one Router</em> (bertindak sekaligus sebagai Switch, Access Point, dan NAT Gateway/Firewall).</li>
-                    </ul>
+            <!-- SLIDE 2: OVERVIEW -->
+            <section data-topic="Outline Materi">
+                <h3>Outline Materi</h3>
+                <div class="layout-2col">
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-router"></i> 1. Desain Jaringan SOHO Modern
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Router All-in-One, Translasi <strong>NAT / PAT</strong>, &amp; Isolasi VLAN Perangkat IoT</li>
+                            <li>Optimalisasi Antrean Bufferbloat (SQM) &amp; Terowongan WireGuard VPN</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#0f766e; margin:0 0 4px 0;">
+                            <i class="bi bi-cpu-fill"></i> 2. Internet of Things (IoT) &amp; Komputasi Edge
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Arsitektur 3-Tier IoT, Constrained Devices, &amp; Nirkabel LPWAN (LoRa vs NB-IoT)</li>
+                            <li>Protokol Aplikasi (MQTT vs CoAP), Kontinum Edge AI, &amp; Demo Interaktif</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#7c3aed; margin:0 0 4px 0;">
+                            <i class="bi bi-diagram-3-fill"></i> 3. Software-Defined Networking (SDN) &amp; NFV
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Dekopling Control &amp; Data Plane, Antarmuka API, &amp; Logika OpenFlow</li>
+                            <li>Simulasi Penanganan Table-Miss &amp; Service Function Chaining (NFV)</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#b91c1c; margin:0 0 4px 0;">
+                            <i class="bi bi-shield-check"></i> 4. Keamanan Modern &amp; Isu Etika Digital
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Paradigma Zero Trust (ZTA NIST) &amp; Anatomi Serangan Botnet IoT Mirai</li>
+                            <li>AIOps vs Adversarial AI, Inspeksi DPI &amp; Kepatuhan UU PDP, serta Netralitas Internet</li>
+                        </ul>
+
+                        <p style="font-weight:700; color:#ea580c; margin:0 0 4px 0;">
+                            <i class="bi bi-pencil-square"></i> 5. Evaluasi Akhir &amp; Penutup Perkuliahan
+                        </p>
+                        <ul style="margin-bottom:10px;">
+                            <li>Sintesis Semester (Layer 1–7), <strong>Pelaksanaan Kuis 2 di Kelas (0 Tugas)</strong></li>
+                            <li>Pengarahan Kisi-Kisi Ujian Akhir Semester (Minggu XVI)</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu menganalisis integrasi teknologi jaringan modern (SOHO, IoT, Edge, SDN, Zero Trust) secara komprehensif serta memahami batasan etika dan hukum rekayasa jaringan.
+                        </div>
+                    </div>
                 </div>
+                <aside class="notes">Bahas peta alur Pertemuan 15: materi dipadatkan menjadi 4 pilar arsitektur utama, kemudian dilanjutkan dengan sesi evaluasi Kuis 2 langsung di kelas tanpa ada tugas rumah tambahan.</aside>
             </section>
 
-            <section>
-                <h3>Arsitektur Jaringan SOHO</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week15/image1.png" class="slide-img" alt="Arsitektur Jaringan SOHO">
-                </div>
+            <!-- SLIDE 3: PEMISAH BAB 1 -->
+            <section class="section-slide" data-topic="Bagian 1: Desain Jaringan SOHO Modern">
+                <div class="section-part-label">Bagian 1</div>
+                <h2>1. Desain Jaringan SOHO Modern</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Router All-in-One, Cara Kerja NAT/PAT, Segmentasi VLAN, Mitigasi Bufferbloat SQM, &amp; WireGuard</p>
+                <aside class="notes">Bagian pertama memusatkan fokus pada arsitektur jaringan lokal skala kecil/rumahan modern, mekanisme translasi alamat NAT/PAT, serta optimalisasi antrean paket dan akses terowongan VPN.</aside>
             </section>
 
-            <section>
-                <h3>Tantangan dan Optimalisasi SOHO</h3>
-                <div class="card text-left text-smaller">
-                    <p>Merujuk pada Paper: <em>"Role of Machine Learning in Optimizing SOHO"</em></p>
-                    <ul>
-                        <li>Banyaknya perangkat <em>Smart Home</em> (TV, Kulkas, CCTV) di rumah yang membebani <em>Bandwidth</em> kerja.</li>
-                        <li><strong>Penggunaan ML:</strong> Router modern kini dilengkapi AI dasar untuk memprioritaskan lalu lintas (*Quality of Service/QoS*). Secara dinamis, AI akan mencekik bandwidth Netflix saat mendeteksi adanya sesi Zoom Meeting kerja.</li>
-                        <li><strong>Konektivitas Eksternal:</strong> Penggunaan Client-to-Site VPN agar pekerja di rumah tetap bisa mengakses *Intranet/Database* kantor secara aman.</li>
-                    </ul>
+            <!-- SLIDE 4: ARSITEKTUR SOHO & ISOLASI VLAN -->
+            <section data-topic="Arsitektur Jaringan SOHO &amp; Isolasi VLAN">
+                <h3>Arsitektur Jaringan SOHO &amp; Isolasi VLAN</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-router"></i> Arsitektur All-in-One Gateway &amp; Segmentasi VLAN</div>
+                            <p><strong>SOHO (<em>Small Office / Home Office</em>)</strong> adalah jaringan skala rumah/kantor kecil (~5–50 perangkat) yang menggabungkan Router NAT, Switch, Wi-Fi 6 AP, DHCP, &amp; Stateful Firewall dalam satu perangkat kompak.</p>
+                            <ul>
+                                <li><strong>Ancaman IoT Rumahan:</strong> Perangkat pintar murah (IP Cam, Smart TV) jarang di-update dan rentan disusupi. Jika berada di subnet yang sama, peretas dapat mengintip laptop kerja &amp; file NAS!</li>
+                                <li><strong>Praktik Segmentasi 3 VLAN &amp; SSID:</strong>
+                                    <br>&bull; <span class="tag-pill tag-pill-blue">VLAN 10</span> <strong>Private Trusted:</strong> Laptop kerja, PC, &amp; NAS storage.
+                                    <br>&bull; <span class="tag-pill tag-pill-amber">VLAN 20</span> <strong>IoT Untrusted:</strong> Hanya boleh akses Internet cloud, akses ke LAN diblokir total!
+                                    <br>&bull; <span class="tag-pill tag-pill-purple">VLAN 30</span> <strong>Guest:</strong> Akses internet tamu terisolasi dengan Captive Portal.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/soho_vlan_segmentation.jpg" alt="Topologi Jaringan SOHO Modern dengan Isolasi Segmentasi VLAN 10, 20, dan 30">
+                        <div class="img-caption">Topologi SOHO Modern: Segmentasi VLAN 10 (Trusted), Isolasi Firewall VLAN 20 (IoT), &amp; VLAN 30 (Guest)</div>
+                    </div>
                 </div>
+                <aside class="notes">Gunakan diagram segmentasi VLAN di sebelah kanan untuk membedah isolasi perangkat nyata di rumah. Tekankan mengapa segmentasi VLAN dan isolasi perangkat IoT di rumah sangat krusial di era sekarang.</aside>
             </section>
 
-            <section>
-                <h3>Bagian 2: Internet of Things (IoT)</h3>
-                <div class="card text-left text-smaller">
-                    <p>Transisi masif dari komunikasi "Manusia ke Manusia" menjadi komunikasi "Mesin ke Mesin".</p>
-                    <ul>
-                        <li>Setiap detik, ribuan sensor suhu, kelembaban, dan CCTV melaporkan log aktivitasnya ke Cloud.</li>
-                        <li>Protokol HTTP (yang dipakai Web) dianggap <strong>Terlalu Berat/Makan Baterai</strong> untuk sensor kecil bersuhu CPU rendah.</li>
-                        <li>Muncullah protokol spesifik mesin: <strong>MQTT (Message Queuing Telemetry Transport)</strong> dan <strong>CoAP</strong> yang berukuran data ekstra ringan.</li>
-                    </ul>
+            <!-- SLIDE 4B: CARA KERJA ROUTER NAT & PAT -->
+            <section data-topic="Cara Kerja Router NAT &amp; PAT">
+                <h3>Cara Kerja Router NAT &amp; PAT</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-teal"><i class="bi bi-arrow-left-right"></i> Network Address &amp; Port Translation (NAT / PAT)</div>
+                            <p><strong>Router NAT</strong> menerjemahkan <em>IP Privat</em> LAN (yang tidak bisa di-routing di Internet) ke satu <em>IP Publik</em> ISP. Varian modernnya adalah <strong>PAT / NAPT</strong> (<em>Port Address Translation</em>):</p>
+                            <ol>
+                                <li><strong>Outbound Rewrite:</strong> Laptop (<code>192.168.1.10:54321</code>) &amp; HP mengirim paket keluar. Router mengganti <em>Source IP</em> menjadi IP Publik (<code>203.0.113.5</code>) dengan <strong>Port unik</strong> (<code>:40001</code> &amp; <code>:40002</code>).</li>
+                                <li><strong>Catat di Tabel NAT:</strong> Router menyimpan pasangan <code>[LAN IP:Port &harr; WAN IP:Port]</code> pada memori RAM.</li>
+                                <li><strong>Inbound Lookup:</strong> Saat balasan tiba di port <code>:40001</code>, router merujuk Tabel NAT dan meneruskannya ke Laptop asal.</li>
+                                <li><strong>Efek Keamanan &amp; <em>Port Forwarding</em>:</strong> Koneksi asing masuk tanpa baris di Tabel NAT ditolak otomatis (kecuali dibuka via aturan statis <em>Port Forwarding</em>).</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/soho_nat_pat_workflow.svg" alt="Diagram Alur Translasi Alamat dan Port pada Router NAT dan PAT">
+                        <div class="img-caption">Mekanisme Translasi Router NAT/PAT: Puluhan Perangkat LAN Berbagi 1 IP Publik ISP via Port Unik</div>
+                    </div>
                 </div>
+                <aside class="notes">Jelaskan bagaimana PAT menyelamatkan ketersediaan IPv4 di rumah maupun kampus: cukup 1 IP publik ISP untuk melayani puluhan laptop, HP, dan perangkat IoT sekaligus. Kaitkan pula dengan konsep Inbound Block yang membuat server lokal tidak bisa diakses langsung dari luar tanpa Port Forwarding (atau memicu masalah Active FTP dan Double-NAT).</aside>
             </section>
 
-            <section>
-                <h3>Arsitektur Lengkap IoT</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week15/image2.png" class="slide-img" alt="Arsitektur Lengkap IoT">
+            <!-- SLIDE 5: BUFFERBLOAT & SMART QUEUE MANAGEMENT (SQM) -->
+            <section data-topic="Bufferbloat &amp; Smart Queue Management (SQM)">
+                <h3>Bufferbloat &amp; Smart Queue Management (SQM)</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-red"><i class="bi bi-hourglass-bottom"></i> Masalah Bufferbloat &amp; Solusi SQM</div>
+                            <p><strong>Gejala Lag Nyata:</strong> Saat unduhan besar atau backup cloud berjalan, panggilan Zoom atau ping game melonjak dari 15 ms ke 450 ms!</p>
+                            <ul>
+                                <li><strong>Akar Masalah:</strong> Buffer hardware router berukuran terlalu besar (<em>bloated</em>). Algoritma FIFO standar menimbun paket di antrean alih-alih menjatuhkannya lebih awal, memicu latensi antrean raksasa.</li>
+                                <li><strong>Solusi FQ-CoDel (Fair Queueing Controlled Delay):</strong> Memisahkan setiap koneksi (flow) ke antrean mandiri. Paket interaktif berukuran kecil (DNS, VoIP, Gaming) otomatis menyalip antrean paket unduhan besar!</li>
+                                <li><strong>CAKE (Common Applications Kept Enhanced):</strong> Algoritma SQM mutakhir di OpenWrt yang menjaga buffer delay tetap stabil di bawah 5 ms meski bandwidth 100% jenuh.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/soho_bufferbloat_vs_sqm.jpg" alt="Perbandingan Masalah Bufferbloat FIFO dan Solusi SQM FQ-CoDel/CAKE">
+                        <div class="img-caption">Mekanisme Antrean FIFO (Bufferbloat) vs Pembagian Aliran Adil FQ-CoDel/CAKE</div>
+                    </div>
                 </div>
+                <aside class="notes">Jelaskan bahwa menambah bandwidth ISP tidak selalu menyelesaikan lag jika terjadi bufferbloat. Solusi ilmiahnya adalah Smart Queue Management (SQM) pada router.</aside>
             </section>
 
-            <section>
-                <h3>Evolusi Infrastruktur IoT</h3>
-                <div class="card text-left text-smaller">
-                    <ul>
-                        <li><strong>Skalabilitas IP:</strong> Kebutuhan jutaan IP address memaksa adopsi IPv6 untuk perangkat IoT.</li>
-                        <li><strong>Medium Transmisi Fisik:</strong> Sensor tidak memakai WiFi/Ethernet standar, melainkan <strong>Zigbee, LoRaWAN</strong>, atau <strong>NB-IoT</strong> yang hemat daya dengan cakupan berkilo-kilometer.</li>
-                        <li><strong>Edge Computing:</strong> Alih-alih mengirim jutaan data mentah ke Cloud, *IoT Gateway* (di tengah) melakukan analitik awal, menyaring data spam, dan hanya mengirimkan anomali penting ke *Cloud Server* untuk menghemat bandwidth.</li>
-                    </ul>
+            <!-- SLIDE 6: REMOTE ACCESS SOHO: WIREGUARD VS OPENVPN -->
+            <section data-topic="Remote Access SOHO: WireGuard vs OpenVPN">
+                <h3>Remote Access SOHO: WireGuard vs OpenVPN</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-purple"><i class="bi bi-shield-shaded"></i> Komparasi Arsitektur VPN: WireGuard vs OpenVPN</div>
+                            <p>Karyawan WFH memerlukan terowongan terenkripsi untuk mengakses file server lokal (NAS) atau dashboard internal rumah dari jaringan publik.</p>
+                            <ul>
+                                <li><strong>OpenVPN (Standar Lama):</strong>
+                                    <br>&bull; Berjalan di <em>User-space</em> &rarr; beban alih konteks CPU tinggi.
+                                    <br>&bull; Kode masif (>100.000 baris C) &rarr; permukaan celah kerentanan luas.
+                                    <br>&bull; Handshake TLS rumit &rarr; rekoneksi saat roaming nirkabel lambat.
+                                </li>
+                                <li><strong>WireGuard (Standar Modern):</strong>
+                                    <br>&bull; Terintegrasi langsung di <em>Kernel-space</em> Linux &rarr; throughput mendekati kecepatan kabel.
+                                    <br>&bull; Kode ultra-ramping (~4.000 baris) &rarr; sangat mudah diaudit keamanannya.
+                                    <br>&bull; <em>Cryptokey Routing:</em> Pasangan kunci publik langsung memetakan IP tunnel; roaming instan tanpa putus!
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/vpn_wireguard_vs_openvpn.jpg" alt="Komparasi Ruang Eksekusi OpenVPN User-Space vs WireGuard Kernel-Space">
+                        <div class="img-caption">Komparasi Ruang Eksekusi: Kernel Space (WireGuard) vs User Space (OpenVPN)</div>
+                    </div>
                 </div>
+                <aside class="notes">Bandingkan perbedaan performa CPU dan kemudahan konfigurasi antara OpenVPN dan WireGuard. WireGuard telah menjadi standar de-facto VPN modern.</aside>
             </section>
 
-            <section>
-                <h3>Bagian 3: Software-Defined Networking (SDN)</h3>
-                <div class="card text-left text-smaller">
-                    <p>Merujuk pada Paper: <em>"Innovative Architectures and Management Strategies"</em></p>
-                    <p><strong>Masalah Jaringan Tradisional:</strong> Router itu "Bodoh". Ia hanya mengikuti insting (Tabel Routing) lokalnya sendiri. Jika butuh mengubah aturan jaringan berskala Nasional, admin harus mencolok kabel *console* ke ratusan router satu per satu!</p>
-                    <p><strong>Solusi SDN:</strong> Memisahkan Hardware penyalur fisik, dengan Software (Otak) pengambil keputusannya.</p>
-                </div>
+            <!-- SLIDE 7: PEMISAH BAB 2 -->
+            <section class="section-slide" data-topic="Bagian 2: Internet of Things (IoT) &amp; Komputasi Edge">
+                <div class="section-part-label">Bagian 2</div>
+                <h2>2. Internet of Things (IoT) &amp; Komputasi Edge</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Ekosistem 3-Tier, LPWAN (LoRaWAN &amp; NB-IoT), Protokol MQTT/CoAP, serta Kontinum Edge AI</p>
+                <aside class="notes">Bagian kedua membedah ekspansi miliaran sensor IoT hemat daya dan pergeseran komputasi dari pure cloud menuju edge device lokal.</aside>
             </section>
 
-            <section>
-                <h3>Arsitektur SDN: Control & Data Plane</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week15/image3.png" class="slide-img" alt="Arsitektur SDN: Control & Data Plane">
+            <!-- SLIDE 8: EKOSISTEM & ARSITEKTUR LENGKAP IOT -->
+            <section data-topic="Ekosistem &amp; Arsitektur Lengkap IoT">
+                <h3>Ekosistem &amp; Arsitektur Lengkap IoT</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-teal"><i class="bi bi-diagram-3-fill"></i> Arsitektur Tiga Lapisan IoT &amp; Batasan Perangkat</div>
+                            <ul>
+                                <li><strong>1. Perception Layer (Edge):</strong>
+                                    <br>Koleksi ribuan sensor fisik (suhu, getaran mesin) dan aktuator berbasis MCU hemat daya (ESP32/STM32). Wajib beroperasi tahunan dengan baterai koin.
+                                </li>
+                                <li><strong>2. Network &amp; Gateway Layer:</strong>
+                                    <br>Menghubungkan link nirkabel lokal (LoRa/Zigbee/BLE) ke internet IP. <em>Edge IoT Gateway</em> melakukan agregasi data, konversi protokol, dan enkripsi.
+                                </li>
+                                <li><strong>3. Application &amp; Cloud Layer:</strong>
+                                    <br>Pusat ingestion data (MQTT/Kafka), Big Data, analisis model ML, dan antarmuka dashboard pengguna.
+                                </li>
+                                <li><strong>Karakteristik Constrained Devices:</strong> Memori sangat kecil (RAM &lt; 64 KB, Flash &lt; 512 KB), sehingga memerlukan protokol ringan bebas overhead.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/image2.png" alt="Modern IoT Architecture">
+                        <div class="img-caption">Arsitektur End-to-End IoT: Smart Sensors, Edge Gateway, Cloud Ingestion, &amp; User Dashboard</div>
+                    </div>
                 </div>
+                <aside class="notes">Tunjukkan visual image2.png di sebelah kanan. Ajak mahasiswa melihat perjalanan data dari sensor industri fisik, melewati IoT gateway, masuk ke cloud server data center, hingga ke layar ponsel pengguna.</aside>
             </section>
 
-            <section>
-                <h3>Komponen Vital SDN</h3>
-                <div class="card text-left text-smaller">
-                    <ul>
-                        <li><strong>Data Plane (Bawah):</strong> Berisi <em>Dumb Switches</em>. Hardware ini harganya sangat murah karena tidak perlu CPU canggih untuk berpikir. Tugas mereka HANYA meneruskan (forward) paket secara membabi-buta berdasar perintah sang Controller.</li>
-                        <li><strong>Control Plane (Tengah):</strong> Sebuah <em>SDN Controller Server</em> pusat. Inilah satu-satunya yang memegang *Global View* peta jaringan. Ia mengkalkulasi rute terpendek dan menurunkannya lewat <em>Southbound APIs</em> (seperti protokol <strong>OpenFlow</strong>).</li>
-                        <li><strong>Aplikasi (Atas):</strong> Aplikasi *Load Balancing* atau *Security* memprogram jaringan dengan menulis kode *Python* ringan ke Controller lewat *Northbound APIs*.</li>
-                    </ul>
+            <!-- SLIDE 9: KONEKTIVITAS NIRKABEL IOT: LPWAN (LORAWAN VS NB-IOT) -->
+            <section data-topic="Konektivitas Nirkabel IoT: LPWAN">
+                <h3>Konektivitas Nirkabel IoT: LPWAN</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-broadcast-pin"></i> Komparasi Teknologi LPWAN: LoRaWAN vs NB-IoT</div>
+                            <p>Low-Power Wide-Area Network (LPWAN) mentransmisikan data jarak jauh (2–15 km) dengan konsumsi daya baterai tahunan dan ukuran payload puluhan byte.</p>
+                            <ul>
+                                <li><strong>LoRaWAN (Unlicensed ISM Band):</strong>
+                                    <br>&bull; Beroperasi di pita frekuensi bebas lisensi (915/923 MHz di Indonesia).
+                                    <br>&bull; Memakai modulasi <em>Chirp Spread Spectrum (CSS)</em> tahan interferensi.
+                                    <br>&bull; Pengguna bebas membangun Gateway mandiri tanpa biaya langganan bulanan operator.
+                                </li>
+                                <li><strong>NB-IoT (Licensed Cellular):</strong>
+                                    <br>&bull; Berjalan pada spektrum seluler berlisensi operator (LTE In-band / Guard-band).
+                                    <br>&bull; Kualitas layanan (QoS) dijamin operator, latensi lebih stabil.
+                                    <br>&bull; Membutuhkan kartu SIM/eSIM dan biaya paket data langganan per node.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/lpwan_lorawan_vs_nbiot.jpg" alt="Perbandingan Arsitektur LPWAN: LoRaWAN Bebas Lisensi vs NB-IoT Seluler">
+                        <div class="img-caption">Peta Arsitektur: LoRaWAN (Private Gateways) vs NB-IoT (Base Station eNodeB Operator)</div>
+                    </div>
                 </div>
+                <aside class="notes">Bandingkan trade-off antara LoRaWAN dan NB-IoT. Kapan memilih LoRaWAN (misal perkebunan sawit terpencil tanpa sinyal operator) dan kapan memilih NB-IoT (misal smart meter PDAM di pusat kota).</aside>
             </section>
 
-            <section>
-                <h3>Bagian 4: Keamanan Modern & Isu Etika</h3>
-                <div class="card text-left text-smaller">
-                    <p>Merujuk pada Paper: <em>"Intelligent Shields: Artificial Intelligence and Machine Learning for Cybersecurity"</em></p>
-                    <p>Lanskap keamanan jaringan berubah drastis dengan hadirnya AI:</p>
-                    <ul>
-                        <li>Hacker kini menggunakan Algoritma AI otomatis untuk mencari celah server tanpa lelah (Zero-day exploits).</li>
-                        <li>Sebagai respons, Administrator Jaringan memasang <strong>AI berbasis Anomali</strong>. Jika AI melihat mesin pegawai mendadak mengunduh 50GB arsip data di tengah malam (di luar pola jam kerjanya), koneksi akan seketika diblokir walau mesin tersebut punya otorisasi penuh!</li>
-                    </ul>
+            <!-- SLIDE 10: PROTOKOL IOT: MQTT (PUB/SUB & QOS) VS COAP -->
+            <section data-topic="Protokol IoT: MQTT vs CoAP">
+                <h3>Protokol IoT: MQTT vs CoAP</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-teal"><i class="bi bi-envelope-paper-fill"></i> Protokol Aplikasi IoT: MQTT (TCP) vs CoAP (UDP)</div>
+                            <p>Header HTTP/1.1 teks (~1 KB) sangat boros baterai. Protokol IoT dirancang dengan overhead ultra-ringan:</p>
+                            <ul>
+                                <li><strong>MQTT (Publish/Subscribe over TCP):</strong>
+                                    <br>&bull; Port 1883/8883 (TLS); header fixed hanya <strong>2 byte</strong>!
+                                    <br>&bull; Publisher dan Subscriber tidak terhubung langsung, melainkan melalui <em>Broker</em>.
+                                    <br>&bull; <span class="tag-pill tag-pill-blue">QoS 0</span> <em>At most once:</em> Kirim &amp; lupakan (telemetri rutin).
+                                    <br>&bull; <span class="tag-pill tag-pill-green">QoS 1</span> <em>At least once:</em> Wajib balasan PUBACK (sensor kritis).
+                                    <br>&bull; <span class="tag-pill tag-pill-amber">QoS 2</span> <em>Exactly once:</em> Handshake 4-arah (perintah darurat).
+                                </li>
+                                <li><strong>CoAP (RESTful over UDP):</strong> Port 5683, model request/response berbasis UDP untuk interaksi langsung node-ke-node.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/iot_mqtt_pubsub_vs_coap.jpg" alt="Perbandingan Protokol Aplikasi IoT: MQTT Publish/Subscribe Broker vs CoAP Request/Response">
+                        <div class="img-caption">Perbandingan Stack Protokol Aplikasi IoT: MQTT (over TCP) vs CoAP (over UDP)</div>
+                    </div>
                 </div>
+                <aside class="notes">Bahas pentingnya 3 tingkat QoS MQTT. QoS 0 untuk data yang tidak kritis jika hilang satu titik, QoS 1 untuk data yang harus sampai tapi boleh duplikat, dan QoS 2 untuk instruksi kritis seperti mematikan katup gas darurat.</aside>
             </section>
 
-            <section>
-                <h3>Abstrak Privasi Data & Cybersecurity</h3>
-                <div style="text-align: center; margin: 15px auto;">
-                    <img src="images/week15/image4.png" class="slide-img" alt="Abstrak Privasi Data & Cybersecurity">
+            <!-- SLIDE 11: SIMULASI INTERAKTIF MQTT -->
+            <section data-topic="Simulasi Interaktif: Alur Protokol IoT MQTT">
+                <h3>Simulasi Interaktif: Alur Protokol IoT MQTT</h3>
+                <div class="sim-container">
+                    <p style="text-align:center; margin-bottom:6px; color:#475569; font-size: 0.85em;">
+                        Uji coba langsung pengiriman pesan asinkron antara <strong>Sensor Node (Publisher)</strong>, <strong>MQTT Broker</strong>, dan <strong>Subscriber Dashboard</strong>.
+                    </p>
+                    <div class="sim-controls">
+                        <button class="sim-btn sim-btn-primary" onclick="runW15MqttSim(0)"><i class="bi bi-send-fill"></i> Telemetri (QoS 0)</button>
+                        <button class="sim-btn sim-btn-secondary" onclick="runW15MqttSim(1)"><i class="bi bi-check2-circle"></i> Sensor Kritis (QoS 1)</button>
+                        <button class="sim-btn sim-btn-warn" onclick="runW15MqttSim(2)"><i class="bi bi-shield-check"></i> Perintah Darurat (QoS 2)</button>
+                        <button class="sim-btn sim-btn-reset" onclick="resetW15MqttSim()"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+                    </div>
+
+                    <div class="sim-grid">
+                        <div class="sim-pane">
+                            <div class="sim-pane-header">
+                                <span><i class="bi bi-cpu"></i> ESP32 SENSOR</span>
+                                <span class="sim-badge sim-status-idle" id="mqtt-pub-st">IDLE</span>
+                            </div>
+                            <div class="sim-log" id="mqtt-pub-log">Menunggu pemicu sensor...</div>
+                        </div>
+
+                        <div class="sim-pane">
+                            <div class="sim-pane-header">
+                                <span><i class="bi bi-server"></i> EMQX BROKER</span>
+                                <span class="sim-badge sim-status-idle" id="mqtt-brk-st">LISTENING</span>
+                            </div>
+                            <div class="sim-log" id="mqtt-brk-log">Broker aktif pada port 1883/TCP...</div>
+                        </div>
+
+                        <div class="sim-pane">
+                            <div class="sim-pane-header">
+                                <span><i class="bi bi-display"></i> SUBSCRIBER WEB</span>
+                                <span class="sim-badge sim-status-idle" id="mqtt-sub-st">IDLE</span>
+                            </div>
+                            <div class="sim-log" id="mqtt-sub-log">Berlangganan: <code>itera/lab/#</code></div>
+                        </div>
+                    </div>
                 </div>
+                <aside class="notes">Demonstrasikan langsung di kelas: klik tombol QoS 0, lalu QoS 1, lalu QoS 2. Tunjukkan bagaimana QoS 1 membutuhkan PUBACK, dan QoS 2 melakukan 4-way handshake (PUBREC/PUBREL/PUBCOMP) untuk memastikan pesan dieksekusi tepat satu kali.</aside>
             </section>
 
-            <section>
-                <h3>Isu Etika dan Netralitas Jaringan (Net Neutrality)</h3>
-                <div class="card text-left text-smaller">
-                    <p>Tanggung jawab moral insinyur jaringan di dunia nyata:</p>
-                    <ul>
-                        <li><strong>Deep Packet Inspection (DPI) & Privasi:</strong> IDS perusahaan mampu mengintip isi lalu lintas jaringan pegawai. Sampai batas mana pelacakan ini etis? Kapan tindakan ini melanggar regulasi perundangan (seperti GDPR Eropa/UU PDP Indonesia)?</li>
-                        <li><strong>Netralitas Internet:</strong> Etika Penyedia Jasa Internet (ISP). Apakah etis bagi ISP mencekik (throttling) kecepatan streaming kompetitor (misal: Netflix), demi memperlancar akses aplikasi streaming buatan ISP tersebut sendiri?</li>
-                        <li>Insinyur yang memegang kunci enkripsi dan jaringan sebuah korporat/negara memegang amanah <em>Confidentiality</em> jutaan nasib pengguna.</li>
-                    </ul>
+            <!-- SLIDE 12: PARADIGMA EDGE COMPUTING -->
+            <section data-topic="Paradigma Edge Computing: Mengatasi Batasan Cloud">
+                <h3>Paradigma Edge Computing: Mengatasi Batasan Cloud</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-red"><i class="bi bi-layers-fill"></i> Mengapa Butuh Edge? Batasan Pure Cloud</div>
+                            <p>Paradigma komputasi terpusat (Pure Cloud) menghadapi kendala fisik pada skenario industri kritis:</p>
+                            <ul>
+                                <li><strong>Latensi Jaringan (Latency):</strong> Transmisi data ke cloud memakan waktu 80–200 ms. Kendaraan otonom atau rem robot pabrik membutuhkan waktu respon &lt; 5 ms!</li>
+                                <li><strong>Hambatan Bandwidth (Bottleneck):</strong> Ribuan kamera CCTV 4K yang mengunggah video mentah terus-menerus akan melumpuhkan uplink internet lokal.</li>
+                                <li><strong>Kedaulatan &amp; Privasi Data:</strong> Rekam medis atau rahasia manufaktur pabrik tidak boleh keluar dari jaringan lokal tanpa enkripsi ketat.</li>
+                                <li><strong>Kontinum Komputasi:</strong> Beban analitik dipindahkan bertingkat dari <em>Cloud &rarr; Fog &rarr; Edge Gateway &rarr; Sensor Node</em>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/edge_cloud_fog_continuum.jpg" alt="Kontinum Komputasi: Edge Gateway, Fog Computing, dan Cloud Data Center">
+                        <div class="img-caption">Kontinum Komputasi Terdistribusi: Cloud Data Center &rarr; Fog Node &rarr; Edge Gateway &rarr; Sensor</div>
+                    </div>
                 </div>
+                <aside class="notes">Jelaskan bahwa Edge Computing bukan pengganti Cloud, melainkan pelengkap. Pekerjaan berat seperti training model AI tetap di Cloud, namun inferensi cepat dilakukan di Edge.</aside>
             </section>
 
-            <section>
-                <h3>Penutup Perkuliahan Jaringan Komputer</h3>
-                <div class="card text-left text-smaller">
-                    <p>Anda telah merampungkan 15 pertemuan fondasi tulang punggung dunia digital modern!</p>
-                    <ul>
-                        <li>Dari mencetak kabel UTP di <em>Physical Layer</em> (L1).</li>
-                        <li>Mengatur lalu lintas <em>Routing OSPF/BGP</em> di <em>Network Layer</em> (L3).</li>
-                        <li>Memahami aliran <em>TCP/UDP Socket</em> di <em>Transport Layer</em> (L4).</li>
-                        <li>Hingga mengamankan data lewat Enkripsi & menelusuri evolusi Jaringan Nirkabel/SDN.</li>
-                    </ul>
-                    <br>
-                    <p style="text-align:center; font-size: 1.2em; color: #4CAF50;"><strong>Semoga Sukses pada Ujian Akhir Semester (UAS)!</strong></p>
+            <!-- SLIDE 13: PERANGKAT EDGE & EDGE AI -->
+            <section data-topic="Perangkat Edge &amp; Edge AI">
+                <h3>Perangkat Edge &amp; Edge AI</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-purple"><i class="bi bi-cpu-fill"></i> Industrial IoT Gateway &amp; Komputasi Edge AI</div>
+                            <p>Perangkat keras Edge dirancang tahan banting (<em>industrial-grade</em>) untuk lingkungan pabrik dan luar ruangan:</p>
+                            <ul>
+                                <li><strong>Antarmuka Fisik Terintegrasi:</strong> Port serial RS-485 Modbus, CAN Bus otomotif, GPIO, serta Gigabit Ethernet industri dengan modem 5G failover.</li>
+                                <li><strong>Akselerasi Neural On-Device:</strong> Dilengkapi NPU / Google Coral TPU / NVIDIA Jetson untuk eksekusi model deep learning secara lokal.</li>
+                                <li><strong>Inferensi Real-Time (&lt; 3 ms):</strong> Deteksi anomali getaran mesin atau kebakaran pabrik diproses seketika di tempat tanpa bergantung pada koneksi internet cloud!</li>
+                                <li><strong>Pemisahan Tugas:</strong> <em>Training</em> model dilakukan di Cloud cluster GPU, <em>Inference</em> dieksekusi di Edge.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/edge_ai_gateway_npu.jpg" alt="Arsitektur Hardware Industrial Edge Gateway dan Mesin Inferensi NPU Edge AI">
+                        <div class="img-caption">Arsitektur Hardware Edge Gateway: Akuisisi Sensor Fisik, Mesin Inferensi NPU AI, &amp; Uplink 5G</div>
+                    </div>
                 </div>
+                <aside class="notes">Bahas bagaimana industri manufaktur saat ini menggunakan Edge AI untuk <em>predictive maintenance</em>: sensor getaran mendeteksi kerusakan bearing mesin dalam milidetik dan langsung menghentikan motor.</aside>
+            </section>
+
+            <!-- SLIDE 14: PEMISAH BAB 3 -->
+            <section class="section-slide" data-topic="Bagian 3: Software-Defined Networking (SDN) &amp; NFV">
+                <div class="section-part-label">Bagian 3</div>
+                <h2>3. Software-Defined Networking (SDN) &amp; NFV</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Dekopling Control &amp; Data Plane, Northbound REST API, Match-Action OpenFlow, &amp; VNF</p>
+                <aside class="notes">Bagian ketiga membahas transformasi arsitektur perangkat keras sakelar jaringan tradisional menjadi jaringan cerdas terpusat yang dapat diprogram secara dinamis via software.</aside>
+            </section>
+
+            <!-- SLIDE 15: MENGAPA BUTUH SDN? DEKOPLING CONTROL & DATA PLANE -->
+            <section data-topic="Mengapa Butuh SDN? Dekopling Control &amp; Data Plane">
+                <h3>Mengapa Butuh SDN? Dekopling Control &amp; Data Plane</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-green"><i class="bi bi-shuffle"></i> Krisis Router Tradisional &amp; Solusi Dekopling SDN</div>
+                            <ul>
+                                <li><strong>Kelemahan Router Tradisional:</strong> Otak penentu rute (<em>Control Plane</em>) dan sirkuit penerus paket (<em>Data Plane</em>) terkunci rapat dalam satu kotak fisik mahal (<em>proprietary black-box</em>). Konfigurasi manual via CLI rentan salah dan lambat.</li>
+                                <li><strong>Prinsip Dekopling SDN:</strong> Memisahkan otak dari otot jaringan.
+                                    <br>&bull; <em>Control Plane:</em> Dipusatkan sebagai perangkat lunak pada server <strong>SDN Controller</strong>.
+                                    <br>&bull; <em>Data Plane:</em> Disederhanakan menjadi sakelar paket komoditas (<em>White-box Switch</em>) yang murah dan hemat energi.
+                                </li>
+                                <li><strong>Keuntungan Utama:</strong> Jaringan dapat diprogram (<em>programmable</em>), otomatis beradaptasi dengan perubahan trafik, dan bebas dari vendor lock-in.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/sdn_decoupling_control_data.jpg" alt="Dekopling SDN: Router Tradisional vs Arsitektur SDN Control &amp; Data Plane">
+                        <div class="img-caption">Pergeseran Paradigma Arsitektur Jaringan: Router Tradisional vs Software-Defined Networking</div>
+                    </div>
+                </div>
+                <aside class="notes">Gunakan analogi sistem lalu lintas: router tradisional seperti setiap persimpangan jalan berpikir sendiri tanpa koordinasi. SDN seperti sistem lampu lalu lintas pintar terpusat yang tahu kondisi macet seluruh kota dari satelit.</aside>
+            </section>
+
+            <!-- SLIDE 16: ARSITEKTUR TIGA LAPISAN SDN & ANTARMUKA API -->
+            <section data-topic="Arsitektur Tiga Lapisan SDN &amp; Antarmuka API">
+                <h3>Arsitektur Tiga Lapisan SDN &amp; Antarmuka API</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-layers-half"></i> Tiga Lapisan SDN &amp; Antarmuka API</div>
+                            <ul>
+                                <li><strong>1. Application Layer (Atas):</strong> Kebijakan bisnis jaringan: Load Balancer cerdas, Firewall dinamis, dan Traffic Engineering.</li>
+                                <li><strong>2. Control Layer (Tengah):</strong> <em>SDN Controller</em> (ONOS, OpenDaylight) yang memelihara peta topologi global (<em>Global Network View</em>).</li>
+                                <li><strong>3. Data Layer (Bawah):</strong> Sakelar perangkat keras fisik/virtual yang mengeksekusi penerusan paket pada kecepatan kabel.</li>
+                                <li><strong>Northbound API (RESTful):</strong> Menghubungkan Aplikasi ke Controller. Insinyur jaringan dapat mengatur rute baru cukup via panggilan HTTP <code>POST /flow</code>!</li>
+                                <li><strong>Southbound Protocol (OpenFlow):</strong> Protokol standar penghubung Controller dengan sakelar di bawahnya.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/sdn_three_layers_api.jpg" alt="Arsitektur Tiga Lapisan SDN: Application, Control Layer Global View, dan Data Layer">
+                        <div class="img-caption">Arsitektur Tiga Lapisan SDN: Application Layer, Northbound Interface, Controller, &amp; Data Plane</div>
+                    </div>
+                </div>
+                <aside class="notes">Tunjukkan diagram tiga lapisan SDN di panel kanan. Tekankan batas horizontal antara Control Plane dan Data Plane, serta peran vital REST API di Northbound Interface yang membuat jaringan bisa diprogram oleh software developer.</aside>
+            </section>
+
+            <!-- SLIDE 17: LOGIKA PEMROSESAN PAKET: MATCH-ACTION OPENFLOW -->
+            <section data-topic="Logika Pemrosesan Paket: Match-Action OpenFlow">
+                <h3>Logika Pemrosesan Paket: Match-Action OpenFlow</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-teal"><i class="bi bi-table"></i> Logika Match-Action &amp; Penanganan Table-Miss</div>
+                            <p>Forwarding paket tidak lagi dibatasi oleh alamat IP tujuan saja, melainkan pencocokan fleksibel di semua lapisan header:</p>
+                            <ul>
+                                <li><strong>Match Fields:</strong> Pencocokan kombinasi MAC (L2), VLAN ID, IP Src/Dst (L3), dan Port TCP/UDP (L4).</li>
+                                <li><strong>Actions:</strong> Teruskan ke Port X (<em>Forward</em>), Buang paket (<em>Drop / Firewall</em>), atau Modifikasi header (<em>Modify / NAT</em>).</li>
+                                <li><strong>Penanganan Table-Miss:</strong> Jika paket baru tiba dan tidak ada aturan cocok di tabel TCAM sakelar:
+                                    <br>&bull; Sakelar mengirim paket ke Controller via <code>OFPT_PACKET_IN</code>.
+                                    <br>&bull; Controller menghitung jalur terbaik dan menginjeksi aturan via <code>OFPT_FLOW_MOD</code>.
+                                    <br>&bull; Paket selanjutnya diproses instan oleh hardware sakelar!
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/openflow_match_action_tablemiss.jpg" alt="Logika Match-Action OpenFlow dan Penanganan Table-Miss PACKET_IN ke FLOW_MOD">
+                        <div class="img-caption">Logika Pemrosesan Paket: Pencocokan Header Multi-Layer (Match) &rarr; Eksekusi Aksi (Action)</div>
+                    </div>
+                </div>
+                <aside class="notes">Bahas keunggulan Match-Action: satu sakelar OpenFlow bisa sekaligus berfungsi sebagai Switch L2, Router L3, Firewall L4, dan NAT Translator hanya dengan variasi aturan tabel aliran.</aside>
+            </section>
+
+            <!-- SLIDE 18: SIMULASI INTERAKTIF SDN OPENFLOW -->
+            <section data-topic="Simulasi Interaktif: SDN OpenFlow Injection">
+                <h3>Simulasi Interaktif: SDN OpenFlow Injection</h3>
+                <div class="sim-container">
+                    <p style="text-align:center; margin-bottom:6px; color:#475569; font-size: 0.85em;">
+                        Simulasikan bagaimana OpenFlow Switch menangani paket tak dikenal (<strong>Table-Miss</strong>) vs paket berikutnya yang cocok di Flow Table (<strong>Flow-Hit</strong>).
+                    </p>
+                    <div class="sim-controls">
+                        <button class="sim-btn sim-btn-primary" onclick="runW15SdnSim(false)"><i class="bi bi-question-circle"></i> Paket 1: Belum Ada Aturan (Table-Miss)</button>
+                        <button class="sim-btn sim-btn-secondary" onclick="runW15SdnSim(true)"><i class="bi bi-lightning-fill"></i> Paket 2: Aturan Terpasang (Flow-Hit)</button>
+                        <button class="sim-btn sim-btn-reset" onclick="resetW15SdnSim()"><i class="bi bi-arrow-counterclockwise"></i> Reset Switch</button>
+                    </div>
+
+                    <div class="sim-grid">
+                        <div class="sim-pane">
+                            <div class="sim-pane-header">
+                                <span><i class="bi bi-laptop"></i> HOST A (PENGIRIM)</span>
+                                <span class="sim-badge sim-status-idle" id="sdn-host-st">IDLE</span>
+                            </div>
+                            <div class="sim-log" id="sdn-host-log">Siap kirim paket IP ke Host B (10.0.0.2)...</div>
+                        </div>
+
+                        <div class="sim-pane">
+                            <div class="sim-pane-header">
+                                <span><i class="bi bi-hdd-network"></i> OPENFLOW SWITCH</span>
+                                <span class="sim-badge sim-status-idle" id="sdn-sw-st">FLOW TABLE</span>
+                            </div>
+                            <div class="sim-log" id="sdn-sw-log">Tabel TCAM siap memproses paket...</div>
+                        </div>
+
+                        <div class="sim-pane">
+                            <div class="sim-pane-header">
+                                <span><i class="bi bi-cpu-fill"></i> SDN CONTROLLER</span>
+                                <span class="sim-badge sim-status-idle" id="sdn-ctrl-st">GLOBAL VIEW</span>
+                            </div>
+                            <div class="sim-log" id="sdn-ctrl-log">Topologi aktif. Menunggu Packet-In...</div>
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">Ajak mahasiswa memperhatikan: pada Paket 1 terjadi intervensi controller yang memicu sedikit latensi. Namun pada Paket 2, controller di-bypass sepenuhnya dan sakelar memproses langsung pada kecepatan kabel (<em>wire speed</em>).</aside>
+            </section>
+
+            <!-- SLIDE 19: NETWORK FUNCTIONS VIRTUALIZATION (NFV) -->
+            <section data-topic="Network Functions Virtualization (NFV)">
+                <h3>Network Functions Virtualization (NFV)</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-purple"><i class="bi bi-cloud-arrow-up-fill"></i> Virtual Network Functions (VNF) &amp; Service Chaining</div>
+                            <p>Di masa lalu, setiap penambahan fungsi membutuhkan pembelian <em>appliance rack</em> fisik terpisah (Hardware Firewall, Hardware NAT, IDS) yang sangat mahal dan lambat diperbarui.</p>
+                            <ul>
+                                <li><strong>Konsep NFV:</strong> Mengubah fungsi jaringan fisik menjadi perangkat lunak virtual (<em>VNF</em>) yang berjalan di server standar x86 berbasis VM atau container Docker/Kubernetes.</li>
+                                <li><strong>Service Function Chaining (SFC):</strong> Aliran paket secara otomatis diarahkan melewati rantai fungsi virtual sesuai profil trafik:
+                                    <br><code>Internet &rarr; vFirewall &rarr; vNAT &rarr; vDPI &rarr; Web Server</code>
+                                </li>
+                                <li><strong>Sinergi SDN &amp; NFV:</strong> SDN mengendalikan jalur perutean (<em>steering</em>), sedangkan NFV menyediakan fungsi pemrosesan isi paketnya.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/nfv_hardware_vs_service_chain.jpg" alt="Evolusi NFV: Appliance Hardware Khusus vs Virtual Service Chaining">
+                        <div class="img-caption">Evolusi NFV: Dari Appliance Fisik Terkunci Menuju Service Function Chaining Virtual Berbasis Cloud</div>
+                    </div>
+                </div>
+                <aside class="notes">Jelaskan kaitan erat SDN dan NFV: SDN bertugas mengendalikan jalur pengalihan paket, sedangkan NFV menyediakan fungsi pengolahan paketnya (seperti firewall dan inspeksi paket).</aside>
+            </section>
+
+            <!-- SLIDE 20: PEMISAH BAB 4 -->
+            <section class="section-slide" data-topic="Bagian 4: Keamanan Modern &amp; Isu Etika Digital">
+                <div class="section-part-label">Bagian 4</div>
+                <h2>4. Keamanan Modern &amp; Isu Etika Digital</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Arsitektur Zero Trust (ZTA), Bedah Kasus Mirai, AIOps, Regulasi UU PDP, &amp; Net Neutrality</p>
+                <aside class="notes">Bagian keempat mengupas runtuhnya perimeter keamanan tradisional, ancaman botnet IoT, penerapan kecerdasan buatan, hingga batasan etika dan kepatuhan hukum perlindungan data.</aside>
+            </section>
+
+            <!-- SLIDE 21: PARADIGMA ZERO TRUST ARCHITECTURE (ZTA) -->
+            <section data-topic="Paradigma Zero Trust: Never Trust, Always Verify">
+                <h3>Paradigma Zero Trust: Never Trust, Always Verify</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-green"><i class="bi bi-shield-check"></i> Paradigma Zero Trust (NIST SP 800-207)</div>
+                            <p>Model lama <em>Castle-and-Moat</em> berasumsi siapa pun di dalam LAN kantor adalah pihak terpercaya. Celah ini berbahaya karena peretas yang membobol 1 PC bisa bebas bergerak menyamping (<em>Lateral Movement</em>).</p>
+                            <ul>
+                                <li><strong>1. Never Trust, Always Verify:</strong> Setiap permintaan akses ke aplikasi atau data wajib diautentikasi dan diotorisasi ulang secara dinamis tanpa memandang lokasi jaringan.</li>
+                                <li><strong>2. Least Privilege Access:</strong> Hak akses dibatasi seminimal mungkin hanya untuk data yang relevan dengan tugas (<em>Micro-segmentation</em>).</li>
+                                <li><strong>3. Assume Breach:</strong> Selalu berasumsi bahwa jaringan telah disusupi peretas; enkripsi end-to-end wajib aktif di mana pun.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/zero_trust_vs_castle_moat.jpg" alt="Model Lama Castle-and-Moat vs Arsitektur Zero Trust NIST 800-207">
+                        <div class="img-caption">Arsitektur Zero Trust: Policy Decision Point (PDP) &amp; Policy Enforcement Point (PEP)</div>
+                    </div>
+                </div>
+                <aside class="notes">Tekankan filosofi Zero Trust: "Lokasi jaringan (apakah kamu di rumah atau di dalam kantor) tidak lagi menentukan hak aksesmu." Keamanan bergantung pada identitas, kesehatan perangkat, dan verifikasi berkelanjutan.</aside>
+            </section>
+
+            <!-- SLIDE 22: STUDI KASUS KEAMANAN: BOTNET IOT MIRAI -->
+            <section data-topic="Studi Kasus Keamanan: Anatomi Botnet IoT Mirai">
+                <h3>Studi Kasus Keamanan: Anatomi Botnet IoT Mirai</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-red"><i class="bi bi-bug-fill"></i> Anatomi Serangan Botnet IoT Mirai (2016)</div>
+                            <p>Serangan banjir DDoS masif mencapai rekor <strong>1+ Terabit per detik</strong> melumpuhkan penyedia DNS Dyn, meruntuhkan akses global ke Twitter, Netflix, Spotify, GitHub, dan Reddit.</p>
+                            <ul>
+                                <li><strong>Vektor Eksploitasi:</strong> Mirai memindai alamat IPv4 publik yang membuka <strong>Port 23 (Telnet)</strong> pada IP Camera dan DVR CCTV rumahan murah.</li>
+                                <li><strong>Kamus 60 Default Password:</strong> Membobol otomatis kredensial bawaan pabrik yang tidak pernah diganti (seperti <code>admin:admin</code> atau <code>root:xc3511</code>).</li>
+                                <li><strong>Pelajaran Rekayasa:</strong> Wajib mengganti kredensial bawaan, menutup port manajemen Telnet yang tidak terenkripsi, dan mengisolasi perangkat IoT di VLAN terpisah!</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/mirai_iot_botnet_lifecycle.jpg" alt="Anatomi Siklus Serangan Botnet IoT Mirai (Scan Port 23, Default Password, Banjir DDoS)">
+                        <div class="img-caption">Siklus Hidup Botnet Mirai: Scanning Port Telnet &rarr; Brute Force Default Credential &rarr; DDoS Attack</div>
+                    </div>
+                </div>
+                <aside class="notes">Ceritakan kisah nyata ini sebagai peringatan penting bagi calon insinyur informatika: keamanan perangkat keras IoT sering kali diabaikan oleh pabrikan demi menekan harga produksi.</aside>
+            </section>
+
+            <!-- SLIDE 23: AI DALAM JARINGAN: AIOPS VS ADVERSARIAL AI -->
+            <section data-topic="AI dalam Jaringan: AIOps vs Adversarial AI">
+                <h3>AI dalam Jaringan: AIOps vs Adversarial AI</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-robot"></i> AI for Network Operations (AIOps) vs Adversarial AI</div>
+                            <ul>
+                                <li><strong>Pertahanan AIOps:</strong>
+                                    <br>&bull; Analisis log masif jutaan paket per detik secara prediktif.
+                                    <br>&bull; <em>Unsupervised Learning:</em> Menandai serangan Zero-Day baru tanpa perlu tanda tangan (<em>signature</em>).
+                                    <br>&bull; <em>Self-Healing Networks:</em> Pengalihan rute otomatis sebelum sakelar mengalami kegagalan hardware.
+                                </li>
+                                <li><strong>Ancaman Adversarial AI:</strong>
+                                    <br>&bull; Peretas menyusupkan manipulasi matematis kecil (<em>Feature Perturbation</em>) pada muatan paket.
+                                    <br>&bull; Model deteksi AI tertipu menganggap paket berbahaya sebagai browsing normal!
+                                </li>
+                                <li><strong>Perlombaan Senjata:</strong> Pertempuran masa depan adalah pertahanan AI vs eksploitasi AI otomatis.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/aiops_defender_vs_adversarial_ai.jpg" alt="Perbandingan AIOps Defender Otomatis vs Serangan Adversarial AI Feature Perturbation">
+                        <div class="img-caption">Perlombaan Senjata AI: Deteksi Anomali Defensif vs Manipulasi Fitur Adversarial</div>
+                    </div>
+                </div>
+                <aside class="notes">Bahas masa depan rekayasa jaringan: pertempuran di masa depan adalah AI melawan AI. Baik pihak bertahan maupun pihak penyerang memanfaatkan machine learning otomatis.</aside>
+            </section>
+
+            <!-- SLIDE 24: KEAMANAN SIBER MODERN & TATA KELOLA PRIVASI DATA -->
+            <section data-topic="Keamanan Siber Modern &amp; Tata Kelola Privasi Data">
+                <h3>Keamanan Siber Modern &amp; Tata Kelola Privasi Data</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-purple"><i class="bi bi-shield-lock-fill"></i> Empat Pilar Ekosistem Keamanan Siber Modern</div>
+                            <ul>
+                                <li><strong>1. Perlindungan Data (Data Protection):</strong>
+                                    <br>Enkripsi kuat pada saat transit (<em>in-transit</em>: TLS 1.3/IPSec) dan pada saat diam (<em>at-rest</em>: AES-256) untuk mencegah penyadapan data pengguna.
+                                </li>
+                                <li><strong>2. Identity &amp; Access Governance:</strong>
+                                    <br>Penerapan Multi-Factor Authentication (MFA), manajemen kunci kriptografi publik/privat, dan kontrol akses berbasis peran (RBAC).
+                                </li>
+                                <li><strong>3. AI Threat Intelligence Engine:</strong>
+                                    <br>Korelasi insiden real-time (SIEM/XDR) untuk mendeteksi upaya pembobolan identitas secara otomatis.
+                                </li>
+                                <li><strong>4. Ethical Data Compliance:</strong>
+                                    <br>Audit pemrosesan data jaringan agar patuh pada prinsip kedaulatan digital dan hak-hak privasi masyarakat.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/cybersecurity_four_pillars_id.jpg" alt="Empat Pilar Ekosistem Keamanan Siber Modern: Data Protection, Identity Governance, AI Threat Engine, dan Ethical Compliance">
+                        <div class="img-caption">Ekosistem Keamanan Terintegrasi: Enkripsi Data, Identity Verification, Ethical Engine, &amp; AI Analytics</div>
+                    </div>
+                </div>
+                <aside class="notes">Tunjukkan empat pilar keamanan siber di panel kanan. Diskusikan bagaimana keamanan jaringan bukan sekadar masalah teknis paket data, melainkan melibatkan perlindungan identitas manusia dan privasi warga negara.</aside>
+            </section>
+
+            <!-- SLIDE 25: ETIKA JARINGAN: DPI VS UU PDP -->
+            <section data-topic="Etika Jaringan &amp; Regulasi: DPI vs UU PDP">
+                <h3>Etika Jaringan &amp; Regulasi: DPI vs UU PDP</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-amber"><i class="bi bi-search"></i> Deep Packet Inspection (DPI) &amp; Kepatuhan UU PDP</div>
+                            <p>Perangkat DPI memungkinkan ISP/Enterprise memeriksa isi muatan paket Lapisan Aplikasi (Layer 7), bukan sekadar header IP tujuan:</p>
+                            <ul>
+                                <li><strong>Dilema Etis DPI:</strong>
+                                    <br>&bull; <em>Manfaat Positif:</em> Memblokir malware/trojan dan mencegah kebocoran data rahasia perusahaan (DLP).
+                                    <br>&bull; <em>Penyalahgunaan Privasi:</em> ISP dapat memprofil kebiasaan berselancar pengguna, mengumpulkan data pribadi tanpa izin, dan melakukan sensor konten politik sepihak.
+                                </li>
+                                <li><strong>Kepatuhan UU No. 27/2022 (UU PDP):</strong> Penyelenggara jaringan di Indonesia secara hukum dilarang membuka dan memproses data pribadi masyarakat tanpa dasar hukum sah atau persetujuan eksplisit (<em>Explicit Consent</em>).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/dpi_inspection_vs_uu_pdp.jpg" alt="Perbandingan Firewall Header vs Deep Packet Inspection dan Kepatuhan UU PDP No. 27/2022">
+                        <div class="img-caption">Inspeksi Paket Mendalam (DPI) vs Perlindungan Data Pribadi (UU No. 27 Tahun 2022)</div>
+                    </div>
+                </div>
+                <aside class="notes">Ingatkan mahasiswa sebagai calon profesional IT: memiliki kemampuan teknis untuk mengintip trafik jaringan membawa tanggung jawab etika dan hukum yang sangat besar.</aside>
+            </section>
+
+            <!-- SLIDE 26: PRINSIP NETRALITAS INTERNET (NET NEUTRALITY) -->
+            <section data-topic="Prinsip Netralitas Internet (Net Neutrality)">
+                <h3>Prinsip Netralitas Internet (Net Neutrality)</h3>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact">
+                            <div class="sec-bar sec-bar-teal"><i class="bi bi-globe2"></i> Prinsip Netralitas Internet vs Jalur Berbayar</div>
+                            <p>Prinsip keadilan bahwa penyedia layanan internet (ISP) wajib memperlakukan seluruh paket data secara setara tanpa diskriminasi, perlambatan (<em>throttling</em>), atau pemblokiran.</p>
+                            <ul>
+                                <li><strong>Bahaya Jalur Cepat Berbayar (Paid Prioritization):</strong>
+                                    <br>&bull; ISP dapat membuat <strong>"Fast Lane"</strong> berbayar mahal untuk platform korporasi raksasa.
+                                    <br>&bull; Startup lokal, platform edukasi kampus, dan portal nirlaba dipaksa berada di <strong>"Slow Lane"</strong> yang lambat.
+                                </li>
+                                <li><strong>Dampak terhadap Demokrasi &amp; Inovasi:</strong> Pelanggaran netralitas internet mematikan kompetisi inovasi digital dan mendistorsi hak masyarakat untuk mengakses informasi secara merata.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="images/week15/net_neutrality_vs_fast_lane.jpg" alt="Prinsip Netralitas Internet Setara vs Diskriminasi Jalur Berbayar">
+                        <div class="img-caption">Netralitas Internet: Akses Jalur Terbuka Setara vs Diskriminasi Jalur Cepat Berbayar (Paid Fast Lane)</div>
+                    </div>
+                </div>
+                <aside class="notes">Bahas perdebatan regulasi global terkait Net Neutrality. Tanpa netralitas internet, inovasi digital sulit berkembang bagi pelaku usaha rintisan kecil.</aside>
+            </section>
+
+            <!-- SLIDE 27: PEMISAH BAB 5 -->
+            <section class="section-slide" data-topic="Bagian 5: Evaluasi Akhir &amp; Penutup Perkuliahan">
+                <div class="section-part-label">Bagian 5</div>
+                <h2>5. Evaluasi Akhir &amp; Penutup Perkuliahan</h2>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Sintesis Peta Capaian Semester, Pelaksanaan KUIS 2 (Bebas Tugas), &amp; Pengarahan UAS</p>
+                <aside class="notes">Bagian kelima menutup 15 pekan perkuliahan Jaringan Komputer, dilanjutkan dengan pelaksanaan Kuis 2 langsung di kelas dan penyampaian kisi-kisi UAS.</aside>
+            </section>
+
+            <!-- SLIDE 28: SINTESIS SEMESTER: PETA PERJALANAN JARINGAN KOMPUTER -->
+            <section data-topic="Sintesis Semester: Peta Perjalanan Jaringan Komputer">
+                <h3>Sintesis Semester: Peta Perjalanan Jaringan Komputer</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; text-align: left; width: 100%;">
+                    <div class="card card-compact" style="border-top: 4px solid #3b82f6; min-width: 0;">
+                        <div style="font-weight: 700; color: #1d4ed8; margin-bottom: 4px;">1. Fisik &amp; Link</div>
+                        <div style="font-size: 0.88em; color: #475569;">
+                            &bull; Media kabel &amp; nirkabel<br>
+                            &bull; Ethernet CSMA/CD<br>
+                            &bull; Wi-Fi 802.11 CSMA/CA<br>
+                            &bull; MAC Address &amp; Switch
+                        </div>
+                    </div>
+                    <div class="card card-compact" style="border-top: 4px solid #0d9488; min-width: 0;">
+                        <div style="font-weight: 700; color: #0f766e; margin-bottom: 4px;">2. Network Layer</div>
+                        <div style="font-size: 0.88em; color: #475569;">
+                            &bull; IPv4 / IPv6 Addressing<br>
+                            &bull; Subnetting &amp; VLSM<br>
+                            &bull; Routing: OSPF, BGP<br>
+                            &bull; NAT &amp; DHCP Gateway
+                        </div>
+                    </div>
+                    <div class="card card-compact" style="border-top: 4px solid #d97706; min-width: 0;">
+                        <div style="font-weight: 700; color: #92400e; margin-bottom: 4px;">3. Transport Layer</div>
+                        <div style="font-size: 0.88em; color: #475569;">
+                            &bull; Port Addressing<br>
+                            &bull; UDP: Datagram cepat<br>
+                            &bull; TCP Handshake 3-Way<br>
+                            &bull; Flow &amp; Congestion Control
+                        </div>
+                    </div>
+                    <div class="card card-compact" style="border-top: 4px solid #7c3aed; min-width: 0;">
+                        <div style="font-weight: 700; color: #6b21a8; margin-bottom: 4px;">4. Aplikasi &amp; Tren</div>
+                        <div style="font-size: 0.88em; color: #475569;">
+                            &bull; DNS, HTTP/3, TLS 1.3<br>
+                            &bull; Kriptografi: RSA &amp; AES<br>
+                            &bull; IoT MQTT &amp; Edge AI<br>
+                            &bull; SDN, NFV, &amp; Zero Trust
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-compact" style="margin-top: 15px; text-align: left; background: #f0fdf4; border-color: #86efac;">
+                    <div style="font-weight: 700; color: #166534;"><i class="bi bi-award-fill"></i> Capaian Pembelajaran Lulusan (CPL)</div>
+                    <p style="margin: 0; font-size: 0.95em; color: #1e293b;">
+                        Selamat! Mahasiswa kini memiliki pemahaman utuh bagaimana sebuah bit data dikirimkan melintasi udara/kabel, diarahkan ribuan router global, diamankan dengan matematika kriptografi, hingga menjadi layanan aplikasi internet yang kita nikmati setiap detik.
+                    </p>
+                </div>
+                <aside class="notes">Beri apresiasi kepada seluruh mahasiswa atas perjuangannya selama 15 pekan mempelajari rekayasa protokol jaringan komputer dari tingkat terbawah hingga teratas.</aside>
+            </section>
+
+            <!-- SLIDE 29: PELAKSANAAN KUIS 2 (TIMER COUNTDOWN INTERAKTIF) -->
+            <section data-topic="Pelaksanaan Kuis 2 Jaringan Komputer">
+                <h3>Pelaksanaan Kuis 2 Jaringan Komputer</h3>
+                <div class="card" style="max-width: 720px; margin: 15px auto 0; text-align: center; padding: 20px 24px;">
+                    <!-- Setting durasi -->
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+                        <span style="font-size: 0.85em; font-weight: 700; color: #334155;"><i class="bi bi-hourglass-split"></i> Atur Waktu Kuis:</span>
+                        <input type="number" id="quiz-min-input" value="30" min="1" max="180" onchange="resetQuizTimer()"
+                            style="width: 70px; padding: 5px 8px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.95em; font-weight: 700; text-align: center; color: #1e293b;">
+                        <span style="font-size: 0.85em; color: #475569; font-weight: 600;">Menit</span>
+                        
+                        <!-- Tombol Preset Cepat -->
+                        <div style="display: flex; gap: 5px; margin-left: 8px;">
+                            <button type="button" class="sim-btn sim-btn-secondary" style="padding: 3px 8px; font-size: 0.72em;" onclick="setQuizPreset(15)">15m</button>
+                            <button type="button" class="sim-btn sim-btn-secondary" style="padding: 3px 8px; font-size: 0.72em;" onclick="setQuizPreset(30)">30m</button>
+                            <button type="button" class="sim-btn sim-btn-secondary" style="padding: 3px 8px; font-size: 0.72em;" onclick="setQuizPreset(45)">45m</button>
+                            <button type="button" class="sim-btn sim-btn-secondary" style="padding: 3px 8px; font-size: 0.72em;" onclick="setQuizPreset(60)">60m</button>
+                        </div>
+                    </div>
+
+                    <!-- Display Angka Countdown Raksasa -->
+                    <div id="quiz-timer-display" style="font-family: 'Courier New', Courier, monospace; font-size: 4.0em; font-weight: 900; color: #1e40af; letter-spacing: 3px; line-height: 1.1; margin: 8px 0;">
+                        30:00
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin: 8px auto 14px; max-width: 500px;">
+                        <div id="quiz-progress-bar" style="width: 100%; height: 100%; background: #2563eb; transition: width 0.3s;"></div>
+                    </div>
+
+                    <!-- Status Text -->
+                    <div id="quiz-timer-status" style="font-size: 0.82em; font-weight: 600; color: #64748b; margin-bottom: 14px;">
+                        Timer siap dimulai (30 Menit)
+                    </div>
+
+                    <!-- Kontrol Tombol -->
+                    <div style="display: flex; justify-content: center; gap: 10px;">
+                        <button type="button" class="sim-btn sim-btn-primary" style="padding: 8px 18px; font-size: 0.9em;" onclick="startQuizTimer()">
+                            <i class="bi bi-play-fill"></i> Mulai
+                        </button>
+                        <button type="button" class="sim-btn sim-btn-warn" style="padding: 8px 18px; font-size: 0.9em;" onclick="pauseQuizTimer()">
+                            <i class="bi bi-pause-fill"></i> Jeda
+                        </button>
+                        <button type="button" class="sim-btn sim-btn-reset" style="padding: 8px 18px; font-size: 0.9em;" onclick="resetQuizTimer()">
+                            <i class="bi bi-arrow-counterclockwise"></i> Reset
+                        </button>
+                    </div>
+
+                    <!-- Petunjuk Singkat -->
+                    <p style="font-size: 0.68em; color: #64748b; margin: 16px auto 0; line-height: 1.4; max-width: 580px;">
+                        Silakan kerjakan soal melalui portal <strong>Kuliah Daring ITERA / LMS</strong>. Pastikan jawaban disubmit sebelum hitungan waktu berakhir.
+                    </p>
+                </div>
+                <aside class="notes">Halaman ini difungsikan khusus sebagai layar hitung mundur (countdown timer) interaktif untuk Kuis 2 di kelas. Dosen dapat mengisi durasi menit sesuai kebutuhan (misal 30, 40, atau 45 menit) atau menekan tombol preset, lalu klik tombol Mulai saat mahasiswa siap mengerjakan.</aside>
+            </section>
+
+            <!-- SLIDE 30: PENUTUP PERKULIAHAN & PENGARAHAN UAS -->
+            <section data-topic="Penutup Perkuliahan &amp; Pengarahan UAS">
+                <div class="title-box">
+                    <h2>Terima Kasih &amp; Sukses UAS!</h2>
+                    <h4 class="subtitle">IF25-21008 Jaringan Komputer &bull; Institut Teknologi Sumatera</h4>
+                </div>
+                <div class="layout-2col" style="max-width: 860px; margin: 20px auto 0; text-align: left;">
+                    <div class="card card-compact">
+                        <div class="sec-bar sec-bar-purple"><i class="bi bi-calendar-check-fill"></i> Kisi-Kisi Ujian Akhir Semester (UAS)</div>
+                        <ul style="font-size: 0.92em; color: #475569;">
+                            <li><strong>Perhitungan Subnetting / VLSM &amp; Rute:</strong> Kemampuan merancang alokasi IP dan tabel routing.</li>
+                            <li><strong>Dinamika TCP:</strong> Handshake 3-way, sequence number, dan mekanisme kontrol kongesti.</li>
+                            <li><strong>Protokol Keamanan:</strong> Komparasi kriptografi simetris/asimetris, Digital Signature, &amp; PKI.</li>
+                            <li><strong>Kasus Jaringan Nirkabel &amp; Tren:</strong> Wi-Fi SNR, handoff seluler, IoT MQTT, &amp; konsep SDN.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-compact">
+                        <div class="sec-bar sec-bar-green"><i class="bi bi-mortarboard-fill"></i> Pesan &amp; Motivasi Dosen</div>
+                        <p style="font-size: 0.92em; color: #475569; margin: 0; line-height: 1.5;">
+                            <em>"Jaringan komputer bukan sekadar menghafal akronim dan nomor port, melainkan seni merancang sistem komunikasi yang handal, efisien, dan aman di tengah dunia yang saling terhubung."</em>
+                        </p>
+                        <div style="margin-top: 10px; font-weight: 700; color: #166534; font-size: 0.95em;">
+                            Sampai jumpa di Ujian Akhir Semester (Minggu XVI)! Semoga mendapat hasil terbaik.
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">Tutup perkuliahan satu semester dengan hangat. Berikan semangat kepada mahasiswa untuk menghadapi minggu ujian dan ingatkan untuk menjaga kesehatan serta integritas akademik.</aside>
             </section>
 
         </div><!-- /slides -->
@@ -479,14 +1208,279 @@
 
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/math/math.js"></script>
     <script>
         Reveal.initialize({
             hash: true,
             slideNumber: 'c/t',
             transition: 'slide',
-            plugins: [RevealNotes]
+            autoAnimateDuration: 0.75,
+            autoAnimateEasing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            plugins: [RevealNotes, RevealMath.KaTeX]
         });
     </script>
+
+    
+    <script>
+        let w15Timers = [];
+
+        function clearW15Timers() {
+            w15Timers.forEach(t => clearTimeout(t));
+            w15Timers = [];
+        }
+
+        function appendW15Log(elemId, htmlContent) {
+            const el = document.getElementById(elemId);
+            if (!el) return;
+            const item = document.createElement('div');
+            item.className = 'sim-log-item';
+            item.innerHTML = htmlContent;
+            el.appendChild(item);
+            el.scrollTop = el.scrollHeight;
+        }
+
+        function setW15PaneActive(badgeId, text = 'ACTIVE', statusClass = 'sim-status-active') {
+            const badge = document.getElementById(badgeId);
+            if (badge) {
+                badge.className = 'sim-badge ' + statusClass;
+                badge.textContent = text;
+            }
+        }
+
+        /* MQTT SIMULATION */
+        function resetW15MqttSim() {
+            clearW15Timers();
+            document.getElementById('mqtt-pub-log').innerHTML = 'Menunggu pemicu sensor...';
+            document.getElementById('mqtt-brk-log').innerHTML = 'Broker aktif pada port 1883/TCP...';
+            document.getElementById('mqtt-sub-log').innerHTML = 'Berlangganan topik: <code>itera/lab/#</code>';
+            setW15PaneActive('mqtt-pub-st', 'IDLE', 'sim-status-idle');
+            setW15PaneActive('mqtt-brk-st', 'LISTENING', 'sim-status-idle');
+            setW15PaneActive('mqtt-sub-st', 'IDLE', 'sim-status-idle');
+        }
+
+        function runW15MqttSim(qosLevel) {
+            resetW15MqttSim();
+            const delay = 650;
+
+            if (qosLevel === 0) {
+                setW15PaneActive('mqtt-pub-st', 'PUBLISHING (QoS 0)');
+                appendW15Log('mqtt-pub-log', '<span class="sim-tag-req">PUBLISH</span> Topik: <code>itera/lab/temp</code> (Nilai: 27.8&deg;C). Tanpa ACK.');
+                w15Timers.push(setTimeout(() => {
+                    setW15PaneActive('mqtt-brk-st', 'FORWARDING');
+                    appendW15Log('mqtt-brk-log', '<span class="sim-tag-cache">BROKER</span> Paket diterima. Teruskan ke subscriber topik <code>itera/lab/#</code>.');
+                    w15Timers.push(setTimeout(() => {
+                        setW15PaneActive('mqtt-sub-st', 'RECEIVED');
+                        appendW15Log('mqtt-sub-log', '<span class="sim-tag-res">DATA IN</span> Suhu: 27.8&deg;C ditampilkan di dashboard.');
+                        setW15PaneActive('mqtt-pub-st', 'IDLE', 'sim-status-idle');
+                    }, delay));
+                }, delay));
+            } else if (qosLevel === 1) {
+                setW15PaneActive('mqtt-pub-st', 'PUBLISHING (QoS 1)');
+                appendW15Log('mqtt-pub-log', '<span class="sim-tag-req">PUBLISH</span> Sensor Kritis (Tekanan Gas). Menunggu PUBACK.');
+                w15Timers.push(setTimeout(() => {
+                    setW15PaneActive('mqtt-brk-st', 'ACK & DISPATCH');
+                    appendW15Log('mqtt-brk-log', '<span class="sim-tag-res">PUBACK</span> Kirim ACK ke Publisher (PacketID: #1042).');
+                    appendW15Log('mqtt-brk-log', '<span class="sim-tag-cache">ROUTE</span> Teruskan pesan ke Subscriber terdaftar.');
+                    w15Timers.push(setTimeout(() => {
+                        setW15PaneActive('mqtt-pub-st', 'ACKED (TERKIRIM)');
+                        appendW15Log('mqtt-pub-log', '<span class="sim-tag-res">PUBACK IN</span> Sensor menerima bukti kirim.');
+                        setW15PaneActive('mqtt-sub-st', 'RECEIVED');
+                        appendW15Log('mqtt-sub-log', '<span class="sim-tag-res">ALERT IN</span> Tekanan: 4.2 Bar (Tercatat pasti).');
+                    }, delay));
+                }, delay));
+            } else if (qosLevel === 2) {
+                setW15PaneActive('mqtt-pub-st', 'PUBLISH (QoS 2: 4-WAY)');
+                appendW15Log('mqtt-pub-log', '<span class="sim-tag-req">1. PUBLISH</span> Perintah Darurat Pintu Lab. Menunggu PUBREC.');
+                w15Timers.push(setTimeout(() => {
+                    setW15PaneActive('mqtt-brk-st', 'PUBREC');
+                    appendW15Log('mqtt-brk-log', '<span class="sim-tag-cache">2. PUBREC</span> Broker simpan PacketID & kirim balasan.');
+                    w15Timers.push(setTimeout(() => {
+                        setW15PaneActive('mqtt-pub-st', 'PUBREL');
+                        appendW15Log('mqtt-pub-log', '<span class="sim-tag-req">3. PUBREL</span> Publisher rilis kunci antrean.');
+                        w15Timers.push(setTimeout(() => {
+                            setW15PaneActive('mqtt-brk-st', 'PUBCOMP');
+                            appendW15Log('mqtt-brk-log', '<span class="sim-tag-res">4. PUBCOMP</span> Selesai! Tidak mungkin duplikat.');
+                            setW15PaneActive('mqtt-sub-st', 'EXACTLY ONCE');
+                            appendW15Log('mqtt-sub-log', '<span class="sim-tag-res">EXEC</span> Perintah Pintu Darurat dieksekusi 1x.');
+                        }, delay));
+                    }, delay));
+                }, delay));
+            }
+        }
+
+        /* SDN SIMULATION */
+        function resetW15SdnSim() {
+            clearW15Timers();
+            document.getElementById('sdn-host-log').innerHTML = 'Siap kirim paket IP ke Host B (10.0.0.2)...';
+            document.getElementById('sdn-sw-log').innerHTML = 'Tabel TCAM siap memproses paket...';
+            document.getElementById('sdn-ctrl-log').innerHTML = 'Topologi aktif. Menunggu Packet-In...';
+            setW15PaneActive('sdn-host-st', 'IDLE', 'sim-status-idle');
+            setW15PaneActive('sdn-sw-st', 'FLOW TABLE', 'sim-status-idle');
+            setW15PaneActive('sdn-ctrl-st', 'GLOBAL VIEW', 'sim-status-idle');
+        }
+
+        function runW15SdnSim(hasFlowRule) {
+            resetW15SdnSim();
+            const delay = 650;
+
+            if (!hasFlowRule) {
+                setW15PaneActive('sdn-host-st', 'TX PACKET');
+                appendW15Log('sdn-host-log', '<span class="sim-tag-req">FRAME</span> Kirim IPv4: Src=10.0.0.1 -> Dst=10.0.0.2');
+                w15Timers.push(setTimeout(() => {
+                    setW15PaneActive('sdn-sw-st', 'TABLE-MISS!');
+                    appendW15Log('sdn-sw-log', '<span class="sim-tag-err">MISS</span> Tidak ada aturan cocok di Flow Table!');
+                    appendW15Log('sdn-sw-log', '<span class="sim-tag-req">OFPT_PACKET_IN</span> Kirim paket ke Controller via OpenFlow.');
+                    w15Timers.push(setTimeout(() => {
+                        setW15PaneActive('sdn-ctrl-st', 'COMPUTING PATH');
+                        appendW15Log('sdn-ctrl-log', '<span class="sim-tag-cache">ALGORITMA DIJKSTRA</span> Jalur terpendek ditemukan: Port 3.');
+                        appendW15Log('sdn-ctrl-log', '<span class="sim-tag-res">OFPT_FLOW_MOD</span> Pasang aturan baru ke Switch!');
+                        w15Timers.push(setTimeout(() => {
+                            setW15PaneActive('sdn-sw-st', 'RULE INSTALLED');
+                            appendW15Log('sdn-sw-log', '<span class="sim-tag-res">INSTALLED</span> Aturan terpasang: [Match: Dst 10.0.0.2 -> Output: Port 3].');
+                            appendW15Log('sdn-sw-log', '<span class="sim-tag-cache">FORWARD</span> Paket pertama diteruskan ke Host B.');
+                        }, delay));
+                    }, delay));
+                }, delay));
+            } else {
+                setW15PaneActive('sdn-host-st', 'TX PACKET 2');
+                appendW15Log('sdn-host-log', '<span class="sim-tag-req">FRAME 2</span> Kirim IPv4 kedua: Src=10.0.0.1 -> Dst=10.0.0.2');
+                w15Timers.push(setTimeout(() => {
+                    setW15PaneActive('sdn-sw-st', 'FLOW HIT (FAST PATH)');
+                    appendW15Log('sdn-sw-log', '<span class="sim-tag-res">HIT</span> Aturan cocok di TCAM! Forward langsung ke Port 3.');
+                    appendW15Log('sdn-sw-log', '<span class="sim-tag-cache">SPEED</span> Diproses hardware (latensi < 100 ns, 0% CPU beban).');
+                    setW15PaneActive('sdn-ctrl-st', 'IDLE (BYPASSED)');
+                    appendW15Log('sdn-ctrl-log', '<span class="sim-tag-cache">CONTROLLER</span> Tidak terbebani (Data Plane berjalan otomatis pada kecepatan kabel).');
+                }, delay));
+            }
+        }
+
+        /* QUIZ COUNTDOWN TIMER */
+        let quizTimerInterval = null;
+        let quizTotalSeconds = 30 * 60;
+        let quizRemainingSeconds = 30 * 60;
+        let quizIsRunning = false;
+
+        function setQuizPreset(minutes) {
+            const input = document.getElementById('quiz-min-input');
+            if (input) {
+                input.value = minutes;
+                resetQuizTimer();
+            }
+        }
+
+        function formatQuizTime(totalSeconds) {
+            const hrs = Math.floor(totalSeconds / 3600);
+            const mins = Math.floor((totalSeconds % 3600) / 60);
+            const secs = totalSeconds % 60;
+            if (hrs > 0) {
+                return String(hrs).padStart(2, '0') + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            }
+            return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+        }
+
+        function updateQuizTimerDisplay() {
+            const display = document.getElementById('quiz-timer-display');
+            const pbar = document.getElementById('quiz-progress-bar');
+            const statusEl = document.getElementById('quiz-timer-status');
+            if (!display) return;
+
+            display.textContent = formatQuizTime(quizRemainingSeconds);
+
+            if (pbar && quizTotalSeconds > 0) {
+                const pct = Math.max(0, (quizRemainingSeconds / quizTotalSeconds) * 100);
+                pbar.style.width = pct + '%';
+            }
+
+            if (quizRemainingSeconds > 300) {
+                display.style.color = '#1e40af';
+                if (pbar) pbar.style.background = '#2563eb';
+            } else if (quizRemainingSeconds > 60) {
+                display.style.color = '#d97706';
+                if (pbar) pbar.style.background = '#d97706';
+            } else {
+                display.style.color = '#dc2626';
+                if (pbar) pbar.style.background = '#dc2626';
+            }
+        }
+
+        function playQuizBeep() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                for (let i = 0; i < 3; i++) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(880, ctx.currentTime + i * 0.25);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime + i * 0.25);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.25 + 0.2);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + i * 0.25);
+                    osc.stop(ctx.currentTime + i * 0.25 + 0.2);
+                }
+            } catch (e) {
+                // AudioContext blocked or unsupported, silently ignore
+            }
+        }
+
+        function startQuizTimer() {
+            if (quizIsRunning) return;
+            const input = document.getElementById('quiz-min-input');
+            const statusEl = document.getElementById('quiz-timer-status');
+
+            if (quizRemainingSeconds <= 0 && input) {
+                const mins = Math.max(1, parseInt(input.value, 10) || 30);
+                quizTotalSeconds = mins * 60;
+                quizRemainingSeconds = quizTotalSeconds;
+            }
+
+            quizIsRunning = true;
+            if (statusEl) {
+                statusEl.innerHTML = '<span style="color:#16a34a;"><i class="bi bi-clock-history"></i> Kuis sedang berlangsung...</span>';
+            }
+
+            quizTimerInterval = setInterval(() => {
+                if (quizRemainingSeconds > 0) {
+                    quizRemainingSeconds--;
+                    updateQuizTimerDisplay();
+                } else {
+                    clearInterval(quizTimerInterval);
+                    quizIsRunning = false;
+                    const status = document.getElementById('quiz-timer-status');
+                    if (status) {
+                        status.innerHTML = '<span style="color:#dc2626; font-size:1.15em; font-weight:800;"><i class="bi bi-alarm-fill"></i> WAKTU PENGERJAAN KUIS TELAH SELESAI! Silakan submit jawaban Anda.</span>';
+                    }
+                    playQuizBeep();
+                }
+            }, 1000);
+        }
+
+        function pauseQuizTimer() {
+            if (!quizIsRunning) return;
+            clearInterval(quizTimerInterval);
+            quizIsRunning = false;
+            const statusEl = document.getElementById('quiz-timer-status');
+            if (statusEl) {
+                statusEl.innerHTML = '<span style="color:#d97706;"><i class="bi bi-pause-circle-fill"></i> Timer dijeda (Pause)</span>';
+            }
+        }
+
+        function resetQuizTimer() {
+            clearInterval(quizTimerInterval);
+            quizIsRunning = false;
+            const input = document.getElementById('quiz-min-input');
+            const mins = input ? Math.max(1, parseInt(input.value, 10) || 30) : 30;
+            quizTotalSeconds = mins * 60;
+            quizRemainingSeconds = quizTotalSeconds;
+            updateQuizTimerDisplay();
+
+            const statusEl = document.getElementById('quiz-timer-status');
+            if (statusEl) {
+                statusEl.innerHTML = '<span style="color:#64748b;">Timer siap dimulai (' + mins + ' Menit)</span>';
+            }
+        }
+    </script>
+    
 
     <!-- Theme Toggle -->
     <button id="theme-toggle"
@@ -496,13 +1490,11 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const toggleBtn = document.getElementById('theme-toggle');
-            const themeLink = document.getElementById('theme');
             const themeIcon = document.getElementById('theme-icon');
-            if (!toggleBtn || !themeLink) return;
+            if (!toggleBtn) return;
 
-            const currentTheme = localStorage.getItem('reveal-theme') || 'simple';
-            if (currentTheme === 'night') {
-                themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
+            const currentTheme = localStorage.getItem('reveal-theme') || 'light';
+            if (currentTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
                 toggleBtn.style.background = '#f1f1f1';
@@ -510,24 +1502,23 @@
             }
 
             toggleBtn.addEventListener('click', () => {
-                if (themeLink.href.includes('simple.css')) {
-                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/night.css';
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('reveal-theme', 'night');
-                    themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
-                    toggleBtn.style.background = '#f1f1f1';
-                    toggleBtn.style.color = '#333';
-                } else {
-                    themeLink.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css';
+                if (document.documentElement.getAttribute('data-theme') === 'dark') {
                     document.documentElement.removeAttribute('data-theme');
-                    localStorage.setItem('reveal-theme', 'simple');
+                    localStorage.setItem('reveal-theme', 'light');
                     themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
                     toggleBtn.style.background = '#333';
                     toggleBtn.style.color = '#fff';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('reveal-theme', 'dark');
+                    themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                    toggleBtn.style.background = '#f1f1f1';
+                    toggleBtn.style.color = '#333';
                 }
             });
         });
     </script>
+
 </body>
 
 </html>

@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/>
+        </marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/>
+        </marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="44" rx="10" fill="#0f172a"/>
+    <text x="480" y="44" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">HIDDEN TERMINAL PROBLEM &amp; SOLUSI RESERVASI RTS / CTS (CSMA/CA)</text>
+
+    <!-- LEFT: Hidden Terminal Problem -->
+    <g transform="translate(24, 76)">
+        <rect width="420" height="440" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="210" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#991b1b" text-anchor="middle">Masalah: Hidden Terminal (Tanpa RTS/CTS)</text>
+
+        <!-- Coverage A & C -->
+        <circle cx="135" cy="170" r="105" fill="#3b82f6" fill-opacity="0.10" stroke="#2563eb" stroke-width="2" stroke-dasharray="5,4"/>
+        <circle cx="285" cy="170" r="105" fill="#f97316" fill-opacity="0.10" stroke="#ea580c" stroke-width="2" stroke-dasharray="5,4"/>
+
+        <!-- Nodes A, B, C -->
+        <circle cx="62" cy="170" r="24" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <text x="62" y="176" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">A</text>
+
+        <circle cx="210" cy="170" r="28" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <text x="210" y="169" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#ffffff" text-anchor="middle">B</text>
+        <text x="210" y="185" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#fee2e2" text-anchor="middle">(AP)</text>
+
+        <circle cx="358" cy="170" r="24" fill="#ea580c" stroke="#ffffff" stroke-width="2"/>
+        <text x="358" y="176" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">C</text>
+
+        <!-- Arrows A->B and C->B -->
+        <line x1="90" y1="170" x2="176" y2="170" stroke="#2563eb" stroke-width="4" marker-end="url(#arrB)"/>
+        <line x1="330" y1="170" x2="244" y2="170" stroke="#ea580c" stroke-width="4" marker-end="url(#arrO)"/>
+
+        <rect x="165" y="114" width="90" height="24" rx="6" fill="#dc2626"/>
+        <text x="210" y="130" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#ffffff" text-anchor="middle">💥 COLLISION!</text>
+
+        <!-- Signal strength curves -->
+        <path d="M 48 338 L 48 290 L 185 338" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+        <path d="M 372 338 L 372 290 L 235 338" fill="none" stroke="#ea580c" stroke-width="2.5"/>
+        <line x1="30" y1="338" x2="390" y2="338" stroke="#475569" stroke-width="1.5"/>
+        <text x="112" y="354" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#1e40af" text-anchor="middle">Sinyal A tak sampai ke C</text>
+        <text x="308" y="354" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#9a3412" text-anchor="middle">Sinyal C tak sampai ke A</text>
+
+        <rect x="20" y="372" width="380" height="52" rx="8" fill="#ffffff" stroke="#fca5a5"/>
+        <text x="210" y="394" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#991b1b" text-anchor="middle">A &amp; C mengira kanal kosong → Mengirim bersamaan</text>
+        <text x="210" y="412" font-family="system-ui, sans-serif" font-size="10" fill="#7f1d1d" text-anchor="middle">CSMA/CD gagal karena fading sinyal &amp; transmisi menutupi kolisi</text>
+    </g>
+
+    <!-- RIGHT: Timing Diagram CSMA/CA + RTS/CTS -->
+    <g transform="translate(460, 76)">
+        <rect width="476" height="440" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="238" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#166534" text-anchor="middle">Solusi CSMA/CA dengan Reservasi RTS / CTS</text>
+
+        <!-- Timeline Rows: Node A, AP (B), Node C -->
+        <g transform="translate(20, 56)">
+            <!-- Node Labels -->
+            <text x="18" y="42" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#1e40af">A</text>
+            <line x1="40" y1="38" x2="435" y2="38" stroke="#94a3b8" stroke-width="2"/>
+
+            <text x="10" y="142" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#166534">AP</text>
+            <line x1="40" y1="138" x2="435" y2="138" stroke="#94a3b8" stroke-width="2"/>
+
+            <text x="18" y="242" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#9a3412">C</text>
+            <line x1="40" y1="238" x2="435" y2="238" stroke="#94a3b8" stroke-width="2"/>
+
+            <!-- DIFS -->
+            <rect x="44" y="18" width="42" height="20" rx="4" fill="#e2e8f0" stroke="#64748b"/>
+            <text x="65" y="32" font-family="monospace" font-size="10.5" font-weight="700" fill="#0f172a" text-anchor="middle">DIFS</text>
+
+            <!-- 1. RTS (A -> AP) -->
+            <rect x="88" y="16" width="48" height="22" rx="4" fill="#2563eb"/>
+            <text x="112" y="31" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">RTS</text>
+            <path d="M 112 38 L 128 134" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrB)"/>
+
+            <!-- SIFS -->
+            <rect x="138" y="116" width="30" height="20" rx="4" fill="#fef3c7" stroke="#d97706"/>
+            <text x="153" y="130" font-family="monospace" font-size="9.5" font-weight="700" fill="#92400e" text-anchor="middle">SIFS</text>
+
+            <!-- 2. CTS Broadcast (AP -> A & C) -->
+            <rect x="170" y="116" width="52" height="22" rx="4" fill="#16a34a"/>
+            <text x="196" y="131" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">CTS</text>
+            <path d="M 188 116 L 208 42" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+            <path d="M 200 138 L 220 234" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrG)"/>
+
+            <!-- C waits (NAV Defer) -->
+            <rect x="224" y="218" width="198" height="20" rx="4" fill="#ffedd5" stroke="#f97316" stroke-dasharray="4,2"/>
+            <text x="323" y="232" font-family="system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#9a3412" text-anchor="middle">NAV: Node C Menunda Transmisi (Diam)</text>
+
+            <!-- SIFS then DATA (A -> AP) -->
+            <rect x="222" y="16" width="112" height="22" rx="4" fill="#1d4ed8"/>
+            <text x="278" y="31" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">DATA FRAME (Aman)</text>
+            <path d="M 278 38 L 330 134" stroke="#1d4ed8" stroke-width="3" marker-end="url(#arrB)"/>
+
+            <!-- SIFS -->
+            <rect x="342" y="116" width="30" height="20" rx="4" fill="#fef3c7" stroke="#d97706"/>
+            <text x="357" y="130" font-family="monospace" font-size="9.5" font-weight="700" fill="#92400e" text-anchor="middle">SIFS</text>
+
+            <!-- ACK (AP -> A) -->
+            <rect x="374" y="116" width="48" height="22" rx="4" fill="#15803d"/>
+            <text x="398" y="131" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">ACK</text>
+            <path d="M 398 116 L 418 42" stroke="#15803d" stroke-width="2.5" marker-end="url(#arrG)"/>
+        </g>
+
+        <rect x="20" y="330" width="436" height="94" rx="10" fill="#ffffff" stroke="#86efac"/>
+        <text x="34" y="352" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#166534">Ringkasan Mekanisme CSMA/CA:</text>
+        <text x="34" y="372" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">1. Tunggu DIFS (+ Random Backoff jika kanal sibuk).</text>
+        <text x="34" y="390" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">2. RTS pendek → AP siarkan CTS ke seluruh jangkauan (A &amp; C).</text>
+        <text x="34" y="408" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">3. Penerima WAJIB balas ACK setelah SIFS untuk konfirmasi.</text>
+    </g>
+</svg>

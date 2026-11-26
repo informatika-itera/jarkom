@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/></marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ea580c"/></marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/></marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+    <rect width="960" height="540" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="42" rx="8" fill="#0f172a"/>
+    <text x="480.0" y="42" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">ARSITEKTUR 3-TIER EKOSISTEM INTERNET OF THINGS (IOT)</text>
+
+    <!-- Tier 1: Perception Layer -->
+    <rect x="40" y="80" width="260" height="420" rx="10" fill="#f8fafc" stroke="#0284c7" stroke-width="2" filter="url(#sh)"/>
+    <rect x="55" y="95" width="230" height="30" rx="6" fill="#0284c7"/>
+    <text x="170" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">1. PERCEPTION LAYER</text>
+    <text x="170" y="145" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0369a1" text-anchor="middle">Sensor, Aktuator &amp; Node Mini</text>
+
+    <rect x="60" y="170" width="220" height="65" rx="6" fill="#ffffff" stroke="#bae6fd"/>
+    <text x="75" y="193" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Smart Agriculture (ITERA)</text>
+    <text x="75" y="212" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Sensor Suhu tanah, Kelembaban</text>
+
+    <rect x="60" y="250" width="220" height="65" rx="6" fill="#ffffff" stroke="#bae6fd"/>
+    <text x="75" y="273" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Smart City &amp; Campus</text>
+    <text x="75" y="292" font-family="system-ui, sans-serif" font-size="10" fill="#475569">CCTV jalan, Kualitas udara PM2.5</text>
+
+    <rect x="60" y="330" width="220" height="65" rx="6" fill="#ffffff" stroke="#bae6fd"/>
+    <text x="75" y="353" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Smart Industrial (IIoT)</text>
+    <text x="75" y="372" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Getaran turbin, Tekanan pipa gas</text>
+
+    <rect x="60" y="415" width="220" height="65" rx="6" fill="#e0f2fe"/>
+    <text x="170" y="440" font-family="monospace" font-size="10" font-weight="700" fill="#0369a1" text-anchor="middle">MCU: ESP32 / STM32</text>
+    <text x="170" y="460" font-family="system-ui, sans-serif" font-size="10" fill="#0369a1" text-anchor="middle">RAM 32-512 KB, Baterai Koin</text>
+
+    <!-- Arrow 1 to 2 -->
+    <line x1="300" y1="290" x2="350" y2="290" stroke="#0284c7" stroke-width="3" marker-end="url(#arrB)"/>
+
+    <!-- Tier 2: Network Layer -->
+    <rect x="350" y="80" width="260" height="420" rx="10" fill="#f8fafc" stroke="#16a34a" stroke-width="2" filter="url(#sh)"/>
+    <rect x="365" y="95" width="230" height="30" rx="6" fill="#16a34a"/>
+    <text x="480" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">2. NETWORK LAYER</text>
+    <text x="480" y="145" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Gateway &amp; Transmisi LPWAN</text>
+
+    <rect x="370" y="170" width="220" height="65" rx="6" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="385" y="193" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">LPWAN (Jarak Jauh)</text>
+    <text x="385" y="212" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">&bull; LoRaWAN (920-923 MHz)</text>
+    <text x="385" y="227" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">&bull; NB-IoT / LTE-M (Seluler)</text>
+
+    <rect x="370" y="250" width="220" height="65" rx="6" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="385" y="273" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Jarak Pendek (Mesh)</text>
+    <text x="385" y="292" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Zigbee (IEEE 802.15.4)</text>
+    <text x="385" y="307" font-family="system-ui, sans-serif" font-size="10" fill="#475569">&bull; Bluetooth Low Energy (BLE)</text>
+
+    <rect x="370" y="330" width="220" height="65" rx="6" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="385" y="353" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Backbone Gateway</text>
+    <text x="385" y="372" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Konversi protokol radio ke</text>
+    <text x="385" y="387" font-family="system-ui, sans-serif" font-size="10" fill="#475569">TCP/IP Ethernet &amp; 4G Uplink</text>
+
+    <rect x="370" y="415" width="220" height="65" rx="6" fill="#f0fdf4"/>
+    <text x="480" y="440" font-family="monospace" font-size="10" font-weight="700" fill="#15803d" text-anchor="middle">Protokol: MQTT / CoAP</text>
+    <text x="480" y="460" font-family="system-ui, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">Header 2 Byte (Sangat Ringan)</text>
+
+    <!-- Arrow 2 to 3 -->
+    <line x1="610" y1="290" x2="660" y2="290" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG)"/>
+
+    <!-- Tier 3: Application Layer -->
+    <rect x="660" y="80" width="260" height="420" rx="10" fill="#f8fafc" stroke="#7c3aed" stroke-width="2" filter="url(#sh)"/>
+    <rect x="675" y="95" width="230" height="30" rx="6" fill="#7c3aed"/>
+    <text x="790" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">3. APPLICATION LAYER</text>
+    <text x="790" y="145" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#6d28d9" text-anchor="middle">Cloud Broker &amp; Analitik AI</text>
+
+    <rect x="680" y="170" width="220" height="65" rx="6" fill="#ffffff" stroke="#ddd6fe"/>
+    <text x="695" y="193" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">MQTT Broker Central</text>
+    <text x="695" y="212" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Mosquitto, EMQX, AWS IoT Core</text>
+
+    <rect x="680" y="250" width="220" height="65" rx="6" fill="#ffffff" stroke="#ddd6fe"/>
+    <text x="695" y="273" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Database Time-Series</text>
+    <text x="695" y="292" font-family="system-ui, sans-serif" font-size="10" fill="#475569">InfluxDB, Prometheus, Timescale</text>
+
+    <rect x="680" y="330" width="220" height="65" rx="6" fill="#ffffff" stroke="#ddd6fe"/>
+    <text x="695" y="353" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Dashboard &amp; AI Trigger</text>
+    <text x="695" y="372" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Grafana, Notifikasi Telegram/WA</text>
+
+    <rect x="680" y="415" width="220" height="65" rx="6" fill="#f5f3ff"/>
+    <text x="790" y="440" font-family="monospace" font-size="10" font-weight="700" fill="#6d28d9" text-anchor="middle">End-to-End Security</text>
+    <text x="790" y="460" font-family="system-ui, sans-serif" font-size="10" fill="#6d28d9" text-anchor="middle">TLS 1.3 / DTLS Encryption</text>
+</svg>

@@ -312,6 +312,79 @@
         [data-theme="dark"] .reveal table tr:nth-child(even) td {
             background: #222 !important;
         }
+        /* Standardized Outline & Section Divider Styles (P14 Match) */
+        .section-part-label {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1565c0;
+            font-size: .5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .section-part-label {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .layout-2col > div {
+            min-width: 0;
+        }
+
+        .card-compact {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            font-size: .45em;
+            line-height: 1.48;
+            padding: 14px 18px;
+        }
+
+        .card-compact p,
+        .card-compact li {
+            font-size: 1em;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+
+        .card-compact ul {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1.2em;
+            margin-bottom: 6px;
+        }
+
+        .reveal section[data-topic="Outline Materi"] h3 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .card-compact .info-box {
+            border-left: 4px solid #1565c0;
+            background: #e8f0fe;
+            color: #1e3a8a;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: .92em;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
     </style>
 </head>
 
@@ -347,63 +420,61 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ OUTLINE ━━━━━━━━━━━━━━ -->
-            <section>
+            <section data-topic="Outline Materi">
                 <h3>Outline Materi</h3>
                 <div class="layout-2col">
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; color:#1565c0; font-size:.85em; margin:0;">
-                            1. Konsep Dasar Routing &amp; Forwarding</p>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#1565c0; margin:0 0 4px 0;">
+                            <i class="bi bi-router-fill"></i> 1. Konsep Routing &amp; 2. Routing Statis
+                        </p>
                         <ul style="margin-bottom:8px;">
-                            <li>Fungsi Router, Control vs Data Plane</li>
-                            <li>Routing Table, AD &amp; Longest Prefix Match</li>
+                            <li>Fungsi Router, Tabel Routing, AD, &amp; <em>Longest Prefix Match</em></li>
+                            <li>Sintaks <code>ip route</code>, Default Route, &amp; Floating Static</li>
                         </ul>
 
-                        <p style="font-weight:700; color:#e65100; font-size:.85em; margin:0;">
-                            2. Routing Statis (Static Routing)</p>
+                        <p style="font-weight:700; color:#1b5e20; margin:0 0 4px 0;">
+                            <i class="bi bi-signpost-split-fill"></i> 3. Dynamic Routing: RIP (Distance Vector)
+                        </p>
                         <ul style="margin-bottom:8px;">
-                            <li>Sintaks Konfigurasi <code>ip route</code></li>
-                            <li>Default Route &amp; Floating Static (Backup)</li>
+                            <li>Taksonomi IGP vs EGP, Konsep AS, &amp; Simulator Bellman-Ford</li>
                         </ul>
 
-                        <p style="font-weight:700; font-size:.85em; color:#1b5e20; margin:0;">
-                            3. Dynamic Routing: RIP (Distance Vector)</p>
-                        <ul>
-                            <li>Taksonomi IGP vs EGP, Konsep AS</li>
-                            <li>Count-to-Infinity &amp; Simulator Bellman-Ford</li>
+                        <p style="font-weight:700; color:#0277bd; margin:0 0 4px 0;">
+                            <i class="bi bi-diagram-3-fill"></i> 4. OSPF (Link-State Protocol)
+                        </p>
+                        <ul style="margin-bottom:0;">
+                            <li>Prinsip LSDB, Metrik Cost, Simulasi Dijkstra, Multi-Area &amp; DR/BDR</li>
                         </ul>
                     </div>
-                    <div class="card text-left text-smaller">
-                        <p style="font-weight:700; font-size:.85em; color:#0277bd; margin:0;">
-                            4. OSPF (Link-State Protocol)</p>
+                    <div class="card card-compact text-left">
+                        <p style="font-weight:700; color:#e65100; margin:0 0 4px 0;">
+                            <i class="bi bi-globe"></i> 5. BGP (Border Gateway Protocol)
+                        </p>
                         <ul style="margin-bottom:8px;">
-                            <li>Prinsip LSDB, Metrik Cost &amp; Simulasi Dijkstra</li>
-                            <li>Hierarki Multi-Area &amp; Peran DR/BDR</li>
+                            <li>Perutean Inter-AS (eBGP vs iBGP), Path Attributes, &amp; Policy</li>
                         </ul>
 
-                        <p style="font-weight:700; font-size:.85em; color:#d84315; margin:0;">
-                            5. BGP (Border Gateway Protocol)</p>
+                        <p style="font-weight:700; color:#6a1b9a; margin:0 0 4px 0;">
+                            <i class="bi bi-table"></i> 6. Komparasi &amp; 7. Tugas Praktikum
+                        </p>
                         <ul style="margin-bottom:8px;">
-                            <li>Perutean Inter-AS, eBGP vs iBGP</li>
-                            <li>Path Attributes &amp; Kebijakan Routing (Policy)</li>
+                            <li>Matriks Evaluasi Protokol Routing &amp; Simulasi Cisco Packet Tracer</li>
                         </ul>
 
-                        <p style="font-weight:700; font-size:.85em; color:#4a148c; margin:0;">
-                            6. Komparasi</p>
-                        <ul>
-                            <li>Matriks Evaluasi 4 Protokol &amp; Panduan Pemilihan</li>
-                        </ul>
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Capaian Pembelajaran:</strong> Mahasiswa mampu menganalisis cara kerja tabel routing, mengonfigurasi Static Routing, serta membandingkan protokol dinamik RIP, OSPF, dan BGP sesuai kebutuhan topologi.
+                        </div>
                     </div>
                 </div>
-                <aside class="notes">Jelaskan roadmap materi dari fondasi routing table, rute statis, dinamika protokol
-                    interior (RIP, OSPF) dan eksterior (BGP), evaluasi komparatif, hingga tugas simulasi Cisco Packet
-                    Tracer.</aside>
+                <aside class="notes">Jelaskan roadmap materi dari fondasi routing table, rute statis, dinamika protokol interior (RIP, OSPF) dan eksterior (BGP), evaluasi komparatif, hingga tugas simulasi Cisco Packet Tracer.</aside>
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 1: KONSEP DASAR ROUTING ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 1: Konsep Dasar Routing">
+                <div class="section-part-label">Bagian 1</div>
                 <h2>1. Konsep Dasar Routing &amp; Forwarding</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Peran Router, Control Plane vs Data Plane,
-                    dan Struktur Routing Table</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Peran Router, Control Plane vs Data Plane, Struktur Routing Table, &amp; Longest Prefix Match</p>
+                <aside class="notes">Bangun pemahaman membaca isi tabel routing serta aturan pemilihan prefix terpanjang.</aside>
             </section>
 
             <!-- Slide 1.1 -->
@@ -586,10 +657,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 2: ROUTING STATIS ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 2: Routing Statis">
+                <div class="section-part-label">Bagian 2</div>
                 <h2>2. Routing Statis (Static Routing)</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Rute Manual, Gateway of Last Resort, dan
-                    Redundansi Floating Static</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Rute Manual via Sintaks ip route, Gateway of Last Resort, dan Floating Static Backup</p>
+                <aside class="notes">Jelaskan kapan rute statis unggul (jaringan stub/SOHO) serta cara membuat jalur cadangan.</aside>
             </section>
 
             <!-- Slide 2.1 -->
@@ -747,10 +819,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 3: DYNAMIC ROUTING & RIP ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 3: Dynamic Routing &amp; RIP">
+                <div class="section-part-label">Bagian 3</div>
                 <h2>3. Dynamic Routing &amp; RIP (Distance Vector)</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Otomasi Pembaruan Rute, Taksonomi IGP/EGP
-                    &amp; Protokol Klasik Bellman-Ford</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Otomasi Pembaruan Rute, Taksonomi IGP/EGP, Masalah Count-to-Infinity, &amp; Bellman-Ford</p>
+                <aside class="notes">Tunjukkan kelebihan routing dinamis dan keterbatasan metrik hop count pada protokol RIP.</aside>
             </section>
 
             <!-- Slide 3.1 -->
@@ -949,10 +1022,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 4: OSPF ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 4: OSPF Link-State">
+                <div class="section-part-label">Bagian 4</div>
                 <h2>4. OSPF (Open Shortest Path First)</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Evolusi dari Distance Vector: Protokol
-                    Link-State Berkecepatan Tinggi</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Protokol Link-State Berkecepatan Tinggi: LSDB, Metrik Cost, Multi-Area, dan DR/BDR</p>
+                <aside class="notes">Jelaskan mengapa OSPF jauh lebih cepat konvergen dan skalabel dibanding RIP di jaringan kampus/enterprise.</aside>
             </section>
 
             <!-- Slide 4.1 -->
@@ -1155,10 +1229,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 5: BGP ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 5: BGP Inter-AS">
+                <div class="section-part-label">Bagian 5</div>
                 <h2>5. BGP (Border Gateway Protocol)</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Dari Jaringan Internal Menuju Perutean
-                    Internet Global (Exterior Gateway)</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Perutean Internet Global Inter-AS (eBGP vs iBGP), Path Attributes, &amp; Kebijakan Policy</p>
+                <aside class="notes">Tekankan bahwa BGP merutekan trafik antar-ISP berdasarkan kebijakan bisnis dan Path Attributes.</aside>
             </section>
 
             <!-- Slide 5.1 -->
@@ -1286,10 +1361,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 6: KOMPARASI MENYELURUH ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 6: Komparasi Protokol Routing">
+                <div class="section-part-label">Bagian 6</div>
                 <h2>6. Komparasi Menyeluruh Protokol Routing</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Matriks Evaluasi, Trade-off Performa, dan
-                    Panduan Desain Arsitektur</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Matriks Evaluasi Static vs RIP vs OSPF vs BGP, Trade-off Performa, &amp; Panduan Pemilihan</p>
+                <aside class="notes">Bantu mahasiswa merangkum kapan memilih masing-masing protokol berdasarkan skala topologi.</aside>
             </section>
 
             <!-- Slide 6.1 -->
@@ -1414,10 +1490,11 @@
             </section>
 
             <!-- ━━━━━━━━━━━━━━ SECTION 7: PRAKTIKUM & TUGAS ━━━━━━━━━━━━━━ -->
-            <section>
+            <section class="section-slide" data-topic="Bagian 7: Tugas Mandiri &amp; Simulasi">
+                <div class="section-part-label">Bagian 7</div>
                 <h2>7. Tugas Mandiri &amp; Simulasi Praktikum</h2>
-                <p class="text-small" style="color: #666; margin-top: 10px;">Studi Kasus Jaringan Multi-Router pada
-                    Cisco Packet Tracer</p>
+                <p class="text-small" style="color: #64748b; margin-top: 10px;">Studi Kasus Perancangan &amp; Konfigurasi Jaringan Multi-Router pada Cisco Packet Tracer</p>
+                <aside class="notes">Berikan pengarahan langkah kerja tugas simulasi routing multi-router agar berjalan mulus.</aside>
             </section>
 
             <!-- Slide 7.1 -->

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+    
+    <defs>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#d97706"/>
+        </marker>
+        <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/>
+        </marker>
+        <marker id="arrS" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z" fill="#475569"/>
+        </marker>
+        <filter id="sh" x="-4%" y="-4%" width="108%" height="108%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+        </filter>
+    </defs>
+
+    <rect width="960" height="540" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="20" y="16" width="920" height="44" rx="10" fill="#0f172a"/>
+    <text x="480" y="44" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">ARSITEKTUR KONFIGURASI WIRELESS ACCESS POINT (AP) KAMPUS / SOHO</text>
+
+    <!-- LEFT: Wired Infrastructure to AP -->
+    <g transform="translate(24, 76)">
+        <rect width="410" height="440" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="205" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#1e3a8a" text-anchor="middle">Topologi Integrasi Kabel, VLAN &amp; PoE</text>
+
+        <!-- Core Router + DHCP + RADIUS -->
+        <rect x="30" y="54" width="165" height="66" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+        <text x="112" y="79" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#1e40af" text-anchor="middle">Router Gateway</text>
+        <text x="112" y="96" font-family="system-ui, sans-serif" font-size="10.5" fill="#1e3a8a" text-anchor="middle">DHCP Server &amp; NAT</text>
+        <text x="112" y="111" font-family="monospace" font-size="9.5" fill="#3b82f6" text-anchor="middle">VLAN 10 / VLAN 20</text>
+
+        <rect x="215" y="54" width="165" height="66" rx="8" fill="#fdf4ff" stroke="#9333ea" stroke-width="2"/>
+        <text x="297" y="79" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#6b21a8" text-anchor="middle">RADIUS Server</text>
+        <text x="297" y="96" font-family="system-ui, sans-serif" font-size="10.5" fill="#7e22ce" text-anchor="middle">Otentikasi 802.1X</text>
+        <text x="297" y="111" font-family="monospace" font-size="9.5" fill="#9333ea" text-anchor="middle">(WPA3-Enterprise)</text>
+
+        <line x1="112" y1="120" x2="175" y2="164" stroke="#334155" stroke-width="3"/>
+        <line x1="297" y1="120" x2="235" y2="164" stroke="#334155" stroke-width="3"/>
+
+        <!-- PoE Switch -->
+        <rect x="75" y="164" width="260" height="54" rx="8" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+        <text x="205" y="187" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">PoE Switch (802.1Q Trunk)</text>
+        <text x="205" y="205" font-family="monospace" font-size="10.5" fill="#38bdf8" text-anchor="middle">Data + Daya Listrik (48V) via Cat6</text>
+
+        <line x1="205" y1="218" x2="205" y2="262" stroke="#2563eb" stroke-width="3.5" marker-end="url(#arrB)"/>
+
+        <!-- Access Point -->
+        <rect x="65" y="266" width="280" height="62" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+        <text x="205" y="292" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#1e40af" text-anchor="middle">📡 Access Point (Mode Bridge/AP)</text>
+        <text x="205" y="313" font-family="monospace" font-size="10.5" fill="#1e3a8a" text-anchor="middle">Mgmt IP: 10.10.1.5/24 | Dual-Band</text>
+
+        <!-- Wireless Clients by SSID -->
+        <line x1="145" y1="328" x2="105" y2="366" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="4,3"/>
+        <line x1="265" y1="328" x2="305" y2="366" stroke="#d97706" stroke-width="2.5" stroke-dasharray="4,3"/>
+
+        <rect x="20" y="366" width="175" height="60" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="107" y="388" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#166534" text-anchor="middle">SSID: ITERA-Dosen</text>
+        <text x="107" y="406" font-family="monospace" font-size="10" fill="#15803d" text-anchor="middle">VLAN 10 | 5 GHz (Ch 36)</text>
+        <text x="107" y="420" font-family="system-ui, sans-serif" font-size="9.5" fill="#166534" text-anchor="middle">WPA3-Enterprise</text>
+
+        <rect x="215" y="366" width="175" height="60" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+        <text x="302" y="388" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#92400e" text-anchor="middle">SSID: ITERA-Mhs</text>
+        <text x="302" y="406" font-family="monospace" font-size="10" fill="#b45309" text-anchor="middle">VLAN 20 | 2.4 GHz (Ch 6)</text>
+        <text x="302" y="420" font-family="system-ui, sans-serif" font-size="9.5" fill="#92400e" text-anchor="middle">WPA2/WPA3-SAE (AES)</text>
+    </g>
+
+    <!-- RIGHT: 4 Parameter Konfigurasi Wajib -->
+    <g transform="translate(454, 76)">
+        <rect width="482" height="440" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+        <text x="241" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#1e3a8a" text-anchor="middle">4 Parameter Kunci Konfigurasi Access Point</text>
+
+        <!-- Param 1 -->
+        <rect x="18" y="48" width="446" height="84" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+        <text x="30" y="70" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#1e40af">1. Mode Operasi: Bridge (AP Mode) vs NAT Router</text>
+        <text x="30" y="90" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• Pakai <tspan font-weight="700">AP / Bridge Mode</tspan> di jaringan kampus agar klien mendapat</text>
+        <text x="40" y="108" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">IP langsung dari DHCP Router pusat (hindari Double-NAT).</text>
+
+        <!-- Param 2 -->
+        <rect x="18" y="144" width="446" height="84" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+        <text x="30" y="166" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#166534">2. Perencanaan Radio: Band, Channel &amp; TX Power</text>
+        <text x="30" y="186" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• 2.4 GHz: Kunci kanal di <tspan font-weight="700">1, 6, atau 11</tspan> (20 MHz, cegah overlap).</text>
+        <text x="30" y="204" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• Atur TX Power sedang agar AP bersebelahan tak saling ganggu.</text>
+
+        <!-- Param 3 -->
+        <rect x="18" y="240" width="446" height="84" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+        <text x="30" y="262" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#991b1b">3. Keamanan Enkripsi: WPA2-AES / WPA3-SAE</text>
+        <text x="30" y="282" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• Matikan WEP &amp; WPA-TKIP! Pilih <tspan font-weight="700">WPA2-PSK (AES)</tspan>, <tspan font-weight="700">WPA3-SAE</tspan>,</text>
+        <text x="40" y="300" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">atau Enterprise 802.1X + RADIUS untuk otentikasi per pengguna.</text>
+
+        <!-- Param 4 -->
+        <rect x="18" y="336" width="446" height="84" rx="8" fill="#fffbeb" stroke="#fcd34d"/>
+        <text x="30" y="358" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" fill="#92400e">4. Segmentasi VLAN &amp; Isolasi Klien (Client Isolation)</text>
+        <text x="30" y="378" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• Petakan setiap SSID ke <tspan font-weight="700">VLAN ID</tspan> berbeda via port Trunk switch.</text>
+        <text x="30" y="396" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• Aktifkan Client Isolation pada SSID tamu cegah sniffing ARP.</text>
+    </g>
+</svg>
