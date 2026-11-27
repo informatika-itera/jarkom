@@ -84,15 +84,98 @@
 
         .layout-text-img {
             display: grid;
-            grid-template-columns: 52% 1fr;
+            grid-template-columns: 48% 1fr;
             gap: 16px;
             align-items: center;
             width: 100%;
+            margin-top: 8px;
         }
 
         .layout-text-img > * {
             min-width: 0;
         }
+
+        .lcol-text {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
+            box-sizing: border-box;
+        }
+
+        .lcol-text .card-compact {
+            font-size: .42em;
+            line-height: 1.44;
+            padding: 10px 14px;
+            margin-bottom: 0;
+        }
+
+        .lcol-text .card-compact p,
+        .lcol-text .card-compact li {
+            font-size: .96em;
+            margin-bottom: 4px;
+        }
+
+        .rcol-img {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        .rcol-img img {
+            max-width: 100%;
+            max-height: 440px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .08);
+            margin: auto;
+        }
+
+        .img-caption {
+            font-size: .40em;
+            color: #64748b;
+            text-align: center;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .sec-bar {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: 700;
+            font-size: .98em;
+            padding: 5px 9px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+        }
+
+        .sec-bar-blue { background: #eff6ff; color: #1d4ed8; border-left: 4px solid #2563eb; }
+        .sec-bar-purple { background: #faf5ff; color: #6b21a8; border-left: 4px solid #9333ea; }
+        .sec-bar-teal { background: #f0fdfa; color: #0f766e; border-left: 4px solid #0d9488; }
+        .sec-bar-amber { background: #fffbeb; color: #92400e; border-left: 4px solid #d97706; }
+        .sec-bar-red { background: #fef2f2; color: #991b1b; border-left: 4px solid #dc2626; }
+        .sec-bar-green { background: #f0fdf4; color: #166534; border-left: 4px solid #16a34a; }
+
+        html[data-theme="dark"] .rcol-img {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        html[data-theme="dark"] .sec-bar-blue { background: #1e3a8a; color: #93c5fd; }
+        html[data-theme="dark"] .sec-bar-purple { background: #3b0764; color: #d8b4fe; }
+        html[data-theme="dark"] .sec-bar-teal { background: #042f2e; color: #5eead4; }
+        html[data-theme="dark"] .sec-bar-amber { background: #451a03; color: #fde68a; }
+        html[data-theme="dark"] .sec-bar-red { background: #450a0a; color: #fca5a5; }
+        html[data-theme="dark"] .sec-bar-green { background: #052e16; color: #86efac; }
 
         .info-box-warn {
             border-left: 4px solid #e65100;
@@ -386,21 +469,27 @@
 
             <section>
                 <h3>Klasifikasi Jaringan Komputer</h3>
-                <div class="layout-2col">
-                    <div class="card card-compact text-left">
-                        <h4 class="highlight-blue" style="margin-top:0;"><i class="bi bi-geo-alt-fill"></i> Berdasarkan Cakupan Area</h4>
-                        <ul>
-                            <li><strong>LAN (Local Area Network):</strong> Area kecil seperti rumah, kantor, laboratorium.</li>
-                            <li><strong>MAN (Metropolitan Area Network):</strong> Area kota atau kampus besar.</li>
-                            <li><strong>WAN (Wide Area Network):</strong> Area luas antar kota/negara (contoh: Internet).</li>
-                        </ul>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-geo-alt-fill"></i> Berdasarkan Cakupan Area</div>
+                            <ul style="margin-bottom:0;">
+                                <li><strong>LAN (Local Area Network):</strong> Area terbatas seperti rumah, lab, atau gedung kantor.</li>
+                                <li><strong>MAN (Metropolitan Area Network):</strong> Area tingkat kota atau kawasan kampus terintegrasi.</li>
+                                <li><strong>WAN (Wide Area Network):</strong> Area luas antar negara dan benua (contoh: Internet).</li>
+                            </ul>
+                        </div>
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-amber"><i class="bi bi-people-fill"></i> Berdasarkan Metode Manajemen</div>
+                            <ul style="margin-bottom:0;">
+                                <li><strong>Client-Server:</strong> Komputer pusat (<em>server</em>) melayani permintaan perangkat pengguna (<em>client</em>).</li>
+                                <li><strong>Peer-to-Peer (P2P):</strong> Tiap node berkedudukan setara dan dapat saling berbagi langsung.</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="card card-compact text-left">
-                        <h4 class="highlight-orange" style="margin-top:0;"><i class="bi bi-people-fill"></i> Berdasarkan Metode Manajemen</h4>
-                        <ul>
-                            <li><strong>Client-Server:</strong> Terdapat komputer pusat (<em>server</em>) yang melayani permintaan komputer pengguna (<em>client</em>).</li>
-                            <li><strong>Peer-to-Peer (P2P):</strong> Semua komputer berkedudukan setara dan dapat saling berbagi langsung.</li>
-                        </ul>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s05_klasifikasi_jaringan.jpg" alt="Klasifikasi Jaringan LAN MAN WAN serta Client-Server dan P2P">
+                        <div class="img-caption">Taksonomi jaringan berdasarkan skala geografis dan model pengelolaan.</div>
                     </div>
                 </div>
             </section>
@@ -423,10 +512,21 @@
 
             <section>
                 <h3>Nuts and Bolts: Gambaran Lengkap</h3>
-                <img src="img/pptx_slide3_nuts_bolts.png" alt="Kurose Figure 1.1 - Internet Nuts and Bolts View" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box" style="margin-top:0;">
-                        <strong>4 Komponen Utama:</strong> <em>End systems</em> (hosts), <em>Packet switches</em> (router &amp; switch), <em>Communication links</em> (kabel/fiber/radio dengan laju transmisi bps), dan <em>Networks</em> yang saling terhubung.
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-hdd-network-fill"></i> 4 Komponen Penyusun Internet</div>
+                            <ul>
+                                <li><strong>End Systems (Hosts):</strong> Miliaran perangkat komputasi di ujung jaringan (PC, HP, server, IoT) yang menjalankan aplikasi jaringan.</li>
+                                <li><strong>Packet Switches:</strong> Perangkat penerus potongan data/paket (<em>Router</em> &amp; <em>Link-Layer Switch</em>).</li>
+                                <li><strong>Communication Links:</strong> Media fisik (tembaga, fiber optik, radio, satelit) dengan kapasitas laju transmisi (<em>bandwidth</em>, bps).</li>
+                                <li><strong>Networks:</strong> Kumpulan perangkat, router, dan link yang dikelola organisasi/ISP dan terhubung global.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s07_nuts_and_bolts.jpg" alt="Komponen Utama Internet Nuts and Bolts">
+                        <div class="img-caption">Peta infrastruktur perangkat keras pembentuk Internet global.</div>
                     </div>
                 </div>
                 <aside class="notes">Ini adalah gambaran lengkap komponen Internet dari Kurose &amp; Ross: end systems, packet switches, communication links, dan networks.</aside>
@@ -554,40 +654,47 @@
 
             <section>
                 <h3>Home Access: Cable (HFC), DSL, &amp; FTTH</h3>
-                <div class="layout-3col">
-                    <div class="card card-compact text-left" style="border-top: 4px solid #e65100;">
-                        <h4 class="highlight-orange" style="margin-top:0;">Cable (HFC)</h4>
-                        <ul>
-                            <li>Memakai infrastruktur kabel antena TV (Coaxial + Fiber / Hybrid Fiber Coax).</li>
-                            <li>Data &amp; siaran TV dibagi lewat frekuensi berbeda (FDM).</li>
-                            <li>Sifatnya <strong>Shared</strong>: bandwidth dibagi bersama tetangga sekitar.</li>
-                        </ul>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-amber"><i class="bi bi-broadcast"></i> Cable Internet (HFC)</div>
+                            <p style="margin-bottom:0;">Memakai infrastruktur TV kabel (<em>Hybrid Fiber Coax</em>). Data &amp; TV dipisah via FDM; bandwidth bersifat <strong>Shared</strong> bersama tetangga.</p>
+                        </div>
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-telephone-fill"></i> DSL (Digital Subscriber Line)</div>
+                            <p style="margin-bottom:0;">Memakai kabel telepon tembaga ke sentral (DSLAM). Suara &amp; data terpisah frekuensi; koneksi bersifat <strong>Dedicated</strong> per rumah.</p>
+                        </div>
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-green"><i class="bi bi-lightning-fill"></i> FTTH (Fiber To The Home)</div>
+                            <p style="margin-bottom:0;">Serat optik ditarik langsung ke rumah melalui <strong>Optical Splitter (PON)</strong>, menghadirkan kecepatan tertinggi (Mbps–Gbps).</p>
+                        </div>
                     </div>
-                    <div class="card card-compact text-left" style="border-top: 4px solid #1565c0;">
-                        <h4 class="highlight-blue" style="margin-top:0;">DSL (Digital Subscriber Line)</h4>
-                        <ul>
-                            <li>Memakai kabel telepon tembaga (<em>twisted-pair</em>) menuju sentral (DSLAM).</li>
-                            <li>Data &amp; suara berjalan di kanal frekuensi berbeda.</li>
-                            <li>Sifatnya <strong>Dedicated</strong> (tidak dibagi dengan tetangga).</li>
-                        </ul>
-                    </div>
-                    <div class="card card-compact text-left" style="border-top: 4px solid #1b5e20;">
-                        <h4 class="highlight-green" style="margin-top:0;">FTTH (Fiber To The Home)</h4>
-                        <ul>
-                            <li>Menarik kabel serat optik langsung dari sentral ISP ke rumah.</li>
-                            <li>Memakai arsitektur PON (<em>Passive Optical Network</em>) dengan splitter cahaya.</li>
-                            <li>Kecepatan sangat tinggi (ratusan Mbps hingga Gbps).</li>
-                        </ul>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s14_home_access.jpg" alt="Perbandingan Home Access Cable HFC DSL dan FTTH">
+                        <div class="img-caption">Perbandingan jalur akses Cable HFC (shared), DSL (dedicated), dan FTTH optik.</div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Home Network Layout</h3>
-                <img src="img/pptx_slide_1_17_home_networks.png" alt="Access networks: home networks" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box" style="margin-top:0;">
-                        <strong>Komponen Jaringan Rumah:</strong> <strong>Modem/ONT</strong> (pengubah sinyal masuk ISP), <strong>Router / Firewall / NAT</strong> (penghubung ke Internet), dan <strong>Wi-Fi Access Point + Switch</strong> lokal—umumnya terintegrasi dalam satu perangkat dari ISP.
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-teal">Komponen Gateway Rumah</div>
+                            <ul style="margin:4px 0 8px;">
+                                <li><strong>Modem / ONT:</strong> Mengubah sinyal akses ISP (fiber optik, kabel, atau DSL) menjadi paket data digital.</li>
+                                <li><strong>Router / Firewall / NAT:</strong> Menghubungkan LAN rumah ke Internet publik sekaligus berbagi satu IP publik.</li>
+                                <li><strong>Switch Ethernet &amp; Wi-Fi AP:</strong> Menyediakan koneksi kabel dan nirkabel ke seluruh perangkat lokal.</li>
+                            </ul>
+                            <div class="info-box" style="margin-top:0;">
+                                Pada jaringan rumah modern, fungsi modem, router/NAT, switch, dan Wi-Fi AP umumnya terintegrasi dalam satu kotak <em>home router</em> dari ISP.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s15_home_network.jpg" alt="Arsitektur jaringan rumah terintegrasi">
+                        <div class="img-caption">Ilustrasi: Integrasi modem/ONT, router/NAT, switch Ethernet, dan Wi-Fi AP di jaringan rumah.</div>
                     </div>
                 </div>
                 <aside class="notes">Dalam jaringan rumah (home network), biasanya terdapat modem (kabel/DSL/ONT), router/firewall/NAT, switch lokal, dan Wi-Fi access point dalam satu perangkat.</aside>
@@ -595,10 +702,26 @@
 
             <section>
                 <h3>Wireless Access Networks (Wi-Fi vs 4G/5G)</h3>
-                <img src="img/pptx_slide_1_18_wireless.png" alt="Wireless access networks" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box" style="margin-top:0;">
-                        <strong>Dua Skala Nirkabel:</strong> <strong>Wireless LAN (Wi-Fi / IEEE 802.11)</strong> menjangkau area dalam gedung (~puluhan meter via Access Point), sedangkan <strong>Wide-Area Cellular (4G LTE / 5G)</strong> menjangkau puluhan kilometer via menara BTS operator untuk mobilitas penuh.
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-wifi"></i> Wireless LAN (Wi-Fi / IEEE 802.11)</div>
+                            <ul style="margin-bottom:0;">
+                                <li>Menghubungkan perangkat pengguna ke router ISP via <strong>Access Point (AP)</strong>.</li>
+                                <li>Cakupan lokal di dalam/sekitar gedung (puluhan meter) dengan throughput tinggi.</li>
+                            </ul>
+                        </div>
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-teal"><i class="bi bi-reception-4"></i> Wide-Area Cellular (4G LTE / 5G)</div>
+                            <ul style="margin-bottom:0;">
+                                <li>Disediakan operator seluler melalui jaringan menara <strong>BTS (Base Station)</strong>.</li>
+                                <li>Cakupan luas (puluhan kilometer) dengan keunggulan <strong>mobilitas penuh</strong> saat bergerak.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s16_wireless_access.jpg" alt="Perbandingan Wireless LAN Wi-Fi dan Wide-Area Cellular 4G 5G">
+                        <div class="img-caption">Perbedaan cakupan jarak dan mobilitas antara Wi-Fi LAN dan jaringan seluler 4G/5G.</div>
                     </div>
                 </div>
                 <aside class="notes">Jaringan akses nirkabel terbagi dua: Wireless LANs (seperti Wi-Fi) dalam gedung, dan Wide-area cellular networks (4G/5G) dari operator seluler.</aside>
@@ -606,10 +729,18 @@
 
             <section>
                 <h3>Enterprise LAN &amp; Data Center Networks</h3>
-                <img src="img/pptx_slide_1_19_enterprise.png" alt="Access networks: enterprise networks" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box" style="margin-top:0;">
-                        <strong>Kampus/Kantor &amp; Data Center:</strong> Jaringan institusi menggabungkan kabel <strong>Ethernet</strong> dan <strong>Wi-Fi</strong> melalui switch 1–10 Gbps ke router institusi; sedangkan <strong>Data Center</strong> (Google/Amazon) menghubungkan ribuan server berkecepatan 10–100 Gbps.
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue">Enterprise LAN (Kampus / Kantor)</div>
+                            <p style="margin:4px 0 10px;">Menggabungkan kabel <strong>Ethernet</strong> dan titik akses <strong>Wi-Fi</strong> melalui switch <strong>1–10 Gbps</strong> menuju router institusi dan ISP, beserta server lokal (web/email).</p>
+                            <div class="sec-bar sec-bar-purple">Data Center Network (Cloud Scale)</div>
+                            <p style="margin:4px 0 0;">Menghubungkan ribuan server rak lewat hierarki switch berkecepatan <strong>10–100 Gbps</strong> guna menopang layanan komputasi besar (misal Google/AWS).</p>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s17_enterprise_datacenter.jpg" alt="Perbandingan jaringan institusi dan data center">
+                        <div class="img-caption">Ilustrasi: Topologi Enterprise LAN kampus/kantor versus jaringan server Data Center berkecepatan tinggi.</div>
                     </div>
                 </div>
                 <aside class="notes">Jaringan perusahaan atau kampus memakai gabungan Ethernet dan Wi-Fi yang terhubung ke switch dan router sebelum ke ISP, sedangkan data center menautkan ribuan server berkecepatan 10–100 Gbps.</aside>
@@ -660,18 +791,22 @@
 
             <section>
                 <h3>Media Fisik: Unguided Media (Radio &amp; Satelit)</h3>
-                <div class="layout-2col">
-                    <div class="card card-compact text-left">
-                        <h4 class="highlight-blue" style="margin-top:0;"><i class="bi bi-wifi"></i> Terrestrial Radio</h4>
-                        <p>Gelombang elektromagnetik merambat bebas di atmosfer tanpa medium padat (contoh: Wi-Fi, Bluetooth, 4G/5G, Microwave).</p>
-                        <p style="margin-bottom:0;"><strong>Tantangan:</strong> Rawan pantulan dinding (<em>multipath</em>), halangan fisik, interferensi, dan cuaca.</p>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue">Terrestrial Radio (Wi-Fi, 4G/5G)</div>
+                            <p style="margin:4px 0 6px;">Gelombang elektromagnetik merambat bebas di udara tanpa kabel fisik (Wi-Fi, Bluetooth, 4G/5G, <em>microwave</em>).</p>
+                            <p style="margin:0 0 10px;"><strong>Tantangan:</strong> Rawan pantulan dinding (<em>multipath</em>), halangan fisik, interferensi, dan kondisi cuaca.</p>
+                            <div class="sec-bar sec-bar-amber">Satellite Radio: GEO vs LEO</div>
+                            <ul style="margin:4px 0 0;">
+                                <li><strong>GEO (~36.000 km):</strong> Cakupan sangat luas namun <em>propagation delay</em> besar (~280 ms).</li>
+                                <li><strong>LEO (&lt;2.000 km):</strong> Orbit dekat bumi → latensi rendah, butuh konstelasi satelit (misal Starlink).</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="card card-compact text-left">
-                        <h4 class="highlight-orange" style="margin-top:0;"><i class="bi bi-broadcast"></i> Satellite Radio</h4>
-                        <ul style="margin-bottom:0;">
-                            <li><strong>Geostationary (GEO ~36.000 km):</strong> Cakupan luas namun <em>propagation delay</em> besar (~280 ms).</li>
-                            <li><strong>LEO (Low Earth Orbit):</strong> Jauh lebih dekat ke bumi → latensi rendah, butuh konstelasi banyak satelit (contoh: Starlink).</li>
-                        </ul>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s19_unguided_media.svg" alt="Media nirkabel radio terestrial dan satelit GEO vs LEO">
+                        <div class="img-caption">Ilustrasi: Propagasi radio terestrial (multipath &amp; cuaca) serta perbandingan orbit satelit GEO vs LEO.</div>
                     </div>
                 </div>
             </section>
@@ -686,10 +821,25 @@
 
             <section>
                 <h3>Fungsi Inti Network Core: Routing vs Forwarding</h3>
-                <img src="img/pptx_slide_1_27_core_functions.png" alt="Two key network-core functions" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box" style="margin-top:0;">
-                        <strong>Routing (Global / Control Plane):</strong> Algoritma routing menentukan jalur rute dari sumber ke tujuan. &nbsp;|&nbsp; <strong>Forwarding (Lokal / Data Plane):</strong> Router memeriksa IP tujuan di <em>Forwarding Table</em> untuk memindahkan paket dari port masuk ke port keluar yang tepat.
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-purple"><i class="bi bi-map-fill"></i> Routing (Global — Control Plane)</div>
+                            <ul style="margin-bottom:0;">
+                                <li>Aksi global yang menentukan jalur rute <em>end-to-end</em> dari sumber ke tujuan melintasi banyak router.</li>
+                                <li>Dijalankan oleh algoritma routing (misal OSPF/BGP) untuk mengisi peta tabel di setiap router.</li>
+                            </ul>
+                        </div>
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-signpost-split-fill"></i> Forwarding (Lokal — Data Plane)</div>
+                            <ul style="margin-bottom:0;">
+                                <li>Aksi lokal cepat di satu router: membaca header alamat tujuan paket dan memindahkannya ke link keluar sesuai <strong>Forwarding Table</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s21_routing_vs_forwarding.jpg" alt="Perbedaan Routing Control Plane dan Forwarding Data Plane">
+                        <div class="img-caption">Routing menentukan rute global; Forwarding mengeksekusi pemilihan port keluar per paket.</div>
                     </div>
                 </div>
                 <aside class="notes">Di dalam Network Core ada dua fungsi utama: Routing (aksi global menentukan peta jalan) dan Forwarding (aksi lokal memindahkan paket di tiap router berdasarkan Forwarding Table).</aside>
@@ -697,10 +847,22 @@
 
             <section>
                 <h3>Packet Switching: Store-and-Forward</h3>
-                <img src="img/pptx_slide_1_30_store_forward.png" alt="Packet-switching: store-and-forward" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box" style="margin-top:0;">
-                        <strong>Prinsip Store-and-Forward:</strong> Router wajib menerima &amp; menyimpan <strong>seluruh <em>L</em> bit paket secara utuh</strong> sebelum mulai meneruskannya ke link berikutnya berkecepatan <em>R</em> bps, menimbulkan delay transmisi sebesar <strong><em>L</em> / <em>R</em> detik</strong> per hop.
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-box-seam-fill"></i> Cara Kerja Store-and-Forward</div>
+                            <ul>
+                                <li><strong>1. Store:</strong> Router wajib menerima dan menyimpan <strong>seluruh <em>L</em> bit paket secara utuh</strong> di memori buffer terlebih dahulu.</li>
+                                <li><strong>2. Forward:</strong> Setelah lengkap tanpa cacat, router meneruskan paket ke link keluar berkecepatan <em>R</em> bps.</li>
+                            </ul>
+                            <div class="info-box" style="margin-top:4px;">
+                                <strong>Delay Transmisi:</strong> Memerlukan waktu dorong ke kabel sebesar <strong><em>L</em> / <em>R</em> detik</strong> per hop router.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s22_store_and_forward.jpg" alt="Mekanisme Store and Forward Packet Switching">
+                        <div class="img-caption">Seluruh L bit paket harus tiba utuh di router sebelum mulai dikirim ke hop berikutnya.</div>
                     </div>
                 </div>
                 <aside class="notes">Packet-switching menggunakan prinsip store-and-forward: seluruh bit paket harus tiba di router terlebih dahulu sebelum diteruskan ke link berikutnya.</aside>
@@ -708,10 +870,19 @@
 
             <section>
                 <h3>Queuing Delay &amp; Packet Loss</h3>
-                <img src="img/pptx_slide_1_32_queueing_2.png" alt="Packet-switching: queueing and loss" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box-warn" style="margin-top:0;">
-                        <strong>Antrean Output Buffer:</strong> Jika laju kedatangan paket melebihi kapasitas link keluar, paket mengantre (<strong>Queuing Delay</strong>). Bila memori buffer penuh, paket baru terpaksa dibuang/di-<em>drop</em> (<strong>Packet Loss</strong>).
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-amber"><i class="bi bi-hourglass-split"></i> Output Buffer &amp; Kemacetan</div>
+                            <ul>
+                                <li><strong>Queuing Delay:</strong> Terjadi ketika laju kedatangan paket dari link masuk (misal 100 Mbps) melebihi kapasitas link keluar (10 Mbps), sehingga paket mengantre di <em>output buffer</em>.</li>
+                                <li><strong>Packet Loss:</strong> Jika trafik terus membanjir hingga kapasitas memori buffer penuh, paket yang baru tiba terpaksa dibuang (<em>drop</em>).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s23_queuing_loss.jpg" alt="Ilustrasi Queuing Delay dan Packet Loss pada Router">
+                        <div class="img-caption">Penyempitan kapasitas keluar memicu antrean buffer hingga risiko paket terbuang.</div>
                     </div>
                 </div>
                 <aside class="notes">Antrean terjadi saat kedatangan paket lebih cepat daripada laju kirim link keluar; jika buffer penuh maka terjadi packet loss.</aside>
@@ -719,10 +890,21 @@
 
             <section>
                 <h3>Circuit Switching &amp; Multiplexing (FDM vs TDM)</h3>
-                <img src="img/pptx_slide_1_34_fdm_tdm.png" alt="Circuit switching: FDM and TDM" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box" style="margin-top:0;">
-                        <strong>Circuit Switching (Telepon Tradisional):</strong> Jalur komunikasi dipesan eksklusif selama sesi berlangsung (kinerja terjamin tanpa antrean, tetapi boros saat diam). Kapasitas link dibagi dengan <strong>FDM</strong> (membagi frekuensi) atau <strong>TDM</strong> (membagi slot waktu bergiliran).
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue">Prinsip Circuit Switching</div>
+                            <p style="margin:4px 0 10px;">Jalur komunikasi dipesan eksklusif sepanjang sesi panggilan—kinerja terjamin tanpa antrean, namun boros kapasitas saat pengguna diam.</p>
+                            <div class="sec-bar sec-bar-purple">Pembagian Kapasitas Link</div>
+                            <ul style="margin:4px 0 0;">
+                                <li><strong>FDM (Frequency Division):</strong> Spektrum link dibagi menjadi pita frekuensi tetap bagi tiap pengguna secara paralel.</li>
+                                <li><strong>TDM (Time Division):</strong> Waktu dibagi menjadi <em>frame</em> periodik; pengguna bergiliran memakai seluruh spektrum di slotnya.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s24_fdm_tdm.svg" alt="Perbandingan multiplexing FDM dan TDM pada circuit switching">
+                        <div class="img-caption">Ilustrasi: Pembagian pita frekuensi paralel (FDM) versus giliran slot waktu periodik (TDM).</div>
                     </div>
                 </div>
                 <aside class="notes">Circuit switching memesan jalur eksklusif dari awal sampai akhir panggilan, umumnya dibagi via FDM (frekuensi) atau TDM (slot waktu).</aside>
@@ -730,10 +912,22 @@
 
             <section>
                 <h3>Packet Switching vs Circuit Switching</h3>
-                <img src="img/pptx_slide_1_35_packet_vs_circuit.png" alt="Packet switching versus circuit switching" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box-green" style="margin-top:0;">
-                        <strong>Mengapa Internet Memilih Packet Switching?</strong> Karena lalu lintas data bersifat <em>bursty</em> (aktif sesaat lalu diam), <em>resource sharing</em> memungkinkan kabel dipakai lebih banyak pengguna secara hemat, meski berisiko macet (<em>congestion</em>) saat penuh.
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-green"><i class="bi bi-check-circle-fill"></i> Mengapa Internet Memilih Packet Switching?</div>
+                            <ul>
+                                <li><strong>Resource Sharing:</strong> Trafik internet bersifat <em>bursty</em> (diam lama saat membaca, lalu tiba-tiba mengunduh). Kanal dapat dipakai bersama secara <em>on-demand</em> tanpa jatah idle yang terbuang.</li>
+                                <li><strong>Skalabilitas &amp; Biaya:</strong> Jauh lebih murah dan mampu melayani lebih banyak pengguna dibanding jalur eksklusif <em>Circuit Switching</em>.</li>
+                            </ul>
+                            <div class="info-box-warn" style="margin-top:4px;">
+                                <strong>Trade-off:</strong> Jika beban serentak melampaui kapasitas, tetap berisiko mengalami kemacetan (<em>congestion</em>) dan delay tak menentu.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s25_packet_vs_circuit.jpg" alt="Perbandingan Circuit Switching dan Packet Switching">
+                        <div class="img-caption">Packet Switching memaksimalkan utilisasi link dibanding jalur terdedikasi Circuit Switching.</div>
                     </div>
                 </div>
                 <aside class="notes">Packet switching jauh lebih efisien untuk trafik bursty karena kapasitas link dibagi bersama (on-demand), berbeda dengan circuit switching yang dedicated.</aside>
@@ -741,10 +935,21 @@
 
             <section>
                 <h3>Struktur Internet: Network of Networks</h3>
-                <img src="img/pptx_slide_1_36_network_of_networks.png" alt="Internet structure: a network of networks" class="slide-img-diagram">
-                <div class="card-compact text-left" style="padding: 8px 0 0 0;">
-                    <div class="info-box" style="margin-top:0;">
-                        <strong>Hierarki Global:</strong> End systems terhubung ke <strong>Access ISP</strong> &rarr; <strong>Regional ISP</strong> &rarr; <strong>Tier-1 Global ISP</strong>, saling bertukar trafik melalui <strong>IXP (Internet Exchange Point)</strong> dan terhubung dengan <strong>Content Provider Networks</strong> (Google, Meta, Microsoft).
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-blue"><i class="bi bi-diagram-3-fill"></i> Hierarki Interkoneksi ISP Global</div>
+                            <ul style="margin-bottom:0;">
+                                <li><strong>Access ISP:</strong> Menghubungkan langsung jaringan rumah, kampus/enterprise, &amp; seluler.</li>
+                                <li><strong>Regional ISP &amp; IXP:</strong> ISP regional saling bertukar trafik lokal secara efisien di titik pertemuan fisik <strong>IXP (Internet Exchange Point)</strong>.</li>
+                                <li><strong>Tier-1 Global ISP:</strong> Tulang punggung (<em>backbone</em>) internasional yang menautkan antar-benua.</li>
+                                <li><strong>Content Provider Networks:</strong> Jaringan pribadi raksasa (Google, Meta, Microsoft) yang mem-<em>bypass</em> ISP perantara demi latensi rendah.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s26_network_of_networks.jpg" alt="Hierarki Network of Networks Access ISP Regional Tier-1 dan IXP">
+                        <div class="img-caption">Struktur bertingkat ISP dari pengguna ujung hingga Tier-1 backbone dan Content Provider.</div>
                     </div>
                 </div>
                 <aside class="notes">Internet tersusun secara hierarkis dari Access ISP, Regional ISP, Tier-1 Global ISP, IXP untuk peering, hingga jaringan Content Provider.</aside>
@@ -760,52 +965,64 @@
 
             <section>
                 <h3>4 Sumber Delay Keterlambatan (Nodal Delay)</h3>
-                <p class="text-small" style="margin-bottom:10px;"><code>d_nodal = d_proc + d_queue + d_trans + d_prop</code></p>
-                <div class="layout-2col">
-                    <div class="card card-compact text-left" style="border-left: 4px solid #1565c0;">
-                        <p style="font-weight:700; color:#1565c0; margin-top:0;">1. Processing Delay (<code>d_proc</code>)</p>
-                        <p style="margin-bottom:0;">Waktu router memeriksa header paket, mengecek error bit, dan menentukan link keluar (sangat cepat, hitungan mikrodetik).</p>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-purple"><i class="bi bi-stopwatch-fill"></i> Total: <code>d_nodal = d_proc + d_queue + d_trans + d_prop</code></div>
+                            <ul style="margin-bottom:0;">
+                                <li><strong class="highlight-blue">1. Processing (<code>d_proc</code>):</strong> Waktu router memeriksa header &amp; error bit (mikrodetik).</li>
+                                <li><strong class="highlight-orange">2. Queuing (<code>d_queue</code>):</strong> Waktu antre di <em>output buffer</em>; bervariasi sesuai kemacetan.</li>
+                                <li><strong class="highlight-green">3. Transmission (<code>d_trans = L/R</code>):</strong> Waktu mendorong seluruh <em>L</em> bit masuk ke kabel berkecepatan <em>R</em> bps.</li>
+                                <li><strong class="highlight-red">4. Propagation (<code>d_prop = d/s</code>):</strong> Waktu rambat fisik sinyal sepanjang jarak kabel <em>d</em> pada laju cahaya <em>s</em>.</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="card card-compact text-left" style="border-left: 4px solid #e65100;">
-                        <p style="font-weight:700; color:#e65100; margin-top:0;">2. Queuing Delay (<code>d_queue</code>)</p>
-                        <p style="margin-bottom:0;">Waktu paket menunggu antrean di buffer sebelum ditransmisikan ke kabel; paling bervariasi sesuai kepadatan trafik.</p>
-                    </div>
-                    <div class="card card-compact text-left" style="border-left: 4px solid #1b5e20;">
-                        <p style="font-weight:700; color:#1b5e20; margin-top:0;">3. Transmission Delay (<code>d_trans = L / R</code>)</p>
-                        <p style="margin-bottom:0;">Waktu "mendorong" seluruh <em>L</em> bit paket masuk ke kabel dengan kapasitas <em>bandwidth</em> <em>R</em> bps (bukan soal jarak).</p>
-                    </div>
-                    <div class="card card-compact text-left" style="border-left: 4px solid #b71c1c;">
-                        <p style="font-weight:700; color:#b71c1c; margin-top:0;">4. Propagation Delay (<code>d_prop = d / s</code>)</p>
-                        <p style="margin-bottom:0;">Waktu perambatan fisik bit sepanjang jarak kabel <em>d</em> dengan kecepatan gelombang <em>s</em> (bergantung jarak kota/negara).</p>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s28_four_delays.jpg" alt="Diagram Empat Sumber Nodal Delay pada Router Hop">
+                        <div class="img-caption">Posisi terjadinya keempat komponen delay dalam satu hop perjalanan paket.</div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Analogi Karavan Mobil (Transmission vs Propagation)</h3>
-                <div class="layout-2col">
-                    <div class="card card-compact text-left" style="border-top: 4px solid #1b5e20;">
-                        <h4 class="highlight-green" style="margin-top:0;"><i class="bi bi-stoplights-fill"></i> Transmission Delay (Gerbang Tol)</h4>
-                        <p>Bayangkan 1 paket adalah <strong>rombongan 10 mobil</strong> yang harus melewati gerbang tol satu per satu.</p>
-                        <p style="margin-bottom:0;">Waktu untuk melayani dan "mendorong" kesepuluh mobil keluar dari gerbang tol menuju jalan bebas hambatan = <strong>Transmission Delay</strong>.</p>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-green"><i class="bi bi-stoplights-fill"></i> Transmission Delay (Gerbang Tol)</div>
+                            <p style="margin-bottom:0;">Bayangkan 1 paket adalah <strong>rombongan 10 mobil</strong> yang harus melewati pintu tol satu per satu. Waktu melayani seluruh mobil hingga keluar gerbang tol bergantung pada kecepatan pintu (<em>Bandwidth R</em>) = <strong>Transmission Delay</strong>.</p>
+                        </div>
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-red"><i class="bi bi-signpost-split-fill"></i> Propagation Delay (Jarak Jalan Tol)</div>
+                            <p style="margin-bottom:0;">Setelah masuk jalan tol dengan kecepatan melaju tetap (<em>s</em>), waktu tempuh fisik dari <strong>Jakarta ke Bandung</strong> bergantung pada jarak (<em>d</em>) = <strong>Propagation Delay</strong>.</p>
+                        </div>
                     </div>
-                    <div class="card card-compact text-left" style="border-top: 4px solid #b71c1c;">
-                        <h4 class="highlight-red" style="margin-top:0;"><i class="bi bi-signpost-split-fill"></i> Propagation Delay (Jarak Tempuh)</h4>
-                        <p>Setelah keluar gerbang tol, mobil melaju di jalan tol dengan kecepatan tetap (misal 100 km/jam).</p>
-                        <p style="margin-bottom:0;">Waktu tempuh fisik mobil dari gerbang tol <strong>Jakarta ke Bandung</strong> = <strong>Propagation Delay</strong>.</p>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s29_caravan_analogy.jpg" alt="Analogi Karavan Mobil Transmission vs Propagation Delay">
+                        <div class="img-caption">Gerbang tol merepresentasikan laju transmisi (L/R), jarak Jakarta–Bandung merepresentasikan propagasi (d/s).</div>
                     </div>
                 </div>
             </section>
 
             <section>
                 <h3>Throughput &amp; Bottleneck Link</h3>
-                <div class="card text-left text-small">
-                    <p><strong>Throughput</strong> adalah laju aktual bit data yang berhasil dipindahkan dari <em>sender</em> ke <em>receiver</em> per detik (bits/sec).</p>
-                    <ul>
-                        <li><strong>Instantaneous Throughput:</strong> Kecepatan transfer pada satu titik waktu sesaat.</li>
-                        <li><strong>Average Throughput:</strong> Rata-rata kecepatan transfer sepanjang satu sesi unduhan.</li>
-                        <li><strong>Bottleneck Link:</strong> Throughput ujung-ke-ujung dibatasi oleh link paling lambat di sepanjang rute (<code>min(R_c, R_s)</code>).</li>
-                    </ul>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-teal">Definisi &amp; Ukuran Laju Data</div>
+                            <p style="margin:4px 0 6px;"><strong>Throughput</strong> adalah laju aktual bit data yang berhasil dipindahkan dari <em>sender</em> ke <em>receiver</em> per detik (bits/sec).</p>
+                            <ul style="margin:0 0 10px;">
+                                <li><strong>Instantaneous:</strong> Kecepatan transfer pada satu titik waktu sesaat.</li>
+                                <li><strong>Average:</strong> Rata-rata kecepatan transfer sepanjang satu sesi unduhan.</li>
+                            </ul>
+                            <div class="sec-bar sec-bar-red">Bottleneck Link</div>
+                            <p style="margin:4px 0 0;">Throughput ujung-ke-ujung dibatasi oleh link paling lambat di sepanjang rute: <code>min(R_s, R_c)</code>, atau <code>min(R_s, R_c, R/N)</code> pada backbone bersama.</p>
+                        </div>
+                    </div>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s30_throughput_bottleneck.svg" alt="Analogi pipa bottleneck link dan pembagian link bersama">
+                        <div class="img-caption">Ilustrasi: Link tersempit (bottleneck) serta pembagian bandwidth backbone R/N membatasi throughput aktual.</div>
+                    </div>
                 </div>
             </section>
 
@@ -885,21 +1102,24 @@
 
             <section>
                 <h3>Ancaman Keamanan: Malware, Sniffing &amp; Spoofing</h3>
-                <div class="layout-2col">
-                    <div class="card card-compact text-left" style="border-top: 4px solid #b71c1c;">
-                        <h4 class="highlight-red" style="margin-top:0;"><i class="bi bi-bug-fill"></i> Malware (Virus &amp; Worms)</h4>
-                        <p>Perangkat lunak jahat yang menginfeksi host untuk mencuri data atau membentuk jaringan <em>botnet</em>.</p>
-                        <ul style="margin-bottom:0;">
-                            <li><strong>Virus:</strong> Butuh interaksi pengguna untuk aktif (misal klik lampiran email).</li>
-                            <li><strong>Worms:</strong> Menyebar otomatis lewat celah jaringan tanpa perlu diklik.</li>
-                        </ul>
+                <div class="layout-text-img">
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-red">Malware (Virus &amp; Worm)</div>
+                            <ul style="margin:4px 0 10px;">
+                                <li><strong>Virus:</strong> Memerlukan interaksi pengguna untuk aktif (misal klik lampiran).</li>
+                                <li><strong>Worm:</strong> Menyebar otomatis via celah jaringan membentuk <em>botnet</em>.</li>
+                            </ul>
+                            <div class="sec-bar sec-bar-purple">Sniffing &amp; IP Spoofing</div>
+                            <ul style="margin:4px 0 0;">
+                                <li><strong>Packet Sniffing:</strong> Menyadap paket di media bersama (seperti Wi-Fi publik); ditangkal dengan enkripsi <strong>TLS/HTTPS</strong>.</li>
+                                <li><strong>IP Spoofing:</strong> Memalsukan alamat IP pengirim agar paket terlihat dari sumber tepercaya.</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="card card-compact text-left" style="border-top: 4px solid #6a1b9a;">
-                        <h4 style="color:#6a1b9a; margin-top:0;"><i class="bi bi-eye-slash-fill"></i> Sniffing &amp; IP Spoofing</h4>
-                        <ul style="margin-bottom:0;">
-                            <li><strong class="highlight-blue">Packet Sniffing:</strong> Menyadap/merekam paket yang lewat di jaringan (seperti Wi-Fi publik). Solusi: enkripsi data (TLS/HTTPS).</li>
-                            <li><strong class="highlight-green">IP Spoofing:</strong> Memalsukan alamat IP pengirim agar paket seolah berasal dari sumber tepercaya.</li>
-                        </ul>
+                    <div class="rcol-img">
+                        <img src="img/week1/p01_s34_malware_sniffing_spoofing.svg" alt="Ilustrasi ancaman malware, packet sniffing, dan IP spoofing">
+                        <div class="img-caption">Ilustrasi: Perbedaan Virus vs Worm, penyadapan pasif (Sniffing) vs TLS, dan pemalsuan IP Spoofing.</div>
                     </div>
                 </div>
             </section>
@@ -907,17 +1127,21 @@
             <section>
                 <h3>Serangan DoS dan DDoS</h3>
                 <div class="layout-text-img">
-                    <div class="card card-compact text-left">
-                        <ul>
-                            <li><strong class="highlight-red">DoS (Denial of Service):</strong> Membanjiri server/jaringan target dengan trafik sampah hingga sumber daya penuh dan pengguna sah tidak dapat mengakses layanan.</li>
-                            <li><strong class="highlight-orange">DDoS (Distributed DoS):</strong> Serangan DoS secara terkoordinasi oleh puluhan ribu perangkat <em>botnet</em> dari berbagai lokasi, sehingga sangat sulit diblokir.</li>
-                        </ul>
-                        <div class="info-box" style="margin-top:8px;">
-                            <strong>Catatan Kuliah:</strong> Kriptografi, otentikasi, TLS/IPsec, dan pertahanan DoS dibahas mendalam di <strong>Pertemuan 13 (Network Security)</strong>.
+                    <div class="lcol-text">
+                        <div class="card card-compact text-left">
+                            <div class="sec-bar sec-bar-red"><i class="bi bi-shield-fill-exclamation"></i> Melumpuhkan Ketersediaan Layanan</div>
+                            <ul>
+                                <li><strong class="highlight-red">DoS (Denial of Service):</strong> Membanjiri server/jaringan target dari satu sumber hingga CPU, memori, atau bandwidth penuh dan pengguna sah terblokir.</li>
+                                <li><strong class="highlight-orange">DDoS (Distributed DoS):</strong> Serangan DoS secara terkoordinasi oleh puluhan ribu perangkat <em>botnet</em> dari banyak alamat IP sehingga jauh lebih sulit ditangkal.</li>
+                            </ul>
+                            <div class="info-box" style="margin-top:4px;">
+                                <strong>Catatan Kuliah:</strong> Kriptografi, otentikasi, TLS/IPsec, dan pertahanan DoS dibahas mendalam di <strong>Pertemuan 13 (Network Security)</strong>.
+                            </div>
                         </div>
                     </div>
-                    <div style="text-align:center; background:#fff; padding:8px; border-radius:10px; box-shadow: 0 4px 12px rgba(0,0,0,0.12);">
-                        <img src="img/week1/dos_vs_ddos.svg" alt="Diagram Serangan DoS vs DDoS" class="slide-img">
+                    <div class="rcol-img">
+                        <img src="img/week1/dos_vs_ddos.svg" alt="Diagram Serangan DoS vs DDoS">
+                        <div class="img-caption">Perbedaan DoS (sumber tunggal) vs DDoS (jaringan botnet tersebar).</div>
                     </div>
                 </div>
             </section>

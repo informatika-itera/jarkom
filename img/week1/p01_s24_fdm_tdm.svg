@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="Inter, Arial, sans-serif">
+  <defs>
+    <marker id="axisArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="800" height="600" rx="16" fill="#f8fafc"/>
+
+  <!-- User Legend Strip -->
+  <rect x="24" y="14" width="752" height="38" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="44" y="38" font-size="13" font-weight="800" fill="#334155">4 Pengguna Berbagi Link:</text>
+  <rect x="236" y="23" width="112" height="20" rx="10" fill="#dbeafe"/>
+  <circle cx="250" cy="33" r="5" fill="#2563eb"/>
+  <text x="298" y="37" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e40af">Pengguna A</text>
+
+  <rect x="364" y="23" width="112" height="20" rx="10" fill="#dcfce7"/>
+  <circle cx="378" cy="33" r="5" fill="#16a34a"/>
+  <text x="426" y="37" text-anchor="middle" font-size="11.5" font-weight="700" fill="#166534">Pengguna B</text>
+
+  <rect x="492" y="23" width="112" height="20" rx="10" fill="#ffedd5"/>
+  <circle cx="506" cy="33" r="5" fill="#ea580c"/>
+  <text x="554" y="37" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9a3412">Pengguna C</text>
+
+  <rect x="620" y="23" width="112" height="20" rx="10" fill="#f3e8ff"/>
+  <circle cx="634" cy="33" r="5" fill="#9333ea"/>
+  <text x="682" y="37" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6b21a8">Pengguna D</text>
+
+  <!-- TOP PANEL: FDM -->
+  <rect x="24" y="64" width="752" height="246" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="24" y="64" width="752" height="42" rx="14" fill="#eff6ff"/>
+  <rect x="24" y="90" width="752" height="16" fill="#eff6ff"/>
+  <line x1="24" y1="106" x2="776" y2="106" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="44" y="90" font-size="17" font-weight="800" fill="#1d4ed8">1. FDM (Frequency Division Multiplexing) — Pembagian Frekuensi</text>
+
+  <!-- FDM Axes -->
+  <line x1="78" y1="274" x2="78" y2="122" stroke="#475569" stroke-width="2.2" marker-end="url(#axisArrow)"/>
+  <line x1="78" y1="274" x2="536" y2="274" stroke="#475569" stroke-width="2.2" marker-end="url(#axisArrow)"/>
+  <text x="54" y="198" text-anchor="middle" font-size="12.5" font-weight="700" fill="#334155" transform="rotate(-90 54 198)">Frekuensi</text>
+  <text x="307" y="294" text-anchor="middle" font-size="12.5" font-weight="700" fill="#334155">Waktu</text>
+
+  <!-- 4 Parallel Continuous Frequency Bands -->
+  <rect x="88" y="128" width="440" height="30" rx="6" fill="#2563eb"/>
+  <text x="308" y="148" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Pita Frekuensi Pengguna A (Aktif Terus)</text>
+
+  <rect x="88" y="164" width="440" height="30" rx="6" fill="#16a34a"/>
+  <text x="308" y="184" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Pita Frekuensi Pengguna B (Aktif Terus)</text>
+
+  <rect x="88" y="200" width="440" height="30" rx="6" fill="#ea580c"/>
+  <text x="308" y="220" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Pita Frekuensi Pengguna C (Aktif Terus)</text>
+
+  <rect x="88" y="236" width="440" height="30" rx="6" fill="#9333ea"/>
+  <text x="308" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Pita Frekuensi Pengguna D (Aktif Terus)</text>
+
+  <!-- FDM Summary Box -->
+  <rect x="548" y="128" width="208" height="138" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="652" y="152" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1e40af">Cara Kerja FDM</text>
+  <line x1="564" y1="162" x2="740" y2="162" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="564" y="184" font-size="12" fill="#334155">• Spektrum dibagi menjadi</text>
+  <text x="574" y="200" font-size="12" fill="#334155">pita frekuensi tetap.</text>
+  <text x="564" y="224" font-size="12" fill="#334155">• Tiap pengguna mengirim</text>
+  <text x="574" y="240" font-size="12" fill="#334155">bersamaan secara paralel.</text>
+
+  <!-- BOTTOM PANEL: TDM -->
+  <rect x="24" y="324" width="752" height="260" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="24" y="324" width="752" height="42" rx="14" fill="#f5f3ff"/>
+  <rect x="24" y="350" width="752" height="16" fill="#f5f3ff"/>
+  <line x1="24" y1="366" x2="776" y2="366" stroke="#ddd6fe" stroke-width="1.5"/>
+  <text x="44" y="350" font-size="17" font-weight="800" fill="#6d28d9">2. TDM (Time Division Multiplexing) — Pembagian Slot Waktu</text>
+
+  <!-- TDM Axes -->
+  <line x1="78" y1="538" x2="78" y2="386" stroke="#475569" stroke-width="2.2" marker-end="url(#axisArrow)"/>
+  <line x1="78" y1="538" x2="536" y2="538" stroke="#475569" stroke-width="2.2" marker-end="url(#axisArrow)"/>
+  <text x="54" y="462" text-anchor="middle" font-size="12.5" font-weight="700" fill="#334155" transform="rotate(-90 54 462)">Frekuensi</text>
+  <text x="307" y="562" text-anchor="middle" font-size="12.5" font-weight="700" fill="#334155">Waktu (Slot Periodik Berulang)</text>
+
+  <!-- Frame 1 Bracket & Label -->
+  <rect x="88" y="382" width="214" height="148" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="195" y="398" text-anchor="middle" font-size="11.5" font-weight="800" fill="#475569">Frame 1</text>
+
+  <!-- Frame 2 Bracket & Label -->
+  <rect x="314" y="382" width="214" height="148" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="421" y="398" text-anchor="middle" font-size="11.5" font-weight="800" fill="#475569">Frame 2</text>
+
+  <!-- TDM Vertical Slots Frame 1 -->
+  <rect x="94" y="406" width="46" height="118" rx="5" fill="#2563eb"/>
+  <text x="117" y="470" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">A</text>
+
+  <rect x="146" y="406" width="46" height="118" rx="5" fill="#16a34a"/>
+  <text x="169" y="470" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">B</text>
+
+  <rect x="198" y="406" width="46" height="118" rx="5" fill="#ea580c"/>
+  <text x="221" y="470" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">C</text>
+
+  <rect x="250" y="406" width="46" height="118" rx="5" fill="#9333ea"/>
+  <text x="273" y="470" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">D</text>
+
+  <!-- TDM Vertical Slots Frame 2 -->
+  <rect x="320" y="406" width="46" height="118" rx="5" fill="#2563eb"/>
+  <text x="343" y="470" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">A</text>
+
+  <rect x="372" y="406" width="46" height="118" rx="5" fill="#16a34a"/>
+  <text x="395" y="470" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">B</text>
+
+  <rect x="424" y="406" width="46" height="118" rx="5" fill="#ea580c"/>
+  <text x="447" y="470" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">C</text>
+
+  <rect x="476" y="406" width="46" height="118" rx="5" fill="#9333ea"/>
+  <text x="499" y="470" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">D</text>
+
+  <!-- TDM Summary Box -->
+  <rect x="548" y="388" width="208" height="138" rx="10" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="652" y="412" text-anchor="middle" font-size="13.5" font-weight="800" fill="#6d28d9">Cara Kerja TDM</text>
+  <line x1="564" y1="422" x2="740" y2="422" stroke="#e9d5ff" stroke-width="1.5"/>
+  <text x="564" y="444" font-size="12" fill="#334155">• Seluruh pita frekuensi</text>
+  <text x="574" y="460" font-size="12" fill="#334155">dipakai tiap slot waktu.</text>
+  <text x="564" y="484" font-size="12" fill="#334155">• Pengguna bergiliran tiap</text>
+  <text x="574" y="500" font-size="12" fill="#334155">frame (boros saat diam).</text>
+</svg>

@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="Inter, Arial, sans-serif">
+  <defs>
+    <linearGradient id="widePipe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="35%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </linearGradient>
+    <linearGradient id="narrowPipe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="45%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+    <marker id="arrDark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+    </marker>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrWhite" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ffffff"/>
+    </marker>
+    <marker id="arrTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0d9488"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="800" height="600" rx="16" fill="#f8fafc"/>
+
+  <!-- TOP CARD: Bottleneck Pipe Analogy -->
+  <rect x="24" y="18" width="752" height="332" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="24" y="18" width="752" height="44" rx="14" fill="#ecfeff"/>
+  <rect x="24" y="46" width="752" height="16" fill="#ecfeff"/>
+  <line x1="24" y1="62" x2="776" y2="62" stroke="#a5f3fc" stroke-width="1.5"/>
+  <text x="44" y="46" font-size="18" font-weight="800" fill="#0f766e">1. Analogi Pipa Air: Bottleneck Link (R_s &gt; R_c)</text>
+
+  <!-- Server Node -->
+  <rect x="44" y="126" width="110" height="114" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="74" y="140" width="50" height="48" rx="5" fill="#1e293b"/>
+  <line x1="82" y1="152" x2="116" y2="152" stroke="#38bdf8" stroke-width="3"/>
+  <line x1="82" y1="164" x2="116" y2="164" stroke="#38bdf8" stroke-width="3"/>
+  <line x1="82" y1="176" x2="116" y2="176" stroke="#38bdf8" stroke-width="3"/>
+  <text x="99" y="210" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1e40af">Pengirim</text>
+  <text x="99" y="228" text-anchor="middle" font-size="11.5" fill="#3b82f6">(Server)</text>
+
+  <!-- Wide Pipe R_s -->
+  <rect x="154" y="148" width="198" height="70" fill="url(#widePipe)"/>
+  <text x="253" y="178" text-anchor="middle" font-size="13.5" font-weight="800" fill="#ffffff">Link Server (R_s)</text>
+  <text x="253" y="200" text-anchor="middle" font-size="15" font-weight="800" fill="#dbeafe">100 Mbps</text>
+
+  <!-- Router Hub -->
+  <rect x="352" y="132" width="76" height="102" rx="12" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <circle cx="390" cy="174" r="22" fill="#0284c7" stroke="#bae6fd" stroke-width="2"/>
+  <path d="M 380,168 L 400,168 M 395,163 L 400,168 L 395,173 M 400,180 L 380,180 M 385,175 L 380,180 L 385,185" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+  <text x="390" y="218" text-anchor="middle" font-size="13" font-weight="800" fill="#334155">Router</text>
+
+  <!-- Narrow Bottleneck Pipe R_c -->
+  <rect x="428" y="170" width="212" height="26" fill="url(#narrowPipe)"/>
+  <line x1="442" y1="183" x2="622" y2="183" stroke="#ffffff" stroke-width="2.2" stroke-dasharray="6,6" marker-end="url(#arrWhite)"/>
+
+  <!-- Bottleneck Callout Box Above Narrow Pipe -->
+  <rect x="438" y="84" width="192" height="58" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="534" y="108" text-anchor="middle" font-size="13" font-weight="800" fill="#dc2626">BOTTLENECK LINK</text>
+  <text x="534" y="128" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7f1d1d">R_c = 10 Mbps (Tersempit)</text>
+  <line x1="534" y1="142" x2="534" y2="168" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arrRed)"/>
+
+  <!-- Client Node -->
+  <rect x="640" y="126" width="114" height="114" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <rect x="670" y="142" width="54" height="36" rx="4" fill="#1e293b"/>
+  <rect x="674" y="146" width="46" height="26" fill="#86efac"/>
+  <rect x="662" y="179" width="70" height="6" rx="3" fill="#475569"/>
+  <text x="697" y="210" text-anchor="middle" font-size="13.5" font-weight="800" fill="#166534">Penerima</text>
+  <text x="697" y="228" text-anchor="middle" font-size="11.5" fill="#15803d">(Klien)</text>
+
+  <!-- Formula Summary Box -->
+  <rect x="64" y="264" width="672" height="66" rx="10" fill="#f0fdfa" stroke="#14b8a6" stroke-width="2"/>
+  <text x="400" y="292" text-anchor="middle" font-size="16" font-weight="800" fill="#0f766e">Throughput Aktual = min(R_s, R_c) = min(100, 10) = 10 Mbps</text>
+  <text x="400" y="315" text-anchor="middle" font-size="12.5" fill="#334155">Bit tidak bisa mengalir lebih cepat daripada segmen pipa paling sempit di sepanjang rute.</text>
+
+  <!-- BOTTOM CARD: Shared Backbone Scenario -->
+  <rect x="24" y="366" width="752" height="216" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="24" y="366" width="752" height="42" rx="14" fill="#f1f5f9"/>
+  <rect x="24" y="392" width="752" height="16" fill="#f1f5f9"/>
+  <line x1="24" y1="408" x2="776" y2="408" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="44" y="392" font-size="17" font-weight="800" fill="#334155">2. Skenario Link Bersama (N Koneksi Aktif Serentak)</text>
+
+  <!-- Left Server Sources -->
+  <rect x="48" y="426" width="96" height="34" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="96" y="448" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">Server 1 (R_s)</text>
+  <rect x="48" y="470" width="96" height="34" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="96" y="492" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">Server 2 (R_s)</text>
+  <rect x="48" y="514" width="96" height="34" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="96" y="536" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">Server N (R_s)</text>
+
+  <!-- Converge to Shared Pipe -->
+  <line x1="144" y1="443" x2="220" y2="480" stroke="#475569" stroke-width="2" marker-end="url(#arrDark)"/>
+  <line x1="144" y1="487" x2="220" y2="487" stroke="#475569" stroke-width="2" marker-end="url(#arrDark)"/>
+  <line x1="144" y1="531" x2="220" y2="494" stroke="#475569" stroke-width="2" marker-end="url(#arrDark)"/>
+
+  <!-- Shared Backbone Pipe -->
+  <rect x="228" y="458" width="194" height="58" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2.5"/>
+  <text x="325" y="482" text-anchor="middle" font-size="13.5" font-weight="800" fill="#c2410c">Backbone Bersama R</text>
+  <text x="325" y="502" text-anchor="middle" font-size="12" font-weight="700" fill="#9a3412">Bagian Tiap Aliran = R / N</text>
+
+  <!-- Diverge to Clients -->
+  <line x1="422" y1="480" x2="492" y2="443" stroke="#475569" stroke-width="2" marker-end="url(#arrDark)"/>
+  <line x1="422" y1="487" x2="492" y2="487" stroke="#475569" stroke-width="2" marker-end="url(#arrDark)"/>
+  <line x1="422" y1="494" x2="492" y2="531" stroke="#475569" stroke-width="2" marker-end="url(#arrDark)"/>
+
+  <!-- Client Receivers -->
+  <rect x="500" y="426" width="90" height="34" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="545" y="448" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">Klien 1 (R_c)</text>
+  <rect x="500" y="470" width="90" height="34" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="545" y="492" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">Klien 2 (R_c)</text>
+  <rect x="500" y="514" width="90" height="34" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="545" y="536" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">Klien N (R_c)</text>
+
+  <!-- Formula Right Box -->
+  <rect x="606" y="424" width="150" height="132" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="681" y="448" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1e40af">Throughput / Aliran</text>
+  <rect x="618" y="462" width="126" height="34" rx="6" fill="#1d4ed8"/>
+  <text x="681" y="484" text-anchor="middle" font-size="12.5" font-weight="800" fill="#ffffff">min(R_s, R_c, R/N)</text>
+  <text x="681" y="518" text-anchor="middle" font-size="11.5" fill="#475569">Makin banyak N,</text>
+  <text x="681" y="534" text-anchor="middle" font-size="11.5" fill="#475569">jatah R/N mengecil</text>
+</svg>
